@@ -1,0 +1,224 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+  AGENT
+}
+
+enum Poste {
+  DIRECTEUR
+  SECRETAIRE
+  CAISSER
+  GERANT
+}
+
+enum Sexe {
+  homme
+  femme
+}
+
+enum Ville {
+  Bandundu
+  Kindu
+  Butembo
+  Kinshasa
+  Mbujimayi
+  Lubumbashi
+  Kananga
+  Kisangani
+  Goma
+  Bukavu
+  Tshikapa
+  Kolwezi
+  Likasi
+  Kikwit
+  Uvira
+  Bunia
+  Kalemie
+  Mbandaka
+  Matadi
+}
+
+enum MoyenPaiment {
+  CACH
+  BANCAIRE
+}
+
+// This is the main model for the application
+
+model Entreprise {
+  id           Int     @id @default(autoincrement())
+  nom          String  @unique
+  encronyme    String  @unique
+  code_postale String  @unique
+  adresse      String
+  tel          String  @unique
+  site         String?
+  email        String  @unique
+  decription   String?
+  logo         String?
+  Vente        Vente[]
+}
+
+model Utilisateur {
+  id          String    @id
+  email       String    @unique
+  nom         String
+  postnom     String
+  nom_complet String?
+  sexe        Sexe?
+  role        Role      @default(CLIENT)
+  poste       Poste?
+  picture     String?
+  password    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Adresse     Adresse[]
+  Contact     Contact[]
+  Produit     Produit[]
+  Vente       Vente[]
+  Achat       Achat[]
+}
+
+model Adresse {
+  id            Int           @id @default(autoincrement())
+  ville         String
+  commune       String
+  adresse       String
+  utilisateurId String
+  utilisateur   Utilisateur   @relation(fields: [utilisateurId], references: [id])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  Fournisseur   Fournisseur[]
+}
+
+model Contact {
+  id            Int           @id @default(autoincrement())
+  tel           String        @unique
+  utilisateurId String
+  utilisateur   Utilisateur   @relation(fields: [utilisateurId], references: [id])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  Fournisseur   Fournisseur[]
+}
+
+model Fournisseur {
+  id          Int      @id @default(autoincrement())
+  nom         String
+  email       String   @unique
+  code_postal String?
+  adresseId   Int
+  adresse     Adresse  @relation(fields: [adresseId], references: [id])
+  contactId   Int
+  contact     Contact  @relation(fields: [contactId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Vente       Vente[]
+  Achat       Achat[]
+}
+
+model Teneur {
+  id      Int       @id @default(autoincrement())
+  valeur  Float
+  Produit Produit[]
+}
+
+model Produit {
+  id            Int           @id @default(autoincrement())
+  designation   String
+  prix          Float
+  qtte          Int?
+  description   String
+  teneurId      Int
+  teneur        Teneur        @relation(fields: [teneurId], references: [id])
+  utilisateurId String
+  utilisateur   Utilisateur   @relation(fields: [utilisateurId], references: [id])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  DetailVente   DetailVente[]
+  DetailAchat   DetailAchat[]
+}
+
+// Models de la Vente...
+
+model DetailVente {
+  id           Int      @id @default(autoincrement())
+  produitId    Int
+  qtte         Int
+  prixUnitaire Float
+  prixTotal    Float
+  produit      Produit  @relation(fields: [produitId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  Vente        Vente[]
+}
+
+model Paiement {
+  id             Int          @id @default(autoincrement())
+  montant        Float
+  moyen_paiement MoyenPaiment @default(CACH)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  Vente          Vente[]
+  Achat          Achat[]
+}
+
+model Vente {
+  id            Int          @id @default(autoincrement())
+  statut        String
+  total_ttc     Float
+  total_ht      Float
+  remise        Float
+  detailVenteId Int
+  detailvente   DetailVente  @relation(fields: [detailVenteId], references: [id])
+  paiementId    Int
+  peiement      Paiement     @relation(fields: [paiementId], references: [id])
+  entrepriseId  Int
+  entreprise    Entreprise   @relation(fields: [entrepriseId], references: [id])
+  clientId      String
+  agentId       String
+  utilisateur   Utilisateur  @relation(fields: [clientId], references: [id])
+  //   fournisseurId Int
+  //   fournisseur   Fournisseur @relation(fields: [fournisseurId], references: [id])
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  Fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
+  fournisseurId Int?
+}
+
+model DetailAchat {
+  id           Int      @id @default(autoincrement())
+  produitId    Int
+  qtte         Int
+  prixUnitaire Float
+  prixTotal    Float
+  produit      Produit  @relation(fields: [produitId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  Achat        Achat[]
+}
+
+model Achat {
+  id            Int         @id @default(autoincrement())
+  statut        String
+  fournisseurId Int
+  total         Float
+  fournisseur   Fournisseur @relation(fields: [fournisseurId], references: [id])
+  detailAchatId Int
+  detailAchat   DetailAchat @relation(fields: [detailAchatId], references: [id])
+  agentId       String
+  agent         Utilisateur @relation(fields: [agentId], references: [id])
+  paiementId    Int
+  paiement      Paiement    @relation(fields: [paiementId], references: [id])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
