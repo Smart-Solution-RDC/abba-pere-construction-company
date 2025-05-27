@@ -129,7 +129,7 @@ exports.Prisma.EntrepriseScalarFieldEnum = {
   tel: 'tel',
   site: 'site',
   email: 'email',
-  decription: 'decription',
+  description: 'description',
   logo: 'logo'
 };
 
@@ -143,7 +143,6 @@ exports.Prisma.UtilisateurScalarFieldEnum = {
   role: 'role',
   poste: 'poste',
   picture: 'picture',
-  password: 'password',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -179,7 +178,20 @@ exports.Prisma.FournisseurScalarFieldEnum = {
 
 exports.Prisma.TeneurScalarFieldEnum = {
   id: 'id',
-  valeur: 'valeur'
+  valeur: 'valeur',
+  utilisateurId: 'utilisateurId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DeviseScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  code: 'code',
+  symbole: 'symbole',
+  utilisateurId: 'utilisateurId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ProduitScalarFieldEnum = {
@@ -188,18 +200,9 @@ exports.Prisma.ProduitScalarFieldEnum = {
   prix: 'prix',
   qtte: 'qtte',
   description: 'description',
+  deviseId: 'deviseId',
   teneurId: 'teneurId',
   utilisateurId: 'utilisateurId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.DetailVenteScalarFieldEnum = {
-  id: 'id',
-  produitId: 'produitId',
-  qtte: 'qtte',
-  prixUnitaire: 'prixUnitaire',
-  prixTotal: 'prixTotal',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -228,12 +231,30 @@ exports.Prisma.VenteScalarFieldEnum = {
   fournisseurId: 'fournisseurId'
 };
 
+exports.Prisma.PanierScalarFieldEnum = {
+  id: 'id',
+  utilisateurId: 'utilisateurId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DetailVenteScalarFieldEnum = {
+  id: 'id',
+  produitId: 'produitId',
+  qtte: 'qtte',
+  prixUnitaire: 'prixUnitaire',
+  prixTotal: 'prixTotal',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.DetailAchatScalarFieldEnum = {
   id: 'id',
   produitId: 'produitId',
   qtte: 'qtte',
   prixUnitaire: 'prixUnitaire',
   prixTotal: 'prixTotal',
+  panierId: 'panierId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -270,16 +291,16 @@ exports.Sexe = exports.$Enums.Sexe = {
 };
 
 exports.Role = exports.$Enums.Role = {
-  ADMIN: 'ADMIN',
-  CLIENT: 'CLIENT',
-  AGENT: 'AGENT'
+  admin: 'admin',
+  client: 'client',
+  agent: 'agent'
 };
 
 exports.Poste = exports.$Enums.Poste = {
-  DIRECTEUR: 'DIRECTEUR',
-  SECRETAIRE: 'SECRETAIRE',
-  CAISSER: 'CAISSER',
-  GERANT: 'GERANT'
+  directeur: 'directeur',
+  secretaire: 'secretaire',
+  caissier: 'caissier',
+  gerant: 'gerant'
 };
 
 exports.MoyenPaiment = exports.$Enums.MoyenPaiment = {
@@ -294,10 +315,12 @@ exports.Prisma.ModelName = {
   Contact: 'Contact',
   Fournisseur: 'Fournisseur',
   Teneur: 'Teneur',
+  Devise: 'Devise',
   Produit: 'Produit',
-  DetailVente: 'DetailVente',
   Paiement: 'Paiement',
   Vente: 'Vente',
+  Panier: 'Panier',
+  DetailVente: 'DetailVente',
   DetailAchat: 'DetailAchat',
   Achat: 'Achat'
 };

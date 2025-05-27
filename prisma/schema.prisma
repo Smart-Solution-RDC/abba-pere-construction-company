@@ -9,16 +9,16 @@ datasource db {
 }
 
 enum Role {
-  ADMIN
-  CLIENT
-  AGENT
+  admin
+  client
+  agent
 }
 
 enum Poste {
-  DIRECTEUR
-  SECRETAIRE
-  CAISSER
-  GERANT
+  directeur
+  secretaire
+  caissier
+  gerant
 }
 
 enum Sexe {
@@ -64,7 +64,7 @@ model Entreprise {
   tel          String  @unique
   site         String?
   email        String  @unique
-  decription   String?
+  description  String?
   logo         String?
   Vente        Vente[]
 }
@@ -76,10 +76,9 @@ model Utilisateur {
   postnom     String
   nom_complet String?
   sexe        Sexe?
-  role        Role      @default(CLIENT)
+  role        Role      @default(client)
   poste       Poste?
   picture     String?
-  password    String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   Adresse     Adresse[]
@@ -87,7 +86,19 @@ model Utilisateur {
   Produit     Produit[]
   Vente       Vente[]
   Achat       Achat[]
+  Teneur      Teneur[]
+  Devise      Devise[]
+  Panier      Panier[]
 }
+
+// model Poste {
+//   id               Int         @id @default(autoincrement())
+//   titre            String      @db.VarChar(255)
+//   utilisateurId    String
+//   utilisateur      Utilisateur @relation(fields: [utilisateurId], references: [id])
+//   createdAt        DateTime    @default(now())
+//   updatedAt        DateTime    @updatedAt
+// }
 
 model Adresse {
   id            Int           @id @default(autoincrement())
@@ -127,9 +138,25 @@ model Fournisseur {
 }
 
 model Teneur {
-  id      Int       @id @default(autoincrement())
-  valeur  Float
-  Produit Produit[]
+  id            Int         @id @default(autoincrement())
+  valeur        Float       @unique
+  utilisateurId String
+  utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  Produit       Produit[]
+}
+
+model Devise {
+  id            Int         @id @default(autoincrement())
+  nom           String      @unique
+  code          String      @unique @db.VarChar(3)
+  symbole       String      @db.VarChar(5)
+  utilisateurId String
+  utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  Produit       Produit[]
 }
 
 model Produit {
@@ -138,6 +165,8 @@ model Produit {
   prix          Float
   qtte          Int?
   description   String
+  deviseId      Int
+  devise        Devise        @relation(fields: [deviseId], references: [id])
   teneurId      Int
   teneur        Teneur        @relation(fields: [teneurId], references: [id])
   utilisateurId String
@@ -149,18 +178,6 @@ model Produit {
 }
 
 // Models de la Vente...
-
-model DetailVente {
-  id           Int      @id @default(autoincrement())
-  produitId    Int
-  qtte         Int
-  prixUnitaire Float
-  prixTotal    Float
-  produit      Produit  @relation(fields: [produitId], references: [id])
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  Vente        Vente[]
-}
 
 model Paiement {
   id             Int          @id @default(autoincrement())
@@ -195,6 +212,29 @@ model Vente {
   fournisseurId Int?
 }
 
+model Panier {
+  id            Int         @id @default(autoincrement())
+  // detailVenteId Int
+  // detailVente   DetailVente @relation(fields: [detailVenteId], references: [id])
+  utilisateurId String
+  utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  DetailAchat   DetailAchat[]
+}
+
+model DetailVente {
+  id           Int      @id @default(autoincrement())
+  produitId    Int
+  qtte         Int
+  prixUnitaire Float
+  prixTotal    Float
+  produit      Produit  @relation(fields: [produitId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  Vente        Vente[]
+}
+
 model DetailAchat {
   id           Int      @id @default(autoincrement())
   produitId    Int
@@ -202,6 +242,8 @@ model DetailAchat {
   prixUnitaire Float
   prixTotal    Float
   produit      Produit  @relation(fields: [produitId], references: [id])
+  panierId     Int
+  panier       Panier   @relation(fields: [panierId], references: [id])
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   Achat        Achat[]
