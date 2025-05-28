@@ -208,15 +208,15 @@ model Vente {
   total_ht      Float
   remise        Float
   detailVenteId Int
-  detailvente   DetailVente  @relation(fields: [detailVenteId], references: [id])
   entrepriseId  Int
-  entreprise    Entreprise   @relation(fields: [entrepriseId], references: [id])
   clientId      String
   agentId       String
-  utilisateur   Utilisateur  @relation(fields: [clientId], references: [id])
   fournisseurId Int?
-  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
   paiementId    Int?
+  detailvente   DetailVente  @relation(fields: [detailVenteId], references: [id])
+  entreprise    Entreprise   @relation(fields: [entrepriseId], references: [id])
+  utilisateur   Utilisateur  @relation(fields: [clientId], references: [id])
+  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
   paiement      Paiement?    @relation(fields: [paiementId], references: [id])
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
