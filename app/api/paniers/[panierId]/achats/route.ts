@@ -58,22 +58,22 @@ export async function POST(req: Request, { params }: { params: RouteParams}) {
             montant += detail_panier[i].prixTotal;
         }
 
-        const achat = await prisma.achat.create({
-            data: {
-                panierId: parseInt(panierId, 10),
-                fournisseurId: parseInt(data.fournisseurId),
-                enregisterParId: data.utilisateurId
-            }
-        });
-
         const paiement = await prisma.paiement.create({
             data: {
                 montant: montant,
                 deviseId: parseInt(data.deviseId, 10),
                 moyen_paiement: data.moyen_paiement,
-                achatId: achat.id,
             }
         });
+
+        const achat = await prisma.achat.create({
+            data: {
+                panierId: parseInt(panierId, 10),
+                fournisseurId: parseInt(data.fournisseurId),
+                paiementId: paiement.id,
+                enregisterParId: data.utilisateurId
+            }
+        });        
 
         const produits = await prisma.produit.updateMany({
             where: {

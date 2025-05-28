@@ -35,7 +35,7 @@ export async function POST(req: Request, { params }: { params: RouteParams }) {
             data: produits           
         });
 
-        return new Response("Achat Created!", { status: 201 });
+        return new Response(JSON.stringify(produits), { status: 201 });
     } catch (error) {
         return new Response("Invalid Form", { status: 201 });
     }

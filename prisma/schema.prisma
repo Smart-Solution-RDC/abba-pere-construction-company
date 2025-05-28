@@ -173,7 +173,7 @@ model Produit {
   id            Int           @id @default(autoincrement())
   designation   String
   prix          Float
-  qtte          Int @default(0)
+  qtte          Int           @default(0)
   description   String
   deviseId      Int
   devise        Devise        @relation(fields: [deviseId], references: [id])
@@ -192,15 +192,13 @@ model Produit {
 model Paiement {
   id             Int          @id @default(autoincrement())
   montant        Float
-  moyen_paiement MoyenPaiment 
+  moyen_paiement MoyenPaiment
   deviseId       Int
   devise         Devise       @relation(fields: [deviseId], references: [id])
-  achatId        Int?
-  achat          Achat?       @relation(fields: [achatId], references: [id])
-  venteId        Int?
-  vente          Vente?       @relation(fields: [venteId], references: [id])
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
+  Achat          Achat[]
+  Vente          Vente[]
 }
 
 model Vente {
@@ -216,13 +214,12 @@ model Vente {
   clientId      String
   agentId       String
   utilisateur   Utilisateur  @relation(fields: [clientId], references: [id])
-  //   fournisseurId Int
-  //   fournisseur   Fournisseur @relation(fields: [fournisseurId], references: [id])
+  fournisseurId Int?
+  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
+  paiementId    Int?
+  paiement      Paiement?    @relation(fields: [paiementId], references: [id])
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
-  Fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
-  fournisseurId Int?
-  Paiement      Paiement[]
 }
 
 model Panier {
@@ -264,12 +261,13 @@ model Achat {
   id              Int         @id @default(autoincrement())
   statut          StatutAchat @default(EN_COURS)
   panierId        Int
-  panier          Panier      @relation(fields: [panierId], references: [id])
   fournisseurId   Int
-  fournisseur     Fournisseur @relation(fields: [fournisseurId], references: [id])
   enregisterParId String
-  enregisterPar   Utilisateur @relation(fields: [enregisterParId], references: [id])
+  paiementId      Int
+  panier          Panier      @relation(fields: [panierId], references: [id])
+  fournisseur     Fournisseur @relation(fields: [fournisseurId], references: [id])
+  utilisateur     Utilisateur @relation(fields: [enregisterParId], references: [id])
+  paiement        Paiement    @relation(fields: [paiementId], references: [id])
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
-  Paiement        Paiement[]
 }
