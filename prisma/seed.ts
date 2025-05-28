@@ -86,6 +86,27 @@ async function main() {
         }
     });
 
+    // Create Product
+    await prisma.produit.create({
+        data: {
+            designation: 'ciment-1',
+            prix: 100,
+            description: 'My product',
+            deviseId: 1,
+            teneurId: 1,
+            utilisateurId: 'default-admin'
+        }
+    });
+
+    // Create Fournisseur
+    // await prisma.fournisseur.create({
+    //     data: {
+    //         nom: 'bralima',
+    //         email: 'bralima@gmail.com',
+    //         code_postal: 'sd90K12',
+    //     }
+    // });
+
     // Create Default Roles
   console.log(`Seeding terminé. 🎉`);
 }

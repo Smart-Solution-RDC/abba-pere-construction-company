@@ -50,7 +50,16 @@ enum Ville {
 
 enum MoyenPaiment {
   CACH
-  BANCAIRE
+  BANQUE
+  MOBILE
+  CHEQUE
+  AUTRE
+}
+
+enum StatutAchat {
+  EN_COURS
+  TERMINE
+  ANNULE
 }
 
 // This is the main model for the application
@@ -101,40 +110,40 @@ model Utilisateur {
 // }
 
 model Adresse {
-  id            Int           @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   ville         String
-  commune       String
+  commune       String // Delete this attr.
   adresse       String
-  utilisateurId String
-  utilisateur   Utilisateur   @relation(fields: [utilisateurId], references: [id])
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  Fournisseur   Fournisseur[]
+  utilisateurId String?
+  utilisateur   Utilisateur? @relation(fields: [utilisateurId], references: [id])
+  fournisseurId Int?
+  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 }
 
 model Contact {
-  id            Int           @id @default(autoincrement())
-  tel           String        @unique
-  utilisateurId String
-  utilisateur   Utilisateur   @relation(fields: [utilisateurId], references: [id])
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  Fournisseur   Fournisseur[]
+  id            Int          @id @default(autoincrement())
+  tel           String       @unique
+  utilisateurId String?
+  utilisateur   Utilisateur? @relation(fields: [utilisateurId], references: [id])
+  fournisseurId Int?
+  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 }
 
 model Fournisseur {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   nom         String
-  email       String   @unique
+  email       String    @unique
   code_postal String?
-  adresseId   Int
-  adresse     Adresse  @relation(fields: [adresseId], references: [id])
-  contactId   Int
-  contact     Contact  @relation(fields: [contactId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   Vente       Vente[]
   Achat       Achat[]
+  Adresse     Adresse[]
+  Contact     Contact[]
 }
 
 model Teneur {
@@ -157,6 +166,7 @@ model Devise {
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
   Produit       Produit[]
+  Paiement      Paiement[]
 }
 
 model Produit {
@@ -182,11 +192,15 @@ model Produit {
 model Paiement {
   id             Int          @id @default(autoincrement())
   montant        Float
-  moyen_paiement MoyenPaiment @default(CACH)
+  moyen_paiement MoyenPaiment @default(BANQUE)
+  deviseId       Int
+  devise         Devise       @relation(fields: [deviseId], references: [id])
+  achatId        Int?
+  achat          Achat?       @relation(fields: [achatId], references: [id])
+  venteId        Int?
+  vente          Vente?       @relation(fields: [venteId], references: [id])
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
-  Vente          Vente[]
-  Achat          Achat[]
 }
 
 model Vente {
@@ -197,8 +211,6 @@ model Vente {
   remise        Float
   detailVenteId Int
   detailvente   DetailVente  @relation(fields: [detailVenteId], references: [id])
-  paiementId    Int
-  peiement      Paiement     @relation(fields: [paiementId], references: [id])
   entrepriseId  Int
   entreprise    Entreprise   @relation(fields: [entrepriseId], references: [id])
   clientId      String
@@ -210,17 +222,17 @@ model Vente {
   updatedAt     DateTime     @updatedAt
   Fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
   fournisseurId Int?
+  Paiement      Paiement[]
 }
 
 model Panier {
   id            Int           @id @default(autoincrement())
-  // detailVenteId Int
-  // detailVente   DetailVente @relation(fields: [detailVenteId], references: [id])
   utilisateurId String
   utilisateur   Utilisateur   @relation(fields: [utilisateurId], references: [id])
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   DetailAchat   DetailAchat[]
+  Achat         Achat[]
 }
 
 model DetailVente {
@@ -246,21 +258,18 @@ model DetailAchat {
   panier       Panier   @relation(fields: [panierId], references: [id])
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  Achat        Achat[]
 }
 
 model Achat {
-  id            Int         @id @default(autoincrement())
-  statut        String
-  fournisseurId Int
-  total         Float
-  fournisseur   Fournisseur @relation(fields: [fournisseurId], references: [id])
-  detailAchatId Int
-  detailAchat   DetailAchat @relation(fields: [detailAchatId], references: [id])
-  agentId       String
-  agent         Utilisateur @relation(fields: [agentId], references: [id])
-  paiementId    Int
-  paiement      Paiement    @relation(fields: [paiementId], references: [id])
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  id              Int         @id @default(autoincrement())
+  statut          StatutAchat @default(EN_COURS)
+  panierId        Int
+  panier          Panier      @relation(fields: [panierId], references: [id])
+  fournisseurId   Int
+  fournisseur     Fournisseur @relation(fields: [fournisseurId], references: [id])
+  enregisterParId String
+  enregisterPar   Utilisateur @relation(fields: [enregisterParId], references: [id])
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  Paiement        Paiement[]
 }

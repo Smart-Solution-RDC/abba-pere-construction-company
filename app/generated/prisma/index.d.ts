@@ -142,10 +142,22 @@ export type Ville = (typeof Ville)[keyof typeof Ville]
 
 export const MoyenPaiment: {
   CACH: 'CACH',
-  BANCAIRE: 'BANCAIRE'
+  BANQUE: 'BANQUE',
+  MOBILE: 'MOBILE',
+  CHEQUE: 'CHEQUE',
+  AUTRE: 'AUTRE'
 };
 
 export type MoyenPaiment = (typeof MoyenPaiment)[keyof typeof MoyenPaiment]
+
+
+export const StatutAchat: {
+  EN_COURS: 'EN_COURS',
+  TERMINE: 'TERMINE',
+  ANNULE: 'ANNULE'
+};
+
+export type StatutAchat = (typeof StatutAchat)[keyof typeof StatutAchat]
 
 }
 
@@ -168,6 +180,10 @@ export const Ville: typeof $Enums.Ville
 export type MoyenPaiment = $Enums.MoyenPaiment
 
 export const MoyenPaiment: typeof $Enums.MoyenPaiment
+
+export type StatutAchat = $Enums.StatutAchat
+
+export const StatutAchat: typeof $Enums.StatutAchat
 
 /**
  * ##  Prisma Client ʲˢ
@@ -2258,79 +2274,21 @@ export namespace Prisma {
 
 
   /**
-   * Count Type AdresseCountOutputType
-   */
-
-  export type AdresseCountOutputType = {
-    Fournisseur: number
-  }
-
-  export type AdresseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Fournisseur?: boolean | AdresseCountOutputTypeCountFournisseurArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * AdresseCountOutputType without action
-   */
-  export type AdresseCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AdresseCountOutputType
-     */
-    select?: AdresseCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * AdresseCountOutputType without action
-   */
-  export type AdresseCountOutputTypeCountFournisseurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FournisseurWhereInput
-  }
-
-
-  /**
-   * Count Type ContactCountOutputType
-   */
-
-  export type ContactCountOutputType = {
-    Fournisseur: number
-  }
-
-  export type ContactCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Fournisseur?: boolean | ContactCountOutputTypeCountFournisseurArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ContactCountOutputType without action
-   */
-  export type ContactCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ContactCountOutputType
-     */
-    select?: ContactCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * ContactCountOutputType without action
-   */
-  export type ContactCountOutputTypeCountFournisseurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FournisseurWhereInput
-  }
-
-
-  /**
    * Count Type FournisseurCountOutputType
    */
 
   export type FournisseurCountOutputType = {
     Vente: number
     Achat: number
+    Adresse: number
+    Contact: number
   }
 
   export type FournisseurCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Vente?: boolean | FournisseurCountOutputTypeCountVenteArgs
     Achat?: boolean | FournisseurCountOutputTypeCountAchatArgs
+    Adresse?: boolean | FournisseurCountOutputTypeCountAdresseArgs
+    Contact?: boolean | FournisseurCountOutputTypeCountContactArgs
   }
 
   // Custom InputTypes
@@ -2356,6 +2314,20 @@ export namespace Prisma {
    */
   export type FournisseurCountOutputTypeCountAchatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AchatWhereInput
+  }
+
+  /**
+   * FournisseurCountOutputType without action
+   */
+  export type FournisseurCountOutputTypeCountAdresseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdresseWhereInput
+  }
+
+  /**
+   * FournisseurCountOutputType without action
+   */
+  export type FournisseurCountOutputTypeCountContactArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContactWhereInput
   }
 
 
@@ -2396,10 +2368,12 @@ export namespace Prisma {
 
   export type DeviseCountOutputType = {
     Produit: number
+    Paiement: number
   }
 
   export type DeviseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Produit?: boolean | DeviseCountOutputTypeCountProduitArgs
+    Paiement?: boolean | DeviseCountOutputTypeCountPaiementArgs
   }
 
   // Custom InputTypes
@@ -2418,6 +2392,13 @@ export namespace Prisma {
    */
   export type DeviseCountOutputTypeCountProduitArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProduitWhereInput
+  }
+
+  /**
+   * DeviseCountOutputType without action
+   */
+  export type DeviseCountOutputTypeCountPaiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaiementWhereInput
   }
 
 
@@ -2462,42 +2443,33 @@ export namespace Prisma {
 
 
   /**
-   * Count Type PaiementCountOutputType
+   * Count Type VenteCountOutputType
    */
 
-  export type PaiementCountOutputType = {
-    Vente: number
-    Achat: number
+  export type VenteCountOutputType = {
+    Paiement: number
   }
 
-  export type PaiementCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Vente?: boolean | PaiementCountOutputTypeCountVenteArgs
-    Achat?: boolean | PaiementCountOutputTypeCountAchatArgs
+  export type VenteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Paiement?: boolean | VenteCountOutputTypeCountPaiementArgs
   }
 
   // Custom InputTypes
   /**
-   * PaiementCountOutputType without action
+   * VenteCountOutputType without action
    */
-  export type PaiementCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type VenteCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaiementCountOutputType
+     * Select specific fields to fetch from the VenteCountOutputType
      */
-    select?: PaiementCountOutputTypeSelect<ExtArgs> | null
+    select?: VenteCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * PaiementCountOutputType without action
+   * VenteCountOutputType without action
    */
-  export type PaiementCountOutputTypeCountVenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VenteWhereInput
-  }
-
-  /**
-   * PaiementCountOutputType without action
-   */
-  export type PaiementCountOutputTypeCountAchatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AchatWhereInput
+  export type VenteCountOutputTypeCountPaiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaiementWhereInput
   }
 
 
@@ -2507,10 +2479,12 @@ export namespace Prisma {
 
   export type PanierCountOutputType = {
     DetailAchat: number
+    Achat: number
   }
 
   export type PanierCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     DetailAchat?: boolean | PanierCountOutputTypeCountDetailAchatArgs
+    Achat?: boolean | PanierCountOutputTypeCountAchatArgs
   }
 
   // Custom InputTypes
@@ -2529,6 +2503,13 @@ export namespace Prisma {
    */
   export type PanierCountOutputTypeCountDetailAchatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DetailAchatWhereInput
+  }
+
+  /**
+   * PanierCountOutputType without action
+   */
+  export type PanierCountOutputTypeCountAchatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AchatWhereInput
   }
 
 
@@ -2564,33 +2545,33 @@ export namespace Prisma {
 
 
   /**
-   * Count Type DetailAchatCountOutputType
+   * Count Type AchatCountOutputType
    */
 
-  export type DetailAchatCountOutputType = {
-    Achat: number
+  export type AchatCountOutputType = {
+    Paiement: number
   }
 
-  export type DetailAchatCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Achat?: boolean | DetailAchatCountOutputTypeCountAchatArgs
+  export type AchatCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Paiement?: boolean | AchatCountOutputTypeCountPaiementArgs
   }
 
   // Custom InputTypes
   /**
-   * DetailAchatCountOutputType without action
+   * AchatCountOutputType without action
    */
-  export type DetailAchatCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AchatCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchatCountOutputType
+     * Select specific fields to fetch from the AchatCountOutputType
      */
-    select?: DetailAchatCountOutputTypeSelect<ExtArgs> | null
+    select?: AchatCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * DetailAchatCountOutputType without action
+   * AchatCountOutputType without action
    */
-  export type DetailAchatCountOutputTypeCountAchatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AchatWhereInput
+  export type AchatCountOutputTypeCountPaiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaiementWhereInput
   }
 
 
@@ -5125,10 +5106,12 @@ export namespace Prisma {
 
   export type AdresseAvgAggregateOutputType = {
     id: number | null
+    fournisseurId: number | null
   }
 
   export type AdresseSumAggregateOutputType = {
     id: number | null
+    fournisseurId: number | null
   }
 
   export type AdresseMinAggregateOutputType = {
@@ -5137,6 +5120,7 @@ export namespace Prisma {
     commune: string | null
     adresse: string | null
     utilisateurId: string | null
+    fournisseurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5147,6 +5131,7 @@ export namespace Prisma {
     commune: string | null
     adresse: string | null
     utilisateurId: string | null
+    fournisseurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5157,6 +5142,7 @@ export namespace Prisma {
     commune: number
     adresse: number
     utilisateurId: number
+    fournisseurId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5165,10 +5151,12 @@ export namespace Prisma {
 
   export type AdresseAvgAggregateInputType = {
     id?: true
+    fournisseurId?: true
   }
 
   export type AdresseSumAggregateInputType = {
     id?: true
+    fournisseurId?: true
   }
 
   export type AdresseMinAggregateInputType = {
@@ -5177,6 +5165,7 @@ export namespace Prisma {
     commune?: true
     adresse?: true
     utilisateurId?: true
+    fournisseurId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5187,6 +5176,7 @@ export namespace Prisma {
     commune?: true
     adresse?: true
     utilisateurId?: true
+    fournisseurId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5197,6 +5187,7 @@ export namespace Prisma {
     commune?: true
     adresse?: true
     utilisateurId?: true
+    fournisseurId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5293,7 +5284,8 @@ export namespace Prisma {
     ville: string
     commune: string
     adresse: string
-    utilisateurId: string
+    utilisateurId: string | null
+    fournisseurId: number | null
     createdAt: Date
     updatedAt: Date
     _count: AdresseCountAggregateOutputType | null
@@ -5323,11 +5315,11 @@ export namespace Prisma {
     commune?: boolean
     adresse?: boolean
     utilisateurId?: boolean
+    fournisseurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    Fournisseur?: boolean | Adresse$FournisseurArgs<ExtArgs>
-    _count?: boolean | AdresseCountOutputTypeDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Adresse$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Adresse$fournisseurArgs<ExtArgs>
   }, ExtArgs["result"]["adresse"]>
 
   export type AdresseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5336,9 +5328,11 @@ export namespace Prisma {
     commune?: boolean
     adresse?: boolean
     utilisateurId?: boolean
+    fournisseurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Adresse$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Adresse$fournisseurArgs<ExtArgs>
   }, ExtArgs["result"]["adresse"]>
 
   export type AdresseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5347,9 +5341,11 @@ export namespace Prisma {
     commune?: boolean
     adresse?: boolean
     utilisateurId?: boolean
+    fournisseurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Adresse$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Adresse$fournisseurArgs<ExtArgs>
   }, ExtArgs["result"]["adresse"]>
 
   export type AdresseSelectScalar = {
@@ -5358,35 +5354,38 @@ export namespace Prisma {
     commune?: boolean
     adresse?: boolean
     utilisateurId?: boolean
+    fournisseurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AdresseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ville" | "commune" | "adresse" | "utilisateurId" | "createdAt" | "updatedAt", ExtArgs["result"]["adresse"]>
+  export type AdresseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ville" | "commune" | "adresse" | "utilisateurId" | "fournisseurId" | "createdAt" | "updatedAt", ExtArgs["result"]["adresse"]>
   export type AdresseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    Fournisseur?: boolean | Adresse$FournisseurArgs<ExtArgs>
-    _count?: boolean | AdresseCountOutputTypeDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Adresse$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Adresse$fournisseurArgs<ExtArgs>
   }
   export type AdresseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Adresse$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Adresse$fournisseurArgs<ExtArgs>
   }
   export type AdresseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Adresse$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Adresse$fournisseurArgs<ExtArgs>
   }
 
   export type $AdressePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Adresse"
     objects: {
-      utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
-      Fournisseur: Prisma.$FournisseurPayload<ExtArgs>[]
+      utilisateur: Prisma.$UtilisateurPayload<ExtArgs> | null
+      fournisseur: Prisma.$FournisseurPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       ville: string
       commune: string
       adresse: string
-      utilisateurId: string
+      utilisateurId: string | null
+      fournisseurId: number | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["adresse"]>
@@ -5783,8 +5782,8 @@ export namespace Prisma {
    */
   export interface Prisma__AdresseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Fournisseur<T extends Adresse$FournisseurArgs<ExtArgs> = {}>(args?: Subset<T, Adresse$FournisseurArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    utilisateur<T extends Adresse$utilisateurArgs<ExtArgs> = {}>(args?: Subset<T, Adresse$utilisateurArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    fournisseur<T extends Adresse$fournisseurArgs<ExtArgs> = {}>(args?: Subset<T, Adresse$fournisseurArgs<ExtArgs>>): Prisma__FournisseurClient<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5819,6 +5818,7 @@ export namespace Prisma {
     readonly commune: FieldRef<"Adresse", 'String'>
     readonly adresse: FieldRef<"Adresse", 'String'>
     readonly utilisateurId: FieldRef<"Adresse", 'String'>
+    readonly fournisseurId: FieldRef<"Adresse", 'Int'>
     readonly createdAt: FieldRef<"Adresse", 'DateTime'>
     readonly updatedAt: FieldRef<"Adresse", 'DateTime'>
   }
@@ -6217,9 +6217,28 @@ export namespace Prisma {
   }
 
   /**
-   * Adresse.Fournisseur
+   * Adresse.utilisateur
    */
-  export type Adresse$FournisseurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Adresse$utilisateurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Utilisateur
+     */
+    select?: UtilisateurSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Utilisateur
+     */
+    omit?: UtilisateurOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UtilisateurInclude<ExtArgs> | null
+    where?: UtilisateurWhereInput
+  }
+
+  /**
+   * Adresse.fournisseur
+   */
+  export type Adresse$fournisseurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Fournisseur
      */
@@ -6233,11 +6252,6 @@ export namespace Prisma {
      */
     include?: FournisseurInclude<ExtArgs> | null
     where?: FournisseurWhereInput
-    orderBy?: FournisseurOrderByWithRelationInput | FournisseurOrderByWithRelationInput[]
-    cursor?: FournisseurWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: FournisseurScalarFieldEnum | FournisseurScalarFieldEnum[]
   }
 
   /**
@@ -6273,16 +6287,19 @@ export namespace Prisma {
 
   export type ContactAvgAggregateOutputType = {
     id: number | null
+    fournisseurId: number | null
   }
 
   export type ContactSumAggregateOutputType = {
     id: number | null
+    fournisseurId: number | null
   }
 
   export type ContactMinAggregateOutputType = {
     id: number | null
     tel: string | null
     utilisateurId: string | null
+    fournisseurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6291,6 +6308,7 @@ export namespace Prisma {
     id: number | null
     tel: string | null
     utilisateurId: string | null
+    fournisseurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6299,6 +6317,7 @@ export namespace Prisma {
     id: number
     tel: number
     utilisateurId: number
+    fournisseurId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -6307,16 +6326,19 @@ export namespace Prisma {
 
   export type ContactAvgAggregateInputType = {
     id?: true
+    fournisseurId?: true
   }
 
   export type ContactSumAggregateInputType = {
     id?: true
+    fournisseurId?: true
   }
 
   export type ContactMinAggregateInputType = {
     id?: true
     tel?: true
     utilisateurId?: true
+    fournisseurId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6325,6 +6347,7 @@ export namespace Prisma {
     id?: true
     tel?: true
     utilisateurId?: true
+    fournisseurId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6333,6 +6356,7 @@ export namespace Prisma {
     id?: true
     tel?: true
     utilisateurId?: true
+    fournisseurId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6427,7 +6451,8 @@ export namespace Prisma {
   export type ContactGroupByOutputType = {
     id: number
     tel: string
-    utilisateurId: string
+    utilisateurId: string | null
+    fournisseurId: number | null
     createdAt: Date
     updatedAt: Date
     _count: ContactCountAggregateOutputType | null
@@ -6455,62 +6480,69 @@ export namespace Prisma {
     id?: boolean
     tel?: boolean
     utilisateurId?: boolean
+    fournisseurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    Fournisseur?: boolean | Contact$FournisseurArgs<ExtArgs>
-    _count?: boolean | ContactCountOutputTypeDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Contact$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Contact$fournisseurArgs<ExtArgs>
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     tel?: boolean
     utilisateurId?: boolean
+    fournisseurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Contact$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Contact$fournisseurArgs<ExtArgs>
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     tel?: boolean
     utilisateurId?: boolean
+    fournisseurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Contact$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Contact$fournisseurArgs<ExtArgs>
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectScalar = {
     id?: boolean
     tel?: boolean
     utilisateurId?: boolean
+    fournisseurId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ContactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tel" | "utilisateurId" | "createdAt" | "updatedAt", ExtArgs["result"]["contact"]>
+  export type ContactOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tel" | "utilisateurId" | "fournisseurId" | "createdAt" | "updatedAt", ExtArgs["result"]["contact"]>
   export type ContactInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    Fournisseur?: boolean | Contact$FournisseurArgs<ExtArgs>
-    _count?: boolean | ContactCountOutputTypeDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Contact$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Contact$fournisseurArgs<ExtArgs>
   }
   export type ContactIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Contact$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Contact$fournisseurArgs<ExtArgs>
   }
   export type ContactIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Contact$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Contact$fournisseurArgs<ExtArgs>
   }
 
   export type $ContactPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Contact"
     objects: {
-      utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
-      Fournisseur: Prisma.$FournisseurPayload<ExtArgs>[]
+      utilisateur: Prisma.$UtilisateurPayload<ExtArgs> | null
+      fournisseur: Prisma.$FournisseurPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       tel: string
-      utilisateurId: string
+      utilisateurId: string | null
+      fournisseurId: number | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["contact"]>
@@ -6907,8 +6939,8 @@ export namespace Prisma {
    */
   export interface Prisma__ContactClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Fournisseur<T extends Contact$FournisseurArgs<ExtArgs> = {}>(args?: Subset<T, Contact$FournisseurArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    utilisateur<T extends Contact$utilisateurArgs<ExtArgs> = {}>(args?: Subset<T, Contact$utilisateurArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    fournisseur<T extends Contact$fournisseurArgs<ExtArgs> = {}>(args?: Subset<T, Contact$fournisseurArgs<ExtArgs>>): Prisma__FournisseurClient<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6941,6 +6973,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Contact", 'Int'>
     readonly tel: FieldRef<"Contact", 'String'>
     readonly utilisateurId: FieldRef<"Contact", 'String'>
+    readonly fournisseurId: FieldRef<"Contact", 'Int'>
     readonly createdAt: FieldRef<"Contact", 'DateTime'>
     readonly updatedAt: FieldRef<"Contact", 'DateTime'>
   }
@@ -7339,9 +7372,28 @@ export namespace Prisma {
   }
 
   /**
-   * Contact.Fournisseur
+   * Contact.utilisateur
    */
-  export type Contact$FournisseurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Contact$utilisateurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Utilisateur
+     */
+    select?: UtilisateurSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Utilisateur
+     */
+    omit?: UtilisateurOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UtilisateurInclude<ExtArgs> | null
+    where?: UtilisateurWhereInput
+  }
+
+  /**
+   * Contact.fournisseur
+   */
+  export type Contact$fournisseurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Fournisseur
      */
@@ -7355,11 +7407,6 @@ export namespace Prisma {
      */
     include?: FournisseurInclude<ExtArgs> | null
     where?: FournisseurWhereInput
-    orderBy?: FournisseurOrderByWithRelationInput | FournisseurOrderByWithRelationInput[]
-    cursor?: FournisseurWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: FournisseurScalarFieldEnum | FournisseurScalarFieldEnum[]
   }
 
   /**
@@ -7395,14 +7442,10 @@ export namespace Prisma {
 
   export type FournisseurAvgAggregateOutputType = {
     id: number | null
-    adresseId: number | null
-    contactId: number | null
   }
 
   export type FournisseurSumAggregateOutputType = {
     id: number | null
-    adresseId: number | null
-    contactId: number | null
   }
 
   export type FournisseurMinAggregateOutputType = {
@@ -7410,8 +7453,6 @@ export namespace Prisma {
     nom: string | null
     email: string | null
     code_postal: string | null
-    adresseId: number | null
-    contactId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7421,8 +7462,6 @@ export namespace Prisma {
     nom: string | null
     email: string | null
     code_postal: string | null
-    adresseId: number | null
-    contactId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7432,8 +7471,6 @@ export namespace Prisma {
     nom: number
     email: number
     code_postal: number
-    adresseId: number
-    contactId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -7442,14 +7479,10 @@ export namespace Prisma {
 
   export type FournisseurAvgAggregateInputType = {
     id?: true
-    adresseId?: true
-    contactId?: true
   }
 
   export type FournisseurSumAggregateInputType = {
     id?: true
-    adresseId?: true
-    contactId?: true
   }
 
   export type FournisseurMinAggregateInputType = {
@@ -7457,8 +7490,6 @@ export namespace Prisma {
     nom?: true
     email?: true
     code_postal?: true
-    adresseId?: true
-    contactId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7468,8 +7499,6 @@ export namespace Prisma {
     nom?: true
     email?: true
     code_postal?: true
-    adresseId?: true
-    contactId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7479,8 +7508,6 @@ export namespace Prisma {
     nom?: true
     email?: true
     code_postal?: true
-    adresseId?: true
-    contactId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -7577,8 +7604,6 @@ export namespace Prisma {
     nom: string
     email: string
     code_postal: string | null
-    adresseId: number
-    contactId: number
     createdAt: Date
     updatedAt: Date
     _count: FournisseurCountAggregateOutputType | null
@@ -7607,14 +7632,12 @@ export namespace Prisma {
     nom?: boolean
     email?: boolean
     code_postal?: boolean
-    adresseId?: boolean
-    contactId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    adresse?: boolean | AdresseDefaultArgs<ExtArgs>
-    contact?: boolean | ContactDefaultArgs<ExtArgs>
     Vente?: boolean | Fournisseur$VenteArgs<ExtArgs>
     Achat?: boolean | Fournisseur$AchatArgs<ExtArgs>
+    Adresse?: boolean | Fournisseur$AdresseArgs<ExtArgs>
+    Contact?: boolean | Fournisseur$ContactArgs<ExtArgs>
     _count?: boolean | FournisseurCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["fournisseur"]>
 
@@ -7623,12 +7646,8 @@ export namespace Prisma {
     nom?: boolean
     email?: boolean
     code_postal?: boolean
-    adresseId?: boolean
-    contactId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    adresse?: boolean | AdresseDefaultArgs<ExtArgs>
-    contact?: boolean | ContactDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["fournisseur"]>
 
   export type FournisseurSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7636,12 +7655,8 @@ export namespace Prisma {
     nom?: boolean
     email?: boolean
     code_postal?: boolean
-    adresseId?: boolean
-    contactId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    adresse?: boolean | AdresseDefaultArgs<ExtArgs>
-    contact?: boolean | ContactDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["fournisseur"]>
 
   export type FournisseurSelectScalar = {
@@ -7649,44 +7664,34 @@ export namespace Prisma {
     nom?: boolean
     email?: boolean
     code_postal?: boolean
-    adresseId?: boolean
-    contactId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type FournisseurOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "email" | "code_postal" | "adresseId" | "contactId" | "createdAt" | "updatedAt", ExtArgs["result"]["fournisseur"]>
+  export type FournisseurOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "email" | "code_postal" | "createdAt" | "updatedAt", ExtArgs["result"]["fournisseur"]>
   export type FournisseurInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    adresse?: boolean | AdresseDefaultArgs<ExtArgs>
-    contact?: boolean | ContactDefaultArgs<ExtArgs>
     Vente?: boolean | Fournisseur$VenteArgs<ExtArgs>
     Achat?: boolean | Fournisseur$AchatArgs<ExtArgs>
+    Adresse?: boolean | Fournisseur$AdresseArgs<ExtArgs>
+    Contact?: boolean | Fournisseur$ContactArgs<ExtArgs>
     _count?: boolean | FournisseurCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type FournisseurIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    adresse?: boolean | AdresseDefaultArgs<ExtArgs>
-    contact?: boolean | ContactDefaultArgs<ExtArgs>
-  }
-  export type FournisseurIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    adresse?: boolean | AdresseDefaultArgs<ExtArgs>
-    contact?: boolean | ContactDefaultArgs<ExtArgs>
-  }
+  export type FournisseurIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type FournisseurIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $FournisseurPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Fournisseur"
     objects: {
-      adresse: Prisma.$AdressePayload<ExtArgs>
-      contact: Prisma.$ContactPayload<ExtArgs>
       Vente: Prisma.$VentePayload<ExtArgs>[]
       Achat: Prisma.$AchatPayload<ExtArgs>[]
+      Adresse: Prisma.$AdressePayload<ExtArgs>[]
+      Contact: Prisma.$ContactPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nom: string
       email: string
       code_postal: string | null
-      adresseId: number
-      contactId: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["fournisseur"]>
@@ -8083,10 +8088,10 @@ export namespace Prisma {
    */
   export interface Prisma__FournisseurClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    adresse<T extends AdresseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdresseDefaultArgs<ExtArgs>>): Prisma__AdresseClient<$Result.GetResult<Prisma.$AdressePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    contact<T extends ContactDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContactDefaultArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Vente<T extends Fournisseur$VenteArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$VenteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Achat<T extends Fournisseur$AchatArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$AchatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Adresse<T extends Fournisseur$AdresseArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$AdresseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdressePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Contact<T extends Fournisseur$ContactArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$ContactArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8120,8 +8125,6 @@ export namespace Prisma {
     readonly nom: FieldRef<"Fournisseur", 'String'>
     readonly email: FieldRef<"Fournisseur", 'String'>
     readonly code_postal: FieldRef<"Fournisseur", 'String'>
-    readonly adresseId: FieldRef<"Fournisseur", 'Int'>
-    readonly contactId: FieldRef<"Fournisseur", 'Int'>
     readonly createdAt: FieldRef<"Fournisseur", 'DateTime'>
     readonly updatedAt: FieldRef<"Fournisseur", 'DateTime'>
   }
@@ -8373,10 +8376,6 @@ export namespace Prisma {
      */
     data: FournisseurCreateManyInput | FournisseurCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FournisseurIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8447,10 +8446,6 @@ export namespace Prisma {
      * Limit how many Fournisseurs to update.
      */
     limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FournisseurIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8565,6 +8560,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AchatScalarFieldEnum | AchatScalarFieldEnum[]
+  }
+
+  /**
+   * Fournisseur.Adresse
+   */
+  export type Fournisseur$AdresseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adresse
+     */
+    select?: AdresseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adresse
+     */
+    omit?: AdresseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdresseInclude<ExtArgs> | null
+    where?: AdresseWhereInput
+    orderBy?: AdresseOrderByWithRelationInput | AdresseOrderByWithRelationInput[]
+    cursor?: AdresseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdresseScalarFieldEnum | AdresseScalarFieldEnum[]
+  }
+
+  /**
+   * Fournisseur.Contact
+   */
+  export type Fournisseur$ContactArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    where?: ContactWhereInput
+    orderBy?: ContactOrderByWithRelationInput | ContactOrderByWithRelationInput[]
+    cursor?: ContactWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
   }
 
   /**
@@ -9928,6 +9971,7 @@ export namespace Prisma {
     updatedAt?: boolean
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     Produit?: boolean | Devise$ProduitArgs<ExtArgs>
+    Paiement?: boolean | Devise$PaiementArgs<ExtArgs>
     _count?: boolean | DeviseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["devise"]>
 
@@ -9967,6 +10011,7 @@ export namespace Prisma {
   export type DeviseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     Produit?: boolean | Devise$ProduitArgs<ExtArgs>
+    Paiement?: boolean | Devise$PaiementArgs<ExtArgs>
     _count?: boolean | DeviseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DeviseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9981,6 +10026,7 @@ export namespace Prisma {
     objects: {
       utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
       Produit: Prisma.$ProduitPayload<ExtArgs>[]
+      Paiement: Prisma.$PaiementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -10386,6 +10432,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Produit<T extends Devise$ProduitArgs<ExtArgs> = {}>(args?: Subset<T, Devise$ProduitArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProduitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Paiement<T extends Devise$PaiementArgs<ExtArgs> = {}>(args?: Subset<T, Devise$PaiementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10839,6 +10886,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProduitScalarFieldEnum | ProduitScalarFieldEnum[]
+  }
+
+  /**
+   * Devise.Paiement
+   */
+  export type Devise$PaiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paiement
+     */
+    select?: PaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paiement
+     */
+    omit?: PaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaiementInclude<ExtArgs> | null
+    where?: PaiementWhereInput
+    orderBy?: PaiementOrderByWithRelationInput | PaiementOrderByWithRelationInput[]
+    cursor?: PaiementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaiementScalarFieldEnum | PaiementScalarFieldEnum[]
   }
 
   /**
@@ -12122,17 +12193,26 @@ export namespace Prisma {
   export type PaiementAvgAggregateOutputType = {
     id: number | null
     montant: number | null
+    deviseId: number | null
+    achatId: number | null
+    venteId: number | null
   }
 
   export type PaiementSumAggregateOutputType = {
     id: number | null
     montant: number | null
+    deviseId: number | null
+    achatId: number | null
+    venteId: number | null
   }
 
   export type PaiementMinAggregateOutputType = {
     id: number | null
     montant: number | null
     moyen_paiement: $Enums.MoyenPaiment | null
+    deviseId: number | null
+    achatId: number | null
+    venteId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12141,6 +12221,9 @@ export namespace Prisma {
     id: number | null
     montant: number | null
     moyen_paiement: $Enums.MoyenPaiment | null
+    deviseId: number | null
+    achatId: number | null
+    venteId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12149,6 +12232,9 @@ export namespace Prisma {
     id: number
     montant: number
     moyen_paiement: number
+    deviseId: number
+    achatId: number
+    venteId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -12158,17 +12244,26 @@ export namespace Prisma {
   export type PaiementAvgAggregateInputType = {
     id?: true
     montant?: true
+    deviseId?: true
+    achatId?: true
+    venteId?: true
   }
 
   export type PaiementSumAggregateInputType = {
     id?: true
     montant?: true
+    deviseId?: true
+    achatId?: true
+    venteId?: true
   }
 
   export type PaiementMinAggregateInputType = {
     id?: true
     montant?: true
     moyen_paiement?: true
+    deviseId?: true
+    achatId?: true
+    venteId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12177,6 +12272,9 @@ export namespace Prisma {
     id?: true
     montant?: true
     moyen_paiement?: true
+    deviseId?: true
+    achatId?: true
+    venteId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12185,6 +12283,9 @@ export namespace Prisma {
     id?: true
     montant?: true
     moyen_paiement?: true
+    deviseId?: true
+    achatId?: true
+    venteId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -12280,6 +12381,9 @@ export namespace Prisma {
     id: number
     montant: number
     moyen_paiement: $Enums.MoyenPaiment
+    deviseId: number
+    achatId: number | null
+    venteId: number | null
     createdAt: Date
     updatedAt: Date
     _count: PaiementCountAggregateOutputType | null
@@ -12307,56 +12411,86 @@ export namespace Prisma {
     id?: boolean
     montant?: boolean
     moyen_paiement?: boolean
+    deviseId?: boolean
+    achatId?: boolean
+    venteId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    Vente?: boolean | Paiement$VenteArgs<ExtArgs>
-    Achat?: boolean | Paiement$AchatArgs<ExtArgs>
-    _count?: boolean | PaiementCountOutputTypeDefaultArgs<ExtArgs>
+    devise?: boolean | DeviseDefaultArgs<ExtArgs>
+    achat?: boolean | Paiement$achatArgs<ExtArgs>
+    vente?: boolean | Paiement$venteArgs<ExtArgs>
   }, ExtArgs["result"]["paiement"]>
 
   export type PaiementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     montant?: boolean
     moyen_paiement?: boolean
+    deviseId?: boolean
+    achatId?: boolean
+    venteId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    devise?: boolean | DeviseDefaultArgs<ExtArgs>
+    achat?: boolean | Paiement$achatArgs<ExtArgs>
+    vente?: boolean | Paiement$venteArgs<ExtArgs>
   }, ExtArgs["result"]["paiement"]>
 
   export type PaiementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     montant?: boolean
     moyen_paiement?: boolean
+    deviseId?: boolean
+    achatId?: boolean
+    venteId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    devise?: boolean | DeviseDefaultArgs<ExtArgs>
+    achat?: boolean | Paiement$achatArgs<ExtArgs>
+    vente?: boolean | Paiement$venteArgs<ExtArgs>
   }, ExtArgs["result"]["paiement"]>
 
   export type PaiementSelectScalar = {
     id?: boolean
     montant?: boolean
     moyen_paiement?: boolean
+    deviseId?: boolean
+    achatId?: boolean
+    venteId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PaiementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "montant" | "moyen_paiement" | "createdAt" | "updatedAt", ExtArgs["result"]["paiement"]>
+  export type PaiementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "montant" | "moyen_paiement" | "deviseId" | "achatId" | "venteId" | "createdAt" | "updatedAt", ExtArgs["result"]["paiement"]>
   export type PaiementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Vente?: boolean | Paiement$VenteArgs<ExtArgs>
-    Achat?: boolean | Paiement$AchatArgs<ExtArgs>
-    _count?: boolean | PaiementCountOutputTypeDefaultArgs<ExtArgs>
+    devise?: boolean | DeviseDefaultArgs<ExtArgs>
+    achat?: boolean | Paiement$achatArgs<ExtArgs>
+    vente?: boolean | Paiement$venteArgs<ExtArgs>
   }
-  export type PaiementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type PaiementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PaiementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    devise?: boolean | DeviseDefaultArgs<ExtArgs>
+    achat?: boolean | Paiement$achatArgs<ExtArgs>
+    vente?: boolean | Paiement$venteArgs<ExtArgs>
+  }
+  export type PaiementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    devise?: boolean | DeviseDefaultArgs<ExtArgs>
+    achat?: boolean | Paiement$achatArgs<ExtArgs>
+    vente?: boolean | Paiement$venteArgs<ExtArgs>
+  }
 
   export type $PaiementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Paiement"
     objects: {
-      Vente: Prisma.$VentePayload<ExtArgs>[]
-      Achat: Prisma.$AchatPayload<ExtArgs>[]
+      devise: Prisma.$DevisePayload<ExtArgs>
+      achat: Prisma.$AchatPayload<ExtArgs> | null
+      vente: Prisma.$VentePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       montant: number
       moyen_paiement: $Enums.MoyenPaiment
+      deviseId: number
+      achatId: number | null
+      venteId: number | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["paiement"]>
@@ -12753,8 +12887,9 @@ export namespace Prisma {
    */
   export interface Prisma__PaiementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Vente<T extends Paiement$VenteArgs<ExtArgs> = {}>(args?: Subset<T, Paiement$VenteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Achat<T extends Paiement$AchatArgs<ExtArgs> = {}>(args?: Subset<T, Paiement$AchatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    devise<T extends DeviseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DeviseDefaultArgs<ExtArgs>>): Prisma__DeviseClient<$Result.GetResult<Prisma.$DevisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    achat<T extends Paiement$achatArgs<ExtArgs> = {}>(args?: Subset<T, Paiement$achatArgs<ExtArgs>>): Prisma__AchatClient<$Result.GetResult<Prisma.$AchatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    vente<T extends Paiement$venteArgs<ExtArgs> = {}>(args?: Subset<T, Paiement$venteArgs<ExtArgs>>): Prisma__VenteClient<$Result.GetResult<Prisma.$VentePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12787,6 +12922,9 @@ export namespace Prisma {
     readonly id: FieldRef<"Paiement", 'Int'>
     readonly montant: FieldRef<"Paiement", 'Float'>
     readonly moyen_paiement: FieldRef<"Paiement", 'MoyenPaiment'>
+    readonly deviseId: FieldRef<"Paiement", 'Int'>
+    readonly achatId: FieldRef<"Paiement", 'Int'>
+    readonly venteId: FieldRef<"Paiement", 'Int'>
     readonly createdAt: FieldRef<"Paiement", 'DateTime'>
     readonly updatedAt: FieldRef<"Paiement", 'DateTime'>
   }
@@ -13038,6 +13176,10 @@ export namespace Prisma {
      */
     data: PaiementCreateManyInput | PaiementCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaiementIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -13108,6 +13250,10 @@ export namespace Prisma {
      * Limit how many Paiements to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaiementIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -13177,33 +13323,9 @@ export namespace Prisma {
   }
 
   /**
-   * Paiement.Vente
+   * Paiement.achat
    */
-  export type Paiement$VenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vente
-     */
-    select?: VenteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vente
-     */
-    omit?: VenteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VenteInclude<ExtArgs> | null
-    where?: VenteWhereInput
-    orderBy?: VenteOrderByWithRelationInput | VenteOrderByWithRelationInput[]
-    cursor?: VenteWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: VenteScalarFieldEnum | VenteScalarFieldEnum[]
-  }
-
-  /**
-   * Paiement.Achat
-   */
-  export type Paiement$AchatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Paiement$achatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Achat
      */
@@ -13217,11 +13339,25 @@ export namespace Prisma {
      */
     include?: AchatInclude<ExtArgs> | null
     where?: AchatWhereInput
-    orderBy?: AchatOrderByWithRelationInput | AchatOrderByWithRelationInput[]
-    cursor?: AchatWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AchatScalarFieldEnum | AchatScalarFieldEnum[]
+  }
+
+  /**
+   * Paiement.vente
+   */
+  export type Paiement$venteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vente
+     */
+    select?: VenteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Vente
+     */
+    omit?: VenteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VenteInclude<ExtArgs> | null
+    where?: VenteWhereInput
   }
 
   /**
@@ -13261,7 +13397,6 @@ export namespace Prisma {
     total_ht: number | null
     remise: number | null
     detailVenteId: number | null
-    paiementId: number | null
     entrepriseId: number | null
     fournisseurId: number | null
   }
@@ -13272,7 +13407,6 @@ export namespace Prisma {
     total_ht: number | null
     remise: number | null
     detailVenteId: number | null
-    paiementId: number | null
     entrepriseId: number | null
     fournisseurId: number | null
   }
@@ -13284,7 +13418,6 @@ export namespace Prisma {
     total_ht: number | null
     remise: number | null
     detailVenteId: number | null
-    paiementId: number | null
     entrepriseId: number | null
     clientId: string | null
     agentId: string | null
@@ -13300,7 +13433,6 @@ export namespace Prisma {
     total_ht: number | null
     remise: number | null
     detailVenteId: number | null
-    paiementId: number | null
     entrepriseId: number | null
     clientId: string | null
     agentId: string | null
@@ -13316,7 +13448,6 @@ export namespace Prisma {
     total_ht: number
     remise: number
     detailVenteId: number
-    paiementId: number
     entrepriseId: number
     clientId: number
     agentId: number
@@ -13333,7 +13464,6 @@ export namespace Prisma {
     total_ht?: true
     remise?: true
     detailVenteId?: true
-    paiementId?: true
     entrepriseId?: true
     fournisseurId?: true
   }
@@ -13344,7 +13474,6 @@ export namespace Prisma {
     total_ht?: true
     remise?: true
     detailVenteId?: true
-    paiementId?: true
     entrepriseId?: true
     fournisseurId?: true
   }
@@ -13356,7 +13485,6 @@ export namespace Prisma {
     total_ht?: true
     remise?: true
     detailVenteId?: true
-    paiementId?: true
     entrepriseId?: true
     clientId?: true
     agentId?: true
@@ -13372,7 +13500,6 @@ export namespace Prisma {
     total_ht?: true
     remise?: true
     detailVenteId?: true
-    paiementId?: true
     entrepriseId?: true
     clientId?: true
     agentId?: true
@@ -13388,7 +13515,6 @@ export namespace Prisma {
     total_ht?: true
     remise?: true
     detailVenteId?: true
-    paiementId?: true
     entrepriseId?: true
     clientId?: true
     agentId?: true
@@ -13491,7 +13617,6 @@ export namespace Prisma {
     total_ht: number
     remise: number
     detailVenteId: number
-    paiementId: number
     entrepriseId: number
     clientId: string
     agentId: string
@@ -13526,7 +13651,6 @@ export namespace Prisma {
     total_ht?: boolean
     remise?: boolean
     detailVenteId?: boolean
-    paiementId?: boolean
     entrepriseId?: boolean
     clientId?: boolean
     agentId?: boolean
@@ -13534,10 +13658,11 @@ export namespace Prisma {
     updatedAt?: boolean
     fournisseurId?: boolean
     detailvente?: boolean | DetailVenteDefaultArgs<ExtArgs>
-    peiement?: boolean | PaiementDefaultArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     Fournisseur?: boolean | Vente$FournisseurArgs<ExtArgs>
+    Paiement?: boolean | Vente$PaiementArgs<ExtArgs>
+    _count?: boolean | VenteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["vente"]>
 
   export type VenteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13547,7 +13672,6 @@ export namespace Prisma {
     total_ht?: boolean
     remise?: boolean
     detailVenteId?: boolean
-    paiementId?: boolean
     entrepriseId?: boolean
     clientId?: boolean
     agentId?: boolean
@@ -13555,7 +13679,6 @@ export namespace Prisma {
     updatedAt?: boolean
     fournisseurId?: boolean
     detailvente?: boolean | DetailVenteDefaultArgs<ExtArgs>
-    peiement?: boolean | PaiementDefaultArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     Fournisseur?: boolean | Vente$FournisseurArgs<ExtArgs>
@@ -13568,7 +13691,6 @@ export namespace Prisma {
     total_ht?: boolean
     remise?: boolean
     detailVenteId?: boolean
-    paiementId?: boolean
     entrepriseId?: boolean
     clientId?: boolean
     agentId?: boolean
@@ -13576,7 +13698,6 @@ export namespace Prisma {
     updatedAt?: boolean
     fournisseurId?: boolean
     detailvente?: boolean | DetailVenteDefaultArgs<ExtArgs>
-    peiement?: boolean | PaiementDefaultArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     Fournisseur?: boolean | Vente$FournisseurArgs<ExtArgs>
@@ -13589,7 +13710,6 @@ export namespace Prisma {
     total_ht?: boolean
     remise?: boolean
     detailVenteId?: boolean
-    paiementId?: boolean
     entrepriseId?: boolean
     clientId?: boolean
     agentId?: boolean
@@ -13598,24 +13718,23 @@ export namespace Prisma {
     fournisseurId?: boolean
   }
 
-  export type VenteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "total_ttc" | "total_ht" | "remise" | "detailVenteId" | "paiementId" | "entrepriseId" | "clientId" | "agentId" | "createdAt" | "updatedAt" | "fournisseurId", ExtArgs["result"]["vente"]>
+  export type VenteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "total_ttc" | "total_ht" | "remise" | "detailVenteId" | "entrepriseId" | "clientId" | "agentId" | "createdAt" | "updatedAt" | "fournisseurId", ExtArgs["result"]["vente"]>
   export type VenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     detailvente?: boolean | DetailVenteDefaultArgs<ExtArgs>
-    peiement?: boolean | PaiementDefaultArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     Fournisseur?: boolean | Vente$FournisseurArgs<ExtArgs>
+    Paiement?: boolean | Vente$PaiementArgs<ExtArgs>
+    _count?: boolean | VenteCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type VenteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     detailvente?: boolean | DetailVenteDefaultArgs<ExtArgs>
-    peiement?: boolean | PaiementDefaultArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     Fournisseur?: boolean | Vente$FournisseurArgs<ExtArgs>
   }
   export type VenteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     detailvente?: boolean | DetailVenteDefaultArgs<ExtArgs>
-    peiement?: boolean | PaiementDefaultArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     Fournisseur?: boolean | Vente$FournisseurArgs<ExtArgs>
@@ -13625,10 +13744,10 @@ export namespace Prisma {
     name: "Vente"
     objects: {
       detailvente: Prisma.$DetailVentePayload<ExtArgs>
-      peiement: Prisma.$PaiementPayload<ExtArgs>
       entreprise: Prisma.$EntreprisePayload<ExtArgs>
       utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
       Fournisseur: Prisma.$FournisseurPayload<ExtArgs> | null
+      Paiement: Prisma.$PaiementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -13637,7 +13756,6 @@ export namespace Prisma {
       total_ht: number
       remise: number
       detailVenteId: number
-      paiementId: number
       entrepriseId: number
       clientId: string
       agentId: string
@@ -14039,10 +14157,10 @@ export namespace Prisma {
   export interface Prisma__VenteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     detailvente<T extends DetailVenteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DetailVenteDefaultArgs<ExtArgs>>): Prisma__DetailVenteClient<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    peiement<T extends PaiementDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PaiementDefaultArgs<ExtArgs>>): Prisma__PaiementClient<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     entreprise<T extends EntrepriseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EntrepriseDefaultArgs<ExtArgs>>): Prisma__EntrepriseClient<$Result.GetResult<Prisma.$EntreprisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Fournisseur<T extends Vente$FournisseurArgs<ExtArgs> = {}>(args?: Subset<T, Vente$FournisseurArgs<ExtArgs>>): Prisma__FournisseurClient<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Paiement<T extends Vente$PaiementArgs<ExtArgs> = {}>(args?: Subset<T, Vente$PaiementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14078,7 +14196,6 @@ export namespace Prisma {
     readonly total_ht: FieldRef<"Vente", 'Float'>
     readonly remise: FieldRef<"Vente", 'Float'>
     readonly detailVenteId: FieldRef<"Vente", 'Int'>
-    readonly paiementId: FieldRef<"Vente", 'Int'>
     readonly entrepriseId: FieldRef<"Vente", 'Int'>
     readonly clientId: FieldRef<"Vente", 'String'>
     readonly agentId: FieldRef<"Vente", 'String'>
@@ -14500,6 +14617,30 @@ export namespace Prisma {
   }
 
   /**
+   * Vente.Paiement
+   */
+  export type Vente$PaiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paiement
+     */
+    select?: PaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paiement
+     */
+    omit?: PaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaiementInclude<ExtArgs> | null
+    where?: PaiementWhereInput
+    orderBy?: PaiementOrderByWithRelationInput | PaiementOrderByWithRelationInput[]
+    cursor?: PaiementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaiementScalarFieldEnum | PaiementScalarFieldEnum[]
+  }
+
+  /**
    * Vente without action
    */
   export type VenteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14710,6 +14851,7 @@ export namespace Prisma {
     updatedAt?: boolean
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     DetailAchat?: boolean | Panier$DetailAchatArgs<ExtArgs>
+    Achat?: boolean | Panier$AchatArgs<ExtArgs>
     _count?: boolean | PanierCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["panier"]>
 
@@ -14740,6 +14882,7 @@ export namespace Prisma {
   export type PanierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     DetailAchat?: boolean | Panier$DetailAchatArgs<ExtArgs>
+    Achat?: boolean | Panier$AchatArgs<ExtArgs>
     _count?: boolean | PanierCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PanierIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14754,6 +14897,7 @@ export namespace Prisma {
     objects: {
       utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
       DetailAchat: Prisma.$DetailAchatPayload<ExtArgs>[]
+      Achat: Prisma.$AchatPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -15156,6 +15300,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     DetailAchat<T extends Panier$DetailAchatArgs<ExtArgs> = {}>(args?: Subset<T, Panier$DetailAchatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Achat<T extends Panier$AchatArgs<ExtArgs> = {}>(args?: Subset<T, Panier$AchatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15606,6 +15751,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DetailAchatScalarFieldEnum | DetailAchatScalarFieldEnum[]
+  }
+
+  /**
+   * Panier.Achat
+   */
+  export type Panier$AchatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Achat
+     */
+    select?: AchatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Achat
+     */
+    omit?: AchatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchatInclude<ExtArgs> | null
+    where?: AchatWhereInput
+    orderBy?: AchatOrderByWithRelationInput | AchatOrderByWithRelationInput[]
+    cursor?: AchatWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AchatScalarFieldEnum | AchatScalarFieldEnum[]
   }
 
   /**
@@ -17035,8 +17204,6 @@ export namespace Prisma {
     updatedAt?: boolean
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    Achat?: boolean | DetailAchat$AchatArgs<ExtArgs>
-    _count?: boolean | DetailAchatCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["detailAchat"]>
 
   export type DetailAchatSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -17080,8 +17247,6 @@ export namespace Prisma {
   export type DetailAchatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    Achat?: boolean | DetailAchat$AchatArgs<ExtArgs>
-    _count?: boolean | DetailAchatCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DetailAchatIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
@@ -17097,7 +17262,6 @@ export namespace Prisma {
     objects: {
       produit: Prisma.$ProduitPayload<ExtArgs>
       panier: Prisma.$PanierPayload<ExtArgs>
-      Achat: Prisma.$AchatPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -17504,7 +17668,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     produit<T extends ProduitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProduitDefaultArgs<ExtArgs>>): Prisma__ProduitClient<$Result.GetResult<Prisma.$ProduitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     panier<T extends PanierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PanierDefaultArgs<ExtArgs>>): Prisma__PanierClient<$Result.GetResult<Prisma.$PanierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Achat<T extends DetailAchat$AchatArgs<ExtArgs> = {}>(args?: Subset<T, DetailAchat$AchatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17938,30 +18101,6 @@ export namespace Prisma {
   }
 
   /**
-   * DetailAchat.Achat
-   */
-  export type DetailAchat$AchatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Achat
-     */
-    select?: AchatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Achat
-     */
-    omit?: AchatOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AchatInclude<ExtArgs> | null
-    where?: AchatWhereInput
-    orderBy?: AchatOrderByWithRelationInput | AchatOrderByWithRelationInput[]
-    cursor?: AchatWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AchatScalarFieldEnum | AchatScalarFieldEnum[]
-  }
-
-  /**
    * DetailAchat without action
    */
   export type DetailAchatDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17994,40 +18133,32 @@ export namespace Prisma {
 
   export type AchatAvgAggregateOutputType = {
     id: number | null
+    panierId: number | null
     fournisseurId: number | null
-    total: number | null
-    detailAchatId: number | null
-    paiementId: number | null
   }
 
   export type AchatSumAggregateOutputType = {
     id: number | null
+    panierId: number | null
     fournisseurId: number | null
-    total: number | null
-    detailAchatId: number | null
-    paiementId: number | null
   }
 
   export type AchatMinAggregateOutputType = {
     id: number | null
-    statut: string | null
+    statut: $Enums.StatutAchat | null
+    panierId: number | null
     fournisseurId: number | null
-    total: number | null
-    detailAchatId: number | null
-    agentId: string | null
-    paiementId: number | null
+    enregisterParId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type AchatMaxAggregateOutputType = {
     id: number | null
-    statut: string | null
+    statut: $Enums.StatutAchat | null
+    panierId: number | null
     fournisseurId: number | null
-    total: number | null
-    detailAchatId: number | null
-    agentId: string | null
-    paiementId: number | null
+    enregisterParId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -18035,11 +18166,9 @@ export namespace Prisma {
   export type AchatCountAggregateOutputType = {
     id: number
     statut: number
+    panierId: number
     fournisseurId: number
-    total: number
-    detailAchatId: number
-    agentId: number
-    paiementId: number
+    enregisterParId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -18048,28 +18177,22 @@ export namespace Prisma {
 
   export type AchatAvgAggregateInputType = {
     id?: true
+    panierId?: true
     fournisseurId?: true
-    total?: true
-    detailAchatId?: true
-    paiementId?: true
   }
 
   export type AchatSumAggregateInputType = {
     id?: true
+    panierId?: true
     fournisseurId?: true
-    total?: true
-    detailAchatId?: true
-    paiementId?: true
   }
 
   export type AchatMinAggregateInputType = {
     id?: true
     statut?: true
+    panierId?: true
     fournisseurId?: true
-    total?: true
-    detailAchatId?: true
-    agentId?: true
-    paiementId?: true
+    enregisterParId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -18077,11 +18200,9 @@ export namespace Prisma {
   export type AchatMaxAggregateInputType = {
     id?: true
     statut?: true
+    panierId?: true
     fournisseurId?: true
-    total?: true
-    detailAchatId?: true
-    agentId?: true
-    paiementId?: true
+    enregisterParId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -18089,11 +18210,9 @@ export namespace Prisma {
   export type AchatCountAggregateInputType = {
     id?: true
     statut?: true
+    panierId?: true
     fournisseurId?: true
-    total?: true
-    detailAchatId?: true
-    agentId?: true
-    paiementId?: true
+    enregisterParId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -18187,12 +18306,10 @@ export namespace Prisma {
 
   export type AchatGroupByOutputType = {
     id: number
-    statut: string
+    statut: $Enums.StatutAchat
+    panierId: number
     fournisseurId: number
-    total: number
-    detailAchatId: number
-    agentId: string
-    paiementId: number
+    enregisterParId: string
     createdAt: Date
     updatedAt: Date
     _count: AchatCountAggregateOutputType | null
@@ -18219,99 +18336,87 @@ export namespace Prisma {
   export type AchatSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     statut?: boolean
+    panierId?: boolean
     fournisseurId?: boolean
-    total?: boolean
-    detailAchatId?: boolean
-    agentId?: boolean
-    paiementId?: boolean
+    enregisterParId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
     fournisseur?: boolean | FournisseurDefaultArgs<ExtArgs>
-    detailAchat?: boolean | DetailAchatDefaultArgs<ExtArgs>
-    agent?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    paiement?: boolean | PaiementDefaultArgs<ExtArgs>
+    enregisterPar?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    Paiement?: boolean | Achat$PaiementArgs<ExtArgs>
+    _count?: boolean | AchatCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["achat"]>
 
   export type AchatSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     statut?: boolean
+    panierId?: boolean
     fournisseurId?: boolean
-    total?: boolean
-    detailAchatId?: boolean
-    agentId?: boolean
-    paiementId?: boolean
+    enregisterParId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
     fournisseur?: boolean | FournisseurDefaultArgs<ExtArgs>
-    detailAchat?: boolean | DetailAchatDefaultArgs<ExtArgs>
-    agent?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    paiement?: boolean | PaiementDefaultArgs<ExtArgs>
+    enregisterPar?: boolean | UtilisateurDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["achat"]>
 
   export type AchatSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     statut?: boolean
+    panierId?: boolean
     fournisseurId?: boolean
-    total?: boolean
-    detailAchatId?: boolean
-    agentId?: boolean
-    paiementId?: boolean
+    enregisterParId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
     fournisseur?: boolean | FournisseurDefaultArgs<ExtArgs>
-    detailAchat?: boolean | DetailAchatDefaultArgs<ExtArgs>
-    agent?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    paiement?: boolean | PaiementDefaultArgs<ExtArgs>
+    enregisterPar?: boolean | UtilisateurDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["achat"]>
 
   export type AchatSelectScalar = {
     id?: boolean
     statut?: boolean
+    panierId?: boolean
     fournisseurId?: boolean
-    total?: boolean
-    detailAchatId?: boolean
-    agentId?: boolean
-    paiementId?: boolean
+    enregisterParId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AchatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "fournisseurId" | "total" | "detailAchatId" | "agentId" | "paiementId" | "createdAt" | "updatedAt", ExtArgs["result"]["achat"]>
+  export type AchatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "panierId" | "fournisseurId" | "enregisterParId" | "createdAt" | "updatedAt", ExtArgs["result"]["achat"]>
   export type AchatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
     fournisseur?: boolean | FournisseurDefaultArgs<ExtArgs>
-    detailAchat?: boolean | DetailAchatDefaultArgs<ExtArgs>
-    agent?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    paiement?: boolean | PaiementDefaultArgs<ExtArgs>
+    enregisterPar?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    Paiement?: boolean | Achat$PaiementArgs<ExtArgs>
+    _count?: boolean | AchatCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AchatIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
     fournisseur?: boolean | FournisseurDefaultArgs<ExtArgs>
-    detailAchat?: boolean | DetailAchatDefaultArgs<ExtArgs>
-    agent?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    paiement?: boolean | PaiementDefaultArgs<ExtArgs>
+    enregisterPar?: boolean | UtilisateurDefaultArgs<ExtArgs>
   }
   export type AchatIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
     fournisseur?: boolean | FournisseurDefaultArgs<ExtArgs>
-    detailAchat?: boolean | DetailAchatDefaultArgs<ExtArgs>
-    agent?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    paiement?: boolean | PaiementDefaultArgs<ExtArgs>
+    enregisterPar?: boolean | UtilisateurDefaultArgs<ExtArgs>
   }
 
   export type $AchatPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Achat"
     objects: {
+      panier: Prisma.$PanierPayload<ExtArgs>
       fournisseur: Prisma.$FournisseurPayload<ExtArgs>
-      detailAchat: Prisma.$DetailAchatPayload<ExtArgs>
-      agent: Prisma.$UtilisateurPayload<ExtArgs>
-      paiement: Prisma.$PaiementPayload<ExtArgs>
+      enregisterPar: Prisma.$UtilisateurPayload<ExtArgs>
+      Paiement: Prisma.$PaiementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      statut: string
+      statut: $Enums.StatutAchat
+      panierId: number
       fournisseurId: number
-      total: number
-      detailAchatId: number
-      agentId: string
-      paiementId: number
+      enregisterParId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["achat"]>
@@ -18708,10 +18813,10 @@ export namespace Prisma {
    */
   export interface Prisma__AchatClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    panier<T extends PanierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PanierDefaultArgs<ExtArgs>>): Prisma__PanierClient<$Result.GetResult<Prisma.$PanierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     fournisseur<T extends FournisseurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FournisseurDefaultArgs<ExtArgs>>): Prisma__FournisseurClient<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    detailAchat<T extends DetailAchatDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DetailAchatDefaultArgs<ExtArgs>>): Prisma__DetailAchatClient<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    agent<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    paiement<T extends PaiementDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PaiementDefaultArgs<ExtArgs>>): Prisma__PaiementClient<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    enregisterPar<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Paiement<T extends Achat$PaiementArgs<ExtArgs> = {}>(args?: Subset<T, Achat$PaiementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18742,12 +18847,10 @@ export namespace Prisma {
    */
   interface AchatFieldRefs {
     readonly id: FieldRef<"Achat", 'Int'>
-    readonly statut: FieldRef<"Achat", 'String'>
+    readonly statut: FieldRef<"Achat", 'StatutAchat'>
+    readonly panierId: FieldRef<"Achat", 'Int'>
     readonly fournisseurId: FieldRef<"Achat", 'Int'>
-    readonly total: FieldRef<"Achat", 'Float'>
-    readonly detailAchatId: FieldRef<"Achat", 'Int'>
-    readonly agentId: FieldRef<"Achat", 'String'>
-    readonly paiementId: FieldRef<"Achat", 'Int'>
+    readonly enregisterParId: FieldRef<"Achat", 'String'>
     readonly createdAt: FieldRef<"Achat", 'DateTime'>
     readonly updatedAt: FieldRef<"Achat", 'DateTime'>
   }
@@ -19146,6 +19249,30 @@ export namespace Prisma {
   }
 
   /**
+   * Achat.Paiement
+   */
+  export type Achat$PaiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paiement
+     */
+    select?: PaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paiement
+     */
+    omit?: PaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaiementInclude<ExtArgs> | null
+    where?: PaiementWhereInput
+    orderBy?: PaiementOrderByWithRelationInput | PaiementOrderByWithRelationInput[]
+    cursor?: PaiementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaiementScalarFieldEnum | PaiementScalarFieldEnum[]
+  }
+
+  /**
    * Achat without action
    */
   export type AchatDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19217,6 +19344,7 @@ export namespace Prisma {
     commune: 'commune',
     adresse: 'adresse',
     utilisateurId: 'utilisateurId',
+    fournisseurId: 'fournisseurId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -19228,6 +19356,7 @@ export namespace Prisma {
     id: 'id',
     tel: 'tel',
     utilisateurId: 'utilisateurId',
+    fournisseurId: 'fournisseurId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -19240,8 +19369,6 @@ export namespace Prisma {
     nom: 'nom',
     email: 'email',
     code_postal: 'code_postal',
-    adresseId: 'adresseId',
-    contactId: 'contactId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -19293,6 +19420,9 @@ export namespace Prisma {
     id: 'id',
     montant: 'montant',
     moyen_paiement: 'moyen_paiement',
+    deviseId: 'deviseId',
+    achatId: 'achatId',
+    venteId: 'venteId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -19307,7 +19437,6 @@ export namespace Prisma {
     total_ht: 'total_ht',
     remise: 'remise',
     detailVenteId: 'detailVenteId',
-    paiementId: 'paiementId',
     entrepriseId: 'entrepriseId',
     clientId: 'clientId',
     agentId: 'agentId',
@@ -19359,11 +19488,9 @@ export namespace Prisma {
   export const AchatScalarFieldEnum: {
     id: 'id',
     statut: 'statut',
+    panierId: 'panierId',
     fournisseurId: 'fournisseurId',
-    total: 'total',
-    detailAchatId: 'detailAchatId',
-    agentId: 'agentId',
-    paiementId: 'paiementId',
+    enregisterParId: 'enregisterParId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -19509,6 +19636,20 @@ export namespace Prisma {
    * Reference to a field of type 'MoyenPaiment[]'
    */
   export type ListEnumMoyenPaimentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MoyenPaiment[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatutAchat'
+   */
+  export type EnumStatutAchatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutAchat'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatutAchat[]'
+   */
+  export type ListEnumStatutAchatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutAchat[]'>
     
   /**
    * Deep Input Types
@@ -19711,11 +19852,12 @@ export namespace Prisma {
     ville?: StringFilter<"Adresse"> | string
     commune?: StringFilter<"Adresse"> | string
     adresse?: StringFilter<"Adresse"> | string
-    utilisateurId?: StringFilter<"Adresse"> | string
+    utilisateurId?: StringNullableFilter<"Adresse"> | string | null
+    fournisseurId?: IntNullableFilter<"Adresse"> | number | null
     createdAt?: DateTimeFilter<"Adresse"> | Date | string
     updatedAt?: DateTimeFilter<"Adresse"> | Date | string
-    utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    Fournisseur?: FournisseurListRelationFilter
+    utilisateur?: XOR<UtilisateurNullableScalarRelationFilter, UtilisateurWhereInput> | null
+    fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
   }
 
   export type AdresseOrderByWithRelationInput = {
@@ -19723,11 +19865,12 @@ export namespace Prisma {
     ville?: SortOrder
     commune?: SortOrder
     adresse?: SortOrder
-    utilisateurId?: SortOrder
+    utilisateurId?: SortOrderInput | SortOrder
+    fournisseurId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     utilisateur?: UtilisateurOrderByWithRelationInput
-    Fournisseur?: FournisseurOrderByRelationAggregateInput
+    fournisseur?: FournisseurOrderByWithRelationInput
   }
 
   export type AdresseWhereUniqueInput = Prisma.AtLeast<{
@@ -19738,11 +19881,12 @@ export namespace Prisma {
     ville?: StringFilter<"Adresse"> | string
     commune?: StringFilter<"Adresse"> | string
     adresse?: StringFilter<"Adresse"> | string
-    utilisateurId?: StringFilter<"Adresse"> | string
+    utilisateurId?: StringNullableFilter<"Adresse"> | string | null
+    fournisseurId?: IntNullableFilter<"Adresse"> | number | null
     createdAt?: DateTimeFilter<"Adresse"> | Date | string
     updatedAt?: DateTimeFilter<"Adresse"> | Date | string
-    utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    Fournisseur?: FournisseurListRelationFilter
+    utilisateur?: XOR<UtilisateurNullableScalarRelationFilter, UtilisateurWhereInput> | null
+    fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
   }, "id">
 
   export type AdresseOrderByWithAggregationInput = {
@@ -19750,7 +19894,8 @@ export namespace Prisma {
     ville?: SortOrder
     commune?: SortOrder
     adresse?: SortOrder
-    utilisateurId?: SortOrder
+    utilisateurId?: SortOrderInput | SortOrder
+    fournisseurId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AdresseCountOrderByAggregateInput
@@ -19768,7 +19913,8 @@ export namespace Prisma {
     ville?: StringWithAggregatesFilter<"Adresse"> | string
     commune?: StringWithAggregatesFilter<"Adresse"> | string
     adresse?: StringWithAggregatesFilter<"Adresse"> | string
-    utilisateurId?: StringWithAggregatesFilter<"Adresse"> | string
+    utilisateurId?: StringNullableWithAggregatesFilter<"Adresse"> | string | null
+    fournisseurId?: IntNullableWithAggregatesFilter<"Adresse"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Adresse"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Adresse"> | Date | string
   }
@@ -19779,21 +19925,23 @@ export namespace Prisma {
     NOT?: ContactWhereInput | ContactWhereInput[]
     id?: IntFilter<"Contact"> | number
     tel?: StringFilter<"Contact"> | string
-    utilisateurId?: StringFilter<"Contact"> | string
+    utilisateurId?: StringNullableFilter<"Contact"> | string | null
+    fournisseurId?: IntNullableFilter<"Contact"> | number | null
     createdAt?: DateTimeFilter<"Contact"> | Date | string
     updatedAt?: DateTimeFilter<"Contact"> | Date | string
-    utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    Fournisseur?: FournisseurListRelationFilter
+    utilisateur?: XOR<UtilisateurNullableScalarRelationFilter, UtilisateurWhereInput> | null
+    fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
   }
 
   export type ContactOrderByWithRelationInput = {
     id?: SortOrder
     tel?: SortOrder
-    utilisateurId?: SortOrder
+    utilisateurId?: SortOrderInput | SortOrder
+    fournisseurId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     utilisateur?: UtilisateurOrderByWithRelationInput
-    Fournisseur?: FournisseurOrderByRelationAggregateInput
+    fournisseur?: FournisseurOrderByWithRelationInput
   }
 
   export type ContactWhereUniqueInput = Prisma.AtLeast<{
@@ -19802,17 +19950,19 @@ export namespace Prisma {
     AND?: ContactWhereInput | ContactWhereInput[]
     OR?: ContactWhereInput[]
     NOT?: ContactWhereInput | ContactWhereInput[]
-    utilisateurId?: StringFilter<"Contact"> | string
+    utilisateurId?: StringNullableFilter<"Contact"> | string | null
+    fournisseurId?: IntNullableFilter<"Contact"> | number | null
     createdAt?: DateTimeFilter<"Contact"> | Date | string
     updatedAt?: DateTimeFilter<"Contact"> | Date | string
-    utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    Fournisseur?: FournisseurListRelationFilter
+    utilisateur?: XOR<UtilisateurNullableScalarRelationFilter, UtilisateurWhereInput> | null
+    fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
   }, "id" | "tel">
 
   export type ContactOrderByWithAggregationInput = {
     id?: SortOrder
     tel?: SortOrder
-    utilisateurId?: SortOrder
+    utilisateurId?: SortOrderInput | SortOrder
+    fournisseurId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ContactCountOrderByAggregateInput
@@ -19828,7 +19978,8 @@ export namespace Prisma {
     NOT?: ContactScalarWhereWithAggregatesInput | ContactScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Contact"> | number
     tel?: StringWithAggregatesFilter<"Contact"> | string
-    utilisateurId?: StringWithAggregatesFilter<"Contact"> | string
+    utilisateurId?: StringNullableWithAggregatesFilter<"Contact"> | string | null
+    fournisseurId?: IntNullableWithAggregatesFilter<"Contact"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Contact"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Contact"> | Date | string
   }
@@ -19841,14 +19992,12 @@ export namespace Prisma {
     nom?: StringFilter<"Fournisseur"> | string
     email?: StringFilter<"Fournisseur"> | string
     code_postal?: StringNullableFilter<"Fournisseur"> | string | null
-    adresseId?: IntFilter<"Fournisseur"> | number
-    contactId?: IntFilter<"Fournisseur"> | number
     createdAt?: DateTimeFilter<"Fournisseur"> | Date | string
     updatedAt?: DateTimeFilter<"Fournisseur"> | Date | string
-    adresse?: XOR<AdresseScalarRelationFilter, AdresseWhereInput>
-    contact?: XOR<ContactScalarRelationFilter, ContactWhereInput>
     Vente?: VenteListRelationFilter
     Achat?: AchatListRelationFilter
+    Adresse?: AdresseListRelationFilter
+    Contact?: ContactListRelationFilter
   }
 
   export type FournisseurOrderByWithRelationInput = {
@@ -19856,14 +20005,12 @@ export namespace Prisma {
     nom?: SortOrder
     email?: SortOrder
     code_postal?: SortOrderInput | SortOrder
-    adresseId?: SortOrder
-    contactId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    adresse?: AdresseOrderByWithRelationInput
-    contact?: ContactOrderByWithRelationInput
     Vente?: VenteOrderByRelationAggregateInput
     Achat?: AchatOrderByRelationAggregateInput
+    Adresse?: AdresseOrderByRelationAggregateInput
+    Contact?: ContactOrderByRelationAggregateInput
   }
 
   export type FournisseurWhereUniqueInput = Prisma.AtLeast<{
@@ -19874,14 +20021,12 @@ export namespace Prisma {
     NOT?: FournisseurWhereInput | FournisseurWhereInput[]
     nom?: StringFilter<"Fournisseur"> | string
     code_postal?: StringNullableFilter<"Fournisseur"> | string | null
-    adresseId?: IntFilter<"Fournisseur"> | number
-    contactId?: IntFilter<"Fournisseur"> | number
     createdAt?: DateTimeFilter<"Fournisseur"> | Date | string
     updatedAt?: DateTimeFilter<"Fournisseur"> | Date | string
-    adresse?: XOR<AdresseScalarRelationFilter, AdresseWhereInput>
-    contact?: XOR<ContactScalarRelationFilter, ContactWhereInput>
     Vente?: VenteListRelationFilter
     Achat?: AchatListRelationFilter
+    Adresse?: AdresseListRelationFilter
+    Contact?: ContactListRelationFilter
   }, "id" | "email">
 
   export type FournisseurOrderByWithAggregationInput = {
@@ -19889,8 +20034,6 @@ export namespace Prisma {
     nom?: SortOrder
     email?: SortOrder
     code_postal?: SortOrderInput | SortOrder
-    adresseId?: SortOrder
-    contactId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: FournisseurCountOrderByAggregateInput
@@ -19908,8 +20051,6 @@ export namespace Prisma {
     nom?: StringWithAggregatesFilter<"Fournisseur"> | string
     email?: StringWithAggregatesFilter<"Fournisseur"> | string
     code_postal?: StringNullableWithAggregatesFilter<"Fournisseur"> | string | null
-    adresseId?: IntWithAggregatesFilter<"Fournisseur"> | number
-    contactId?: IntWithAggregatesFilter<"Fournisseur"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Fournisseur"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Fournisseur"> | Date | string
   }
@@ -19987,6 +20128,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Devise"> | Date | string
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     Produit?: ProduitListRelationFilter
+    Paiement?: PaiementListRelationFilter
   }
 
   export type DeviseOrderByWithRelationInput = {
@@ -19999,6 +20141,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     utilisateur?: UtilisateurOrderByWithRelationInput
     Produit?: ProduitOrderByRelationAggregateInput
+    Paiement?: PaiementOrderByRelationAggregateInput
   }
 
   export type DeviseWhereUniqueInput = Prisma.AtLeast<{
@@ -20014,6 +20157,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Devise"> | Date | string
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     Produit?: ProduitListRelationFilter
+    Paiement?: PaiementListRelationFilter
   }, "id" | "nom" | "code">
 
   export type DeviseOrderByWithAggregationInput = {
@@ -20145,20 +20289,28 @@ export namespace Prisma {
     id?: IntFilter<"Paiement"> | number
     montant?: FloatFilter<"Paiement"> | number
     moyen_paiement?: EnumMoyenPaimentFilter<"Paiement"> | $Enums.MoyenPaiment
+    deviseId?: IntFilter<"Paiement"> | number
+    achatId?: IntNullableFilter<"Paiement"> | number | null
+    venteId?: IntNullableFilter<"Paiement"> | number | null
     createdAt?: DateTimeFilter<"Paiement"> | Date | string
     updatedAt?: DateTimeFilter<"Paiement"> | Date | string
-    Vente?: VenteListRelationFilter
-    Achat?: AchatListRelationFilter
+    devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
+    achat?: XOR<AchatNullableScalarRelationFilter, AchatWhereInput> | null
+    vente?: XOR<VenteNullableScalarRelationFilter, VenteWhereInput> | null
   }
 
   export type PaiementOrderByWithRelationInput = {
     id?: SortOrder
     montant?: SortOrder
     moyen_paiement?: SortOrder
+    deviseId?: SortOrder
+    achatId?: SortOrderInput | SortOrder
+    venteId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    Vente?: VenteOrderByRelationAggregateInput
-    Achat?: AchatOrderByRelationAggregateInput
+    devise?: DeviseOrderByWithRelationInput
+    achat?: AchatOrderByWithRelationInput
+    vente?: VenteOrderByWithRelationInput
   }
 
   export type PaiementWhereUniqueInput = Prisma.AtLeast<{
@@ -20168,16 +20320,23 @@ export namespace Prisma {
     NOT?: PaiementWhereInput | PaiementWhereInput[]
     montant?: FloatFilter<"Paiement"> | number
     moyen_paiement?: EnumMoyenPaimentFilter<"Paiement"> | $Enums.MoyenPaiment
+    deviseId?: IntFilter<"Paiement"> | number
+    achatId?: IntNullableFilter<"Paiement"> | number | null
+    venteId?: IntNullableFilter<"Paiement"> | number | null
     createdAt?: DateTimeFilter<"Paiement"> | Date | string
     updatedAt?: DateTimeFilter<"Paiement"> | Date | string
-    Vente?: VenteListRelationFilter
-    Achat?: AchatListRelationFilter
+    devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
+    achat?: XOR<AchatNullableScalarRelationFilter, AchatWhereInput> | null
+    vente?: XOR<VenteNullableScalarRelationFilter, VenteWhereInput> | null
   }, "id">
 
   export type PaiementOrderByWithAggregationInput = {
     id?: SortOrder
     montant?: SortOrder
     moyen_paiement?: SortOrder
+    deviseId?: SortOrder
+    achatId?: SortOrderInput | SortOrder
+    venteId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PaiementCountOrderByAggregateInput
@@ -20194,6 +20353,9 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Paiement"> | number
     montant?: FloatWithAggregatesFilter<"Paiement"> | number
     moyen_paiement?: EnumMoyenPaimentWithAggregatesFilter<"Paiement"> | $Enums.MoyenPaiment
+    deviseId?: IntWithAggregatesFilter<"Paiement"> | number
+    achatId?: IntNullableWithAggregatesFilter<"Paiement"> | number | null
+    venteId?: IntNullableWithAggregatesFilter<"Paiement"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Paiement"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Paiement"> | Date | string
   }
@@ -20208,7 +20370,6 @@ export namespace Prisma {
     total_ht?: FloatFilter<"Vente"> | number
     remise?: FloatFilter<"Vente"> | number
     detailVenteId?: IntFilter<"Vente"> | number
-    paiementId?: IntFilter<"Vente"> | number
     entrepriseId?: IntFilter<"Vente"> | number
     clientId?: StringFilter<"Vente"> | string
     agentId?: StringFilter<"Vente"> | string
@@ -20216,10 +20377,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Vente"> | Date | string
     fournisseurId?: IntNullableFilter<"Vente"> | number | null
     detailvente?: XOR<DetailVenteScalarRelationFilter, DetailVenteWhereInput>
-    peiement?: XOR<PaiementScalarRelationFilter, PaiementWhereInput>
     entreprise?: XOR<EntrepriseScalarRelationFilter, EntrepriseWhereInput>
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     Fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
+    Paiement?: PaiementListRelationFilter
   }
 
   export type VenteOrderByWithRelationInput = {
@@ -20229,7 +20390,6 @@ export namespace Prisma {
     total_ht?: SortOrder
     remise?: SortOrder
     detailVenteId?: SortOrder
-    paiementId?: SortOrder
     entrepriseId?: SortOrder
     clientId?: SortOrder
     agentId?: SortOrder
@@ -20237,10 +20397,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
     fournisseurId?: SortOrderInput | SortOrder
     detailvente?: DetailVenteOrderByWithRelationInput
-    peiement?: PaiementOrderByWithRelationInput
     entreprise?: EntrepriseOrderByWithRelationInput
     utilisateur?: UtilisateurOrderByWithRelationInput
     Fournisseur?: FournisseurOrderByWithRelationInput
+    Paiement?: PaiementOrderByRelationAggregateInput
   }
 
   export type VenteWhereUniqueInput = Prisma.AtLeast<{
@@ -20253,7 +20413,6 @@ export namespace Prisma {
     total_ht?: FloatFilter<"Vente"> | number
     remise?: FloatFilter<"Vente"> | number
     detailVenteId?: IntFilter<"Vente"> | number
-    paiementId?: IntFilter<"Vente"> | number
     entrepriseId?: IntFilter<"Vente"> | number
     clientId?: StringFilter<"Vente"> | string
     agentId?: StringFilter<"Vente"> | string
@@ -20261,10 +20420,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Vente"> | Date | string
     fournisseurId?: IntNullableFilter<"Vente"> | number | null
     detailvente?: XOR<DetailVenteScalarRelationFilter, DetailVenteWhereInput>
-    peiement?: XOR<PaiementScalarRelationFilter, PaiementWhereInput>
     entreprise?: XOR<EntrepriseScalarRelationFilter, EntrepriseWhereInput>
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     Fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
+    Paiement?: PaiementListRelationFilter
   }, "id">
 
   export type VenteOrderByWithAggregationInput = {
@@ -20274,7 +20433,6 @@ export namespace Prisma {
     total_ht?: SortOrder
     remise?: SortOrder
     detailVenteId?: SortOrder
-    paiementId?: SortOrder
     entrepriseId?: SortOrder
     clientId?: SortOrder
     agentId?: SortOrder
@@ -20298,7 +20456,6 @@ export namespace Prisma {
     total_ht?: FloatWithAggregatesFilter<"Vente"> | number
     remise?: FloatWithAggregatesFilter<"Vente"> | number
     detailVenteId?: IntWithAggregatesFilter<"Vente"> | number
-    paiementId?: IntWithAggregatesFilter<"Vente"> | number
     entrepriseId?: IntWithAggregatesFilter<"Vente"> | number
     clientId?: StringWithAggregatesFilter<"Vente"> | string
     agentId?: StringWithAggregatesFilter<"Vente"> | string
@@ -20317,6 +20474,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Panier"> | Date | string
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     DetailAchat?: DetailAchatListRelationFilter
+    Achat?: AchatListRelationFilter
   }
 
   export type PanierOrderByWithRelationInput = {
@@ -20326,6 +20484,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     utilisateur?: UtilisateurOrderByWithRelationInput
     DetailAchat?: DetailAchatOrderByRelationAggregateInput
+    Achat?: AchatOrderByRelationAggregateInput
   }
 
   export type PanierWhereUniqueInput = Prisma.AtLeast<{
@@ -20338,6 +20497,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Panier"> | Date | string
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     DetailAchat?: DetailAchatListRelationFilter
+    Achat?: AchatListRelationFilter
   }, "id">
 
   export type PanierOrderByWithAggregationInput = {
@@ -20446,7 +20606,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"DetailAchat"> | Date | string
     produit?: XOR<ProduitScalarRelationFilter, ProduitWhereInput>
     panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
-    Achat?: AchatListRelationFilter
   }
 
   export type DetailAchatOrderByWithRelationInput = {
@@ -20460,7 +20619,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     produit?: ProduitOrderByWithRelationInput
     panier?: PanierOrderByWithRelationInput
-    Achat?: AchatOrderByRelationAggregateInput
   }
 
   export type DetailAchatWhereUniqueInput = Prisma.AtLeast<{
@@ -20477,7 +20635,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"DetailAchat"> | Date | string
     produit?: XOR<ProduitScalarRelationFilter, ProduitWhereInput>
     panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
-    Achat?: AchatListRelationFilter
   }, "id">
 
   export type DetailAchatOrderByWithAggregationInput = {
@@ -20515,34 +20672,30 @@ export namespace Prisma {
     OR?: AchatWhereInput[]
     NOT?: AchatWhereInput | AchatWhereInput[]
     id?: IntFilter<"Achat"> | number
-    statut?: StringFilter<"Achat"> | string
+    statut?: EnumStatutAchatFilter<"Achat"> | $Enums.StatutAchat
+    panierId?: IntFilter<"Achat"> | number
     fournisseurId?: IntFilter<"Achat"> | number
-    total?: FloatFilter<"Achat"> | number
-    detailAchatId?: IntFilter<"Achat"> | number
-    agentId?: StringFilter<"Achat"> | string
-    paiementId?: IntFilter<"Achat"> | number
+    enregisterParId?: StringFilter<"Achat"> | string
     createdAt?: DateTimeFilter<"Achat"> | Date | string
     updatedAt?: DateTimeFilter<"Achat"> | Date | string
+    panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
     fournisseur?: XOR<FournisseurScalarRelationFilter, FournisseurWhereInput>
-    detailAchat?: XOR<DetailAchatScalarRelationFilter, DetailAchatWhereInput>
-    agent?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    paiement?: XOR<PaiementScalarRelationFilter, PaiementWhereInput>
+    enregisterPar?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
+    Paiement?: PaiementListRelationFilter
   }
 
   export type AchatOrderByWithRelationInput = {
     id?: SortOrder
     statut?: SortOrder
+    panierId?: SortOrder
     fournisseurId?: SortOrder
-    total?: SortOrder
-    detailAchatId?: SortOrder
-    agentId?: SortOrder
-    paiementId?: SortOrder
+    enregisterParId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    panier?: PanierOrderByWithRelationInput
     fournisseur?: FournisseurOrderByWithRelationInput
-    detailAchat?: DetailAchatOrderByWithRelationInput
-    agent?: UtilisateurOrderByWithRelationInput
-    paiement?: PaiementOrderByWithRelationInput
+    enregisterPar?: UtilisateurOrderByWithRelationInput
+    Paiement?: PaiementOrderByRelationAggregateInput
   }
 
   export type AchatWhereUniqueInput = Prisma.AtLeast<{
@@ -20550,28 +20703,24 @@ export namespace Prisma {
     AND?: AchatWhereInput | AchatWhereInput[]
     OR?: AchatWhereInput[]
     NOT?: AchatWhereInput | AchatWhereInput[]
-    statut?: StringFilter<"Achat"> | string
+    statut?: EnumStatutAchatFilter<"Achat"> | $Enums.StatutAchat
+    panierId?: IntFilter<"Achat"> | number
     fournisseurId?: IntFilter<"Achat"> | number
-    total?: FloatFilter<"Achat"> | number
-    detailAchatId?: IntFilter<"Achat"> | number
-    agentId?: StringFilter<"Achat"> | string
-    paiementId?: IntFilter<"Achat"> | number
+    enregisterParId?: StringFilter<"Achat"> | string
     createdAt?: DateTimeFilter<"Achat"> | Date | string
     updatedAt?: DateTimeFilter<"Achat"> | Date | string
+    panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
     fournisseur?: XOR<FournisseurScalarRelationFilter, FournisseurWhereInput>
-    detailAchat?: XOR<DetailAchatScalarRelationFilter, DetailAchatWhereInput>
-    agent?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    paiement?: XOR<PaiementScalarRelationFilter, PaiementWhereInput>
+    enregisterPar?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
+    Paiement?: PaiementListRelationFilter
   }, "id">
 
   export type AchatOrderByWithAggregationInput = {
     id?: SortOrder
     statut?: SortOrder
+    panierId?: SortOrder
     fournisseurId?: SortOrder
-    total?: SortOrder
-    detailAchatId?: SortOrder
-    agentId?: SortOrder
-    paiementId?: SortOrder
+    enregisterParId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AchatCountOrderByAggregateInput
@@ -20586,12 +20735,10 @@ export namespace Prisma {
     OR?: AchatScalarWhereWithAggregatesInput[]
     NOT?: AchatScalarWhereWithAggregatesInput | AchatScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Achat"> | number
-    statut?: StringWithAggregatesFilter<"Achat"> | string
+    statut?: EnumStatutAchatWithAggregatesFilter<"Achat"> | $Enums.StatutAchat
+    panierId?: IntWithAggregatesFilter<"Achat"> | number
     fournisseurId?: IntWithAggregatesFilter<"Achat"> | number
-    total?: FloatWithAggregatesFilter<"Achat"> | number
-    detailAchatId?: IntWithAggregatesFilter<"Achat"> | number
-    agentId?: StringWithAggregatesFilter<"Achat"> | string
-    paiementId?: IntWithAggregatesFilter<"Achat"> | number
+    enregisterParId?: StringWithAggregatesFilter<"Achat"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Achat"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Achat"> | Date | string
   }
@@ -20704,7 +20851,7 @@ export namespace Prisma {
     Contact?: ContactCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatCreateNestedManyWithoutAgentInput
+    Achat?: AchatCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
@@ -20726,7 +20873,7 @@ export namespace Prisma {
     Contact?: ContactUncheckedCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitUncheckedCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteUncheckedCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatUncheckedCreateNestedManyWithoutAgentInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
@@ -20748,7 +20895,7 @@ export namespace Prisma {
     Contact?: ContactUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
@@ -20770,7 +20917,7 @@ export namespace Prisma {
     Contact?: ContactUncheckedUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUncheckedUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUncheckedUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUncheckedUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
@@ -20824,8 +20971,8 @@ export namespace Prisma {
     adresse: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    utilisateur: UtilisateurCreateNestedOneWithoutAdresseInput
-    Fournisseur?: FournisseurCreateNestedManyWithoutAdresseInput
+    utilisateur?: UtilisateurCreateNestedOneWithoutAdresseInput
+    fournisseur?: FournisseurCreateNestedOneWithoutAdresseInput
   }
 
   export type AdresseUncheckedCreateInput = {
@@ -20833,10 +20980,10 @@ export namespace Prisma {
     ville: string
     commune: string
     adresse: string
-    utilisateurId: string
+    utilisateurId?: string | null
+    fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    Fournisseur?: FournisseurUncheckedCreateNestedManyWithoutAdresseInput
   }
 
   export type AdresseUpdateInput = {
@@ -20845,8 +20992,8 @@ export namespace Prisma {
     adresse?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    utilisateur?: UtilisateurUpdateOneRequiredWithoutAdresseNestedInput
-    Fournisseur?: FournisseurUpdateManyWithoutAdresseNestedInput
+    utilisateur?: UtilisateurUpdateOneWithoutAdresseNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutAdresseNestedInput
   }
 
   export type AdresseUncheckedUpdateInput = {
@@ -20854,10 +21001,10 @@ export namespace Prisma {
     ville?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
     adresse?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Fournisseur?: FournisseurUncheckedUpdateManyWithoutAdresseNestedInput
   }
 
   export type AdresseCreateManyInput = {
@@ -20865,7 +21012,8 @@ export namespace Prisma {
     ville: string
     commune: string
     adresse: string
-    utilisateurId: string
+    utilisateurId?: string | null
+    fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20883,7 +21031,8 @@ export namespace Prisma {
     ville?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
     adresse?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20892,40 +21041,41 @@ export namespace Prisma {
     tel: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    utilisateur: UtilisateurCreateNestedOneWithoutContactInput
-    Fournisseur?: FournisseurCreateNestedManyWithoutContactInput
+    utilisateur?: UtilisateurCreateNestedOneWithoutContactInput
+    fournisseur?: FournisseurCreateNestedOneWithoutContactInput
   }
 
   export type ContactUncheckedCreateInput = {
     id?: number
     tel: string
-    utilisateurId: string
+    utilisateurId?: string | null
+    fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    Fournisseur?: FournisseurUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactUpdateInput = {
     tel?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    utilisateur?: UtilisateurUpdateOneRequiredWithoutContactNestedInput
-    Fournisseur?: FournisseurUpdateManyWithoutContactNestedInput
+    utilisateur?: UtilisateurUpdateOneWithoutContactNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     tel?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Fournisseur?: FournisseurUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type ContactCreateManyInput = {
     id?: number
     tel: string
-    utilisateurId: string
+    utilisateurId?: string | null
+    fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20939,7 +21089,8 @@ export namespace Prisma {
   export type ContactUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     tel?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20950,10 +21101,10 @@ export namespace Prisma {
     code_postal?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    adresse: AdresseCreateNestedOneWithoutFournisseurInput
-    contact: ContactCreateNestedOneWithoutFournisseurInput
     Vente?: VenteCreateNestedManyWithoutFournisseurInput
     Achat?: AchatCreateNestedManyWithoutFournisseurInput
+    Adresse?: AdresseCreateNestedManyWithoutFournisseurInput
+    Contact?: ContactCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUncheckedCreateInput = {
@@ -20961,12 +21112,12 @@ export namespace Prisma {
     nom: string
     email: string
     code_postal?: string | null
-    adresseId: number
-    contactId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Vente?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
     Achat?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
+    Adresse?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
+    Contact?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUpdateInput = {
@@ -20975,10 +21126,10 @@ export namespace Prisma {
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: AdresseUpdateOneRequiredWithoutFournisseurNestedInput
-    contact?: ContactUpdateOneRequiredWithoutFournisseurNestedInput
     Vente?: VenteUpdateManyWithoutFournisseurNestedInput
     Achat?: AchatUpdateManyWithoutFournisseurNestedInput
+    Adresse?: AdresseUpdateManyWithoutFournisseurNestedInput
+    Contact?: ContactUpdateManyWithoutFournisseurNestedInput
   }
 
   export type FournisseurUncheckedUpdateInput = {
@@ -20986,12 +21137,12 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresseId?: IntFieldUpdateOperationsInput | number
-    contactId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Vente?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
     Achat?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
+    Adresse?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
+    Contact?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
   export type FournisseurCreateManyInput = {
@@ -20999,8 +21150,6 @@ export namespace Prisma {
     nom: string
     email: string
     code_postal?: string | null
-    adresseId: number
-    contactId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21018,8 +21167,6 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresseId?: IntFieldUpdateOperationsInput | number
-    contactId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21088,6 +21235,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     utilisateur: UtilisateurCreateNestedOneWithoutDeviseInput
     Produit?: ProduitCreateNestedManyWithoutDeviseInput
+    Paiement?: PaiementCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseUncheckedCreateInput = {
@@ -21099,6 +21247,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Produit?: ProduitUncheckedCreateNestedManyWithoutDeviseInput
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseUpdateInput = {
@@ -21109,6 +21258,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneRequiredWithoutDeviseNestedInput
     Produit?: ProduitUpdateManyWithoutDeviseNestedInput
+    Paiement?: PaiementUpdateManyWithoutDeviseNestedInput
   }
 
   export type DeviseUncheckedUpdateInput = {
@@ -21120,6 +21270,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Produit?: ProduitUncheckedUpdateManyWithoutDeviseNestedInput
+    Paiement?: PaiementUncheckedUpdateManyWithoutDeviseNestedInput
   }
 
   export type DeviseCreateManyInput = {
@@ -21248,18 +21399,20 @@ export namespace Prisma {
     moyen_paiement?: $Enums.MoyenPaiment
     createdAt?: Date | string
     updatedAt?: Date | string
-    Vente?: VenteCreateNestedManyWithoutPeiementInput
-    Achat?: AchatCreateNestedManyWithoutPaiementInput
+    devise: DeviseCreateNestedOneWithoutPaiementInput
+    achat?: AchatCreateNestedOneWithoutPaiementInput
+    vente?: VenteCreateNestedOneWithoutPaiementInput
   }
 
   export type PaiementUncheckedCreateInput = {
     id?: number
     montant: number
     moyen_paiement?: $Enums.MoyenPaiment
+    deviseId: number
+    achatId?: number | null
+    venteId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    Vente?: VenteUncheckedCreateNestedManyWithoutPeiementInput
-    Achat?: AchatUncheckedCreateNestedManyWithoutPaiementInput
   }
 
   export type PaiementUpdateInput = {
@@ -21267,24 +21420,29 @@ export namespace Prisma {
     moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Vente?: VenteUpdateManyWithoutPeiementNestedInput
-    Achat?: AchatUpdateManyWithoutPaiementNestedInput
+    devise?: DeviseUpdateOneRequiredWithoutPaiementNestedInput
+    achat?: AchatUpdateOneWithoutPaiementNestedInput
+    vente?: VenteUpdateOneWithoutPaiementNestedInput
   }
 
   export type PaiementUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     montant?: FloatFieldUpdateOperationsInput | number
     moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    deviseId?: IntFieldUpdateOperationsInput | number
+    achatId?: NullableIntFieldUpdateOperationsInput | number | null
+    venteId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Vente?: VenteUncheckedUpdateManyWithoutPeiementNestedInput
-    Achat?: AchatUncheckedUpdateManyWithoutPaiementNestedInput
   }
 
   export type PaiementCreateManyInput = {
     id?: number
     montant: number
     moyen_paiement?: $Enums.MoyenPaiment
+    deviseId: number
+    achatId?: number | null
+    venteId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21300,6 +21458,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     montant?: FloatFieldUpdateOperationsInput | number
     moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    deviseId?: IntFieldUpdateOperationsInput | number
+    achatId?: NullableIntFieldUpdateOperationsInput | number | null
+    venteId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21313,10 +21474,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     detailvente: DetailVenteCreateNestedOneWithoutVenteInput
-    peiement: PaiementCreateNestedOneWithoutVenteInput
     entreprise: EntrepriseCreateNestedOneWithoutVenteInput
     utilisateur: UtilisateurCreateNestedOneWithoutVenteInput
     Fournisseur?: FournisseurCreateNestedOneWithoutVenteInput
+    Paiement?: PaiementCreateNestedManyWithoutVenteInput
   }
 
   export type VenteUncheckedCreateInput = {
@@ -21326,13 +21487,13 @@ export namespace Prisma {
     total_ht: number
     remise: number
     detailVenteId: number
-    paiementId: number
     entrepriseId: number
     clientId: string
     agentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     fournisseurId?: number | null
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutVenteInput
   }
 
   export type VenteUpdateInput = {
@@ -21344,10 +21505,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     detailvente?: DetailVenteUpdateOneRequiredWithoutVenteNestedInput
-    peiement?: PaiementUpdateOneRequiredWithoutVenteNestedInput
     entreprise?: EntrepriseUpdateOneRequiredWithoutVenteNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutVenteNestedInput
     Fournisseur?: FournisseurUpdateOneWithoutVenteNestedInput
+    Paiement?: PaiementUpdateManyWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateInput = {
@@ -21357,13 +21518,13 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     remise?: FloatFieldUpdateOperationsInput | number
     detailVenteId?: IntFieldUpdateOperationsInput | number
-    paiementId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     clientId?: StringFieldUpdateOperationsInput | string
     agentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    Paiement?: PaiementUncheckedUpdateManyWithoutVenteNestedInput
   }
 
   export type VenteCreateManyInput = {
@@ -21373,7 +21534,6 @@ export namespace Prisma {
     total_ht: number
     remise: number
     detailVenteId: number
-    paiementId: number
     entrepriseId: number
     clientId: string
     agentId: string
@@ -21399,7 +21559,6 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     remise?: FloatFieldUpdateOperationsInput | number
     detailVenteId?: IntFieldUpdateOperationsInput | number
-    paiementId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     clientId?: StringFieldUpdateOperationsInput | string
     agentId?: StringFieldUpdateOperationsInput | string
@@ -21413,6 +21572,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     utilisateur: UtilisateurCreateNestedOneWithoutPanierInput
     DetailAchat?: DetailAchatCreateNestedManyWithoutPanierInput
+    Achat?: AchatCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUncheckedCreateInput = {
@@ -21421,6 +21581,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     DetailAchat?: DetailAchatUncheckedCreateNestedManyWithoutPanierInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUpdateInput = {
@@ -21428,6 +21589,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneRequiredWithoutPanierNestedInput
     DetailAchat?: DetailAchatUpdateManyWithoutPanierNestedInput
+    Achat?: AchatUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateInput = {
@@ -21436,6 +21598,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DetailAchat?: DetailAchatUncheckedUpdateManyWithoutPanierNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierCreateManyInput = {
@@ -21535,7 +21698,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     produit: ProduitCreateNestedOneWithoutDetailAchatInput
     panier: PanierCreateNestedOneWithoutDetailAchatInput
-    Achat?: AchatCreateNestedManyWithoutDetailAchatInput
   }
 
   export type DetailAchatUncheckedCreateInput = {
@@ -21547,7 +21709,6 @@ export namespace Prisma {
     panierId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    Achat?: AchatUncheckedCreateNestedManyWithoutDetailAchatInput
   }
 
   export type DetailAchatUpdateInput = {
@@ -21558,7 +21719,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     produit?: ProduitUpdateOneRequiredWithoutDetailAchatNestedInput
     panier?: PanierUpdateOneRequiredWithoutDetailAchatNestedInput
-    Achat?: AchatUpdateManyWithoutDetailAchatNestedInput
   }
 
   export type DetailAchatUncheckedUpdateInput = {
@@ -21570,7 +21730,6 @@ export namespace Prisma {
     panierId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Achat?: AchatUncheckedUpdateManyWithoutDetailAchatNestedInput
   }
 
   export type DetailAchatCreateManyInput = {
@@ -21604,78 +21763,69 @@ export namespace Prisma {
   }
 
   export type AchatCreateInput = {
-    statut: string
-    total: number
+    statut?: $Enums.StatutAchat
     createdAt?: Date | string
     updatedAt?: Date | string
+    panier: PanierCreateNestedOneWithoutAchatInput
     fournisseur: FournisseurCreateNestedOneWithoutAchatInput
-    detailAchat: DetailAchatCreateNestedOneWithoutAchatInput
-    agent: UtilisateurCreateNestedOneWithoutAchatInput
-    paiement: PaiementCreateNestedOneWithoutAchatInput
+    enregisterPar: UtilisateurCreateNestedOneWithoutAchatInput
+    Paiement?: PaiementCreateNestedManyWithoutAchatInput
   }
 
   export type AchatUncheckedCreateInput = {
     id?: number
-    statut: string
+    statut?: $Enums.StatutAchat
+    panierId: number
     fournisseurId: number
-    total: number
-    detailAchatId: number
-    agentId: string
-    paiementId: number
+    enregisterParId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutAchatInput
   }
 
   export type AchatUpdateInput = {
-    statut?: StringFieldUpdateOperationsInput | string
-    total?: FloatFieldUpdateOperationsInput | number
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    panier?: PanierUpdateOneRequiredWithoutAchatNestedInput
     fournisseur?: FournisseurUpdateOneRequiredWithoutAchatNestedInput
-    detailAchat?: DetailAchatUpdateOneRequiredWithoutAchatNestedInput
-    agent?: UtilisateurUpdateOneRequiredWithoutAchatNestedInput
-    paiement?: PaiementUpdateOneRequiredWithoutAchatNestedInput
+    enregisterPar?: UtilisateurUpdateOneRequiredWithoutAchatNestedInput
+    Paiement?: PaiementUpdateManyWithoutAchatNestedInput
   }
 
   export type AchatUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
+    panierId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    total?: FloatFieldUpdateOperationsInput | number
-    detailAchatId?: IntFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
-    paiementId?: IntFieldUpdateOperationsInput | number
+    enregisterParId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Paiement?: PaiementUncheckedUpdateManyWithoutAchatNestedInput
   }
 
   export type AchatCreateManyInput = {
     id?: number
-    statut: string
+    statut?: $Enums.StatutAchat
+    panierId: number
     fournisseurId: number
-    total: number
-    detailAchatId: number
-    agentId: string
-    paiementId: number
+    enregisterParId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type AchatUpdateManyMutationInput = {
-    statut?: StringFieldUpdateOperationsInput | string
-    total?: FloatFieldUpdateOperationsInput | number
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AchatUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
+    panierId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    total?: FloatFieldUpdateOperationsInput | number
-    detailAchatId?: IntFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
-    paiementId?: IntFieldUpdateOperationsInput | number
+    enregisterParId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22023,19 +22173,25 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type UtilisateurScalarRelationFilter = {
-    is?: UtilisateurWhereInput
-    isNot?: UtilisateurWhereInput
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type FournisseurListRelationFilter = {
-    every?: FournisseurWhereInput
-    some?: FournisseurWhereInput
-    none?: FournisseurWhereInput
+  export type UtilisateurNullableScalarRelationFilter = {
+    is?: UtilisateurWhereInput | null
+    isNot?: UtilisateurWhereInput | null
   }
 
-  export type FournisseurOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type FournisseurNullableScalarRelationFilter = {
+    is?: FournisseurWhereInput | null
+    isNot?: FournisseurWhereInput | null
   }
 
   export type AdresseCountOrderByAggregateInput = {
@@ -22044,12 +22200,14 @@ export namespace Prisma {
     commune?: SortOrder
     adresse?: SortOrder
     utilisateurId?: SortOrder
+    fournisseurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type AdresseAvgOrderByAggregateInput = {
     id?: SortOrder
+    fournisseurId?: SortOrder
   }
 
   export type AdresseMaxOrderByAggregateInput = {
@@ -22058,6 +22216,7 @@ export namespace Prisma {
     commune?: SortOrder
     adresse?: SortOrder
     utilisateurId?: SortOrder
+    fournisseurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22068,30 +22227,51 @@ export namespace Prisma {
     commune?: SortOrder
     adresse?: SortOrder
     utilisateurId?: SortOrder
+    fournisseurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type AdresseSumOrderByAggregateInput = {
     id?: SortOrder
+    fournisseurId?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type ContactCountOrderByAggregateInput = {
     id?: SortOrder
     tel?: SortOrder
     utilisateurId?: SortOrder
+    fournisseurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type ContactAvgOrderByAggregateInput = {
     id?: SortOrder
+    fournisseurId?: SortOrder
   }
 
   export type ContactMaxOrderByAggregateInput = {
     id?: SortOrder
     tel?: SortOrder
     utilisateurId?: SortOrder
+    fournisseurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22100,22 +22280,14 @@ export namespace Prisma {
     id?: SortOrder
     tel?: SortOrder
     utilisateurId?: SortOrder
+    fournisseurId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type ContactSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type AdresseScalarRelationFilter = {
-    is?: AdresseWhereInput
-    isNot?: AdresseWhereInput
-  }
-
-  export type ContactScalarRelationFilter = {
-    is?: ContactWhereInput
-    isNot?: ContactWhereInput
+    fournisseurId?: SortOrder
   }
 
   export type FournisseurCountOrderByAggregateInput = {
@@ -22123,16 +22295,12 @@ export namespace Prisma {
     nom?: SortOrder
     email?: SortOrder
     code_postal?: SortOrder
-    adresseId?: SortOrder
-    contactId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type FournisseurAvgOrderByAggregateInput = {
     id?: SortOrder
-    adresseId?: SortOrder
-    contactId?: SortOrder
   }
 
   export type FournisseurMaxOrderByAggregateInput = {
@@ -22140,8 +22308,6 @@ export namespace Prisma {
     nom?: SortOrder
     email?: SortOrder
     code_postal?: SortOrder
-    adresseId?: SortOrder
-    contactId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22151,16 +22317,12 @@ export namespace Prisma {
     nom?: SortOrder
     email?: SortOrder
     code_postal?: SortOrder
-    adresseId?: SortOrder
-    contactId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type FournisseurSumOrderByAggregateInput = {
     id?: SortOrder
-    adresseId?: SortOrder
-    contactId?: SortOrder
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -22172,6 +22334,11 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type UtilisateurScalarRelationFilter = {
+    is?: UtilisateurWhereInput
+    isNot?: UtilisateurWhereInput
   }
 
   export type TeneurCountOrderByAggregateInput = {
@@ -22224,6 +22391,16 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type PaiementListRelationFilter = {
+    every?: PaiementWhereInput
+    some?: PaiementWhereInput
+    none?: PaiementWhereInput
+  }
+
+  export type PaiementOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type DeviseCountOrderByAggregateInput = {
     id?: SortOrder
     nom?: SortOrder
@@ -22260,17 +22437,6 @@ export namespace Prisma {
 
   export type DeviseSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type DeviseScalarRelationFilter = {
@@ -22358,22 +22524,6 @@ export namespace Prisma {
     teneurId?: SortOrder
   }
 
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
   export type EnumMoyenPaimentFilter<$PrismaModel = never> = {
     equals?: $Enums.MoyenPaiment | EnumMoyenPaimentFieldRefInput<$PrismaModel>
     in?: $Enums.MoyenPaiment[] | ListEnumMoyenPaimentFieldRefInput<$PrismaModel>
@@ -22381,10 +22531,23 @@ export namespace Prisma {
     not?: NestedEnumMoyenPaimentFilter<$PrismaModel> | $Enums.MoyenPaiment
   }
 
+  export type AchatNullableScalarRelationFilter = {
+    is?: AchatWhereInput | null
+    isNot?: AchatWhereInput | null
+  }
+
+  export type VenteNullableScalarRelationFilter = {
+    is?: VenteWhereInput | null
+    isNot?: VenteWhereInput | null
+  }
+
   export type PaiementCountOrderByAggregateInput = {
     id?: SortOrder
     montant?: SortOrder
     moyen_paiement?: SortOrder
+    deviseId?: SortOrder
+    achatId?: SortOrder
+    venteId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22392,12 +22555,18 @@ export namespace Prisma {
   export type PaiementAvgOrderByAggregateInput = {
     id?: SortOrder
     montant?: SortOrder
+    deviseId?: SortOrder
+    achatId?: SortOrder
+    venteId?: SortOrder
   }
 
   export type PaiementMaxOrderByAggregateInput = {
     id?: SortOrder
     montant?: SortOrder
     moyen_paiement?: SortOrder
+    deviseId?: SortOrder
+    achatId?: SortOrder
+    venteId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22406,6 +22575,9 @@ export namespace Prisma {
     id?: SortOrder
     montant?: SortOrder
     moyen_paiement?: SortOrder
+    deviseId?: SortOrder
+    achatId?: SortOrder
+    venteId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22413,6 +22585,9 @@ export namespace Prisma {
   export type PaiementSumOrderByAggregateInput = {
     id?: SortOrder
     montant?: SortOrder
+    deviseId?: SortOrder
+    achatId?: SortOrder
+    venteId?: SortOrder
   }
 
   export type EnumMoyenPaimentWithAggregatesFilter<$PrismaModel = never> = {
@@ -22430,19 +22605,9 @@ export namespace Prisma {
     isNot?: DetailVenteWhereInput
   }
 
-  export type PaiementScalarRelationFilter = {
-    is?: PaiementWhereInput
-    isNot?: PaiementWhereInput
-  }
-
   export type EntrepriseScalarRelationFilter = {
     is?: EntrepriseWhereInput
     isNot?: EntrepriseWhereInput
-  }
-
-  export type FournisseurNullableScalarRelationFilter = {
-    is?: FournisseurWhereInput | null
-    isNot?: FournisseurWhereInput | null
   }
 
   export type VenteCountOrderByAggregateInput = {
@@ -22452,7 +22617,6 @@ export namespace Prisma {
     total_ht?: SortOrder
     remise?: SortOrder
     detailVenteId?: SortOrder
-    paiementId?: SortOrder
     entrepriseId?: SortOrder
     clientId?: SortOrder
     agentId?: SortOrder
@@ -22467,7 +22631,6 @@ export namespace Prisma {
     total_ht?: SortOrder
     remise?: SortOrder
     detailVenteId?: SortOrder
-    paiementId?: SortOrder
     entrepriseId?: SortOrder
     fournisseurId?: SortOrder
   }
@@ -22479,7 +22642,6 @@ export namespace Prisma {
     total_ht?: SortOrder
     remise?: SortOrder
     detailVenteId?: SortOrder
-    paiementId?: SortOrder
     entrepriseId?: SortOrder
     clientId?: SortOrder
     agentId?: SortOrder
@@ -22495,7 +22657,6 @@ export namespace Prisma {
     total_ht?: SortOrder
     remise?: SortOrder
     detailVenteId?: SortOrder
-    paiementId?: SortOrder
     entrepriseId?: SortOrder
     clientId?: SortOrder
     agentId?: SortOrder
@@ -22510,7 +22671,6 @@ export namespace Prisma {
     total_ht?: SortOrder
     remise?: SortOrder
     detailVenteId?: SortOrder
-    paiementId?: SortOrder
     entrepriseId?: SortOrder
     fournisseurId?: SortOrder
   }
@@ -22651,44 +22811,40 @@ export namespace Prisma {
     panierId?: SortOrder
   }
 
+  export type EnumStatutAchatFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutAchat | EnumStatutAchatFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutAchat[] | ListEnumStatutAchatFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutAchat[] | ListEnumStatutAchatFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutAchatFilter<$PrismaModel> | $Enums.StatutAchat
+  }
+
   export type FournisseurScalarRelationFilter = {
     is?: FournisseurWhereInput
     isNot?: FournisseurWhereInput
   }
 
-  export type DetailAchatScalarRelationFilter = {
-    is?: DetailAchatWhereInput
-    isNot?: DetailAchatWhereInput
-  }
-
   export type AchatCountOrderByAggregateInput = {
     id?: SortOrder
     statut?: SortOrder
+    panierId?: SortOrder
     fournisseurId?: SortOrder
-    total?: SortOrder
-    detailAchatId?: SortOrder
-    agentId?: SortOrder
-    paiementId?: SortOrder
+    enregisterParId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type AchatAvgOrderByAggregateInput = {
     id?: SortOrder
+    panierId?: SortOrder
     fournisseurId?: SortOrder
-    total?: SortOrder
-    detailAchatId?: SortOrder
-    paiementId?: SortOrder
   }
 
   export type AchatMaxOrderByAggregateInput = {
     id?: SortOrder
     statut?: SortOrder
+    panierId?: SortOrder
     fournisseurId?: SortOrder
-    total?: SortOrder
-    detailAchatId?: SortOrder
-    agentId?: SortOrder
-    paiementId?: SortOrder
+    enregisterParId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22696,21 +22852,27 @@ export namespace Prisma {
   export type AchatMinOrderByAggregateInput = {
     id?: SortOrder
     statut?: SortOrder
+    panierId?: SortOrder
     fournisseurId?: SortOrder
-    total?: SortOrder
-    detailAchatId?: SortOrder
-    agentId?: SortOrder
-    paiementId?: SortOrder
+    enregisterParId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type AchatSumOrderByAggregateInput = {
     id?: SortOrder
+    panierId?: SortOrder
     fournisseurId?: SortOrder
-    total?: SortOrder
-    detailAchatId?: SortOrder
-    paiementId?: SortOrder
+  }
+
+  export type EnumStatutAchatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutAchat | EnumStatutAchatFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutAchat[] | ListEnumStatutAchatFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutAchat[] | ListEnumStatutAchatFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutAchatWithAggregatesFilter<$PrismaModel> | $Enums.StatutAchat
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatutAchatFilter<$PrismaModel>
+    _max?: NestedEnumStatutAchatFilter<$PrismaModel>
   }
 
   export type VenteCreateNestedManyWithoutEntrepriseInput = {
@@ -22799,10 +22961,10 @@ export namespace Prisma {
     connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
   }
 
-  export type AchatCreateNestedManyWithoutAgentInput = {
-    create?: XOR<AchatCreateWithoutAgentInput, AchatUncheckedCreateWithoutAgentInput> | AchatCreateWithoutAgentInput[] | AchatUncheckedCreateWithoutAgentInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutAgentInput | AchatCreateOrConnectWithoutAgentInput[]
-    createMany?: AchatCreateManyAgentInputEnvelope
+  export type AchatCreateNestedManyWithoutEnregisterParInput = {
+    create?: XOR<AchatCreateWithoutEnregisterParInput, AchatUncheckedCreateWithoutEnregisterParInput> | AchatCreateWithoutEnregisterParInput[] | AchatUncheckedCreateWithoutEnregisterParInput[]
+    connectOrCreate?: AchatCreateOrConnectWithoutEnregisterParInput | AchatCreateOrConnectWithoutEnregisterParInput[]
+    createMany?: AchatCreateManyEnregisterParInputEnvelope
     connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
   }
 
@@ -22855,10 +23017,10 @@ export namespace Prisma {
     connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
   }
 
-  export type AchatUncheckedCreateNestedManyWithoutAgentInput = {
-    create?: XOR<AchatCreateWithoutAgentInput, AchatUncheckedCreateWithoutAgentInput> | AchatCreateWithoutAgentInput[] | AchatUncheckedCreateWithoutAgentInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutAgentInput | AchatCreateOrConnectWithoutAgentInput[]
-    createMany?: AchatCreateManyAgentInputEnvelope
+  export type AchatUncheckedCreateNestedManyWithoutEnregisterParInput = {
+    create?: XOR<AchatCreateWithoutEnregisterParInput, AchatUncheckedCreateWithoutEnregisterParInput> | AchatCreateWithoutEnregisterParInput[] | AchatUncheckedCreateWithoutEnregisterParInput[]
+    connectOrCreate?: AchatCreateOrConnectWithoutEnregisterParInput | AchatCreateOrConnectWithoutEnregisterParInput[]
+    createMany?: AchatCreateManyEnregisterParInputEnvelope
     connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
   }
 
@@ -22955,17 +23117,17 @@ export namespace Prisma {
     deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
   }
 
-  export type AchatUpdateManyWithoutAgentNestedInput = {
-    create?: XOR<AchatCreateWithoutAgentInput, AchatUncheckedCreateWithoutAgentInput> | AchatCreateWithoutAgentInput[] | AchatUncheckedCreateWithoutAgentInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutAgentInput | AchatCreateOrConnectWithoutAgentInput[]
-    upsert?: AchatUpsertWithWhereUniqueWithoutAgentInput | AchatUpsertWithWhereUniqueWithoutAgentInput[]
-    createMany?: AchatCreateManyAgentInputEnvelope
+  export type AchatUpdateManyWithoutEnregisterParNestedInput = {
+    create?: XOR<AchatCreateWithoutEnregisterParInput, AchatUncheckedCreateWithoutEnregisterParInput> | AchatCreateWithoutEnregisterParInput[] | AchatUncheckedCreateWithoutEnregisterParInput[]
+    connectOrCreate?: AchatCreateOrConnectWithoutEnregisterParInput | AchatCreateOrConnectWithoutEnregisterParInput[]
+    upsert?: AchatUpsertWithWhereUniqueWithoutEnregisterParInput | AchatUpsertWithWhereUniqueWithoutEnregisterParInput[]
+    createMany?: AchatCreateManyEnregisterParInputEnvelope
     set?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
     disconnect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
     delete?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
     connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    update?: AchatUpdateWithWhereUniqueWithoutAgentInput | AchatUpdateWithWhereUniqueWithoutAgentInput[]
-    updateMany?: AchatUpdateManyWithWhereWithoutAgentInput | AchatUpdateManyWithWhereWithoutAgentInput[]
+    update?: AchatUpdateWithWhereUniqueWithoutEnregisterParInput | AchatUpdateWithWhereUniqueWithoutEnregisterParInput[]
+    updateMany?: AchatUpdateManyWithWhereWithoutEnregisterParInput | AchatUpdateManyWithWhereWithoutEnregisterParInput[]
     deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
   }
 
@@ -23067,17 +23229,17 @@ export namespace Prisma {
     deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
   }
 
-  export type AchatUncheckedUpdateManyWithoutAgentNestedInput = {
-    create?: XOR<AchatCreateWithoutAgentInput, AchatUncheckedCreateWithoutAgentInput> | AchatCreateWithoutAgentInput[] | AchatUncheckedCreateWithoutAgentInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutAgentInput | AchatCreateOrConnectWithoutAgentInput[]
-    upsert?: AchatUpsertWithWhereUniqueWithoutAgentInput | AchatUpsertWithWhereUniqueWithoutAgentInput[]
-    createMany?: AchatCreateManyAgentInputEnvelope
+  export type AchatUncheckedUpdateManyWithoutEnregisterParNestedInput = {
+    create?: XOR<AchatCreateWithoutEnregisterParInput, AchatUncheckedCreateWithoutEnregisterParInput> | AchatCreateWithoutEnregisterParInput[] | AchatUncheckedCreateWithoutEnregisterParInput[]
+    connectOrCreate?: AchatCreateOrConnectWithoutEnregisterParInput | AchatCreateOrConnectWithoutEnregisterParInput[]
+    upsert?: AchatUpsertWithWhereUniqueWithoutEnregisterParInput | AchatUpsertWithWhereUniqueWithoutEnregisterParInput[]
+    createMany?: AchatCreateManyEnregisterParInputEnvelope
     set?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
     disconnect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
     delete?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
     connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    update?: AchatUpdateWithWhereUniqueWithoutAgentInput | AchatUpdateWithWhereUniqueWithoutAgentInput[]
-    updateMany?: AchatUpdateManyWithWhereWithoutAgentInput | AchatUpdateManyWithWhereWithoutAgentInput[]
+    update?: AchatUpdateWithWhereUniqueWithoutEnregisterParInput | AchatUpdateWithWhereUniqueWithoutEnregisterParInput[]
+    updateMany?: AchatUpdateManyWithWhereWithoutEnregisterParInput | AchatUpdateManyWithWhereWithoutEnregisterParInput[]
     deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
   }
 
@@ -23129,54 +23291,38 @@ export namespace Prisma {
     connect?: UtilisateurWhereUniqueInput
   }
 
-  export type FournisseurCreateNestedManyWithoutAdresseInput = {
-    create?: XOR<FournisseurCreateWithoutAdresseInput, FournisseurUncheckedCreateWithoutAdresseInput> | FournisseurCreateWithoutAdresseInput[] | FournisseurUncheckedCreateWithoutAdresseInput[]
-    connectOrCreate?: FournisseurCreateOrConnectWithoutAdresseInput | FournisseurCreateOrConnectWithoutAdresseInput[]
-    createMany?: FournisseurCreateManyAdresseInputEnvelope
-    connect?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
+  export type FournisseurCreateNestedOneWithoutAdresseInput = {
+    create?: XOR<FournisseurCreateWithoutAdresseInput, FournisseurUncheckedCreateWithoutAdresseInput>
+    connectOrCreate?: FournisseurCreateOrConnectWithoutAdresseInput
+    connect?: FournisseurWhereUniqueInput
   }
 
-  export type FournisseurUncheckedCreateNestedManyWithoutAdresseInput = {
-    create?: XOR<FournisseurCreateWithoutAdresseInput, FournisseurUncheckedCreateWithoutAdresseInput> | FournisseurCreateWithoutAdresseInput[] | FournisseurUncheckedCreateWithoutAdresseInput[]
-    connectOrCreate?: FournisseurCreateOrConnectWithoutAdresseInput | FournisseurCreateOrConnectWithoutAdresseInput[]
-    createMany?: FournisseurCreateManyAdresseInputEnvelope
-    connect?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-  }
-
-  export type UtilisateurUpdateOneRequiredWithoutAdresseNestedInput = {
+  export type UtilisateurUpdateOneWithoutAdresseNestedInput = {
     create?: XOR<UtilisateurCreateWithoutAdresseInput, UtilisateurUncheckedCreateWithoutAdresseInput>
     connectOrCreate?: UtilisateurCreateOrConnectWithoutAdresseInput
     upsert?: UtilisateurUpsertWithoutAdresseInput
+    disconnect?: UtilisateurWhereInput | boolean
+    delete?: UtilisateurWhereInput | boolean
     connect?: UtilisateurWhereUniqueInput
     update?: XOR<XOR<UtilisateurUpdateToOneWithWhereWithoutAdresseInput, UtilisateurUpdateWithoutAdresseInput>, UtilisateurUncheckedUpdateWithoutAdresseInput>
   }
 
-  export type FournisseurUpdateManyWithoutAdresseNestedInput = {
-    create?: XOR<FournisseurCreateWithoutAdresseInput, FournisseurUncheckedCreateWithoutAdresseInput> | FournisseurCreateWithoutAdresseInput[] | FournisseurUncheckedCreateWithoutAdresseInput[]
-    connectOrCreate?: FournisseurCreateOrConnectWithoutAdresseInput | FournisseurCreateOrConnectWithoutAdresseInput[]
-    upsert?: FournisseurUpsertWithWhereUniqueWithoutAdresseInput | FournisseurUpsertWithWhereUniqueWithoutAdresseInput[]
-    createMany?: FournisseurCreateManyAdresseInputEnvelope
-    set?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    disconnect?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    delete?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    connect?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    update?: FournisseurUpdateWithWhereUniqueWithoutAdresseInput | FournisseurUpdateWithWhereUniqueWithoutAdresseInput[]
-    updateMany?: FournisseurUpdateManyWithWhereWithoutAdresseInput | FournisseurUpdateManyWithWhereWithoutAdresseInput[]
-    deleteMany?: FournisseurScalarWhereInput | FournisseurScalarWhereInput[]
+  export type FournisseurUpdateOneWithoutAdresseNestedInput = {
+    create?: XOR<FournisseurCreateWithoutAdresseInput, FournisseurUncheckedCreateWithoutAdresseInput>
+    connectOrCreate?: FournisseurCreateOrConnectWithoutAdresseInput
+    upsert?: FournisseurUpsertWithoutAdresseInput
+    disconnect?: FournisseurWhereInput | boolean
+    delete?: FournisseurWhereInput | boolean
+    connect?: FournisseurWhereUniqueInput
+    update?: XOR<XOR<FournisseurUpdateToOneWithWhereWithoutAdresseInput, FournisseurUpdateWithoutAdresseInput>, FournisseurUncheckedUpdateWithoutAdresseInput>
   }
 
-  export type FournisseurUncheckedUpdateManyWithoutAdresseNestedInput = {
-    create?: XOR<FournisseurCreateWithoutAdresseInput, FournisseurUncheckedCreateWithoutAdresseInput> | FournisseurCreateWithoutAdresseInput[] | FournisseurUncheckedCreateWithoutAdresseInput[]
-    connectOrCreate?: FournisseurCreateOrConnectWithoutAdresseInput | FournisseurCreateOrConnectWithoutAdresseInput[]
-    upsert?: FournisseurUpsertWithWhereUniqueWithoutAdresseInput | FournisseurUpsertWithWhereUniqueWithoutAdresseInput[]
-    createMany?: FournisseurCreateManyAdresseInputEnvelope
-    set?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    disconnect?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    delete?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    connect?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    update?: FournisseurUpdateWithWhereUniqueWithoutAdresseInput | FournisseurUpdateWithWhereUniqueWithoutAdresseInput[]
-    updateMany?: FournisseurUpdateManyWithWhereWithoutAdresseInput | FournisseurUpdateManyWithWhereWithoutAdresseInput[]
-    deleteMany?: FournisseurScalarWhereInput | FournisseurScalarWhereInput[]
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type UtilisateurCreateNestedOneWithoutContactInput = {
@@ -23185,66 +23331,30 @@ export namespace Prisma {
     connect?: UtilisateurWhereUniqueInput
   }
 
-  export type FournisseurCreateNestedManyWithoutContactInput = {
-    create?: XOR<FournisseurCreateWithoutContactInput, FournisseurUncheckedCreateWithoutContactInput> | FournisseurCreateWithoutContactInput[] | FournisseurUncheckedCreateWithoutContactInput[]
-    connectOrCreate?: FournisseurCreateOrConnectWithoutContactInput | FournisseurCreateOrConnectWithoutContactInput[]
-    createMany?: FournisseurCreateManyContactInputEnvelope
-    connect?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
+  export type FournisseurCreateNestedOneWithoutContactInput = {
+    create?: XOR<FournisseurCreateWithoutContactInput, FournisseurUncheckedCreateWithoutContactInput>
+    connectOrCreate?: FournisseurCreateOrConnectWithoutContactInput
+    connect?: FournisseurWhereUniqueInput
   }
 
-  export type FournisseurUncheckedCreateNestedManyWithoutContactInput = {
-    create?: XOR<FournisseurCreateWithoutContactInput, FournisseurUncheckedCreateWithoutContactInput> | FournisseurCreateWithoutContactInput[] | FournisseurUncheckedCreateWithoutContactInput[]
-    connectOrCreate?: FournisseurCreateOrConnectWithoutContactInput | FournisseurCreateOrConnectWithoutContactInput[]
-    createMany?: FournisseurCreateManyContactInputEnvelope
-    connect?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-  }
-
-  export type UtilisateurUpdateOneRequiredWithoutContactNestedInput = {
+  export type UtilisateurUpdateOneWithoutContactNestedInput = {
     create?: XOR<UtilisateurCreateWithoutContactInput, UtilisateurUncheckedCreateWithoutContactInput>
     connectOrCreate?: UtilisateurCreateOrConnectWithoutContactInput
     upsert?: UtilisateurUpsertWithoutContactInput
+    disconnect?: UtilisateurWhereInput | boolean
+    delete?: UtilisateurWhereInput | boolean
     connect?: UtilisateurWhereUniqueInput
     update?: XOR<XOR<UtilisateurUpdateToOneWithWhereWithoutContactInput, UtilisateurUpdateWithoutContactInput>, UtilisateurUncheckedUpdateWithoutContactInput>
   }
 
-  export type FournisseurUpdateManyWithoutContactNestedInput = {
-    create?: XOR<FournisseurCreateWithoutContactInput, FournisseurUncheckedCreateWithoutContactInput> | FournisseurCreateWithoutContactInput[] | FournisseurUncheckedCreateWithoutContactInput[]
-    connectOrCreate?: FournisseurCreateOrConnectWithoutContactInput | FournisseurCreateOrConnectWithoutContactInput[]
-    upsert?: FournisseurUpsertWithWhereUniqueWithoutContactInput | FournisseurUpsertWithWhereUniqueWithoutContactInput[]
-    createMany?: FournisseurCreateManyContactInputEnvelope
-    set?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    disconnect?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    delete?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    connect?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    update?: FournisseurUpdateWithWhereUniqueWithoutContactInput | FournisseurUpdateWithWhereUniqueWithoutContactInput[]
-    updateMany?: FournisseurUpdateManyWithWhereWithoutContactInput | FournisseurUpdateManyWithWhereWithoutContactInput[]
-    deleteMany?: FournisseurScalarWhereInput | FournisseurScalarWhereInput[]
-  }
-
-  export type FournisseurUncheckedUpdateManyWithoutContactNestedInput = {
-    create?: XOR<FournisseurCreateWithoutContactInput, FournisseurUncheckedCreateWithoutContactInput> | FournisseurCreateWithoutContactInput[] | FournisseurUncheckedCreateWithoutContactInput[]
-    connectOrCreate?: FournisseurCreateOrConnectWithoutContactInput | FournisseurCreateOrConnectWithoutContactInput[]
-    upsert?: FournisseurUpsertWithWhereUniqueWithoutContactInput | FournisseurUpsertWithWhereUniqueWithoutContactInput[]
-    createMany?: FournisseurCreateManyContactInputEnvelope
-    set?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    disconnect?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    delete?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    connect?: FournisseurWhereUniqueInput | FournisseurWhereUniqueInput[]
-    update?: FournisseurUpdateWithWhereUniqueWithoutContactInput | FournisseurUpdateWithWhereUniqueWithoutContactInput[]
-    updateMany?: FournisseurUpdateManyWithWhereWithoutContactInput | FournisseurUpdateManyWithWhereWithoutContactInput[]
-    deleteMany?: FournisseurScalarWhereInput | FournisseurScalarWhereInput[]
-  }
-
-  export type AdresseCreateNestedOneWithoutFournisseurInput = {
-    create?: XOR<AdresseCreateWithoutFournisseurInput, AdresseUncheckedCreateWithoutFournisseurInput>
-    connectOrCreate?: AdresseCreateOrConnectWithoutFournisseurInput
-    connect?: AdresseWhereUniqueInput
-  }
-
-  export type ContactCreateNestedOneWithoutFournisseurInput = {
-    create?: XOR<ContactCreateWithoutFournisseurInput, ContactUncheckedCreateWithoutFournisseurInput>
-    connectOrCreate?: ContactCreateOrConnectWithoutFournisseurInput
-    connect?: ContactWhereUniqueInput
+  export type FournisseurUpdateOneWithoutContactNestedInput = {
+    create?: XOR<FournisseurCreateWithoutContactInput, FournisseurUncheckedCreateWithoutContactInput>
+    connectOrCreate?: FournisseurCreateOrConnectWithoutContactInput
+    upsert?: FournisseurUpsertWithoutContactInput
+    disconnect?: FournisseurWhereInput | boolean
+    delete?: FournisseurWhereInput | boolean
+    connect?: FournisseurWhereUniqueInput
+    update?: XOR<XOR<FournisseurUpdateToOneWithWhereWithoutContactInput, FournisseurUpdateWithoutContactInput>, FournisseurUncheckedUpdateWithoutContactInput>
   }
 
   export type VenteCreateNestedManyWithoutFournisseurInput = {
@@ -23261,6 +23371,20 @@ export namespace Prisma {
     connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
   }
 
+  export type AdresseCreateNestedManyWithoutFournisseurInput = {
+    create?: XOR<AdresseCreateWithoutFournisseurInput, AdresseUncheckedCreateWithoutFournisseurInput> | AdresseCreateWithoutFournisseurInput[] | AdresseUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: AdresseCreateOrConnectWithoutFournisseurInput | AdresseCreateOrConnectWithoutFournisseurInput[]
+    createMany?: AdresseCreateManyFournisseurInputEnvelope
+    connect?: AdresseWhereUniqueInput | AdresseWhereUniqueInput[]
+  }
+
+  export type ContactCreateNestedManyWithoutFournisseurInput = {
+    create?: XOR<ContactCreateWithoutFournisseurInput, ContactUncheckedCreateWithoutFournisseurInput> | ContactCreateWithoutFournisseurInput[] | ContactUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: ContactCreateOrConnectWithoutFournisseurInput | ContactCreateOrConnectWithoutFournisseurInput[]
+    createMany?: ContactCreateManyFournisseurInputEnvelope
+    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+  }
+
   export type VenteUncheckedCreateNestedManyWithoutFournisseurInput = {
     create?: XOR<VenteCreateWithoutFournisseurInput, VenteUncheckedCreateWithoutFournisseurInput> | VenteCreateWithoutFournisseurInput[] | VenteUncheckedCreateWithoutFournisseurInput[]
     connectOrCreate?: VenteCreateOrConnectWithoutFournisseurInput | VenteCreateOrConnectWithoutFournisseurInput[]
@@ -23275,20 +23399,18 @@ export namespace Prisma {
     connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
   }
 
-  export type AdresseUpdateOneRequiredWithoutFournisseurNestedInput = {
-    create?: XOR<AdresseCreateWithoutFournisseurInput, AdresseUncheckedCreateWithoutFournisseurInput>
-    connectOrCreate?: AdresseCreateOrConnectWithoutFournisseurInput
-    upsert?: AdresseUpsertWithoutFournisseurInput
-    connect?: AdresseWhereUniqueInput
-    update?: XOR<XOR<AdresseUpdateToOneWithWhereWithoutFournisseurInput, AdresseUpdateWithoutFournisseurInput>, AdresseUncheckedUpdateWithoutFournisseurInput>
+  export type AdresseUncheckedCreateNestedManyWithoutFournisseurInput = {
+    create?: XOR<AdresseCreateWithoutFournisseurInput, AdresseUncheckedCreateWithoutFournisseurInput> | AdresseCreateWithoutFournisseurInput[] | AdresseUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: AdresseCreateOrConnectWithoutFournisseurInput | AdresseCreateOrConnectWithoutFournisseurInput[]
+    createMany?: AdresseCreateManyFournisseurInputEnvelope
+    connect?: AdresseWhereUniqueInput | AdresseWhereUniqueInput[]
   }
 
-  export type ContactUpdateOneRequiredWithoutFournisseurNestedInput = {
-    create?: XOR<ContactCreateWithoutFournisseurInput, ContactUncheckedCreateWithoutFournisseurInput>
-    connectOrCreate?: ContactCreateOrConnectWithoutFournisseurInput
-    upsert?: ContactUpsertWithoutFournisseurInput
-    connect?: ContactWhereUniqueInput
-    update?: XOR<XOR<ContactUpdateToOneWithWhereWithoutFournisseurInput, ContactUpdateWithoutFournisseurInput>, ContactUncheckedUpdateWithoutFournisseurInput>
+  export type ContactUncheckedCreateNestedManyWithoutFournisseurInput = {
+    create?: XOR<ContactCreateWithoutFournisseurInput, ContactUncheckedCreateWithoutFournisseurInput> | ContactCreateWithoutFournisseurInput[] | ContactUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: ContactCreateOrConnectWithoutFournisseurInput | ContactCreateOrConnectWithoutFournisseurInput[]
+    createMany?: ContactCreateManyFournisseurInputEnvelope
+    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
   }
 
   export type VenteUpdateManyWithoutFournisseurNestedInput = {
@@ -23319,6 +23441,34 @@ export namespace Prisma {
     deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
   }
 
+  export type AdresseUpdateManyWithoutFournisseurNestedInput = {
+    create?: XOR<AdresseCreateWithoutFournisseurInput, AdresseUncheckedCreateWithoutFournisseurInput> | AdresseCreateWithoutFournisseurInput[] | AdresseUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: AdresseCreateOrConnectWithoutFournisseurInput | AdresseCreateOrConnectWithoutFournisseurInput[]
+    upsert?: AdresseUpsertWithWhereUniqueWithoutFournisseurInput | AdresseUpsertWithWhereUniqueWithoutFournisseurInput[]
+    createMany?: AdresseCreateManyFournisseurInputEnvelope
+    set?: AdresseWhereUniqueInput | AdresseWhereUniqueInput[]
+    disconnect?: AdresseWhereUniqueInput | AdresseWhereUniqueInput[]
+    delete?: AdresseWhereUniqueInput | AdresseWhereUniqueInput[]
+    connect?: AdresseWhereUniqueInput | AdresseWhereUniqueInput[]
+    update?: AdresseUpdateWithWhereUniqueWithoutFournisseurInput | AdresseUpdateWithWhereUniqueWithoutFournisseurInput[]
+    updateMany?: AdresseUpdateManyWithWhereWithoutFournisseurInput | AdresseUpdateManyWithWhereWithoutFournisseurInput[]
+    deleteMany?: AdresseScalarWhereInput | AdresseScalarWhereInput[]
+  }
+
+  export type ContactUpdateManyWithoutFournisseurNestedInput = {
+    create?: XOR<ContactCreateWithoutFournisseurInput, ContactUncheckedCreateWithoutFournisseurInput> | ContactCreateWithoutFournisseurInput[] | ContactUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: ContactCreateOrConnectWithoutFournisseurInput | ContactCreateOrConnectWithoutFournisseurInput[]
+    upsert?: ContactUpsertWithWhereUniqueWithoutFournisseurInput | ContactUpsertWithWhereUniqueWithoutFournisseurInput[]
+    createMany?: ContactCreateManyFournisseurInputEnvelope
+    set?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    disconnect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    delete?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    update?: ContactUpdateWithWhereUniqueWithoutFournisseurInput | ContactUpdateWithWhereUniqueWithoutFournisseurInput[]
+    updateMany?: ContactUpdateManyWithWhereWithoutFournisseurInput | ContactUpdateManyWithWhereWithoutFournisseurInput[]
+    deleteMany?: ContactScalarWhereInput | ContactScalarWhereInput[]
+  }
+
   export type VenteUncheckedUpdateManyWithoutFournisseurNestedInput = {
     create?: XOR<VenteCreateWithoutFournisseurInput, VenteUncheckedCreateWithoutFournisseurInput> | VenteCreateWithoutFournisseurInput[] | VenteUncheckedCreateWithoutFournisseurInput[]
     connectOrCreate?: VenteCreateOrConnectWithoutFournisseurInput | VenteCreateOrConnectWithoutFournisseurInput[]
@@ -23345,6 +23495,34 @@ export namespace Prisma {
     update?: AchatUpdateWithWhereUniqueWithoutFournisseurInput | AchatUpdateWithWhereUniqueWithoutFournisseurInput[]
     updateMany?: AchatUpdateManyWithWhereWithoutFournisseurInput | AchatUpdateManyWithWhereWithoutFournisseurInput[]
     deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
+  }
+
+  export type AdresseUncheckedUpdateManyWithoutFournisseurNestedInput = {
+    create?: XOR<AdresseCreateWithoutFournisseurInput, AdresseUncheckedCreateWithoutFournisseurInput> | AdresseCreateWithoutFournisseurInput[] | AdresseUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: AdresseCreateOrConnectWithoutFournisseurInput | AdresseCreateOrConnectWithoutFournisseurInput[]
+    upsert?: AdresseUpsertWithWhereUniqueWithoutFournisseurInput | AdresseUpsertWithWhereUniqueWithoutFournisseurInput[]
+    createMany?: AdresseCreateManyFournisseurInputEnvelope
+    set?: AdresseWhereUniqueInput | AdresseWhereUniqueInput[]
+    disconnect?: AdresseWhereUniqueInput | AdresseWhereUniqueInput[]
+    delete?: AdresseWhereUniqueInput | AdresseWhereUniqueInput[]
+    connect?: AdresseWhereUniqueInput | AdresseWhereUniqueInput[]
+    update?: AdresseUpdateWithWhereUniqueWithoutFournisseurInput | AdresseUpdateWithWhereUniqueWithoutFournisseurInput[]
+    updateMany?: AdresseUpdateManyWithWhereWithoutFournisseurInput | AdresseUpdateManyWithWhereWithoutFournisseurInput[]
+    deleteMany?: AdresseScalarWhereInput | AdresseScalarWhereInput[]
+  }
+
+  export type ContactUncheckedUpdateManyWithoutFournisseurNestedInput = {
+    create?: XOR<ContactCreateWithoutFournisseurInput, ContactUncheckedCreateWithoutFournisseurInput> | ContactCreateWithoutFournisseurInput[] | ContactUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: ContactCreateOrConnectWithoutFournisseurInput | ContactCreateOrConnectWithoutFournisseurInput[]
+    upsert?: ContactUpsertWithWhereUniqueWithoutFournisseurInput | ContactUpsertWithWhereUniqueWithoutFournisseurInput[]
+    createMany?: ContactCreateManyFournisseurInputEnvelope
+    set?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    disconnect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    delete?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+    update?: ContactUpdateWithWhereUniqueWithoutFournisseurInput | ContactUpdateWithWhereUniqueWithoutFournisseurInput[]
+    updateMany?: ContactUpdateManyWithWhereWithoutFournisseurInput | ContactUpdateManyWithWhereWithoutFournisseurInput[]
+    deleteMany?: ContactScalarWhereInput | ContactScalarWhereInput[]
   }
 
   export type UtilisateurCreateNestedOneWithoutTeneurInput = {
@@ -23424,11 +23602,25 @@ export namespace Prisma {
     connect?: ProduitWhereUniqueInput | ProduitWhereUniqueInput[]
   }
 
+  export type PaiementCreateNestedManyWithoutDeviseInput = {
+    create?: XOR<PaiementCreateWithoutDeviseInput, PaiementUncheckedCreateWithoutDeviseInput> | PaiementCreateWithoutDeviseInput[] | PaiementUncheckedCreateWithoutDeviseInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutDeviseInput | PaiementCreateOrConnectWithoutDeviseInput[]
+    createMany?: PaiementCreateManyDeviseInputEnvelope
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+  }
+
   export type ProduitUncheckedCreateNestedManyWithoutDeviseInput = {
     create?: XOR<ProduitCreateWithoutDeviseInput, ProduitUncheckedCreateWithoutDeviseInput> | ProduitCreateWithoutDeviseInput[] | ProduitUncheckedCreateWithoutDeviseInput[]
     connectOrCreate?: ProduitCreateOrConnectWithoutDeviseInput | ProduitCreateOrConnectWithoutDeviseInput[]
     createMany?: ProduitCreateManyDeviseInputEnvelope
     connect?: ProduitWhereUniqueInput | ProduitWhereUniqueInput[]
+  }
+
+  export type PaiementUncheckedCreateNestedManyWithoutDeviseInput = {
+    create?: XOR<PaiementCreateWithoutDeviseInput, PaiementUncheckedCreateWithoutDeviseInput> | PaiementCreateWithoutDeviseInput[] | PaiementUncheckedCreateWithoutDeviseInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutDeviseInput | PaiementCreateOrConnectWithoutDeviseInput[]
+    createMany?: PaiementCreateManyDeviseInputEnvelope
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
   }
 
   export type UtilisateurUpdateOneRequiredWithoutDeviseNestedInput = {
@@ -23453,6 +23645,20 @@ export namespace Prisma {
     deleteMany?: ProduitScalarWhereInput | ProduitScalarWhereInput[]
   }
 
+  export type PaiementUpdateManyWithoutDeviseNestedInput = {
+    create?: XOR<PaiementCreateWithoutDeviseInput, PaiementUncheckedCreateWithoutDeviseInput> | PaiementCreateWithoutDeviseInput[] | PaiementUncheckedCreateWithoutDeviseInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutDeviseInput | PaiementCreateOrConnectWithoutDeviseInput[]
+    upsert?: PaiementUpsertWithWhereUniqueWithoutDeviseInput | PaiementUpsertWithWhereUniqueWithoutDeviseInput[]
+    createMany?: PaiementCreateManyDeviseInputEnvelope
+    set?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    disconnect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    delete?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    update?: PaiementUpdateWithWhereUniqueWithoutDeviseInput | PaiementUpdateWithWhereUniqueWithoutDeviseInput[]
+    updateMany?: PaiementUpdateManyWithWhereWithoutDeviseInput | PaiementUpdateManyWithWhereWithoutDeviseInput[]
+    deleteMany?: PaiementScalarWhereInput | PaiementScalarWhereInput[]
+  }
+
   export type ProduitUncheckedUpdateManyWithoutDeviseNestedInput = {
     create?: XOR<ProduitCreateWithoutDeviseInput, ProduitUncheckedCreateWithoutDeviseInput> | ProduitCreateWithoutDeviseInput[] | ProduitUncheckedCreateWithoutDeviseInput[]
     connectOrCreate?: ProduitCreateOrConnectWithoutDeviseInput | ProduitCreateOrConnectWithoutDeviseInput[]
@@ -23465,6 +23671,20 @@ export namespace Prisma {
     update?: ProduitUpdateWithWhereUniqueWithoutDeviseInput | ProduitUpdateWithWhereUniqueWithoutDeviseInput[]
     updateMany?: ProduitUpdateManyWithWhereWithoutDeviseInput | ProduitUpdateManyWithWhereWithoutDeviseInput[]
     deleteMany?: ProduitScalarWhereInput | ProduitScalarWhereInput[]
+  }
+
+  export type PaiementUncheckedUpdateManyWithoutDeviseNestedInput = {
+    create?: XOR<PaiementCreateWithoutDeviseInput, PaiementUncheckedCreateWithoutDeviseInput> | PaiementCreateWithoutDeviseInput[] | PaiementUncheckedCreateWithoutDeviseInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutDeviseInput | PaiementCreateOrConnectWithoutDeviseInput[]
+    upsert?: PaiementUpsertWithWhereUniqueWithoutDeviseInput | PaiementUpsertWithWhereUniqueWithoutDeviseInput[]
+    createMany?: PaiementCreateManyDeviseInputEnvelope
+    set?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    disconnect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    delete?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    update?: PaiementUpdateWithWhereUniqueWithoutDeviseInput | PaiementUpdateWithWhereUniqueWithoutDeviseInput[]
+    updateMany?: PaiementUpdateManyWithWhereWithoutDeviseInput | PaiementUpdateManyWithWhereWithoutDeviseInput[]
+    deleteMany?: PaiementScalarWhereInput | PaiementScalarWhereInput[]
   }
 
   export type DeviseCreateNestedOneWithoutProduitInput = {
@@ -23511,14 +23731,6 @@ export namespace Prisma {
     connectOrCreate?: DetailAchatCreateOrConnectWithoutProduitInput | DetailAchatCreateOrConnectWithoutProduitInput[]
     createMany?: DetailAchatCreateManyProduitInputEnvelope
     connect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type DeviseUpdateOneRequiredWithoutProduitNestedInput = {
@@ -23601,104 +23813,60 @@ export namespace Prisma {
     deleteMany?: DetailAchatScalarWhereInput | DetailAchatScalarWhereInput[]
   }
 
-  export type VenteCreateNestedManyWithoutPeiementInput = {
-    create?: XOR<VenteCreateWithoutPeiementInput, VenteUncheckedCreateWithoutPeiementInput> | VenteCreateWithoutPeiementInput[] | VenteUncheckedCreateWithoutPeiementInput[]
-    connectOrCreate?: VenteCreateOrConnectWithoutPeiementInput | VenteCreateOrConnectWithoutPeiementInput[]
-    createMany?: VenteCreateManyPeiementInputEnvelope
-    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
+  export type DeviseCreateNestedOneWithoutPaiementInput = {
+    create?: XOR<DeviseCreateWithoutPaiementInput, DeviseUncheckedCreateWithoutPaiementInput>
+    connectOrCreate?: DeviseCreateOrConnectWithoutPaiementInput
+    connect?: DeviseWhereUniqueInput
   }
 
-  export type AchatCreateNestedManyWithoutPaiementInput = {
-    create?: XOR<AchatCreateWithoutPaiementInput, AchatUncheckedCreateWithoutPaiementInput> | AchatCreateWithoutPaiementInput[] | AchatUncheckedCreateWithoutPaiementInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutPaiementInput | AchatCreateOrConnectWithoutPaiementInput[]
-    createMany?: AchatCreateManyPaiementInputEnvelope
-    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
+  export type AchatCreateNestedOneWithoutPaiementInput = {
+    create?: XOR<AchatCreateWithoutPaiementInput, AchatUncheckedCreateWithoutPaiementInput>
+    connectOrCreate?: AchatCreateOrConnectWithoutPaiementInput
+    connect?: AchatWhereUniqueInput
   }
 
-  export type VenteUncheckedCreateNestedManyWithoutPeiementInput = {
-    create?: XOR<VenteCreateWithoutPeiementInput, VenteUncheckedCreateWithoutPeiementInput> | VenteCreateWithoutPeiementInput[] | VenteUncheckedCreateWithoutPeiementInput[]
-    connectOrCreate?: VenteCreateOrConnectWithoutPeiementInput | VenteCreateOrConnectWithoutPeiementInput[]
-    createMany?: VenteCreateManyPeiementInputEnvelope
-    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-  }
-
-  export type AchatUncheckedCreateNestedManyWithoutPaiementInput = {
-    create?: XOR<AchatCreateWithoutPaiementInput, AchatUncheckedCreateWithoutPaiementInput> | AchatCreateWithoutPaiementInput[] | AchatUncheckedCreateWithoutPaiementInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutPaiementInput | AchatCreateOrConnectWithoutPaiementInput[]
-    createMany?: AchatCreateManyPaiementInputEnvelope
-    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
+  export type VenteCreateNestedOneWithoutPaiementInput = {
+    create?: XOR<VenteCreateWithoutPaiementInput, VenteUncheckedCreateWithoutPaiementInput>
+    connectOrCreate?: VenteCreateOrConnectWithoutPaiementInput
+    connect?: VenteWhereUniqueInput
   }
 
   export type EnumMoyenPaimentFieldUpdateOperationsInput = {
     set?: $Enums.MoyenPaiment
   }
 
-  export type VenteUpdateManyWithoutPeiementNestedInput = {
-    create?: XOR<VenteCreateWithoutPeiementInput, VenteUncheckedCreateWithoutPeiementInput> | VenteCreateWithoutPeiementInput[] | VenteUncheckedCreateWithoutPeiementInput[]
-    connectOrCreate?: VenteCreateOrConnectWithoutPeiementInput | VenteCreateOrConnectWithoutPeiementInput[]
-    upsert?: VenteUpsertWithWhereUniqueWithoutPeiementInput | VenteUpsertWithWhereUniqueWithoutPeiementInput[]
-    createMany?: VenteCreateManyPeiementInputEnvelope
-    set?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    disconnect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    delete?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    update?: VenteUpdateWithWhereUniqueWithoutPeiementInput | VenteUpdateWithWhereUniqueWithoutPeiementInput[]
-    updateMany?: VenteUpdateManyWithWhereWithoutPeiementInput | VenteUpdateManyWithWhereWithoutPeiementInput[]
-    deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
+  export type DeviseUpdateOneRequiredWithoutPaiementNestedInput = {
+    create?: XOR<DeviseCreateWithoutPaiementInput, DeviseUncheckedCreateWithoutPaiementInput>
+    connectOrCreate?: DeviseCreateOrConnectWithoutPaiementInput
+    upsert?: DeviseUpsertWithoutPaiementInput
+    connect?: DeviseWhereUniqueInput
+    update?: XOR<XOR<DeviseUpdateToOneWithWhereWithoutPaiementInput, DeviseUpdateWithoutPaiementInput>, DeviseUncheckedUpdateWithoutPaiementInput>
   }
 
-  export type AchatUpdateManyWithoutPaiementNestedInput = {
-    create?: XOR<AchatCreateWithoutPaiementInput, AchatUncheckedCreateWithoutPaiementInput> | AchatCreateWithoutPaiementInput[] | AchatUncheckedCreateWithoutPaiementInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutPaiementInput | AchatCreateOrConnectWithoutPaiementInput[]
-    upsert?: AchatUpsertWithWhereUniqueWithoutPaiementInput | AchatUpsertWithWhereUniqueWithoutPaiementInput[]
-    createMany?: AchatCreateManyPaiementInputEnvelope
-    set?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    disconnect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    delete?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    update?: AchatUpdateWithWhereUniqueWithoutPaiementInput | AchatUpdateWithWhereUniqueWithoutPaiementInput[]
-    updateMany?: AchatUpdateManyWithWhereWithoutPaiementInput | AchatUpdateManyWithWhereWithoutPaiementInput[]
-    deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
+  export type AchatUpdateOneWithoutPaiementNestedInput = {
+    create?: XOR<AchatCreateWithoutPaiementInput, AchatUncheckedCreateWithoutPaiementInput>
+    connectOrCreate?: AchatCreateOrConnectWithoutPaiementInput
+    upsert?: AchatUpsertWithoutPaiementInput
+    disconnect?: AchatWhereInput | boolean
+    delete?: AchatWhereInput | boolean
+    connect?: AchatWhereUniqueInput
+    update?: XOR<XOR<AchatUpdateToOneWithWhereWithoutPaiementInput, AchatUpdateWithoutPaiementInput>, AchatUncheckedUpdateWithoutPaiementInput>
   }
 
-  export type VenteUncheckedUpdateManyWithoutPeiementNestedInput = {
-    create?: XOR<VenteCreateWithoutPeiementInput, VenteUncheckedCreateWithoutPeiementInput> | VenteCreateWithoutPeiementInput[] | VenteUncheckedCreateWithoutPeiementInput[]
-    connectOrCreate?: VenteCreateOrConnectWithoutPeiementInput | VenteCreateOrConnectWithoutPeiementInput[]
-    upsert?: VenteUpsertWithWhereUniqueWithoutPeiementInput | VenteUpsertWithWhereUniqueWithoutPeiementInput[]
-    createMany?: VenteCreateManyPeiementInputEnvelope
-    set?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    disconnect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    delete?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    update?: VenteUpdateWithWhereUniqueWithoutPeiementInput | VenteUpdateWithWhereUniqueWithoutPeiementInput[]
-    updateMany?: VenteUpdateManyWithWhereWithoutPeiementInput | VenteUpdateManyWithWhereWithoutPeiementInput[]
-    deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
-  }
-
-  export type AchatUncheckedUpdateManyWithoutPaiementNestedInput = {
-    create?: XOR<AchatCreateWithoutPaiementInput, AchatUncheckedCreateWithoutPaiementInput> | AchatCreateWithoutPaiementInput[] | AchatUncheckedCreateWithoutPaiementInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutPaiementInput | AchatCreateOrConnectWithoutPaiementInput[]
-    upsert?: AchatUpsertWithWhereUniqueWithoutPaiementInput | AchatUpsertWithWhereUniqueWithoutPaiementInput[]
-    createMany?: AchatCreateManyPaiementInputEnvelope
-    set?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    disconnect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    delete?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    update?: AchatUpdateWithWhereUniqueWithoutPaiementInput | AchatUpdateWithWhereUniqueWithoutPaiementInput[]
-    updateMany?: AchatUpdateManyWithWhereWithoutPaiementInput | AchatUpdateManyWithWhereWithoutPaiementInput[]
-    deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
+  export type VenteUpdateOneWithoutPaiementNestedInput = {
+    create?: XOR<VenteCreateWithoutPaiementInput, VenteUncheckedCreateWithoutPaiementInput>
+    connectOrCreate?: VenteCreateOrConnectWithoutPaiementInput
+    upsert?: VenteUpsertWithoutPaiementInput
+    disconnect?: VenteWhereInput | boolean
+    delete?: VenteWhereInput | boolean
+    connect?: VenteWhereUniqueInput
+    update?: XOR<XOR<VenteUpdateToOneWithWhereWithoutPaiementInput, VenteUpdateWithoutPaiementInput>, VenteUncheckedUpdateWithoutPaiementInput>
   }
 
   export type DetailVenteCreateNestedOneWithoutVenteInput = {
     create?: XOR<DetailVenteCreateWithoutVenteInput, DetailVenteUncheckedCreateWithoutVenteInput>
     connectOrCreate?: DetailVenteCreateOrConnectWithoutVenteInput
     connect?: DetailVenteWhereUniqueInput
-  }
-
-  export type PaiementCreateNestedOneWithoutVenteInput = {
-    create?: XOR<PaiementCreateWithoutVenteInput, PaiementUncheckedCreateWithoutVenteInput>
-    connectOrCreate?: PaiementCreateOrConnectWithoutVenteInput
-    connect?: PaiementWhereUniqueInput
   }
 
   export type EntrepriseCreateNestedOneWithoutVenteInput = {
@@ -23719,20 +23887,26 @@ export namespace Prisma {
     connect?: FournisseurWhereUniqueInput
   }
 
+  export type PaiementCreateNestedManyWithoutVenteInput = {
+    create?: XOR<PaiementCreateWithoutVenteInput, PaiementUncheckedCreateWithoutVenteInput> | PaiementCreateWithoutVenteInput[] | PaiementUncheckedCreateWithoutVenteInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutVenteInput | PaiementCreateOrConnectWithoutVenteInput[]
+    createMany?: PaiementCreateManyVenteInputEnvelope
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+  }
+
+  export type PaiementUncheckedCreateNestedManyWithoutVenteInput = {
+    create?: XOR<PaiementCreateWithoutVenteInput, PaiementUncheckedCreateWithoutVenteInput> | PaiementCreateWithoutVenteInput[] | PaiementUncheckedCreateWithoutVenteInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutVenteInput | PaiementCreateOrConnectWithoutVenteInput[]
+    createMany?: PaiementCreateManyVenteInputEnvelope
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+  }
+
   export type DetailVenteUpdateOneRequiredWithoutVenteNestedInput = {
     create?: XOR<DetailVenteCreateWithoutVenteInput, DetailVenteUncheckedCreateWithoutVenteInput>
     connectOrCreate?: DetailVenteCreateOrConnectWithoutVenteInput
     upsert?: DetailVenteUpsertWithoutVenteInput
     connect?: DetailVenteWhereUniqueInput
     update?: XOR<XOR<DetailVenteUpdateToOneWithWhereWithoutVenteInput, DetailVenteUpdateWithoutVenteInput>, DetailVenteUncheckedUpdateWithoutVenteInput>
-  }
-
-  export type PaiementUpdateOneRequiredWithoutVenteNestedInput = {
-    create?: XOR<PaiementCreateWithoutVenteInput, PaiementUncheckedCreateWithoutVenteInput>
-    connectOrCreate?: PaiementCreateOrConnectWithoutVenteInput
-    upsert?: PaiementUpsertWithoutVenteInput
-    connect?: PaiementWhereUniqueInput
-    update?: XOR<XOR<PaiementUpdateToOneWithWhereWithoutVenteInput, PaiementUpdateWithoutVenteInput>, PaiementUncheckedUpdateWithoutVenteInput>
   }
 
   export type EntrepriseUpdateOneRequiredWithoutVenteNestedInput = {
@@ -23761,6 +23935,34 @@ export namespace Prisma {
     update?: XOR<XOR<FournisseurUpdateToOneWithWhereWithoutVenteInput, FournisseurUpdateWithoutVenteInput>, FournisseurUncheckedUpdateWithoutVenteInput>
   }
 
+  export type PaiementUpdateManyWithoutVenteNestedInput = {
+    create?: XOR<PaiementCreateWithoutVenteInput, PaiementUncheckedCreateWithoutVenteInput> | PaiementCreateWithoutVenteInput[] | PaiementUncheckedCreateWithoutVenteInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutVenteInput | PaiementCreateOrConnectWithoutVenteInput[]
+    upsert?: PaiementUpsertWithWhereUniqueWithoutVenteInput | PaiementUpsertWithWhereUniqueWithoutVenteInput[]
+    createMany?: PaiementCreateManyVenteInputEnvelope
+    set?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    disconnect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    delete?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    update?: PaiementUpdateWithWhereUniqueWithoutVenteInput | PaiementUpdateWithWhereUniqueWithoutVenteInput[]
+    updateMany?: PaiementUpdateManyWithWhereWithoutVenteInput | PaiementUpdateManyWithWhereWithoutVenteInput[]
+    deleteMany?: PaiementScalarWhereInput | PaiementScalarWhereInput[]
+  }
+
+  export type PaiementUncheckedUpdateManyWithoutVenteNestedInput = {
+    create?: XOR<PaiementCreateWithoutVenteInput, PaiementUncheckedCreateWithoutVenteInput> | PaiementCreateWithoutVenteInput[] | PaiementUncheckedCreateWithoutVenteInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutVenteInput | PaiementCreateOrConnectWithoutVenteInput[]
+    upsert?: PaiementUpsertWithWhereUniqueWithoutVenteInput | PaiementUpsertWithWhereUniqueWithoutVenteInput[]
+    createMany?: PaiementCreateManyVenteInputEnvelope
+    set?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    disconnect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    delete?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    update?: PaiementUpdateWithWhereUniqueWithoutVenteInput | PaiementUpdateWithWhereUniqueWithoutVenteInput[]
+    updateMany?: PaiementUpdateManyWithWhereWithoutVenteInput | PaiementUpdateManyWithWhereWithoutVenteInput[]
+    deleteMany?: PaiementScalarWhereInput | PaiementScalarWhereInput[]
+  }
+
   export type UtilisateurCreateNestedOneWithoutPanierInput = {
     create?: XOR<UtilisateurCreateWithoutPanierInput, UtilisateurUncheckedCreateWithoutPanierInput>
     connectOrCreate?: UtilisateurCreateOrConnectWithoutPanierInput
@@ -23774,11 +23976,25 @@ export namespace Prisma {
     connect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
   }
 
+  export type AchatCreateNestedManyWithoutPanierInput = {
+    create?: XOR<AchatCreateWithoutPanierInput, AchatUncheckedCreateWithoutPanierInput> | AchatCreateWithoutPanierInput[] | AchatUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: AchatCreateOrConnectWithoutPanierInput | AchatCreateOrConnectWithoutPanierInput[]
+    createMany?: AchatCreateManyPanierInputEnvelope
+    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
+  }
+
   export type DetailAchatUncheckedCreateNestedManyWithoutPanierInput = {
     create?: XOR<DetailAchatCreateWithoutPanierInput, DetailAchatUncheckedCreateWithoutPanierInput> | DetailAchatCreateWithoutPanierInput[] | DetailAchatUncheckedCreateWithoutPanierInput[]
     connectOrCreate?: DetailAchatCreateOrConnectWithoutPanierInput | DetailAchatCreateOrConnectWithoutPanierInput[]
     createMany?: DetailAchatCreateManyPanierInputEnvelope
     connect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
+  }
+
+  export type AchatUncheckedCreateNestedManyWithoutPanierInput = {
+    create?: XOR<AchatCreateWithoutPanierInput, AchatUncheckedCreateWithoutPanierInput> | AchatCreateWithoutPanierInput[] | AchatUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: AchatCreateOrConnectWithoutPanierInput | AchatCreateOrConnectWithoutPanierInput[]
+    createMany?: AchatCreateManyPanierInputEnvelope
+    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
   }
 
   export type UtilisateurUpdateOneRequiredWithoutPanierNestedInput = {
@@ -23803,6 +24019,20 @@ export namespace Prisma {
     deleteMany?: DetailAchatScalarWhereInput | DetailAchatScalarWhereInput[]
   }
 
+  export type AchatUpdateManyWithoutPanierNestedInput = {
+    create?: XOR<AchatCreateWithoutPanierInput, AchatUncheckedCreateWithoutPanierInput> | AchatCreateWithoutPanierInput[] | AchatUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: AchatCreateOrConnectWithoutPanierInput | AchatCreateOrConnectWithoutPanierInput[]
+    upsert?: AchatUpsertWithWhereUniqueWithoutPanierInput | AchatUpsertWithWhereUniqueWithoutPanierInput[]
+    createMany?: AchatCreateManyPanierInputEnvelope
+    set?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
+    disconnect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
+    delete?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
+    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
+    update?: AchatUpdateWithWhereUniqueWithoutPanierInput | AchatUpdateWithWhereUniqueWithoutPanierInput[]
+    updateMany?: AchatUpdateManyWithWhereWithoutPanierInput | AchatUpdateManyWithWhereWithoutPanierInput[]
+    deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
+  }
+
   export type DetailAchatUncheckedUpdateManyWithoutPanierNestedInput = {
     create?: XOR<DetailAchatCreateWithoutPanierInput, DetailAchatUncheckedCreateWithoutPanierInput> | DetailAchatCreateWithoutPanierInput[] | DetailAchatUncheckedCreateWithoutPanierInput[]
     connectOrCreate?: DetailAchatCreateOrConnectWithoutPanierInput | DetailAchatCreateOrConnectWithoutPanierInput[]
@@ -23815,6 +24045,20 @@ export namespace Prisma {
     update?: DetailAchatUpdateWithWhereUniqueWithoutPanierInput | DetailAchatUpdateWithWhereUniqueWithoutPanierInput[]
     updateMany?: DetailAchatUpdateManyWithWhereWithoutPanierInput | DetailAchatUpdateManyWithWhereWithoutPanierInput[]
     deleteMany?: DetailAchatScalarWhereInput | DetailAchatScalarWhereInput[]
+  }
+
+  export type AchatUncheckedUpdateManyWithoutPanierNestedInput = {
+    create?: XOR<AchatCreateWithoutPanierInput, AchatUncheckedCreateWithoutPanierInput> | AchatCreateWithoutPanierInput[] | AchatUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: AchatCreateOrConnectWithoutPanierInput | AchatCreateOrConnectWithoutPanierInput[]
+    upsert?: AchatUpsertWithWhereUniqueWithoutPanierInput | AchatUpsertWithWhereUniqueWithoutPanierInput[]
+    createMany?: AchatCreateManyPanierInputEnvelope
+    set?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
+    disconnect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
+    delete?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
+    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
+    update?: AchatUpdateWithWhereUniqueWithoutPanierInput | AchatUpdateWithWhereUniqueWithoutPanierInput[]
+    updateMany?: AchatUpdateManyWithWhereWithoutPanierInput | AchatUpdateManyWithWhereWithoutPanierInput[]
+    deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
   }
 
   export type ProduitCreateNestedOneWithoutDetailVenteInput = {
@@ -23885,20 +24129,6 @@ export namespace Prisma {
     connect?: PanierWhereUniqueInput
   }
 
-  export type AchatCreateNestedManyWithoutDetailAchatInput = {
-    create?: XOR<AchatCreateWithoutDetailAchatInput, AchatUncheckedCreateWithoutDetailAchatInput> | AchatCreateWithoutDetailAchatInput[] | AchatUncheckedCreateWithoutDetailAchatInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutDetailAchatInput | AchatCreateOrConnectWithoutDetailAchatInput[]
-    createMany?: AchatCreateManyDetailAchatInputEnvelope
-    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-  }
-
-  export type AchatUncheckedCreateNestedManyWithoutDetailAchatInput = {
-    create?: XOR<AchatCreateWithoutDetailAchatInput, AchatUncheckedCreateWithoutDetailAchatInput> | AchatCreateWithoutDetailAchatInput[] | AchatUncheckedCreateWithoutDetailAchatInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutDetailAchatInput | AchatCreateOrConnectWithoutDetailAchatInput[]
-    createMany?: AchatCreateManyDetailAchatInputEnvelope
-    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-  }
-
   export type ProduitUpdateOneRequiredWithoutDetailAchatNestedInput = {
     create?: XOR<ProduitCreateWithoutDetailAchatInput, ProduitUncheckedCreateWithoutDetailAchatInput>
     connectOrCreate?: ProduitCreateOrConnectWithoutDetailAchatInput
@@ -23915,32 +24145,10 @@ export namespace Prisma {
     update?: XOR<XOR<PanierUpdateToOneWithWhereWithoutDetailAchatInput, PanierUpdateWithoutDetailAchatInput>, PanierUncheckedUpdateWithoutDetailAchatInput>
   }
 
-  export type AchatUpdateManyWithoutDetailAchatNestedInput = {
-    create?: XOR<AchatCreateWithoutDetailAchatInput, AchatUncheckedCreateWithoutDetailAchatInput> | AchatCreateWithoutDetailAchatInput[] | AchatUncheckedCreateWithoutDetailAchatInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutDetailAchatInput | AchatCreateOrConnectWithoutDetailAchatInput[]
-    upsert?: AchatUpsertWithWhereUniqueWithoutDetailAchatInput | AchatUpsertWithWhereUniqueWithoutDetailAchatInput[]
-    createMany?: AchatCreateManyDetailAchatInputEnvelope
-    set?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    disconnect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    delete?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    update?: AchatUpdateWithWhereUniqueWithoutDetailAchatInput | AchatUpdateWithWhereUniqueWithoutDetailAchatInput[]
-    updateMany?: AchatUpdateManyWithWhereWithoutDetailAchatInput | AchatUpdateManyWithWhereWithoutDetailAchatInput[]
-    deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
-  }
-
-  export type AchatUncheckedUpdateManyWithoutDetailAchatNestedInput = {
-    create?: XOR<AchatCreateWithoutDetailAchatInput, AchatUncheckedCreateWithoutDetailAchatInput> | AchatCreateWithoutDetailAchatInput[] | AchatUncheckedCreateWithoutDetailAchatInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutDetailAchatInput | AchatCreateOrConnectWithoutDetailAchatInput[]
-    upsert?: AchatUpsertWithWhereUniqueWithoutDetailAchatInput | AchatUpsertWithWhereUniqueWithoutDetailAchatInput[]
-    createMany?: AchatCreateManyDetailAchatInputEnvelope
-    set?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    disconnect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    delete?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    update?: AchatUpdateWithWhereUniqueWithoutDetailAchatInput | AchatUpdateWithWhereUniqueWithoutDetailAchatInput[]
-    updateMany?: AchatUpdateManyWithWhereWithoutDetailAchatInput | AchatUpdateManyWithWhereWithoutDetailAchatInput[]
-    deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
+  export type PanierCreateNestedOneWithoutAchatInput = {
+    create?: XOR<PanierCreateWithoutAchatInput, PanierUncheckedCreateWithoutAchatInput>
+    connectOrCreate?: PanierCreateOrConnectWithoutAchatInput
+    connect?: PanierWhereUniqueInput
   }
 
   export type FournisseurCreateNestedOneWithoutAchatInput = {
@@ -23949,22 +24157,36 @@ export namespace Prisma {
     connect?: FournisseurWhereUniqueInput
   }
 
-  export type DetailAchatCreateNestedOneWithoutAchatInput = {
-    create?: XOR<DetailAchatCreateWithoutAchatInput, DetailAchatUncheckedCreateWithoutAchatInput>
-    connectOrCreate?: DetailAchatCreateOrConnectWithoutAchatInput
-    connect?: DetailAchatWhereUniqueInput
-  }
-
   export type UtilisateurCreateNestedOneWithoutAchatInput = {
     create?: XOR<UtilisateurCreateWithoutAchatInput, UtilisateurUncheckedCreateWithoutAchatInput>
     connectOrCreate?: UtilisateurCreateOrConnectWithoutAchatInput
     connect?: UtilisateurWhereUniqueInput
   }
 
-  export type PaiementCreateNestedOneWithoutAchatInput = {
-    create?: XOR<PaiementCreateWithoutAchatInput, PaiementUncheckedCreateWithoutAchatInput>
-    connectOrCreate?: PaiementCreateOrConnectWithoutAchatInput
-    connect?: PaiementWhereUniqueInput
+  export type PaiementCreateNestedManyWithoutAchatInput = {
+    create?: XOR<PaiementCreateWithoutAchatInput, PaiementUncheckedCreateWithoutAchatInput> | PaiementCreateWithoutAchatInput[] | PaiementUncheckedCreateWithoutAchatInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutAchatInput | PaiementCreateOrConnectWithoutAchatInput[]
+    createMany?: PaiementCreateManyAchatInputEnvelope
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+  }
+
+  export type PaiementUncheckedCreateNestedManyWithoutAchatInput = {
+    create?: XOR<PaiementCreateWithoutAchatInput, PaiementUncheckedCreateWithoutAchatInput> | PaiementCreateWithoutAchatInput[] | PaiementUncheckedCreateWithoutAchatInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutAchatInput | PaiementCreateOrConnectWithoutAchatInput[]
+    createMany?: PaiementCreateManyAchatInputEnvelope
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+  }
+
+  export type EnumStatutAchatFieldUpdateOperationsInput = {
+    set?: $Enums.StatutAchat
+  }
+
+  export type PanierUpdateOneRequiredWithoutAchatNestedInput = {
+    create?: XOR<PanierCreateWithoutAchatInput, PanierUncheckedCreateWithoutAchatInput>
+    connectOrCreate?: PanierCreateOrConnectWithoutAchatInput
+    upsert?: PanierUpsertWithoutAchatInput
+    connect?: PanierWhereUniqueInput
+    update?: XOR<XOR<PanierUpdateToOneWithWhereWithoutAchatInput, PanierUpdateWithoutAchatInput>, PanierUncheckedUpdateWithoutAchatInput>
   }
 
   export type FournisseurUpdateOneRequiredWithoutAchatNestedInput = {
@@ -23975,14 +24197,6 @@ export namespace Prisma {
     update?: XOR<XOR<FournisseurUpdateToOneWithWhereWithoutAchatInput, FournisseurUpdateWithoutAchatInput>, FournisseurUncheckedUpdateWithoutAchatInput>
   }
 
-  export type DetailAchatUpdateOneRequiredWithoutAchatNestedInput = {
-    create?: XOR<DetailAchatCreateWithoutAchatInput, DetailAchatUncheckedCreateWithoutAchatInput>
-    connectOrCreate?: DetailAchatCreateOrConnectWithoutAchatInput
-    upsert?: DetailAchatUpsertWithoutAchatInput
-    connect?: DetailAchatWhereUniqueInput
-    update?: XOR<XOR<DetailAchatUpdateToOneWithWhereWithoutAchatInput, DetailAchatUpdateWithoutAchatInput>, DetailAchatUncheckedUpdateWithoutAchatInput>
-  }
-
   export type UtilisateurUpdateOneRequiredWithoutAchatNestedInput = {
     create?: XOR<UtilisateurCreateWithoutAchatInput, UtilisateurUncheckedCreateWithoutAchatInput>
     connectOrCreate?: UtilisateurCreateOrConnectWithoutAchatInput
@@ -23991,12 +24205,32 @@ export namespace Prisma {
     update?: XOR<XOR<UtilisateurUpdateToOneWithWhereWithoutAchatInput, UtilisateurUpdateWithoutAchatInput>, UtilisateurUncheckedUpdateWithoutAchatInput>
   }
 
-  export type PaiementUpdateOneRequiredWithoutAchatNestedInput = {
-    create?: XOR<PaiementCreateWithoutAchatInput, PaiementUncheckedCreateWithoutAchatInput>
-    connectOrCreate?: PaiementCreateOrConnectWithoutAchatInput
-    upsert?: PaiementUpsertWithoutAchatInput
-    connect?: PaiementWhereUniqueInput
-    update?: XOR<XOR<PaiementUpdateToOneWithWhereWithoutAchatInput, PaiementUpdateWithoutAchatInput>, PaiementUncheckedUpdateWithoutAchatInput>
+  export type PaiementUpdateManyWithoutAchatNestedInput = {
+    create?: XOR<PaiementCreateWithoutAchatInput, PaiementUncheckedCreateWithoutAchatInput> | PaiementCreateWithoutAchatInput[] | PaiementUncheckedCreateWithoutAchatInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutAchatInput | PaiementCreateOrConnectWithoutAchatInput[]
+    upsert?: PaiementUpsertWithWhereUniqueWithoutAchatInput | PaiementUpsertWithWhereUniqueWithoutAchatInput[]
+    createMany?: PaiementCreateManyAchatInputEnvelope
+    set?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    disconnect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    delete?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    update?: PaiementUpdateWithWhereUniqueWithoutAchatInput | PaiementUpdateWithWhereUniqueWithoutAchatInput[]
+    updateMany?: PaiementUpdateManyWithWhereWithoutAchatInput | PaiementUpdateManyWithWhereWithoutAchatInput[]
+    deleteMany?: PaiementScalarWhereInput | PaiementScalarWhereInput[]
+  }
+
+  export type PaiementUncheckedUpdateManyWithoutAchatNestedInput = {
+    create?: XOR<PaiementCreateWithoutAchatInput, PaiementUncheckedCreateWithoutAchatInput> | PaiementCreateWithoutAchatInput[] | PaiementUncheckedCreateWithoutAchatInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutAchatInput | PaiementCreateOrConnectWithoutAchatInput[]
+    upsert?: PaiementUpsertWithWhereUniqueWithoutAchatInput | PaiementUpsertWithWhereUniqueWithoutAchatInput[]
+    createMany?: PaiementCreateManyAchatInputEnvelope
+    set?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    disconnect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    delete?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    update?: PaiementUpdateWithWhereUniqueWithoutAchatInput | PaiementUpdateWithWhereUniqueWithoutAchatInput[]
+    updateMany?: PaiementUpdateManyWithWhereWithoutAchatInput | PaiementUpdateManyWithWhereWithoutAchatInput[]
+    deleteMany?: PaiementScalarWhereInput | PaiementScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -24186,22 +24420,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -24229,6 +24447,22 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type NestedEnumMoyenPaimentFilter<$PrismaModel = never> = {
     equals?: $Enums.MoyenPaiment | EnumMoyenPaimentFieldRefInput<$PrismaModel>
     in?: $Enums.MoyenPaiment[] | ListEnumMoyenPaimentFieldRefInput<$PrismaModel>
@@ -24246,6 +24480,23 @@ export namespace Prisma {
     _max?: NestedEnumMoyenPaimentFilter<$PrismaModel>
   }
 
+  export type NestedEnumStatutAchatFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutAchat | EnumStatutAchatFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutAchat[] | ListEnumStatutAchatFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutAchat[] | ListEnumStatutAchatFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutAchatFilter<$PrismaModel> | $Enums.StatutAchat
+  }
+
+  export type NestedEnumStatutAchatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutAchat | EnumStatutAchatFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutAchat[] | ListEnumStatutAchatFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutAchat[] | ListEnumStatutAchatFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutAchatWithAggregatesFilter<$PrismaModel> | $Enums.StatutAchat
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatutAchatFilter<$PrismaModel>
+    _max?: NestedEnumStatutAchatFilter<$PrismaModel>
+  }
+
   export type VenteCreateWithoutEntrepriseInput = {
     statut: string
     total_ttc: number
@@ -24255,9 +24506,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     detailvente: DetailVenteCreateNestedOneWithoutVenteInput
-    peiement: PaiementCreateNestedOneWithoutVenteInput
     utilisateur: UtilisateurCreateNestedOneWithoutVenteInput
     Fournisseur?: FournisseurCreateNestedOneWithoutVenteInput
+    Paiement?: PaiementCreateNestedManyWithoutVenteInput
   }
 
   export type VenteUncheckedCreateWithoutEntrepriseInput = {
@@ -24267,12 +24518,12 @@ export namespace Prisma {
     total_ht: number
     remise: number
     detailVenteId: number
-    paiementId: number
     clientId: string
     agentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     fournisseurId?: number | null
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutVenteInput
   }
 
   export type VenteCreateOrConnectWithoutEntrepriseInput = {
@@ -24311,7 +24562,6 @@ export namespace Prisma {
     total_ht?: FloatFilter<"Vente"> | number
     remise?: FloatFilter<"Vente"> | number
     detailVenteId?: IntFilter<"Vente"> | number
-    paiementId?: IntFilter<"Vente"> | number
     entrepriseId?: IntFilter<"Vente"> | number
     clientId?: StringFilter<"Vente"> | string
     agentId?: StringFilter<"Vente"> | string
@@ -24326,7 +24576,7 @@ export namespace Prisma {
     adresse: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    Fournisseur?: FournisseurCreateNestedManyWithoutAdresseInput
+    fournisseur?: FournisseurCreateNestedOneWithoutAdresseInput
   }
 
   export type AdresseUncheckedCreateWithoutUtilisateurInput = {
@@ -24334,9 +24584,9 @@ export namespace Prisma {
     ville: string
     commune: string
     adresse: string
+    fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    Fournisseur?: FournisseurUncheckedCreateNestedManyWithoutAdresseInput
   }
 
   export type AdresseCreateOrConnectWithoutUtilisateurInput = {
@@ -24353,15 +24603,15 @@ export namespace Prisma {
     tel: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    Fournisseur?: FournisseurCreateNestedManyWithoutContactInput
+    fournisseur?: FournisseurCreateNestedOneWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutUtilisateurInput = {
     id?: number
     tel: string
+    fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    Fournisseur?: FournisseurUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutUtilisateurInput = {
@@ -24420,9 +24670,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     detailvente: DetailVenteCreateNestedOneWithoutVenteInput
-    peiement: PaiementCreateNestedOneWithoutVenteInput
     entreprise: EntrepriseCreateNestedOneWithoutVenteInput
     Fournisseur?: FournisseurCreateNestedOneWithoutVenteInput
+    Paiement?: PaiementCreateNestedManyWithoutVenteInput
   }
 
   export type VenteUncheckedCreateWithoutUtilisateurInput = {
@@ -24432,12 +24682,12 @@ export namespace Prisma {
     total_ht: number
     remise: number
     detailVenteId: number
-    paiementId: number
     entrepriseId: number
     agentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     fournisseurId?: number | null
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutVenteInput
   }
 
   export type VenteCreateOrConnectWithoutUtilisateurInput = {
@@ -24450,34 +24700,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type AchatCreateWithoutAgentInput = {
-    statut: string
-    total: number
+  export type AchatCreateWithoutEnregisterParInput = {
+    statut?: $Enums.StatutAchat
     createdAt?: Date | string
     updatedAt?: Date | string
+    panier: PanierCreateNestedOneWithoutAchatInput
     fournisseur: FournisseurCreateNestedOneWithoutAchatInput
-    detailAchat: DetailAchatCreateNestedOneWithoutAchatInput
-    paiement: PaiementCreateNestedOneWithoutAchatInput
+    Paiement?: PaiementCreateNestedManyWithoutAchatInput
   }
 
-  export type AchatUncheckedCreateWithoutAgentInput = {
+  export type AchatUncheckedCreateWithoutEnregisterParInput = {
     id?: number
-    statut: string
+    statut?: $Enums.StatutAchat
+    panierId: number
     fournisseurId: number
-    total: number
-    detailAchatId: number
-    paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutAchatInput
   }
 
-  export type AchatCreateOrConnectWithoutAgentInput = {
+  export type AchatCreateOrConnectWithoutEnregisterParInput = {
     where: AchatWhereUniqueInput
-    create: XOR<AchatCreateWithoutAgentInput, AchatUncheckedCreateWithoutAgentInput>
+    create: XOR<AchatCreateWithoutEnregisterParInput, AchatUncheckedCreateWithoutEnregisterParInput>
   }
 
-  export type AchatCreateManyAgentInputEnvelope = {
-    data: AchatCreateManyAgentInput | AchatCreateManyAgentInput[]
+  export type AchatCreateManyEnregisterParInputEnvelope = {
+    data: AchatCreateManyEnregisterParInput | AchatCreateManyEnregisterParInput[]
     skipDuplicates?: boolean
   }
 
@@ -24513,6 +24761,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Produit?: ProduitCreateNestedManyWithoutDeviseInput
+    Paiement?: PaiementCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseUncheckedCreateWithoutUtilisateurInput = {
@@ -24523,6 +24772,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Produit?: ProduitUncheckedCreateNestedManyWithoutDeviseInput
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseCreateOrConnectWithoutUtilisateurInput = {
@@ -24539,6 +24789,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     DetailAchat?: DetailAchatCreateNestedManyWithoutPanierInput
+    Achat?: AchatCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUncheckedCreateWithoutUtilisateurInput = {
@@ -24546,6 +24797,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     DetailAchat?: DetailAchatUncheckedCreateNestedManyWithoutPanierInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutPanierInput
   }
 
   export type PanierCreateOrConnectWithoutUtilisateurInput = {
@@ -24582,7 +24834,8 @@ export namespace Prisma {
     ville?: StringFilter<"Adresse"> | string
     commune?: StringFilter<"Adresse"> | string
     adresse?: StringFilter<"Adresse"> | string
-    utilisateurId?: StringFilter<"Adresse"> | string
+    utilisateurId?: StringNullableFilter<"Adresse"> | string | null
+    fournisseurId?: IntNullableFilter<"Adresse"> | number | null
     createdAt?: DateTimeFilter<"Adresse"> | Date | string
     updatedAt?: DateTimeFilter<"Adresse"> | Date | string
   }
@@ -24609,7 +24862,8 @@ export namespace Prisma {
     NOT?: ContactScalarWhereInput | ContactScalarWhereInput[]
     id?: IntFilter<"Contact"> | number
     tel?: StringFilter<"Contact"> | string
-    utilisateurId?: StringFilter<"Contact"> | string
+    utilisateurId?: StringNullableFilter<"Contact"> | string | null
+    fournisseurId?: IntNullableFilter<"Contact"> | number | null
     createdAt?: DateTimeFilter<"Contact"> | Date | string
     updatedAt?: DateTimeFilter<"Contact"> | Date | string
   }
@@ -24662,20 +24916,20 @@ export namespace Prisma {
     data: XOR<VenteUpdateManyMutationInput, VenteUncheckedUpdateManyWithoutUtilisateurInput>
   }
 
-  export type AchatUpsertWithWhereUniqueWithoutAgentInput = {
+  export type AchatUpsertWithWhereUniqueWithoutEnregisterParInput = {
     where: AchatWhereUniqueInput
-    update: XOR<AchatUpdateWithoutAgentInput, AchatUncheckedUpdateWithoutAgentInput>
-    create: XOR<AchatCreateWithoutAgentInput, AchatUncheckedCreateWithoutAgentInput>
+    update: XOR<AchatUpdateWithoutEnregisterParInput, AchatUncheckedUpdateWithoutEnregisterParInput>
+    create: XOR<AchatCreateWithoutEnregisterParInput, AchatUncheckedCreateWithoutEnregisterParInput>
   }
 
-  export type AchatUpdateWithWhereUniqueWithoutAgentInput = {
+  export type AchatUpdateWithWhereUniqueWithoutEnregisterParInput = {
     where: AchatWhereUniqueInput
-    data: XOR<AchatUpdateWithoutAgentInput, AchatUncheckedUpdateWithoutAgentInput>
+    data: XOR<AchatUpdateWithoutEnregisterParInput, AchatUncheckedUpdateWithoutEnregisterParInput>
   }
 
-  export type AchatUpdateManyWithWhereWithoutAgentInput = {
+  export type AchatUpdateManyWithWhereWithoutEnregisterParInput = {
     where: AchatScalarWhereInput
-    data: XOR<AchatUpdateManyMutationInput, AchatUncheckedUpdateManyWithoutAgentInput>
+    data: XOR<AchatUpdateManyMutationInput, AchatUncheckedUpdateManyWithoutEnregisterParInput>
   }
 
   export type AchatScalarWhereInput = {
@@ -24683,12 +24937,10 @@ export namespace Prisma {
     OR?: AchatScalarWhereInput[]
     NOT?: AchatScalarWhereInput | AchatScalarWhereInput[]
     id?: IntFilter<"Achat"> | number
-    statut?: StringFilter<"Achat"> | string
+    statut?: EnumStatutAchatFilter<"Achat"> | $Enums.StatutAchat
+    panierId?: IntFilter<"Achat"> | number
     fournisseurId?: IntFilter<"Achat"> | number
-    total?: FloatFilter<"Achat"> | number
-    detailAchatId?: IntFilter<"Achat"> | number
-    agentId?: StringFilter<"Achat"> | string
-    paiementId?: IntFilter<"Achat"> | number
+    enregisterParId?: StringFilter<"Achat"> | string
     createdAt?: DateTimeFilter<"Achat"> | Date | string
     updatedAt?: DateTimeFilter<"Achat"> | Date | string
   }
@@ -24790,7 +25042,7 @@ export namespace Prisma {
     Contact?: ContactCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatCreateNestedManyWithoutAgentInput
+    Achat?: AchatCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
@@ -24811,7 +25063,7 @@ export namespace Prisma {
     Contact?: ContactUncheckedCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitUncheckedCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteUncheckedCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatUncheckedCreateNestedManyWithoutAgentInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
@@ -24828,9 +25080,9 @@ export namespace Prisma {
     code_postal?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    contact: ContactCreateNestedOneWithoutFournisseurInput
     Vente?: VenteCreateNestedManyWithoutFournisseurInput
     Achat?: AchatCreateNestedManyWithoutFournisseurInput
+    Contact?: ContactCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUncheckedCreateWithoutAdresseInput = {
@@ -24838,21 +25090,16 @@ export namespace Prisma {
     nom: string
     email: string
     code_postal?: string | null
-    contactId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Vente?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
     Achat?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
+    Contact?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurCreateOrConnectWithoutAdresseInput = {
     where: FournisseurWhereUniqueInput
     create: XOR<FournisseurCreateWithoutAdresseInput, FournisseurUncheckedCreateWithoutAdresseInput>
-  }
-
-  export type FournisseurCreateManyAdresseInputEnvelope = {
-    data: FournisseurCreateManyAdresseInput | FournisseurCreateManyAdresseInput[]
-    skipDuplicates?: boolean
   }
 
   export type UtilisateurUpsertWithoutAdresseInput = {
@@ -24881,7 +25128,7 @@ export namespace Prisma {
     Contact?: ContactUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
@@ -24902,40 +25149,44 @@ export namespace Prisma {
     Contact?: ContactUncheckedUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUncheckedUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUncheckedUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUncheckedUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
   }
 
-  export type FournisseurUpsertWithWhereUniqueWithoutAdresseInput = {
-    where: FournisseurWhereUniqueInput
+  export type FournisseurUpsertWithoutAdresseInput = {
     update: XOR<FournisseurUpdateWithoutAdresseInput, FournisseurUncheckedUpdateWithoutAdresseInput>
     create: XOR<FournisseurCreateWithoutAdresseInput, FournisseurUncheckedCreateWithoutAdresseInput>
+    where?: FournisseurWhereInput
   }
 
-  export type FournisseurUpdateWithWhereUniqueWithoutAdresseInput = {
-    where: FournisseurWhereUniqueInput
+  export type FournisseurUpdateToOneWithWhereWithoutAdresseInput = {
+    where?: FournisseurWhereInput
     data: XOR<FournisseurUpdateWithoutAdresseInput, FournisseurUncheckedUpdateWithoutAdresseInput>
   }
 
-  export type FournisseurUpdateManyWithWhereWithoutAdresseInput = {
-    where: FournisseurScalarWhereInput
-    data: XOR<FournisseurUpdateManyMutationInput, FournisseurUncheckedUpdateManyWithoutAdresseInput>
+  export type FournisseurUpdateWithoutAdresseInput = {
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Vente?: VenteUpdateManyWithoutFournisseurNestedInput
+    Achat?: AchatUpdateManyWithoutFournisseurNestedInput
+    Contact?: ContactUpdateManyWithoutFournisseurNestedInput
   }
 
-  export type FournisseurScalarWhereInput = {
-    AND?: FournisseurScalarWhereInput | FournisseurScalarWhereInput[]
-    OR?: FournisseurScalarWhereInput[]
-    NOT?: FournisseurScalarWhereInput | FournisseurScalarWhereInput[]
-    id?: IntFilter<"Fournisseur"> | number
-    nom?: StringFilter<"Fournisseur"> | string
-    email?: StringFilter<"Fournisseur"> | string
-    code_postal?: StringNullableFilter<"Fournisseur"> | string | null
-    adresseId?: IntFilter<"Fournisseur"> | number
-    contactId?: IntFilter<"Fournisseur"> | number
-    createdAt?: DateTimeFilter<"Fournisseur"> | Date | string
-    updatedAt?: DateTimeFilter<"Fournisseur"> | Date | string
+  export type FournisseurUncheckedUpdateWithoutAdresseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Vente?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
+    Contact?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
   export type UtilisateurCreateWithoutContactInput = {
@@ -24953,7 +25204,7 @@ export namespace Prisma {
     Adresse?: AdresseCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatCreateNestedManyWithoutAgentInput
+    Achat?: AchatCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
@@ -24974,7 +25225,7 @@ export namespace Prisma {
     Adresse?: AdresseUncheckedCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitUncheckedCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteUncheckedCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatUncheckedCreateNestedManyWithoutAgentInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
@@ -24991,9 +25242,9 @@ export namespace Prisma {
     code_postal?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    adresse: AdresseCreateNestedOneWithoutFournisseurInput
     Vente?: VenteCreateNestedManyWithoutFournisseurInput
     Achat?: AchatCreateNestedManyWithoutFournisseurInput
+    Adresse?: AdresseCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUncheckedCreateWithoutContactInput = {
@@ -25001,21 +25252,16 @@ export namespace Prisma {
     nom: string
     email: string
     code_postal?: string | null
-    adresseId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Vente?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
     Achat?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
+    Adresse?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurCreateOrConnectWithoutContactInput = {
     where: FournisseurWhereUniqueInput
     create: XOR<FournisseurCreateWithoutContactInput, FournisseurUncheckedCreateWithoutContactInput>
-  }
-
-  export type FournisseurCreateManyContactInputEnvelope = {
-    data: FournisseurCreateManyContactInput | FournisseurCreateManyContactInput[]
-    skipDuplicates?: boolean
   }
 
   export type UtilisateurUpsertWithoutContactInput = {
@@ -25044,7 +25290,7 @@ export namespace Prisma {
     Adresse?: AdresseUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
@@ -25065,70 +25311,44 @@ export namespace Prisma {
     Adresse?: AdresseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUncheckedUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUncheckedUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUncheckedUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
   }
 
-  export type FournisseurUpsertWithWhereUniqueWithoutContactInput = {
-    where: FournisseurWhereUniqueInput
+  export type FournisseurUpsertWithoutContactInput = {
     update: XOR<FournisseurUpdateWithoutContactInput, FournisseurUncheckedUpdateWithoutContactInput>
     create: XOR<FournisseurCreateWithoutContactInput, FournisseurUncheckedCreateWithoutContactInput>
+    where?: FournisseurWhereInput
   }
 
-  export type FournisseurUpdateWithWhereUniqueWithoutContactInput = {
-    where: FournisseurWhereUniqueInput
+  export type FournisseurUpdateToOneWithWhereWithoutContactInput = {
+    where?: FournisseurWhereInput
     data: XOR<FournisseurUpdateWithoutContactInput, FournisseurUncheckedUpdateWithoutContactInput>
   }
 
-  export type FournisseurUpdateManyWithWhereWithoutContactInput = {
-    where: FournisseurScalarWhereInput
-    data: XOR<FournisseurUpdateManyMutationInput, FournisseurUncheckedUpdateManyWithoutContactInput>
+  export type FournisseurUpdateWithoutContactInput = {
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Vente?: VenteUpdateManyWithoutFournisseurNestedInput
+    Achat?: AchatUpdateManyWithoutFournisseurNestedInput
+    Adresse?: AdresseUpdateManyWithoutFournisseurNestedInput
   }
 
-  export type AdresseCreateWithoutFournisseurInput = {
-    ville: string
-    commune: string
-    adresse: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    utilisateur: UtilisateurCreateNestedOneWithoutAdresseInput
-  }
-
-  export type AdresseUncheckedCreateWithoutFournisseurInput = {
-    id?: number
-    ville: string
-    commune: string
-    adresse: string
-    utilisateurId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type AdresseCreateOrConnectWithoutFournisseurInput = {
-    where: AdresseWhereUniqueInput
-    create: XOR<AdresseCreateWithoutFournisseurInput, AdresseUncheckedCreateWithoutFournisseurInput>
-  }
-
-  export type ContactCreateWithoutFournisseurInput = {
-    tel: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    utilisateur: UtilisateurCreateNestedOneWithoutContactInput
-  }
-
-  export type ContactUncheckedCreateWithoutFournisseurInput = {
-    id?: number
-    tel: string
-    utilisateurId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ContactCreateOrConnectWithoutFournisseurInput = {
-    where: ContactWhereUniqueInput
-    create: XOR<ContactCreateWithoutFournisseurInput, ContactUncheckedCreateWithoutFournisseurInput>
+  export type FournisseurUncheckedUpdateWithoutContactInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Vente?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
+    Adresse?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
   export type VenteCreateWithoutFournisseurInput = {
@@ -25140,9 +25360,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     detailvente: DetailVenteCreateNestedOneWithoutVenteInput
-    peiement: PaiementCreateNestedOneWithoutVenteInput
     entreprise: EntrepriseCreateNestedOneWithoutVenteInput
     utilisateur: UtilisateurCreateNestedOneWithoutVenteInput
+    Paiement?: PaiementCreateNestedManyWithoutVenteInput
   }
 
   export type VenteUncheckedCreateWithoutFournisseurInput = {
@@ -25152,12 +25372,12 @@ export namespace Prisma {
     total_ht: number
     remise: number
     detailVenteId: number
-    paiementId: number
     entrepriseId: number
     clientId: string
     agentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutVenteInput
   }
 
   export type VenteCreateOrConnectWithoutFournisseurInput = {
@@ -25171,24 +25391,22 @@ export namespace Prisma {
   }
 
   export type AchatCreateWithoutFournisseurInput = {
-    statut: string
-    total: number
+    statut?: $Enums.StatutAchat
     createdAt?: Date | string
     updatedAt?: Date | string
-    detailAchat: DetailAchatCreateNestedOneWithoutAchatInput
-    agent: UtilisateurCreateNestedOneWithoutAchatInput
-    paiement: PaiementCreateNestedOneWithoutAchatInput
+    panier: PanierCreateNestedOneWithoutAchatInput
+    enregisterPar: UtilisateurCreateNestedOneWithoutAchatInput
+    Paiement?: PaiementCreateNestedManyWithoutAchatInput
   }
 
   export type AchatUncheckedCreateWithoutFournisseurInput = {
     id?: number
-    statut: string
-    total: number
-    detailAchatId: number
-    agentId: string
-    paiementId: number
+    statut?: $Enums.StatutAchat
+    panierId: number
+    enregisterParId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutAchatInput
   }
 
   export type AchatCreateOrConnectWithoutFournisseurInput = {
@@ -25201,60 +25419,58 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type AdresseUpsertWithoutFournisseurInput = {
-    update: XOR<AdresseUpdateWithoutFournisseurInput, AdresseUncheckedUpdateWithoutFournisseurInput>
+  export type AdresseCreateWithoutFournisseurInput = {
+    ville: string
+    commune: string
+    adresse: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    utilisateur?: UtilisateurCreateNestedOneWithoutAdresseInput
+  }
+
+  export type AdresseUncheckedCreateWithoutFournisseurInput = {
+    id?: number
+    ville: string
+    commune: string
+    adresse: string
+    utilisateurId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdresseCreateOrConnectWithoutFournisseurInput = {
+    where: AdresseWhereUniqueInput
     create: XOR<AdresseCreateWithoutFournisseurInput, AdresseUncheckedCreateWithoutFournisseurInput>
-    where?: AdresseWhereInput
   }
 
-  export type AdresseUpdateToOneWithWhereWithoutFournisseurInput = {
-    where?: AdresseWhereInput
-    data: XOR<AdresseUpdateWithoutFournisseurInput, AdresseUncheckedUpdateWithoutFournisseurInput>
+  export type AdresseCreateManyFournisseurInputEnvelope = {
+    data: AdresseCreateManyFournisseurInput | AdresseCreateManyFournisseurInput[]
+    skipDuplicates?: boolean
   }
 
-  export type AdresseUpdateWithoutFournisseurInput = {
-    ville?: StringFieldUpdateOperationsInput | string
-    commune?: StringFieldUpdateOperationsInput | string
-    adresse?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    utilisateur?: UtilisateurUpdateOneRequiredWithoutAdresseNestedInput
+  export type ContactCreateWithoutFournisseurInput = {
+    tel: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    utilisateur?: UtilisateurCreateNestedOneWithoutContactInput
   }
 
-  export type AdresseUncheckedUpdateWithoutFournisseurInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    ville?: StringFieldUpdateOperationsInput | string
-    commune?: StringFieldUpdateOperationsInput | string
-    adresse?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type ContactUncheckedCreateWithoutFournisseurInput = {
+    id?: number
+    tel: string
+    utilisateurId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type ContactUpsertWithoutFournisseurInput = {
-    update: XOR<ContactUpdateWithoutFournisseurInput, ContactUncheckedUpdateWithoutFournisseurInput>
+  export type ContactCreateOrConnectWithoutFournisseurInput = {
+    where: ContactWhereUniqueInput
     create: XOR<ContactCreateWithoutFournisseurInput, ContactUncheckedCreateWithoutFournisseurInput>
-    where?: ContactWhereInput
   }
 
-  export type ContactUpdateToOneWithWhereWithoutFournisseurInput = {
-    where?: ContactWhereInput
-    data: XOR<ContactUpdateWithoutFournisseurInput, ContactUncheckedUpdateWithoutFournisseurInput>
-  }
-
-  export type ContactUpdateWithoutFournisseurInput = {
-    tel?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    utilisateur?: UtilisateurUpdateOneRequiredWithoutContactNestedInput
-  }
-
-  export type ContactUncheckedUpdateWithoutFournisseurInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    tel?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type ContactCreateManyFournisseurInputEnvelope = {
+    data: ContactCreateManyFournisseurInput | ContactCreateManyFournisseurInput[]
+    skipDuplicates?: boolean
   }
 
   export type VenteUpsertWithWhereUniqueWithoutFournisseurInput = {
@@ -25289,6 +25505,38 @@ export namespace Prisma {
     data: XOR<AchatUpdateManyMutationInput, AchatUncheckedUpdateManyWithoutFournisseurInput>
   }
 
+  export type AdresseUpsertWithWhereUniqueWithoutFournisseurInput = {
+    where: AdresseWhereUniqueInput
+    update: XOR<AdresseUpdateWithoutFournisseurInput, AdresseUncheckedUpdateWithoutFournisseurInput>
+    create: XOR<AdresseCreateWithoutFournisseurInput, AdresseUncheckedCreateWithoutFournisseurInput>
+  }
+
+  export type AdresseUpdateWithWhereUniqueWithoutFournisseurInput = {
+    where: AdresseWhereUniqueInput
+    data: XOR<AdresseUpdateWithoutFournisseurInput, AdresseUncheckedUpdateWithoutFournisseurInput>
+  }
+
+  export type AdresseUpdateManyWithWhereWithoutFournisseurInput = {
+    where: AdresseScalarWhereInput
+    data: XOR<AdresseUpdateManyMutationInput, AdresseUncheckedUpdateManyWithoutFournisseurInput>
+  }
+
+  export type ContactUpsertWithWhereUniqueWithoutFournisseurInput = {
+    where: ContactWhereUniqueInput
+    update: XOR<ContactUpdateWithoutFournisseurInput, ContactUncheckedUpdateWithoutFournisseurInput>
+    create: XOR<ContactCreateWithoutFournisseurInput, ContactUncheckedCreateWithoutFournisseurInput>
+  }
+
+  export type ContactUpdateWithWhereUniqueWithoutFournisseurInput = {
+    where: ContactWhereUniqueInput
+    data: XOR<ContactUpdateWithoutFournisseurInput, ContactUncheckedUpdateWithoutFournisseurInput>
+  }
+
+  export type ContactUpdateManyWithWhereWithoutFournisseurInput = {
+    where: ContactScalarWhereInput
+    data: XOR<ContactUpdateManyMutationInput, ContactUncheckedUpdateManyWithoutFournisseurInput>
+  }
+
   export type UtilisateurCreateWithoutTeneurInput = {
     id: string
     email: string
@@ -25305,7 +25553,7 @@ export namespace Prisma {
     Contact?: ContactCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatCreateNestedManyWithoutAgentInput
+    Achat?: AchatCreateNestedManyWithoutEnregisterParInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
   }
@@ -25326,7 +25574,7 @@ export namespace Prisma {
     Contact?: ContactUncheckedCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitUncheckedCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteUncheckedCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatUncheckedCreateNestedManyWithoutAgentInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutEnregisterParInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
   }
@@ -25400,7 +25648,7 @@ export namespace Prisma {
     Contact?: ContactUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUpdateManyWithoutEnregisterParNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
   }
@@ -25421,7 +25669,7 @@ export namespace Prisma {
     Contact?: ContactUncheckedUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUncheckedUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUncheckedUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUncheckedUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutEnregisterParNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
   }
@@ -25458,7 +25706,7 @@ export namespace Prisma {
     Contact?: ContactCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatCreateNestedManyWithoutAgentInput
+    Achat?: AchatCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
   }
@@ -25479,7 +25727,7 @@ export namespace Prisma {
     Contact?: ContactUncheckedCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitUncheckedCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteUncheckedCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatUncheckedCreateNestedManyWithoutAgentInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
   }
@@ -25526,6 +25774,35 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PaiementCreateWithoutDeviseInput = {
+    montant: number
+    moyen_paiement?: $Enums.MoyenPaiment
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    achat?: AchatCreateNestedOneWithoutPaiementInput
+    vente?: VenteCreateNestedOneWithoutPaiementInput
+  }
+
+  export type PaiementUncheckedCreateWithoutDeviseInput = {
+    id?: number
+    montant: number
+    moyen_paiement?: $Enums.MoyenPaiment
+    achatId?: number | null
+    venteId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaiementCreateOrConnectWithoutDeviseInput = {
+    where: PaiementWhereUniqueInput
+    create: XOR<PaiementCreateWithoutDeviseInput, PaiementUncheckedCreateWithoutDeviseInput>
+  }
+
+  export type PaiementCreateManyDeviseInputEnvelope = {
+    data: PaiementCreateManyDeviseInput | PaiementCreateManyDeviseInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UtilisateurUpsertWithoutDeviseInput = {
     update: XOR<UtilisateurUpdateWithoutDeviseInput, UtilisateurUncheckedUpdateWithoutDeviseInput>
     create: XOR<UtilisateurCreateWithoutDeviseInput, UtilisateurUncheckedCreateWithoutDeviseInput>
@@ -25553,7 +25830,7 @@ export namespace Prisma {
     Contact?: ContactUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
   }
@@ -25574,7 +25851,7 @@ export namespace Prisma {
     Contact?: ContactUncheckedUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUncheckedUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUncheckedUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUncheckedUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
   }
@@ -25595,6 +25872,36 @@ export namespace Prisma {
     data: XOR<ProduitUpdateManyMutationInput, ProduitUncheckedUpdateManyWithoutDeviseInput>
   }
 
+  export type PaiementUpsertWithWhereUniqueWithoutDeviseInput = {
+    where: PaiementWhereUniqueInput
+    update: XOR<PaiementUpdateWithoutDeviseInput, PaiementUncheckedUpdateWithoutDeviseInput>
+    create: XOR<PaiementCreateWithoutDeviseInput, PaiementUncheckedCreateWithoutDeviseInput>
+  }
+
+  export type PaiementUpdateWithWhereUniqueWithoutDeviseInput = {
+    where: PaiementWhereUniqueInput
+    data: XOR<PaiementUpdateWithoutDeviseInput, PaiementUncheckedUpdateWithoutDeviseInput>
+  }
+
+  export type PaiementUpdateManyWithWhereWithoutDeviseInput = {
+    where: PaiementScalarWhereInput
+    data: XOR<PaiementUpdateManyMutationInput, PaiementUncheckedUpdateManyWithoutDeviseInput>
+  }
+
+  export type PaiementScalarWhereInput = {
+    AND?: PaiementScalarWhereInput | PaiementScalarWhereInput[]
+    OR?: PaiementScalarWhereInput[]
+    NOT?: PaiementScalarWhereInput | PaiementScalarWhereInput[]
+    id?: IntFilter<"Paiement"> | number
+    montant?: FloatFilter<"Paiement"> | number
+    moyen_paiement?: EnumMoyenPaimentFilter<"Paiement"> | $Enums.MoyenPaiment
+    deviseId?: IntFilter<"Paiement"> | number
+    achatId?: IntNullableFilter<"Paiement"> | number | null
+    venteId?: IntNullableFilter<"Paiement"> | number | null
+    createdAt?: DateTimeFilter<"Paiement"> | Date | string
+    updatedAt?: DateTimeFilter<"Paiement"> | Date | string
+  }
+
   export type DeviseCreateWithoutProduitInput = {
     nom: string
     code: string
@@ -25602,6 +25909,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     utilisateur: UtilisateurCreateNestedOneWithoutDeviseInput
+    Paiement?: PaiementCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseUncheckedCreateWithoutProduitInput = {
@@ -25612,6 +25920,7 @@ export namespace Prisma {
     utilisateurId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseCreateOrConnectWithoutProduitInput = {
@@ -25654,7 +25963,7 @@ export namespace Prisma {
     Adresse?: AdresseCreateNestedManyWithoutUtilisateurInput
     Contact?: ContactCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatCreateNestedManyWithoutAgentInput
+    Achat?: AchatCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
@@ -25675,7 +25984,7 @@ export namespace Prisma {
     Adresse?: AdresseUncheckedCreateNestedManyWithoutUtilisateurInput
     Contact?: ContactUncheckedCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteUncheckedCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatUncheckedCreateNestedManyWithoutAgentInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
@@ -25722,7 +26031,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     panier: PanierCreateNestedOneWithoutDetailAchatInput
-    Achat?: AchatCreateNestedManyWithoutDetailAchatInput
   }
 
   export type DetailAchatUncheckedCreateWithoutProduitInput = {
@@ -25733,7 +26041,6 @@ export namespace Prisma {
     panierId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    Achat?: AchatUncheckedCreateNestedManyWithoutDetailAchatInput
   }
 
   export type DetailAchatCreateOrConnectWithoutProduitInput = {
@@ -25764,6 +26071,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneRequiredWithoutDeviseNestedInput
+    Paiement?: PaiementUpdateManyWithoutDeviseNestedInput
   }
 
   export type DeviseUncheckedUpdateWithoutProduitInput = {
@@ -25774,6 +26082,7 @@ export namespace Prisma {
     utilisateurId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Paiement?: PaiementUncheckedUpdateManyWithoutDeviseNestedInput
   }
 
   export type TeneurUpsertWithoutProduitInput = {
@@ -25828,7 +26137,7 @@ export namespace Prisma {
     Adresse?: AdresseUpdateManyWithoutUtilisateurNestedInput
     Contact?: ContactUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
@@ -25849,7 +26158,7 @@ export namespace Prisma {
     Adresse?: AdresseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Contact?: ContactUncheckedUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUncheckedUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUncheckedUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
@@ -25914,7 +26223,57 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"DetailAchat"> | Date | string
   }
 
-  export type VenteCreateWithoutPeiementInput = {
+  export type DeviseCreateWithoutPaiementInput = {
+    nom: string
+    code: string
+    symbole: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    utilisateur: UtilisateurCreateNestedOneWithoutDeviseInput
+    Produit?: ProduitCreateNestedManyWithoutDeviseInput
+  }
+
+  export type DeviseUncheckedCreateWithoutPaiementInput = {
+    id?: number
+    nom: string
+    code: string
+    symbole: string
+    utilisateurId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Produit?: ProduitUncheckedCreateNestedManyWithoutDeviseInput
+  }
+
+  export type DeviseCreateOrConnectWithoutPaiementInput = {
+    where: DeviseWhereUniqueInput
+    create: XOR<DeviseCreateWithoutPaiementInput, DeviseUncheckedCreateWithoutPaiementInput>
+  }
+
+  export type AchatCreateWithoutPaiementInput = {
+    statut?: $Enums.StatutAchat
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    panier: PanierCreateNestedOneWithoutAchatInput
+    fournisseur: FournisseurCreateNestedOneWithoutAchatInput
+    enregisterPar: UtilisateurCreateNestedOneWithoutAchatInput
+  }
+
+  export type AchatUncheckedCreateWithoutPaiementInput = {
+    id?: number
+    statut?: $Enums.StatutAchat
+    panierId: number
+    fournisseurId: number
+    enregisterParId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AchatCreateOrConnectWithoutPaiementInput = {
+    where: AchatWhereUniqueInput
+    create: XOR<AchatCreateWithoutPaiementInput, AchatUncheckedCreateWithoutPaiementInput>
+  }
+
+  export type VenteCreateWithoutPaiementInput = {
     statut: string
     total_ttc: number
     total_ht: number
@@ -25928,7 +26287,7 @@ export namespace Prisma {
     Fournisseur?: FournisseurCreateNestedOneWithoutVenteInput
   }
 
-  export type VenteUncheckedCreateWithoutPeiementInput = {
+  export type VenteUncheckedCreateWithoutPaiementInput = {
     id?: number
     statut: string
     total_ttc: number
@@ -25943,77 +26302,111 @@ export namespace Prisma {
     fournisseurId?: number | null
   }
 
-  export type VenteCreateOrConnectWithoutPeiementInput = {
+  export type VenteCreateOrConnectWithoutPaiementInput = {
     where: VenteWhereUniqueInput
-    create: XOR<VenteCreateWithoutPeiementInput, VenteUncheckedCreateWithoutPeiementInput>
+    create: XOR<VenteCreateWithoutPaiementInput, VenteUncheckedCreateWithoutPaiementInput>
   }
 
-  export type VenteCreateManyPeiementInputEnvelope = {
-    data: VenteCreateManyPeiementInput | VenteCreateManyPeiementInput[]
-    skipDuplicates?: boolean
+  export type DeviseUpsertWithoutPaiementInput = {
+    update: XOR<DeviseUpdateWithoutPaiementInput, DeviseUncheckedUpdateWithoutPaiementInput>
+    create: XOR<DeviseCreateWithoutPaiementInput, DeviseUncheckedCreateWithoutPaiementInput>
+    where?: DeviseWhereInput
   }
 
-  export type AchatCreateWithoutPaiementInput = {
-    statut: string
-    total: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    fournisseur: FournisseurCreateNestedOneWithoutAchatInput
-    detailAchat: DetailAchatCreateNestedOneWithoutAchatInput
-    agent: UtilisateurCreateNestedOneWithoutAchatInput
+  export type DeviseUpdateToOneWithWhereWithoutPaiementInput = {
+    where?: DeviseWhereInput
+    data: XOR<DeviseUpdateWithoutPaiementInput, DeviseUncheckedUpdateWithoutPaiementInput>
   }
 
-  export type AchatUncheckedCreateWithoutPaiementInput = {
-    id?: number
-    statut: string
-    fournisseurId: number
-    total: number
-    detailAchatId: number
-    agentId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type DeviseUpdateWithoutPaiementInput = {
+    nom?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    symbole?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateur?: UtilisateurUpdateOneRequiredWithoutDeviseNestedInput
+    Produit?: ProduitUpdateManyWithoutDeviseNestedInput
   }
 
-  export type AchatCreateOrConnectWithoutPaiementInput = {
-    where: AchatWhereUniqueInput
-    create: XOR<AchatCreateWithoutPaiementInput, AchatUncheckedCreateWithoutPaiementInput>
+  export type DeviseUncheckedUpdateWithoutPaiementInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    symbole?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Produit?: ProduitUncheckedUpdateManyWithoutDeviseNestedInput
   }
 
-  export type AchatCreateManyPaiementInputEnvelope = {
-    data: AchatCreateManyPaiementInput | AchatCreateManyPaiementInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type VenteUpsertWithWhereUniqueWithoutPeiementInput = {
-    where: VenteWhereUniqueInput
-    update: XOR<VenteUpdateWithoutPeiementInput, VenteUncheckedUpdateWithoutPeiementInput>
-    create: XOR<VenteCreateWithoutPeiementInput, VenteUncheckedCreateWithoutPeiementInput>
-  }
-
-  export type VenteUpdateWithWhereUniqueWithoutPeiementInput = {
-    where: VenteWhereUniqueInput
-    data: XOR<VenteUpdateWithoutPeiementInput, VenteUncheckedUpdateWithoutPeiementInput>
-  }
-
-  export type VenteUpdateManyWithWhereWithoutPeiementInput = {
-    where: VenteScalarWhereInput
-    data: XOR<VenteUpdateManyMutationInput, VenteUncheckedUpdateManyWithoutPeiementInput>
-  }
-
-  export type AchatUpsertWithWhereUniqueWithoutPaiementInput = {
-    where: AchatWhereUniqueInput
+  export type AchatUpsertWithoutPaiementInput = {
     update: XOR<AchatUpdateWithoutPaiementInput, AchatUncheckedUpdateWithoutPaiementInput>
     create: XOR<AchatCreateWithoutPaiementInput, AchatUncheckedCreateWithoutPaiementInput>
+    where?: AchatWhereInput
   }
 
-  export type AchatUpdateWithWhereUniqueWithoutPaiementInput = {
-    where: AchatWhereUniqueInput
+  export type AchatUpdateToOneWithWhereWithoutPaiementInput = {
+    where?: AchatWhereInput
     data: XOR<AchatUpdateWithoutPaiementInput, AchatUncheckedUpdateWithoutPaiementInput>
   }
 
-  export type AchatUpdateManyWithWhereWithoutPaiementInput = {
-    where: AchatScalarWhereInput
-    data: XOR<AchatUpdateManyMutationInput, AchatUncheckedUpdateManyWithoutPaiementInput>
+  export type AchatUpdateWithoutPaiementInput = {
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    panier?: PanierUpdateOneRequiredWithoutAchatNestedInput
+    fournisseur?: FournisseurUpdateOneRequiredWithoutAchatNestedInput
+    enregisterPar?: UtilisateurUpdateOneRequiredWithoutAchatNestedInput
+  }
+
+  export type AchatUncheckedUpdateWithoutPaiementInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
+    panierId?: IntFieldUpdateOperationsInput | number
+    fournisseurId?: IntFieldUpdateOperationsInput | number
+    enregisterParId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VenteUpsertWithoutPaiementInput = {
+    update: XOR<VenteUpdateWithoutPaiementInput, VenteUncheckedUpdateWithoutPaiementInput>
+    create: XOR<VenteCreateWithoutPaiementInput, VenteUncheckedCreateWithoutPaiementInput>
+    where?: VenteWhereInput
+  }
+
+  export type VenteUpdateToOneWithWhereWithoutPaiementInput = {
+    where?: VenteWhereInput
+    data: XOR<VenteUpdateWithoutPaiementInput, VenteUncheckedUpdateWithoutPaiementInput>
+  }
+
+  export type VenteUpdateWithoutPaiementInput = {
+    statut?: StringFieldUpdateOperationsInput | string
+    total_ttc?: FloatFieldUpdateOperationsInput | number
+    total_ht?: FloatFieldUpdateOperationsInput | number
+    remise?: FloatFieldUpdateOperationsInput | number
+    agentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    detailvente?: DetailVenteUpdateOneRequiredWithoutVenteNestedInput
+    entreprise?: EntrepriseUpdateOneRequiredWithoutVenteNestedInput
+    utilisateur?: UtilisateurUpdateOneRequiredWithoutVenteNestedInput
+    Fournisseur?: FournisseurUpdateOneWithoutVenteNestedInput
+  }
+
+  export type VenteUncheckedUpdateWithoutPaiementInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    statut?: StringFieldUpdateOperationsInput | string
+    total_ttc?: FloatFieldUpdateOperationsInput | number
+    total_ht?: FloatFieldUpdateOperationsInput | number
+    remise?: FloatFieldUpdateOperationsInput | number
+    detailVenteId?: IntFieldUpdateOperationsInput | number
+    entrepriseId?: IntFieldUpdateOperationsInput | number
+    clientId?: StringFieldUpdateOperationsInput | string
+    agentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type DetailVenteCreateWithoutVenteInput = {
@@ -26038,28 +26431,6 @@ export namespace Prisma {
   export type DetailVenteCreateOrConnectWithoutVenteInput = {
     where: DetailVenteWhereUniqueInput
     create: XOR<DetailVenteCreateWithoutVenteInput, DetailVenteUncheckedCreateWithoutVenteInput>
-  }
-
-  export type PaiementCreateWithoutVenteInput = {
-    montant: number
-    moyen_paiement?: $Enums.MoyenPaiment
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Achat?: AchatCreateNestedManyWithoutPaiementInput
-  }
-
-  export type PaiementUncheckedCreateWithoutVenteInput = {
-    id?: number
-    montant: number
-    moyen_paiement?: $Enums.MoyenPaiment
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Achat?: AchatUncheckedCreateNestedManyWithoutPaiementInput
-  }
-
-  export type PaiementCreateOrConnectWithoutVenteInput = {
-    where: PaiementWhereUniqueInput
-    create: XOR<PaiementCreateWithoutVenteInput, PaiementUncheckedCreateWithoutVenteInput>
   }
 
   export type EntrepriseCreateWithoutVenteInput = {
@@ -26107,7 +26478,7 @@ export namespace Prisma {
     Adresse?: AdresseCreateNestedManyWithoutUtilisateurInput
     Contact?: ContactCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatCreateNestedManyWithoutAgentInput
+    Achat?: AchatCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
@@ -26128,7 +26499,7 @@ export namespace Prisma {
     Adresse?: AdresseUncheckedCreateNestedManyWithoutUtilisateurInput
     Contact?: ContactUncheckedCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitUncheckedCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatUncheckedCreateNestedManyWithoutAgentInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
@@ -26145,9 +26516,9 @@ export namespace Prisma {
     code_postal?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    adresse: AdresseCreateNestedOneWithoutFournisseurInput
-    contact: ContactCreateNestedOneWithoutFournisseurInput
     Achat?: AchatCreateNestedManyWithoutFournisseurInput
+    Adresse?: AdresseCreateNestedManyWithoutFournisseurInput
+    Contact?: ContactCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUncheckedCreateWithoutVenteInput = {
@@ -26155,16 +26526,45 @@ export namespace Prisma {
     nom: string
     email: string
     code_postal?: string | null
-    adresseId: number
-    contactId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Achat?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
+    Adresse?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
+    Contact?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurCreateOrConnectWithoutVenteInput = {
     where: FournisseurWhereUniqueInput
     create: XOR<FournisseurCreateWithoutVenteInput, FournisseurUncheckedCreateWithoutVenteInput>
+  }
+
+  export type PaiementCreateWithoutVenteInput = {
+    montant: number
+    moyen_paiement?: $Enums.MoyenPaiment
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    devise: DeviseCreateNestedOneWithoutPaiementInput
+    achat?: AchatCreateNestedOneWithoutPaiementInput
+  }
+
+  export type PaiementUncheckedCreateWithoutVenteInput = {
+    id?: number
+    montant: number
+    moyen_paiement?: $Enums.MoyenPaiment
+    deviseId: number
+    achatId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaiementCreateOrConnectWithoutVenteInput = {
+    where: PaiementWhereUniqueInput
+    create: XOR<PaiementCreateWithoutVenteInput, PaiementUncheckedCreateWithoutVenteInput>
+  }
+
+  export type PaiementCreateManyVenteInputEnvelope = {
+    data: PaiementCreateManyVenteInput | PaiementCreateManyVenteInput[]
+    skipDuplicates?: boolean
   }
 
   export type DetailVenteUpsertWithoutVenteInput = {
@@ -26195,34 +26595,6 @@ export namespace Prisma {
     prixTotal?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PaiementUpsertWithoutVenteInput = {
-    update: XOR<PaiementUpdateWithoutVenteInput, PaiementUncheckedUpdateWithoutVenteInput>
-    create: XOR<PaiementCreateWithoutVenteInput, PaiementUncheckedCreateWithoutVenteInput>
-    where?: PaiementWhereInput
-  }
-
-  export type PaiementUpdateToOneWithWhereWithoutVenteInput = {
-    where?: PaiementWhereInput
-    data: XOR<PaiementUpdateWithoutVenteInput, PaiementUncheckedUpdateWithoutVenteInput>
-  }
-
-  export type PaiementUpdateWithoutVenteInput = {
-    montant?: FloatFieldUpdateOperationsInput | number
-    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Achat?: AchatUpdateManyWithoutPaiementNestedInput
-  }
-
-  export type PaiementUncheckedUpdateWithoutVenteInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    montant?: FloatFieldUpdateOperationsInput | number
-    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Achat?: AchatUncheckedUpdateManyWithoutPaiementNestedInput
   }
 
   export type EntrepriseUpsertWithoutVenteInput = {
@@ -26287,7 +26659,7 @@ export namespace Prisma {
     Adresse?: AdresseUpdateManyWithoutUtilisateurNestedInput
     Contact?: ContactUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
@@ -26308,7 +26680,7 @@ export namespace Prisma {
     Adresse?: AdresseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Contact?: ContactUncheckedUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUncheckedUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUncheckedUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
@@ -26331,9 +26703,9 @@ export namespace Prisma {
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: AdresseUpdateOneRequiredWithoutFournisseurNestedInput
-    contact?: ContactUpdateOneRequiredWithoutFournisseurNestedInput
     Achat?: AchatUpdateManyWithoutFournisseurNestedInput
+    Adresse?: AdresseUpdateManyWithoutFournisseurNestedInput
+    Contact?: ContactUpdateManyWithoutFournisseurNestedInput
   }
 
   export type FournisseurUncheckedUpdateWithoutVenteInput = {
@@ -26341,11 +26713,27 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresseId?: IntFieldUpdateOperationsInput | number
-    contactId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Achat?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
+    Adresse?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
+    Contact?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
+  }
+
+  export type PaiementUpsertWithWhereUniqueWithoutVenteInput = {
+    where: PaiementWhereUniqueInput
+    update: XOR<PaiementUpdateWithoutVenteInput, PaiementUncheckedUpdateWithoutVenteInput>
+    create: XOR<PaiementCreateWithoutVenteInput, PaiementUncheckedCreateWithoutVenteInput>
+  }
+
+  export type PaiementUpdateWithWhereUniqueWithoutVenteInput = {
+    where: PaiementWhereUniqueInput
+    data: XOR<PaiementUpdateWithoutVenteInput, PaiementUncheckedUpdateWithoutVenteInput>
+  }
+
+  export type PaiementUpdateManyWithWhereWithoutVenteInput = {
+    where: PaiementScalarWhereInput
+    data: XOR<PaiementUpdateManyMutationInput, PaiementUncheckedUpdateManyWithoutVenteInput>
   }
 
   export type UtilisateurCreateWithoutPanierInput = {
@@ -26364,7 +26752,7 @@ export namespace Prisma {
     Contact?: ContactCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatCreateNestedManyWithoutAgentInput
+    Achat?: AchatCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
   }
@@ -26385,7 +26773,7 @@ export namespace Prisma {
     Contact?: ContactUncheckedCreateNestedManyWithoutUtilisateurInput
     Produit?: ProduitUncheckedCreateNestedManyWithoutUtilisateurInput
     Vente?: VenteUncheckedCreateNestedManyWithoutUtilisateurInput
-    Achat?: AchatUncheckedCreateNestedManyWithoutAgentInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutEnregisterParInput
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
   }
@@ -26402,7 +26790,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     produit: ProduitCreateNestedOneWithoutDetailAchatInput
-    Achat?: AchatCreateNestedManyWithoutDetailAchatInput
   }
 
   export type DetailAchatUncheckedCreateWithoutPanierInput = {
@@ -26413,7 +26800,6 @@ export namespace Prisma {
     prixTotal: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    Achat?: AchatUncheckedCreateNestedManyWithoutDetailAchatInput
   }
 
   export type DetailAchatCreateOrConnectWithoutPanierInput = {
@@ -26423,6 +26809,35 @@ export namespace Prisma {
 
   export type DetailAchatCreateManyPanierInputEnvelope = {
     data: DetailAchatCreateManyPanierInput | DetailAchatCreateManyPanierInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AchatCreateWithoutPanierInput = {
+    statut?: $Enums.StatutAchat
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    fournisseur: FournisseurCreateNestedOneWithoutAchatInput
+    enregisterPar: UtilisateurCreateNestedOneWithoutAchatInput
+    Paiement?: PaiementCreateNestedManyWithoutAchatInput
+  }
+
+  export type AchatUncheckedCreateWithoutPanierInput = {
+    id?: number
+    statut?: $Enums.StatutAchat
+    fournisseurId: number
+    enregisterParId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutAchatInput
+  }
+
+  export type AchatCreateOrConnectWithoutPanierInput = {
+    where: AchatWhereUniqueInput
+    create: XOR<AchatCreateWithoutPanierInput, AchatUncheckedCreateWithoutPanierInput>
+  }
+
+  export type AchatCreateManyPanierInputEnvelope = {
+    data: AchatCreateManyPanierInput | AchatCreateManyPanierInput[]
     skipDuplicates?: boolean
   }
 
@@ -26453,7 +26868,7 @@ export namespace Prisma {
     Contact?: ContactUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
   }
@@ -26474,7 +26889,7 @@ export namespace Prisma {
     Contact?: ContactUncheckedUpdateManyWithoutUtilisateurNestedInput
     Produit?: ProduitUncheckedUpdateManyWithoutUtilisateurNestedInput
     Vente?: VenteUncheckedUpdateManyWithoutUtilisateurNestedInput
-    Achat?: AchatUncheckedUpdateManyWithoutAgentNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutEnregisterParNestedInput
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
   }
@@ -26493,6 +26908,22 @@ export namespace Prisma {
   export type DetailAchatUpdateManyWithWhereWithoutPanierInput = {
     where: DetailAchatScalarWhereInput
     data: XOR<DetailAchatUpdateManyMutationInput, DetailAchatUncheckedUpdateManyWithoutPanierInput>
+  }
+
+  export type AchatUpsertWithWhereUniqueWithoutPanierInput = {
+    where: AchatWhereUniqueInput
+    update: XOR<AchatUpdateWithoutPanierInput, AchatUncheckedUpdateWithoutPanierInput>
+    create: XOR<AchatCreateWithoutPanierInput, AchatUncheckedCreateWithoutPanierInput>
+  }
+
+  export type AchatUpdateWithWhereUniqueWithoutPanierInput = {
+    where: AchatWhereUniqueInput
+    data: XOR<AchatUpdateWithoutPanierInput, AchatUncheckedUpdateWithoutPanierInput>
+  }
+
+  export type AchatUpdateManyWithWhereWithoutPanierInput = {
+    where: AchatScalarWhereInput
+    data: XOR<AchatUpdateManyMutationInput, AchatUncheckedUpdateManyWithoutPanierInput>
   }
 
   export type ProduitCreateWithoutDetailVenteInput = {
@@ -26535,10 +26966,10 @@ export namespace Prisma {
     agentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    peiement: PaiementCreateNestedOneWithoutVenteInput
     entreprise: EntrepriseCreateNestedOneWithoutVenteInput
     utilisateur: UtilisateurCreateNestedOneWithoutVenteInput
     Fournisseur?: FournisseurCreateNestedOneWithoutVenteInput
+    Paiement?: PaiementCreateNestedManyWithoutVenteInput
   }
 
   export type VenteUncheckedCreateWithoutDetailventeInput = {
@@ -26547,13 +26978,13 @@ export namespace Prisma {
     total_ttc: number
     total_ht: number
     remise: number
-    paiementId: number
     entrepriseId: number
     clientId: string
     agentId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     fournisseurId?: number | null
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutVenteInput
   }
 
   export type VenteCreateOrConnectWithoutDetailventeInput = {
@@ -26656,6 +27087,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     utilisateur: UtilisateurCreateNestedOneWithoutPanierInput
+    Achat?: AchatCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUncheckedCreateWithoutDetailAchatInput = {
@@ -26663,42 +27095,12 @@ export namespace Prisma {
     utilisateurId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    Achat?: AchatUncheckedCreateNestedManyWithoutPanierInput
   }
 
   export type PanierCreateOrConnectWithoutDetailAchatInput = {
     where: PanierWhereUniqueInput
     create: XOR<PanierCreateWithoutDetailAchatInput, PanierUncheckedCreateWithoutDetailAchatInput>
-  }
-
-  export type AchatCreateWithoutDetailAchatInput = {
-    statut: string
-    total: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    fournisseur: FournisseurCreateNestedOneWithoutAchatInput
-    agent: UtilisateurCreateNestedOneWithoutAchatInput
-    paiement: PaiementCreateNestedOneWithoutAchatInput
-  }
-
-  export type AchatUncheckedCreateWithoutDetailAchatInput = {
-    id?: number
-    statut: string
-    fournisseurId: number
-    total: number
-    agentId: string
-    paiementId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type AchatCreateOrConnectWithoutDetailAchatInput = {
-    where: AchatWhereUniqueInput
-    create: XOR<AchatCreateWithoutDetailAchatInput, AchatUncheckedCreateWithoutDetailAchatInput>
-  }
-
-  export type AchatCreateManyDetailAchatInputEnvelope = {
-    data: AchatCreateManyDetailAchatInput | AchatCreateManyDetailAchatInput[]
-    skipDuplicates?: boolean
   }
 
   export type ProduitUpsertWithoutDetailAchatInput = {
@@ -26754,6 +27156,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneRequiredWithoutPanierNestedInput
+    Achat?: AchatUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateWithoutDetailAchatInput = {
@@ -26761,22 +27164,27 @@ export namespace Prisma {
     utilisateurId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Achat?: AchatUncheckedUpdateManyWithoutPanierNestedInput
   }
 
-  export type AchatUpsertWithWhereUniqueWithoutDetailAchatInput = {
-    where: AchatWhereUniqueInput
-    update: XOR<AchatUpdateWithoutDetailAchatInput, AchatUncheckedUpdateWithoutDetailAchatInput>
-    create: XOR<AchatCreateWithoutDetailAchatInput, AchatUncheckedCreateWithoutDetailAchatInput>
+  export type PanierCreateWithoutAchatInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    utilisateur: UtilisateurCreateNestedOneWithoutPanierInput
+    DetailAchat?: DetailAchatCreateNestedManyWithoutPanierInput
   }
 
-  export type AchatUpdateWithWhereUniqueWithoutDetailAchatInput = {
-    where: AchatWhereUniqueInput
-    data: XOR<AchatUpdateWithoutDetailAchatInput, AchatUncheckedUpdateWithoutDetailAchatInput>
+  export type PanierUncheckedCreateWithoutAchatInput = {
+    id?: number
+    utilisateurId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    DetailAchat?: DetailAchatUncheckedCreateNestedManyWithoutPanierInput
   }
 
-  export type AchatUpdateManyWithWhereWithoutDetailAchatInput = {
-    where: AchatScalarWhereInput
-    data: XOR<AchatUpdateManyMutationInput, AchatUncheckedUpdateManyWithoutDetailAchatInput>
+  export type PanierCreateOrConnectWithoutAchatInput = {
+    where: PanierWhereUniqueInput
+    create: XOR<PanierCreateWithoutAchatInput, PanierUncheckedCreateWithoutAchatInput>
   }
 
   export type FournisseurCreateWithoutAchatInput = {
@@ -26785,9 +27193,9 @@ export namespace Prisma {
     code_postal?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    adresse: AdresseCreateNestedOneWithoutFournisseurInput
-    contact: ContactCreateNestedOneWithoutFournisseurInput
     Vente?: VenteCreateNestedManyWithoutFournisseurInput
+    Adresse?: AdresseCreateNestedManyWithoutFournisseurInput
+    Contact?: ContactCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUncheckedCreateWithoutAchatInput = {
@@ -26795,42 +27203,16 @@ export namespace Prisma {
     nom: string
     email: string
     code_postal?: string | null
-    adresseId: number
-    contactId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Vente?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
+    Adresse?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
+    Contact?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurCreateOrConnectWithoutAchatInput = {
     where: FournisseurWhereUniqueInput
     create: XOR<FournisseurCreateWithoutAchatInput, FournisseurUncheckedCreateWithoutAchatInput>
-  }
-
-  export type DetailAchatCreateWithoutAchatInput = {
-    qtte: number
-    prixUnitaire: number
-    prixTotal: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    produit: ProduitCreateNestedOneWithoutDetailAchatInput
-    panier: PanierCreateNestedOneWithoutDetailAchatInput
-  }
-
-  export type DetailAchatUncheckedCreateWithoutAchatInput = {
-    id?: number
-    produitId: number
-    qtte: number
-    prixUnitaire: number
-    prixTotal: number
-    panierId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DetailAchatCreateOrConnectWithoutAchatInput = {
-    where: DetailAchatWhereUniqueInput
-    create: XOR<DetailAchatCreateWithoutAchatInput, DetailAchatUncheckedCreateWithoutAchatInput>
   }
 
   export type UtilisateurCreateWithoutAchatInput = {
@@ -26885,21 +27267,54 @@ export namespace Prisma {
     moyen_paiement?: $Enums.MoyenPaiment
     createdAt?: Date | string
     updatedAt?: Date | string
-    Vente?: VenteCreateNestedManyWithoutPeiementInput
+    devise: DeviseCreateNestedOneWithoutPaiementInput
+    vente?: VenteCreateNestedOneWithoutPaiementInput
   }
 
   export type PaiementUncheckedCreateWithoutAchatInput = {
     id?: number
     montant: number
     moyen_paiement?: $Enums.MoyenPaiment
+    deviseId: number
+    venteId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    Vente?: VenteUncheckedCreateNestedManyWithoutPeiementInput
   }
 
   export type PaiementCreateOrConnectWithoutAchatInput = {
     where: PaiementWhereUniqueInput
     create: XOR<PaiementCreateWithoutAchatInput, PaiementUncheckedCreateWithoutAchatInput>
+  }
+
+  export type PaiementCreateManyAchatInputEnvelope = {
+    data: PaiementCreateManyAchatInput | PaiementCreateManyAchatInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PanierUpsertWithoutAchatInput = {
+    update: XOR<PanierUpdateWithoutAchatInput, PanierUncheckedUpdateWithoutAchatInput>
+    create: XOR<PanierCreateWithoutAchatInput, PanierUncheckedCreateWithoutAchatInput>
+    where?: PanierWhereInput
+  }
+
+  export type PanierUpdateToOneWithWhereWithoutAchatInput = {
+    where?: PanierWhereInput
+    data: XOR<PanierUpdateWithoutAchatInput, PanierUncheckedUpdateWithoutAchatInput>
+  }
+
+  export type PanierUpdateWithoutAchatInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateur?: UtilisateurUpdateOneRequiredWithoutPanierNestedInput
+    DetailAchat?: DetailAchatUpdateManyWithoutPanierNestedInput
+  }
+
+  export type PanierUncheckedUpdateWithoutAchatInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    utilisateurId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    DetailAchat?: DetailAchatUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type FournisseurUpsertWithoutAchatInput = {
@@ -26919,9 +27334,9 @@ export namespace Prisma {
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: AdresseUpdateOneRequiredWithoutFournisseurNestedInput
-    contact?: ContactUpdateOneRequiredWithoutFournisseurNestedInput
     Vente?: VenteUpdateManyWithoutFournisseurNestedInput
+    Adresse?: AdresseUpdateManyWithoutFournisseurNestedInput
+    Contact?: ContactUpdateManyWithoutFournisseurNestedInput
   }
 
   export type FournisseurUncheckedUpdateWithoutAchatInput = {
@@ -26929,43 +27344,11 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresseId?: IntFieldUpdateOperationsInput | number
-    contactId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Vente?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
-  }
-
-  export type DetailAchatUpsertWithoutAchatInput = {
-    update: XOR<DetailAchatUpdateWithoutAchatInput, DetailAchatUncheckedUpdateWithoutAchatInput>
-    create: XOR<DetailAchatCreateWithoutAchatInput, DetailAchatUncheckedCreateWithoutAchatInput>
-    where?: DetailAchatWhereInput
-  }
-
-  export type DetailAchatUpdateToOneWithWhereWithoutAchatInput = {
-    where?: DetailAchatWhereInput
-    data: XOR<DetailAchatUpdateWithoutAchatInput, DetailAchatUncheckedUpdateWithoutAchatInput>
-  }
-
-  export type DetailAchatUpdateWithoutAchatInput = {
-    qtte?: IntFieldUpdateOperationsInput | number
-    prixUnitaire?: FloatFieldUpdateOperationsInput | number
-    prixTotal?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    produit?: ProduitUpdateOneRequiredWithoutDetailAchatNestedInput
-    panier?: PanierUpdateOneRequiredWithoutDetailAchatNestedInput
-  }
-
-  export type DetailAchatUncheckedUpdateWithoutAchatInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    produitId?: IntFieldUpdateOperationsInput | number
-    qtte?: IntFieldUpdateOperationsInput | number
-    prixUnitaire?: FloatFieldUpdateOperationsInput | number
-    prixTotal?: FloatFieldUpdateOperationsInput | number
-    panierId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Adresse?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
+    Contact?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
   export type UtilisateurUpsertWithoutAchatInput = {
@@ -27021,32 +27404,20 @@ export namespace Prisma {
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
   }
 
-  export type PaiementUpsertWithoutAchatInput = {
+  export type PaiementUpsertWithWhereUniqueWithoutAchatInput = {
+    where: PaiementWhereUniqueInput
     update: XOR<PaiementUpdateWithoutAchatInput, PaiementUncheckedUpdateWithoutAchatInput>
     create: XOR<PaiementCreateWithoutAchatInput, PaiementUncheckedCreateWithoutAchatInput>
-    where?: PaiementWhereInput
   }
 
-  export type PaiementUpdateToOneWithWhereWithoutAchatInput = {
-    where?: PaiementWhereInput
+  export type PaiementUpdateWithWhereUniqueWithoutAchatInput = {
+    where: PaiementWhereUniqueInput
     data: XOR<PaiementUpdateWithoutAchatInput, PaiementUncheckedUpdateWithoutAchatInput>
   }
 
-  export type PaiementUpdateWithoutAchatInput = {
-    montant?: FloatFieldUpdateOperationsInput | number
-    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Vente?: VenteUpdateManyWithoutPeiementNestedInput
-  }
-
-  export type PaiementUncheckedUpdateWithoutAchatInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    montant?: FloatFieldUpdateOperationsInput | number
-    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Vente?: VenteUncheckedUpdateManyWithoutPeiementNestedInput
+  export type PaiementUpdateManyWithWhereWithoutAchatInput = {
+    where: PaiementScalarWhereInput
+    data: XOR<PaiementUpdateManyMutationInput, PaiementUncheckedUpdateManyWithoutAchatInput>
   }
 
   export type VenteCreateManyEntrepriseInput = {
@@ -27056,7 +27427,6 @@ export namespace Prisma {
     total_ht: number
     remise: number
     detailVenteId: number
-    paiementId: number
     clientId: string
     agentId: string
     createdAt?: Date | string
@@ -27073,9 +27443,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     detailvente?: DetailVenteUpdateOneRequiredWithoutVenteNestedInput
-    peiement?: PaiementUpdateOneRequiredWithoutVenteNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutVenteNestedInput
     Fournisseur?: FournisseurUpdateOneWithoutVenteNestedInput
+    Paiement?: PaiementUpdateManyWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateWithoutEntrepriseInput = {
@@ -27085,12 +27455,12 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     remise?: FloatFieldUpdateOperationsInput | number
     detailVenteId?: IntFieldUpdateOperationsInput | number
-    paiementId?: IntFieldUpdateOperationsInput | number
     clientId?: StringFieldUpdateOperationsInput | string
     agentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    Paiement?: PaiementUncheckedUpdateManyWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateManyWithoutEntrepriseInput = {
@@ -27100,7 +27470,6 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     remise?: FloatFieldUpdateOperationsInput | number
     detailVenteId?: IntFieldUpdateOperationsInput | number
-    paiementId?: IntFieldUpdateOperationsInput | number
     clientId?: StringFieldUpdateOperationsInput | string
     agentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27113,6 +27482,7 @@ export namespace Prisma {
     ville: string
     commune: string
     adresse: string
+    fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -27120,6 +27490,7 @@ export namespace Prisma {
   export type ContactCreateManyUtilisateurInput = {
     id?: number
     tel: string
+    fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -27143,7 +27514,6 @@ export namespace Prisma {
     total_ht: number
     remise: number
     detailVenteId: number
-    paiementId: number
     entrepriseId: number
     agentId: string
     createdAt?: Date | string
@@ -27151,13 +27521,11 @@ export namespace Prisma {
     fournisseurId?: number | null
   }
 
-  export type AchatCreateManyAgentInput = {
+  export type AchatCreateManyEnregisterParInput = {
     id?: number
-    statut: string
+    statut?: $Enums.StatutAchat
+    panierId: number
     fournisseurId: number
-    total: number
-    detailAchatId: number
-    paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -27190,7 +27558,7 @@ export namespace Prisma {
     adresse?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Fournisseur?: FournisseurUpdateManyWithoutAdresseNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutAdresseNestedInput
   }
 
   export type AdresseUncheckedUpdateWithoutUtilisateurInput = {
@@ -27198,9 +27566,9 @@ export namespace Prisma {
     ville?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
     adresse?: StringFieldUpdateOperationsInput | string
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Fournisseur?: FournisseurUncheckedUpdateManyWithoutAdresseNestedInput
   }
 
   export type AdresseUncheckedUpdateManyWithoutUtilisateurInput = {
@@ -27208,6 +27576,7 @@ export namespace Prisma {
     ville?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
     adresse?: StringFieldUpdateOperationsInput | string
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27216,20 +27585,21 @@ export namespace Prisma {
     tel?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Fournisseur?: FournisseurUpdateManyWithoutContactNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutUtilisateurInput = {
     id?: IntFieldUpdateOperationsInput | number
     tel?: StringFieldUpdateOperationsInput | string
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Fournisseur?: FournisseurUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateManyWithoutUtilisateurInput = {
     id?: IntFieldUpdateOperationsInput | number
     tel?: StringFieldUpdateOperationsInput | string
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27282,9 +27652,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     detailvente?: DetailVenteUpdateOneRequiredWithoutVenteNestedInput
-    peiement?: PaiementUpdateOneRequiredWithoutVenteNestedInput
     entreprise?: EntrepriseUpdateOneRequiredWithoutVenteNestedInput
     Fournisseur?: FournisseurUpdateOneWithoutVenteNestedInput
+    Paiement?: PaiementUpdateManyWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateWithoutUtilisateurInput = {
@@ -27294,12 +27664,12 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     remise?: FloatFieldUpdateOperationsInput | number
     detailVenteId?: IntFieldUpdateOperationsInput | number
-    paiementId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     agentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    Paiement?: PaiementUncheckedUpdateManyWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateManyWithoutUtilisateurInput = {
@@ -27309,7 +27679,6 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     remise?: FloatFieldUpdateOperationsInput | number
     detailVenteId?: IntFieldUpdateOperationsInput | number
-    paiementId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     agentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27317,34 +27686,30 @@ export namespace Prisma {
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type AchatUpdateWithoutAgentInput = {
-    statut?: StringFieldUpdateOperationsInput | string
-    total?: FloatFieldUpdateOperationsInput | number
+  export type AchatUpdateWithoutEnregisterParInput = {
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    panier?: PanierUpdateOneRequiredWithoutAchatNestedInput
     fournisseur?: FournisseurUpdateOneRequiredWithoutAchatNestedInput
-    detailAchat?: DetailAchatUpdateOneRequiredWithoutAchatNestedInput
-    paiement?: PaiementUpdateOneRequiredWithoutAchatNestedInput
+    Paiement?: PaiementUpdateManyWithoutAchatNestedInput
   }
 
-  export type AchatUncheckedUpdateWithoutAgentInput = {
+  export type AchatUncheckedUpdateWithoutEnregisterParInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
+    panierId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    total?: FloatFieldUpdateOperationsInput | number
-    detailAchatId?: IntFieldUpdateOperationsInput | number
-    paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Paiement?: PaiementUncheckedUpdateManyWithoutAchatNestedInput
   }
 
-  export type AchatUncheckedUpdateManyWithoutAgentInput = {
+  export type AchatUncheckedUpdateManyWithoutEnregisterParInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
+    panierId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    total?: FloatFieldUpdateOperationsInput | number
-    detailAchatId?: IntFieldUpdateOperationsInput | number
-    paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27378,6 +27743,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Produit?: ProduitUpdateManyWithoutDeviseNestedInput
+    Paiement?: PaiementUpdateManyWithoutDeviseNestedInput
   }
 
   export type DeviseUncheckedUpdateWithoutUtilisateurInput = {
@@ -27388,6 +27754,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Produit?: ProduitUncheckedUpdateManyWithoutDeviseNestedInput
+    Paiement?: PaiementUncheckedUpdateManyWithoutDeviseNestedInput
   }
 
   export type DeviseUncheckedUpdateManyWithoutUtilisateurInput = {
@@ -27403,6 +27770,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DetailAchat?: DetailAchatUpdateManyWithoutPanierNestedInput
+    Achat?: AchatUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateWithoutUtilisateurInput = {
@@ -27410,96 +27778,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DetailAchat?: DetailAchatUncheckedUpdateManyWithoutPanierNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateManyWithoutUtilisateurInput = {
     id?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FournisseurCreateManyAdresseInput = {
-    id?: number
-    nom: string
-    email: string
-    code_postal?: string | null
-    contactId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type FournisseurUpdateWithoutAdresseInput = {
-    nom?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contact?: ContactUpdateOneRequiredWithoutFournisseurNestedInput
-    Vente?: VenteUpdateManyWithoutFournisseurNestedInput
-    Achat?: AchatUpdateManyWithoutFournisseurNestedInput
-  }
-
-  export type FournisseurUncheckedUpdateWithoutAdresseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    contactId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Vente?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
-    Achat?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
-  }
-
-  export type FournisseurUncheckedUpdateManyWithoutAdresseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    contactId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FournisseurCreateManyContactInput = {
-    id?: number
-    nom: string
-    email: string
-    code_postal?: string | null
-    adresseId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type FournisseurUpdateWithoutContactInput = {
-    nom?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    adresse?: AdresseUpdateOneRequiredWithoutFournisseurNestedInput
-    Vente?: VenteUpdateManyWithoutFournisseurNestedInput
-    Achat?: AchatUpdateManyWithoutFournisseurNestedInput
-  }
-
-  export type FournisseurUncheckedUpdateWithoutContactInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresseId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Vente?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
-    Achat?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
-  }
-
-  export type FournisseurUncheckedUpdateManyWithoutContactInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27511,7 +27794,6 @@ export namespace Prisma {
     total_ht: number
     remise: number
     detailVenteId: number
-    paiementId: number
     entrepriseId: number
     clientId: string
     agentId: string
@@ -27521,11 +27803,27 @@ export namespace Prisma {
 
   export type AchatCreateManyFournisseurInput = {
     id?: number
-    statut: string
-    total: number
-    detailAchatId: number
-    agentId: string
-    paiementId: number
+    statut?: $Enums.StatutAchat
+    panierId: number
+    enregisterParId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdresseCreateManyFournisseurInput = {
+    id?: number
+    ville: string
+    commune: string
+    adresse: string
+    utilisateurId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContactCreateManyFournisseurInput = {
+    id?: number
+    tel: string
+    utilisateurId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -27539,9 +27837,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     detailvente?: DetailVenteUpdateOneRequiredWithoutVenteNestedInput
-    peiement?: PaiementUpdateOneRequiredWithoutVenteNestedInput
     entreprise?: EntrepriseUpdateOneRequiredWithoutVenteNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutVenteNestedInput
+    Paiement?: PaiementUpdateManyWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateWithoutFournisseurInput = {
@@ -27551,12 +27849,12 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     remise?: FloatFieldUpdateOperationsInput | number
     detailVenteId?: IntFieldUpdateOperationsInput | number
-    paiementId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     clientId?: StringFieldUpdateOperationsInput | string
     agentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Paiement?: PaiementUncheckedUpdateManyWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateManyWithoutFournisseurInput = {
@@ -27566,7 +27864,6 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     remise?: FloatFieldUpdateOperationsInput | number
     detailVenteId?: IntFieldUpdateOperationsInput | number
-    paiementId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     clientId?: StringFieldUpdateOperationsInput | string
     agentId?: StringFieldUpdateOperationsInput | string
@@ -27575,33 +27872,81 @@ export namespace Prisma {
   }
 
   export type AchatUpdateWithoutFournisseurInput = {
-    statut?: StringFieldUpdateOperationsInput | string
-    total?: FloatFieldUpdateOperationsInput | number
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    detailAchat?: DetailAchatUpdateOneRequiredWithoutAchatNestedInput
-    agent?: UtilisateurUpdateOneRequiredWithoutAchatNestedInput
-    paiement?: PaiementUpdateOneRequiredWithoutAchatNestedInput
+    panier?: PanierUpdateOneRequiredWithoutAchatNestedInput
+    enregisterPar?: UtilisateurUpdateOneRequiredWithoutAchatNestedInput
+    Paiement?: PaiementUpdateManyWithoutAchatNestedInput
   }
 
   export type AchatUncheckedUpdateWithoutFournisseurInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
-    total?: FloatFieldUpdateOperationsInput | number
-    detailAchatId?: IntFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
-    paiementId?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
+    panierId?: IntFieldUpdateOperationsInput | number
+    enregisterParId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Paiement?: PaiementUncheckedUpdateManyWithoutAchatNestedInput
   }
 
   export type AchatUncheckedUpdateManyWithoutFournisseurInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
-    total?: FloatFieldUpdateOperationsInput | number
-    detailAchatId?: IntFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
-    paiementId?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
+    panierId?: IntFieldUpdateOperationsInput | number
+    enregisterParId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdresseUpdateWithoutFournisseurInput = {
+    ville?: StringFieldUpdateOperationsInput | string
+    commune?: StringFieldUpdateOperationsInput | string
+    adresse?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateur?: UtilisateurUpdateOneWithoutAdresseNestedInput
+  }
+
+  export type AdresseUncheckedUpdateWithoutFournisseurInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ville?: StringFieldUpdateOperationsInput | string
+    commune?: StringFieldUpdateOperationsInput | string
+    adresse?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdresseUncheckedUpdateManyWithoutFournisseurInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ville?: StringFieldUpdateOperationsInput | string
+    commune?: StringFieldUpdateOperationsInput | string
+    adresse?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContactUpdateWithoutFournisseurInput = {
+    tel?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateur?: UtilisateurUpdateOneWithoutContactNestedInput
+  }
+
+  export type ContactUncheckedUpdateWithoutFournisseurInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tel?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContactUncheckedUpdateManyWithoutFournisseurInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tel?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27669,6 +28014,16 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type PaiementCreateManyDeviseInput = {
+    id?: number
+    montant: number
+    moyen_paiement?: $Enums.MoyenPaiment
+    achatId?: number | null
+    venteId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ProduitUpdateWithoutDeviseInput = {
     designation?: StringFieldUpdateOperationsInput | string
     prix?: FloatFieldUpdateOperationsInput | number
@@ -27704,6 +28059,35 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     teneurId?: IntFieldUpdateOperationsInput | number
     utilisateurId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaiementUpdateWithoutDeviseInput = {
+    montant?: FloatFieldUpdateOperationsInput | number
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    achat?: AchatUpdateOneWithoutPaiementNestedInput
+    vente?: VenteUpdateOneWithoutPaiementNestedInput
+  }
+
+  export type PaiementUncheckedUpdateWithoutDeviseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    montant?: FloatFieldUpdateOperationsInput | number
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    achatId?: NullableIntFieldUpdateOperationsInput | number | null
+    venteId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaiementUncheckedUpdateManyWithoutDeviseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    montant?: FloatFieldUpdateOperationsInput | number
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    achatId?: NullableIntFieldUpdateOperationsInput | number | null
+    venteId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27762,7 +28146,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     panier?: PanierUpdateOneRequiredWithoutDetailAchatNestedInput
-    Achat?: AchatUpdateManyWithoutDetailAchatNestedInput
   }
 
   export type DetailAchatUncheckedUpdateWithoutProduitInput = {
@@ -27773,7 +28156,6 @@ export namespace Prisma {
     panierId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Achat?: AchatUncheckedUpdateManyWithoutDetailAchatNestedInput
   }
 
   export type DetailAchatUncheckedUpdateManyWithoutProduitInput = {
@@ -27786,104 +28168,41 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type VenteCreateManyPeiementInput = {
+  export type PaiementCreateManyVenteInput = {
     id?: number
-    statut: string
-    total_ttc: number
-    total_ht: number
-    remise: number
-    detailVenteId: number
-    entrepriseId: number
-    clientId: string
-    agentId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    fournisseurId?: number | null
-  }
-
-  export type AchatCreateManyPaiementInput = {
-    id?: number
-    statut: string
-    fournisseurId: number
-    total: number
-    detailAchatId: number
-    agentId: string
+    montant: number
+    moyen_paiement?: $Enums.MoyenPaiment
+    deviseId: number
+    achatId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type VenteUpdateWithoutPeiementInput = {
-    statut?: StringFieldUpdateOperationsInput | string
-    total_ttc?: FloatFieldUpdateOperationsInput | number
-    total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
+  export type PaiementUpdateWithoutVenteInput = {
+    montant?: FloatFieldUpdateOperationsInput | number
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    detailvente?: DetailVenteUpdateOneRequiredWithoutVenteNestedInput
-    entreprise?: EntrepriseUpdateOneRequiredWithoutVenteNestedInput
-    utilisateur?: UtilisateurUpdateOneRequiredWithoutVenteNestedInput
-    Fournisseur?: FournisseurUpdateOneWithoutVenteNestedInput
+    devise?: DeviseUpdateOneRequiredWithoutPaiementNestedInput
+    achat?: AchatUpdateOneWithoutPaiementNestedInput
   }
 
-  export type VenteUncheckedUpdateWithoutPeiementInput = {
+  export type PaiementUncheckedUpdateWithoutVenteInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
-    total_ttc?: FloatFieldUpdateOperationsInput | number
-    total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    detailVenteId?: IntFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    clientId?: StringFieldUpdateOperationsInput | string
-    agentId?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    deviseId?: IntFieldUpdateOperationsInput | number
+    achatId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type VenteUncheckedUpdateManyWithoutPeiementInput = {
+  export type PaiementUncheckedUpdateManyWithoutVenteInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
-    total_ttc?: FloatFieldUpdateOperationsInput | number
-    total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    detailVenteId?: IntFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    clientId?: StringFieldUpdateOperationsInput | string
-    agentId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type AchatUpdateWithoutPaiementInput = {
-    statut?: StringFieldUpdateOperationsInput | string
-    total?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    fournisseur?: FournisseurUpdateOneRequiredWithoutAchatNestedInput
-    detailAchat?: DetailAchatUpdateOneRequiredWithoutAchatNestedInput
-    agent?: UtilisateurUpdateOneRequiredWithoutAchatNestedInput
-  }
-
-  export type AchatUncheckedUpdateWithoutPaiementInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
-    fournisseurId?: IntFieldUpdateOperationsInput | number
-    total?: FloatFieldUpdateOperationsInput | number
-    detailAchatId?: IntFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AchatUncheckedUpdateManyWithoutPaiementInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
-    fournisseurId?: IntFieldUpdateOperationsInput | number
-    total?: FloatFieldUpdateOperationsInput | number
-    detailAchatId?: IntFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
+    montant?: FloatFieldUpdateOperationsInput | number
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    deviseId?: IntFieldUpdateOperationsInput | number
+    achatId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27898,6 +28217,15 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type AchatCreateManyPanierInput = {
+    id?: number
+    statut?: $Enums.StatutAchat
+    fournisseurId: number
+    enregisterParId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type DetailAchatUpdateWithoutPanierInput = {
     qtte?: IntFieldUpdateOperationsInput | number
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
@@ -27905,7 +28233,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     produit?: ProduitUpdateOneRequiredWithoutDetailAchatNestedInput
-    Achat?: AchatUpdateManyWithoutDetailAchatNestedInput
   }
 
   export type DetailAchatUncheckedUpdateWithoutPanierInput = {
@@ -27916,7 +28243,6 @@ export namespace Prisma {
     prixTotal?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Achat?: AchatUncheckedUpdateManyWithoutDetailAchatNestedInput
   }
 
   export type DetailAchatUncheckedUpdateManyWithoutPanierInput = {
@@ -27929,13 +28255,40 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AchatUpdateWithoutPanierInput = {
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    fournisseur?: FournisseurUpdateOneRequiredWithoutAchatNestedInput
+    enregisterPar?: UtilisateurUpdateOneRequiredWithoutAchatNestedInput
+    Paiement?: PaiementUpdateManyWithoutAchatNestedInput
+  }
+
+  export type AchatUncheckedUpdateWithoutPanierInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
+    fournisseurId?: IntFieldUpdateOperationsInput | number
+    enregisterParId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Paiement?: PaiementUncheckedUpdateManyWithoutAchatNestedInput
+  }
+
+  export type AchatUncheckedUpdateManyWithoutPanierInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
+    fournisseurId?: IntFieldUpdateOperationsInput | number
+    enregisterParId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type VenteCreateManyDetailventeInput = {
     id?: number
     statut: string
     total_ttc: number
     total_ht: number
     remise: number
-    paiementId: number
     entrepriseId: number
     clientId: string
     agentId: string
@@ -27952,10 +28305,10 @@ export namespace Prisma {
     agentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    peiement?: PaiementUpdateOneRequiredWithoutVenteNestedInput
     entreprise?: EntrepriseUpdateOneRequiredWithoutVenteNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutVenteNestedInput
     Fournisseur?: FournisseurUpdateOneWithoutVenteNestedInput
+    Paiement?: PaiementUpdateManyWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateWithoutDetailventeInput = {
@@ -27964,13 +28317,13 @@ export namespace Prisma {
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
     remise?: FloatFieldUpdateOperationsInput | number
-    paiementId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     clientId?: StringFieldUpdateOperationsInput | string
     agentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    Paiement?: PaiementUncheckedUpdateManyWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateManyWithoutDetailventeInput = {
@@ -27979,7 +28332,6 @@ export namespace Prisma {
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
     remise?: FloatFieldUpdateOperationsInput | number
-    paiementId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     clientId?: StringFieldUpdateOperationsInput | string
     agentId?: StringFieldUpdateOperationsInput | string
@@ -27988,45 +28340,41 @@ export namespace Prisma {
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type AchatCreateManyDetailAchatInput = {
+  export type PaiementCreateManyAchatInput = {
     id?: number
-    statut: string
-    fournisseurId: number
-    total: number
-    agentId: string
-    paiementId: number
+    montant: number
+    moyen_paiement?: $Enums.MoyenPaiment
+    deviseId: number
+    venteId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type AchatUpdateWithoutDetailAchatInput = {
-    statut?: StringFieldUpdateOperationsInput | string
-    total?: FloatFieldUpdateOperationsInput | number
+  export type PaiementUpdateWithoutAchatInput = {
+    montant?: FloatFieldUpdateOperationsInput | number
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    fournisseur?: FournisseurUpdateOneRequiredWithoutAchatNestedInput
-    agent?: UtilisateurUpdateOneRequiredWithoutAchatNestedInput
-    paiement?: PaiementUpdateOneRequiredWithoutAchatNestedInput
+    devise?: DeviseUpdateOneRequiredWithoutPaiementNestedInput
+    vente?: VenteUpdateOneWithoutPaiementNestedInput
   }
 
-  export type AchatUncheckedUpdateWithoutDetailAchatInput = {
+  export type PaiementUncheckedUpdateWithoutAchatInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
-    fournisseurId?: IntFieldUpdateOperationsInput | number
-    total?: FloatFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
-    paiementId?: IntFieldUpdateOperationsInput | number
+    montant?: FloatFieldUpdateOperationsInput | number
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    deviseId?: IntFieldUpdateOperationsInput | number
+    venteId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type AchatUncheckedUpdateManyWithoutDetailAchatInput = {
+  export type PaiementUncheckedUpdateManyWithoutAchatInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
-    fournisseurId?: IntFieldUpdateOperationsInput | number
-    total?: FloatFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
-    paiementId?: IntFieldUpdateOperationsInput | number
+    montant?: FloatFieldUpdateOperationsInput | number
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    deviseId?: IntFieldUpdateOperationsInput | number
+    venteId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

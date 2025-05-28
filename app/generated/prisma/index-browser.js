@@ -153,6 +153,7 @@ exports.Prisma.AdresseScalarFieldEnum = {
   commune: 'commune',
   adresse: 'adresse',
   utilisateurId: 'utilisateurId',
+  fournisseurId: 'fournisseurId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -161,6 +162,7 @@ exports.Prisma.ContactScalarFieldEnum = {
   id: 'id',
   tel: 'tel',
   utilisateurId: 'utilisateurId',
+  fournisseurId: 'fournisseurId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -170,8 +172,6 @@ exports.Prisma.FournisseurScalarFieldEnum = {
   nom: 'nom',
   email: 'email',
   code_postal: 'code_postal',
-  adresseId: 'adresseId',
-  contactId: 'contactId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -211,6 +211,9 @@ exports.Prisma.PaiementScalarFieldEnum = {
   id: 'id',
   montant: 'montant',
   moyen_paiement: 'moyen_paiement',
+  deviseId: 'deviseId',
+  achatId: 'achatId',
+  venteId: 'venteId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -222,7 +225,6 @@ exports.Prisma.VenteScalarFieldEnum = {
   total_ht: 'total_ht',
   remise: 'remise',
   detailVenteId: 'detailVenteId',
-  paiementId: 'paiementId',
   entrepriseId: 'entrepriseId',
   clientId: 'clientId',
   agentId: 'agentId',
@@ -262,11 +264,9 @@ exports.Prisma.DetailAchatScalarFieldEnum = {
 exports.Prisma.AchatScalarFieldEnum = {
   id: 'id',
   statut: 'statut',
+  panierId: 'panierId',
   fournisseurId: 'fournisseurId',
-  total: 'total',
-  detailAchatId: 'detailAchatId',
-  agentId: 'agentId',
-  paiementId: 'paiementId',
+  enregisterParId: 'enregisterParId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -305,7 +305,16 @@ exports.Poste = exports.$Enums.Poste = {
 
 exports.MoyenPaiment = exports.$Enums.MoyenPaiment = {
   CACH: 'CACH',
-  BANCAIRE: 'BANCAIRE'
+  BANQUE: 'BANQUE',
+  MOBILE: 'MOBILE',
+  CHEQUE: 'CHEQUE',
+  AUTRE: 'AUTRE'
+};
+
+exports.StatutAchat = exports.$Enums.StatutAchat = {
+  EN_COURS: 'EN_COURS',
+  TERMINE: 'TERMINE',
+  ANNULE: 'ANNULE'
 };
 
 exports.Prisma.ModelName = {
