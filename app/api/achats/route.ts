@@ -12,7 +12,7 @@ export async function GET(req: Request) {
             },
             panier: {
                 select: {
-                    DetailAchat: {
+                    DetailPanier: {
                         select: {
                             produit: {
                                 select: {
@@ -67,7 +67,7 @@ export async function POST(req: Request) {
             return new Response("Panier not found", { status: 404 });
         }
 
-        const detail_panier = await prisma.detailAchat.findMany({
+        const detail_panier = await prisma.detailPanier.findMany({
             where: { panierId: parseInt(data.panierId, 10) },
             select: {
                 produitId: true,

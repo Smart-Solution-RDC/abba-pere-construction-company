@@ -221,13 +221,13 @@ exports.Prisma.VenteScalarFieldEnum = {
   statut: 'statut',
   total_ttc: 'total_ttc',
   total_ht: 'total_ht',
-  remise: 'remise',
-  detailVenteId: 'detailVenteId',
-  entrepriseId: 'entrepriseId',
+  type_acheteur: 'type_acheteur',
   clientId: 'clientId',
-  agentId: 'agentId',
+  enregisterParId: 'enregisterParId',
   fournisseurId: 'fournisseurId',
+  agentId: 'agentId',
   paiementId: 'paiementId',
+  panierId: 'panierId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -239,17 +239,7 @@ exports.Prisma.PanierScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.DetailVenteScalarFieldEnum = {
-  id: 'id',
-  produitId: 'produitId',
-  qtte: 'qtte',
-  prixUnitaire: 'prixUnitaire',
-  prixTotal: 'prixTotal',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.DetailAchatScalarFieldEnum = {
+exports.Prisma.DetailPanierScalarFieldEnum = {
   id: 'id',
   produitId: 'produitId',
   qtte: 'qtte',
@@ -311,6 +301,21 @@ exports.MoyenPaiment = exports.$Enums.MoyenPaiment = {
   autres: 'autres'
 };
 
+exports.StatutVente = exports.$Enums.StatutVente = {
+  EN_ATTENTE: 'EN_ATTENTE',
+  CONFIRME: 'CONFIRME',
+  REMBOURSE: 'REMBOURSE',
+  ANNULE: 'ANNULE'
+};
+
+exports.TypeAcheteur = exports.$Enums.TypeAcheteur = {
+  ordinaire: 'ordinaire',
+  nouveau: 'nouveau',
+  client: 'client',
+  fournisseur: 'fournisseur',
+  agent: 'agent'
+};
+
 exports.StatutAchat = exports.$Enums.StatutAchat = {
   EN_COURS: 'EN_COURS',
   TERMINE: 'TERMINE',
@@ -329,8 +334,7 @@ exports.Prisma.ModelName = {
   Paiement: 'Paiement',
   Vente: 'Vente',
   Panier: 'Panier',
-  DetailVente: 'DetailVente',
-  DetailAchat: 'DetailAchat',
+  DetailPanier: 'DetailPanier',
   Achat: 'Achat'
 };
 

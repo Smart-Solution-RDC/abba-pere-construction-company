@@ -69,15 +69,10 @@ export type Vente = $Result.DefaultSelection<Prisma.$VentePayload>
  */
 export type Panier = $Result.DefaultSelection<Prisma.$PanierPayload>
 /**
- * Model DetailVente
+ * Model DetailPanier
  * 
  */
-export type DetailVente = $Result.DefaultSelection<Prisma.$DetailVentePayload>
-/**
- * Model DetailAchat
- * 
- */
-export type DetailAchat = $Result.DefaultSelection<Prisma.$DetailAchatPayload>
+export type DetailPanier = $Result.DefaultSelection<Prisma.$DetailPanierPayload>
 /**
  * Model Achat
  * 
@@ -159,6 +154,27 @@ export const StatutAchat: {
 
 export type StatutAchat = (typeof StatutAchat)[keyof typeof StatutAchat]
 
+
+export const StatutVente: {
+  EN_ATTENTE: 'EN_ATTENTE',
+  CONFIRME: 'CONFIRME',
+  REMBOURSE: 'REMBOURSE',
+  ANNULE: 'ANNULE'
+};
+
+export type StatutVente = (typeof StatutVente)[keyof typeof StatutVente]
+
+
+export const TypeAcheteur: {
+  ordinaire: 'ordinaire',
+  nouveau: 'nouveau',
+  client: 'client',
+  fournisseur: 'fournisseur',
+  agent: 'agent'
+};
+
+export type TypeAcheteur = (typeof TypeAcheteur)[keyof typeof TypeAcheteur]
+
 }
 
 export type Role = $Enums.Role
@@ -184,6 +200,14 @@ export const MoyenPaiment: typeof $Enums.MoyenPaiment
 export type StatutAchat = $Enums.StatutAchat
 
 export const StatutAchat: typeof $Enums.StatutAchat
+
+export type StatutVente = $Enums.StatutVente
+
+export const StatutVente: typeof $Enums.StatutVente
+
+export type TypeAcheteur = $Enums.TypeAcheteur
+
+export const TypeAcheteur: typeof $Enums.TypeAcheteur
 
 /**
  * ##  Prisma Client ʲˢ
@@ -421,24 +445,14 @@ export class PrismaClient<
   get panier(): Prisma.PanierDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.detailVente`: Exposes CRUD operations for the **DetailVente** model.
+   * `prisma.detailPanier`: Exposes CRUD operations for the **DetailPanier** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more DetailVentes
-    * const detailVentes = await prisma.detailVente.findMany()
+    * // Fetch zero or more DetailPaniers
+    * const detailPaniers = await prisma.detailPanier.findMany()
     * ```
     */
-  get detailVente(): Prisma.DetailVenteDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.detailAchat`: Exposes CRUD operations for the **DetailAchat** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more DetailAchats
-    * const detailAchats = await prisma.detailAchat.findMany()
-    * ```
-    */
-  get detailAchat(): Prisma.DetailAchatDelegate<ExtArgs, ClientOptions>;
+  get detailPanier(): Prisma.DetailPanierDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.achat`: Exposes CRUD operations for the **Achat** model.
@@ -900,8 +914,7 @@ export namespace Prisma {
     Paiement: 'Paiement',
     Vente: 'Vente',
     Panier: 'Panier',
-    DetailVente: 'DetailVente',
-    DetailAchat: 'DetailAchat',
+    DetailPanier: 'DetailPanier',
     Achat: 'Achat'
   };
 
@@ -921,7 +934,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "entreprise" | "utilisateur" | "adresse" | "contact" | "fournisseur" | "teneur" | "devise" | "produit" | "paiement" | "vente" | "panier" | "detailVente" | "detailAchat" | "achat"
+      modelProps: "entreprise" | "utilisateur" | "adresse" | "contact" | "fournisseur" | "teneur" | "devise" | "produit" | "paiement" | "vente" | "panier" | "detailPanier" | "achat"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1739,151 +1752,77 @@ export namespace Prisma {
           }
         }
       }
-      DetailVente: {
-        payload: Prisma.$DetailVentePayload<ExtArgs>
-        fields: Prisma.DetailVenteFieldRefs
+      DetailPanier: {
+        payload: Prisma.$DetailPanierPayload<ExtArgs>
+        fields: Prisma.DetailPanierFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.DetailVenteFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailVentePayload> | null
+            args: Prisma.DetailPanierFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DetailPanierPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.DetailVenteFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailVentePayload>
+            args: Prisma.DetailPanierFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DetailPanierPayload>
           }
           findFirst: {
-            args: Prisma.DetailVenteFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailVentePayload> | null
+            args: Prisma.DetailPanierFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DetailPanierPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.DetailVenteFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailVentePayload>
+            args: Prisma.DetailPanierFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DetailPanierPayload>
           }
           findMany: {
-            args: Prisma.DetailVenteFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailVentePayload>[]
+            args: Prisma.DetailPanierFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DetailPanierPayload>[]
           }
           create: {
-            args: Prisma.DetailVenteCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailVentePayload>
+            args: Prisma.DetailPanierCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DetailPanierPayload>
           }
           createMany: {
-            args: Prisma.DetailVenteCreateManyArgs<ExtArgs>
+            args: Prisma.DetailPanierCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.DetailVenteCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailVentePayload>[]
+            args: Prisma.DetailPanierCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DetailPanierPayload>[]
           }
           delete: {
-            args: Prisma.DetailVenteDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailVentePayload>
+            args: Prisma.DetailPanierDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DetailPanierPayload>
           }
           update: {
-            args: Prisma.DetailVenteUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailVentePayload>
+            args: Prisma.DetailPanierUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DetailPanierPayload>
           }
           deleteMany: {
-            args: Prisma.DetailVenteDeleteManyArgs<ExtArgs>
+            args: Prisma.DetailPanierDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.DetailVenteUpdateManyArgs<ExtArgs>
+            args: Prisma.DetailPanierUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.DetailVenteUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailVentePayload>[]
+            args: Prisma.DetailPanierUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DetailPanierPayload>[]
           }
           upsert: {
-            args: Prisma.DetailVenteUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailVentePayload>
+            args: Prisma.DetailPanierUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DetailPanierPayload>
           }
           aggregate: {
-            args: Prisma.DetailVenteAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDetailVente>
+            args: Prisma.DetailPanierAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDetailPanier>
           }
           groupBy: {
-            args: Prisma.DetailVenteGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DetailVenteGroupByOutputType>[]
+            args: Prisma.DetailPanierGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DetailPanierGroupByOutputType>[]
           }
           count: {
-            args: Prisma.DetailVenteCountArgs<ExtArgs>
-            result: $Utils.Optional<DetailVenteCountAggregateOutputType> | number
-          }
-        }
-      }
-      DetailAchat: {
-        payload: Prisma.$DetailAchatPayload<ExtArgs>
-        fields: Prisma.DetailAchatFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.DetailAchatFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailAchatPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.DetailAchatFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailAchatPayload>
-          }
-          findFirst: {
-            args: Prisma.DetailAchatFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailAchatPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.DetailAchatFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailAchatPayload>
-          }
-          findMany: {
-            args: Prisma.DetailAchatFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailAchatPayload>[]
-          }
-          create: {
-            args: Prisma.DetailAchatCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailAchatPayload>
-          }
-          createMany: {
-            args: Prisma.DetailAchatCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.DetailAchatCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailAchatPayload>[]
-          }
-          delete: {
-            args: Prisma.DetailAchatDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailAchatPayload>
-          }
-          update: {
-            args: Prisma.DetailAchatUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailAchatPayload>
-          }
-          deleteMany: {
-            args: Prisma.DetailAchatDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.DetailAchatUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.DetailAchatUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailAchatPayload>[]
-          }
-          upsert: {
-            args: Prisma.DetailAchatUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailAchatPayload>
-          }
-          aggregate: {
-            args: Prisma.DetailAchatAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDetailAchat>
-          }
-          groupBy: {
-            args: Prisma.DetailAchatGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DetailAchatGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.DetailAchatCountArgs<ExtArgs>
-            result: $Utils.Optional<DetailAchatCountAggregateOutputType> | number
+            args: Prisma.DetailPanierCountArgs<ExtArgs>
+            result: $Utils.Optional<DetailPanierCountAggregateOutputType> | number
           }
         }
       }
@@ -2056,8 +1995,7 @@ export namespace Prisma {
     paiement?: PaiementOmit
     vente?: VenteOmit
     panier?: PanierOmit
-    detailVente?: DetailVenteOmit
-    detailAchat?: DetailAchatOmit
+    detailPanier?: DetailPanierOmit
     achat?: AchatOmit
   }
 
@@ -2146,37 +2084,6 @@ export namespace Prisma {
   /**
    * Count Types
    */
-
-
-  /**
-   * Count Type EntrepriseCountOutputType
-   */
-
-  export type EntrepriseCountOutputType = {
-    Vente: number
-  }
-
-  export type EntrepriseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Vente?: boolean | EntrepriseCountOutputTypeCountVenteArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * EntrepriseCountOutputType without action
-   */
-  export type EntrepriseCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EntrepriseCountOutputType
-     */
-    select?: EntrepriseCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * EntrepriseCountOutputType without action
-   */
-  export type EntrepriseCountOutputTypeCountVenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VenteWhereInput
-  }
 
 
   /**
@@ -2407,13 +2314,11 @@ export namespace Prisma {
    */
 
   export type ProduitCountOutputType = {
-    DetailVente: number
-    DetailAchat: number
+    DetailPanier: number
   }
 
   export type ProduitCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    DetailVente?: boolean | ProduitCountOutputTypeCountDetailVenteArgs
-    DetailAchat?: boolean | ProduitCountOutputTypeCountDetailAchatArgs
+    DetailPanier?: boolean | ProduitCountOutputTypeCountDetailPanierArgs
   }
 
   // Custom InputTypes
@@ -2430,15 +2335,8 @@ export namespace Prisma {
   /**
    * ProduitCountOutputType without action
    */
-  export type ProduitCountOutputTypeCountDetailVenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DetailVenteWhereInput
-  }
-
-  /**
-   * ProduitCountOutputType without action
-   */
-  export type ProduitCountOutputTypeCountDetailAchatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DetailAchatWhereInput
+  export type ProduitCountOutputTypeCountDetailPanierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DetailPanierWhereInput
   }
 
 
@@ -2487,13 +2385,15 @@ export namespace Prisma {
    */
 
   export type PanierCountOutputType = {
-    DetailAchat: number
+    DetailPanier: number
     Achat: number
+    Vente: number
   }
 
   export type PanierCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    DetailAchat?: boolean | PanierCountOutputTypeCountDetailAchatArgs
+    DetailPanier?: boolean | PanierCountOutputTypeCountDetailPanierArgs
     Achat?: boolean | PanierCountOutputTypeCountAchatArgs
+    Vente?: boolean | PanierCountOutputTypeCountVenteArgs
   }
 
   // Custom InputTypes
@@ -2510,8 +2410,8 @@ export namespace Prisma {
   /**
    * PanierCountOutputType without action
    */
-  export type PanierCountOutputTypeCountDetailAchatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DetailAchatWhereInput
+  export type PanierCountOutputTypeCountDetailPanierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DetailPanierWhereInput
   }
 
   /**
@@ -2521,34 +2421,10 @@ export namespace Prisma {
     where?: AchatWhereInput
   }
 
-
   /**
-   * Count Type DetailVenteCountOutputType
+   * PanierCountOutputType without action
    */
-
-  export type DetailVenteCountOutputType = {
-    Vente: number
-  }
-
-  export type DetailVenteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Vente?: boolean | DetailVenteCountOutputTypeCountVenteArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * DetailVenteCountOutputType without action
-   */
-  export type DetailVenteCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailVenteCountOutputType
-     */
-    select?: DetailVenteCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * DetailVenteCountOutputType without action
-   */
-  export type DetailVenteCountOutputTypeCountVenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PanierCountOutputTypeCountVenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VenteWhereInput
   }
 
@@ -2795,8 +2671,6 @@ export namespace Prisma {
     email?: boolean
     description?: boolean
     logo?: boolean
-    Vente?: boolean | Entreprise$VenteArgs<ExtArgs>
-    _count?: boolean | EntrepriseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["entreprise"]>
 
   export type EntrepriseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2839,18 +2713,10 @@ export namespace Prisma {
   }
 
   export type EntrepriseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "encronyme" | "code_postale" | "adresse" | "tel" | "site" | "email" | "description" | "logo", ExtArgs["result"]["entreprise"]>
-  export type EntrepriseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Vente?: boolean | Entreprise$VenteArgs<ExtArgs>
-    _count?: boolean | EntrepriseCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type EntrepriseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type EntrepriseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $EntreprisePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Entreprise"
-    objects: {
-      Vente: Prisma.$VentePayload<ExtArgs>[]
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nom: string
@@ -3256,7 +3122,6 @@ export namespace Prisma {
    */
   export interface Prisma__EntrepriseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Vente<T extends Entreprise$VenteArgs<ExtArgs> = {}>(args?: Subset<T, Entreprise$VenteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3313,10 +3178,6 @@ export namespace Prisma {
      */
     omit?: EntrepriseOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EntrepriseInclude<ExtArgs> | null
-    /**
      * Filter, which Entreprise to fetch.
      */
     where: EntrepriseWhereUniqueInput
@@ -3335,10 +3196,6 @@ export namespace Prisma {
      */
     omit?: EntrepriseOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EntrepriseInclude<ExtArgs> | null
-    /**
      * Filter, which Entreprise to fetch.
      */
     where: EntrepriseWhereUniqueInput
@@ -3356,10 +3213,6 @@ export namespace Prisma {
      * Omit specific fields from the Entreprise
      */
     omit?: EntrepriseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EntrepriseInclude<ExtArgs> | null
     /**
      * Filter, which Entreprise to fetch.
      */
@@ -3409,10 +3262,6 @@ export namespace Prisma {
      */
     omit?: EntrepriseOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EntrepriseInclude<ExtArgs> | null
-    /**
      * Filter, which Entreprise to fetch.
      */
     where?: EntrepriseWhereInput
@@ -3461,10 +3310,6 @@ export namespace Prisma {
      */
     omit?: EntrepriseOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EntrepriseInclude<ExtArgs> | null
-    /**
      * Filter, which Entreprises to fetch.
      */
     where?: EntrepriseWhereInput
@@ -3507,10 +3352,6 @@ export namespace Prisma {
      * Omit specific fields from the Entreprise
      */
     omit?: EntrepriseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EntrepriseInclude<ExtArgs> | null
     /**
      * The data needed to create a Entreprise.
      */
@@ -3559,10 +3400,6 @@ export namespace Prisma {
      * Omit specific fields from the Entreprise
      */
     omit?: EntrepriseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EntrepriseInclude<ExtArgs> | null
     /**
      * The data needed to update a Entreprise.
      */
@@ -3630,10 +3467,6 @@ export namespace Prisma {
      */
     omit?: EntrepriseOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EntrepriseInclude<ExtArgs> | null
-    /**
      * The filter to search for the Entreprise to update in case it exists.
      */
     where: EntrepriseWhereUniqueInput
@@ -3660,10 +3493,6 @@ export namespace Prisma {
      */
     omit?: EntrepriseOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EntrepriseInclude<ExtArgs> | null
-    /**
      * Filter which Entreprise to delete.
      */
     where: EntrepriseWhereUniqueInput
@@ -3684,30 +3513,6 @@ export namespace Prisma {
   }
 
   /**
-   * Entreprise.Vente
-   */
-  export type Entreprise$VenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vente
-     */
-    select?: VenteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Vente
-     */
-    omit?: VenteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VenteInclude<ExtArgs> | null
-    where?: VenteWhereInput
-    orderBy?: VenteOrderByWithRelationInput | VenteOrderByWithRelationInput[]
-    cursor?: VenteWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: VenteScalarFieldEnum | VenteScalarFieldEnum[]
-  }
-
-  /**
    * Entreprise without action
    */
   export type EntrepriseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3719,10 +3524,6 @@ export namespace Prisma {
      * Omit specific fields from the Entreprise
      */
     omit?: EntrepriseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EntrepriseInclude<ExtArgs> | null
   }
 
 
@@ -3732,12 +3533,22 @@ export namespace Prisma {
 
   export type AggregateUtilisateur = {
     _count: UtilisateurCountAggregateOutputType | null
+    _avg: UtilisateurAvgAggregateOutputType | null
+    _sum: UtilisateurSumAggregateOutputType | null
     _min: UtilisateurMinAggregateOutputType | null
     _max: UtilisateurMaxAggregateOutputType | null
   }
 
+  export type UtilisateurAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type UtilisateurSumAggregateOutputType = {
+    id: number | null
+  }
+
   export type UtilisateurMinAggregateOutputType = {
-    id: string | null
+    id: number | null
     email: string | null
     nom: string | null
     postnom: string | null
@@ -3751,7 +3562,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurMaxAggregateOutputType = {
-    id: string | null
+    id: number | null
     email: string | null
     nom: string | null
     postnom: string | null
@@ -3779,6 +3590,14 @@ export namespace Prisma {
     _all: number
   }
 
+
+  export type UtilisateurAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type UtilisateurSumAggregateInputType = {
+    id?: true
+  }
 
   export type UtilisateurMinAggregateInputType = {
     id?: true
@@ -3861,6 +3680,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UtilisateurAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UtilisateurSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UtilisateurMinAggregateInputType
@@ -3891,12 +3722,14 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UtilisateurCountAggregateInputType | true
+    _avg?: UtilisateurAvgAggregateInputType
+    _sum?: UtilisateurSumAggregateInputType
     _min?: UtilisateurMinAggregateInputType
     _max?: UtilisateurMaxAggregateInputType
   }
 
   export type UtilisateurGroupByOutputType = {
-    id: string
+    id: number
     email: string
     nom: string
     postnom: string
@@ -3908,6 +3741,8 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     _count: UtilisateurCountAggregateOutputType | null
+    _avg: UtilisateurAvgAggregateOutputType | null
+    _sum: UtilisateurSumAggregateOutputType | null
     _min: UtilisateurMinAggregateOutputType | null
     _max: UtilisateurMaxAggregateOutputType | null
   }
@@ -4019,7 +3854,7 @@ export namespace Prisma {
       Panier: Prisma.$PanierPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
+      id: number
       email: string
       nom: string
       postnom: string
@@ -4461,7 +4296,7 @@ export namespace Prisma {
    * Fields of the Utilisateur model
    */
   interface UtilisateurFieldRefs {
-    readonly id: FieldRef<"Utilisateur", 'String'>
+    readonly id: FieldRef<"Utilisateur", 'Int'>
     readonly email: FieldRef<"Utilisateur", 'String'>
     readonly nom: FieldRef<"Utilisateur", 'String'>
     readonly postnom: FieldRef<"Utilisateur", 'String'>
@@ -5084,11 +4919,13 @@ export namespace Prisma {
 
   export type AdresseAvgAggregateOutputType = {
     id: number | null
+    utilisateurId: number | null
     fournisseurId: number | null
   }
 
   export type AdresseSumAggregateOutputType = {
     id: number | null
+    utilisateurId: number | null
     fournisseurId: number | null
   }
 
@@ -5097,7 +4934,7 @@ export namespace Prisma {
     ville: string | null
     commune: string | null
     adresse: string | null
-    utilisateurId: string | null
+    utilisateurId: number | null
     fournisseurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -5108,7 +4945,7 @@ export namespace Prisma {
     ville: string | null
     commune: string | null
     adresse: string | null
-    utilisateurId: string | null
+    utilisateurId: number | null
     fournisseurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -5129,11 +4966,13 @@ export namespace Prisma {
 
   export type AdresseAvgAggregateInputType = {
     id?: true
+    utilisateurId?: true
     fournisseurId?: true
   }
 
   export type AdresseSumAggregateInputType = {
     id?: true
+    utilisateurId?: true
     fournisseurId?: true
   }
 
@@ -5262,7 +5101,7 @@ export namespace Prisma {
     ville: string
     commune: string
     adresse: string
-    utilisateurId: string | null
+    utilisateurId: number | null
     fournisseurId: number | null
     createdAt: Date
     updatedAt: Date
@@ -5362,7 +5201,7 @@ export namespace Prisma {
       ville: string
       commune: string
       adresse: string
-      utilisateurId: string | null
+      utilisateurId: number | null
       fournisseurId: number | null
       createdAt: Date
       updatedAt: Date
@@ -5795,7 +5634,7 @@ export namespace Prisma {
     readonly ville: FieldRef<"Adresse", 'String'>
     readonly commune: FieldRef<"Adresse", 'String'>
     readonly adresse: FieldRef<"Adresse", 'String'>
-    readonly utilisateurId: FieldRef<"Adresse", 'String'>
+    readonly utilisateurId: FieldRef<"Adresse", 'Int'>
     readonly fournisseurId: FieldRef<"Adresse", 'Int'>
     readonly createdAt: FieldRef<"Adresse", 'DateTime'>
     readonly updatedAt: FieldRef<"Adresse", 'DateTime'>
@@ -6265,18 +6104,20 @@ export namespace Prisma {
 
   export type ContactAvgAggregateOutputType = {
     id: number | null
+    utilisateurId: number | null
     fournisseurId: number | null
   }
 
   export type ContactSumAggregateOutputType = {
     id: number | null
+    utilisateurId: number | null
     fournisseurId: number | null
   }
 
   export type ContactMinAggregateOutputType = {
     id: number | null
     tel: string | null
-    utilisateurId: string | null
+    utilisateurId: number | null
     fournisseurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6285,7 +6126,7 @@ export namespace Prisma {
   export type ContactMaxAggregateOutputType = {
     id: number | null
     tel: string | null
-    utilisateurId: string | null
+    utilisateurId: number | null
     fournisseurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6304,11 +6145,13 @@ export namespace Prisma {
 
   export type ContactAvgAggregateInputType = {
     id?: true
+    utilisateurId?: true
     fournisseurId?: true
   }
 
   export type ContactSumAggregateInputType = {
     id?: true
+    utilisateurId?: true
     fournisseurId?: true
   }
 
@@ -6429,7 +6272,7 @@ export namespace Prisma {
   export type ContactGroupByOutputType = {
     id: number
     tel: string
-    utilisateurId: string | null
+    utilisateurId: number | null
     fournisseurId: number | null
     createdAt: Date
     updatedAt: Date
@@ -6519,7 +6362,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       tel: string
-      utilisateurId: string | null
+      utilisateurId: number | null
       fournisseurId: number | null
       createdAt: Date
       updatedAt: Date
@@ -6950,7 +6793,7 @@ export namespace Prisma {
   interface ContactFieldRefs {
     readonly id: FieldRef<"Contact", 'Int'>
     readonly tel: FieldRef<"Contact", 'String'>
-    readonly utilisateurId: FieldRef<"Contact", 'String'>
+    readonly utilisateurId: FieldRef<"Contact", 'Int'>
     readonly fournisseurId: FieldRef<"Contact", 'Int'>
     readonly createdAt: FieldRef<"Contact", 'DateTime'>
     readonly updatedAt: FieldRef<"Contact", 'DateTime'>
@@ -8622,17 +8465,19 @@ export namespace Prisma {
   export type TeneurAvgAggregateOutputType = {
     id: number | null
     valeur: number | null
+    utilisateurId: number | null
   }
 
   export type TeneurSumAggregateOutputType = {
     id: number | null
     valeur: number | null
+    utilisateurId: number | null
   }
 
   export type TeneurMinAggregateOutputType = {
     id: number | null
     valeur: number | null
-    utilisateurId: string | null
+    utilisateurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -8640,7 +8485,7 @@ export namespace Prisma {
   export type TeneurMaxAggregateOutputType = {
     id: number | null
     valeur: number | null
-    utilisateurId: string | null
+    utilisateurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -8658,11 +8503,13 @@ export namespace Prisma {
   export type TeneurAvgAggregateInputType = {
     id?: true
     valeur?: true
+    utilisateurId?: true
   }
 
   export type TeneurSumAggregateInputType = {
     id?: true
     valeur?: true
+    utilisateurId?: true
   }
 
   export type TeneurMinAggregateInputType = {
@@ -8779,7 +8626,7 @@ export namespace Prisma {
   export type TeneurGroupByOutputType = {
     id: number
     valeur: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt: Date
     updatedAt: Date
     _count: TeneurCountAggregateOutputType | null
@@ -8862,7 +8709,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       valeur: number
-      utilisateurId: string
+      utilisateurId: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["teneur"]>
@@ -9292,7 +9139,7 @@ export namespace Prisma {
   interface TeneurFieldRefs {
     readonly id: FieldRef<"Teneur", 'Int'>
     readonly valeur: FieldRef<"Teneur", 'Float'>
-    readonly utilisateurId: FieldRef<"Teneur", 'String'>
+    readonly utilisateurId: FieldRef<"Teneur", 'Int'>
     readonly createdAt: FieldRef<"Teneur", 'DateTime'>
     readonly updatedAt: FieldRef<"Teneur", 'DateTime'>
   }
@@ -9747,10 +9594,12 @@ export namespace Prisma {
 
   export type DeviseAvgAggregateOutputType = {
     id: number | null
+    utilisateurId: number | null
   }
 
   export type DeviseSumAggregateOutputType = {
     id: number | null
+    utilisateurId: number | null
   }
 
   export type DeviseMinAggregateOutputType = {
@@ -9758,7 +9607,7 @@ export namespace Prisma {
     nom: string | null
     code: string | null
     symbole: string | null
-    utilisateurId: string | null
+    utilisateurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9768,7 +9617,7 @@ export namespace Prisma {
     nom: string | null
     code: string | null
     symbole: string | null
-    utilisateurId: string | null
+    utilisateurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9787,10 +9636,12 @@ export namespace Prisma {
 
   export type DeviseAvgAggregateInputType = {
     id?: true
+    utilisateurId?: true
   }
 
   export type DeviseSumAggregateInputType = {
     id?: true
+    utilisateurId?: true
   }
 
   export type DeviseMinAggregateInputType = {
@@ -9915,7 +9766,7 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
-    utilisateurId: string
+    utilisateurId: number
     createdAt: Date
     updatedAt: Date
     _count: DeviseCountAggregateOutputType | null
@@ -10011,7 +9862,7 @@ export namespace Prisma {
       nom: string
       code: string
       symbole: string
-      utilisateurId: string
+      utilisateurId: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["devise"]>
@@ -10444,7 +10295,7 @@ export namespace Prisma {
     readonly nom: FieldRef<"Devise", 'String'>
     readonly code: FieldRef<"Devise", 'String'>
     readonly symbole: FieldRef<"Devise", 'String'>
-    readonly utilisateurId: FieldRef<"Devise", 'String'>
+    readonly utilisateurId: FieldRef<"Devise", 'Int'>
     readonly createdAt: FieldRef<"Devise", 'DateTime'>
     readonly updatedAt: FieldRef<"Devise", 'DateTime'>
   }
@@ -10927,6 +10778,7 @@ export namespace Prisma {
     qtte: number | null
     deviseId: number | null
     teneurId: number | null
+    utilisateurId: number | null
   }
 
   export type ProduitSumAggregateOutputType = {
@@ -10935,6 +10787,7 @@ export namespace Prisma {
     qtte: number | null
     deviseId: number | null
     teneurId: number | null
+    utilisateurId: number | null
   }
 
   export type ProduitMinAggregateOutputType = {
@@ -10945,7 +10798,7 @@ export namespace Prisma {
     description: string | null
     deviseId: number | null
     teneurId: number | null
-    utilisateurId: string | null
+    utilisateurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10958,7 +10811,7 @@ export namespace Prisma {
     description: string | null
     deviseId: number | null
     teneurId: number | null
-    utilisateurId: string | null
+    utilisateurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10984,6 +10837,7 @@ export namespace Prisma {
     qtte?: true
     deviseId?: true
     teneurId?: true
+    utilisateurId?: true
   }
 
   export type ProduitSumAggregateInputType = {
@@ -10992,6 +10846,7 @@ export namespace Prisma {
     qtte?: true
     deviseId?: true
     teneurId?: true
+    utilisateurId?: true
   }
 
   export type ProduitMinAggregateInputType = {
@@ -11128,7 +10983,7 @@ export namespace Prisma {
     description: string
     deviseId: number
     teneurId: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt: Date
     updatedAt: Date
     _count: ProduitCountAggregateOutputType | null
@@ -11166,8 +11021,7 @@ export namespace Prisma {
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
     teneur?: boolean | TeneurDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    DetailVente?: boolean | Produit$DetailVenteArgs<ExtArgs>
-    DetailAchat?: boolean | Produit$DetailAchatArgs<ExtArgs>
+    DetailPanier?: boolean | Produit$DetailPanierArgs<ExtArgs>
     _count?: boolean | ProduitCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produit"]>
 
@@ -11221,8 +11075,7 @@ export namespace Prisma {
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
     teneur?: boolean | TeneurDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    DetailVente?: boolean | Produit$DetailVenteArgs<ExtArgs>
-    DetailAchat?: boolean | Produit$DetailAchatArgs<ExtArgs>
+    DetailPanier?: boolean | Produit$DetailPanierArgs<ExtArgs>
     _count?: boolean | ProduitCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProduitIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11242,8 +11095,7 @@ export namespace Prisma {
       devise: Prisma.$DevisePayload<ExtArgs>
       teneur: Prisma.$TeneurPayload<ExtArgs>
       utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
-      DetailVente: Prisma.$DetailVentePayload<ExtArgs>[]
-      DetailAchat: Prisma.$DetailAchatPayload<ExtArgs>[]
+      DetailPanier: Prisma.$DetailPanierPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -11253,7 +11105,7 @@ export namespace Prisma {
       description: string
       deviseId: number
       teneurId: number
-      utilisateurId: string
+      utilisateurId: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["produit"]>
@@ -11653,8 +11505,7 @@ export namespace Prisma {
     devise<T extends DeviseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DeviseDefaultArgs<ExtArgs>>): Prisma__DeviseClient<$Result.GetResult<Prisma.$DevisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     teneur<T extends TeneurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TeneurDefaultArgs<ExtArgs>>): Prisma__TeneurClient<$Result.GetResult<Prisma.$TeneurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    DetailVente<T extends Produit$DetailVenteArgs<ExtArgs> = {}>(args?: Subset<T, Produit$DetailVenteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    DetailAchat<T extends Produit$DetailAchatArgs<ExtArgs> = {}>(args?: Subset<T, Produit$DetailAchatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    DetailPanier<T extends Produit$DetailPanierArgs<ExtArgs> = {}>(args?: Subset<T, Produit$DetailPanierArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11691,7 +11542,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Produit", 'String'>
     readonly deviseId: FieldRef<"Produit", 'Int'>
     readonly teneurId: FieldRef<"Produit", 'Int'>
-    readonly utilisateurId: FieldRef<"Produit", 'String'>
+    readonly utilisateurId: FieldRef<"Produit", 'Int'>
     readonly createdAt: FieldRef<"Produit", 'DateTime'>
     readonly updatedAt: FieldRef<"Produit", 'DateTime'>
   }
@@ -12090,51 +11941,27 @@ export namespace Prisma {
   }
 
   /**
-   * Produit.DetailVente
+   * Produit.DetailPanier
    */
-  export type Produit$DetailVenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Produit$DetailPanierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailVente
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailVenteSelect<ExtArgs> | null
+    select?: DetailPanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailVente
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailVenteOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailVenteInclude<ExtArgs> | null
-    where?: DetailVenteWhereInput
-    orderBy?: DetailVenteOrderByWithRelationInput | DetailVenteOrderByWithRelationInput[]
-    cursor?: DetailVenteWhereUniqueInput
+    include?: DetailPanierInclude<ExtArgs> | null
+    where?: DetailPanierWhereInput
+    orderBy?: DetailPanierOrderByWithRelationInput | DetailPanierOrderByWithRelationInput[]
+    cursor?: DetailPanierWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: DetailVenteScalarFieldEnum | DetailVenteScalarFieldEnum[]
-  }
-
-  /**
-   * Produit.DetailAchat
-   */
-  export type Produit$DetailAchatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailAchat
-     */
-    select?: DetailAchatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailAchat
-     */
-    omit?: DetailAchatOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailAchatInclude<ExtArgs> | null
-    where?: DetailAchatWhereInput
-    orderBy?: DetailAchatOrderByWithRelationInput | DetailAchatOrderByWithRelationInput[]
-    cursor?: DetailAchatWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: DetailAchatScalarFieldEnum | DetailAchatScalarFieldEnum[]
+    distinct?: DetailPanierScalarFieldEnum | DetailPanierScalarFieldEnum[]
   }
 
   /**
@@ -13343,52 +13170,54 @@ export namespace Prisma {
     id: number | null
     total_ttc: number | null
     total_ht: number | null
-    remise: number | null
-    detailVenteId: number | null
-    entrepriseId: number | null
+    clientId: number | null
+    enregisterParId: number | null
     fournisseurId: number | null
+    agentId: number | null
     paiementId: number | null
+    panierId: number | null
   }
 
   export type VenteSumAggregateOutputType = {
     id: number | null
     total_ttc: number | null
     total_ht: number | null
-    remise: number | null
-    detailVenteId: number | null
-    entrepriseId: number | null
+    clientId: number | null
+    enregisterParId: number | null
     fournisseurId: number | null
+    agentId: number | null
     paiementId: number | null
+    panierId: number | null
   }
 
   export type VenteMinAggregateOutputType = {
     id: number | null
-    statut: string | null
+    statut: $Enums.StatutVente | null
     total_ttc: number | null
     total_ht: number | null
-    remise: number | null
-    detailVenteId: number | null
-    entrepriseId: number | null
-    clientId: string | null
-    agentId: string | null
+    type_acheteur: $Enums.TypeAcheteur | null
+    clientId: number | null
+    enregisterParId: number | null
     fournisseurId: number | null
+    agentId: number | null
     paiementId: number | null
+    panierId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type VenteMaxAggregateOutputType = {
     id: number | null
-    statut: string | null
+    statut: $Enums.StatutVente | null
     total_ttc: number | null
     total_ht: number | null
-    remise: number | null
-    detailVenteId: number | null
-    entrepriseId: number | null
-    clientId: string | null
-    agentId: string | null
+    type_acheteur: $Enums.TypeAcheteur | null
+    clientId: number | null
+    enregisterParId: number | null
     fournisseurId: number | null
+    agentId: number | null
     paiementId: number | null
+    panierId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -13398,13 +13227,13 @@ export namespace Prisma {
     statut: number
     total_ttc: number
     total_ht: number
-    remise: number
-    detailVenteId: number
-    entrepriseId: number
+    type_acheteur: number
     clientId: number
-    agentId: number
+    enregisterParId: number
     fournisseurId: number
+    agentId: number
     paiementId: number
+    panierId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -13415,22 +13244,24 @@ export namespace Prisma {
     id?: true
     total_ttc?: true
     total_ht?: true
-    remise?: true
-    detailVenteId?: true
-    entrepriseId?: true
+    clientId?: true
+    enregisterParId?: true
     fournisseurId?: true
+    agentId?: true
     paiementId?: true
+    panierId?: true
   }
 
   export type VenteSumAggregateInputType = {
     id?: true
     total_ttc?: true
     total_ht?: true
-    remise?: true
-    detailVenteId?: true
-    entrepriseId?: true
+    clientId?: true
+    enregisterParId?: true
     fournisseurId?: true
+    agentId?: true
     paiementId?: true
+    panierId?: true
   }
 
   export type VenteMinAggregateInputType = {
@@ -13438,13 +13269,13 @@ export namespace Prisma {
     statut?: true
     total_ttc?: true
     total_ht?: true
-    remise?: true
-    detailVenteId?: true
-    entrepriseId?: true
+    type_acheteur?: true
     clientId?: true
-    agentId?: true
+    enregisterParId?: true
     fournisseurId?: true
+    agentId?: true
     paiementId?: true
+    panierId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -13454,13 +13285,13 @@ export namespace Prisma {
     statut?: true
     total_ttc?: true
     total_ht?: true
-    remise?: true
-    detailVenteId?: true
-    entrepriseId?: true
+    type_acheteur?: true
     clientId?: true
-    agentId?: true
+    enregisterParId?: true
     fournisseurId?: true
+    agentId?: true
     paiementId?: true
+    panierId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -13470,13 +13301,13 @@ export namespace Prisma {
     statut?: true
     total_ttc?: true
     total_ht?: true
-    remise?: true
-    detailVenteId?: true
-    entrepriseId?: true
+    type_acheteur?: true
     clientId?: true
-    agentId?: true
+    enregisterParId?: true
     fournisseurId?: true
+    agentId?: true
     paiementId?: true
+    panierId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -13570,16 +13401,16 @@ export namespace Prisma {
 
   export type VenteGroupByOutputType = {
     id: number
-    statut: string
+    statut: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    detailVenteId: number
-    entrepriseId: number
-    clientId: string
-    agentId: string
+    type_acheteur: $Enums.TypeAcheteur
+    clientId: number | null
+    enregisterParId: number
     fournisseurId: number | null
-    paiementId: number | null
+    agentId: number | null
+    paiementId: number
+    panierId: number
     createdAt: Date
     updatedAt: Date
     _count: VenteCountAggregateOutputType | null
@@ -13608,20 +13439,19 @@ export namespace Prisma {
     statut?: boolean
     total_ttc?: boolean
     total_ht?: boolean
-    remise?: boolean
-    detailVenteId?: boolean
-    entrepriseId?: boolean
+    type_acheteur?: boolean
     clientId?: boolean
-    agentId?: boolean
+    enregisterParId?: boolean
     fournisseurId?: boolean
+    agentId?: boolean
     paiementId?: boolean
+    panierId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    detailvente?: boolean | DetailVenteDefaultArgs<ExtArgs>
-    entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     fournisseur?: boolean | Vente$fournisseurArgs<ExtArgs>
-    paiement?: boolean | Vente$paiementArgs<ExtArgs>
+    paiement?: boolean | PaiementDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["vente"]>
 
   export type VenteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13629,20 +13459,19 @@ export namespace Prisma {
     statut?: boolean
     total_ttc?: boolean
     total_ht?: boolean
-    remise?: boolean
-    detailVenteId?: boolean
-    entrepriseId?: boolean
+    type_acheteur?: boolean
     clientId?: boolean
-    agentId?: boolean
+    enregisterParId?: boolean
     fournisseurId?: boolean
+    agentId?: boolean
     paiementId?: boolean
+    panierId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    detailvente?: boolean | DetailVenteDefaultArgs<ExtArgs>
-    entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     fournisseur?: boolean | Vente$fournisseurArgs<ExtArgs>
-    paiement?: boolean | Vente$paiementArgs<ExtArgs>
+    paiement?: boolean | PaiementDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["vente"]>
 
   export type VenteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13650,20 +13479,19 @@ export namespace Prisma {
     statut?: boolean
     total_ttc?: boolean
     total_ht?: boolean
-    remise?: boolean
-    detailVenteId?: boolean
-    entrepriseId?: boolean
+    type_acheteur?: boolean
     clientId?: boolean
-    agentId?: boolean
+    enregisterParId?: boolean
     fournisseurId?: boolean
+    agentId?: boolean
     paiementId?: boolean
+    panierId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    detailvente?: boolean | DetailVenteDefaultArgs<ExtArgs>
-    entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     fournisseur?: boolean | Vente$fournisseurArgs<ExtArgs>
-    paiement?: boolean | Vente$paiementArgs<ExtArgs>
+    paiement?: boolean | PaiementDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["vente"]>
 
   export type VenteSelectScalar = {
@@ -13671,61 +13499,57 @@ export namespace Prisma {
     statut?: boolean
     total_ttc?: boolean
     total_ht?: boolean
-    remise?: boolean
-    detailVenteId?: boolean
-    entrepriseId?: boolean
+    type_acheteur?: boolean
     clientId?: boolean
-    agentId?: boolean
+    enregisterParId?: boolean
     fournisseurId?: boolean
+    agentId?: boolean
     paiementId?: boolean
+    panierId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type VenteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "total_ttc" | "total_ht" | "remise" | "detailVenteId" | "entrepriseId" | "clientId" | "agentId" | "fournisseurId" | "paiementId" | "createdAt" | "updatedAt", ExtArgs["result"]["vente"]>
+  export type VenteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "total_ttc" | "total_ht" | "type_acheteur" | "clientId" | "enregisterParId" | "fournisseurId" | "agentId" | "paiementId" | "panierId" | "createdAt" | "updatedAt", ExtArgs["result"]["vente"]>
   export type VenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    detailvente?: boolean | DetailVenteDefaultArgs<ExtArgs>
-    entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     fournisseur?: boolean | Vente$fournisseurArgs<ExtArgs>
-    paiement?: boolean | Vente$paiementArgs<ExtArgs>
+    paiement?: boolean | PaiementDefaultArgs<ExtArgs>
   }
   export type VenteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    detailvente?: boolean | DetailVenteDefaultArgs<ExtArgs>
-    entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     fournisseur?: boolean | Vente$fournisseurArgs<ExtArgs>
-    paiement?: boolean | Vente$paiementArgs<ExtArgs>
+    paiement?: boolean | PaiementDefaultArgs<ExtArgs>
   }
   export type VenteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    detailvente?: boolean | DetailVenteDefaultArgs<ExtArgs>
-    entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     fournisseur?: boolean | Vente$fournisseurArgs<ExtArgs>
-    paiement?: boolean | Vente$paiementArgs<ExtArgs>
+    paiement?: boolean | PaiementDefaultArgs<ExtArgs>
   }
 
   export type $VentePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Vente"
     objects: {
-      detailvente: Prisma.$DetailVentePayload<ExtArgs>
-      entreprise: Prisma.$EntreprisePayload<ExtArgs>
+      panier: Prisma.$PanierPayload<ExtArgs>
       utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
       fournisseur: Prisma.$FournisseurPayload<ExtArgs> | null
-      paiement: Prisma.$PaiementPayload<ExtArgs> | null
+      paiement: Prisma.$PaiementPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      statut: string
+      statut: $Enums.StatutVente
       total_ttc: number
       total_ht: number
-      remise: number
-      detailVenteId: number
-      entrepriseId: number
-      clientId: string
-      agentId: string
+      type_acheteur: $Enums.TypeAcheteur
+      clientId: number | null
+      enregisterParId: number
       fournisseurId: number | null
-      paiementId: number | null
+      agentId: number | null
+      paiementId: number
+      panierId: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["vente"]>
@@ -14122,11 +13946,10 @@ export namespace Prisma {
    */
   export interface Prisma__VenteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    detailvente<T extends DetailVenteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DetailVenteDefaultArgs<ExtArgs>>): Prisma__DetailVenteClient<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    entreprise<T extends EntrepriseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EntrepriseDefaultArgs<ExtArgs>>): Prisma__EntrepriseClient<$Result.GetResult<Prisma.$EntreprisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    panier<T extends PanierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PanierDefaultArgs<ExtArgs>>): Prisma__PanierClient<$Result.GetResult<Prisma.$PanierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     fournisseur<T extends Vente$fournisseurArgs<ExtArgs> = {}>(args?: Subset<T, Vente$fournisseurArgs<ExtArgs>>): Prisma__FournisseurClient<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    paiement<T extends Vente$paiementArgs<ExtArgs> = {}>(args?: Subset<T, Vente$paiementArgs<ExtArgs>>): Prisma__PaiementClient<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    paiement<T extends PaiementDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PaiementDefaultArgs<ExtArgs>>): Prisma__PaiementClient<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14157,16 +13980,16 @@ export namespace Prisma {
    */
   interface VenteFieldRefs {
     readonly id: FieldRef<"Vente", 'Int'>
-    readonly statut: FieldRef<"Vente", 'String'>
+    readonly statut: FieldRef<"Vente", 'StatutVente'>
     readonly total_ttc: FieldRef<"Vente", 'Float'>
     readonly total_ht: FieldRef<"Vente", 'Float'>
-    readonly remise: FieldRef<"Vente", 'Float'>
-    readonly detailVenteId: FieldRef<"Vente", 'Int'>
-    readonly entrepriseId: FieldRef<"Vente", 'Int'>
-    readonly clientId: FieldRef<"Vente", 'String'>
-    readonly agentId: FieldRef<"Vente", 'String'>
+    readonly type_acheteur: FieldRef<"Vente", 'TypeAcheteur'>
+    readonly clientId: FieldRef<"Vente", 'Int'>
+    readonly enregisterParId: FieldRef<"Vente", 'Int'>
     readonly fournisseurId: FieldRef<"Vente", 'Int'>
+    readonly agentId: FieldRef<"Vente", 'Int'>
     readonly paiementId: FieldRef<"Vente", 'Int'>
+    readonly panierId: FieldRef<"Vente", 'Int'>
     readonly createdAt: FieldRef<"Vente", 'DateTime'>
     readonly updatedAt: FieldRef<"Vente", 'DateTime'>
   }
@@ -14584,25 +14407,6 @@ export namespace Prisma {
   }
 
   /**
-   * Vente.paiement
-   */
-  export type Vente$paiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Paiement
-     */
-    select?: PaiementSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Paiement
-     */
-    omit?: PaiementOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PaiementInclude<ExtArgs> | null
-    where?: PaiementWhereInput
-  }
-
-  /**
    * Vente without action
    */
   export type VenteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14635,22 +14439,24 @@ export namespace Prisma {
 
   export type PanierAvgAggregateOutputType = {
     id: number | null
+    utilisateurId: number | null
   }
 
   export type PanierSumAggregateOutputType = {
     id: number | null
+    utilisateurId: number | null
   }
 
   export type PanierMinAggregateOutputType = {
     id: number | null
-    utilisateurId: string | null
+    utilisateurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type PanierMaxAggregateOutputType = {
     id: number | null
-    utilisateurId: string | null
+    utilisateurId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -14666,10 +14472,12 @@ export namespace Prisma {
 
   export type PanierAvgAggregateInputType = {
     id?: true
+    utilisateurId?: true
   }
 
   export type PanierSumAggregateInputType = {
     id?: true
+    utilisateurId?: true
   }
 
   export type PanierMinAggregateInputType = {
@@ -14782,7 +14590,7 @@ export namespace Prisma {
 
   export type PanierGroupByOutputType = {
     id: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt: Date
     updatedAt: Date
     _count: PanierCountAggregateOutputType | null
@@ -14812,8 +14620,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    DetailAchat?: boolean | Panier$DetailAchatArgs<ExtArgs>
+    DetailPanier?: boolean | Panier$DetailPanierArgs<ExtArgs>
     Achat?: boolean | Panier$AchatArgs<ExtArgs>
+    Vente?: boolean | Panier$VenteArgs<ExtArgs>
     _count?: boolean | PanierCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["panier"]>
 
@@ -14843,8 +14652,9 @@ export namespace Prisma {
   export type PanierOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "utilisateurId" | "createdAt" | "updatedAt", ExtArgs["result"]["panier"]>
   export type PanierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    DetailAchat?: boolean | Panier$DetailAchatArgs<ExtArgs>
+    DetailPanier?: boolean | Panier$DetailPanierArgs<ExtArgs>
     Achat?: boolean | Panier$AchatArgs<ExtArgs>
+    Vente?: boolean | Panier$VenteArgs<ExtArgs>
     _count?: boolean | PanierCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PanierIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14858,12 +14668,13 @@ export namespace Prisma {
     name: "Panier"
     objects: {
       utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
-      DetailAchat: Prisma.$DetailAchatPayload<ExtArgs>[]
+      DetailPanier: Prisma.$DetailPanierPayload<ExtArgs>[]
       Achat: Prisma.$AchatPayload<ExtArgs>[]
+      Vente: Prisma.$VentePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      utilisateurId: string
+      utilisateurId: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["panier"]>
@@ -15261,8 +15072,9 @@ export namespace Prisma {
   export interface Prisma__PanierClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    DetailAchat<T extends Panier$DetailAchatArgs<ExtArgs> = {}>(args?: Subset<T, Panier$DetailAchatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    DetailPanier<T extends Panier$DetailPanierArgs<ExtArgs> = {}>(args?: Subset<T, Panier$DetailPanierArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Achat<T extends Panier$AchatArgs<ExtArgs> = {}>(args?: Subset<T, Panier$AchatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Vente<T extends Panier$VenteArgs<ExtArgs> = {}>(args?: Subset<T, Panier$VenteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15293,7 +15105,7 @@ export namespace Prisma {
    */
   interface PanierFieldRefs {
     readonly id: FieldRef<"Panier", 'Int'>
-    readonly utilisateurId: FieldRef<"Panier", 'String'>
+    readonly utilisateurId: FieldRef<"Panier", 'Int'>
     readonly createdAt: FieldRef<"Panier", 'DateTime'>
     readonly updatedAt: FieldRef<"Panier", 'DateTime'>
   }
@@ -15692,27 +15504,27 @@ export namespace Prisma {
   }
 
   /**
-   * Panier.DetailAchat
+   * Panier.DetailPanier
    */
-  export type Panier$DetailAchatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Panier$DetailPanierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelect<ExtArgs> | null
+    select?: DetailPanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatInclude<ExtArgs> | null
-    where?: DetailAchatWhereInput
-    orderBy?: DetailAchatOrderByWithRelationInput | DetailAchatOrderByWithRelationInput[]
-    cursor?: DetailAchatWhereUniqueInput
+    include?: DetailPanierInclude<ExtArgs> | null
+    where?: DetailPanierWhereInput
+    orderBy?: DetailPanierOrderByWithRelationInput | DetailPanierOrderByWithRelationInput[]
+    cursor?: DetailPanierWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: DetailAchatScalarFieldEnum | DetailAchatScalarFieldEnum[]
+    distinct?: DetailPanierScalarFieldEnum | DetailPanierScalarFieldEnum[]
   }
 
   /**
@@ -15740,1149 +15552,9 @@ export namespace Prisma {
   }
 
   /**
-   * Panier without action
+   * Panier.Vente
    */
-  export type PanierDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Panier
-     */
-    select?: PanierSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Panier
-     */
-    omit?: PanierOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PanierInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model DetailVente
-   */
-
-  export type AggregateDetailVente = {
-    _count: DetailVenteCountAggregateOutputType | null
-    _avg: DetailVenteAvgAggregateOutputType | null
-    _sum: DetailVenteSumAggregateOutputType | null
-    _min: DetailVenteMinAggregateOutputType | null
-    _max: DetailVenteMaxAggregateOutputType | null
-  }
-
-  export type DetailVenteAvgAggregateOutputType = {
-    id: number | null
-    produitId: number | null
-    qtte: number | null
-    prixUnitaire: number | null
-    prixTotal: number | null
-  }
-
-  export type DetailVenteSumAggregateOutputType = {
-    id: number | null
-    produitId: number | null
-    qtte: number | null
-    prixUnitaire: number | null
-    prixTotal: number | null
-  }
-
-  export type DetailVenteMinAggregateOutputType = {
-    id: number | null
-    produitId: number | null
-    qtte: number | null
-    prixUnitaire: number | null
-    prixTotal: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type DetailVenteMaxAggregateOutputType = {
-    id: number | null
-    produitId: number | null
-    qtte: number | null
-    prixUnitaire: number | null
-    prixTotal: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type DetailVenteCountAggregateOutputType = {
-    id: number
-    produitId: number
-    qtte: number
-    prixUnitaire: number
-    prixTotal: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type DetailVenteAvgAggregateInputType = {
-    id?: true
-    produitId?: true
-    qtte?: true
-    prixUnitaire?: true
-    prixTotal?: true
-  }
-
-  export type DetailVenteSumAggregateInputType = {
-    id?: true
-    produitId?: true
-    qtte?: true
-    prixUnitaire?: true
-    prixTotal?: true
-  }
-
-  export type DetailVenteMinAggregateInputType = {
-    id?: true
-    produitId?: true
-    qtte?: true
-    prixUnitaire?: true
-    prixTotal?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type DetailVenteMaxAggregateInputType = {
-    id?: true
-    produitId?: true
-    qtte?: true
-    prixUnitaire?: true
-    prixTotal?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type DetailVenteCountAggregateInputType = {
-    id?: true
-    produitId?: true
-    qtte?: true
-    prixUnitaire?: true
-    prixTotal?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type DetailVenteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which DetailVente to aggregate.
-     */
-    where?: DetailVenteWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DetailVentes to fetch.
-     */
-    orderBy?: DetailVenteOrderByWithRelationInput | DetailVenteOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: DetailVenteWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DetailVentes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DetailVentes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned DetailVentes
-    **/
-    _count?: true | DetailVenteCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: DetailVenteAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: DetailVenteSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: DetailVenteMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: DetailVenteMaxAggregateInputType
-  }
-
-  export type GetDetailVenteAggregateType<T extends DetailVenteAggregateArgs> = {
-        [P in keyof T & keyof AggregateDetailVente]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateDetailVente[P]>
-      : GetScalarType<T[P], AggregateDetailVente[P]>
-  }
-
-
-
-
-  export type DetailVenteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DetailVenteWhereInput
-    orderBy?: DetailVenteOrderByWithAggregationInput | DetailVenteOrderByWithAggregationInput[]
-    by: DetailVenteScalarFieldEnum[] | DetailVenteScalarFieldEnum
-    having?: DetailVenteScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: DetailVenteCountAggregateInputType | true
-    _avg?: DetailVenteAvgAggregateInputType
-    _sum?: DetailVenteSumAggregateInputType
-    _min?: DetailVenteMinAggregateInputType
-    _max?: DetailVenteMaxAggregateInputType
-  }
-
-  export type DetailVenteGroupByOutputType = {
-    id: number
-    produitId: number
-    qtte: number
-    prixUnitaire: number
-    prixTotal: number
-    createdAt: Date
-    updatedAt: Date
-    _count: DetailVenteCountAggregateOutputType | null
-    _avg: DetailVenteAvgAggregateOutputType | null
-    _sum: DetailVenteSumAggregateOutputType | null
-    _min: DetailVenteMinAggregateOutputType | null
-    _max: DetailVenteMaxAggregateOutputType | null
-  }
-
-  type GetDetailVenteGroupByPayload<T extends DetailVenteGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<DetailVenteGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof DetailVenteGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], DetailVenteGroupByOutputType[P]>
-            : GetScalarType<T[P], DetailVenteGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type DetailVenteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    produitId?: boolean
-    qtte?: boolean
-    prixUnitaire?: boolean
-    prixTotal?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    produit?: boolean | ProduitDefaultArgs<ExtArgs>
-    Vente?: boolean | DetailVente$VenteArgs<ExtArgs>
-    _count?: boolean | DetailVenteCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["detailVente"]>
-
-  export type DetailVenteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    produitId?: boolean
-    qtte?: boolean
-    prixUnitaire?: boolean
-    prixTotal?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    produit?: boolean | ProduitDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["detailVente"]>
-
-  export type DetailVenteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    produitId?: boolean
-    qtte?: boolean
-    prixUnitaire?: boolean
-    prixTotal?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    produit?: boolean | ProduitDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["detailVente"]>
-
-  export type DetailVenteSelectScalar = {
-    id?: boolean
-    produitId?: boolean
-    qtte?: boolean
-    prixUnitaire?: boolean
-    prixTotal?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type DetailVenteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "produitId" | "qtte" | "prixUnitaire" | "prixTotal" | "createdAt" | "updatedAt", ExtArgs["result"]["detailVente"]>
-  export type DetailVenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    produit?: boolean | ProduitDefaultArgs<ExtArgs>
-    Vente?: boolean | DetailVente$VenteArgs<ExtArgs>
-    _count?: boolean | DetailVenteCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type DetailVenteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    produit?: boolean | ProduitDefaultArgs<ExtArgs>
-  }
-  export type DetailVenteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    produit?: boolean | ProduitDefaultArgs<ExtArgs>
-  }
-
-  export type $DetailVentePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "DetailVente"
-    objects: {
-      produit: Prisma.$ProduitPayload<ExtArgs>
-      Vente: Prisma.$VentePayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      produitId: number
-      qtte: number
-      prixUnitaire: number
-      prixTotal: number
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["detailVente"]>
-    composites: {}
-  }
-
-  type DetailVenteGetPayload<S extends boolean | null | undefined | DetailVenteDefaultArgs> = $Result.GetResult<Prisma.$DetailVentePayload, S>
-
-  type DetailVenteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<DetailVenteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: DetailVenteCountAggregateInputType | true
-    }
-
-  export interface DetailVenteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DetailVente'], meta: { name: 'DetailVente' } }
-    /**
-     * Find zero or one DetailVente that matches the filter.
-     * @param {DetailVenteFindUniqueArgs} args - Arguments to find a DetailVente
-     * @example
-     * // Get one DetailVente
-     * const detailVente = await prisma.detailVente.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends DetailVenteFindUniqueArgs>(args: SelectSubset<T, DetailVenteFindUniqueArgs<ExtArgs>>): Prisma__DetailVenteClient<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one DetailVente that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {DetailVenteFindUniqueOrThrowArgs} args - Arguments to find a DetailVente
-     * @example
-     * // Get one DetailVente
-     * const detailVente = await prisma.detailVente.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends DetailVenteFindUniqueOrThrowArgs>(args: SelectSubset<T, DetailVenteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DetailVenteClient<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first DetailVente that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailVenteFindFirstArgs} args - Arguments to find a DetailVente
-     * @example
-     * // Get one DetailVente
-     * const detailVente = await prisma.detailVente.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends DetailVenteFindFirstArgs>(args?: SelectSubset<T, DetailVenteFindFirstArgs<ExtArgs>>): Prisma__DetailVenteClient<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first DetailVente that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailVenteFindFirstOrThrowArgs} args - Arguments to find a DetailVente
-     * @example
-     * // Get one DetailVente
-     * const detailVente = await prisma.detailVente.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends DetailVenteFindFirstOrThrowArgs>(args?: SelectSubset<T, DetailVenteFindFirstOrThrowArgs<ExtArgs>>): Prisma__DetailVenteClient<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more DetailVentes that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailVenteFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all DetailVentes
-     * const detailVentes = await prisma.detailVente.findMany()
-     * 
-     * // Get first 10 DetailVentes
-     * const detailVentes = await prisma.detailVente.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const detailVenteWithIdOnly = await prisma.detailVente.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends DetailVenteFindManyArgs>(args?: SelectSubset<T, DetailVenteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a DetailVente.
-     * @param {DetailVenteCreateArgs} args - Arguments to create a DetailVente.
-     * @example
-     * // Create one DetailVente
-     * const DetailVente = await prisma.detailVente.create({
-     *   data: {
-     *     // ... data to create a DetailVente
-     *   }
-     * })
-     * 
-     */
-    create<T extends DetailVenteCreateArgs>(args: SelectSubset<T, DetailVenteCreateArgs<ExtArgs>>): Prisma__DetailVenteClient<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many DetailVentes.
-     * @param {DetailVenteCreateManyArgs} args - Arguments to create many DetailVentes.
-     * @example
-     * // Create many DetailVentes
-     * const detailVente = await prisma.detailVente.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends DetailVenteCreateManyArgs>(args?: SelectSubset<T, DetailVenteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many DetailVentes and returns the data saved in the database.
-     * @param {DetailVenteCreateManyAndReturnArgs} args - Arguments to create many DetailVentes.
-     * @example
-     * // Create many DetailVentes
-     * const detailVente = await prisma.detailVente.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many DetailVentes and only return the `id`
-     * const detailVenteWithIdOnly = await prisma.detailVente.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends DetailVenteCreateManyAndReturnArgs>(args?: SelectSubset<T, DetailVenteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a DetailVente.
-     * @param {DetailVenteDeleteArgs} args - Arguments to delete one DetailVente.
-     * @example
-     * // Delete one DetailVente
-     * const DetailVente = await prisma.detailVente.delete({
-     *   where: {
-     *     // ... filter to delete one DetailVente
-     *   }
-     * })
-     * 
-     */
-    delete<T extends DetailVenteDeleteArgs>(args: SelectSubset<T, DetailVenteDeleteArgs<ExtArgs>>): Prisma__DetailVenteClient<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one DetailVente.
-     * @param {DetailVenteUpdateArgs} args - Arguments to update one DetailVente.
-     * @example
-     * // Update one DetailVente
-     * const detailVente = await prisma.detailVente.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends DetailVenteUpdateArgs>(args: SelectSubset<T, DetailVenteUpdateArgs<ExtArgs>>): Prisma__DetailVenteClient<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more DetailVentes.
-     * @param {DetailVenteDeleteManyArgs} args - Arguments to filter DetailVentes to delete.
-     * @example
-     * // Delete a few DetailVentes
-     * const { count } = await prisma.detailVente.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends DetailVenteDeleteManyArgs>(args?: SelectSubset<T, DetailVenteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more DetailVentes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailVenteUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many DetailVentes
-     * const detailVente = await prisma.detailVente.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends DetailVenteUpdateManyArgs>(args: SelectSubset<T, DetailVenteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more DetailVentes and returns the data updated in the database.
-     * @param {DetailVenteUpdateManyAndReturnArgs} args - Arguments to update many DetailVentes.
-     * @example
-     * // Update many DetailVentes
-     * const detailVente = await prisma.detailVente.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more DetailVentes and only return the `id`
-     * const detailVenteWithIdOnly = await prisma.detailVente.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends DetailVenteUpdateManyAndReturnArgs>(args: SelectSubset<T, DetailVenteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one DetailVente.
-     * @param {DetailVenteUpsertArgs} args - Arguments to update or create a DetailVente.
-     * @example
-     * // Update or create a DetailVente
-     * const detailVente = await prisma.detailVente.upsert({
-     *   create: {
-     *     // ... data to create a DetailVente
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the DetailVente we want to update
-     *   }
-     * })
-     */
-    upsert<T extends DetailVenteUpsertArgs>(args: SelectSubset<T, DetailVenteUpsertArgs<ExtArgs>>): Prisma__DetailVenteClient<$Result.GetResult<Prisma.$DetailVentePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of DetailVentes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailVenteCountArgs} args - Arguments to filter DetailVentes to count.
-     * @example
-     * // Count the number of DetailVentes
-     * const count = await prisma.detailVente.count({
-     *   where: {
-     *     // ... the filter for the DetailVentes we want to count
-     *   }
-     * })
-    **/
-    count<T extends DetailVenteCountArgs>(
-      args?: Subset<T, DetailVenteCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], DetailVenteCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a DetailVente.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailVenteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends DetailVenteAggregateArgs>(args: Subset<T, DetailVenteAggregateArgs>): Prisma.PrismaPromise<GetDetailVenteAggregateType<T>>
-
-    /**
-     * Group by DetailVente.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailVenteGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends DetailVenteGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: DetailVenteGroupByArgs['orderBy'] }
-        : { orderBy?: DetailVenteGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, DetailVenteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDetailVenteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the DetailVente model
-   */
-  readonly fields: DetailVenteFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for DetailVente.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__DetailVenteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    produit<T extends ProduitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProduitDefaultArgs<ExtArgs>>): Prisma__ProduitClient<$Result.GetResult<Prisma.$ProduitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Vente<T extends DetailVente$VenteArgs<ExtArgs> = {}>(args?: Subset<T, DetailVente$VenteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the DetailVente model
-   */
-  interface DetailVenteFieldRefs {
-    readonly id: FieldRef<"DetailVente", 'Int'>
-    readonly produitId: FieldRef<"DetailVente", 'Int'>
-    readonly qtte: FieldRef<"DetailVente", 'Int'>
-    readonly prixUnitaire: FieldRef<"DetailVente", 'Float'>
-    readonly prixTotal: FieldRef<"DetailVente", 'Float'>
-    readonly createdAt: FieldRef<"DetailVente", 'DateTime'>
-    readonly updatedAt: FieldRef<"DetailVente", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * DetailVente findUnique
-   */
-  export type DetailVenteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailVente
-     */
-    select?: DetailVenteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailVente
-     */
-    omit?: DetailVenteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailVenteInclude<ExtArgs> | null
-    /**
-     * Filter, which DetailVente to fetch.
-     */
-    where: DetailVenteWhereUniqueInput
-  }
-
-  /**
-   * DetailVente findUniqueOrThrow
-   */
-  export type DetailVenteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailVente
-     */
-    select?: DetailVenteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailVente
-     */
-    omit?: DetailVenteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailVenteInclude<ExtArgs> | null
-    /**
-     * Filter, which DetailVente to fetch.
-     */
-    where: DetailVenteWhereUniqueInput
-  }
-
-  /**
-   * DetailVente findFirst
-   */
-  export type DetailVenteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailVente
-     */
-    select?: DetailVenteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailVente
-     */
-    omit?: DetailVenteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailVenteInclude<ExtArgs> | null
-    /**
-     * Filter, which DetailVente to fetch.
-     */
-    where?: DetailVenteWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DetailVentes to fetch.
-     */
-    orderBy?: DetailVenteOrderByWithRelationInput | DetailVenteOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for DetailVentes.
-     */
-    cursor?: DetailVenteWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DetailVentes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DetailVentes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of DetailVentes.
-     */
-    distinct?: DetailVenteScalarFieldEnum | DetailVenteScalarFieldEnum[]
-  }
-
-  /**
-   * DetailVente findFirstOrThrow
-   */
-  export type DetailVenteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailVente
-     */
-    select?: DetailVenteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailVente
-     */
-    omit?: DetailVenteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailVenteInclude<ExtArgs> | null
-    /**
-     * Filter, which DetailVente to fetch.
-     */
-    where?: DetailVenteWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DetailVentes to fetch.
-     */
-    orderBy?: DetailVenteOrderByWithRelationInput | DetailVenteOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for DetailVentes.
-     */
-    cursor?: DetailVenteWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DetailVentes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DetailVentes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of DetailVentes.
-     */
-    distinct?: DetailVenteScalarFieldEnum | DetailVenteScalarFieldEnum[]
-  }
-
-  /**
-   * DetailVente findMany
-   */
-  export type DetailVenteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailVente
-     */
-    select?: DetailVenteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailVente
-     */
-    omit?: DetailVenteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailVenteInclude<ExtArgs> | null
-    /**
-     * Filter, which DetailVentes to fetch.
-     */
-    where?: DetailVenteWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DetailVentes to fetch.
-     */
-    orderBy?: DetailVenteOrderByWithRelationInput | DetailVenteOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing DetailVentes.
-     */
-    cursor?: DetailVenteWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DetailVentes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DetailVentes.
-     */
-    skip?: number
-    distinct?: DetailVenteScalarFieldEnum | DetailVenteScalarFieldEnum[]
-  }
-
-  /**
-   * DetailVente create
-   */
-  export type DetailVenteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailVente
-     */
-    select?: DetailVenteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailVente
-     */
-    omit?: DetailVenteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailVenteInclude<ExtArgs> | null
-    /**
-     * The data needed to create a DetailVente.
-     */
-    data: XOR<DetailVenteCreateInput, DetailVenteUncheckedCreateInput>
-  }
-
-  /**
-   * DetailVente createMany
-   */
-  export type DetailVenteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many DetailVentes.
-     */
-    data: DetailVenteCreateManyInput | DetailVenteCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * DetailVente createManyAndReturn
-   */
-  export type DetailVenteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailVente
-     */
-    select?: DetailVenteSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailVente
-     */
-    omit?: DetailVenteOmit<ExtArgs> | null
-    /**
-     * The data used to create many DetailVentes.
-     */
-    data: DetailVenteCreateManyInput | DetailVenteCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailVenteIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * DetailVente update
-   */
-  export type DetailVenteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailVente
-     */
-    select?: DetailVenteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailVente
-     */
-    omit?: DetailVenteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailVenteInclude<ExtArgs> | null
-    /**
-     * The data needed to update a DetailVente.
-     */
-    data: XOR<DetailVenteUpdateInput, DetailVenteUncheckedUpdateInput>
-    /**
-     * Choose, which DetailVente to update.
-     */
-    where: DetailVenteWhereUniqueInput
-  }
-
-  /**
-   * DetailVente updateMany
-   */
-  export type DetailVenteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update DetailVentes.
-     */
-    data: XOR<DetailVenteUpdateManyMutationInput, DetailVenteUncheckedUpdateManyInput>
-    /**
-     * Filter which DetailVentes to update
-     */
-    where?: DetailVenteWhereInput
-    /**
-     * Limit how many DetailVentes to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * DetailVente updateManyAndReturn
-   */
-  export type DetailVenteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailVente
-     */
-    select?: DetailVenteSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailVente
-     */
-    omit?: DetailVenteOmit<ExtArgs> | null
-    /**
-     * The data used to update DetailVentes.
-     */
-    data: XOR<DetailVenteUpdateManyMutationInput, DetailVenteUncheckedUpdateManyInput>
-    /**
-     * Filter which DetailVentes to update
-     */
-    where?: DetailVenteWhereInput
-    /**
-     * Limit how many DetailVentes to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailVenteIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * DetailVente upsert
-   */
-  export type DetailVenteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailVente
-     */
-    select?: DetailVenteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailVente
-     */
-    omit?: DetailVenteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailVenteInclude<ExtArgs> | null
-    /**
-     * The filter to search for the DetailVente to update in case it exists.
-     */
-    where: DetailVenteWhereUniqueInput
-    /**
-     * In case the DetailVente found by the `where` argument doesn't exist, create a new DetailVente with this data.
-     */
-    create: XOR<DetailVenteCreateInput, DetailVenteUncheckedCreateInput>
-    /**
-     * In case the DetailVente was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<DetailVenteUpdateInput, DetailVenteUncheckedUpdateInput>
-  }
-
-  /**
-   * DetailVente delete
-   */
-  export type DetailVenteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailVente
-     */
-    select?: DetailVenteSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailVente
-     */
-    omit?: DetailVenteOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailVenteInclude<ExtArgs> | null
-    /**
-     * Filter which DetailVente to delete.
-     */
-    where: DetailVenteWhereUniqueInput
-  }
-
-  /**
-   * DetailVente deleteMany
-   */
-  export type DetailVenteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which DetailVentes to delete
-     */
-    where?: DetailVenteWhereInput
-    /**
-     * Limit how many DetailVentes to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * DetailVente.Vente
-   */
-  export type DetailVente$VenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Panier$VenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Vente
      */
@@ -16904,37 +15576,37 @@ export namespace Prisma {
   }
 
   /**
-   * DetailVente without action
+   * Panier without action
    */
-  export type DetailVenteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PanierDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailVente
+     * Select specific fields to fetch from the Panier
      */
-    select?: DetailVenteSelect<ExtArgs> | null
+    select?: PanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailVente
+     * Omit specific fields from the Panier
      */
-    omit?: DetailVenteOmit<ExtArgs> | null
+    omit?: PanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailVenteInclude<ExtArgs> | null
+    include?: PanierInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model DetailAchat
+   * Model DetailPanier
    */
 
-  export type AggregateDetailAchat = {
-    _count: DetailAchatCountAggregateOutputType | null
-    _avg: DetailAchatAvgAggregateOutputType | null
-    _sum: DetailAchatSumAggregateOutputType | null
-    _min: DetailAchatMinAggregateOutputType | null
-    _max: DetailAchatMaxAggregateOutputType | null
+  export type AggregateDetailPanier = {
+    _count: DetailPanierCountAggregateOutputType | null
+    _avg: DetailPanierAvgAggregateOutputType | null
+    _sum: DetailPanierSumAggregateOutputType | null
+    _min: DetailPanierMinAggregateOutputType | null
+    _max: DetailPanierMaxAggregateOutputType | null
   }
 
-  export type DetailAchatAvgAggregateOutputType = {
+  export type DetailPanierAvgAggregateOutputType = {
     id: number | null
     produitId: number | null
     qtte: number | null
@@ -16943,7 +15615,7 @@ export namespace Prisma {
     panierId: number | null
   }
 
-  export type DetailAchatSumAggregateOutputType = {
+  export type DetailPanierSumAggregateOutputType = {
     id: number | null
     produitId: number | null
     qtte: number | null
@@ -16952,18 +15624,7 @@ export namespace Prisma {
     panierId: number | null
   }
 
-  export type DetailAchatMinAggregateOutputType = {
-    id: number | null
-    produitId: number | null
-    qtte: number | null
-    prixUnitaire: number | null
-    prixTotal: number | null
-    panierId: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type DetailAchatMaxAggregateOutputType = {
+  export type DetailPanierMinAggregateOutputType = {
     id: number | null
     produitId: number | null
     qtte: number | null
@@ -16974,7 +15635,18 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type DetailAchatCountAggregateOutputType = {
+  export type DetailPanierMaxAggregateOutputType = {
+    id: number | null
+    produitId: number | null
+    qtte: number | null
+    prixUnitaire: number | null
+    prixTotal: number | null
+    panierId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DetailPanierCountAggregateOutputType = {
     id: number
     produitId: number
     qtte: number
@@ -16987,7 +15659,7 @@ export namespace Prisma {
   }
 
 
-  export type DetailAchatAvgAggregateInputType = {
+  export type DetailPanierAvgAggregateInputType = {
     id?: true
     produitId?: true
     qtte?: true
@@ -16996,7 +15668,7 @@ export namespace Prisma {
     panierId?: true
   }
 
-  export type DetailAchatSumAggregateInputType = {
+  export type DetailPanierSumAggregateInputType = {
     id?: true
     produitId?: true
     qtte?: true
@@ -17005,18 +15677,7 @@ export namespace Prisma {
     panierId?: true
   }
 
-  export type DetailAchatMinAggregateInputType = {
-    id?: true
-    produitId?: true
-    qtte?: true
-    prixUnitaire?: true
-    prixTotal?: true
-    panierId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type DetailAchatMaxAggregateInputType = {
+  export type DetailPanierMinAggregateInputType = {
     id?: true
     produitId?: true
     qtte?: true
@@ -17027,7 +15688,18 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type DetailAchatCountAggregateInputType = {
+  export type DetailPanierMaxAggregateInputType = {
+    id?: true
+    produitId?: true
+    qtte?: true
+    prixUnitaire?: true
+    prixTotal?: true
+    panierId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DetailPanierCountAggregateInputType = {
     id?: true
     produitId?: true
     qtte?: true
@@ -17039,93 +15711,93 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type DetailAchatAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which DetailAchat to aggregate.
+     * Filter which DetailPanier to aggregate.
      */
-    where?: DetailAchatWhereInput
+    where?: DetailPanierWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of DetailAchats to fetch.
+     * Determine the order of DetailPaniers to fetch.
      */
-    orderBy?: DetailAchatOrderByWithRelationInput | DetailAchatOrderByWithRelationInput[]
+    orderBy?: DetailPanierOrderByWithRelationInput | DetailPanierOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: DetailAchatWhereUniqueInput
+    cursor?: DetailPanierWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` DetailAchats from the position of the cursor.
+     * Take `±n` DetailPaniers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` DetailAchats.
+     * Skip the first `n` DetailPaniers.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned DetailAchats
+     * Count returned DetailPaniers
     **/
-    _count?: true | DetailAchatCountAggregateInputType
+    _count?: true | DetailPanierCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: DetailAchatAvgAggregateInputType
+    _avg?: DetailPanierAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: DetailAchatSumAggregateInputType
+    _sum?: DetailPanierSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: DetailAchatMinAggregateInputType
+    _min?: DetailPanierMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: DetailAchatMaxAggregateInputType
+    _max?: DetailPanierMaxAggregateInputType
   }
 
-  export type GetDetailAchatAggregateType<T extends DetailAchatAggregateArgs> = {
-        [P in keyof T & keyof AggregateDetailAchat]: P extends '_count' | 'count'
+  export type GetDetailPanierAggregateType<T extends DetailPanierAggregateArgs> = {
+        [P in keyof T & keyof AggregateDetailPanier]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateDetailAchat[P]>
-      : GetScalarType<T[P], AggregateDetailAchat[P]>
+        : GetScalarType<T[P], AggregateDetailPanier[P]>
+      : GetScalarType<T[P], AggregateDetailPanier[P]>
   }
 
 
 
 
-  export type DetailAchatGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DetailAchatWhereInput
-    orderBy?: DetailAchatOrderByWithAggregationInput | DetailAchatOrderByWithAggregationInput[]
-    by: DetailAchatScalarFieldEnum[] | DetailAchatScalarFieldEnum
-    having?: DetailAchatScalarWhereWithAggregatesInput
+  export type DetailPanierGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DetailPanierWhereInput
+    orderBy?: DetailPanierOrderByWithAggregationInput | DetailPanierOrderByWithAggregationInput[]
+    by: DetailPanierScalarFieldEnum[] | DetailPanierScalarFieldEnum
+    having?: DetailPanierScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: DetailAchatCountAggregateInputType | true
-    _avg?: DetailAchatAvgAggregateInputType
-    _sum?: DetailAchatSumAggregateInputType
-    _min?: DetailAchatMinAggregateInputType
-    _max?: DetailAchatMaxAggregateInputType
+    _count?: DetailPanierCountAggregateInputType | true
+    _avg?: DetailPanierAvgAggregateInputType
+    _sum?: DetailPanierSumAggregateInputType
+    _min?: DetailPanierMinAggregateInputType
+    _max?: DetailPanierMaxAggregateInputType
   }
 
-  export type DetailAchatGroupByOutputType = {
+  export type DetailPanierGroupByOutputType = {
     id: number
     produitId: number
     qtte: number
@@ -17134,28 +15806,28 @@ export namespace Prisma {
     panierId: number
     createdAt: Date
     updatedAt: Date
-    _count: DetailAchatCountAggregateOutputType | null
-    _avg: DetailAchatAvgAggregateOutputType | null
-    _sum: DetailAchatSumAggregateOutputType | null
-    _min: DetailAchatMinAggregateOutputType | null
-    _max: DetailAchatMaxAggregateOutputType | null
+    _count: DetailPanierCountAggregateOutputType | null
+    _avg: DetailPanierAvgAggregateOutputType | null
+    _sum: DetailPanierSumAggregateOutputType | null
+    _min: DetailPanierMinAggregateOutputType | null
+    _max: DetailPanierMaxAggregateOutputType | null
   }
 
-  type GetDetailAchatGroupByPayload<T extends DetailAchatGroupByArgs> = Prisma.PrismaPromise<
+  type GetDetailPanierGroupByPayload<T extends DetailPanierGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<DetailAchatGroupByOutputType, T['by']> &
+      PickEnumerable<DetailPanierGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof DetailAchatGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof DetailPanierGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], DetailAchatGroupByOutputType[P]>
-            : GetScalarType<T[P], DetailAchatGroupByOutputType[P]>
+              : GetScalarType<T[P], DetailPanierGroupByOutputType[P]>
+            : GetScalarType<T[P], DetailPanierGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type DetailAchatSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type DetailPanierSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     produitId?: boolean
     qtte?: boolean
@@ -17166,9 +15838,9 @@ export namespace Prisma {
     updatedAt?: boolean
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["detailAchat"]>
+  }, ExtArgs["result"]["detailPanier"]>
 
-  export type DetailAchatSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type DetailPanierSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     produitId?: boolean
     qtte?: boolean
@@ -17179,9 +15851,9 @@ export namespace Prisma {
     updatedAt?: boolean
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["detailAchat"]>
+  }, ExtArgs["result"]["detailPanier"]>
 
-  export type DetailAchatSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type DetailPanierSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     produitId?: boolean
     qtte?: boolean
@@ -17192,9 +15864,9 @@ export namespace Prisma {
     updatedAt?: boolean
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["detailAchat"]>
+  }, ExtArgs["result"]["detailPanier"]>
 
-  export type DetailAchatSelectScalar = {
+  export type DetailPanierSelectScalar = {
     id?: boolean
     produitId?: boolean
     qtte?: boolean
@@ -17205,22 +15877,22 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type DetailAchatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "produitId" | "qtte" | "prixUnitaire" | "prixTotal" | "panierId" | "createdAt" | "updatedAt", ExtArgs["result"]["detailAchat"]>
-  export type DetailAchatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "produitId" | "qtte" | "prixUnitaire" | "prixTotal" | "panierId" | "createdAt" | "updatedAt", ExtArgs["result"]["detailPanier"]>
+  export type DetailPanierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }
-  export type DetailAchatIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }
-  export type DetailAchatIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }
 
-  export type $DetailAchatPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "DetailAchat"
+  export type $DetailPanierPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DetailPanier"
     objects: {
       produit: Prisma.$ProduitPayload<ExtArgs>
       panier: Prisma.$PanierPayload<ExtArgs>
@@ -17234,136 +15906,136 @@ export namespace Prisma {
       panierId: number
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["detailAchat"]>
+    }, ExtArgs["result"]["detailPanier"]>
     composites: {}
   }
 
-  type DetailAchatGetPayload<S extends boolean | null | undefined | DetailAchatDefaultArgs> = $Result.GetResult<Prisma.$DetailAchatPayload, S>
+  type DetailPanierGetPayload<S extends boolean | null | undefined | DetailPanierDefaultArgs> = $Result.GetResult<Prisma.$DetailPanierPayload, S>
 
-  type DetailAchatCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<DetailAchatFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: DetailAchatCountAggregateInputType | true
+  type DetailPanierCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DetailPanierFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DetailPanierCountAggregateInputType | true
     }
 
-  export interface DetailAchatDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DetailAchat'], meta: { name: 'DetailAchat' } }
+  export interface DetailPanierDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DetailPanier'], meta: { name: 'DetailPanier' } }
     /**
-     * Find zero or one DetailAchat that matches the filter.
-     * @param {DetailAchatFindUniqueArgs} args - Arguments to find a DetailAchat
+     * Find zero or one DetailPanier that matches the filter.
+     * @param {DetailPanierFindUniqueArgs} args - Arguments to find a DetailPanier
      * @example
-     * // Get one DetailAchat
-     * const detailAchat = await prisma.detailAchat.findUnique({
+     * // Get one DetailPanier
+     * const detailPanier = await prisma.detailPanier.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends DetailAchatFindUniqueArgs>(args: SelectSubset<T, DetailAchatFindUniqueArgs<ExtArgs>>): Prisma__DetailAchatClient<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends DetailPanierFindUniqueArgs>(args: SelectSubset<T, DetailPanierFindUniqueArgs<ExtArgs>>): Prisma__DetailPanierClient<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one DetailAchat that matches the filter or throw an error with `error.code='P2025'`
+     * Find one DetailPanier that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {DetailAchatFindUniqueOrThrowArgs} args - Arguments to find a DetailAchat
+     * @param {DetailPanierFindUniqueOrThrowArgs} args - Arguments to find a DetailPanier
      * @example
-     * // Get one DetailAchat
-     * const detailAchat = await prisma.detailAchat.findUniqueOrThrow({
+     * // Get one DetailPanier
+     * const detailPanier = await prisma.detailPanier.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends DetailAchatFindUniqueOrThrowArgs>(args: SelectSubset<T, DetailAchatFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DetailAchatClient<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends DetailPanierFindUniqueOrThrowArgs>(args: SelectSubset<T, DetailPanierFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DetailPanierClient<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first DetailAchat that matches the filter.
+     * Find the first DetailPanier that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailAchatFindFirstArgs} args - Arguments to find a DetailAchat
+     * @param {DetailPanierFindFirstArgs} args - Arguments to find a DetailPanier
      * @example
-     * // Get one DetailAchat
-     * const detailAchat = await prisma.detailAchat.findFirst({
+     * // Get one DetailPanier
+     * const detailPanier = await prisma.detailPanier.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends DetailAchatFindFirstArgs>(args?: SelectSubset<T, DetailAchatFindFirstArgs<ExtArgs>>): Prisma__DetailAchatClient<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends DetailPanierFindFirstArgs>(args?: SelectSubset<T, DetailPanierFindFirstArgs<ExtArgs>>): Prisma__DetailPanierClient<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first DetailAchat that matches the filter or
+     * Find the first DetailPanier that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailAchatFindFirstOrThrowArgs} args - Arguments to find a DetailAchat
+     * @param {DetailPanierFindFirstOrThrowArgs} args - Arguments to find a DetailPanier
      * @example
-     * // Get one DetailAchat
-     * const detailAchat = await prisma.detailAchat.findFirstOrThrow({
+     * // Get one DetailPanier
+     * const detailPanier = await prisma.detailPanier.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends DetailAchatFindFirstOrThrowArgs>(args?: SelectSubset<T, DetailAchatFindFirstOrThrowArgs<ExtArgs>>): Prisma__DetailAchatClient<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends DetailPanierFindFirstOrThrowArgs>(args?: SelectSubset<T, DetailPanierFindFirstOrThrowArgs<ExtArgs>>): Prisma__DetailPanierClient<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more DetailAchats that matches the filter.
+     * Find zero or more DetailPaniers that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailAchatFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {DetailPanierFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all DetailAchats
-     * const detailAchats = await prisma.detailAchat.findMany()
+     * // Get all DetailPaniers
+     * const detailPaniers = await prisma.detailPanier.findMany()
      * 
-     * // Get first 10 DetailAchats
-     * const detailAchats = await prisma.detailAchat.findMany({ take: 10 })
+     * // Get first 10 DetailPaniers
+     * const detailPaniers = await prisma.detailPanier.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const detailAchatWithIdOnly = await prisma.detailAchat.findMany({ select: { id: true } })
+     * const detailPanierWithIdOnly = await prisma.detailPanier.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends DetailAchatFindManyArgs>(args?: SelectSubset<T, DetailAchatFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends DetailPanierFindManyArgs>(args?: SelectSubset<T, DetailPanierFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a DetailAchat.
-     * @param {DetailAchatCreateArgs} args - Arguments to create a DetailAchat.
+     * Create a DetailPanier.
+     * @param {DetailPanierCreateArgs} args - Arguments to create a DetailPanier.
      * @example
-     * // Create one DetailAchat
-     * const DetailAchat = await prisma.detailAchat.create({
+     * // Create one DetailPanier
+     * const DetailPanier = await prisma.detailPanier.create({
      *   data: {
-     *     // ... data to create a DetailAchat
+     *     // ... data to create a DetailPanier
      *   }
      * })
      * 
      */
-    create<T extends DetailAchatCreateArgs>(args: SelectSubset<T, DetailAchatCreateArgs<ExtArgs>>): Prisma__DetailAchatClient<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends DetailPanierCreateArgs>(args: SelectSubset<T, DetailPanierCreateArgs<ExtArgs>>): Prisma__DetailPanierClient<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many DetailAchats.
-     * @param {DetailAchatCreateManyArgs} args - Arguments to create many DetailAchats.
+     * Create many DetailPaniers.
+     * @param {DetailPanierCreateManyArgs} args - Arguments to create many DetailPaniers.
      * @example
-     * // Create many DetailAchats
-     * const detailAchat = await prisma.detailAchat.createMany({
+     * // Create many DetailPaniers
+     * const detailPanier = await prisma.detailPanier.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends DetailAchatCreateManyArgs>(args?: SelectSubset<T, DetailAchatCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends DetailPanierCreateManyArgs>(args?: SelectSubset<T, DetailPanierCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many DetailAchats and returns the data saved in the database.
-     * @param {DetailAchatCreateManyAndReturnArgs} args - Arguments to create many DetailAchats.
+     * Create many DetailPaniers and returns the data saved in the database.
+     * @param {DetailPanierCreateManyAndReturnArgs} args - Arguments to create many DetailPaniers.
      * @example
-     * // Create many DetailAchats
-     * const detailAchat = await prisma.detailAchat.createManyAndReturn({
+     * // Create many DetailPaniers
+     * const detailPanier = await prisma.detailPanier.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many DetailAchats and only return the `id`
-     * const detailAchatWithIdOnly = await prisma.detailAchat.createManyAndReturn({
+     * // Create many DetailPaniers and only return the `id`
+     * const detailPanierWithIdOnly = await prisma.detailPanier.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -17373,28 +16045,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends DetailAchatCreateManyAndReturnArgs>(args?: SelectSubset<T, DetailAchatCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends DetailPanierCreateManyAndReturnArgs>(args?: SelectSubset<T, DetailPanierCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a DetailAchat.
-     * @param {DetailAchatDeleteArgs} args - Arguments to delete one DetailAchat.
+     * Delete a DetailPanier.
+     * @param {DetailPanierDeleteArgs} args - Arguments to delete one DetailPanier.
      * @example
-     * // Delete one DetailAchat
-     * const DetailAchat = await prisma.detailAchat.delete({
+     * // Delete one DetailPanier
+     * const DetailPanier = await prisma.detailPanier.delete({
      *   where: {
-     *     // ... filter to delete one DetailAchat
+     *     // ... filter to delete one DetailPanier
      *   }
      * })
      * 
      */
-    delete<T extends DetailAchatDeleteArgs>(args: SelectSubset<T, DetailAchatDeleteArgs<ExtArgs>>): Prisma__DetailAchatClient<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends DetailPanierDeleteArgs>(args: SelectSubset<T, DetailPanierDeleteArgs<ExtArgs>>): Prisma__DetailPanierClient<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one DetailAchat.
-     * @param {DetailAchatUpdateArgs} args - Arguments to update one DetailAchat.
+     * Update one DetailPanier.
+     * @param {DetailPanierUpdateArgs} args - Arguments to update one DetailPanier.
      * @example
-     * // Update one DetailAchat
-     * const detailAchat = await prisma.detailAchat.update({
+     * // Update one DetailPanier
+     * const detailPanier = await prisma.detailPanier.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -17404,30 +16076,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends DetailAchatUpdateArgs>(args: SelectSubset<T, DetailAchatUpdateArgs<ExtArgs>>): Prisma__DetailAchatClient<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends DetailPanierUpdateArgs>(args: SelectSubset<T, DetailPanierUpdateArgs<ExtArgs>>): Prisma__DetailPanierClient<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more DetailAchats.
-     * @param {DetailAchatDeleteManyArgs} args - Arguments to filter DetailAchats to delete.
+     * Delete zero or more DetailPaniers.
+     * @param {DetailPanierDeleteManyArgs} args - Arguments to filter DetailPaniers to delete.
      * @example
-     * // Delete a few DetailAchats
-     * const { count } = await prisma.detailAchat.deleteMany({
+     * // Delete a few DetailPaniers
+     * const { count } = await prisma.detailPanier.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends DetailAchatDeleteManyArgs>(args?: SelectSubset<T, DetailAchatDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends DetailPanierDeleteManyArgs>(args?: SelectSubset<T, DetailPanierDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more DetailAchats.
+     * Update zero or more DetailPaniers.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailAchatUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {DetailPanierUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many DetailAchats
-     * const detailAchat = await prisma.detailAchat.updateMany({
+     * // Update many DetailPaniers
+     * const detailPanier = await prisma.detailPanier.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -17437,14 +16109,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends DetailAchatUpdateManyArgs>(args: SelectSubset<T, DetailAchatUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends DetailPanierUpdateManyArgs>(args: SelectSubset<T, DetailPanierUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more DetailAchats and returns the data updated in the database.
-     * @param {DetailAchatUpdateManyAndReturnArgs} args - Arguments to update many DetailAchats.
+     * Update zero or more DetailPaniers and returns the data updated in the database.
+     * @param {DetailPanierUpdateManyAndReturnArgs} args - Arguments to update many DetailPaniers.
      * @example
-     * // Update many DetailAchats
-     * const detailAchat = await prisma.detailAchat.updateManyAndReturn({
+     * // Update many DetailPaniers
+     * const detailPanier = await prisma.detailPanier.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -17453,8 +16125,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more DetailAchats and only return the `id`
-     * const detailAchatWithIdOnly = await prisma.detailAchat.updateManyAndReturn({
+     * // Update zero or more DetailPaniers and only return the `id`
+     * const detailPanierWithIdOnly = await prisma.detailPanier.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -17467,56 +16139,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends DetailAchatUpdateManyAndReturnArgs>(args: SelectSubset<T, DetailAchatUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends DetailPanierUpdateManyAndReturnArgs>(args: SelectSubset<T, DetailPanierUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one DetailAchat.
-     * @param {DetailAchatUpsertArgs} args - Arguments to update or create a DetailAchat.
+     * Create or update one DetailPanier.
+     * @param {DetailPanierUpsertArgs} args - Arguments to update or create a DetailPanier.
      * @example
-     * // Update or create a DetailAchat
-     * const detailAchat = await prisma.detailAchat.upsert({
+     * // Update or create a DetailPanier
+     * const detailPanier = await prisma.detailPanier.upsert({
      *   create: {
-     *     // ... data to create a DetailAchat
+     *     // ... data to create a DetailPanier
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the DetailAchat we want to update
+     *     // ... the filter for the DetailPanier we want to update
      *   }
      * })
      */
-    upsert<T extends DetailAchatUpsertArgs>(args: SelectSubset<T, DetailAchatUpsertArgs<ExtArgs>>): Prisma__DetailAchatClient<$Result.GetResult<Prisma.$DetailAchatPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends DetailPanierUpsertArgs>(args: SelectSubset<T, DetailPanierUpsertArgs<ExtArgs>>): Prisma__DetailPanierClient<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of DetailAchats.
+     * Count the number of DetailPaniers.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailAchatCountArgs} args - Arguments to filter DetailAchats to count.
+     * @param {DetailPanierCountArgs} args - Arguments to filter DetailPaniers to count.
      * @example
-     * // Count the number of DetailAchats
-     * const count = await prisma.detailAchat.count({
+     * // Count the number of DetailPaniers
+     * const count = await prisma.detailPanier.count({
      *   where: {
-     *     // ... the filter for the DetailAchats we want to count
+     *     // ... the filter for the DetailPaniers we want to count
      *   }
      * })
     **/
-    count<T extends DetailAchatCountArgs>(
-      args?: Subset<T, DetailAchatCountArgs>,
+    count<T extends DetailPanierCountArgs>(
+      args?: Subset<T, DetailPanierCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], DetailAchatCountAggregateOutputType>
+          : GetScalarType<T['select'], DetailPanierCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a DetailAchat.
+     * Allows you to perform aggregations operations on a DetailPanier.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailAchatAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {DetailPanierAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -17536,13 +16208,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends DetailAchatAggregateArgs>(args: Subset<T, DetailAchatAggregateArgs>): Prisma.PrismaPromise<GetDetailAchatAggregateType<T>>
+    aggregate<T extends DetailPanierAggregateArgs>(args: Subset<T, DetailPanierAggregateArgs>): Prisma.PrismaPromise<GetDetailPanierAggregateType<T>>
 
     /**
-     * Group by DetailAchat.
+     * Group by DetailPanier.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailAchatGroupByArgs} args - Group by arguments.
+     * @param {DetailPanierGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -17557,14 +16229,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends DetailAchatGroupByArgs,
+      T extends DetailPanierGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: DetailAchatGroupByArgs['orderBy'] }
-        : { orderBy?: DetailAchatGroupByArgs['orderBy'] },
+        ? { orderBy: DetailPanierGroupByArgs['orderBy'] }
+        : { orderBy?: DetailPanierGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -17613,20 +16285,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, DetailAchatGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDetailAchatGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, DetailPanierGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDetailPanierGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the DetailAchat model
+   * Fields of the DetailPanier model
    */
-  readonly fields: DetailAchatFieldRefs;
+  readonly fields: DetailPanierFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for DetailAchat.
+   * The delegate class that acts as a "Promise-like" for DetailPanier.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__DetailAchatClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__DetailPanierClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     produit<T extends ProduitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProduitDefaultArgs<ExtArgs>>): Prisma__ProduitClient<$Result.GetResult<Prisma.$ProduitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     panier<T extends PanierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PanierDefaultArgs<ExtArgs>>): Prisma__PanierClient<$Result.GetResult<Prisma.$PanierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -17656,428 +16328,428 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the DetailAchat model
+   * Fields of the DetailPanier model
    */
-  interface DetailAchatFieldRefs {
-    readonly id: FieldRef<"DetailAchat", 'Int'>
-    readonly produitId: FieldRef<"DetailAchat", 'Int'>
-    readonly qtte: FieldRef<"DetailAchat", 'Int'>
-    readonly prixUnitaire: FieldRef<"DetailAchat", 'Float'>
-    readonly prixTotal: FieldRef<"DetailAchat", 'Float'>
-    readonly panierId: FieldRef<"DetailAchat", 'Int'>
-    readonly createdAt: FieldRef<"DetailAchat", 'DateTime'>
-    readonly updatedAt: FieldRef<"DetailAchat", 'DateTime'>
+  interface DetailPanierFieldRefs {
+    readonly id: FieldRef<"DetailPanier", 'Int'>
+    readonly produitId: FieldRef<"DetailPanier", 'Int'>
+    readonly qtte: FieldRef<"DetailPanier", 'Int'>
+    readonly prixUnitaire: FieldRef<"DetailPanier", 'Float'>
+    readonly prixTotal: FieldRef<"DetailPanier", 'Float'>
+    readonly panierId: FieldRef<"DetailPanier", 'Int'>
+    readonly createdAt: FieldRef<"DetailPanier", 'DateTime'>
+    readonly updatedAt: FieldRef<"DetailPanier", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * DetailAchat findUnique
+   * DetailPanier findUnique
    */
-  export type DetailAchatFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelect<ExtArgs> | null
+    select?: DetailPanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatInclude<ExtArgs> | null
+    include?: DetailPanierInclude<ExtArgs> | null
     /**
-     * Filter, which DetailAchat to fetch.
+     * Filter, which DetailPanier to fetch.
      */
-    where: DetailAchatWhereUniqueInput
+    where: DetailPanierWhereUniqueInput
   }
 
   /**
-   * DetailAchat findUniqueOrThrow
+   * DetailPanier findUniqueOrThrow
    */
-  export type DetailAchatFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelect<ExtArgs> | null
+    select?: DetailPanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatInclude<ExtArgs> | null
+    include?: DetailPanierInclude<ExtArgs> | null
     /**
-     * Filter, which DetailAchat to fetch.
+     * Filter, which DetailPanier to fetch.
      */
-    where: DetailAchatWhereUniqueInput
+    where: DetailPanierWhereUniqueInput
   }
 
   /**
-   * DetailAchat findFirst
+   * DetailPanier findFirst
    */
-  export type DetailAchatFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelect<ExtArgs> | null
+    select?: DetailPanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatInclude<ExtArgs> | null
+    include?: DetailPanierInclude<ExtArgs> | null
     /**
-     * Filter, which DetailAchat to fetch.
+     * Filter, which DetailPanier to fetch.
      */
-    where?: DetailAchatWhereInput
+    where?: DetailPanierWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of DetailAchats to fetch.
+     * Determine the order of DetailPaniers to fetch.
      */
-    orderBy?: DetailAchatOrderByWithRelationInput | DetailAchatOrderByWithRelationInput[]
+    orderBy?: DetailPanierOrderByWithRelationInput | DetailPanierOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for DetailAchats.
+     * Sets the position for searching for DetailPaniers.
      */
-    cursor?: DetailAchatWhereUniqueInput
+    cursor?: DetailPanierWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` DetailAchats from the position of the cursor.
+     * Take `±n` DetailPaniers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` DetailAchats.
+     * Skip the first `n` DetailPaniers.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of DetailAchats.
+     * Filter by unique combinations of DetailPaniers.
      */
-    distinct?: DetailAchatScalarFieldEnum | DetailAchatScalarFieldEnum[]
+    distinct?: DetailPanierScalarFieldEnum | DetailPanierScalarFieldEnum[]
   }
 
   /**
-   * DetailAchat findFirstOrThrow
+   * DetailPanier findFirstOrThrow
    */
-  export type DetailAchatFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelect<ExtArgs> | null
+    select?: DetailPanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatInclude<ExtArgs> | null
+    include?: DetailPanierInclude<ExtArgs> | null
     /**
-     * Filter, which DetailAchat to fetch.
+     * Filter, which DetailPanier to fetch.
      */
-    where?: DetailAchatWhereInput
+    where?: DetailPanierWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of DetailAchats to fetch.
+     * Determine the order of DetailPaniers to fetch.
      */
-    orderBy?: DetailAchatOrderByWithRelationInput | DetailAchatOrderByWithRelationInput[]
+    orderBy?: DetailPanierOrderByWithRelationInput | DetailPanierOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for DetailAchats.
+     * Sets the position for searching for DetailPaniers.
      */
-    cursor?: DetailAchatWhereUniqueInput
+    cursor?: DetailPanierWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` DetailAchats from the position of the cursor.
+     * Take `±n` DetailPaniers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` DetailAchats.
+     * Skip the first `n` DetailPaniers.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of DetailAchats.
+     * Filter by unique combinations of DetailPaniers.
      */
-    distinct?: DetailAchatScalarFieldEnum | DetailAchatScalarFieldEnum[]
+    distinct?: DetailPanierScalarFieldEnum | DetailPanierScalarFieldEnum[]
   }
 
   /**
-   * DetailAchat findMany
+   * DetailPanier findMany
    */
-  export type DetailAchatFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelect<ExtArgs> | null
+    select?: DetailPanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatInclude<ExtArgs> | null
+    include?: DetailPanierInclude<ExtArgs> | null
     /**
-     * Filter, which DetailAchats to fetch.
+     * Filter, which DetailPaniers to fetch.
      */
-    where?: DetailAchatWhereInput
+    where?: DetailPanierWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of DetailAchats to fetch.
+     * Determine the order of DetailPaniers to fetch.
      */
-    orderBy?: DetailAchatOrderByWithRelationInput | DetailAchatOrderByWithRelationInput[]
+    orderBy?: DetailPanierOrderByWithRelationInput | DetailPanierOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing DetailAchats.
+     * Sets the position for listing DetailPaniers.
      */
-    cursor?: DetailAchatWhereUniqueInput
+    cursor?: DetailPanierWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` DetailAchats from the position of the cursor.
+     * Take `±n` DetailPaniers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` DetailAchats.
+     * Skip the first `n` DetailPaniers.
      */
     skip?: number
-    distinct?: DetailAchatScalarFieldEnum | DetailAchatScalarFieldEnum[]
+    distinct?: DetailPanierScalarFieldEnum | DetailPanierScalarFieldEnum[]
   }
 
   /**
-   * DetailAchat create
+   * DetailPanier create
    */
-  export type DetailAchatCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelect<ExtArgs> | null
+    select?: DetailPanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatInclude<ExtArgs> | null
+    include?: DetailPanierInclude<ExtArgs> | null
     /**
-     * The data needed to create a DetailAchat.
+     * The data needed to create a DetailPanier.
      */
-    data: XOR<DetailAchatCreateInput, DetailAchatUncheckedCreateInput>
+    data: XOR<DetailPanierCreateInput, DetailPanierUncheckedCreateInput>
   }
 
   /**
-   * DetailAchat createMany
+   * DetailPanier createMany
    */
-  export type DetailAchatCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many DetailAchats.
+     * The data used to create many DetailPaniers.
      */
-    data: DetailAchatCreateManyInput | DetailAchatCreateManyInput[]
+    data: DetailPanierCreateManyInput | DetailPanierCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * DetailAchat createManyAndReturn
+   * DetailPanier createManyAndReturn
    */
-  export type DetailAchatCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelectCreateManyAndReturn<ExtArgs> | null
+    select?: DetailPanierSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
-     * The data used to create many DetailAchats.
+     * The data used to create many DetailPaniers.
      */
-    data: DetailAchatCreateManyInput | DetailAchatCreateManyInput[]
+    data: DetailPanierCreateManyInput | DetailPanierCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: DetailPanierIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * DetailAchat update
+   * DetailPanier update
    */
-  export type DetailAchatUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelect<ExtArgs> | null
+    select?: DetailPanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatInclude<ExtArgs> | null
+    include?: DetailPanierInclude<ExtArgs> | null
     /**
-     * The data needed to update a DetailAchat.
+     * The data needed to update a DetailPanier.
      */
-    data: XOR<DetailAchatUpdateInput, DetailAchatUncheckedUpdateInput>
+    data: XOR<DetailPanierUpdateInput, DetailPanierUncheckedUpdateInput>
     /**
-     * Choose, which DetailAchat to update.
+     * Choose, which DetailPanier to update.
      */
-    where: DetailAchatWhereUniqueInput
+    where: DetailPanierWhereUniqueInput
   }
 
   /**
-   * DetailAchat updateMany
+   * DetailPanier updateMany
    */
-  export type DetailAchatUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update DetailAchats.
+     * The data used to update DetailPaniers.
      */
-    data: XOR<DetailAchatUpdateManyMutationInput, DetailAchatUncheckedUpdateManyInput>
+    data: XOR<DetailPanierUpdateManyMutationInput, DetailPanierUncheckedUpdateManyInput>
     /**
-     * Filter which DetailAchats to update
+     * Filter which DetailPaniers to update
      */
-    where?: DetailAchatWhereInput
+    where?: DetailPanierWhereInput
     /**
-     * Limit how many DetailAchats to update.
+     * Limit how many DetailPaniers to update.
      */
     limit?: number
   }
 
   /**
-   * DetailAchat updateManyAndReturn
+   * DetailPanier updateManyAndReturn
    */
-  export type DetailAchatUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: DetailPanierSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
-     * The data used to update DetailAchats.
+     * The data used to update DetailPaniers.
      */
-    data: XOR<DetailAchatUpdateManyMutationInput, DetailAchatUncheckedUpdateManyInput>
+    data: XOR<DetailPanierUpdateManyMutationInput, DetailPanierUncheckedUpdateManyInput>
     /**
-     * Filter which DetailAchats to update
+     * Filter which DetailPaniers to update
      */
-    where?: DetailAchatWhereInput
+    where?: DetailPanierWhereInput
     /**
-     * Limit how many DetailAchats to update.
+     * Limit how many DetailPaniers to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: DetailPanierIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * DetailAchat upsert
+   * DetailPanier upsert
    */
-  export type DetailAchatUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelect<ExtArgs> | null
+    select?: DetailPanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatInclude<ExtArgs> | null
+    include?: DetailPanierInclude<ExtArgs> | null
     /**
-     * The filter to search for the DetailAchat to update in case it exists.
+     * The filter to search for the DetailPanier to update in case it exists.
      */
-    where: DetailAchatWhereUniqueInput
+    where: DetailPanierWhereUniqueInput
     /**
-     * In case the DetailAchat found by the `where` argument doesn't exist, create a new DetailAchat with this data.
+     * In case the DetailPanier found by the `where` argument doesn't exist, create a new DetailPanier with this data.
      */
-    create: XOR<DetailAchatCreateInput, DetailAchatUncheckedCreateInput>
+    create: XOR<DetailPanierCreateInput, DetailPanierUncheckedCreateInput>
     /**
-     * In case the DetailAchat was found with the provided `where` argument, update it with this data.
+     * In case the DetailPanier was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<DetailAchatUpdateInput, DetailAchatUncheckedUpdateInput>
+    update: XOR<DetailPanierUpdateInput, DetailPanierUncheckedUpdateInput>
   }
 
   /**
-   * DetailAchat delete
+   * DetailPanier delete
    */
-  export type DetailAchatDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelect<ExtArgs> | null
+    select?: DetailPanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatInclude<ExtArgs> | null
+    include?: DetailPanierInclude<ExtArgs> | null
     /**
-     * Filter which DetailAchat to delete.
+     * Filter which DetailPanier to delete.
      */
-    where: DetailAchatWhereUniqueInput
+    where: DetailPanierWhereUniqueInput
   }
 
   /**
-   * DetailAchat deleteMany
+   * DetailPanier deleteMany
    */
-  export type DetailAchatDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which DetailAchats to delete
+     * Filter which DetailPaniers to delete
      */
-    where?: DetailAchatWhereInput
+    where?: DetailPanierWhereInput
     /**
-     * Limit how many DetailAchats to delete.
+     * Limit how many DetailPaniers to delete.
      */
     limit?: number
   }
 
   /**
-   * DetailAchat without action
+   * DetailPanier without action
    */
-  export type DetailAchatDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type DetailPanierDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailAchat
+     * Select specific fields to fetch from the DetailPanier
      */
-    select?: DetailAchatSelect<ExtArgs> | null
+    select?: DetailPanierSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailAchat
+     * Omit specific fields from the DetailPanier
      */
-    omit?: DetailAchatOmit<ExtArgs> | null
+    omit?: DetailPanierOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailAchatInclude<ExtArgs> | null
+    include?: DetailPanierInclude<ExtArgs> | null
   }
 
 
@@ -18097,6 +16769,7 @@ export namespace Prisma {
     id: number | null
     panierId: number | null
     fournisseurId: number | null
+    enregisterParId: number | null
     paiementId: number | null
   }
 
@@ -18104,6 +16777,7 @@ export namespace Prisma {
     id: number | null
     panierId: number | null
     fournisseurId: number | null
+    enregisterParId: number | null
     paiementId: number | null
   }
 
@@ -18112,7 +16786,7 @@ export namespace Prisma {
     statut: $Enums.StatutAchat | null
     panierId: number | null
     fournisseurId: number | null
-    enregisterParId: string | null
+    enregisterParId: number | null
     paiementId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -18123,7 +16797,7 @@ export namespace Prisma {
     statut: $Enums.StatutAchat | null
     panierId: number | null
     fournisseurId: number | null
-    enregisterParId: string | null
+    enregisterParId: number | null
     paiementId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -18146,6 +16820,7 @@ export namespace Prisma {
     id?: true
     panierId?: true
     fournisseurId?: true
+    enregisterParId?: true
     paiementId?: true
   }
 
@@ -18153,6 +16828,7 @@ export namespace Prisma {
     id?: true
     panierId?: true
     fournisseurId?: true
+    enregisterParId?: true
     paiementId?: true
   }
 
@@ -18281,7 +16957,7 @@ export namespace Prisma {
     statut: $Enums.StatutAchat
     panierId: number
     fournisseurId: number
-    enregisterParId: string
+    enregisterParId: number
     paiementId: number
     createdAt: Date
     updatedAt: Date
@@ -18395,7 +17071,7 @@ export namespace Prisma {
       statut: $Enums.StatutAchat
       panierId: number
       fournisseurId: number
-      enregisterParId: string
+      enregisterParId: number
       paiementId: number
       createdAt: Date
       updatedAt: Date
@@ -18830,7 +17506,7 @@ export namespace Prisma {
     readonly statut: FieldRef<"Achat", 'StatutAchat'>
     readonly panierId: FieldRef<"Achat", 'Int'>
     readonly fournisseurId: FieldRef<"Achat", 'Int'>
-    readonly enregisterParId: FieldRef<"Achat", 'String'>
+    readonly enregisterParId: FieldRef<"Achat", 'Int'>
     readonly paiementId: FieldRef<"Achat", 'Int'>
     readonly createdAt: FieldRef<"Achat", 'DateTime'>
     readonly updatedAt: FieldRef<"Achat", 'DateTime'>
@@ -19390,13 +18066,13 @@ export namespace Prisma {
     statut: 'statut',
     total_ttc: 'total_ttc',
     total_ht: 'total_ht',
-    remise: 'remise',
-    detailVenteId: 'detailVenteId',
-    entrepriseId: 'entrepriseId',
+    type_acheteur: 'type_acheteur',
     clientId: 'clientId',
-    agentId: 'agentId',
+    enregisterParId: 'enregisterParId',
     fournisseurId: 'fournisseurId',
+    agentId: 'agentId',
     paiementId: 'paiementId',
+    panierId: 'panierId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -19414,20 +18090,7 @@ export namespace Prisma {
   export type PanierScalarFieldEnum = (typeof PanierScalarFieldEnum)[keyof typeof PanierScalarFieldEnum]
 
 
-  export const DetailVenteScalarFieldEnum: {
-    id: 'id',
-    produitId: 'produitId',
-    qtte: 'qtte',
-    prixUnitaire: 'prixUnitaire',
-    prixTotal: 'prixTotal',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type DetailVenteScalarFieldEnum = (typeof DetailVenteScalarFieldEnum)[keyof typeof DetailVenteScalarFieldEnum]
-
-
-  export const DetailAchatScalarFieldEnum: {
+  export const DetailPanierScalarFieldEnum: {
     id: 'id',
     produitId: 'produitId',
     qtte: 'qtte',
@@ -19438,7 +18101,7 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type DetailAchatScalarFieldEnum = (typeof DetailAchatScalarFieldEnum)[keyof typeof DetailAchatScalarFieldEnum]
+  export type DetailPanierScalarFieldEnum = (typeof DetailPanierScalarFieldEnum)[keyof typeof DetailPanierScalarFieldEnum]
 
 
   export const AchatScalarFieldEnum: {
@@ -19597,6 +18260,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'StatutVente'
+   */
+  export type EnumStatutVenteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutVente'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatutVente[]'
+   */
+  export type ListEnumStatutVenteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutVente[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TypeAcheteur'
+   */
+  export type EnumTypeAcheteurFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeAcheteur'>
+    
+
+
+  /**
+   * Reference to a field of type 'TypeAcheteur[]'
+   */
+  export type ListEnumTypeAcheteurFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeAcheteur[]'>
+    
+
+
+  /**
    * Reference to a field of type 'StatutAchat'
    */
   export type EnumStatutAchatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutAchat'>
@@ -19627,7 +18318,6 @@ export namespace Prisma {
     email?: StringFilter<"Entreprise"> | string
     description?: StringNullableFilter<"Entreprise"> | string | null
     logo?: StringNullableFilter<"Entreprise"> | string | null
-    Vente?: VenteListRelationFilter
   }
 
   export type EntrepriseOrderByWithRelationInput = {
@@ -19641,7 +18331,6 @@ export namespace Prisma {
     email?: SortOrder
     description?: SortOrderInput | SortOrder
     logo?: SortOrderInput | SortOrder
-    Vente?: VenteOrderByRelationAggregateInput
   }
 
   export type EntrepriseWhereUniqueInput = Prisma.AtLeast<{
@@ -19658,7 +18347,6 @@ export namespace Prisma {
     site?: StringNullableFilter<"Entreprise"> | string | null
     description?: StringNullableFilter<"Entreprise"> | string | null
     logo?: StringNullableFilter<"Entreprise"> | string | null
-    Vente?: VenteListRelationFilter
   }, "id" | "nom" | "encronyme" | "code_postale" | "tel" | "email">
 
   export type EntrepriseOrderByWithAggregationInput = {
@@ -19699,7 +18387,7 @@ export namespace Prisma {
     AND?: UtilisateurWhereInput | UtilisateurWhereInput[]
     OR?: UtilisateurWhereInput[]
     NOT?: UtilisateurWhereInput | UtilisateurWhereInput[]
-    id?: StringFilter<"Utilisateur"> | string
+    id?: IntFilter<"Utilisateur"> | number
     email?: StringFilter<"Utilisateur"> | string
     nom?: StringFilter<"Utilisateur"> | string
     postnom?: StringFilter<"Utilisateur"> | string
@@ -19743,7 +18431,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     email?: string
     AND?: UtilisateurWhereInput | UtilisateurWhereInput[]
     OR?: UtilisateurWhereInput[]
@@ -19780,15 +18468,17 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UtilisateurCountOrderByAggregateInput
+    _avg?: UtilisateurAvgOrderByAggregateInput
     _max?: UtilisateurMaxOrderByAggregateInput
     _min?: UtilisateurMinOrderByAggregateInput
+    _sum?: UtilisateurSumOrderByAggregateInput
   }
 
   export type UtilisateurScalarWhereWithAggregatesInput = {
     AND?: UtilisateurScalarWhereWithAggregatesInput | UtilisateurScalarWhereWithAggregatesInput[]
     OR?: UtilisateurScalarWhereWithAggregatesInput[]
     NOT?: UtilisateurScalarWhereWithAggregatesInput | UtilisateurScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Utilisateur"> | string
+    id?: IntWithAggregatesFilter<"Utilisateur"> | number
     email?: StringWithAggregatesFilter<"Utilisateur"> | string
     nom?: StringWithAggregatesFilter<"Utilisateur"> | string
     postnom?: StringWithAggregatesFilter<"Utilisateur"> | string
@@ -19809,7 +18499,7 @@ export namespace Prisma {
     ville?: StringFilter<"Adresse"> | string
     commune?: StringFilter<"Adresse"> | string
     adresse?: StringFilter<"Adresse"> | string
-    utilisateurId?: StringNullableFilter<"Adresse"> | string | null
+    utilisateurId?: IntNullableFilter<"Adresse"> | number | null
     fournisseurId?: IntNullableFilter<"Adresse"> | number | null
     createdAt?: DateTimeFilter<"Adresse"> | Date | string
     updatedAt?: DateTimeFilter<"Adresse"> | Date | string
@@ -19838,7 +18528,7 @@ export namespace Prisma {
     ville?: StringFilter<"Adresse"> | string
     commune?: StringFilter<"Adresse"> | string
     adresse?: StringFilter<"Adresse"> | string
-    utilisateurId?: StringNullableFilter<"Adresse"> | string | null
+    utilisateurId?: IntNullableFilter<"Adresse"> | number | null
     fournisseurId?: IntNullableFilter<"Adresse"> | number | null
     createdAt?: DateTimeFilter<"Adresse"> | Date | string
     updatedAt?: DateTimeFilter<"Adresse"> | Date | string
@@ -19870,7 +18560,7 @@ export namespace Prisma {
     ville?: StringWithAggregatesFilter<"Adresse"> | string
     commune?: StringWithAggregatesFilter<"Adresse"> | string
     adresse?: StringWithAggregatesFilter<"Adresse"> | string
-    utilisateurId?: StringNullableWithAggregatesFilter<"Adresse"> | string | null
+    utilisateurId?: IntNullableWithAggregatesFilter<"Adresse"> | number | null
     fournisseurId?: IntNullableWithAggregatesFilter<"Adresse"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Adresse"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Adresse"> | Date | string
@@ -19882,7 +18572,7 @@ export namespace Prisma {
     NOT?: ContactWhereInput | ContactWhereInput[]
     id?: IntFilter<"Contact"> | number
     tel?: StringFilter<"Contact"> | string
-    utilisateurId?: StringNullableFilter<"Contact"> | string | null
+    utilisateurId?: IntNullableFilter<"Contact"> | number | null
     fournisseurId?: IntNullableFilter<"Contact"> | number | null
     createdAt?: DateTimeFilter<"Contact"> | Date | string
     updatedAt?: DateTimeFilter<"Contact"> | Date | string
@@ -19907,7 +18597,7 @@ export namespace Prisma {
     AND?: ContactWhereInput | ContactWhereInput[]
     OR?: ContactWhereInput[]
     NOT?: ContactWhereInput | ContactWhereInput[]
-    utilisateurId?: StringNullableFilter<"Contact"> | string | null
+    utilisateurId?: IntNullableFilter<"Contact"> | number | null
     fournisseurId?: IntNullableFilter<"Contact"> | number | null
     createdAt?: DateTimeFilter<"Contact"> | Date | string
     updatedAt?: DateTimeFilter<"Contact"> | Date | string
@@ -19935,7 +18625,7 @@ export namespace Prisma {
     NOT?: ContactScalarWhereWithAggregatesInput | ContactScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Contact"> | number
     tel?: StringWithAggregatesFilter<"Contact"> | string
-    utilisateurId?: StringNullableWithAggregatesFilter<"Contact"> | string | null
+    utilisateurId?: IntNullableWithAggregatesFilter<"Contact"> | number | null
     fournisseurId?: IntNullableWithAggregatesFilter<"Contact"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Contact"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Contact"> | Date | string
@@ -20018,7 +18708,7 @@ export namespace Prisma {
     NOT?: TeneurWhereInput | TeneurWhereInput[]
     id?: IntFilter<"Teneur"> | number
     valeur?: FloatFilter<"Teneur"> | number
-    utilisateurId?: StringFilter<"Teneur"> | string
+    utilisateurId?: IntFilter<"Teneur"> | number
     createdAt?: DateTimeFilter<"Teneur"> | Date | string
     updatedAt?: DateTimeFilter<"Teneur"> | Date | string
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
@@ -20041,7 +18731,7 @@ export namespace Prisma {
     AND?: TeneurWhereInput | TeneurWhereInput[]
     OR?: TeneurWhereInput[]
     NOT?: TeneurWhereInput | TeneurWhereInput[]
-    utilisateurId?: StringFilter<"Teneur"> | string
+    utilisateurId?: IntFilter<"Teneur"> | number
     createdAt?: DateTimeFilter<"Teneur"> | Date | string
     updatedAt?: DateTimeFilter<"Teneur"> | Date | string
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
@@ -20067,7 +18757,7 @@ export namespace Prisma {
     NOT?: TeneurScalarWhereWithAggregatesInput | TeneurScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Teneur"> | number
     valeur?: FloatWithAggregatesFilter<"Teneur"> | number
-    utilisateurId?: StringWithAggregatesFilter<"Teneur"> | string
+    utilisateurId?: IntWithAggregatesFilter<"Teneur"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Teneur"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Teneur"> | Date | string
   }
@@ -20080,7 +18770,7 @@ export namespace Prisma {
     nom?: StringFilter<"Devise"> | string
     code?: StringFilter<"Devise"> | string
     symbole?: StringFilter<"Devise"> | string
-    utilisateurId?: StringFilter<"Devise"> | string
+    utilisateurId?: IntFilter<"Devise"> | number
     createdAt?: DateTimeFilter<"Devise"> | Date | string
     updatedAt?: DateTimeFilter<"Devise"> | Date | string
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
@@ -20109,7 +18799,7 @@ export namespace Prisma {
     OR?: DeviseWhereInput[]
     NOT?: DeviseWhereInput | DeviseWhereInput[]
     symbole?: StringFilter<"Devise"> | string
-    utilisateurId?: StringFilter<"Devise"> | string
+    utilisateurId?: IntFilter<"Devise"> | number
     createdAt?: DateTimeFilter<"Devise"> | Date | string
     updatedAt?: DateTimeFilter<"Devise"> | Date | string
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
@@ -20140,7 +18830,7 @@ export namespace Prisma {
     nom?: StringWithAggregatesFilter<"Devise"> | string
     code?: StringWithAggregatesFilter<"Devise"> | string
     symbole?: StringWithAggregatesFilter<"Devise"> | string
-    utilisateurId?: StringWithAggregatesFilter<"Devise"> | string
+    utilisateurId?: IntWithAggregatesFilter<"Devise"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Devise"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Devise"> | Date | string
   }
@@ -20156,14 +18846,13 @@ export namespace Prisma {
     description?: StringFilter<"Produit"> | string
     deviseId?: IntFilter<"Produit"> | number
     teneurId?: IntFilter<"Produit"> | number
-    utilisateurId?: StringFilter<"Produit"> | string
+    utilisateurId?: IntFilter<"Produit"> | number
     createdAt?: DateTimeFilter<"Produit"> | Date | string
     updatedAt?: DateTimeFilter<"Produit"> | Date | string
     devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
     teneur?: XOR<TeneurScalarRelationFilter, TeneurWhereInput>
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    DetailVente?: DetailVenteListRelationFilter
-    DetailAchat?: DetailAchatListRelationFilter
+    DetailPanier?: DetailPanierListRelationFilter
   }
 
   export type ProduitOrderByWithRelationInput = {
@@ -20180,8 +18869,7 @@ export namespace Prisma {
     devise?: DeviseOrderByWithRelationInput
     teneur?: TeneurOrderByWithRelationInput
     utilisateur?: UtilisateurOrderByWithRelationInput
-    DetailVente?: DetailVenteOrderByRelationAggregateInput
-    DetailAchat?: DetailAchatOrderByRelationAggregateInput
+    DetailPanier?: DetailPanierOrderByRelationAggregateInput
   }
 
   export type ProduitWhereUniqueInput = Prisma.AtLeast<{
@@ -20195,14 +18883,13 @@ export namespace Prisma {
     description?: StringFilter<"Produit"> | string
     deviseId?: IntFilter<"Produit"> | number
     teneurId?: IntFilter<"Produit"> | number
-    utilisateurId?: StringFilter<"Produit"> | string
+    utilisateurId?: IntFilter<"Produit"> | number
     createdAt?: DateTimeFilter<"Produit"> | Date | string
     updatedAt?: DateTimeFilter<"Produit"> | Date | string
     devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
     teneur?: XOR<TeneurScalarRelationFilter, TeneurWhereInput>
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    DetailVente?: DetailVenteListRelationFilter
-    DetailAchat?: DetailAchatListRelationFilter
+    DetailPanier?: DetailPanierListRelationFilter
   }, "id">
 
   export type ProduitOrderByWithAggregationInput = {
@@ -20234,7 +18921,7 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Produit"> | string
     deviseId?: IntWithAggregatesFilter<"Produit"> | number
     teneurId?: IntWithAggregatesFilter<"Produit"> | number
-    utilisateurId?: StringWithAggregatesFilter<"Produit"> | string
+    utilisateurId?: IntWithAggregatesFilter<"Produit"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Produit"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Produit"> | Date | string
   }
@@ -20312,23 +18999,22 @@ export namespace Prisma {
     OR?: VenteWhereInput[]
     NOT?: VenteWhereInput | VenteWhereInput[]
     id?: IntFilter<"Vente"> | number
-    statut?: StringFilter<"Vente"> | string
+    statut?: EnumStatutVenteFilter<"Vente"> | $Enums.StatutVente
     total_ttc?: FloatFilter<"Vente"> | number
     total_ht?: FloatFilter<"Vente"> | number
-    remise?: FloatFilter<"Vente"> | number
-    detailVenteId?: IntFilter<"Vente"> | number
-    entrepriseId?: IntFilter<"Vente"> | number
-    clientId?: StringFilter<"Vente"> | string
-    agentId?: StringFilter<"Vente"> | string
+    type_acheteur?: EnumTypeAcheteurFilter<"Vente"> | $Enums.TypeAcheteur
+    clientId?: IntNullableFilter<"Vente"> | number | null
+    enregisterParId?: IntFilter<"Vente"> | number
     fournisseurId?: IntNullableFilter<"Vente"> | number | null
-    paiementId?: IntNullableFilter<"Vente"> | number | null
+    agentId?: IntNullableFilter<"Vente"> | number | null
+    paiementId?: IntFilter<"Vente"> | number
+    panierId?: IntFilter<"Vente"> | number
     createdAt?: DateTimeFilter<"Vente"> | Date | string
     updatedAt?: DateTimeFilter<"Vente"> | Date | string
-    detailvente?: XOR<DetailVenteScalarRelationFilter, DetailVenteWhereInput>
-    entreprise?: XOR<EntrepriseScalarRelationFilter, EntrepriseWhereInput>
+    panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
-    paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
+    paiement?: XOR<PaiementScalarRelationFilter, PaiementWhereInput>
   }
 
   export type VenteOrderByWithRelationInput = {
@@ -20336,17 +19022,16 @@ export namespace Prisma {
     statut?: SortOrder
     total_ttc?: SortOrder
     total_ht?: SortOrder
-    remise?: SortOrder
-    detailVenteId?: SortOrder
-    entrepriseId?: SortOrder
-    clientId?: SortOrder
-    agentId?: SortOrder
+    type_acheteur?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    enregisterParId?: SortOrder
     fournisseurId?: SortOrderInput | SortOrder
-    paiementId?: SortOrderInput | SortOrder
+    agentId?: SortOrderInput | SortOrder
+    paiementId?: SortOrder
+    panierId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    detailvente?: DetailVenteOrderByWithRelationInput
-    entreprise?: EntrepriseOrderByWithRelationInput
+    panier?: PanierOrderByWithRelationInput
     utilisateur?: UtilisateurOrderByWithRelationInput
     fournisseur?: FournisseurOrderByWithRelationInput
     paiement?: PaiementOrderByWithRelationInput
@@ -20357,23 +19042,22 @@ export namespace Prisma {
     AND?: VenteWhereInput | VenteWhereInput[]
     OR?: VenteWhereInput[]
     NOT?: VenteWhereInput | VenteWhereInput[]
-    statut?: StringFilter<"Vente"> | string
+    statut?: EnumStatutVenteFilter<"Vente"> | $Enums.StatutVente
     total_ttc?: FloatFilter<"Vente"> | number
     total_ht?: FloatFilter<"Vente"> | number
-    remise?: FloatFilter<"Vente"> | number
-    detailVenteId?: IntFilter<"Vente"> | number
-    entrepriseId?: IntFilter<"Vente"> | number
-    clientId?: StringFilter<"Vente"> | string
-    agentId?: StringFilter<"Vente"> | string
+    type_acheteur?: EnumTypeAcheteurFilter<"Vente"> | $Enums.TypeAcheteur
+    clientId?: IntNullableFilter<"Vente"> | number | null
+    enregisterParId?: IntFilter<"Vente"> | number
     fournisseurId?: IntNullableFilter<"Vente"> | number | null
-    paiementId?: IntNullableFilter<"Vente"> | number | null
+    agentId?: IntNullableFilter<"Vente"> | number | null
+    paiementId?: IntFilter<"Vente"> | number
+    panierId?: IntFilter<"Vente"> | number
     createdAt?: DateTimeFilter<"Vente"> | Date | string
     updatedAt?: DateTimeFilter<"Vente"> | Date | string
-    detailvente?: XOR<DetailVenteScalarRelationFilter, DetailVenteWhereInput>
-    entreprise?: XOR<EntrepriseScalarRelationFilter, EntrepriseWhereInput>
+    panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
-    paiement?: XOR<PaiementNullableScalarRelationFilter, PaiementWhereInput> | null
+    paiement?: XOR<PaiementScalarRelationFilter, PaiementWhereInput>
   }, "id">
 
   export type VenteOrderByWithAggregationInput = {
@@ -20381,13 +19065,13 @@ export namespace Prisma {
     statut?: SortOrder
     total_ttc?: SortOrder
     total_ht?: SortOrder
-    remise?: SortOrder
-    detailVenteId?: SortOrder
-    entrepriseId?: SortOrder
-    clientId?: SortOrder
-    agentId?: SortOrder
+    type_acheteur?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    enregisterParId?: SortOrder
     fournisseurId?: SortOrderInput | SortOrder
-    paiementId?: SortOrderInput | SortOrder
+    agentId?: SortOrderInput | SortOrder
+    paiementId?: SortOrder
+    panierId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: VenteCountOrderByAggregateInput
@@ -20402,16 +19086,16 @@ export namespace Prisma {
     OR?: VenteScalarWhereWithAggregatesInput[]
     NOT?: VenteScalarWhereWithAggregatesInput | VenteScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Vente"> | number
-    statut?: StringWithAggregatesFilter<"Vente"> | string
+    statut?: EnumStatutVenteWithAggregatesFilter<"Vente"> | $Enums.StatutVente
     total_ttc?: FloatWithAggregatesFilter<"Vente"> | number
     total_ht?: FloatWithAggregatesFilter<"Vente"> | number
-    remise?: FloatWithAggregatesFilter<"Vente"> | number
-    detailVenteId?: IntWithAggregatesFilter<"Vente"> | number
-    entrepriseId?: IntWithAggregatesFilter<"Vente"> | number
-    clientId?: StringWithAggregatesFilter<"Vente"> | string
-    agentId?: StringWithAggregatesFilter<"Vente"> | string
+    type_acheteur?: EnumTypeAcheteurWithAggregatesFilter<"Vente"> | $Enums.TypeAcheteur
+    clientId?: IntNullableWithAggregatesFilter<"Vente"> | number | null
+    enregisterParId?: IntWithAggregatesFilter<"Vente"> | number
     fournisseurId?: IntNullableWithAggregatesFilter<"Vente"> | number | null
-    paiementId?: IntNullableWithAggregatesFilter<"Vente"> | number | null
+    agentId?: IntNullableWithAggregatesFilter<"Vente"> | number | null
+    paiementId?: IntWithAggregatesFilter<"Vente"> | number
+    panierId?: IntWithAggregatesFilter<"Vente"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Vente"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Vente"> | Date | string
   }
@@ -20421,12 +19105,13 @@ export namespace Prisma {
     OR?: PanierWhereInput[]
     NOT?: PanierWhereInput | PanierWhereInput[]
     id?: IntFilter<"Panier"> | number
-    utilisateurId?: StringFilter<"Panier"> | string
+    utilisateurId?: IntFilter<"Panier"> | number
     createdAt?: DateTimeFilter<"Panier"> | Date | string
     updatedAt?: DateTimeFilter<"Panier"> | Date | string
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    DetailAchat?: DetailAchatListRelationFilter
+    DetailPanier?: DetailPanierListRelationFilter
     Achat?: AchatListRelationFilter
+    Vente?: VenteListRelationFilter
   }
 
   export type PanierOrderByWithRelationInput = {
@@ -20435,8 +19120,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     utilisateur?: UtilisateurOrderByWithRelationInput
-    DetailAchat?: DetailAchatOrderByRelationAggregateInput
+    DetailPanier?: DetailPanierOrderByRelationAggregateInput
     Achat?: AchatOrderByRelationAggregateInput
+    Vente?: VenteOrderByRelationAggregateInput
   }
 
   export type PanierWhereUniqueInput = Prisma.AtLeast<{
@@ -20444,12 +19130,13 @@ export namespace Prisma {
     AND?: PanierWhereInput | PanierWhereInput[]
     OR?: PanierWhereInput[]
     NOT?: PanierWhereInput | PanierWhereInput[]
-    utilisateurId?: StringFilter<"Panier"> | string
+    utilisateurId?: IntFilter<"Panier"> | number
     createdAt?: DateTimeFilter<"Panier"> | Date | string
     updatedAt?: DateTimeFilter<"Panier"> | Date | string
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    DetailAchat?: DetailAchatListRelationFilter
+    DetailPanier?: DetailPanierListRelationFilter
     Achat?: AchatListRelationFilter
+    Vente?: VenteListRelationFilter
   }, "id">
 
   export type PanierOrderByWithAggregationInput = {
@@ -20469,98 +19156,28 @@ export namespace Prisma {
     OR?: PanierScalarWhereWithAggregatesInput[]
     NOT?: PanierScalarWhereWithAggregatesInput | PanierScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Panier"> | number
-    utilisateurId?: StringWithAggregatesFilter<"Panier"> | string
+    utilisateurId?: IntWithAggregatesFilter<"Panier"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Panier"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Panier"> | Date | string
   }
 
-  export type DetailVenteWhereInput = {
-    AND?: DetailVenteWhereInput | DetailVenteWhereInput[]
-    OR?: DetailVenteWhereInput[]
-    NOT?: DetailVenteWhereInput | DetailVenteWhereInput[]
-    id?: IntFilter<"DetailVente"> | number
-    produitId?: IntFilter<"DetailVente"> | number
-    qtte?: IntFilter<"DetailVente"> | number
-    prixUnitaire?: FloatFilter<"DetailVente"> | number
-    prixTotal?: FloatFilter<"DetailVente"> | number
-    createdAt?: DateTimeFilter<"DetailVente"> | Date | string
-    updatedAt?: DateTimeFilter<"DetailVente"> | Date | string
-    produit?: XOR<ProduitScalarRelationFilter, ProduitWhereInput>
-    Vente?: VenteListRelationFilter
-  }
-
-  export type DetailVenteOrderByWithRelationInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    qtte?: SortOrder
-    prixUnitaire?: SortOrder
-    prixTotal?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    produit?: ProduitOrderByWithRelationInput
-    Vente?: VenteOrderByRelationAggregateInput
-  }
-
-  export type DetailVenteWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: DetailVenteWhereInput | DetailVenteWhereInput[]
-    OR?: DetailVenteWhereInput[]
-    NOT?: DetailVenteWhereInput | DetailVenteWhereInput[]
-    produitId?: IntFilter<"DetailVente"> | number
-    qtte?: IntFilter<"DetailVente"> | number
-    prixUnitaire?: FloatFilter<"DetailVente"> | number
-    prixTotal?: FloatFilter<"DetailVente"> | number
-    createdAt?: DateTimeFilter<"DetailVente"> | Date | string
-    updatedAt?: DateTimeFilter<"DetailVente"> | Date | string
-    produit?: XOR<ProduitScalarRelationFilter, ProduitWhereInput>
-    Vente?: VenteListRelationFilter
-  }, "id">
-
-  export type DetailVenteOrderByWithAggregationInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    qtte?: SortOrder
-    prixUnitaire?: SortOrder
-    prixTotal?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: DetailVenteCountOrderByAggregateInput
-    _avg?: DetailVenteAvgOrderByAggregateInput
-    _max?: DetailVenteMaxOrderByAggregateInput
-    _min?: DetailVenteMinOrderByAggregateInput
-    _sum?: DetailVenteSumOrderByAggregateInput
-  }
-
-  export type DetailVenteScalarWhereWithAggregatesInput = {
-    AND?: DetailVenteScalarWhereWithAggregatesInput | DetailVenteScalarWhereWithAggregatesInput[]
-    OR?: DetailVenteScalarWhereWithAggregatesInput[]
-    NOT?: DetailVenteScalarWhereWithAggregatesInput | DetailVenteScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"DetailVente"> | number
-    produitId?: IntWithAggregatesFilter<"DetailVente"> | number
-    qtte?: IntWithAggregatesFilter<"DetailVente"> | number
-    prixUnitaire?: FloatWithAggregatesFilter<"DetailVente"> | number
-    prixTotal?: FloatWithAggregatesFilter<"DetailVente"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"DetailVente"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"DetailVente"> | Date | string
-  }
-
-  export type DetailAchatWhereInput = {
-    AND?: DetailAchatWhereInput | DetailAchatWhereInput[]
-    OR?: DetailAchatWhereInput[]
-    NOT?: DetailAchatWhereInput | DetailAchatWhereInput[]
-    id?: IntFilter<"DetailAchat"> | number
-    produitId?: IntFilter<"DetailAchat"> | number
-    qtte?: IntFilter<"DetailAchat"> | number
-    prixUnitaire?: FloatFilter<"DetailAchat"> | number
-    prixTotal?: FloatFilter<"DetailAchat"> | number
-    panierId?: IntFilter<"DetailAchat"> | number
-    createdAt?: DateTimeFilter<"DetailAchat"> | Date | string
-    updatedAt?: DateTimeFilter<"DetailAchat"> | Date | string
+  export type DetailPanierWhereInput = {
+    AND?: DetailPanierWhereInput | DetailPanierWhereInput[]
+    OR?: DetailPanierWhereInput[]
+    NOT?: DetailPanierWhereInput | DetailPanierWhereInput[]
+    id?: IntFilter<"DetailPanier"> | number
+    produitId?: IntFilter<"DetailPanier"> | number
+    qtte?: IntFilter<"DetailPanier"> | number
+    prixUnitaire?: FloatFilter<"DetailPanier"> | number
+    prixTotal?: FloatFilter<"DetailPanier"> | number
+    panierId?: IntFilter<"DetailPanier"> | number
+    createdAt?: DateTimeFilter<"DetailPanier"> | Date | string
+    updatedAt?: DateTimeFilter<"DetailPanier"> | Date | string
     produit?: XOR<ProduitScalarRelationFilter, ProduitWhereInput>
     panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
   }
 
-  export type DetailAchatOrderByWithRelationInput = {
+  export type DetailPanierOrderByWithRelationInput = {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
@@ -20573,23 +19190,23 @@ export namespace Prisma {
     panier?: PanierOrderByWithRelationInput
   }
 
-  export type DetailAchatWhereUniqueInput = Prisma.AtLeast<{
+  export type DetailPanierWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    AND?: DetailAchatWhereInput | DetailAchatWhereInput[]
-    OR?: DetailAchatWhereInput[]
-    NOT?: DetailAchatWhereInput | DetailAchatWhereInput[]
-    produitId?: IntFilter<"DetailAchat"> | number
-    qtte?: IntFilter<"DetailAchat"> | number
-    prixUnitaire?: FloatFilter<"DetailAchat"> | number
-    prixTotal?: FloatFilter<"DetailAchat"> | number
-    panierId?: IntFilter<"DetailAchat"> | number
-    createdAt?: DateTimeFilter<"DetailAchat"> | Date | string
-    updatedAt?: DateTimeFilter<"DetailAchat"> | Date | string
+    AND?: DetailPanierWhereInput | DetailPanierWhereInput[]
+    OR?: DetailPanierWhereInput[]
+    NOT?: DetailPanierWhereInput | DetailPanierWhereInput[]
+    produitId?: IntFilter<"DetailPanier"> | number
+    qtte?: IntFilter<"DetailPanier"> | number
+    prixUnitaire?: FloatFilter<"DetailPanier"> | number
+    prixTotal?: FloatFilter<"DetailPanier"> | number
+    panierId?: IntFilter<"DetailPanier"> | number
+    createdAt?: DateTimeFilter<"DetailPanier"> | Date | string
+    updatedAt?: DateTimeFilter<"DetailPanier"> | Date | string
     produit?: XOR<ProduitScalarRelationFilter, ProduitWhereInput>
     panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
   }, "id">
 
-  export type DetailAchatOrderByWithAggregationInput = {
+  export type DetailPanierOrderByWithAggregationInput = {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
@@ -20598,25 +19215,25 @@ export namespace Prisma {
     panierId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: DetailAchatCountOrderByAggregateInput
-    _avg?: DetailAchatAvgOrderByAggregateInput
-    _max?: DetailAchatMaxOrderByAggregateInput
-    _min?: DetailAchatMinOrderByAggregateInput
-    _sum?: DetailAchatSumOrderByAggregateInput
+    _count?: DetailPanierCountOrderByAggregateInput
+    _avg?: DetailPanierAvgOrderByAggregateInput
+    _max?: DetailPanierMaxOrderByAggregateInput
+    _min?: DetailPanierMinOrderByAggregateInput
+    _sum?: DetailPanierSumOrderByAggregateInput
   }
 
-  export type DetailAchatScalarWhereWithAggregatesInput = {
-    AND?: DetailAchatScalarWhereWithAggregatesInput | DetailAchatScalarWhereWithAggregatesInput[]
-    OR?: DetailAchatScalarWhereWithAggregatesInput[]
-    NOT?: DetailAchatScalarWhereWithAggregatesInput | DetailAchatScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"DetailAchat"> | number
-    produitId?: IntWithAggregatesFilter<"DetailAchat"> | number
-    qtte?: IntWithAggregatesFilter<"DetailAchat"> | number
-    prixUnitaire?: FloatWithAggregatesFilter<"DetailAchat"> | number
-    prixTotal?: FloatWithAggregatesFilter<"DetailAchat"> | number
-    panierId?: IntWithAggregatesFilter<"DetailAchat"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"DetailAchat"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"DetailAchat"> | Date | string
+  export type DetailPanierScalarWhereWithAggregatesInput = {
+    AND?: DetailPanierScalarWhereWithAggregatesInput | DetailPanierScalarWhereWithAggregatesInput[]
+    OR?: DetailPanierScalarWhereWithAggregatesInput[]
+    NOT?: DetailPanierScalarWhereWithAggregatesInput | DetailPanierScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"DetailPanier"> | number
+    produitId?: IntWithAggregatesFilter<"DetailPanier"> | number
+    qtte?: IntWithAggregatesFilter<"DetailPanier"> | number
+    prixUnitaire?: FloatWithAggregatesFilter<"DetailPanier"> | number
+    prixTotal?: FloatWithAggregatesFilter<"DetailPanier"> | number
+    panierId?: IntWithAggregatesFilter<"DetailPanier"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"DetailPanier"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"DetailPanier"> | Date | string
   }
 
   export type AchatWhereInput = {
@@ -20627,7 +19244,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFilter<"Achat"> | $Enums.StatutAchat
     panierId?: IntFilter<"Achat"> | number
     fournisseurId?: IntFilter<"Achat"> | number
-    enregisterParId?: StringFilter<"Achat"> | string
+    enregisterParId?: IntFilter<"Achat"> | number
     paiementId?: IntFilter<"Achat"> | number
     createdAt?: DateTimeFilter<"Achat"> | Date | string
     updatedAt?: DateTimeFilter<"Achat"> | Date | string
@@ -20660,7 +19277,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFilter<"Achat"> | $Enums.StatutAchat
     panierId?: IntFilter<"Achat"> | number
     fournisseurId?: IntFilter<"Achat"> | number
-    enregisterParId?: StringFilter<"Achat"> | string
+    enregisterParId?: IntFilter<"Achat"> | number
     paiementId?: IntFilter<"Achat"> | number
     createdAt?: DateTimeFilter<"Achat"> | Date | string
     updatedAt?: DateTimeFilter<"Achat"> | Date | string
@@ -20694,7 +19311,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatWithAggregatesFilter<"Achat"> | $Enums.StatutAchat
     panierId?: IntWithAggregatesFilter<"Achat"> | number
     fournisseurId?: IntWithAggregatesFilter<"Achat"> | number
-    enregisterParId?: StringWithAggregatesFilter<"Achat"> | string
+    enregisterParId?: IntWithAggregatesFilter<"Achat"> | number
     paiementId?: IntWithAggregatesFilter<"Achat"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Achat"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Achat"> | Date | string
@@ -20710,7 +19327,6 @@ export namespace Prisma {
     email: string
     description?: string | null
     logo?: string | null
-    Vente?: VenteCreateNestedManyWithoutEntrepriseInput
   }
 
   export type EntrepriseUncheckedCreateInput = {
@@ -20724,7 +19340,6 @@ export namespace Prisma {
     email: string
     description?: string | null
     logo?: string | null
-    Vente?: VenteUncheckedCreateNestedManyWithoutEntrepriseInput
   }
 
   export type EntrepriseUpdateInput = {
@@ -20737,7 +19352,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
-    Vente?: VenteUpdateManyWithoutEntrepriseNestedInput
   }
 
   export type EntrepriseUncheckedUpdateInput = {
@@ -20751,7 +19365,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
-    Vente?: VenteUncheckedUpdateManyWithoutEntrepriseNestedInput
   }
 
   export type EntrepriseCreateManyInput = {
@@ -20793,7 +19406,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurCreateInput = {
-    id: string
     email: string
     nom: string
     postnom: string
@@ -20815,7 +19427,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedCreateInput = {
-    id: string
+    id?: number
     email: string
     nom: string
     postnom: string
@@ -20837,7 +19449,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -20859,7 +19470,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -20881,7 +19492,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurCreateManyInput = {
-    id: string
+    id?: number
     email: string
     nom: string
     postnom: string
@@ -20895,7 +19506,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -20909,7 +19519,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -20937,7 +19547,7 @@ export namespace Prisma {
     ville: string
     commune: string
     adresse: string
-    utilisateurId?: string | null
+    utilisateurId?: number | null
     fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -20958,7 +19568,7 @@ export namespace Prisma {
     ville?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
     adresse?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20969,7 +19579,7 @@ export namespace Prisma {
     ville: string
     commune: string
     adresse: string
-    utilisateurId?: string | null
+    utilisateurId?: number | null
     fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -20988,7 +19598,7 @@ export namespace Prisma {
     ville?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
     adresse?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21005,7 +19615,7 @@ export namespace Prisma {
   export type ContactUncheckedCreateInput = {
     id?: number
     tel: string
-    utilisateurId?: string | null
+    utilisateurId?: number | null
     fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21022,7 +19632,7 @@ export namespace Prisma {
   export type ContactUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     tel?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21031,7 +19641,7 @@ export namespace Prisma {
   export type ContactCreateManyInput = {
     id?: number
     tel: string
-    utilisateurId?: string | null
+    utilisateurId?: number | null
     fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21046,7 +19656,7 @@ export namespace Prisma {
   export type ContactUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     tel?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21139,7 +19749,7 @@ export namespace Prisma {
   export type TeneurUncheckedCreateInput = {
     id?: number
     valeur: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Produit?: ProduitUncheckedCreateNestedManyWithoutTeneurInput
@@ -21156,7 +19766,7 @@ export namespace Prisma {
   export type TeneurUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     valeur?: FloatFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Produit?: ProduitUncheckedUpdateManyWithoutTeneurNestedInput
@@ -21165,7 +19775,7 @@ export namespace Prisma {
   export type TeneurCreateManyInput = {
     id?: number
     valeur: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21179,7 +19789,7 @@ export namespace Prisma {
   export type TeneurUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     valeur?: FloatFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21200,7 +19810,7 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Produit?: ProduitUncheckedCreateNestedManyWithoutDeviseInput
@@ -21223,7 +19833,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Produit?: ProduitUncheckedUpdateManyWithoutDeviseNestedInput
@@ -21235,7 +19845,7 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21253,7 +19863,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21268,8 +19878,7 @@ export namespace Prisma {
     devise: DeviseCreateNestedOneWithoutProduitInput
     teneur: TeneurCreateNestedOneWithoutProduitInput
     utilisateur: UtilisateurCreateNestedOneWithoutProduitInput
-    DetailVente?: DetailVenteCreateNestedManyWithoutProduitInput
-    DetailAchat?: DetailAchatCreateNestedManyWithoutProduitInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitUncheckedCreateInput = {
@@ -21280,11 +19889,10 @@ export namespace Prisma {
     description: string
     deviseId: number
     teneurId: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailVente?: DetailVenteUncheckedCreateNestedManyWithoutProduitInput
-    DetailAchat?: DetailAchatUncheckedCreateNestedManyWithoutProduitInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitUpdateInput = {
@@ -21297,8 +19905,7 @@ export namespace Prisma {
     devise?: DeviseUpdateOneRequiredWithoutProduitNestedInput
     teneur?: TeneurUpdateOneRequiredWithoutProduitNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutProduitNestedInput
-    DetailVente?: DetailVenteUpdateManyWithoutProduitNestedInput
-    DetailAchat?: DetailAchatUpdateManyWithoutProduitNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateInput = {
@@ -21309,11 +19916,10 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     deviseId?: IntFieldUpdateOperationsInput | number
     teneurId?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailVente?: DetailVenteUncheckedUpdateManyWithoutProduitNestedInput
-    DetailAchat?: DetailAchatUncheckedUpdateManyWithoutProduitNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitCreateManyInput = {
@@ -21324,7 +19930,7 @@ export namespace Prisma {
     description: string
     deviseId: number
     teneurId: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21346,7 +19952,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     deviseId?: IntFieldUpdateOperationsInput | number
     teneurId?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21419,105 +20025,106 @@ export namespace Prisma {
   }
 
   export type VenteCreateInput = {
-    statut: string
+    statut?: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    agentId: string
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    agentId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    detailvente: DetailVenteCreateNestedOneWithoutVenteInput
-    entreprise: EntrepriseCreateNestedOneWithoutVenteInput
+    panier: PanierCreateNestedOneWithoutVenteInput
     utilisateur: UtilisateurCreateNestedOneWithoutVenteInput
     fournisseur?: FournisseurCreateNestedOneWithoutVenteInput
-    paiement?: PaiementCreateNestedOneWithoutVenteInput
+    paiement: PaiementCreateNestedOneWithoutVenteInput
   }
 
   export type VenteUncheckedCreateInput = {
     id?: number
-    statut: string
+    statut?: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    detailVenteId: number
-    entrepriseId: number
-    clientId: string
-    agentId: string
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    enregisterParId: number
     fournisseurId?: number | null
-    paiementId?: number | null
+    agentId?: number | null
+    paiementId: number
+    panierId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type VenteUpdateInput = {
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    detailvente?: DetailVenteUpdateOneRequiredWithoutVenteNestedInput
-    entreprise?: EntrepriseUpdateOneRequiredWithoutVenteNestedInput
+    panier?: PanierUpdateOneRequiredWithoutVenteNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutVenteNestedInput
     fournisseur?: FournisseurUpdateOneWithoutVenteNestedInput
-    paiement?: PaiementUpdateOneWithoutVenteNestedInput
+    paiement?: PaiementUpdateOneRequiredWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    detailVenteId?: IntFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    clientId?: StringFieldUpdateOperationsInput | string
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
-    paiementId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
+    paiementId?: IntFieldUpdateOperationsInput | number
+    panierId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VenteCreateManyInput = {
     id?: number
-    statut: string
+    statut?: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    detailVenteId: number
-    entrepriseId: number
-    clientId: string
-    agentId: string
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    enregisterParId: number
     fournisseurId?: number | null
-    paiementId?: number | null
+    agentId?: number | null
+    paiementId: number
+    panierId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type VenteUpdateManyMutationInput = {
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VenteUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    detailVenteId?: IntFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    clientId?: StringFieldUpdateOperationsInput | string
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
-    paiementId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
+    paiementId?: IntFieldUpdateOperationsInput | number
+    panierId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21526,39 +20133,43 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     utilisateur: UtilisateurCreateNestedOneWithoutPanierInput
-    DetailAchat?: DetailAchatCreateNestedManyWithoutPanierInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutPanierInput
     Achat?: AchatCreateNestedManyWithoutPanierInput
+    Vente?: VenteCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUncheckedCreateInput = {
     id?: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailAchat?: DetailAchatUncheckedCreateNestedManyWithoutPanierInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutPanierInput
     Achat?: AchatUncheckedCreateNestedManyWithoutPanierInput
+    Vente?: VenteUncheckedCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneRequiredWithoutPanierNestedInput
-    DetailAchat?: DetailAchatUpdateManyWithoutPanierNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutPanierNestedInput
     Achat?: AchatUpdateManyWithoutPanierNestedInput
+    Vente?: VenteUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailAchat?: DetailAchatUncheckedUpdateManyWithoutPanierNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutPanierNestedInput
     Achat?: AchatUncheckedUpdateManyWithoutPanierNestedInput
+    Vente?: VenteUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierCreateManyInput = {
     id?: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21570,92 +20181,22 @@ export namespace Prisma {
 
   export type PanierUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DetailVenteCreateInput = {
+  export type DetailPanierCreateInput = {
     qtte: number
     prixUnitaire: number
     prixTotal: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    produit: ProduitCreateNestedOneWithoutDetailVenteInput
-    Vente?: VenteCreateNestedManyWithoutDetailventeInput
+    produit: ProduitCreateNestedOneWithoutDetailPanierInput
+    panier: PanierCreateNestedOneWithoutDetailPanierInput
   }
 
-  export type DetailVenteUncheckedCreateInput = {
-    id?: number
-    produitId: number
-    qtte: number
-    prixUnitaire: number
-    prixTotal: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Vente?: VenteUncheckedCreateNestedManyWithoutDetailventeInput
-  }
-
-  export type DetailVenteUpdateInput = {
-    qtte?: IntFieldUpdateOperationsInput | number
-    prixUnitaire?: FloatFieldUpdateOperationsInput | number
-    prixTotal?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    produit?: ProduitUpdateOneRequiredWithoutDetailVenteNestedInput
-    Vente?: VenteUpdateManyWithoutDetailventeNestedInput
-  }
-
-  export type DetailVenteUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    produitId?: IntFieldUpdateOperationsInput | number
-    qtte?: IntFieldUpdateOperationsInput | number
-    prixUnitaire?: FloatFieldUpdateOperationsInput | number
-    prixTotal?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Vente?: VenteUncheckedUpdateManyWithoutDetailventeNestedInput
-  }
-
-  export type DetailVenteCreateManyInput = {
-    id?: number
-    produitId: number
-    qtte: number
-    prixUnitaire: number
-    prixTotal: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DetailVenteUpdateManyMutationInput = {
-    qtte?: IntFieldUpdateOperationsInput | number
-    prixUnitaire?: FloatFieldUpdateOperationsInput | number
-    prixTotal?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DetailVenteUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    produitId?: IntFieldUpdateOperationsInput | number
-    qtte?: IntFieldUpdateOperationsInput | number
-    prixUnitaire?: FloatFieldUpdateOperationsInput | number
-    prixTotal?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DetailAchatCreateInput = {
-    qtte: number
-    prixUnitaire: number
-    prixTotal: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    produit: ProduitCreateNestedOneWithoutDetailAchatInput
-    panier: PanierCreateNestedOneWithoutDetailAchatInput
-  }
-
-  export type DetailAchatUncheckedCreateInput = {
+  export type DetailPanierUncheckedCreateInput = {
     id?: number
     produitId: number
     qtte: number
@@ -21666,17 +20207,17 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type DetailAchatUpdateInput = {
+  export type DetailPanierUpdateInput = {
     qtte?: IntFieldUpdateOperationsInput | number
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotal?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    produit?: ProduitUpdateOneRequiredWithoutDetailAchatNestedInput
-    panier?: PanierUpdateOneRequiredWithoutDetailAchatNestedInput
+    produit?: ProduitUpdateOneRequiredWithoutDetailPanierNestedInput
+    panier?: PanierUpdateOneRequiredWithoutDetailPanierNestedInput
   }
 
-  export type DetailAchatUncheckedUpdateInput = {
+  export type DetailPanierUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
@@ -21687,7 +20228,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DetailAchatCreateManyInput = {
+  export type DetailPanierCreateManyInput = {
     id?: number
     produitId: number
     qtte: number
@@ -21698,7 +20239,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type DetailAchatUpdateManyMutationInput = {
+  export type DetailPanierUpdateManyMutationInput = {
     qtte?: IntFieldUpdateOperationsInput | number
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotal?: FloatFieldUpdateOperationsInput | number
@@ -21706,7 +20247,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DetailAchatUncheckedUpdateManyInput = {
+  export type DetailPanierUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
@@ -21732,7 +20273,7 @@ export namespace Prisma {
     statut?: $Enums.StatutAchat
     panierId: number
     fournisseurId: number
-    enregisterParId: string
+    enregisterParId: number
     paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21753,7 +20294,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: StringFieldUpdateOperationsInput | string
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21764,7 +20305,7 @@ export namespace Prisma {
     statut?: $Enums.StatutAchat
     panierId: number
     fournisseurId: number
-    enregisterParId: string
+    enregisterParId: number
     paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21781,7 +20322,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: StringFieldUpdateOperationsInput | string
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21828,19 +20369,9 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type VenteListRelationFilter = {
-    every?: VenteWhereInput
-    some?: VenteWhereInput
-    none?: VenteWhereInput
-  }
-
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
-  }
-
-  export type VenteOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type EntrepriseCountOrderByAggregateInput = {
@@ -21992,6 +20523,12 @@ export namespace Prisma {
     none?: ProduitWhereInput
   }
 
+  export type VenteListRelationFilter = {
+    every?: VenteWhereInput
+    some?: VenteWhereInput
+    none?: VenteWhereInput
+  }
+
   export type AchatListRelationFilter = {
     every?: AchatWhereInput
     some?: AchatWhereInput
@@ -22028,6 +20565,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type VenteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type AchatOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -22058,6 +20599,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type UtilisateurAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type UtilisateurMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
@@ -22084,6 +20629,10 @@ export namespace Prisma {
     picture?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type UtilisateurSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type EnumSexeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -22164,6 +20713,7 @@ export namespace Prisma {
 
   export type AdresseAvgOrderByAggregateInput = {
     id?: SortOrder
+    utilisateurId?: SortOrder
     fournisseurId?: SortOrder
   }
 
@@ -22191,6 +20741,7 @@ export namespace Prisma {
 
   export type AdresseSumOrderByAggregateInput = {
     id?: SortOrder
+    utilisateurId?: SortOrder
     fournisseurId?: SortOrder
   }
 
@@ -22221,6 +20772,7 @@ export namespace Prisma {
 
   export type ContactAvgOrderByAggregateInput = {
     id?: SortOrder
+    utilisateurId?: SortOrder
     fournisseurId?: SortOrder
   }
 
@@ -22244,6 +20796,7 @@ export namespace Prisma {
 
   export type ContactSumOrderByAggregateInput = {
     id?: SortOrder
+    utilisateurId?: SortOrder
     fournisseurId?: SortOrder
   }
 
@@ -22309,6 +20862,7 @@ export namespace Prisma {
   export type TeneurAvgOrderByAggregateInput = {
     id?: SortOrder
     valeur?: SortOrder
+    utilisateurId?: SortOrder
   }
 
   export type TeneurMaxOrderByAggregateInput = {
@@ -22330,6 +20884,7 @@ export namespace Prisma {
   export type TeneurSumOrderByAggregateInput = {
     id?: SortOrder
     valeur?: SortOrder
+    utilisateurId?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -22370,6 +20925,7 @@ export namespace Prisma {
 
   export type DeviseAvgOrderByAggregateInput = {
     id?: SortOrder
+    utilisateurId?: SortOrder
   }
 
   export type DeviseMaxOrderByAggregateInput = {
@@ -22394,6 +20950,7 @@ export namespace Prisma {
 
   export type DeviseSumOrderByAggregateInput = {
     id?: SortOrder
+    utilisateurId?: SortOrder
   }
 
   export type DeviseScalarRelationFilter = {
@@ -22406,23 +20963,13 @@ export namespace Prisma {
     isNot?: TeneurWhereInput
   }
 
-  export type DetailVenteListRelationFilter = {
-    every?: DetailVenteWhereInput
-    some?: DetailVenteWhereInput
-    none?: DetailVenteWhereInput
+  export type DetailPanierListRelationFilter = {
+    every?: DetailPanierWhereInput
+    some?: DetailPanierWhereInput
+    none?: DetailPanierWhereInput
   }
 
-  export type DetailAchatListRelationFilter = {
-    every?: DetailAchatWhereInput
-    some?: DetailAchatWhereInput
-    none?: DetailAchatWhereInput
-  }
-
-  export type DetailVenteOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type DetailAchatOrderByRelationAggregateInput = {
+  export type DetailPanierOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22445,6 +20992,7 @@ export namespace Prisma {
     qtte?: SortOrder
     deviseId?: SortOrder
     teneurId?: SortOrder
+    utilisateurId?: SortOrder
   }
 
   export type ProduitMaxOrderByAggregateInput = {
@@ -22479,6 +21027,7 @@ export namespace Prisma {
     qtte?: SortOrder
     deviseId?: SortOrder
     teneurId?: SortOrder
+    utilisateurId?: SortOrder
   }
 
   export type EnumMoyenPaimentFilter<$PrismaModel = never> = {
@@ -22537,19 +21086,28 @@ export namespace Prisma {
     _max?: NestedEnumMoyenPaimentFilter<$PrismaModel>
   }
 
-  export type DetailVenteScalarRelationFilter = {
-    is?: DetailVenteWhereInput
-    isNot?: DetailVenteWhereInput
+  export type EnumStatutVenteFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutVente | EnumStatutVenteFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutVente[] | ListEnumStatutVenteFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutVente[] | ListEnumStatutVenteFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutVenteFilter<$PrismaModel> | $Enums.StatutVente
   }
 
-  export type EntrepriseScalarRelationFilter = {
-    is?: EntrepriseWhereInput
-    isNot?: EntrepriseWhereInput
+  export type EnumTypeAcheteurFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeAcheteur | EnumTypeAcheteurFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeAcheteur[] | ListEnumTypeAcheteurFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeAcheteur[] | ListEnumTypeAcheteurFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeAcheteurFilter<$PrismaModel> | $Enums.TypeAcheteur
   }
 
-  export type PaiementNullableScalarRelationFilter = {
-    is?: PaiementWhereInput | null
-    isNot?: PaiementWhereInput | null
+  export type PanierScalarRelationFilter = {
+    is?: PanierWhereInput
+    isNot?: PanierWhereInput
+  }
+
+  export type PaiementScalarRelationFilter = {
+    is?: PaiementWhereInput
+    isNot?: PaiementWhereInput
   }
 
   export type VenteCountOrderByAggregateInput = {
@@ -22557,13 +21115,13 @@ export namespace Prisma {
     statut?: SortOrder
     total_ttc?: SortOrder
     total_ht?: SortOrder
-    remise?: SortOrder
-    detailVenteId?: SortOrder
-    entrepriseId?: SortOrder
+    type_acheteur?: SortOrder
     clientId?: SortOrder
-    agentId?: SortOrder
+    enregisterParId?: SortOrder
     fournisseurId?: SortOrder
+    agentId?: SortOrder
     paiementId?: SortOrder
+    panierId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22572,11 +21130,12 @@ export namespace Prisma {
     id?: SortOrder
     total_ttc?: SortOrder
     total_ht?: SortOrder
-    remise?: SortOrder
-    detailVenteId?: SortOrder
-    entrepriseId?: SortOrder
+    clientId?: SortOrder
+    enregisterParId?: SortOrder
     fournisseurId?: SortOrder
+    agentId?: SortOrder
     paiementId?: SortOrder
+    panierId?: SortOrder
   }
 
   export type VenteMaxOrderByAggregateInput = {
@@ -22584,13 +21143,13 @@ export namespace Prisma {
     statut?: SortOrder
     total_ttc?: SortOrder
     total_ht?: SortOrder
-    remise?: SortOrder
-    detailVenteId?: SortOrder
-    entrepriseId?: SortOrder
+    type_acheteur?: SortOrder
     clientId?: SortOrder
-    agentId?: SortOrder
+    enregisterParId?: SortOrder
     fournisseurId?: SortOrder
+    agentId?: SortOrder
     paiementId?: SortOrder
+    panierId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22600,13 +21159,13 @@ export namespace Prisma {
     statut?: SortOrder
     total_ttc?: SortOrder
     total_ht?: SortOrder
-    remise?: SortOrder
-    detailVenteId?: SortOrder
-    entrepriseId?: SortOrder
+    type_acheteur?: SortOrder
     clientId?: SortOrder
-    agentId?: SortOrder
+    enregisterParId?: SortOrder
     fournisseurId?: SortOrder
+    agentId?: SortOrder
     paiementId?: SortOrder
+    panierId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22615,11 +21174,32 @@ export namespace Prisma {
     id?: SortOrder
     total_ttc?: SortOrder
     total_ht?: SortOrder
-    remise?: SortOrder
-    detailVenteId?: SortOrder
-    entrepriseId?: SortOrder
+    clientId?: SortOrder
+    enregisterParId?: SortOrder
     fournisseurId?: SortOrder
+    agentId?: SortOrder
     paiementId?: SortOrder
+    panierId?: SortOrder
+  }
+
+  export type EnumStatutVenteWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutVente | EnumStatutVenteFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutVente[] | ListEnumStatutVenteFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutVente[] | ListEnumStatutVenteFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutVenteWithAggregatesFilter<$PrismaModel> | $Enums.StatutVente
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatutVenteFilter<$PrismaModel>
+    _max?: NestedEnumStatutVenteFilter<$PrismaModel>
+  }
+
+  export type EnumTypeAcheteurWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeAcheteur | EnumTypeAcheteurFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeAcheteur[] | ListEnumTypeAcheteurFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeAcheteur[] | ListEnumTypeAcheteurFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeAcheteurWithAggregatesFilter<$PrismaModel> | $Enums.TypeAcheteur
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTypeAcheteurFilter<$PrismaModel>
+    _max?: NestedEnumTypeAcheteurFilter<$PrismaModel>
   }
 
   export type PanierCountOrderByAggregateInput = {
@@ -22631,6 +21211,7 @@ export namespace Prisma {
 
   export type PanierAvgOrderByAggregateInput = {
     id?: SortOrder
+    utilisateurId?: SortOrder
   }
 
   export type PanierMaxOrderByAggregateInput = {
@@ -22649,6 +21230,7 @@ export namespace Prisma {
 
   export type PanierSumOrderByAggregateInput = {
     id?: SortOrder
+    utilisateurId?: SortOrder
   }
 
   export type ProduitScalarRelationFilter = {
@@ -22656,58 +21238,7 @@ export namespace Prisma {
     isNot?: ProduitWhereInput
   }
 
-  export type DetailVenteCountOrderByAggregateInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    qtte?: SortOrder
-    prixUnitaire?: SortOrder
-    prixTotal?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DetailVenteAvgOrderByAggregateInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    qtte?: SortOrder
-    prixUnitaire?: SortOrder
-    prixTotal?: SortOrder
-  }
-
-  export type DetailVenteMaxOrderByAggregateInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    qtte?: SortOrder
-    prixUnitaire?: SortOrder
-    prixTotal?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DetailVenteMinOrderByAggregateInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    qtte?: SortOrder
-    prixUnitaire?: SortOrder
-    prixTotal?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DetailVenteSumOrderByAggregateInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    qtte?: SortOrder
-    prixUnitaire?: SortOrder
-    prixTotal?: SortOrder
-  }
-
-  export type PanierScalarRelationFilter = {
-    is?: PanierWhereInput
-    isNot?: PanierWhereInput
-  }
-
-  export type DetailAchatCountOrderByAggregateInput = {
+  export type DetailPanierCountOrderByAggregateInput = {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
@@ -22718,7 +21249,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type DetailAchatAvgOrderByAggregateInput = {
+  export type DetailPanierAvgOrderByAggregateInput = {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
@@ -22727,18 +21258,7 @@ export namespace Prisma {
     panierId?: SortOrder
   }
 
-  export type DetailAchatMaxOrderByAggregateInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    qtte?: SortOrder
-    prixUnitaire?: SortOrder
-    prixTotal?: SortOrder
-    panierId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DetailAchatMinOrderByAggregateInput = {
+  export type DetailPanierMaxOrderByAggregateInput = {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
@@ -22749,7 +21269,18 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type DetailAchatSumOrderByAggregateInput = {
+  export type DetailPanierMinOrderByAggregateInput = {
+    id?: SortOrder
+    produitId?: SortOrder
+    qtte?: SortOrder
+    prixUnitaire?: SortOrder
+    prixTotal?: SortOrder
+    panierId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DetailPanierSumOrderByAggregateInput = {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
@@ -22770,11 +21301,6 @@ export namespace Prisma {
     isNot?: FournisseurWhereInput
   }
 
-  export type PaiementScalarRelationFilter = {
-    is?: PaiementWhereInput
-    isNot?: PaiementWhereInput
-  }
-
   export type AchatCountOrderByAggregateInput = {
     id?: SortOrder
     statut?: SortOrder
@@ -22790,6 +21316,7 @@ export namespace Prisma {
     id?: SortOrder
     panierId?: SortOrder
     fournisseurId?: SortOrder
+    enregisterParId?: SortOrder
     paiementId?: SortOrder
   }
 
@@ -22819,6 +21346,7 @@ export namespace Prisma {
     id?: SortOrder
     panierId?: SortOrder
     fournisseurId?: SortOrder
+    enregisterParId?: SortOrder
     paiementId?: SortOrder
   }
 
@@ -22832,20 +21360,6 @@ export namespace Prisma {
     _max?: NestedEnumStatutAchatFilter<$PrismaModel>
   }
 
-  export type VenteCreateNestedManyWithoutEntrepriseInput = {
-    create?: XOR<VenteCreateWithoutEntrepriseInput, VenteUncheckedCreateWithoutEntrepriseInput> | VenteCreateWithoutEntrepriseInput[] | VenteUncheckedCreateWithoutEntrepriseInput[]
-    connectOrCreate?: VenteCreateOrConnectWithoutEntrepriseInput | VenteCreateOrConnectWithoutEntrepriseInput[]
-    createMany?: VenteCreateManyEntrepriseInputEnvelope
-    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-  }
-
-  export type VenteUncheckedCreateNestedManyWithoutEntrepriseInput = {
-    create?: XOR<VenteCreateWithoutEntrepriseInput, VenteUncheckedCreateWithoutEntrepriseInput> | VenteCreateWithoutEntrepriseInput[] | VenteUncheckedCreateWithoutEntrepriseInput[]
-    connectOrCreate?: VenteCreateOrConnectWithoutEntrepriseInput | VenteCreateOrConnectWithoutEntrepriseInput[]
-    createMany?: VenteCreateManyEntrepriseInputEnvelope
-    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-  }
-
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -22854,40 +21368,12 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type VenteUpdateManyWithoutEntrepriseNestedInput = {
-    create?: XOR<VenteCreateWithoutEntrepriseInput, VenteUncheckedCreateWithoutEntrepriseInput> | VenteCreateWithoutEntrepriseInput[] | VenteUncheckedCreateWithoutEntrepriseInput[]
-    connectOrCreate?: VenteCreateOrConnectWithoutEntrepriseInput | VenteCreateOrConnectWithoutEntrepriseInput[]
-    upsert?: VenteUpsertWithWhereUniqueWithoutEntrepriseInput | VenteUpsertWithWhereUniqueWithoutEntrepriseInput[]
-    createMany?: VenteCreateManyEntrepriseInputEnvelope
-    set?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    disconnect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    delete?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    update?: VenteUpdateWithWhereUniqueWithoutEntrepriseInput | VenteUpdateWithWhereUniqueWithoutEntrepriseInput[]
-    updateMany?: VenteUpdateManyWithWhereWithoutEntrepriseInput | VenteUpdateManyWithWhereWithoutEntrepriseInput[]
-    deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
-  }
-
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type VenteUncheckedUpdateManyWithoutEntrepriseNestedInput = {
-    create?: XOR<VenteCreateWithoutEntrepriseInput, VenteUncheckedCreateWithoutEntrepriseInput> | VenteCreateWithoutEntrepriseInput[] | VenteUncheckedCreateWithoutEntrepriseInput[]
-    connectOrCreate?: VenteCreateOrConnectWithoutEntrepriseInput | VenteCreateOrConnectWithoutEntrepriseInput[]
-    upsert?: VenteUpsertWithWhereUniqueWithoutEntrepriseInput | VenteUpsertWithWhereUniqueWithoutEntrepriseInput[]
-    createMany?: VenteCreateManyEntrepriseInputEnvelope
-    set?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    disconnect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    delete?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    update?: VenteUpdateWithWhereUniqueWithoutEntrepriseInput | VenteUpdateWithWhereUniqueWithoutEntrepriseInput[]
-    updateMany?: VenteUpdateManyWithWhereWithoutEntrepriseInput | VenteUpdateManyWithWhereWithoutEntrepriseInput[]
-    deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
   }
 
   export type AdresseCreateNestedManyWithoutUtilisateurInput = {
@@ -23662,32 +22148,18 @@ export namespace Prisma {
     connect?: UtilisateurWhereUniqueInput
   }
 
-  export type DetailVenteCreateNestedManyWithoutProduitInput = {
-    create?: XOR<DetailVenteCreateWithoutProduitInput, DetailVenteUncheckedCreateWithoutProduitInput> | DetailVenteCreateWithoutProduitInput[] | DetailVenteUncheckedCreateWithoutProduitInput[]
-    connectOrCreate?: DetailVenteCreateOrConnectWithoutProduitInput | DetailVenteCreateOrConnectWithoutProduitInput[]
-    createMany?: DetailVenteCreateManyProduitInputEnvelope
-    connect?: DetailVenteWhereUniqueInput | DetailVenteWhereUniqueInput[]
+  export type DetailPanierCreateNestedManyWithoutProduitInput = {
+    create?: XOR<DetailPanierCreateWithoutProduitInput, DetailPanierUncheckedCreateWithoutProduitInput> | DetailPanierCreateWithoutProduitInput[] | DetailPanierUncheckedCreateWithoutProduitInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutProduitInput | DetailPanierCreateOrConnectWithoutProduitInput[]
+    createMany?: DetailPanierCreateManyProduitInputEnvelope
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
   }
 
-  export type DetailAchatCreateNestedManyWithoutProduitInput = {
-    create?: XOR<DetailAchatCreateWithoutProduitInput, DetailAchatUncheckedCreateWithoutProduitInput> | DetailAchatCreateWithoutProduitInput[] | DetailAchatUncheckedCreateWithoutProduitInput[]
-    connectOrCreate?: DetailAchatCreateOrConnectWithoutProduitInput | DetailAchatCreateOrConnectWithoutProduitInput[]
-    createMany?: DetailAchatCreateManyProduitInputEnvelope
-    connect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-  }
-
-  export type DetailVenteUncheckedCreateNestedManyWithoutProduitInput = {
-    create?: XOR<DetailVenteCreateWithoutProduitInput, DetailVenteUncheckedCreateWithoutProduitInput> | DetailVenteCreateWithoutProduitInput[] | DetailVenteUncheckedCreateWithoutProduitInput[]
-    connectOrCreate?: DetailVenteCreateOrConnectWithoutProduitInput | DetailVenteCreateOrConnectWithoutProduitInput[]
-    createMany?: DetailVenteCreateManyProduitInputEnvelope
-    connect?: DetailVenteWhereUniqueInput | DetailVenteWhereUniqueInput[]
-  }
-
-  export type DetailAchatUncheckedCreateNestedManyWithoutProduitInput = {
-    create?: XOR<DetailAchatCreateWithoutProduitInput, DetailAchatUncheckedCreateWithoutProduitInput> | DetailAchatCreateWithoutProduitInput[] | DetailAchatUncheckedCreateWithoutProduitInput[]
-    connectOrCreate?: DetailAchatCreateOrConnectWithoutProduitInput | DetailAchatCreateOrConnectWithoutProduitInput[]
-    createMany?: DetailAchatCreateManyProduitInputEnvelope
-    connect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
+  export type DetailPanierUncheckedCreateNestedManyWithoutProduitInput = {
+    create?: XOR<DetailPanierCreateWithoutProduitInput, DetailPanierUncheckedCreateWithoutProduitInput> | DetailPanierCreateWithoutProduitInput[] | DetailPanierUncheckedCreateWithoutProduitInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutProduitInput | DetailPanierCreateOrConnectWithoutProduitInput[]
+    createMany?: DetailPanierCreateManyProduitInputEnvelope
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
   }
 
   export type DeviseUpdateOneRequiredWithoutProduitNestedInput = {
@@ -23714,60 +22186,32 @@ export namespace Prisma {
     update?: XOR<XOR<UtilisateurUpdateToOneWithWhereWithoutProduitInput, UtilisateurUpdateWithoutProduitInput>, UtilisateurUncheckedUpdateWithoutProduitInput>
   }
 
-  export type DetailVenteUpdateManyWithoutProduitNestedInput = {
-    create?: XOR<DetailVenteCreateWithoutProduitInput, DetailVenteUncheckedCreateWithoutProduitInput> | DetailVenteCreateWithoutProduitInput[] | DetailVenteUncheckedCreateWithoutProduitInput[]
-    connectOrCreate?: DetailVenteCreateOrConnectWithoutProduitInput | DetailVenteCreateOrConnectWithoutProduitInput[]
-    upsert?: DetailVenteUpsertWithWhereUniqueWithoutProduitInput | DetailVenteUpsertWithWhereUniqueWithoutProduitInput[]
-    createMany?: DetailVenteCreateManyProduitInputEnvelope
-    set?: DetailVenteWhereUniqueInput | DetailVenteWhereUniqueInput[]
-    disconnect?: DetailVenteWhereUniqueInput | DetailVenteWhereUniqueInput[]
-    delete?: DetailVenteWhereUniqueInput | DetailVenteWhereUniqueInput[]
-    connect?: DetailVenteWhereUniqueInput | DetailVenteWhereUniqueInput[]
-    update?: DetailVenteUpdateWithWhereUniqueWithoutProduitInput | DetailVenteUpdateWithWhereUniqueWithoutProduitInput[]
-    updateMany?: DetailVenteUpdateManyWithWhereWithoutProduitInput | DetailVenteUpdateManyWithWhereWithoutProduitInput[]
-    deleteMany?: DetailVenteScalarWhereInput | DetailVenteScalarWhereInput[]
+  export type DetailPanierUpdateManyWithoutProduitNestedInput = {
+    create?: XOR<DetailPanierCreateWithoutProduitInput, DetailPanierUncheckedCreateWithoutProduitInput> | DetailPanierCreateWithoutProduitInput[] | DetailPanierUncheckedCreateWithoutProduitInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutProduitInput | DetailPanierCreateOrConnectWithoutProduitInput[]
+    upsert?: DetailPanierUpsertWithWhereUniqueWithoutProduitInput | DetailPanierUpsertWithWhereUniqueWithoutProduitInput[]
+    createMany?: DetailPanierCreateManyProduitInputEnvelope
+    set?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    disconnect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    delete?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    update?: DetailPanierUpdateWithWhereUniqueWithoutProduitInput | DetailPanierUpdateWithWhereUniqueWithoutProduitInput[]
+    updateMany?: DetailPanierUpdateManyWithWhereWithoutProduitInput | DetailPanierUpdateManyWithWhereWithoutProduitInput[]
+    deleteMany?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
   }
 
-  export type DetailAchatUpdateManyWithoutProduitNestedInput = {
-    create?: XOR<DetailAchatCreateWithoutProduitInput, DetailAchatUncheckedCreateWithoutProduitInput> | DetailAchatCreateWithoutProduitInput[] | DetailAchatUncheckedCreateWithoutProduitInput[]
-    connectOrCreate?: DetailAchatCreateOrConnectWithoutProduitInput | DetailAchatCreateOrConnectWithoutProduitInput[]
-    upsert?: DetailAchatUpsertWithWhereUniqueWithoutProduitInput | DetailAchatUpsertWithWhereUniqueWithoutProduitInput[]
-    createMany?: DetailAchatCreateManyProduitInputEnvelope
-    set?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    disconnect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    delete?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    connect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    update?: DetailAchatUpdateWithWhereUniqueWithoutProduitInput | DetailAchatUpdateWithWhereUniqueWithoutProduitInput[]
-    updateMany?: DetailAchatUpdateManyWithWhereWithoutProduitInput | DetailAchatUpdateManyWithWhereWithoutProduitInput[]
-    deleteMany?: DetailAchatScalarWhereInput | DetailAchatScalarWhereInput[]
-  }
-
-  export type DetailVenteUncheckedUpdateManyWithoutProduitNestedInput = {
-    create?: XOR<DetailVenteCreateWithoutProduitInput, DetailVenteUncheckedCreateWithoutProduitInput> | DetailVenteCreateWithoutProduitInput[] | DetailVenteUncheckedCreateWithoutProduitInput[]
-    connectOrCreate?: DetailVenteCreateOrConnectWithoutProduitInput | DetailVenteCreateOrConnectWithoutProduitInput[]
-    upsert?: DetailVenteUpsertWithWhereUniqueWithoutProduitInput | DetailVenteUpsertWithWhereUniqueWithoutProduitInput[]
-    createMany?: DetailVenteCreateManyProduitInputEnvelope
-    set?: DetailVenteWhereUniqueInput | DetailVenteWhereUniqueInput[]
-    disconnect?: DetailVenteWhereUniqueInput | DetailVenteWhereUniqueInput[]
-    delete?: DetailVenteWhereUniqueInput | DetailVenteWhereUniqueInput[]
-    connect?: DetailVenteWhereUniqueInput | DetailVenteWhereUniqueInput[]
-    update?: DetailVenteUpdateWithWhereUniqueWithoutProduitInput | DetailVenteUpdateWithWhereUniqueWithoutProduitInput[]
-    updateMany?: DetailVenteUpdateManyWithWhereWithoutProduitInput | DetailVenteUpdateManyWithWhereWithoutProduitInput[]
-    deleteMany?: DetailVenteScalarWhereInput | DetailVenteScalarWhereInput[]
-  }
-
-  export type DetailAchatUncheckedUpdateManyWithoutProduitNestedInput = {
-    create?: XOR<DetailAchatCreateWithoutProduitInput, DetailAchatUncheckedCreateWithoutProduitInput> | DetailAchatCreateWithoutProduitInput[] | DetailAchatUncheckedCreateWithoutProduitInput[]
-    connectOrCreate?: DetailAchatCreateOrConnectWithoutProduitInput | DetailAchatCreateOrConnectWithoutProduitInput[]
-    upsert?: DetailAchatUpsertWithWhereUniqueWithoutProduitInput | DetailAchatUpsertWithWhereUniqueWithoutProduitInput[]
-    createMany?: DetailAchatCreateManyProduitInputEnvelope
-    set?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    disconnect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    delete?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    connect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    update?: DetailAchatUpdateWithWhereUniqueWithoutProduitInput | DetailAchatUpdateWithWhereUniqueWithoutProduitInput[]
-    updateMany?: DetailAchatUpdateManyWithWhereWithoutProduitInput | DetailAchatUpdateManyWithWhereWithoutProduitInput[]
-    deleteMany?: DetailAchatScalarWhereInput | DetailAchatScalarWhereInput[]
+  export type DetailPanierUncheckedUpdateManyWithoutProduitNestedInput = {
+    create?: XOR<DetailPanierCreateWithoutProduitInput, DetailPanierUncheckedCreateWithoutProduitInput> | DetailPanierCreateWithoutProduitInput[] | DetailPanierUncheckedCreateWithoutProduitInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutProduitInput | DetailPanierCreateOrConnectWithoutProduitInput[]
+    upsert?: DetailPanierUpsertWithWhereUniqueWithoutProduitInput | DetailPanierUpsertWithWhereUniqueWithoutProduitInput[]
+    createMany?: DetailPanierCreateManyProduitInputEnvelope
+    set?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    disconnect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    delete?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    update?: DetailPanierUpdateWithWhereUniqueWithoutProduitInput | DetailPanierUpdateWithWhereUniqueWithoutProduitInput[]
+    updateMany?: DetailPanierUpdateManyWithWhereWithoutProduitInput | DetailPanierUpdateManyWithWhereWithoutProduitInput[]
+    deleteMany?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
   }
 
   export type DeviseCreateNestedOneWithoutPaiementInput = {
@@ -23872,16 +22316,10 @@ export namespace Prisma {
     deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
   }
 
-  export type DetailVenteCreateNestedOneWithoutVenteInput = {
-    create?: XOR<DetailVenteCreateWithoutVenteInput, DetailVenteUncheckedCreateWithoutVenteInput>
-    connectOrCreate?: DetailVenteCreateOrConnectWithoutVenteInput
-    connect?: DetailVenteWhereUniqueInput
-  }
-
-  export type EntrepriseCreateNestedOneWithoutVenteInput = {
-    create?: XOR<EntrepriseCreateWithoutVenteInput, EntrepriseUncheckedCreateWithoutVenteInput>
-    connectOrCreate?: EntrepriseCreateOrConnectWithoutVenteInput
-    connect?: EntrepriseWhereUniqueInput
+  export type PanierCreateNestedOneWithoutVenteInput = {
+    create?: XOR<PanierCreateWithoutVenteInput, PanierUncheckedCreateWithoutVenteInput>
+    connectOrCreate?: PanierCreateOrConnectWithoutVenteInput
+    connect?: PanierWhereUniqueInput
   }
 
   export type UtilisateurCreateNestedOneWithoutVenteInput = {
@@ -23902,20 +22340,20 @@ export namespace Prisma {
     connect?: PaiementWhereUniqueInput
   }
 
-  export type DetailVenteUpdateOneRequiredWithoutVenteNestedInput = {
-    create?: XOR<DetailVenteCreateWithoutVenteInput, DetailVenteUncheckedCreateWithoutVenteInput>
-    connectOrCreate?: DetailVenteCreateOrConnectWithoutVenteInput
-    upsert?: DetailVenteUpsertWithoutVenteInput
-    connect?: DetailVenteWhereUniqueInput
-    update?: XOR<XOR<DetailVenteUpdateToOneWithWhereWithoutVenteInput, DetailVenteUpdateWithoutVenteInput>, DetailVenteUncheckedUpdateWithoutVenteInput>
+  export type EnumStatutVenteFieldUpdateOperationsInput = {
+    set?: $Enums.StatutVente
   }
 
-  export type EntrepriseUpdateOneRequiredWithoutVenteNestedInput = {
-    create?: XOR<EntrepriseCreateWithoutVenteInput, EntrepriseUncheckedCreateWithoutVenteInput>
-    connectOrCreate?: EntrepriseCreateOrConnectWithoutVenteInput
-    upsert?: EntrepriseUpsertWithoutVenteInput
-    connect?: EntrepriseWhereUniqueInput
-    update?: XOR<XOR<EntrepriseUpdateToOneWithWhereWithoutVenteInput, EntrepriseUpdateWithoutVenteInput>, EntrepriseUncheckedUpdateWithoutVenteInput>
+  export type EnumTypeAcheteurFieldUpdateOperationsInput = {
+    set?: $Enums.TypeAcheteur
+  }
+
+  export type PanierUpdateOneRequiredWithoutVenteNestedInput = {
+    create?: XOR<PanierCreateWithoutVenteInput, PanierUncheckedCreateWithoutVenteInput>
+    connectOrCreate?: PanierCreateOrConnectWithoutVenteInput
+    upsert?: PanierUpsertWithoutVenteInput
+    connect?: PanierWhereUniqueInput
+    update?: XOR<XOR<PanierUpdateToOneWithWhereWithoutVenteInput, PanierUpdateWithoutVenteInput>, PanierUncheckedUpdateWithoutVenteInput>
   }
 
   export type UtilisateurUpdateOneRequiredWithoutVenteNestedInput = {
@@ -23936,12 +22374,10 @@ export namespace Prisma {
     update?: XOR<XOR<FournisseurUpdateToOneWithWhereWithoutVenteInput, FournisseurUpdateWithoutVenteInput>, FournisseurUncheckedUpdateWithoutVenteInput>
   }
 
-  export type PaiementUpdateOneWithoutVenteNestedInput = {
+  export type PaiementUpdateOneRequiredWithoutVenteNestedInput = {
     create?: XOR<PaiementCreateWithoutVenteInput, PaiementUncheckedCreateWithoutVenteInput>
     connectOrCreate?: PaiementCreateOrConnectWithoutVenteInput
     upsert?: PaiementUpsertWithoutVenteInput
-    disconnect?: PaiementWhereInput | boolean
-    delete?: PaiementWhereInput | boolean
     connect?: PaiementWhereUniqueInput
     update?: XOR<XOR<PaiementUpdateToOneWithWhereWithoutVenteInput, PaiementUpdateWithoutVenteInput>, PaiementUncheckedUpdateWithoutVenteInput>
   }
@@ -23952,11 +22388,11 @@ export namespace Prisma {
     connect?: UtilisateurWhereUniqueInput
   }
 
-  export type DetailAchatCreateNestedManyWithoutPanierInput = {
-    create?: XOR<DetailAchatCreateWithoutPanierInput, DetailAchatUncheckedCreateWithoutPanierInput> | DetailAchatCreateWithoutPanierInput[] | DetailAchatUncheckedCreateWithoutPanierInput[]
-    connectOrCreate?: DetailAchatCreateOrConnectWithoutPanierInput | DetailAchatCreateOrConnectWithoutPanierInput[]
-    createMany?: DetailAchatCreateManyPanierInputEnvelope
-    connect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
+  export type DetailPanierCreateNestedManyWithoutPanierInput = {
+    create?: XOR<DetailPanierCreateWithoutPanierInput, DetailPanierUncheckedCreateWithoutPanierInput> | DetailPanierCreateWithoutPanierInput[] | DetailPanierUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutPanierInput | DetailPanierCreateOrConnectWithoutPanierInput[]
+    createMany?: DetailPanierCreateManyPanierInputEnvelope
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
   }
 
   export type AchatCreateNestedManyWithoutPanierInput = {
@@ -23966,11 +22402,18 @@ export namespace Prisma {
     connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
   }
 
-  export type DetailAchatUncheckedCreateNestedManyWithoutPanierInput = {
-    create?: XOR<DetailAchatCreateWithoutPanierInput, DetailAchatUncheckedCreateWithoutPanierInput> | DetailAchatCreateWithoutPanierInput[] | DetailAchatUncheckedCreateWithoutPanierInput[]
-    connectOrCreate?: DetailAchatCreateOrConnectWithoutPanierInput | DetailAchatCreateOrConnectWithoutPanierInput[]
-    createMany?: DetailAchatCreateManyPanierInputEnvelope
-    connect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
+  export type VenteCreateNestedManyWithoutPanierInput = {
+    create?: XOR<VenteCreateWithoutPanierInput, VenteUncheckedCreateWithoutPanierInput> | VenteCreateWithoutPanierInput[] | VenteUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: VenteCreateOrConnectWithoutPanierInput | VenteCreateOrConnectWithoutPanierInput[]
+    createMany?: VenteCreateManyPanierInputEnvelope
+    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
+  }
+
+  export type DetailPanierUncheckedCreateNestedManyWithoutPanierInput = {
+    create?: XOR<DetailPanierCreateWithoutPanierInput, DetailPanierUncheckedCreateWithoutPanierInput> | DetailPanierCreateWithoutPanierInput[] | DetailPanierUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutPanierInput | DetailPanierCreateOrConnectWithoutPanierInput[]
+    createMany?: DetailPanierCreateManyPanierInputEnvelope
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
   }
 
   export type AchatUncheckedCreateNestedManyWithoutPanierInput = {
@@ -23978,6 +22421,13 @@ export namespace Prisma {
     connectOrCreate?: AchatCreateOrConnectWithoutPanierInput | AchatCreateOrConnectWithoutPanierInput[]
     createMany?: AchatCreateManyPanierInputEnvelope
     connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
+  }
+
+  export type VenteUncheckedCreateNestedManyWithoutPanierInput = {
+    create?: XOR<VenteCreateWithoutPanierInput, VenteUncheckedCreateWithoutPanierInput> | VenteCreateWithoutPanierInput[] | VenteUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: VenteCreateOrConnectWithoutPanierInput | VenteCreateOrConnectWithoutPanierInput[]
+    createMany?: VenteCreateManyPanierInputEnvelope
+    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
   }
 
   export type UtilisateurUpdateOneRequiredWithoutPanierNestedInput = {
@@ -23988,18 +22438,18 @@ export namespace Prisma {
     update?: XOR<XOR<UtilisateurUpdateToOneWithWhereWithoutPanierInput, UtilisateurUpdateWithoutPanierInput>, UtilisateurUncheckedUpdateWithoutPanierInput>
   }
 
-  export type DetailAchatUpdateManyWithoutPanierNestedInput = {
-    create?: XOR<DetailAchatCreateWithoutPanierInput, DetailAchatUncheckedCreateWithoutPanierInput> | DetailAchatCreateWithoutPanierInput[] | DetailAchatUncheckedCreateWithoutPanierInput[]
-    connectOrCreate?: DetailAchatCreateOrConnectWithoutPanierInput | DetailAchatCreateOrConnectWithoutPanierInput[]
-    upsert?: DetailAchatUpsertWithWhereUniqueWithoutPanierInput | DetailAchatUpsertWithWhereUniqueWithoutPanierInput[]
-    createMany?: DetailAchatCreateManyPanierInputEnvelope
-    set?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    disconnect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    delete?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    connect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    update?: DetailAchatUpdateWithWhereUniqueWithoutPanierInput | DetailAchatUpdateWithWhereUniqueWithoutPanierInput[]
-    updateMany?: DetailAchatUpdateManyWithWhereWithoutPanierInput | DetailAchatUpdateManyWithWhereWithoutPanierInput[]
-    deleteMany?: DetailAchatScalarWhereInput | DetailAchatScalarWhereInput[]
+  export type DetailPanierUpdateManyWithoutPanierNestedInput = {
+    create?: XOR<DetailPanierCreateWithoutPanierInput, DetailPanierUncheckedCreateWithoutPanierInput> | DetailPanierCreateWithoutPanierInput[] | DetailPanierUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutPanierInput | DetailPanierCreateOrConnectWithoutPanierInput[]
+    upsert?: DetailPanierUpsertWithWhereUniqueWithoutPanierInput | DetailPanierUpsertWithWhereUniqueWithoutPanierInput[]
+    createMany?: DetailPanierCreateManyPanierInputEnvelope
+    set?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    disconnect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    delete?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    update?: DetailPanierUpdateWithWhereUniqueWithoutPanierInput | DetailPanierUpdateWithWhereUniqueWithoutPanierInput[]
+    updateMany?: DetailPanierUpdateManyWithWhereWithoutPanierInput | DetailPanierUpdateManyWithWhereWithoutPanierInput[]
+    deleteMany?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
   }
 
   export type AchatUpdateManyWithoutPanierNestedInput = {
@@ -24016,18 +22466,32 @@ export namespace Prisma {
     deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
   }
 
-  export type DetailAchatUncheckedUpdateManyWithoutPanierNestedInput = {
-    create?: XOR<DetailAchatCreateWithoutPanierInput, DetailAchatUncheckedCreateWithoutPanierInput> | DetailAchatCreateWithoutPanierInput[] | DetailAchatUncheckedCreateWithoutPanierInput[]
-    connectOrCreate?: DetailAchatCreateOrConnectWithoutPanierInput | DetailAchatCreateOrConnectWithoutPanierInput[]
-    upsert?: DetailAchatUpsertWithWhereUniqueWithoutPanierInput | DetailAchatUpsertWithWhereUniqueWithoutPanierInput[]
-    createMany?: DetailAchatCreateManyPanierInputEnvelope
-    set?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    disconnect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    delete?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    connect?: DetailAchatWhereUniqueInput | DetailAchatWhereUniqueInput[]
-    update?: DetailAchatUpdateWithWhereUniqueWithoutPanierInput | DetailAchatUpdateWithWhereUniqueWithoutPanierInput[]
-    updateMany?: DetailAchatUpdateManyWithWhereWithoutPanierInput | DetailAchatUpdateManyWithWhereWithoutPanierInput[]
-    deleteMany?: DetailAchatScalarWhereInput | DetailAchatScalarWhereInput[]
+  export type VenteUpdateManyWithoutPanierNestedInput = {
+    create?: XOR<VenteCreateWithoutPanierInput, VenteUncheckedCreateWithoutPanierInput> | VenteCreateWithoutPanierInput[] | VenteUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: VenteCreateOrConnectWithoutPanierInput | VenteCreateOrConnectWithoutPanierInput[]
+    upsert?: VenteUpsertWithWhereUniqueWithoutPanierInput | VenteUpsertWithWhereUniqueWithoutPanierInput[]
+    createMany?: VenteCreateManyPanierInputEnvelope
+    set?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
+    disconnect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
+    delete?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
+    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
+    update?: VenteUpdateWithWhereUniqueWithoutPanierInput | VenteUpdateWithWhereUniqueWithoutPanierInput[]
+    updateMany?: VenteUpdateManyWithWhereWithoutPanierInput | VenteUpdateManyWithWhereWithoutPanierInput[]
+    deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
+  }
+
+  export type DetailPanierUncheckedUpdateManyWithoutPanierNestedInput = {
+    create?: XOR<DetailPanierCreateWithoutPanierInput, DetailPanierUncheckedCreateWithoutPanierInput> | DetailPanierCreateWithoutPanierInput[] | DetailPanierUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutPanierInput | DetailPanierCreateOrConnectWithoutPanierInput[]
+    upsert?: DetailPanierUpsertWithWhereUniqueWithoutPanierInput | DetailPanierUpsertWithWhereUniqueWithoutPanierInput[]
+    createMany?: DetailPanierCreateManyPanierInputEnvelope
+    set?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    disconnect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    delete?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    update?: DetailPanierUpdateWithWhereUniqueWithoutPanierInput | DetailPanierUpdateWithWhereUniqueWithoutPanierInput[]
+    updateMany?: DetailPanierUpdateManyWithWhereWithoutPanierInput | DetailPanierUpdateManyWithWhereWithoutPanierInput[]
+    deleteMany?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
   }
 
   export type AchatUncheckedUpdateManyWithoutPanierNestedInput = {
@@ -24044,88 +22508,46 @@ export namespace Prisma {
     deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
   }
 
-  export type ProduitCreateNestedOneWithoutDetailVenteInput = {
-    create?: XOR<ProduitCreateWithoutDetailVenteInput, ProduitUncheckedCreateWithoutDetailVenteInput>
-    connectOrCreate?: ProduitCreateOrConnectWithoutDetailVenteInput
-    connect?: ProduitWhereUniqueInput
-  }
-
-  export type VenteCreateNestedManyWithoutDetailventeInput = {
-    create?: XOR<VenteCreateWithoutDetailventeInput, VenteUncheckedCreateWithoutDetailventeInput> | VenteCreateWithoutDetailventeInput[] | VenteUncheckedCreateWithoutDetailventeInput[]
-    connectOrCreate?: VenteCreateOrConnectWithoutDetailventeInput | VenteCreateOrConnectWithoutDetailventeInput[]
-    createMany?: VenteCreateManyDetailventeInputEnvelope
-    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-  }
-
-  export type VenteUncheckedCreateNestedManyWithoutDetailventeInput = {
-    create?: XOR<VenteCreateWithoutDetailventeInput, VenteUncheckedCreateWithoutDetailventeInput> | VenteCreateWithoutDetailventeInput[] | VenteUncheckedCreateWithoutDetailventeInput[]
-    connectOrCreate?: VenteCreateOrConnectWithoutDetailventeInput | VenteCreateOrConnectWithoutDetailventeInput[]
-    createMany?: VenteCreateManyDetailventeInputEnvelope
-    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-  }
-
-  export type ProduitUpdateOneRequiredWithoutDetailVenteNestedInput = {
-    create?: XOR<ProduitCreateWithoutDetailVenteInput, ProduitUncheckedCreateWithoutDetailVenteInput>
-    connectOrCreate?: ProduitCreateOrConnectWithoutDetailVenteInput
-    upsert?: ProduitUpsertWithoutDetailVenteInput
-    connect?: ProduitWhereUniqueInput
-    update?: XOR<XOR<ProduitUpdateToOneWithWhereWithoutDetailVenteInput, ProduitUpdateWithoutDetailVenteInput>, ProduitUncheckedUpdateWithoutDetailVenteInput>
-  }
-
-  export type VenteUpdateManyWithoutDetailventeNestedInput = {
-    create?: XOR<VenteCreateWithoutDetailventeInput, VenteUncheckedCreateWithoutDetailventeInput> | VenteCreateWithoutDetailventeInput[] | VenteUncheckedCreateWithoutDetailventeInput[]
-    connectOrCreate?: VenteCreateOrConnectWithoutDetailventeInput | VenteCreateOrConnectWithoutDetailventeInput[]
-    upsert?: VenteUpsertWithWhereUniqueWithoutDetailventeInput | VenteUpsertWithWhereUniqueWithoutDetailventeInput[]
-    createMany?: VenteCreateManyDetailventeInputEnvelope
+  export type VenteUncheckedUpdateManyWithoutPanierNestedInput = {
+    create?: XOR<VenteCreateWithoutPanierInput, VenteUncheckedCreateWithoutPanierInput> | VenteCreateWithoutPanierInput[] | VenteUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: VenteCreateOrConnectWithoutPanierInput | VenteCreateOrConnectWithoutPanierInput[]
+    upsert?: VenteUpsertWithWhereUniqueWithoutPanierInput | VenteUpsertWithWhereUniqueWithoutPanierInput[]
+    createMany?: VenteCreateManyPanierInputEnvelope
     set?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
     disconnect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
     delete?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
     connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    update?: VenteUpdateWithWhereUniqueWithoutDetailventeInput | VenteUpdateWithWhereUniqueWithoutDetailventeInput[]
-    updateMany?: VenteUpdateManyWithWhereWithoutDetailventeInput | VenteUpdateManyWithWhereWithoutDetailventeInput[]
+    update?: VenteUpdateWithWhereUniqueWithoutPanierInput | VenteUpdateWithWhereUniqueWithoutPanierInput[]
+    updateMany?: VenteUpdateManyWithWhereWithoutPanierInput | VenteUpdateManyWithWhereWithoutPanierInput[]
     deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
   }
 
-  export type VenteUncheckedUpdateManyWithoutDetailventeNestedInput = {
-    create?: XOR<VenteCreateWithoutDetailventeInput, VenteUncheckedCreateWithoutDetailventeInput> | VenteCreateWithoutDetailventeInput[] | VenteUncheckedCreateWithoutDetailventeInput[]
-    connectOrCreate?: VenteCreateOrConnectWithoutDetailventeInput | VenteCreateOrConnectWithoutDetailventeInput[]
-    upsert?: VenteUpsertWithWhereUniqueWithoutDetailventeInput | VenteUpsertWithWhereUniqueWithoutDetailventeInput[]
-    createMany?: VenteCreateManyDetailventeInputEnvelope
-    set?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    disconnect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    delete?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-    update?: VenteUpdateWithWhereUniqueWithoutDetailventeInput | VenteUpdateWithWhereUniqueWithoutDetailventeInput[]
-    updateMany?: VenteUpdateManyWithWhereWithoutDetailventeInput | VenteUpdateManyWithWhereWithoutDetailventeInput[]
-    deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
-  }
-
-  export type ProduitCreateNestedOneWithoutDetailAchatInput = {
-    create?: XOR<ProduitCreateWithoutDetailAchatInput, ProduitUncheckedCreateWithoutDetailAchatInput>
-    connectOrCreate?: ProduitCreateOrConnectWithoutDetailAchatInput
+  export type ProduitCreateNestedOneWithoutDetailPanierInput = {
+    create?: XOR<ProduitCreateWithoutDetailPanierInput, ProduitUncheckedCreateWithoutDetailPanierInput>
+    connectOrCreate?: ProduitCreateOrConnectWithoutDetailPanierInput
     connect?: ProduitWhereUniqueInput
   }
 
-  export type PanierCreateNestedOneWithoutDetailAchatInput = {
-    create?: XOR<PanierCreateWithoutDetailAchatInput, PanierUncheckedCreateWithoutDetailAchatInput>
-    connectOrCreate?: PanierCreateOrConnectWithoutDetailAchatInput
+  export type PanierCreateNestedOneWithoutDetailPanierInput = {
+    create?: XOR<PanierCreateWithoutDetailPanierInput, PanierUncheckedCreateWithoutDetailPanierInput>
+    connectOrCreate?: PanierCreateOrConnectWithoutDetailPanierInput
     connect?: PanierWhereUniqueInput
   }
 
-  export type ProduitUpdateOneRequiredWithoutDetailAchatNestedInput = {
-    create?: XOR<ProduitCreateWithoutDetailAchatInput, ProduitUncheckedCreateWithoutDetailAchatInput>
-    connectOrCreate?: ProduitCreateOrConnectWithoutDetailAchatInput
-    upsert?: ProduitUpsertWithoutDetailAchatInput
+  export type ProduitUpdateOneRequiredWithoutDetailPanierNestedInput = {
+    create?: XOR<ProduitCreateWithoutDetailPanierInput, ProduitUncheckedCreateWithoutDetailPanierInput>
+    connectOrCreate?: ProduitCreateOrConnectWithoutDetailPanierInput
+    upsert?: ProduitUpsertWithoutDetailPanierInput
     connect?: ProduitWhereUniqueInput
-    update?: XOR<XOR<ProduitUpdateToOneWithWhereWithoutDetailAchatInput, ProduitUpdateWithoutDetailAchatInput>, ProduitUncheckedUpdateWithoutDetailAchatInput>
+    update?: XOR<XOR<ProduitUpdateToOneWithWhereWithoutDetailPanierInput, ProduitUpdateWithoutDetailPanierInput>, ProduitUncheckedUpdateWithoutDetailPanierInput>
   }
 
-  export type PanierUpdateOneRequiredWithoutDetailAchatNestedInput = {
-    create?: XOR<PanierCreateWithoutDetailAchatInput, PanierUncheckedCreateWithoutDetailAchatInput>
-    connectOrCreate?: PanierCreateOrConnectWithoutDetailAchatInput
-    upsert?: PanierUpsertWithoutDetailAchatInput
+  export type PanierUpdateOneRequiredWithoutDetailPanierNestedInput = {
+    create?: XOR<PanierCreateWithoutDetailPanierInput, PanierUncheckedCreateWithoutDetailPanierInput>
+    connectOrCreate?: PanierCreateOrConnectWithoutDetailPanierInput
+    upsert?: PanierUpsertWithoutDetailPanierInput
     connect?: PanierWhereUniqueInput
-    update?: XOR<XOR<PanierUpdateToOneWithWhereWithoutDetailAchatInput, PanierUpdateWithoutDetailAchatInput>, PanierUncheckedUpdateWithoutDetailAchatInput>
+    update?: XOR<XOR<PanierUpdateToOneWithWhereWithoutDetailPanierInput, PanierUpdateWithoutDetailPanierInput>, PanierUncheckedUpdateWithoutDetailPanierInput>
   }
 
   export type PanierCreateNestedOneWithoutAchatInput = {
@@ -24435,6 +22857,40 @@ export namespace Prisma {
     _max?: NestedEnumMoyenPaimentFilter<$PrismaModel>
   }
 
+  export type NestedEnumStatutVenteFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutVente | EnumStatutVenteFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutVente[] | ListEnumStatutVenteFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutVente[] | ListEnumStatutVenteFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutVenteFilter<$PrismaModel> | $Enums.StatutVente
+  }
+
+  export type NestedEnumTypeAcheteurFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeAcheteur | EnumTypeAcheteurFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeAcheteur[] | ListEnumTypeAcheteurFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeAcheteur[] | ListEnumTypeAcheteurFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeAcheteurFilter<$PrismaModel> | $Enums.TypeAcheteur
+  }
+
+  export type NestedEnumStatutVenteWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutVente | EnumStatutVenteFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutVente[] | ListEnumStatutVenteFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutVente[] | ListEnumStatutVenteFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutVenteWithAggregatesFilter<$PrismaModel> | $Enums.StatutVente
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatutVenteFilter<$PrismaModel>
+    _max?: NestedEnumStatutVenteFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTypeAcheteurWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeAcheteur | EnumTypeAcheteurFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeAcheteur[] | ListEnumTypeAcheteurFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeAcheteur[] | ListEnumTypeAcheteurFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeAcheteurWithAggregatesFilter<$PrismaModel> | $Enums.TypeAcheteur
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTypeAcheteurFilter<$PrismaModel>
+    _max?: NestedEnumTypeAcheteurFilter<$PrismaModel>
+  }
+
   export type NestedEnumStatutAchatFilter<$PrismaModel = never> = {
     equals?: $Enums.StatutAchat | EnumStatutAchatFieldRefInput<$PrismaModel>
     in?: $Enums.StatutAchat[] | ListEnumStatutAchatFieldRefInput<$PrismaModel>
@@ -24450,80 +22906,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutAchatFilter<$PrismaModel>
     _max?: NestedEnumStatutAchatFilter<$PrismaModel>
-  }
-
-  export type VenteCreateWithoutEntrepriseInput = {
-    statut: string
-    total_ttc: number
-    total_ht: number
-    remise: number
-    agentId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    detailvente: DetailVenteCreateNestedOneWithoutVenteInput
-    utilisateur: UtilisateurCreateNestedOneWithoutVenteInput
-    fournisseur?: FournisseurCreateNestedOneWithoutVenteInput
-    paiement?: PaiementCreateNestedOneWithoutVenteInput
-  }
-
-  export type VenteUncheckedCreateWithoutEntrepriseInput = {
-    id?: number
-    statut: string
-    total_ttc: number
-    total_ht: number
-    remise: number
-    detailVenteId: number
-    clientId: string
-    agentId: string
-    fournisseurId?: number | null
-    paiementId?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type VenteCreateOrConnectWithoutEntrepriseInput = {
-    where: VenteWhereUniqueInput
-    create: XOR<VenteCreateWithoutEntrepriseInput, VenteUncheckedCreateWithoutEntrepriseInput>
-  }
-
-  export type VenteCreateManyEntrepriseInputEnvelope = {
-    data: VenteCreateManyEntrepriseInput | VenteCreateManyEntrepriseInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type VenteUpsertWithWhereUniqueWithoutEntrepriseInput = {
-    where: VenteWhereUniqueInput
-    update: XOR<VenteUpdateWithoutEntrepriseInput, VenteUncheckedUpdateWithoutEntrepriseInput>
-    create: XOR<VenteCreateWithoutEntrepriseInput, VenteUncheckedCreateWithoutEntrepriseInput>
-  }
-
-  export type VenteUpdateWithWhereUniqueWithoutEntrepriseInput = {
-    where: VenteWhereUniqueInput
-    data: XOR<VenteUpdateWithoutEntrepriseInput, VenteUncheckedUpdateWithoutEntrepriseInput>
-  }
-
-  export type VenteUpdateManyWithWhereWithoutEntrepriseInput = {
-    where: VenteScalarWhereInput
-    data: XOR<VenteUpdateManyMutationInput, VenteUncheckedUpdateManyWithoutEntrepriseInput>
-  }
-
-  export type VenteScalarWhereInput = {
-    AND?: VenteScalarWhereInput | VenteScalarWhereInput[]
-    OR?: VenteScalarWhereInput[]
-    NOT?: VenteScalarWhereInput | VenteScalarWhereInput[]
-    id?: IntFilter<"Vente"> | number
-    statut?: StringFilter<"Vente"> | string
-    total_ttc?: FloatFilter<"Vente"> | number
-    total_ht?: FloatFilter<"Vente"> | number
-    remise?: FloatFilter<"Vente"> | number
-    detailVenteId?: IntFilter<"Vente"> | number
-    entrepriseId?: IntFilter<"Vente"> | number
-    clientId?: StringFilter<"Vente"> | string
-    agentId?: StringFilter<"Vente"> | string
-    fournisseurId?: IntNullableFilter<"Vente"> | number | null
-    paiementId?: IntNullableFilter<"Vente"> | number | null
-    createdAt?: DateTimeFilter<"Vente"> | Date | string
-    updatedAt?: DateTimeFilter<"Vente"> | Date | string
   }
 
   export type AdresseCreateWithoutUtilisateurInput = {
@@ -24589,8 +22971,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     devise: DeviseCreateNestedOneWithoutProduitInput
     teneur: TeneurCreateNestedOneWithoutProduitInput
-    DetailVente?: DetailVenteCreateNestedManyWithoutProduitInput
-    DetailAchat?: DetailAchatCreateNestedManyWithoutProduitInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitUncheckedCreateWithoutUtilisateurInput = {
@@ -24603,8 +22984,7 @@ export namespace Prisma {
     teneurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailVente?: DetailVenteUncheckedCreateNestedManyWithoutProduitInput
-    DetailAchat?: DetailAchatUncheckedCreateNestedManyWithoutProduitInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitCreateOrConnectWithoutUtilisateurInput = {
@@ -24618,30 +22998,30 @@ export namespace Prisma {
   }
 
   export type VenteCreateWithoutUtilisateurInput = {
-    statut: string
+    statut?: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    agentId: string
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    agentId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    detailvente: DetailVenteCreateNestedOneWithoutVenteInput
-    entreprise: EntrepriseCreateNestedOneWithoutVenteInput
+    panier: PanierCreateNestedOneWithoutVenteInput
     fournisseur?: FournisseurCreateNestedOneWithoutVenteInput
-    paiement?: PaiementCreateNestedOneWithoutVenteInput
+    paiement: PaiementCreateNestedOneWithoutVenteInput
   }
 
   export type VenteUncheckedCreateWithoutUtilisateurInput = {
     id?: number
-    statut: string
+    statut?: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    detailVenteId: number
-    entrepriseId: number
-    agentId: string
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
     fournisseurId?: number | null
-    paiementId?: number | null
+    agentId?: number | null
+    paiementId: number
+    panierId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24744,16 +23124,18 @@ export namespace Prisma {
   export type PanierCreateWithoutUtilisateurInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailAchat?: DetailAchatCreateNestedManyWithoutPanierInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutPanierInput
     Achat?: AchatCreateNestedManyWithoutPanierInput
+    Vente?: VenteCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUncheckedCreateWithoutUtilisateurInput = {
     id?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailAchat?: DetailAchatUncheckedCreateNestedManyWithoutPanierInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutPanierInput
     Achat?: AchatUncheckedCreateNestedManyWithoutPanierInput
+    Vente?: VenteUncheckedCreateNestedManyWithoutPanierInput
   }
 
   export type PanierCreateOrConnectWithoutUtilisateurInput = {
@@ -24790,7 +23172,7 @@ export namespace Prisma {
     ville?: StringFilter<"Adresse"> | string
     commune?: StringFilter<"Adresse"> | string
     adresse?: StringFilter<"Adresse"> | string
-    utilisateurId?: StringNullableFilter<"Adresse"> | string | null
+    utilisateurId?: IntNullableFilter<"Adresse"> | number | null
     fournisseurId?: IntNullableFilter<"Adresse"> | number | null
     createdAt?: DateTimeFilter<"Adresse"> | Date | string
     updatedAt?: DateTimeFilter<"Adresse"> | Date | string
@@ -24818,7 +23200,7 @@ export namespace Prisma {
     NOT?: ContactScalarWhereInput | ContactScalarWhereInput[]
     id?: IntFilter<"Contact"> | number
     tel?: StringFilter<"Contact"> | string
-    utilisateurId?: StringNullableFilter<"Contact"> | string | null
+    utilisateurId?: IntNullableFilter<"Contact"> | number | null
     fournisseurId?: IntNullableFilter<"Contact"> | number | null
     createdAt?: DateTimeFilter<"Contact"> | Date | string
     updatedAt?: DateTimeFilter<"Contact"> | Date | string
@@ -24851,7 +23233,7 @@ export namespace Prisma {
     description?: StringFilter<"Produit"> | string
     deviseId?: IntFilter<"Produit"> | number
     teneurId?: IntFilter<"Produit"> | number
-    utilisateurId?: StringFilter<"Produit"> | string
+    utilisateurId?: IntFilter<"Produit"> | number
     createdAt?: DateTimeFilter<"Produit"> | Date | string
     updatedAt?: DateTimeFilter<"Produit"> | Date | string
   }
@@ -24870,6 +23252,25 @@ export namespace Prisma {
   export type VenteUpdateManyWithWhereWithoutUtilisateurInput = {
     where: VenteScalarWhereInput
     data: XOR<VenteUpdateManyMutationInput, VenteUncheckedUpdateManyWithoutUtilisateurInput>
+  }
+
+  export type VenteScalarWhereInput = {
+    AND?: VenteScalarWhereInput | VenteScalarWhereInput[]
+    OR?: VenteScalarWhereInput[]
+    NOT?: VenteScalarWhereInput | VenteScalarWhereInput[]
+    id?: IntFilter<"Vente"> | number
+    statut?: EnumStatutVenteFilter<"Vente"> | $Enums.StatutVente
+    total_ttc?: FloatFilter<"Vente"> | number
+    total_ht?: FloatFilter<"Vente"> | number
+    type_acheteur?: EnumTypeAcheteurFilter<"Vente"> | $Enums.TypeAcheteur
+    clientId?: IntNullableFilter<"Vente"> | number | null
+    enregisterParId?: IntFilter<"Vente"> | number
+    fournisseurId?: IntNullableFilter<"Vente"> | number | null
+    agentId?: IntNullableFilter<"Vente"> | number | null
+    paiementId?: IntFilter<"Vente"> | number
+    panierId?: IntFilter<"Vente"> | number
+    createdAt?: DateTimeFilter<"Vente"> | Date | string
+    updatedAt?: DateTimeFilter<"Vente"> | Date | string
   }
 
   export type AchatUpsertWithWhereUniqueWithoutUtilisateurInput = {
@@ -24896,7 +23297,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFilter<"Achat"> | $Enums.StatutAchat
     panierId?: IntFilter<"Achat"> | number
     fournisseurId?: IntFilter<"Achat"> | number
-    enregisterParId?: StringFilter<"Achat"> | string
+    enregisterParId?: IntFilter<"Achat"> | number
     paiementId?: IntFilter<"Achat"> | number
     createdAt?: DateTimeFilter<"Achat"> | Date | string
     updatedAt?: DateTimeFilter<"Achat"> | Date | string
@@ -24924,7 +23325,7 @@ export namespace Prisma {
     NOT?: TeneurScalarWhereInput | TeneurScalarWhereInput[]
     id?: IntFilter<"Teneur"> | number
     valeur?: FloatFilter<"Teneur"> | number
-    utilisateurId?: StringFilter<"Teneur"> | string
+    utilisateurId?: IntFilter<"Teneur"> | number
     createdAt?: DateTimeFilter<"Teneur"> | Date | string
     updatedAt?: DateTimeFilter<"Teneur"> | Date | string
   }
@@ -24953,7 +23354,7 @@ export namespace Prisma {
     nom?: StringFilter<"Devise"> | string
     code?: StringFilter<"Devise"> | string
     symbole?: StringFilter<"Devise"> | string
-    utilisateurId?: StringFilter<"Devise"> | string
+    utilisateurId?: IntFilter<"Devise"> | number
     createdAt?: DateTimeFilter<"Devise"> | Date | string
     updatedAt?: DateTimeFilter<"Devise"> | Date | string
   }
@@ -24979,13 +23380,12 @@ export namespace Prisma {
     OR?: PanierScalarWhereInput[]
     NOT?: PanierScalarWhereInput | PanierScalarWhereInput[]
     id?: IntFilter<"Panier"> | number
-    utilisateurId?: StringFilter<"Panier"> | string
+    utilisateurId?: IntFilter<"Panier"> | number
     createdAt?: DateTimeFilter<"Panier"> | Date | string
     updatedAt?: DateTimeFilter<"Panier"> | Date | string
   }
 
   export type UtilisateurCreateWithoutAdresseInput = {
-    id: string
     email: string
     nom: string
     postnom: string
@@ -25006,7 +23406,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedCreateWithoutAdresseInput = {
-    id: string
+    id?: number
     email: string
     nom: string
     postnom: string
@@ -25071,7 +23471,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurUpdateWithoutAdresseInput = {
-    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -25092,7 +23491,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedUpdateWithoutAdresseInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -25147,7 +23546,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurCreateWithoutContactInput = {
-    id: string
     email: string
     nom: string
     postnom: string
@@ -25168,7 +23566,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedCreateWithoutContactInput = {
-    id: string
+    id?: number
     email: string
     nom: string
     postnom: string
@@ -25233,7 +23631,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurUpdateWithoutContactInput = {
-    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -25254,7 +23651,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedUpdateWithoutContactInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -25309,30 +23706,30 @@ export namespace Prisma {
   }
 
   export type VenteCreateWithoutFournisseurInput = {
-    statut: string
+    statut?: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    agentId: string
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    agentId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    detailvente: DetailVenteCreateNestedOneWithoutVenteInput
-    entreprise: EntrepriseCreateNestedOneWithoutVenteInput
+    panier: PanierCreateNestedOneWithoutVenteInput
     utilisateur: UtilisateurCreateNestedOneWithoutVenteInput
-    paiement?: PaiementCreateNestedOneWithoutVenteInput
+    paiement: PaiementCreateNestedOneWithoutVenteInput
   }
 
   export type VenteUncheckedCreateWithoutFournisseurInput = {
     id?: number
-    statut: string
+    statut?: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    detailVenteId: number
-    entrepriseId: number
-    clientId: string
-    agentId: string
-    paiementId?: number | null
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    enregisterParId: number
+    agentId?: number | null
+    paiementId: number
+    panierId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25360,7 +23757,7 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     panierId: number
-    enregisterParId: string
+    enregisterParId: number
     paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -25390,7 +23787,7 @@ export namespace Prisma {
     ville: string
     commune: string
     adresse: string
-    utilisateurId?: string | null
+    utilisateurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25415,7 +23812,7 @@ export namespace Prisma {
   export type ContactUncheckedCreateWithoutFournisseurInput = {
     id?: number
     tel: string
-    utilisateurId?: string | null
+    utilisateurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25495,7 +23892,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurCreateWithoutTeneurInput = {
-    id: string
     email: string
     nom: string
     postnom: string
@@ -25516,7 +23912,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedCreateWithoutTeneurInput = {
-    id: string
+    id?: number
     email: string
     nom: string
     postnom: string
@@ -25550,8 +23946,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     devise: DeviseCreateNestedOneWithoutProduitInput
     utilisateur: UtilisateurCreateNestedOneWithoutProduitInput
-    DetailVente?: DetailVenteCreateNestedManyWithoutProduitInput
-    DetailAchat?: DetailAchatCreateNestedManyWithoutProduitInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitUncheckedCreateWithoutTeneurInput = {
@@ -25561,11 +23956,10 @@ export namespace Prisma {
     qtte?: number
     description: string
     deviseId: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailVente?: DetailVenteUncheckedCreateNestedManyWithoutProduitInput
-    DetailAchat?: DetailAchatUncheckedCreateNestedManyWithoutProduitInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitCreateOrConnectWithoutTeneurInput = {
@@ -25590,7 +23984,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurUpdateWithoutTeneurInput = {
-    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -25611,7 +24004,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedUpdateWithoutTeneurInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -25648,7 +24041,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurCreateWithoutDeviseInput = {
-    id: string
     email: string
     nom: string
     postnom: string
@@ -25669,7 +24061,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedCreateWithoutDeviseInput = {
-    id: string
+    id?: number
     email: string
     nom: string
     postnom: string
@@ -25703,8 +24095,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     teneur: TeneurCreateNestedOneWithoutProduitInput
     utilisateur: UtilisateurCreateNestedOneWithoutProduitInput
-    DetailVente?: DetailVenteCreateNestedManyWithoutProduitInput
-    DetailAchat?: DetailAchatCreateNestedManyWithoutProduitInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitUncheckedCreateWithoutDeviseInput = {
@@ -25714,11 +24105,10 @@ export namespace Prisma {
     qtte?: number
     description: string
     teneurId: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailVente?: DetailVenteUncheckedCreateNestedManyWithoutProduitInput
-    DetailAchat?: DetailAchatUncheckedCreateNestedManyWithoutProduitInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitCreateOrConnectWithoutDeviseInput = {
@@ -25772,7 +24162,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurUpdateWithoutDeviseInput = {
-    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -25793,7 +24182,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedUpdateWithoutDeviseInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -25872,7 +24261,7 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Paiement?: PaiementUncheckedCreateNestedManyWithoutDeviseInput
@@ -25893,7 +24282,7 @@ export namespace Prisma {
   export type TeneurUncheckedCreateWithoutProduitInput = {
     id?: number
     valeur: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25904,7 +24293,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurCreateWithoutProduitInput = {
-    id: string
     email: string
     nom: string
     postnom: string
@@ -25925,7 +24313,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedCreateWithoutProduitInput = {
-    id: string
+    id?: number
     email: string
     nom: string
     postnom: string
@@ -25950,45 +24338,16 @@ export namespace Prisma {
     create: XOR<UtilisateurCreateWithoutProduitInput, UtilisateurUncheckedCreateWithoutProduitInput>
   }
 
-  export type DetailVenteCreateWithoutProduitInput = {
+  export type DetailPanierCreateWithoutProduitInput = {
     qtte: number
     prixUnitaire: number
     prixTotal: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    Vente?: VenteCreateNestedManyWithoutDetailventeInput
+    panier: PanierCreateNestedOneWithoutDetailPanierInput
   }
 
-  export type DetailVenteUncheckedCreateWithoutProduitInput = {
-    id?: number
-    qtte: number
-    prixUnitaire: number
-    prixTotal: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Vente?: VenteUncheckedCreateNestedManyWithoutDetailventeInput
-  }
-
-  export type DetailVenteCreateOrConnectWithoutProduitInput = {
-    where: DetailVenteWhereUniqueInput
-    create: XOR<DetailVenteCreateWithoutProduitInput, DetailVenteUncheckedCreateWithoutProduitInput>
-  }
-
-  export type DetailVenteCreateManyProduitInputEnvelope = {
-    data: DetailVenteCreateManyProduitInput | DetailVenteCreateManyProduitInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type DetailAchatCreateWithoutProduitInput = {
-    qtte: number
-    prixUnitaire: number
-    prixTotal: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    panier: PanierCreateNestedOneWithoutDetailAchatInput
-  }
-
-  export type DetailAchatUncheckedCreateWithoutProduitInput = {
+  export type DetailPanierUncheckedCreateWithoutProduitInput = {
     id?: number
     qtte: number
     prixUnitaire: number
@@ -25998,13 +24357,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type DetailAchatCreateOrConnectWithoutProduitInput = {
-    where: DetailAchatWhereUniqueInput
-    create: XOR<DetailAchatCreateWithoutProduitInput, DetailAchatUncheckedCreateWithoutProduitInput>
+  export type DetailPanierCreateOrConnectWithoutProduitInput = {
+    where: DetailPanierWhereUniqueInput
+    create: XOR<DetailPanierCreateWithoutProduitInput, DetailPanierUncheckedCreateWithoutProduitInput>
   }
 
-  export type DetailAchatCreateManyProduitInputEnvelope = {
-    data: DetailAchatCreateManyProduitInput | DetailAchatCreateManyProduitInput[]
+  export type DetailPanierCreateManyProduitInputEnvelope = {
+    data: DetailPanierCreateManyProduitInput | DetailPanierCreateManyProduitInput[]
     skipDuplicates?: boolean
   }
 
@@ -26034,7 +24393,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Paiement?: PaiementUncheckedUpdateManyWithoutDeviseNestedInput
@@ -26061,7 +24420,7 @@ export namespace Prisma {
   export type TeneurUncheckedUpdateWithoutProduitInput = {
     id?: IntFieldUpdateOperationsInput | number
     valeur?: FloatFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26078,7 +24437,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurUpdateWithoutProduitInput = {
-    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -26099,7 +24457,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedUpdateWithoutProduitInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -26119,63 +24477,34 @@ export namespace Prisma {
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
   }
 
-  export type DetailVenteUpsertWithWhereUniqueWithoutProduitInput = {
-    where: DetailVenteWhereUniqueInput
-    update: XOR<DetailVenteUpdateWithoutProduitInput, DetailVenteUncheckedUpdateWithoutProduitInput>
-    create: XOR<DetailVenteCreateWithoutProduitInput, DetailVenteUncheckedCreateWithoutProduitInput>
+  export type DetailPanierUpsertWithWhereUniqueWithoutProduitInput = {
+    where: DetailPanierWhereUniqueInput
+    update: XOR<DetailPanierUpdateWithoutProduitInput, DetailPanierUncheckedUpdateWithoutProduitInput>
+    create: XOR<DetailPanierCreateWithoutProduitInput, DetailPanierUncheckedCreateWithoutProduitInput>
   }
 
-  export type DetailVenteUpdateWithWhereUniqueWithoutProduitInput = {
-    where: DetailVenteWhereUniqueInput
-    data: XOR<DetailVenteUpdateWithoutProduitInput, DetailVenteUncheckedUpdateWithoutProduitInput>
+  export type DetailPanierUpdateWithWhereUniqueWithoutProduitInput = {
+    where: DetailPanierWhereUniqueInput
+    data: XOR<DetailPanierUpdateWithoutProduitInput, DetailPanierUncheckedUpdateWithoutProduitInput>
   }
 
-  export type DetailVenteUpdateManyWithWhereWithoutProduitInput = {
-    where: DetailVenteScalarWhereInput
-    data: XOR<DetailVenteUpdateManyMutationInput, DetailVenteUncheckedUpdateManyWithoutProduitInput>
+  export type DetailPanierUpdateManyWithWhereWithoutProduitInput = {
+    where: DetailPanierScalarWhereInput
+    data: XOR<DetailPanierUpdateManyMutationInput, DetailPanierUncheckedUpdateManyWithoutProduitInput>
   }
 
-  export type DetailVenteScalarWhereInput = {
-    AND?: DetailVenteScalarWhereInput | DetailVenteScalarWhereInput[]
-    OR?: DetailVenteScalarWhereInput[]
-    NOT?: DetailVenteScalarWhereInput | DetailVenteScalarWhereInput[]
-    id?: IntFilter<"DetailVente"> | number
-    produitId?: IntFilter<"DetailVente"> | number
-    qtte?: IntFilter<"DetailVente"> | number
-    prixUnitaire?: FloatFilter<"DetailVente"> | number
-    prixTotal?: FloatFilter<"DetailVente"> | number
-    createdAt?: DateTimeFilter<"DetailVente"> | Date | string
-    updatedAt?: DateTimeFilter<"DetailVente"> | Date | string
-  }
-
-  export type DetailAchatUpsertWithWhereUniqueWithoutProduitInput = {
-    where: DetailAchatWhereUniqueInput
-    update: XOR<DetailAchatUpdateWithoutProduitInput, DetailAchatUncheckedUpdateWithoutProduitInput>
-    create: XOR<DetailAchatCreateWithoutProduitInput, DetailAchatUncheckedCreateWithoutProduitInput>
-  }
-
-  export type DetailAchatUpdateWithWhereUniqueWithoutProduitInput = {
-    where: DetailAchatWhereUniqueInput
-    data: XOR<DetailAchatUpdateWithoutProduitInput, DetailAchatUncheckedUpdateWithoutProduitInput>
-  }
-
-  export type DetailAchatUpdateManyWithWhereWithoutProduitInput = {
-    where: DetailAchatScalarWhereInput
-    data: XOR<DetailAchatUpdateManyMutationInput, DetailAchatUncheckedUpdateManyWithoutProduitInput>
-  }
-
-  export type DetailAchatScalarWhereInput = {
-    AND?: DetailAchatScalarWhereInput | DetailAchatScalarWhereInput[]
-    OR?: DetailAchatScalarWhereInput[]
-    NOT?: DetailAchatScalarWhereInput | DetailAchatScalarWhereInput[]
-    id?: IntFilter<"DetailAchat"> | number
-    produitId?: IntFilter<"DetailAchat"> | number
-    qtte?: IntFilter<"DetailAchat"> | number
-    prixUnitaire?: FloatFilter<"DetailAchat"> | number
-    prixTotal?: FloatFilter<"DetailAchat"> | number
-    panierId?: IntFilter<"DetailAchat"> | number
-    createdAt?: DateTimeFilter<"DetailAchat"> | Date | string
-    updatedAt?: DateTimeFilter<"DetailAchat"> | Date | string
+  export type DetailPanierScalarWhereInput = {
+    AND?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
+    OR?: DetailPanierScalarWhereInput[]
+    NOT?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
+    id?: IntFilter<"DetailPanier"> | number
+    produitId?: IntFilter<"DetailPanier"> | number
+    qtte?: IntFilter<"DetailPanier"> | number
+    prixUnitaire?: FloatFilter<"DetailPanier"> | number
+    prixTotal?: FloatFilter<"DetailPanier"> | number
+    panierId?: IntFilter<"DetailPanier"> | number
+    createdAt?: DateTimeFilter<"DetailPanier"> | Date | string
+    updatedAt?: DateTimeFilter<"DetailPanier"> | Date | string
   }
 
   export type DeviseCreateWithoutPaiementInput = {
@@ -26193,7 +24522,7 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Produit?: ProduitUncheckedCreateNestedManyWithoutDeviseInput
@@ -26218,7 +24547,7 @@ export namespace Prisma {
     statut?: $Enums.StatutAchat
     panierId: number
     fournisseurId: number
-    enregisterParId: string
+    enregisterParId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -26234,30 +24563,30 @@ export namespace Prisma {
   }
 
   export type VenteCreateWithoutPaiementInput = {
-    statut: string
+    statut?: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    agentId: string
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    agentId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    detailvente: DetailVenteCreateNestedOneWithoutVenteInput
-    entreprise: EntrepriseCreateNestedOneWithoutVenteInput
+    panier: PanierCreateNestedOneWithoutVenteInput
     utilisateur: UtilisateurCreateNestedOneWithoutVenteInput
     fournisseur?: FournisseurCreateNestedOneWithoutVenteInput
   }
 
   export type VenteUncheckedCreateWithoutPaiementInput = {
     id?: number
-    statut: string
+    statut?: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    detailVenteId: number
-    entrepriseId: number
-    clientId: string
-    agentId: string
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    enregisterParId: number
     fournisseurId?: number | null
+    agentId?: number | null
+    panierId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -26298,7 +24627,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Produit?: ProduitUncheckedUpdateManyWithoutDeviseNestedInput
@@ -26336,62 +24665,29 @@ export namespace Prisma {
     data: XOR<VenteUpdateManyMutationInput, VenteUncheckedUpdateManyWithoutPaiementInput>
   }
 
-  export type DetailVenteCreateWithoutVenteInput = {
-    qtte: number
-    prixUnitaire: number
-    prixTotal: number
+  export type PanierCreateWithoutVenteInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
-    produit: ProduitCreateNestedOneWithoutDetailVenteInput
+    utilisateur: UtilisateurCreateNestedOneWithoutPanierInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutPanierInput
+    Achat?: AchatCreateNestedManyWithoutPanierInput
   }
 
-  export type DetailVenteUncheckedCreateWithoutVenteInput = {
+  export type PanierUncheckedCreateWithoutVenteInput = {
     id?: number
-    produitId: number
-    qtte: number
-    prixUnitaire: number
-    prixTotal: number
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutPanierInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutPanierInput
   }
 
-  export type DetailVenteCreateOrConnectWithoutVenteInput = {
-    where: DetailVenteWhereUniqueInput
-    create: XOR<DetailVenteCreateWithoutVenteInput, DetailVenteUncheckedCreateWithoutVenteInput>
-  }
-
-  export type EntrepriseCreateWithoutVenteInput = {
-    nom: string
-    encronyme: string
-    code_postale: string
-    adresse: string
-    tel: string
-    site?: string | null
-    email: string
-    description?: string | null
-    logo?: string | null
-  }
-
-  export type EntrepriseUncheckedCreateWithoutVenteInput = {
-    id?: number
-    nom: string
-    encronyme: string
-    code_postale: string
-    adresse: string
-    tel: string
-    site?: string | null
-    email: string
-    description?: string | null
-    logo?: string | null
-  }
-
-  export type EntrepriseCreateOrConnectWithoutVenteInput = {
-    where: EntrepriseWhereUniqueInput
-    create: XOR<EntrepriseCreateWithoutVenteInput, EntrepriseUncheckedCreateWithoutVenteInput>
+  export type PanierCreateOrConnectWithoutVenteInput = {
+    where: PanierWhereUniqueInput
+    create: XOR<PanierCreateWithoutVenteInput, PanierUncheckedCreateWithoutVenteInput>
   }
 
   export type UtilisateurCreateWithoutVenteInput = {
-    id: string
     email: string
     nom: string
     postnom: string
@@ -26412,7 +24708,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedCreateWithoutVenteInput = {
-    id: string
+    id?: number
     email: string
     nom: string
     postnom: string
@@ -26489,70 +24785,32 @@ export namespace Prisma {
     create: XOR<PaiementCreateWithoutVenteInput, PaiementUncheckedCreateWithoutVenteInput>
   }
 
-  export type DetailVenteUpsertWithoutVenteInput = {
-    update: XOR<DetailVenteUpdateWithoutVenteInput, DetailVenteUncheckedUpdateWithoutVenteInput>
-    create: XOR<DetailVenteCreateWithoutVenteInput, DetailVenteUncheckedCreateWithoutVenteInput>
-    where?: DetailVenteWhereInput
+  export type PanierUpsertWithoutVenteInput = {
+    update: XOR<PanierUpdateWithoutVenteInput, PanierUncheckedUpdateWithoutVenteInput>
+    create: XOR<PanierCreateWithoutVenteInput, PanierUncheckedCreateWithoutVenteInput>
+    where?: PanierWhereInput
   }
 
-  export type DetailVenteUpdateToOneWithWhereWithoutVenteInput = {
-    where?: DetailVenteWhereInput
-    data: XOR<DetailVenteUpdateWithoutVenteInput, DetailVenteUncheckedUpdateWithoutVenteInput>
+  export type PanierUpdateToOneWithWhereWithoutVenteInput = {
+    where?: PanierWhereInput
+    data: XOR<PanierUpdateWithoutVenteInput, PanierUncheckedUpdateWithoutVenteInput>
   }
 
-  export type DetailVenteUpdateWithoutVenteInput = {
-    qtte?: IntFieldUpdateOperationsInput | number
-    prixUnitaire?: FloatFieldUpdateOperationsInput | number
-    prixTotal?: FloatFieldUpdateOperationsInput | number
+  export type PanierUpdateWithoutVenteInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    produit?: ProduitUpdateOneRequiredWithoutDetailVenteNestedInput
+    utilisateur?: UtilisateurUpdateOneRequiredWithoutPanierNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutPanierNestedInput
+    Achat?: AchatUpdateManyWithoutPanierNestedInput
   }
 
-  export type DetailVenteUncheckedUpdateWithoutVenteInput = {
+  export type PanierUncheckedUpdateWithoutVenteInput = {
     id?: IntFieldUpdateOperationsInput | number
-    produitId?: IntFieldUpdateOperationsInput | number
-    qtte?: IntFieldUpdateOperationsInput | number
-    prixUnitaire?: FloatFieldUpdateOperationsInput | number
-    prixTotal?: FloatFieldUpdateOperationsInput | number
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EntrepriseUpsertWithoutVenteInput = {
-    update: XOR<EntrepriseUpdateWithoutVenteInput, EntrepriseUncheckedUpdateWithoutVenteInput>
-    create: XOR<EntrepriseCreateWithoutVenteInput, EntrepriseUncheckedCreateWithoutVenteInput>
-    where?: EntrepriseWhereInput
-  }
-
-  export type EntrepriseUpdateToOneWithWhereWithoutVenteInput = {
-    where?: EntrepriseWhereInput
-    data: XOR<EntrepriseUpdateWithoutVenteInput, EntrepriseUncheckedUpdateWithoutVenteInput>
-  }
-
-  export type EntrepriseUpdateWithoutVenteInput = {
-    nom?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    code_postale?: StringFieldUpdateOperationsInput | string
-    adresse?: StringFieldUpdateOperationsInput | string
-    tel?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type EntrepriseUncheckedUpdateWithoutVenteInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    code_postale?: StringFieldUpdateOperationsInput | string
-    adresse?: StringFieldUpdateOperationsInput | string
-    tel?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutPanierNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type UtilisateurUpsertWithoutVenteInput = {
@@ -26567,7 +24825,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurUpdateWithoutVenteInput = {
-    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -26588,7 +24845,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedUpdateWithoutVenteInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -26673,7 +24930,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurCreateWithoutPanierInput = {
-    id: string
     email: string
     nom: string
     postnom: string
@@ -26694,7 +24950,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedCreateWithoutPanierInput = {
-    id: string
+    id?: number
     email: string
     nom: string
     postnom: string
@@ -26719,16 +24975,16 @@ export namespace Prisma {
     create: XOR<UtilisateurCreateWithoutPanierInput, UtilisateurUncheckedCreateWithoutPanierInput>
   }
 
-  export type DetailAchatCreateWithoutPanierInput = {
+  export type DetailPanierCreateWithoutPanierInput = {
     qtte: number
     prixUnitaire: number
     prixTotal: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    produit: ProduitCreateNestedOneWithoutDetailAchatInput
+    produit: ProduitCreateNestedOneWithoutDetailPanierInput
   }
 
-  export type DetailAchatUncheckedCreateWithoutPanierInput = {
+  export type DetailPanierUncheckedCreateWithoutPanierInput = {
     id?: number
     produitId: number
     qtte: number
@@ -26738,13 +24994,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type DetailAchatCreateOrConnectWithoutPanierInput = {
-    where: DetailAchatWhereUniqueInput
-    create: XOR<DetailAchatCreateWithoutPanierInput, DetailAchatUncheckedCreateWithoutPanierInput>
+  export type DetailPanierCreateOrConnectWithoutPanierInput = {
+    where: DetailPanierWhereUniqueInput
+    create: XOR<DetailPanierCreateWithoutPanierInput, DetailPanierUncheckedCreateWithoutPanierInput>
   }
 
-  export type DetailAchatCreateManyPanierInputEnvelope = {
-    data: DetailAchatCreateManyPanierInput | DetailAchatCreateManyPanierInput[]
+  export type DetailPanierCreateManyPanierInputEnvelope = {
+    data: DetailPanierCreateManyPanierInput | DetailPanierCreateManyPanierInput[]
     skipDuplicates?: boolean
   }
 
@@ -26761,7 +25017,7 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     fournisseurId: number
-    enregisterParId: string
+    enregisterParId: number
     paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -26777,6 +25033,45 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type VenteCreateWithoutPanierInput = {
+    statut?: $Enums.StatutVente
+    total_ttc: number
+    total_ht: number
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    agentId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    utilisateur: UtilisateurCreateNestedOneWithoutVenteInput
+    fournisseur?: FournisseurCreateNestedOneWithoutVenteInput
+    paiement: PaiementCreateNestedOneWithoutVenteInput
+  }
+
+  export type VenteUncheckedCreateWithoutPanierInput = {
+    id?: number
+    statut?: $Enums.StatutVente
+    total_ttc: number
+    total_ht: number
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    enregisterParId: number
+    fournisseurId?: number | null
+    agentId?: number | null
+    paiementId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VenteCreateOrConnectWithoutPanierInput = {
+    where: VenteWhereUniqueInput
+    create: XOR<VenteCreateWithoutPanierInput, VenteUncheckedCreateWithoutPanierInput>
+  }
+
+  export type VenteCreateManyPanierInputEnvelope = {
+    data: VenteCreateManyPanierInput | VenteCreateManyPanierInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UtilisateurUpsertWithoutPanierInput = {
     update: XOR<UtilisateurUpdateWithoutPanierInput, UtilisateurUncheckedUpdateWithoutPanierInput>
     create: XOR<UtilisateurCreateWithoutPanierInput, UtilisateurUncheckedCreateWithoutPanierInput>
@@ -26789,7 +25084,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurUpdateWithoutPanierInput = {
-    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -26810,7 +25104,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedUpdateWithoutPanierInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -26830,20 +25124,20 @@ export namespace Prisma {
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
   }
 
-  export type DetailAchatUpsertWithWhereUniqueWithoutPanierInput = {
-    where: DetailAchatWhereUniqueInput
-    update: XOR<DetailAchatUpdateWithoutPanierInput, DetailAchatUncheckedUpdateWithoutPanierInput>
-    create: XOR<DetailAchatCreateWithoutPanierInput, DetailAchatUncheckedCreateWithoutPanierInput>
+  export type DetailPanierUpsertWithWhereUniqueWithoutPanierInput = {
+    where: DetailPanierWhereUniqueInput
+    update: XOR<DetailPanierUpdateWithoutPanierInput, DetailPanierUncheckedUpdateWithoutPanierInput>
+    create: XOR<DetailPanierCreateWithoutPanierInput, DetailPanierUncheckedCreateWithoutPanierInput>
   }
 
-  export type DetailAchatUpdateWithWhereUniqueWithoutPanierInput = {
-    where: DetailAchatWhereUniqueInput
-    data: XOR<DetailAchatUpdateWithoutPanierInput, DetailAchatUncheckedUpdateWithoutPanierInput>
+  export type DetailPanierUpdateWithWhereUniqueWithoutPanierInput = {
+    where: DetailPanierWhereUniqueInput
+    data: XOR<DetailPanierUpdateWithoutPanierInput, DetailPanierUncheckedUpdateWithoutPanierInput>
   }
 
-  export type DetailAchatUpdateManyWithWhereWithoutPanierInput = {
-    where: DetailAchatScalarWhereInput
-    data: XOR<DetailAchatUpdateManyMutationInput, DetailAchatUncheckedUpdateManyWithoutPanierInput>
+  export type DetailPanierUpdateManyWithWhereWithoutPanierInput = {
+    where: DetailPanierScalarWhereInput
+    data: XOR<DetailPanierUpdateManyMutationInput, DetailPanierUncheckedUpdateManyWithoutPanierInput>
   }
 
   export type AchatUpsertWithWhereUniqueWithoutPanierInput = {
@@ -26862,132 +25156,23 @@ export namespace Prisma {
     data: XOR<AchatUpdateManyMutationInput, AchatUncheckedUpdateManyWithoutPanierInput>
   }
 
-  export type ProduitCreateWithoutDetailVenteInput = {
-    designation: string
-    prix: number
-    qtte?: number
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    devise: DeviseCreateNestedOneWithoutProduitInput
-    teneur: TeneurCreateNestedOneWithoutProduitInput
-    utilisateur: UtilisateurCreateNestedOneWithoutProduitInput
-    DetailAchat?: DetailAchatCreateNestedManyWithoutProduitInput
-  }
-
-  export type ProduitUncheckedCreateWithoutDetailVenteInput = {
-    id?: number
-    designation: string
-    prix: number
-    qtte?: number
-    description: string
-    deviseId: number
-    teneurId: number
-    utilisateurId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    DetailAchat?: DetailAchatUncheckedCreateNestedManyWithoutProduitInput
-  }
-
-  export type ProduitCreateOrConnectWithoutDetailVenteInput = {
-    where: ProduitWhereUniqueInput
-    create: XOR<ProduitCreateWithoutDetailVenteInput, ProduitUncheckedCreateWithoutDetailVenteInput>
-  }
-
-  export type VenteCreateWithoutDetailventeInput = {
-    statut: string
-    total_ttc: number
-    total_ht: number
-    remise: number
-    agentId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    entreprise: EntrepriseCreateNestedOneWithoutVenteInput
-    utilisateur: UtilisateurCreateNestedOneWithoutVenteInput
-    fournisseur?: FournisseurCreateNestedOneWithoutVenteInput
-    paiement?: PaiementCreateNestedOneWithoutVenteInput
-  }
-
-  export type VenteUncheckedCreateWithoutDetailventeInput = {
-    id?: number
-    statut: string
-    total_ttc: number
-    total_ht: number
-    remise: number
-    entrepriseId: number
-    clientId: string
-    agentId: string
-    fournisseurId?: number | null
-    paiementId?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type VenteCreateOrConnectWithoutDetailventeInput = {
+  export type VenteUpsertWithWhereUniqueWithoutPanierInput = {
     where: VenteWhereUniqueInput
-    create: XOR<VenteCreateWithoutDetailventeInput, VenteUncheckedCreateWithoutDetailventeInput>
+    update: XOR<VenteUpdateWithoutPanierInput, VenteUncheckedUpdateWithoutPanierInput>
+    create: XOR<VenteCreateWithoutPanierInput, VenteUncheckedCreateWithoutPanierInput>
   }
 
-  export type VenteCreateManyDetailventeInputEnvelope = {
-    data: VenteCreateManyDetailventeInput | VenteCreateManyDetailventeInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ProduitUpsertWithoutDetailVenteInput = {
-    update: XOR<ProduitUpdateWithoutDetailVenteInput, ProduitUncheckedUpdateWithoutDetailVenteInput>
-    create: XOR<ProduitCreateWithoutDetailVenteInput, ProduitUncheckedCreateWithoutDetailVenteInput>
-    where?: ProduitWhereInput
-  }
-
-  export type ProduitUpdateToOneWithWhereWithoutDetailVenteInput = {
-    where?: ProduitWhereInput
-    data: XOR<ProduitUpdateWithoutDetailVenteInput, ProduitUncheckedUpdateWithoutDetailVenteInput>
-  }
-
-  export type ProduitUpdateWithoutDetailVenteInput = {
-    designation?: StringFieldUpdateOperationsInput | string
-    prix?: FloatFieldUpdateOperationsInput | number
-    qtte?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    devise?: DeviseUpdateOneRequiredWithoutProduitNestedInput
-    teneur?: TeneurUpdateOneRequiredWithoutProduitNestedInput
-    utilisateur?: UtilisateurUpdateOneRequiredWithoutProduitNestedInput
-    DetailAchat?: DetailAchatUpdateManyWithoutProduitNestedInput
-  }
-
-  export type ProduitUncheckedUpdateWithoutDetailVenteInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    designation?: StringFieldUpdateOperationsInput | string
-    prix?: FloatFieldUpdateOperationsInput | number
-    qtte?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
-    deviseId?: IntFieldUpdateOperationsInput | number
-    teneurId?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailAchat?: DetailAchatUncheckedUpdateManyWithoutProduitNestedInput
-  }
-
-  export type VenteUpsertWithWhereUniqueWithoutDetailventeInput = {
+  export type VenteUpdateWithWhereUniqueWithoutPanierInput = {
     where: VenteWhereUniqueInput
-    update: XOR<VenteUpdateWithoutDetailventeInput, VenteUncheckedUpdateWithoutDetailventeInput>
-    create: XOR<VenteCreateWithoutDetailventeInput, VenteUncheckedCreateWithoutDetailventeInput>
+    data: XOR<VenteUpdateWithoutPanierInput, VenteUncheckedUpdateWithoutPanierInput>
   }
 
-  export type VenteUpdateWithWhereUniqueWithoutDetailventeInput = {
-    where: VenteWhereUniqueInput
-    data: XOR<VenteUpdateWithoutDetailventeInput, VenteUncheckedUpdateWithoutDetailventeInput>
-  }
-
-  export type VenteUpdateManyWithWhereWithoutDetailventeInput = {
+  export type VenteUpdateManyWithWhereWithoutPanierInput = {
     where: VenteScalarWhereInput
-    data: XOR<VenteUpdateManyMutationInput, VenteUncheckedUpdateManyWithoutDetailventeInput>
+    data: XOR<VenteUpdateManyMutationInput, VenteUncheckedUpdateManyWithoutPanierInput>
   }
 
-  export type ProduitCreateWithoutDetailAchatInput = {
+  export type ProduitCreateWithoutDetailPanierInput = {
     designation: string
     prix: number
     qtte?: number
@@ -26997,10 +25182,9 @@ export namespace Prisma {
     devise: DeviseCreateNestedOneWithoutProduitInput
     teneur: TeneurCreateNestedOneWithoutProduitInput
     utilisateur: UtilisateurCreateNestedOneWithoutProduitInput
-    DetailVente?: DetailVenteCreateNestedManyWithoutProduitInput
   }
 
-  export type ProduitUncheckedCreateWithoutDetailAchatInput = {
+  export type ProduitUncheckedCreateWithoutDetailPanierInput = {
     id?: number
     designation: string
     prix: number
@@ -27008,49 +25192,50 @@ export namespace Prisma {
     description: string
     deviseId: number
     teneurId: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailVente?: DetailVenteUncheckedCreateNestedManyWithoutProduitInput
   }
 
-  export type ProduitCreateOrConnectWithoutDetailAchatInput = {
+  export type ProduitCreateOrConnectWithoutDetailPanierInput = {
     where: ProduitWhereUniqueInput
-    create: XOR<ProduitCreateWithoutDetailAchatInput, ProduitUncheckedCreateWithoutDetailAchatInput>
+    create: XOR<ProduitCreateWithoutDetailPanierInput, ProduitUncheckedCreateWithoutDetailPanierInput>
   }
 
-  export type PanierCreateWithoutDetailAchatInput = {
+  export type PanierCreateWithoutDetailPanierInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
     utilisateur: UtilisateurCreateNestedOneWithoutPanierInput
     Achat?: AchatCreateNestedManyWithoutPanierInput
+    Vente?: VenteCreateNestedManyWithoutPanierInput
   }
 
-  export type PanierUncheckedCreateWithoutDetailAchatInput = {
+  export type PanierUncheckedCreateWithoutDetailPanierInput = {
     id?: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     Achat?: AchatUncheckedCreateNestedManyWithoutPanierInput
+    Vente?: VenteUncheckedCreateNestedManyWithoutPanierInput
   }
 
-  export type PanierCreateOrConnectWithoutDetailAchatInput = {
+  export type PanierCreateOrConnectWithoutDetailPanierInput = {
     where: PanierWhereUniqueInput
-    create: XOR<PanierCreateWithoutDetailAchatInput, PanierUncheckedCreateWithoutDetailAchatInput>
+    create: XOR<PanierCreateWithoutDetailPanierInput, PanierUncheckedCreateWithoutDetailPanierInput>
   }
 
-  export type ProduitUpsertWithoutDetailAchatInput = {
-    update: XOR<ProduitUpdateWithoutDetailAchatInput, ProduitUncheckedUpdateWithoutDetailAchatInput>
-    create: XOR<ProduitCreateWithoutDetailAchatInput, ProduitUncheckedCreateWithoutDetailAchatInput>
+  export type ProduitUpsertWithoutDetailPanierInput = {
+    update: XOR<ProduitUpdateWithoutDetailPanierInput, ProduitUncheckedUpdateWithoutDetailPanierInput>
+    create: XOR<ProduitCreateWithoutDetailPanierInput, ProduitUncheckedCreateWithoutDetailPanierInput>
     where?: ProduitWhereInput
   }
 
-  export type ProduitUpdateToOneWithWhereWithoutDetailAchatInput = {
+  export type ProduitUpdateToOneWithWhereWithoutDetailPanierInput = {
     where?: ProduitWhereInput
-    data: XOR<ProduitUpdateWithoutDetailAchatInput, ProduitUncheckedUpdateWithoutDetailAchatInput>
+    data: XOR<ProduitUpdateWithoutDetailPanierInput, ProduitUncheckedUpdateWithoutDetailPanierInput>
   }
 
-  export type ProduitUpdateWithoutDetailAchatInput = {
+  export type ProduitUpdateWithoutDetailPanierInput = {
     designation?: StringFieldUpdateOperationsInput | string
     prix?: FloatFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
@@ -27060,10 +25245,9 @@ export namespace Prisma {
     devise?: DeviseUpdateOneRequiredWithoutProduitNestedInput
     teneur?: TeneurUpdateOneRequiredWithoutProduitNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutProduitNestedInput
-    DetailVente?: DetailVenteUpdateManyWithoutProduitNestedInput
   }
 
-  export type ProduitUncheckedUpdateWithoutDetailAchatInput = {
+  export type ProduitUncheckedUpdateWithoutDetailPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
     designation?: StringFieldUpdateOperationsInput | string
     prix?: FloatFieldUpdateOperationsInput | number
@@ -27071,51 +25255,54 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     deviseId?: IntFieldUpdateOperationsInput | number
     teneurId?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailVente?: DetailVenteUncheckedUpdateManyWithoutProduitNestedInput
   }
 
-  export type PanierUpsertWithoutDetailAchatInput = {
-    update: XOR<PanierUpdateWithoutDetailAchatInput, PanierUncheckedUpdateWithoutDetailAchatInput>
-    create: XOR<PanierCreateWithoutDetailAchatInput, PanierUncheckedCreateWithoutDetailAchatInput>
+  export type PanierUpsertWithoutDetailPanierInput = {
+    update: XOR<PanierUpdateWithoutDetailPanierInput, PanierUncheckedUpdateWithoutDetailPanierInput>
+    create: XOR<PanierCreateWithoutDetailPanierInput, PanierUncheckedCreateWithoutDetailPanierInput>
     where?: PanierWhereInput
   }
 
-  export type PanierUpdateToOneWithWhereWithoutDetailAchatInput = {
+  export type PanierUpdateToOneWithWhereWithoutDetailPanierInput = {
     where?: PanierWhereInput
-    data: XOR<PanierUpdateWithoutDetailAchatInput, PanierUncheckedUpdateWithoutDetailAchatInput>
+    data: XOR<PanierUpdateWithoutDetailPanierInput, PanierUncheckedUpdateWithoutDetailPanierInput>
   }
 
-  export type PanierUpdateWithoutDetailAchatInput = {
+  export type PanierUpdateWithoutDetailPanierInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneRequiredWithoutPanierNestedInput
     Achat?: AchatUpdateManyWithoutPanierNestedInput
+    Vente?: VenteUpdateManyWithoutPanierNestedInput
   }
 
-  export type PanierUncheckedUpdateWithoutDetailAchatInput = {
+  export type PanierUncheckedUpdateWithoutDetailPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Achat?: AchatUncheckedUpdateManyWithoutPanierNestedInput
+    Vente?: VenteUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierCreateWithoutAchatInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
     utilisateur: UtilisateurCreateNestedOneWithoutPanierInput
-    DetailAchat?: DetailAchatCreateNestedManyWithoutPanierInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutPanierInput
+    Vente?: VenteCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUncheckedCreateWithoutAchatInput = {
     id?: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailAchat?: DetailAchatUncheckedCreateNestedManyWithoutPanierInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutPanierInput
+    Vente?: VenteUncheckedCreateNestedManyWithoutPanierInput
   }
 
   export type PanierCreateOrConnectWithoutAchatInput = {
@@ -27152,7 +25339,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurCreateWithoutAchatInput = {
-    id: string
     email: string
     nom: string
     postnom: string
@@ -27173,7 +25359,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedCreateWithoutAchatInput = {
-    id: string
+    id?: number
     email: string
     nom: string
     postnom: string
@@ -27237,15 +25423,17 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneRequiredWithoutPanierNestedInput
-    DetailAchat?: DetailAchatUpdateManyWithoutPanierNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutPanierNestedInput
+    Vente?: VenteUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateWithoutAchatInput = {
     id?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailAchat?: DetailAchatUncheckedUpdateManyWithoutPanierNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutPanierNestedInput
+    Vente?: VenteUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type FournisseurUpsertWithoutAchatInput = {
@@ -27294,7 +25482,6 @@ export namespace Prisma {
   }
 
   export type UtilisateurUpdateWithoutAchatInput = {
-    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -27315,7 +25502,7 @@ export namespace Prisma {
   }
 
   export type UtilisateurUncheckedUpdateWithoutAchatInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     nom?: StringFieldUpdateOperationsInput | string
     postnom?: StringFieldUpdateOperationsInput | string
@@ -27365,65 +25552,6 @@ export namespace Prisma {
     Vente?: VenteUncheckedUpdateManyWithoutPaiementNestedInput
   }
 
-  export type VenteCreateManyEntrepriseInput = {
-    id?: number
-    statut: string
-    total_ttc: number
-    total_ht: number
-    remise: number
-    detailVenteId: number
-    clientId: string
-    agentId: string
-    fournisseurId?: number | null
-    paiementId?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type VenteUpdateWithoutEntrepriseInput = {
-    statut?: StringFieldUpdateOperationsInput | string
-    total_ttc?: FloatFieldUpdateOperationsInput | number
-    total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    detailvente?: DetailVenteUpdateOneRequiredWithoutVenteNestedInput
-    utilisateur?: UtilisateurUpdateOneRequiredWithoutVenteNestedInput
-    fournisseur?: FournisseurUpdateOneWithoutVenteNestedInput
-    paiement?: PaiementUpdateOneWithoutVenteNestedInput
-  }
-
-  export type VenteUncheckedUpdateWithoutEntrepriseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
-    total_ttc?: FloatFieldUpdateOperationsInput | number
-    total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    detailVenteId?: IntFieldUpdateOperationsInput | number
-    clientId?: StringFieldUpdateOperationsInput | string
-    agentId?: StringFieldUpdateOperationsInput | string
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
-    paiementId?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VenteUncheckedUpdateManyWithoutEntrepriseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
-    total_ttc?: FloatFieldUpdateOperationsInput | number
-    total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    detailVenteId?: IntFieldUpdateOperationsInput | number
-    clientId?: StringFieldUpdateOperationsInput | string
-    agentId?: StringFieldUpdateOperationsInput | string
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
-    paiementId?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type AdresseCreateManyUtilisateurInput = {
     id?: number
     ville: string
@@ -27456,15 +25584,15 @@ export namespace Prisma {
 
   export type VenteCreateManyUtilisateurInput = {
     id?: number
-    statut: string
+    statut?: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    detailVenteId: number
-    entrepriseId: number
-    agentId: string
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
     fournisseurId?: number | null
-    paiementId?: number | null
+    agentId?: number | null
+    paiementId: number
+    panierId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -27562,8 +25690,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devise?: DeviseUpdateOneRequiredWithoutProduitNestedInput
     teneur?: TeneurUpdateOneRequiredWithoutProduitNestedInput
-    DetailVente?: DetailVenteUpdateManyWithoutProduitNestedInput
-    DetailAchat?: DetailAchatUpdateManyWithoutProduitNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateWithoutUtilisateurInput = {
@@ -27576,8 +25703,7 @@ export namespace Prisma {
     teneurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailVente?: DetailVenteUncheckedUpdateManyWithoutProduitNestedInput
-    DetailAchat?: DetailAchatUncheckedUpdateManyWithoutProduitNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateManyWithoutUtilisateurInput = {
@@ -27593,45 +25719,45 @@ export namespace Prisma {
   }
 
   export type VenteUpdateWithoutUtilisateurInput = {
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    detailvente?: DetailVenteUpdateOneRequiredWithoutVenteNestedInput
-    entreprise?: EntrepriseUpdateOneRequiredWithoutVenteNestedInput
+    panier?: PanierUpdateOneRequiredWithoutVenteNestedInput
     fournisseur?: FournisseurUpdateOneWithoutVenteNestedInput
-    paiement?: PaiementUpdateOneWithoutVenteNestedInput
+    paiement?: PaiementUpdateOneRequiredWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateWithoutUtilisateurInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    detailVenteId?: IntFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
-    paiementId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
+    paiementId?: IntFieldUpdateOperationsInput | number
+    panierId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VenteUncheckedUpdateManyWithoutUtilisateurInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    detailVenteId?: IntFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
-    paiementId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
+    paiementId?: IntFieldUpdateOperationsInput | number
+    panierId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27720,16 +25846,18 @@ export namespace Prisma {
   export type PanierUpdateWithoutUtilisateurInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailAchat?: DetailAchatUpdateManyWithoutPanierNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutPanierNestedInput
     Achat?: AchatUpdateManyWithoutPanierNestedInput
+    Vente?: VenteUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateWithoutUtilisateurInput = {
     id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailAchat?: DetailAchatUncheckedUpdateManyWithoutPanierNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutPanierNestedInput
     Achat?: AchatUncheckedUpdateManyWithoutPanierNestedInput
+    Vente?: VenteUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateManyWithoutUtilisateurInput = {
@@ -27740,15 +25868,15 @@ export namespace Prisma {
 
   export type VenteCreateManyFournisseurInput = {
     id?: number
-    statut: string
+    statut?: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    detailVenteId: number
-    entrepriseId: number
-    clientId: string
-    agentId: string
-    paiementId?: number | null
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    enregisterParId: number
+    agentId?: number | null
+    paiementId: number
+    panierId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -27757,7 +25885,7 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     panierId: number
-    enregisterParId: string
+    enregisterParId: number
     paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -27768,7 +25896,7 @@ export namespace Prisma {
     ville: string
     commune: string
     adresse: string
-    utilisateurId?: string | null
+    utilisateurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -27776,51 +25904,51 @@ export namespace Prisma {
   export type ContactCreateManyFournisseurInput = {
     id?: number
     tel: string
-    utilisateurId?: string | null
+    utilisateurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type VenteUpdateWithoutFournisseurInput = {
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    detailvente?: DetailVenteUpdateOneRequiredWithoutVenteNestedInput
-    entreprise?: EntrepriseUpdateOneRequiredWithoutVenteNestedInput
+    panier?: PanierUpdateOneRequiredWithoutVenteNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutVenteNestedInput
-    paiement?: PaiementUpdateOneWithoutVenteNestedInput
+    paiement?: PaiementUpdateOneRequiredWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateWithoutFournisseurInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    detailVenteId?: IntFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    clientId?: StringFieldUpdateOperationsInput | string
-    agentId?: StringFieldUpdateOperationsInput | string
-    paiementId?: NullableIntFieldUpdateOperationsInput | number | null
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregisterParId?: IntFieldUpdateOperationsInput | number
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
+    paiementId?: IntFieldUpdateOperationsInput | number
+    panierId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VenteUncheckedUpdateManyWithoutFournisseurInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    detailVenteId?: IntFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    clientId?: StringFieldUpdateOperationsInput | string
-    agentId?: StringFieldUpdateOperationsInput | string
-    paiementId?: NullableIntFieldUpdateOperationsInput | number | null
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregisterParId?: IntFieldUpdateOperationsInput | number
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
+    paiementId?: IntFieldUpdateOperationsInput | number
+    panierId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27838,7 +25966,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: StringFieldUpdateOperationsInput | string
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27848,7 +25976,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: StringFieldUpdateOperationsInput | string
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27868,7 +25996,7 @@ export namespace Prisma {
     ville?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
     adresse?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27878,7 +26006,7 @@ export namespace Prisma {
     ville?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
     adresse?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27893,7 +26021,7 @@ export namespace Prisma {
   export type ContactUncheckedUpdateWithoutFournisseurInput = {
     id?: IntFieldUpdateOperationsInput | number
     tel?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27901,7 +26029,7 @@ export namespace Prisma {
   export type ContactUncheckedUpdateManyWithoutFournisseurInput = {
     id?: IntFieldUpdateOperationsInput | number
     tel?: StringFieldUpdateOperationsInput | string
-    utilisateurId?: NullableStringFieldUpdateOperationsInput | string | null
+    utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27913,7 +26041,7 @@ export namespace Prisma {
     qtte?: number
     description: string
     deviseId: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -27927,8 +26055,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devise?: DeviseUpdateOneRequiredWithoutProduitNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutProduitNestedInput
-    DetailVente?: DetailVenteUpdateManyWithoutProduitNestedInput
-    DetailAchat?: DetailAchatUpdateManyWithoutProduitNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateWithoutTeneurInput = {
@@ -27938,11 +26065,10 @@ export namespace Prisma {
     qtte?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     deviseId?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailVente?: DetailVenteUncheckedUpdateManyWithoutProduitNestedInput
-    DetailAchat?: DetailAchatUncheckedUpdateManyWithoutProduitNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateManyWithoutTeneurInput = {
@@ -27952,7 +26078,7 @@ export namespace Prisma {
     qtte?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     deviseId?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27964,7 +26090,7 @@ export namespace Prisma {
     qtte?: number
     description: string
     teneurId: number
-    utilisateurId: string
+    utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -27986,8 +26112,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teneur?: TeneurUpdateOneRequiredWithoutProduitNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutProduitNestedInput
-    DetailVente?: DetailVenteUpdateManyWithoutProduitNestedInput
-    DetailAchat?: DetailAchatUpdateManyWithoutProduitNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateWithoutDeviseInput = {
@@ -27997,11 +26122,10 @@ export namespace Prisma {
     qtte?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     teneurId?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailVente?: DetailVenteUncheckedUpdateManyWithoutProduitNestedInput
-    DetailAchat?: DetailAchatUncheckedUpdateManyWithoutProduitNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateManyWithoutDeviseInput = {
@@ -28011,7 +26135,7 @@ export namespace Prisma {
     qtte?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     teneurId?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28043,16 +26167,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DetailVenteCreateManyProduitInput = {
-    id?: number
-    qtte: number
-    prixUnitaire: number
-    prixTotal: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DetailAchatCreateManyProduitInput = {
+  export type DetailPanierCreateManyProduitInput = {
     id?: number
     qtte: number
     prixUnitaire: number
@@ -28062,44 +26177,16 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type DetailVenteUpdateWithoutProduitInput = {
+  export type DetailPanierUpdateWithoutProduitInput = {
     qtte?: IntFieldUpdateOperationsInput | number
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotal?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Vente?: VenteUpdateManyWithoutDetailventeNestedInput
+    panier?: PanierUpdateOneRequiredWithoutDetailPanierNestedInput
   }
 
-  export type DetailVenteUncheckedUpdateWithoutProduitInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    qtte?: IntFieldUpdateOperationsInput | number
-    prixUnitaire?: FloatFieldUpdateOperationsInput | number
-    prixTotal?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Vente?: VenteUncheckedUpdateManyWithoutDetailventeNestedInput
-  }
-
-  export type DetailVenteUncheckedUpdateManyWithoutProduitInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    qtte?: IntFieldUpdateOperationsInput | number
-    prixUnitaire?: FloatFieldUpdateOperationsInput | number
-    prixTotal?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DetailAchatUpdateWithoutProduitInput = {
-    qtte?: IntFieldUpdateOperationsInput | number
-    prixUnitaire?: FloatFieldUpdateOperationsInput | number
-    prixTotal?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    panier?: PanierUpdateOneRequiredWithoutDetailAchatNestedInput
-  }
-
-  export type DetailAchatUncheckedUpdateWithoutProduitInput = {
+  export type DetailPanierUncheckedUpdateWithoutProduitInput = {
     id?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
@@ -28109,7 +26196,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DetailAchatUncheckedUpdateManyWithoutProduitInput = {
+  export type DetailPanierUncheckedUpdateManyWithoutProduitInput = {
     id?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
@@ -28124,22 +26211,22 @@ export namespace Prisma {
     statut?: $Enums.StatutAchat
     panierId: number
     fournisseurId: number
-    enregisterParId: string
+    enregisterParId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type VenteCreateManyPaiementInput = {
     id?: number
-    statut: string
+    statut?: $Enums.StatutVente
     total_ttc: number
     total_ht: number
-    remise: number
-    detailVenteId: number
-    entrepriseId: number
-    clientId: string
-    agentId: string
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    enregisterParId: number
     fournisseurId?: number | null
+    agentId?: number | null
+    panierId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -28158,7 +26245,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: StringFieldUpdateOperationsInput | string
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28168,56 +26255,56 @@ export namespace Prisma {
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: StringFieldUpdateOperationsInput | string
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VenteUpdateWithoutPaiementInput = {
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    detailvente?: DetailVenteUpdateOneRequiredWithoutVenteNestedInput
-    entreprise?: EntrepriseUpdateOneRequiredWithoutVenteNestedInput
+    panier?: PanierUpdateOneRequiredWithoutVenteNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutVenteNestedInput
     fournisseur?: FournisseurUpdateOneWithoutVenteNestedInput
   }
 
   export type VenteUncheckedUpdateWithoutPaiementInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    detailVenteId?: IntFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    clientId?: StringFieldUpdateOperationsInput | string
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
+    panierId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type VenteUncheckedUpdateManyWithoutPaiementInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    detailVenteId?: IntFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    clientId?: StringFieldUpdateOperationsInput | string
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
+    panierId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DetailAchatCreateManyPanierInput = {
+  export type DetailPanierCreateManyPanierInput = {
     id?: number
     produitId: number
     qtte: number
@@ -28231,22 +26318,37 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     fournisseurId: number
-    enregisterParId: string
+    enregisterParId: number
     paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type DetailAchatUpdateWithoutPanierInput = {
+  export type VenteCreateManyPanierInput = {
+    id?: number
+    statut?: $Enums.StatutVente
+    total_ttc: number
+    total_ht: number
+    type_acheteur: $Enums.TypeAcheteur
+    clientId?: number | null
+    enregisterParId: number
+    fournisseurId?: number | null
+    agentId?: number | null
+    paiementId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DetailPanierUpdateWithoutPanierInput = {
     qtte?: IntFieldUpdateOperationsInput | number
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotal?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    produit?: ProduitUpdateOneRequiredWithoutDetailAchatNestedInput
+    produit?: ProduitUpdateOneRequiredWithoutDetailPanierNestedInput
   }
 
-  export type DetailAchatUncheckedUpdateWithoutPanierInput = {
+  export type DetailPanierUncheckedUpdateWithoutPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
@@ -28256,7 +26358,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DetailAchatUncheckedUpdateManyWithoutPanierInput = {
+  export type DetailPanierUncheckedUpdateManyWithoutPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
@@ -28279,7 +26381,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: StringFieldUpdateOperationsInput | string
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28289,67 +26391,52 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: StringFieldUpdateOperationsInput | string
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type VenteCreateManyDetailventeInput = {
-    id?: number
-    statut: string
-    total_ttc: number
-    total_ht: number
-    remise: number
-    entrepriseId: number
-    clientId: string
-    agentId: string
-    fournisseurId?: number | null
-    paiementId?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type VenteUpdateWithoutDetailventeInput = {
-    statut?: StringFieldUpdateOperationsInput | string
+  export type VenteUpdateWithoutPanierInput = {
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    entreprise?: EntrepriseUpdateOneRequiredWithoutVenteNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutVenteNestedInput
     fournisseur?: FournisseurUpdateOneWithoutVenteNestedInput
-    paiement?: PaiementUpdateOneWithoutVenteNestedInput
+    paiement?: PaiementUpdateOneRequiredWithoutVenteNestedInput
   }
 
-  export type VenteUncheckedUpdateWithoutDetailventeInput = {
+  export type VenteUncheckedUpdateWithoutPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    clientId?: StringFieldUpdateOperationsInput | string
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
-    paiementId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
+    paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type VenteUncheckedUpdateManyWithoutDetailventeInput = {
+  export type VenteUncheckedUpdateManyWithoutPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
-    statut?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
     total_ttc?: FloatFieldUpdateOperationsInput | number
     total_ht?: FloatFieldUpdateOperationsInput | number
-    remise?: FloatFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    clientId?: StringFieldUpdateOperationsInput | string
-    agentId?: StringFieldUpdateOperationsInput | string
+    type_acheteur?: EnumTypeAcheteurFieldUpdateOperationsInput | $Enums.TypeAcheteur
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregisterParId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
-    paiementId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
+    paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

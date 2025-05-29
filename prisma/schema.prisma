@@ -62,6 +62,21 @@ enum StatutAchat {
   ANNULE
 }
 
+enum StatutVente {
+  EN_ATTENTE
+  CONFIRME
+  REMBOURSE
+  ANNULE
+}
+
+enum TypeAcheteur {
+  ordinaire
+  nouveau
+  client
+  fournisseur
+  agent
+}
+
 // This is the main model for the application
 
 model Entreprise {
@@ -75,11 +90,10 @@ model Entreprise {
   email        String  @unique
   description  String?
   logo         String?
-  Vente        Vente[]
 }
 
 model Utilisateur {
-  id          String    @id
+  id          Int       @id @default(autoincrement())
   email       String    @unique
   nom         String
   postnom     String
@@ -114,7 +128,7 @@ model Adresse {
   ville         String
   commune       String // Delete this attr.
   adresse       String
-  utilisateurId String?
+  utilisateurId Int?
   utilisateur   Utilisateur? @relation(fields: [utilisateurId], references: [id])
   fournisseurId Int?
   fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
@@ -125,7 +139,7 @@ model Adresse {
 model Contact {
   id            Int          @id @default(autoincrement())
   tel           String       @unique
-  utilisateurId String?
+  utilisateurId Int?
   utilisateur   Utilisateur? @relation(fields: [utilisateurId], references: [id])
   fournisseurId Int?
   fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
@@ -149,7 +163,7 @@ model Fournisseur {
 model Teneur {
   id            Int         @id @default(autoincrement())
   valeur        Float       @unique
-  utilisateurId String
+  utilisateurId Int
   utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
@@ -161,7 +175,7 @@ model Devise {
   nom           String      @unique
   code          String      @unique @db.VarChar(3)
   symbole       String      @db.VarChar(5)
-  utilisateurId String
+  utilisateurId Int
   utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
@@ -170,21 +184,20 @@ model Devise {
 }
 
 model Produit {
-  id            Int           @id @default(autoincrement())
+  id            Int            @id @default(autoincrement())
   designation   String
   prix          Float
-  qtte          Int           @default(0)
+  qtte          Int            @default(0)
   description   String
   deviseId      Int
-  devise        Devise        @relation(fields: [deviseId], references: [id])
+  devise        Devise         @relation(fields: [deviseId], references: [id])
   teneurId      Int
-  teneur        Teneur        @relation(fields: [teneurId], references: [id])
-  utilisateurId String
-  utilisateur   Utilisateur   @relation(fields: [utilisateurId], references: [id])
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  DetailVente   DetailVente[]
-  DetailAchat   DetailAchat[]
+  teneur        Teneur         @relation(fields: [teneurId], references: [id])
+  utilisateurId Int
+  utilisateur   Utilisateur    @relation(fields: [utilisateurId], references: [id])
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  DetailPanier  DetailPanier[]
 }
 
 // Models de la Vente...
@@ -202,56 +215,44 @@ model Paiement {
 }
 
 model Vente {
-  id            Int          @id @default(autoincrement())
-  statut        String
-  total_ttc     Float
-  total_ht      Float
-  remise        Float
-  detailVenteId Int
-  entrepriseId  Int
-  clientId      String
-  agentId       String
-  fournisseurId Int?
-  paiementId    Int?
-  detailvente   DetailVente  @relation(fields: [detailVenteId], references: [id])
-  entreprise    Entreprise   @relation(fields: [entrepriseId], references: [id])
-  utilisateur   Utilisateur  @relation(fields: [clientId], references: [id])
-  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
-  paiement      Paiement?    @relation(fields: [paiementId], references: [id])
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  id              Int          @id @default(autoincrement())
+  statut          StatutVente  @default(EN_ATTENTE)
+  total_ttc       Float
+  total_ht        Float
+  type_acheteur   TypeAcheteur
+  clientId        Int?
+  enregisterParId Int
+  fournisseurId   Int?
+  agentId         Int?
+  paiementId      Int
+  panierId        Int
+  panier          Panier       @relation(fields: [panierId], references: [id])
+  utilisateur     Utilisateur  @relation(fields: [enregisterParId], references: [id])
+  fournisseur     Fournisseur? @relation(fields: [fournisseurId], references: [id])
+  paiement        Paiement     @relation(fields: [paiementId], references: [id])
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
 }
 
 model Panier {
-  id            Int           @id @default(autoincrement())
-  utilisateurId String
-  utilisateur   Utilisateur   @relation(fields: [utilisateurId], references: [id])
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  DetailAchat   DetailAchat[]
+  id            Int            @id @default(autoincrement())
+  utilisateurId Int
+  utilisateur   Utilisateur    @relation(fields: [utilisateurId], references: [id])
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  DetailPanier  DetailPanier[]
   Achat         Achat[]
+  Vente         Vente[]
 }
 
-model DetailVente {
+model DetailPanier {
   id           Int      @id @default(autoincrement())
   produitId    Int
   qtte         Int
   prixUnitaire Float
   prixTotal    Float
-  produit      Produit  @relation(fields: [produitId], references: [id])
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  Vente        Vente[]
-}
-
-model DetailAchat {
-  id           Int      @id @default(autoincrement())
-  produitId    Int
-  qtte         Int
-  prixUnitaire Float
-  prixTotal    Float
-  produit      Produit  @relation(fields: [produitId], references: [id])
   panierId     Int
+  produit      Produit  @relation(fields: [produitId], references: [id])
   panier       Panier   @relation(fields: [panierId], references: [id])
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -262,7 +263,7 @@ model Achat {
   statut          StatutAchat @default(EN_COURS)
   panierId        Int
   fournisseurId   Int
-  enregisterParId String
+  enregisterParId Int
   paiementId      Int
   panier          Panier      @relation(fields: [panierId], references: [id])
   fournisseur     Fournisseur @relation(fields: [fournisseurId], references: [id])
