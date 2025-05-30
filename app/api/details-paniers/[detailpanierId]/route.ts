@@ -2,34 +2,34 @@ import { prisma } from "@/lib/prisma";
 
 interface RouteParams { 
     panierId: string, 
-    detailachatId: string 
+    detailPanierId: string 
 }
 
 export async function GET (req: Request, { params }: { params: RouteParams }) {
-    const { panierId, detailachatId } = await params;
-    const detailAchat = await prisma.detailAchat.findUnique({
+    const { panierId, detailPanierId } = await params;
+    const detailPanier = await prisma.detailPanier.findUnique({
         where: {
-            id: parseInt(detailachatId, 10),
+            id: parseInt(detailPanierId, 10),
             panierId: parseInt(panierId, 10)
         }
     });
 
-    if (!detailAchat) {
+    if (!detailPanier) {
         return new Response(JSON.stringify({ error: "Detail Achat not found" }), { status: 404 });
     }
 
-    return new Response(JSON.stringify(detailAchat), { status: 201 });
+    return new Response(JSON.stringify(detailPanier), { status: 201 });
 }
 
 
 export async function PUT (req: Request, { params }: { params: RouteParams }) {
-    const { panierId, detailachatId } = await params;
+    const { panierId, detailPanierId } = await params;
     const data = await req.json();
 
     try {
-        const updatedDetailAchat = await prisma.detailAchat.update({
+        const updateddetailPanier = await prisma.detailPanier.update({
             where: {
-                id: parseInt(detailachatId, 10),
+                id: parseInt(detailPanierId, 10),
                 panierId: parseInt(panierId, 10)
             },
             data: {
@@ -40,7 +40,7 @@ export async function PUT (req: Request, { params }: { params: RouteParams }) {
             }
         });
 
-        return new Response(JSON.stringify(updatedDetailAchat), { status: 200 });
+        return new Response(JSON.stringify(updateddetailPanier), { status: 200 });
     } catch (error) {
         return new Response("Detail Achat not found", { status: 404 });
     }
@@ -49,12 +49,12 @@ export async function PUT (req: Request, { params }: { params: RouteParams }) {
 
 
 export async function DELETE (req: Request, { params }: { params: RouteParams }) {
-    const { panierId, detailachatId } = await params;
+    const { panierId, detailPanierId } = await params;
 
     try {
-        await prisma.detailAchat.delete({
+        await prisma.detailPanier.delete({
             where: {
-                id: parseInt(detailachatId, 10),
+                id: parseInt(detailPanierId, 10),
                 panierId: parseInt(panierId, 10)
             }
         });

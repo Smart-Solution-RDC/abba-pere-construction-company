@@ -21,11 +21,11 @@ export async function POST(req: Request) {
 }
 
 export async function Put(req: Request) {
-    const { id, nom, encronyme, code_postale, adresse, tel, site, email, decription, logo } = await req.json();
+    const data = await req.json();
     
     await prisma.entreprise.update({
-        where: { id },
-        data: { nom, encronyme, code_postale, adresse, tel, site, email, decription, logo }
+        where: { id: 1 },
+        data: data
     })
 
     return new Response("Entreprise a été mise à jour...", {

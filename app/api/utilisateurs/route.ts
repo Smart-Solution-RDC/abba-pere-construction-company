@@ -41,6 +41,6 @@ export async function POST(req: Request) {
         
         return new Response("User was created", { status: 201 });
     }
-    return new Response(JSON.stringify(user), { status: 201 });
+    return new Response(JSON.stringify(data), { status: 201 });
 }
 

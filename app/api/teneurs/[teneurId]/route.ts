@@ -10,7 +10,7 @@ export async function GET(req: Request, { params }: { params: RouteParams}) {
 
     const utilisateur = await prisma.utilisateur.findUnique({
         where: {
-            id: utilisateurId
+            id: parseInt(utilisateurId)
         }
     });
 
@@ -34,7 +34,7 @@ export async function PUT(req: Request, { params }: { params: RouteParams}) {
     
     const utilisateur = await prisma.utilisateur.findUnique({
         where: {
-            id: utilisateurId
+            id: parseInt(utilisateurId)
         }
     });
 
@@ -46,7 +46,7 @@ export async function PUT(req: Request, { params }: { params: RouteParams}) {
         await prisma.teneur.update({
             where: {
                 id: parseInt(teneurId, 10),
-                utilisateurId: utilisateurId
+                utilisateurId: parseInt(utilisateurId)
             },
             data: {
                 valeur: parseFloat(valeur)
@@ -65,7 +65,7 @@ export async function DELETE(req: Request, { params }: { params: RouteParams}) {
     
     const utilisateur = await prisma.utilisateur.findUnique({
         where: {
-            id: utilisateurId
+            id: parseInt(utilisateurId)
         }
     });
 
@@ -77,7 +77,7 @@ export async function DELETE(req: Request, { params }: { params: RouteParams}) {
         await prisma.teneur.delete({
             where: {
                 id: parseInt(teneurId, 10),
-                utilisateurId: utilisateurId
+                utilisateurId: parseInt(utilisateurId)
             }
         });
         return new Response("Teneur was Deleted", { status: 200 });

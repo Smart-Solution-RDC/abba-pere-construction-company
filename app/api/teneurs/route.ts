@@ -9,15 +9,14 @@ export async function GET(req: Request, { params }: { params: RouteParams}) {
     return new Response(JSON.stringify(teneurs), { status: 200 });
 }
 
-export async function POST(req: Request, { params }: { params: RouteParams}) {
+export async function POST(req: Request) {
     // This action belongs to the agent with the role of "gerant"
     
-    const { utilisateurId } = await params;
-    const { valeur } = await req.json();
+    const { valeur, utilisateurId } = await req.json();
 
     const utilisateur = await prisma.utilisateur.findUnique({
         where: {
-            id: utilisateurId
+            id: parseInt(utilisateurId, 10)
         }
     });
 
@@ -29,13 +28,13 @@ export async function POST(req: Request, { params }: { params: RouteParams}) {
         await prisma.teneur.create({
             data: {
                 valeur: parseFloat(valeur),
-                utilisateurId: utilisateurId
+                utilisateurId: parseInt(utilisateurId, 10)
             }
         });
         return new Response("Teneur was Created", { status: 200 });
     }
 
-    return new Response(JSON.stringify({ error: "You can't execute this action" }), { status: 404 });
+    return new Response(JSON.stringify({ error: "Invalid form" }), { status: 404 });
 }
 
 

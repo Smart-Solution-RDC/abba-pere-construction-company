@@ -56,7 +56,6 @@ export async function POST(req: NextRequest) {
     const data = await req.json();
     let total_ttc = 0;
     let total_ht = 0;
-    // data.remise = 0;
     const nom_complet =  data.nouveau_client.nom + ' ' + data.nouveau_client.postnom
 
     try {
@@ -123,6 +122,19 @@ export async function POST(req: NextRequest) {
                         enregisterParId: data.utilisateurId
                     }
                 }); 
+
+                const produits = await prisma.produit.updateMany({
+                    where: {
+                        id: {
+                            in: detail_panier.map(item => item.produitId)
+                        }
+                    },
+                    data: {
+                        qtte: {
+                            decrement: detail_panier.find(item => item.produitId === item.produitId)?.qtte || 0
+                        }
+                    }
+                });
                 return new Response(JSON.stringify('vente successed!'), { status : 201 });
             }
 
@@ -137,10 +149,23 @@ export async function POST(req: NextRequest) {
                         paiementId: paiement.id,
                         fournisseurId: data.fournisseurId ? data.fournisseurId : null,
                         clientId: data.clientId ? data.clientId : null,
-                        agentId: 1,
+                        agentId: parseInt(data.agentId, 10),
                         enregisterParId: data.utilisateurId
                     }
                 }); 
+
+                const produits = await prisma.produit.updateMany({
+                    where: {
+                        id: {
+                            in: detail_panier.map(item => item.produitId)
+                        }
+                    },
+                    data: {
+                        qtte: {
+                            decrement: detail_panier.find(item => item.produitId === item.produitId)?.qtte || 0
+                        }
+                    }
+                });
 
                 return new Response("Vente successed", { status : 201 });
             }

@@ -11,7 +11,7 @@ export async function GET(req: NextRequest, { params }: { params: RouteParams}) 
     const { utilisateurId } = await params; 
 
     const contact = await prisma.contact.findMany({
-        where: { utilisateurId: utilisateurId }
+        where: { utilisateurId: parseInt(utilisateurId, 10) }
     });
 
     if (!contact) {

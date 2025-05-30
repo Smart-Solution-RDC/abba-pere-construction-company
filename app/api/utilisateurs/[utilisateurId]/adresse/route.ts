@@ -11,7 +11,7 @@ export async function GET(req: NextRequest, { params }: { params: RouteParams}) 
     const { utilisateurId } = await params; 
 
     const adresse = await prisma.adresse.findFirst({
-        where: { utilisateurId: utilisateurId }
+        where: { utilisateurId: parseInt(utilisateurId, 10) }
     });
 
     if (!adresse) {
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest, { params }: { params: RouteParams})
     const adresse = await prisma.adresse.create({
         data: {
             ...data,
-            utilisateurId: utilisateurId
+            utilisateurId: parseInt(utilisateurId, 10)
         }
     });
 

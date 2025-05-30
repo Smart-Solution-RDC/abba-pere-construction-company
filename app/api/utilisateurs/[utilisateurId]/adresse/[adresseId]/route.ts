@@ -16,7 +16,7 @@ export async function PUT (req: NextRequest, { params }: { params : RouteParams}
         const adresse = await prisma.adresse.update({
             where: {
                 id: change_type,
-                utilisateurId: utilisateurId
+                utilisateurId: parseInt(utilisateurId, 10)
             },
             data: data
         });
@@ -36,7 +36,7 @@ export async function DELETE(req: NextRequest, { params }: { params: RouteParams
         const adresse = await prisma.adresse.delete({
             where: {
                 id: change_type,
-                utilisateurId: utilisateurId
+                utilisateurId: parseInt(utilisateurId, 10)
             }
         });
         
