@@ -93,17 +93,17 @@ model Entreprise {
 }
 
 model Utilisateur {
-  id          Int       @id @default(autoincrement())
-  email       String    @unique
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
   nom         String
   postnom     String
   nom_complet String?
   sexe        Sexe?
-  role        Role      @default(client)
+  role        Role          @default(client)
   poste       Poste?
   picture     String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
   Adresse     Adresse[]
   Contact     Contact[]
   Produit     Produit[]
@@ -112,6 +112,8 @@ model Utilisateur {
   Teneur      Teneur[]
   Devise      Devise[]
   Panier      Panier[]
+  Reservation Reservation[]
+  Commande    Commande[]
 }
 
 // model Poste {
@@ -124,40 +126,46 @@ model Utilisateur {
 // }
 
 model Adresse {
-  id            Int          @id @default(autoincrement())
+  id            Int           @id @default(autoincrement())
   ville         String
   commune       String // Delete this attr.
   adresse       String
   utilisateurId Int?
-  utilisateur   Utilisateur? @relation(fields: [utilisateurId], references: [id])
+  utilisateur   Utilisateur?  @relation(fields: [utilisateurId], references: [id])
   fournisseurId Int?
-  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  fournisseur   Fournisseur?  @relation(fields: [fournisseurId], references: [id])
+  Reservation   Reservation[]
+  Commande      Commande[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 model Contact {
-  id            Int          @id @default(autoincrement())
-  tel           String       @unique
+  id            Int           @id @default(autoincrement())
+  tel           String        @unique
   utilisateurId Int?
-  utilisateur   Utilisateur? @relation(fields: [utilisateurId], references: [id])
+  utilisateur   Utilisateur?  @relation(fields: [utilisateurId], references: [id])
   fournisseurId Int?
-  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  fournisseur   Fournisseur?  @relation(fields: [fournisseurId], references: [id])
+  Reservation   Reservation[]
+  Commande      Commande[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 model Fournisseur {
-  id          Int       @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   nom         String
-  email       String    @unique
+  email       String        @unique
   code_postal String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
   Vente       Vente[]
   Achat       Achat[]
   Adresse     Adresse[]
   Contact     Contact[]
+  Reservation Reservation[]
+  Commande    Commande[]
 }
 
 model Teneur {
@@ -243,6 +251,7 @@ model Panier {
   DetailPanier  DetailPanier[]
   Achat         Achat[]
   Vente         Vente[]
+  Reservation   Reservation[]
 }
 
 model DetailPanier {
@@ -271,4 +280,74 @@ model Achat {
   paiement        Paiement    @relation(fields: [paiementId], references: [id])
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
+}
+
+enum StatutReservation {
+  EN_ATTENTE
+  CONFIRMEE
+  ANNULEE
+  REJETEE
+  CONVERTIE
+}
+
+enum StatutCommande {
+  EN_ATTENTE_PAIEMENT
+  PAIDEE
+  EN_PREPARATION
+  EN_LIVRAISON
+  LIVREE
+  ANNULEE
+  REMBOURSEE
+  ECHEC_PAIEMENT
+}
+
+// codePostal      String?       @db.VarChar(20) // Facultatif pour RDC (Bukavu)
+// Add Prenom de l'utilisateur en ?
+// prixUnitaireHT  Decimal        @db.Decimal(10, 2)
+// stockActuel     Int
+
+model Reservation {
+  id                     Int               @id @default(autoincrement())
+  dateLivraisonSouhaitee DateTime
+  adresseLivraison       String?           @db.VarChar(255)
+  statut                 StatutReservation @default(EN_ATTENTE)
+  notesClient            String?           @db.Text
+  clientId               Int?
+  panierId               Int
+  nom                    String?
+  tel                    String?
+  adresseId              Int?
+  contactId              Int?
+  enregistrerParId       Int?
+  fournisseurId          Int?
+  panier                 Panier            @relation(fields: [panierId], references: [id])
+  utilisateur            Utilisateur?      @relation(fields: [clientId], references: [id])
+  fournisseur            Fournisseur?      @relation(fields: [fournisseurId], references: [id])
+  adresse                Adresse?          @relation(fields: [adresseId], references: [id])
+  contact                Contact?          @relation(fields: [contactId], references: [id])
+  createdAt              DateTime          @default(now())
+  updatedAt              DateTime          @updatedAt
+}
+
+model Commande {
+  id                     Int            @id @default(autoincrement())
+  // Numéro de commande généré, ex: "CMD-20250001"
+  numeroCommande         String         @unique @db.VarChar(50)
+  clientId               Int
+  nom                    String?
+  tel                    String?
+  adresseId              Int?
+  contactId              Int?
+  fournisseurId          Int?
+  notesClient            String?        @db.Text
+  dateLivraisonEffective DateTime?
+  adresseLivraison       String?        @db.VarChar(255)
+  enregistreParId        Int?
+  client                 Utilisateur?   @relation(fields: [clientId], references: [id])
+  fournisseur            Fournisseur?   @relation(fields: [fournisseurId], references: [id])
+  adresse                Adresse?       @relation(fields: [adresseId], references: [id])
+  contact                Contact?       @relation(fields: [contactId], references: [id])
+  statut                 StatutCommande @default(EN_ATTENTE_PAIEMENT) // Statut de la commande
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
 }

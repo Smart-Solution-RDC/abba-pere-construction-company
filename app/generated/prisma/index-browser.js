@@ -261,6 +261,42 @@ exports.Prisma.AchatScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ReservationScalarFieldEnum = {
+  id: 'id',
+  dateLivraisonSouhaitee: 'dateLivraisonSouhaitee',
+  adresseLivraison: 'adresseLivraison',
+  statut: 'statut',
+  notesClient: 'notesClient',
+  clientId: 'clientId',
+  panierId: 'panierId',
+  nom: 'nom',
+  tel: 'tel',
+  adresseId: 'adresseId',
+  contactId: 'contactId',
+  enregistrerParId: 'enregistrerParId',
+  fournisseurId: 'fournisseurId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CommandeScalarFieldEnum = {
+  id: 'id',
+  numeroCommande: 'numeroCommande',
+  clientId: 'clientId',
+  nom: 'nom',
+  tel: 'tel',
+  adresseId: 'adresseId',
+  contactId: 'contactId',
+  fournisseurId: 'fournisseurId',
+  notesClient: 'notesClient',
+  dateLivraisonEffective: 'dateLivraisonEffective',
+  adresseLivraison: 'adresseLivraison',
+  enregistreParId: 'enregistreParId',
+  statut: 'statut',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -322,6 +358,25 @@ exports.StatutAchat = exports.$Enums.StatutAchat = {
   ANNULE: 'ANNULE'
 };
 
+exports.StatutReservation = exports.$Enums.StatutReservation = {
+  EN_ATTENTE: 'EN_ATTENTE',
+  CONFIRMEE: 'CONFIRMEE',
+  ANNULEE: 'ANNULEE',
+  REJETEE: 'REJETEE',
+  CONVERTIE: 'CONVERTIE'
+};
+
+exports.StatutCommande = exports.$Enums.StatutCommande = {
+  EN_ATTENTE_PAIEMENT: 'EN_ATTENTE_PAIEMENT',
+  PAIDEE: 'PAIDEE',
+  EN_PREPARATION: 'EN_PREPARATION',
+  EN_LIVRAISON: 'EN_LIVRAISON',
+  LIVREE: 'LIVREE',
+  ANNULEE: 'ANNULEE',
+  REMBOURSEE: 'REMBOURSEE',
+  ECHEC_PAIEMENT: 'ECHEC_PAIEMENT'
+};
+
 exports.Prisma.ModelName = {
   Entreprise: 'Entreprise',
   Utilisateur: 'Utilisateur',
@@ -335,7 +390,9 @@ exports.Prisma.ModelName = {
   Vente: 'Vente',
   Panier: 'Panier',
   DetailPanier: 'DetailPanier',
-  Achat: 'Achat'
+  Achat: 'Achat',
+  Reservation: 'Reservation',
+  Commande: 'Commande'
 };
 
 /**

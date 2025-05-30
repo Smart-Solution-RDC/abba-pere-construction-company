@@ -78,6 +78,16 @@ export type DetailPanier = $Result.DefaultSelection<Prisma.$DetailPanierPayload>
  * 
  */
 export type Achat = $Result.DefaultSelection<Prisma.$AchatPayload>
+/**
+ * Model Reservation
+ * 
+ */
+export type Reservation = $Result.DefaultSelection<Prisma.$ReservationPayload>
+/**
+ * Model Commande
+ * 
+ */
+export type Commande = $Result.DefaultSelection<Prisma.$CommandePayload>
 
 /**
  * Enums
@@ -175,6 +185,31 @@ export const TypeAcheteur: {
 
 export type TypeAcheteur = (typeof TypeAcheteur)[keyof typeof TypeAcheteur]
 
+
+export const StatutReservation: {
+  EN_ATTENTE: 'EN_ATTENTE',
+  CONFIRMEE: 'CONFIRMEE',
+  ANNULEE: 'ANNULEE',
+  REJETEE: 'REJETEE',
+  CONVERTIE: 'CONVERTIE'
+};
+
+export type StatutReservation = (typeof StatutReservation)[keyof typeof StatutReservation]
+
+
+export const StatutCommande: {
+  EN_ATTENTE_PAIEMENT: 'EN_ATTENTE_PAIEMENT',
+  PAIDEE: 'PAIDEE',
+  EN_PREPARATION: 'EN_PREPARATION',
+  EN_LIVRAISON: 'EN_LIVRAISON',
+  LIVREE: 'LIVREE',
+  ANNULEE: 'ANNULEE',
+  REMBOURSEE: 'REMBOURSEE',
+  ECHEC_PAIEMENT: 'ECHEC_PAIEMENT'
+};
+
+export type StatutCommande = (typeof StatutCommande)[keyof typeof StatutCommande]
+
 }
 
 export type Role = $Enums.Role
@@ -208,6 +243,14 @@ export const StatutVente: typeof $Enums.StatutVente
 export type TypeAcheteur = $Enums.TypeAcheteur
 
 export const TypeAcheteur: typeof $Enums.TypeAcheteur
+
+export type StatutReservation = $Enums.StatutReservation
+
+export const StatutReservation: typeof $Enums.StatutReservation
+
+export type StatutCommande = $Enums.StatutCommande
+
+export const StatutCommande: typeof $Enums.StatutCommande
 
 /**
  * ##  Prisma Client ʲˢ
@@ -463,6 +506,26 @@ export class PrismaClient<
     * ```
     */
   get achat(): Prisma.AchatDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.reservation`: Exposes CRUD operations for the **Reservation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Reservations
+    * const reservations = await prisma.reservation.findMany()
+    * ```
+    */
+  get reservation(): Prisma.ReservationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.commande`: Exposes CRUD operations for the **Commande** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Commandes
+    * const commandes = await prisma.commande.findMany()
+    * ```
+    */
+  get commande(): Prisma.CommandeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -915,7 +978,9 @@ export namespace Prisma {
     Vente: 'Vente',
     Panier: 'Panier',
     DetailPanier: 'DetailPanier',
-    Achat: 'Achat'
+    Achat: 'Achat',
+    Reservation: 'Reservation',
+    Commande: 'Commande'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -934,7 +999,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "entreprise" | "utilisateur" | "adresse" | "contact" | "fournisseur" | "teneur" | "devise" | "produit" | "paiement" | "vente" | "panier" | "detailPanier" | "achat"
+      modelProps: "entreprise" | "utilisateur" | "adresse" | "contact" | "fournisseur" | "teneur" | "devise" | "produit" | "paiement" | "vente" | "panier" | "detailPanier" | "achat" | "reservation" | "commande"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1900,6 +1965,154 @@ export namespace Prisma {
           }
         }
       }
+      Reservation: {
+        payload: Prisma.$ReservationPayload<ExtArgs>
+        fields: Prisma.ReservationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReservationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReservationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>
+          }
+          findFirst: {
+            args: Prisma.ReservationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReservationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>
+          }
+          findMany: {
+            args: Prisma.ReservationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>[]
+          }
+          create: {
+            args: Prisma.ReservationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>
+          }
+          createMany: {
+            args: Prisma.ReservationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReservationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>[]
+          }
+          delete: {
+            args: Prisma.ReservationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>
+          }
+          update: {
+            args: Prisma.ReservationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReservationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReservationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReservationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>[]
+          }
+          upsert: {
+            args: Prisma.ReservationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationPayload>
+          }
+          aggregate: {
+            args: Prisma.ReservationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReservation>
+          }
+          groupBy: {
+            args: Prisma.ReservationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReservationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReservationCountArgs<ExtArgs>
+            result: $Utils.Optional<ReservationCountAggregateOutputType> | number
+          }
+        }
+      }
+      Commande: {
+        payload: Prisma.$CommandePayload<ExtArgs>
+        fields: Prisma.CommandeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CommandeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommandePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CommandeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommandePayload>
+          }
+          findFirst: {
+            args: Prisma.CommandeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommandePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CommandeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommandePayload>
+          }
+          findMany: {
+            args: Prisma.CommandeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommandePayload>[]
+          }
+          create: {
+            args: Prisma.CommandeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommandePayload>
+          }
+          createMany: {
+            args: Prisma.CommandeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CommandeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommandePayload>[]
+          }
+          delete: {
+            args: Prisma.CommandeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommandePayload>
+          }
+          update: {
+            args: Prisma.CommandeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommandePayload>
+          }
+          deleteMany: {
+            args: Prisma.CommandeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CommandeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CommandeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommandePayload>[]
+          }
+          upsert: {
+            args: Prisma.CommandeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommandePayload>
+          }
+          aggregate: {
+            args: Prisma.CommandeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCommande>
+          }
+          groupBy: {
+            args: Prisma.CommandeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CommandeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CommandeCountArgs<ExtArgs>
+            result: $Utils.Optional<CommandeCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1997,6 +2210,8 @@ export namespace Prisma {
     panier?: PanierOmit
     detailPanier?: DetailPanierOmit
     achat?: AchatOmit
+    reservation?: ReservationOmit
+    commande?: CommandeOmit
   }
 
   /* Types for Logging */
@@ -2099,6 +2314,8 @@ export namespace Prisma {
     Teneur: number
     Devise: number
     Panier: number
+    Reservation: number
+    Commande: number
   }
 
   export type UtilisateurCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2110,6 +2327,8 @@ export namespace Prisma {
     Teneur?: boolean | UtilisateurCountOutputTypeCountTeneurArgs
     Devise?: boolean | UtilisateurCountOutputTypeCountDeviseArgs
     Panier?: boolean | UtilisateurCountOutputTypeCountPanierArgs
+    Reservation?: boolean | UtilisateurCountOutputTypeCountReservationArgs
+    Commande?: boolean | UtilisateurCountOutputTypeCountCommandeArgs
   }
 
   // Custom InputTypes
@@ -2179,6 +2398,100 @@ export namespace Prisma {
     where?: PanierWhereInput
   }
 
+  /**
+   * UtilisateurCountOutputType without action
+   */
+  export type UtilisateurCountOutputTypeCountReservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReservationWhereInput
+  }
+
+  /**
+   * UtilisateurCountOutputType without action
+   */
+  export type UtilisateurCountOutputTypeCountCommandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommandeWhereInput
+  }
+
+
+  /**
+   * Count Type AdresseCountOutputType
+   */
+
+  export type AdresseCountOutputType = {
+    Reservation: number
+    Commande: number
+  }
+
+  export type AdresseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Reservation?: boolean | AdresseCountOutputTypeCountReservationArgs
+    Commande?: boolean | AdresseCountOutputTypeCountCommandeArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AdresseCountOutputType without action
+   */
+  export type AdresseCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdresseCountOutputType
+     */
+    select?: AdresseCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AdresseCountOutputType without action
+   */
+  export type AdresseCountOutputTypeCountReservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReservationWhereInput
+  }
+
+  /**
+   * AdresseCountOutputType without action
+   */
+  export type AdresseCountOutputTypeCountCommandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommandeWhereInput
+  }
+
+
+  /**
+   * Count Type ContactCountOutputType
+   */
+
+  export type ContactCountOutputType = {
+    Reservation: number
+    Commande: number
+  }
+
+  export type ContactCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Reservation?: boolean | ContactCountOutputTypeCountReservationArgs
+    Commande?: boolean | ContactCountOutputTypeCountCommandeArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ContactCountOutputType without action
+   */
+  export type ContactCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContactCountOutputType
+     */
+    select?: ContactCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ContactCountOutputType without action
+   */
+  export type ContactCountOutputTypeCountReservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReservationWhereInput
+  }
+
+  /**
+   * ContactCountOutputType without action
+   */
+  export type ContactCountOutputTypeCountCommandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommandeWhereInput
+  }
+
 
   /**
    * Count Type FournisseurCountOutputType
@@ -2189,6 +2502,8 @@ export namespace Prisma {
     Achat: number
     Adresse: number
     Contact: number
+    Reservation: number
+    Commande: number
   }
 
   export type FournisseurCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2196,6 +2511,8 @@ export namespace Prisma {
     Achat?: boolean | FournisseurCountOutputTypeCountAchatArgs
     Adresse?: boolean | FournisseurCountOutputTypeCountAdresseArgs
     Contact?: boolean | FournisseurCountOutputTypeCountContactArgs
+    Reservation?: boolean | FournisseurCountOutputTypeCountReservationArgs
+    Commande?: boolean | FournisseurCountOutputTypeCountCommandeArgs
   }
 
   // Custom InputTypes
@@ -2235,6 +2552,20 @@ export namespace Prisma {
    */
   export type FournisseurCountOutputTypeCountContactArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ContactWhereInput
+  }
+
+  /**
+   * FournisseurCountOutputType without action
+   */
+  export type FournisseurCountOutputTypeCountReservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReservationWhereInput
+  }
+
+  /**
+   * FournisseurCountOutputType without action
+   */
+  export type FournisseurCountOutputTypeCountCommandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommandeWhereInput
   }
 
 
@@ -2388,12 +2719,14 @@ export namespace Prisma {
     DetailPanier: number
     Achat: number
     Vente: number
+    Reservation: number
   }
 
   export type PanierCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     DetailPanier?: boolean | PanierCountOutputTypeCountDetailPanierArgs
     Achat?: boolean | PanierCountOutputTypeCountAchatArgs
     Vente?: boolean | PanierCountOutputTypeCountVenteArgs
+    Reservation?: boolean | PanierCountOutputTypeCountReservationArgs
   }
 
   // Custom InputTypes
@@ -2426,6 +2759,13 @@ export namespace Prisma {
    */
   export type PanierCountOutputTypeCountVenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VenteWhereInput
+  }
+
+  /**
+   * PanierCountOutputType without action
+   */
+  export type PanierCountOutputTypeCountReservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReservationWhereInput
   }
 
 
@@ -3781,6 +4121,8 @@ export namespace Prisma {
     Teneur?: boolean | Utilisateur$TeneurArgs<ExtArgs>
     Devise?: boolean | Utilisateur$DeviseArgs<ExtArgs>
     Panier?: boolean | Utilisateur$PanierArgs<ExtArgs>
+    Reservation?: boolean | Utilisateur$ReservationArgs<ExtArgs>
+    Commande?: boolean | Utilisateur$CommandeArgs<ExtArgs>
     _count?: boolean | UtilisateurCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["utilisateur"]>
 
@@ -3836,6 +4178,8 @@ export namespace Prisma {
     Teneur?: boolean | Utilisateur$TeneurArgs<ExtArgs>
     Devise?: boolean | Utilisateur$DeviseArgs<ExtArgs>
     Panier?: boolean | Utilisateur$PanierArgs<ExtArgs>
+    Reservation?: boolean | Utilisateur$ReservationArgs<ExtArgs>
+    Commande?: boolean | Utilisateur$CommandeArgs<ExtArgs>
     _count?: boolean | UtilisateurCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UtilisateurIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3852,6 +4196,8 @@ export namespace Prisma {
       Teneur: Prisma.$TeneurPayload<ExtArgs>[]
       Devise: Prisma.$DevisePayload<ExtArgs>[]
       Panier: Prisma.$PanierPayload<ExtArgs>[]
+      Reservation: Prisma.$ReservationPayload<ExtArgs>[]
+      Commande: Prisma.$CommandePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4267,6 +4613,8 @@ export namespace Prisma {
     Teneur<T extends Utilisateur$TeneurArgs<ExtArgs> = {}>(args?: Subset<T, Utilisateur$TeneurArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeneurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Devise<T extends Utilisateur$DeviseArgs<ExtArgs> = {}>(args?: Subset<T, Utilisateur$DeviseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DevisePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Panier<T extends Utilisateur$PanierArgs<ExtArgs> = {}>(args?: Subset<T, Utilisateur$PanierArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PanierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Reservation<T extends Utilisateur$ReservationArgs<ExtArgs> = {}>(args?: Subset<T, Utilisateur$ReservationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Commande<T extends Utilisateur$CommandeArgs<ExtArgs> = {}>(args?: Subset<T, Utilisateur$CommandeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4887,6 +5235,54 @@ export namespace Prisma {
   }
 
   /**
+   * Utilisateur.Reservation
+   */
+  export type Utilisateur$ReservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    where?: ReservationWhereInput
+    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
+    cursor?: ReservationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
+  }
+
+  /**
+   * Utilisateur.Commande
+   */
+  export type Utilisateur$CommandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    where?: CommandeWhereInput
+    orderBy?: CommandeOrderByWithRelationInput | CommandeOrderByWithRelationInput[]
+    cursor?: CommandeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommandeScalarFieldEnum | CommandeScalarFieldEnum[]
+  }
+
+  /**
    * Utilisateur without action
    */
   export type UtilisateurDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5137,6 +5533,9 @@ export namespace Prisma {
     updatedAt?: boolean
     utilisateur?: boolean | Adresse$utilisateurArgs<ExtArgs>
     fournisseur?: boolean | Adresse$fournisseurArgs<ExtArgs>
+    Reservation?: boolean | Adresse$ReservationArgs<ExtArgs>
+    Commande?: boolean | Adresse$CommandeArgs<ExtArgs>
+    _count?: boolean | AdresseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["adresse"]>
 
   export type AdresseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5180,6 +5579,9 @@ export namespace Prisma {
   export type AdresseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     utilisateur?: boolean | Adresse$utilisateurArgs<ExtArgs>
     fournisseur?: boolean | Adresse$fournisseurArgs<ExtArgs>
+    Reservation?: boolean | Adresse$ReservationArgs<ExtArgs>
+    Commande?: boolean | Adresse$CommandeArgs<ExtArgs>
+    _count?: boolean | AdresseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AdresseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     utilisateur?: boolean | Adresse$utilisateurArgs<ExtArgs>
@@ -5195,6 +5597,8 @@ export namespace Prisma {
     objects: {
       utilisateur: Prisma.$UtilisateurPayload<ExtArgs> | null
       fournisseur: Prisma.$FournisseurPayload<ExtArgs> | null
+      Reservation: Prisma.$ReservationPayload<ExtArgs>[]
+      Commande: Prisma.$CommandePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5601,6 +6005,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     utilisateur<T extends Adresse$utilisateurArgs<ExtArgs> = {}>(args?: Subset<T, Adresse$utilisateurArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     fournisseur<T extends Adresse$fournisseurArgs<ExtArgs> = {}>(args?: Subset<T, Adresse$fournisseurArgs<ExtArgs>>): Prisma__FournisseurClient<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Reservation<T extends Adresse$ReservationArgs<ExtArgs> = {}>(args?: Subset<T, Adresse$ReservationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Commande<T extends Adresse$CommandeArgs<ExtArgs> = {}>(args?: Subset<T, Adresse$CommandeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6072,6 +6478,54 @@ export namespace Prisma {
   }
 
   /**
+   * Adresse.Reservation
+   */
+  export type Adresse$ReservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    where?: ReservationWhereInput
+    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
+    cursor?: ReservationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
+  }
+
+  /**
+   * Adresse.Commande
+   */
+  export type Adresse$CommandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    where?: CommandeWhereInput
+    orderBy?: CommandeOrderByWithRelationInput | CommandeOrderByWithRelationInput[]
+    cursor?: CommandeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommandeScalarFieldEnum | CommandeScalarFieldEnum[]
+  }
+
+  /**
    * Adresse without action
    */
   export type AdresseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6306,6 +6760,9 @@ export namespace Prisma {
     updatedAt?: boolean
     utilisateur?: boolean | Contact$utilisateurArgs<ExtArgs>
     fournisseur?: boolean | Contact$fournisseurArgs<ExtArgs>
+    Reservation?: boolean | Contact$ReservationArgs<ExtArgs>
+    Commande?: boolean | Contact$CommandeArgs<ExtArgs>
+    _count?: boolean | ContactCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contact"]>
 
   export type ContactSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6343,6 +6800,9 @@ export namespace Prisma {
   export type ContactInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     utilisateur?: boolean | Contact$utilisateurArgs<ExtArgs>
     fournisseur?: boolean | Contact$fournisseurArgs<ExtArgs>
+    Reservation?: boolean | Contact$ReservationArgs<ExtArgs>
+    Commande?: boolean | Contact$CommandeArgs<ExtArgs>
+    _count?: boolean | ContactCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ContactIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     utilisateur?: boolean | Contact$utilisateurArgs<ExtArgs>
@@ -6358,6 +6818,8 @@ export namespace Prisma {
     objects: {
       utilisateur: Prisma.$UtilisateurPayload<ExtArgs> | null
       fournisseur: Prisma.$FournisseurPayload<ExtArgs> | null
+      Reservation: Prisma.$ReservationPayload<ExtArgs>[]
+      Commande: Prisma.$CommandePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -6762,6 +7224,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     utilisateur<T extends Contact$utilisateurArgs<ExtArgs> = {}>(args?: Subset<T, Contact$utilisateurArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     fournisseur<T extends Contact$fournisseurArgs<ExtArgs> = {}>(args?: Subset<T, Contact$fournisseurArgs<ExtArgs>>): Prisma__FournisseurClient<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Reservation<T extends Contact$ReservationArgs<ExtArgs> = {}>(args?: Subset<T, Contact$ReservationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Commande<T extends Contact$CommandeArgs<ExtArgs> = {}>(args?: Subset<T, Contact$CommandeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7231,6 +7695,54 @@ export namespace Prisma {
   }
 
   /**
+   * Contact.Reservation
+   */
+  export type Contact$ReservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    where?: ReservationWhereInput
+    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
+    cursor?: ReservationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
+  }
+
+  /**
+   * Contact.Commande
+   */
+  export type Contact$CommandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    where?: CommandeWhereInput
+    orderBy?: CommandeOrderByWithRelationInput | CommandeOrderByWithRelationInput[]
+    cursor?: CommandeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommandeScalarFieldEnum | CommandeScalarFieldEnum[]
+  }
+
+  /**
    * Contact without action
    */
   export type ContactDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7459,6 +7971,8 @@ export namespace Prisma {
     Achat?: boolean | Fournisseur$AchatArgs<ExtArgs>
     Adresse?: boolean | Fournisseur$AdresseArgs<ExtArgs>
     Contact?: boolean | Fournisseur$ContactArgs<ExtArgs>
+    Reservation?: boolean | Fournisseur$ReservationArgs<ExtArgs>
+    Commande?: boolean | Fournisseur$CommandeArgs<ExtArgs>
     _count?: boolean | FournisseurCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["fournisseur"]>
 
@@ -7495,6 +8009,8 @@ export namespace Prisma {
     Achat?: boolean | Fournisseur$AchatArgs<ExtArgs>
     Adresse?: boolean | Fournisseur$AdresseArgs<ExtArgs>
     Contact?: boolean | Fournisseur$ContactArgs<ExtArgs>
+    Reservation?: boolean | Fournisseur$ReservationArgs<ExtArgs>
+    Commande?: boolean | Fournisseur$CommandeArgs<ExtArgs>
     _count?: boolean | FournisseurCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FournisseurIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -7507,6 +8023,8 @@ export namespace Prisma {
       Achat: Prisma.$AchatPayload<ExtArgs>[]
       Adresse: Prisma.$AdressePayload<ExtArgs>[]
       Contact: Prisma.$ContactPayload<ExtArgs>[]
+      Reservation: Prisma.$ReservationPayload<ExtArgs>[]
+      Commande: Prisma.$CommandePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -7913,6 +8431,8 @@ export namespace Prisma {
     Achat<T extends Fournisseur$AchatArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$AchatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Adresse<T extends Fournisseur$AdresseArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$AdresseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdressePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Contact<T extends Fournisseur$ContactArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$ContactArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Reservation<T extends Fournisseur$ReservationArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$ReservationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Commande<T extends Fournisseur$CommandeArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$CommandeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8429,6 +8949,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
+  }
+
+  /**
+   * Fournisseur.Reservation
+   */
+  export type Fournisseur$ReservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    where?: ReservationWhereInput
+    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
+    cursor?: ReservationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
+  }
+
+  /**
+   * Fournisseur.Commande
+   */
+  export type Fournisseur$CommandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    where?: CommandeWhereInput
+    orderBy?: CommandeOrderByWithRelationInput | CommandeOrderByWithRelationInput[]
+    cursor?: CommandeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommandeScalarFieldEnum | CommandeScalarFieldEnum[]
   }
 
   /**
@@ -14623,6 +15191,7 @@ export namespace Prisma {
     DetailPanier?: boolean | Panier$DetailPanierArgs<ExtArgs>
     Achat?: boolean | Panier$AchatArgs<ExtArgs>
     Vente?: boolean | Panier$VenteArgs<ExtArgs>
+    Reservation?: boolean | Panier$ReservationArgs<ExtArgs>
     _count?: boolean | PanierCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["panier"]>
 
@@ -14655,6 +15224,7 @@ export namespace Prisma {
     DetailPanier?: boolean | Panier$DetailPanierArgs<ExtArgs>
     Achat?: boolean | Panier$AchatArgs<ExtArgs>
     Vente?: boolean | Panier$VenteArgs<ExtArgs>
+    Reservation?: boolean | Panier$ReservationArgs<ExtArgs>
     _count?: boolean | PanierCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PanierIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14671,6 +15241,7 @@ export namespace Prisma {
       DetailPanier: Prisma.$DetailPanierPayload<ExtArgs>[]
       Achat: Prisma.$AchatPayload<ExtArgs>[]
       Vente: Prisma.$VentePayload<ExtArgs>[]
+      Reservation: Prisma.$ReservationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -15075,6 +15646,7 @@ export namespace Prisma {
     DetailPanier<T extends Panier$DetailPanierArgs<ExtArgs> = {}>(args?: Subset<T, Panier$DetailPanierArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Achat<T extends Panier$AchatArgs<ExtArgs> = {}>(args?: Subset<T, Panier$AchatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Vente<T extends Panier$VenteArgs<ExtArgs> = {}>(args?: Subset<T, Panier$VenteArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Reservation<T extends Panier$ReservationArgs<ExtArgs> = {}>(args?: Subset<T, Panier$ReservationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15573,6 +16145,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: VenteScalarFieldEnum | VenteScalarFieldEnum[]
+  }
+
+  /**
+   * Panier.Reservation
+   */
+  export type Panier$ReservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    where?: ReservationWhereInput
+    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
+    cursor?: ReservationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
   }
 
   /**
@@ -17925,6 +18521,2702 @@ export namespace Prisma {
 
 
   /**
+   * Model Reservation
+   */
+
+  export type AggregateReservation = {
+    _count: ReservationCountAggregateOutputType | null
+    _avg: ReservationAvgAggregateOutputType | null
+    _sum: ReservationSumAggregateOutputType | null
+    _min: ReservationMinAggregateOutputType | null
+    _max: ReservationMaxAggregateOutputType | null
+  }
+
+  export type ReservationAvgAggregateOutputType = {
+    id: number | null
+    clientId: number | null
+    panierId: number | null
+    adresseId: number | null
+    contactId: number | null
+    enregistrerParId: number | null
+    fournisseurId: number | null
+  }
+
+  export type ReservationSumAggregateOutputType = {
+    id: number | null
+    clientId: number | null
+    panierId: number | null
+    adresseId: number | null
+    contactId: number | null
+    enregistrerParId: number | null
+    fournisseurId: number | null
+  }
+
+  export type ReservationMinAggregateOutputType = {
+    id: number | null
+    dateLivraisonSouhaitee: Date | null
+    adresseLivraison: string | null
+    statut: $Enums.StatutReservation | null
+    notesClient: string | null
+    clientId: number | null
+    panierId: number | null
+    nom: string | null
+    tel: string | null
+    adresseId: number | null
+    contactId: number | null
+    enregistrerParId: number | null
+    fournisseurId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ReservationMaxAggregateOutputType = {
+    id: number | null
+    dateLivraisonSouhaitee: Date | null
+    adresseLivraison: string | null
+    statut: $Enums.StatutReservation | null
+    notesClient: string | null
+    clientId: number | null
+    panierId: number | null
+    nom: string | null
+    tel: string | null
+    adresseId: number | null
+    contactId: number | null
+    enregistrerParId: number | null
+    fournisseurId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ReservationCountAggregateOutputType = {
+    id: number
+    dateLivraisonSouhaitee: number
+    adresseLivraison: number
+    statut: number
+    notesClient: number
+    clientId: number
+    panierId: number
+    nom: number
+    tel: number
+    adresseId: number
+    contactId: number
+    enregistrerParId: number
+    fournisseurId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ReservationAvgAggregateInputType = {
+    id?: true
+    clientId?: true
+    panierId?: true
+    adresseId?: true
+    contactId?: true
+    enregistrerParId?: true
+    fournisseurId?: true
+  }
+
+  export type ReservationSumAggregateInputType = {
+    id?: true
+    clientId?: true
+    panierId?: true
+    adresseId?: true
+    contactId?: true
+    enregistrerParId?: true
+    fournisseurId?: true
+  }
+
+  export type ReservationMinAggregateInputType = {
+    id?: true
+    dateLivraisonSouhaitee?: true
+    adresseLivraison?: true
+    statut?: true
+    notesClient?: true
+    clientId?: true
+    panierId?: true
+    nom?: true
+    tel?: true
+    adresseId?: true
+    contactId?: true
+    enregistrerParId?: true
+    fournisseurId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ReservationMaxAggregateInputType = {
+    id?: true
+    dateLivraisonSouhaitee?: true
+    adresseLivraison?: true
+    statut?: true
+    notesClient?: true
+    clientId?: true
+    panierId?: true
+    nom?: true
+    tel?: true
+    adresseId?: true
+    contactId?: true
+    enregistrerParId?: true
+    fournisseurId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ReservationCountAggregateInputType = {
+    id?: true
+    dateLivraisonSouhaitee?: true
+    adresseLivraison?: true
+    statut?: true
+    notesClient?: true
+    clientId?: true
+    panierId?: true
+    nom?: true
+    tel?: true
+    adresseId?: true
+    contactId?: true
+    enregistrerParId?: true
+    fournisseurId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ReservationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Reservation to aggregate.
+     */
+    where?: ReservationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Reservations to fetch.
+     */
+    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReservationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Reservations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Reservations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Reservations
+    **/
+    _count?: true | ReservationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ReservationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ReservationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReservationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReservationMaxAggregateInputType
+  }
+
+  export type GetReservationAggregateType<T extends ReservationAggregateArgs> = {
+        [P in keyof T & keyof AggregateReservation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReservation[P]>
+      : GetScalarType<T[P], AggregateReservation[P]>
+  }
+
+
+
+
+  export type ReservationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReservationWhereInput
+    orderBy?: ReservationOrderByWithAggregationInput | ReservationOrderByWithAggregationInput[]
+    by: ReservationScalarFieldEnum[] | ReservationScalarFieldEnum
+    having?: ReservationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReservationCountAggregateInputType | true
+    _avg?: ReservationAvgAggregateInputType
+    _sum?: ReservationSumAggregateInputType
+    _min?: ReservationMinAggregateInputType
+    _max?: ReservationMaxAggregateInputType
+  }
+
+  export type ReservationGroupByOutputType = {
+    id: number
+    dateLivraisonSouhaitee: Date
+    adresseLivraison: string | null
+    statut: $Enums.StatutReservation
+    notesClient: string | null
+    clientId: number | null
+    panierId: number
+    nom: string | null
+    tel: string | null
+    adresseId: number | null
+    contactId: number | null
+    enregistrerParId: number | null
+    fournisseurId: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ReservationCountAggregateOutputType | null
+    _avg: ReservationAvgAggregateOutputType | null
+    _sum: ReservationSumAggregateOutputType | null
+    _min: ReservationMinAggregateOutputType | null
+    _max: ReservationMaxAggregateOutputType | null
+  }
+
+  type GetReservationGroupByPayload<T extends ReservationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReservationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReservationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReservationGroupByOutputType[P]>
+            : GetScalarType<T[P], ReservationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReservationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dateLivraisonSouhaitee?: boolean
+    adresseLivraison?: boolean
+    statut?: boolean
+    notesClient?: boolean
+    clientId?: boolean
+    panierId?: boolean
+    nom?: boolean
+    tel?: boolean
+    adresseId?: boolean
+    contactId?: boolean
+    enregistrerParId?: boolean
+    fournisseurId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Reservation$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Reservation$fournisseurArgs<ExtArgs>
+    adresse?: boolean | Reservation$adresseArgs<ExtArgs>
+    contact?: boolean | Reservation$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["reservation"]>
+
+  export type ReservationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dateLivraisonSouhaitee?: boolean
+    adresseLivraison?: boolean
+    statut?: boolean
+    notesClient?: boolean
+    clientId?: boolean
+    panierId?: boolean
+    nom?: boolean
+    tel?: boolean
+    adresseId?: boolean
+    contactId?: boolean
+    enregistrerParId?: boolean
+    fournisseurId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Reservation$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Reservation$fournisseurArgs<ExtArgs>
+    adresse?: boolean | Reservation$adresseArgs<ExtArgs>
+    contact?: boolean | Reservation$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["reservation"]>
+
+  export type ReservationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dateLivraisonSouhaitee?: boolean
+    adresseLivraison?: boolean
+    statut?: boolean
+    notesClient?: boolean
+    clientId?: boolean
+    panierId?: boolean
+    nom?: boolean
+    tel?: boolean
+    adresseId?: boolean
+    contactId?: boolean
+    enregistrerParId?: boolean
+    fournisseurId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Reservation$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Reservation$fournisseurArgs<ExtArgs>
+    adresse?: boolean | Reservation$adresseArgs<ExtArgs>
+    contact?: boolean | Reservation$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["reservation"]>
+
+  export type ReservationSelectScalar = {
+    id?: boolean
+    dateLivraisonSouhaitee?: boolean
+    adresseLivraison?: boolean
+    statut?: boolean
+    notesClient?: boolean
+    clientId?: boolean
+    panierId?: boolean
+    nom?: boolean
+    tel?: boolean
+    adresseId?: boolean
+    contactId?: boolean
+    enregistrerParId?: boolean
+    fournisseurId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ReservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dateLivraisonSouhaitee" | "adresseLivraison" | "statut" | "notesClient" | "clientId" | "panierId" | "nom" | "tel" | "adresseId" | "contactId" | "enregistrerParId" | "fournisseurId" | "createdAt" | "updatedAt", ExtArgs["result"]["reservation"]>
+  export type ReservationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Reservation$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Reservation$fournisseurArgs<ExtArgs>
+    adresse?: boolean | Reservation$adresseArgs<ExtArgs>
+    contact?: boolean | Reservation$contactArgs<ExtArgs>
+  }
+  export type ReservationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Reservation$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Reservation$fournisseurArgs<ExtArgs>
+    adresse?: boolean | Reservation$adresseArgs<ExtArgs>
+    contact?: boolean | Reservation$contactArgs<ExtArgs>
+  }
+  export type ReservationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    panier?: boolean | PanierDefaultArgs<ExtArgs>
+    utilisateur?: boolean | Reservation$utilisateurArgs<ExtArgs>
+    fournisseur?: boolean | Reservation$fournisseurArgs<ExtArgs>
+    adresse?: boolean | Reservation$adresseArgs<ExtArgs>
+    contact?: boolean | Reservation$contactArgs<ExtArgs>
+  }
+
+  export type $ReservationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Reservation"
+    objects: {
+      panier: Prisma.$PanierPayload<ExtArgs>
+      utilisateur: Prisma.$UtilisateurPayload<ExtArgs> | null
+      fournisseur: Prisma.$FournisseurPayload<ExtArgs> | null
+      adresse: Prisma.$AdressePayload<ExtArgs> | null
+      contact: Prisma.$ContactPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      dateLivraisonSouhaitee: Date
+      adresseLivraison: string | null
+      statut: $Enums.StatutReservation
+      notesClient: string | null
+      clientId: number | null
+      panierId: number
+      nom: string | null
+      tel: string | null
+      adresseId: number | null
+      contactId: number | null
+      enregistrerParId: number | null
+      fournisseurId: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["reservation"]>
+    composites: {}
+  }
+
+  type ReservationGetPayload<S extends boolean | null | undefined | ReservationDefaultArgs> = $Result.GetResult<Prisma.$ReservationPayload, S>
+
+  type ReservationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReservationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReservationCountAggregateInputType | true
+    }
+
+  export interface ReservationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Reservation'], meta: { name: 'Reservation' } }
+    /**
+     * Find zero or one Reservation that matches the filter.
+     * @param {ReservationFindUniqueArgs} args - Arguments to find a Reservation
+     * @example
+     * // Get one Reservation
+     * const reservation = await prisma.reservation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReservationFindUniqueArgs>(args: SelectSubset<T, ReservationFindUniqueArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Reservation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReservationFindUniqueOrThrowArgs} args - Arguments to find a Reservation
+     * @example
+     * // Get one Reservation
+     * const reservation = await prisma.reservation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReservationFindUniqueOrThrowArgs>(args: SelectSubset<T, ReservationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Reservation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationFindFirstArgs} args - Arguments to find a Reservation
+     * @example
+     * // Get one Reservation
+     * const reservation = await prisma.reservation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReservationFindFirstArgs>(args?: SelectSubset<T, ReservationFindFirstArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Reservation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationFindFirstOrThrowArgs} args - Arguments to find a Reservation
+     * @example
+     * // Get one Reservation
+     * const reservation = await prisma.reservation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReservationFindFirstOrThrowArgs>(args?: SelectSubset<T, ReservationFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Reservations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Reservations
+     * const reservations = await prisma.reservation.findMany()
+     * 
+     * // Get first 10 Reservations
+     * const reservations = await prisma.reservation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const reservationWithIdOnly = await prisma.reservation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReservationFindManyArgs>(args?: SelectSubset<T, ReservationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Reservation.
+     * @param {ReservationCreateArgs} args - Arguments to create a Reservation.
+     * @example
+     * // Create one Reservation
+     * const Reservation = await prisma.reservation.create({
+     *   data: {
+     *     // ... data to create a Reservation
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReservationCreateArgs>(args: SelectSubset<T, ReservationCreateArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Reservations.
+     * @param {ReservationCreateManyArgs} args - Arguments to create many Reservations.
+     * @example
+     * // Create many Reservations
+     * const reservation = await prisma.reservation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReservationCreateManyArgs>(args?: SelectSubset<T, ReservationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Reservations and returns the data saved in the database.
+     * @param {ReservationCreateManyAndReturnArgs} args - Arguments to create many Reservations.
+     * @example
+     * // Create many Reservations
+     * const reservation = await prisma.reservation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Reservations and only return the `id`
+     * const reservationWithIdOnly = await prisma.reservation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReservationCreateManyAndReturnArgs>(args?: SelectSubset<T, ReservationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Reservation.
+     * @param {ReservationDeleteArgs} args - Arguments to delete one Reservation.
+     * @example
+     * // Delete one Reservation
+     * const Reservation = await prisma.reservation.delete({
+     *   where: {
+     *     // ... filter to delete one Reservation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReservationDeleteArgs>(args: SelectSubset<T, ReservationDeleteArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Reservation.
+     * @param {ReservationUpdateArgs} args - Arguments to update one Reservation.
+     * @example
+     * // Update one Reservation
+     * const reservation = await prisma.reservation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReservationUpdateArgs>(args: SelectSubset<T, ReservationUpdateArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Reservations.
+     * @param {ReservationDeleteManyArgs} args - Arguments to filter Reservations to delete.
+     * @example
+     * // Delete a few Reservations
+     * const { count } = await prisma.reservation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReservationDeleteManyArgs>(args?: SelectSubset<T, ReservationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Reservations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Reservations
+     * const reservation = await prisma.reservation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReservationUpdateManyArgs>(args: SelectSubset<T, ReservationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Reservations and returns the data updated in the database.
+     * @param {ReservationUpdateManyAndReturnArgs} args - Arguments to update many Reservations.
+     * @example
+     * // Update many Reservations
+     * const reservation = await prisma.reservation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Reservations and only return the `id`
+     * const reservationWithIdOnly = await prisma.reservation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReservationUpdateManyAndReturnArgs>(args: SelectSubset<T, ReservationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Reservation.
+     * @param {ReservationUpsertArgs} args - Arguments to update or create a Reservation.
+     * @example
+     * // Update or create a Reservation
+     * const reservation = await prisma.reservation.upsert({
+     *   create: {
+     *     // ... data to create a Reservation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Reservation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReservationUpsertArgs>(args: SelectSubset<T, ReservationUpsertArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Reservations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationCountArgs} args - Arguments to filter Reservations to count.
+     * @example
+     * // Count the number of Reservations
+     * const count = await prisma.reservation.count({
+     *   where: {
+     *     // ... the filter for the Reservations we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReservationCountArgs>(
+      args?: Subset<T, ReservationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReservationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Reservation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReservationAggregateArgs>(args: Subset<T, ReservationAggregateArgs>): Prisma.PrismaPromise<GetReservationAggregateType<T>>
+
+    /**
+     * Group by Reservation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReservationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReservationGroupByArgs['orderBy'] }
+        : { orderBy?: ReservationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReservationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReservationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Reservation model
+   */
+  readonly fields: ReservationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Reservation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReservationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    panier<T extends PanierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PanierDefaultArgs<ExtArgs>>): Prisma__PanierClient<$Result.GetResult<Prisma.$PanierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    utilisateur<T extends Reservation$utilisateurArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$utilisateurArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    fournisseur<T extends Reservation$fournisseurArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$fournisseurArgs<ExtArgs>>): Prisma__FournisseurClient<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    adresse<T extends Reservation$adresseArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$adresseArgs<ExtArgs>>): Prisma__AdresseClient<$Result.GetResult<Prisma.$AdressePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    contact<T extends Reservation$contactArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$contactArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Reservation model
+   */
+  interface ReservationFieldRefs {
+    readonly id: FieldRef<"Reservation", 'Int'>
+    readonly dateLivraisonSouhaitee: FieldRef<"Reservation", 'DateTime'>
+    readonly adresseLivraison: FieldRef<"Reservation", 'String'>
+    readonly statut: FieldRef<"Reservation", 'StatutReservation'>
+    readonly notesClient: FieldRef<"Reservation", 'String'>
+    readonly clientId: FieldRef<"Reservation", 'Int'>
+    readonly panierId: FieldRef<"Reservation", 'Int'>
+    readonly nom: FieldRef<"Reservation", 'String'>
+    readonly tel: FieldRef<"Reservation", 'String'>
+    readonly adresseId: FieldRef<"Reservation", 'Int'>
+    readonly contactId: FieldRef<"Reservation", 'Int'>
+    readonly enregistrerParId: FieldRef<"Reservation", 'Int'>
+    readonly fournisseurId: FieldRef<"Reservation", 'Int'>
+    readonly createdAt: FieldRef<"Reservation", 'DateTime'>
+    readonly updatedAt: FieldRef<"Reservation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Reservation findUnique
+   */
+  export type ReservationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    /**
+     * Filter, which Reservation to fetch.
+     */
+    where: ReservationWhereUniqueInput
+  }
+
+  /**
+   * Reservation findUniqueOrThrow
+   */
+  export type ReservationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    /**
+     * Filter, which Reservation to fetch.
+     */
+    where: ReservationWhereUniqueInput
+  }
+
+  /**
+   * Reservation findFirst
+   */
+  export type ReservationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    /**
+     * Filter, which Reservation to fetch.
+     */
+    where?: ReservationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Reservations to fetch.
+     */
+    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Reservations.
+     */
+    cursor?: ReservationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Reservations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Reservations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Reservations.
+     */
+    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
+  }
+
+  /**
+   * Reservation findFirstOrThrow
+   */
+  export type ReservationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    /**
+     * Filter, which Reservation to fetch.
+     */
+    where?: ReservationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Reservations to fetch.
+     */
+    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Reservations.
+     */
+    cursor?: ReservationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Reservations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Reservations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Reservations.
+     */
+    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
+  }
+
+  /**
+   * Reservation findMany
+   */
+  export type ReservationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    /**
+     * Filter, which Reservations to fetch.
+     */
+    where?: ReservationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Reservations to fetch.
+     */
+    orderBy?: ReservationOrderByWithRelationInput | ReservationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Reservations.
+     */
+    cursor?: ReservationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Reservations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Reservations.
+     */
+    skip?: number
+    distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
+  }
+
+  /**
+   * Reservation create
+   */
+  export type ReservationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Reservation.
+     */
+    data: XOR<ReservationCreateInput, ReservationUncheckedCreateInput>
+  }
+
+  /**
+   * Reservation createMany
+   */
+  export type ReservationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Reservations.
+     */
+    data: ReservationCreateManyInput | ReservationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Reservation createManyAndReturn
+   */
+  export type ReservationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Reservations.
+     */
+    data: ReservationCreateManyInput | ReservationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Reservation update
+   */
+  export type ReservationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Reservation.
+     */
+    data: XOR<ReservationUpdateInput, ReservationUncheckedUpdateInput>
+    /**
+     * Choose, which Reservation to update.
+     */
+    where: ReservationWhereUniqueInput
+  }
+
+  /**
+   * Reservation updateMany
+   */
+  export type ReservationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Reservations.
+     */
+    data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyInput>
+    /**
+     * Filter which Reservations to update
+     */
+    where?: ReservationWhereInput
+    /**
+     * Limit how many Reservations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Reservation updateManyAndReturn
+   */
+  export type ReservationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * The data used to update Reservations.
+     */
+    data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyInput>
+    /**
+     * Filter which Reservations to update
+     */
+    where?: ReservationWhereInput
+    /**
+     * Limit how many Reservations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Reservation upsert
+   */
+  export type ReservationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Reservation to update in case it exists.
+     */
+    where: ReservationWhereUniqueInput
+    /**
+     * In case the Reservation found by the `where` argument doesn't exist, create a new Reservation with this data.
+     */
+    create: XOR<ReservationCreateInput, ReservationUncheckedCreateInput>
+    /**
+     * In case the Reservation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReservationUpdateInput, ReservationUncheckedUpdateInput>
+  }
+
+  /**
+   * Reservation delete
+   */
+  export type ReservationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    /**
+     * Filter which Reservation to delete.
+     */
+    where: ReservationWhereUniqueInput
+  }
+
+  /**
+   * Reservation deleteMany
+   */
+  export type ReservationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Reservations to delete
+     */
+    where?: ReservationWhereInput
+    /**
+     * Limit how many Reservations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Reservation.utilisateur
+   */
+  export type Reservation$utilisateurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Utilisateur
+     */
+    select?: UtilisateurSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Utilisateur
+     */
+    omit?: UtilisateurOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UtilisateurInclude<ExtArgs> | null
+    where?: UtilisateurWhereInput
+  }
+
+  /**
+   * Reservation.fournisseur
+   */
+  export type Reservation$fournisseurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fournisseur
+     */
+    select?: FournisseurSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fournisseur
+     */
+    omit?: FournisseurOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FournisseurInclude<ExtArgs> | null
+    where?: FournisseurWhereInput
+  }
+
+  /**
+   * Reservation.adresse
+   */
+  export type Reservation$adresseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adresse
+     */
+    select?: AdresseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adresse
+     */
+    omit?: AdresseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdresseInclude<ExtArgs> | null
+    where?: AdresseWhereInput
+  }
+
+  /**
+   * Reservation.contact
+   */
+  export type Reservation$contactArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    where?: ContactWhereInput
+  }
+
+  /**
+   * Reservation without action
+   */
+  export type ReservationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Commande
+   */
+
+  export type AggregateCommande = {
+    _count: CommandeCountAggregateOutputType | null
+    _avg: CommandeAvgAggregateOutputType | null
+    _sum: CommandeSumAggregateOutputType | null
+    _min: CommandeMinAggregateOutputType | null
+    _max: CommandeMaxAggregateOutputType | null
+  }
+
+  export type CommandeAvgAggregateOutputType = {
+    id: number | null
+    clientId: number | null
+    adresseId: number | null
+    contactId: number | null
+    fournisseurId: number | null
+    enregistreParId: number | null
+  }
+
+  export type CommandeSumAggregateOutputType = {
+    id: number | null
+    clientId: number | null
+    adresseId: number | null
+    contactId: number | null
+    fournisseurId: number | null
+    enregistreParId: number | null
+  }
+
+  export type CommandeMinAggregateOutputType = {
+    id: number | null
+    numeroCommande: string | null
+    clientId: number | null
+    nom: string | null
+    tel: string | null
+    adresseId: number | null
+    contactId: number | null
+    fournisseurId: number | null
+    notesClient: string | null
+    dateLivraisonEffective: Date | null
+    adresseLivraison: string | null
+    enregistreParId: number | null
+    statut: $Enums.StatutCommande | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CommandeMaxAggregateOutputType = {
+    id: number | null
+    numeroCommande: string | null
+    clientId: number | null
+    nom: string | null
+    tel: string | null
+    adresseId: number | null
+    contactId: number | null
+    fournisseurId: number | null
+    notesClient: string | null
+    dateLivraisonEffective: Date | null
+    adresseLivraison: string | null
+    enregistreParId: number | null
+    statut: $Enums.StatutCommande | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CommandeCountAggregateOutputType = {
+    id: number
+    numeroCommande: number
+    clientId: number
+    nom: number
+    tel: number
+    adresseId: number
+    contactId: number
+    fournisseurId: number
+    notesClient: number
+    dateLivraisonEffective: number
+    adresseLivraison: number
+    enregistreParId: number
+    statut: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CommandeAvgAggregateInputType = {
+    id?: true
+    clientId?: true
+    adresseId?: true
+    contactId?: true
+    fournisseurId?: true
+    enregistreParId?: true
+  }
+
+  export type CommandeSumAggregateInputType = {
+    id?: true
+    clientId?: true
+    adresseId?: true
+    contactId?: true
+    fournisseurId?: true
+    enregistreParId?: true
+  }
+
+  export type CommandeMinAggregateInputType = {
+    id?: true
+    numeroCommande?: true
+    clientId?: true
+    nom?: true
+    tel?: true
+    adresseId?: true
+    contactId?: true
+    fournisseurId?: true
+    notesClient?: true
+    dateLivraisonEffective?: true
+    adresseLivraison?: true
+    enregistreParId?: true
+    statut?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CommandeMaxAggregateInputType = {
+    id?: true
+    numeroCommande?: true
+    clientId?: true
+    nom?: true
+    tel?: true
+    adresseId?: true
+    contactId?: true
+    fournisseurId?: true
+    notesClient?: true
+    dateLivraisonEffective?: true
+    adresseLivraison?: true
+    enregistreParId?: true
+    statut?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CommandeCountAggregateInputType = {
+    id?: true
+    numeroCommande?: true
+    clientId?: true
+    nom?: true
+    tel?: true
+    adresseId?: true
+    contactId?: true
+    fournisseurId?: true
+    notesClient?: true
+    dateLivraisonEffective?: true
+    adresseLivraison?: true
+    enregistreParId?: true
+    statut?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CommandeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Commande to aggregate.
+     */
+    where?: CommandeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Commandes to fetch.
+     */
+    orderBy?: CommandeOrderByWithRelationInput | CommandeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CommandeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Commandes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Commandes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Commandes
+    **/
+    _count?: true | CommandeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CommandeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CommandeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CommandeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CommandeMaxAggregateInputType
+  }
+
+  export type GetCommandeAggregateType<T extends CommandeAggregateArgs> = {
+        [P in keyof T & keyof AggregateCommande]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCommande[P]>
+      : GetScalarType<T[P], AggregateCommande[P]>
+  }
+
+
+
+
+  export type CommandeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommandeWhereInput
+    orderBy?: CommandeOrderByWithAggregationInput | CommandeOrderByWithAggregationInput[]
+    by: CommandeScalarFieldEnum[] | CommandeScalarFieldEnum
+    having?: CommandeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CommandeCountAggregateInputType | true
+    _avg?: CommandeAvgAggregateInputType
+    _sum?: CommandeSumAggregateInputType
+    _min?: CommandeMinAggregateInputType
+    _max?: CommandeMaxAggregateInputType
+  }
+
+  export type CommandeGroupByOutputType = {
+    id: number
+    numeroCommande: string
+    clientId: number
+    nom: string | null
+    tel: string | null
+    adresseId: number | null
+    contactId: number | null
+    fournisseurId: number | null
+    notesClient: string | null
+    dateLivraisonEffective: Date | null
+    adresseLivraison: string | null
+    enregistreParId: number | null
+    statut: $Enums.StatutCommande
+    createdAt: Date
+    updatedAt: Date
+    _count: CommandeCountAggregateOutputType | null
+    _avg: CommandeAvgAggregateOutputType | null
+    _sum: CommandeSumAggregateOutputType | null
+    _min: CommandeMinAggregateOutputType | null
+    _max: CommandeMaxAggregateOutputType | null
+  }
+
+  type GetCommandeGroupByPayload<T extends CommandeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CommandeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CommandeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CommandeGroupByOutputType[P]>
+            : GetScalarType<T[P], CommandeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CommandeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    numeroCommande?: boolean
+    clientId?: boolean
+    nom?: boolean
+    tel?: boolean
+    adresseId?: boolean
+    contactId?: boolean
+    fournisseurId?: boolean
+    notesClient?: boolean
+    dateLivraisonEffective?: boolean
+    adresseLivraison?: boolean
+    enregistreParId?: boolean
+    statut?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | Commande$clientArgs<ExtArgs>
+    fournisseur?: boolean | Commande$fournisseurArgs<ExtArgs>
+    adresse?: boolean | Commande$adresseArgs<ExtArgs>
+    contact?: boolean | Commande$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["commande"]>
+
+  export type CommandeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    numeroCommande?: boolean
+    clientId?: boolean
+    nom?: boolean
+    tel?: boolean
+    adresseId?: boolean
+    contactId?: boolean
+    fournisseurId?: boolean
+    notesClient?: boolean
+    dateLivraisonEffective?: boolean
+    adresseLivraison?: boolean
+    enregistreParId?: boolean
+    statut?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | Commande$clientArgs<ExtArgs>
+    fournisseur?: boolean | Commande$fournisseurArgs<ExtArgs>
+    adresse?: boolean | Commande$adresseArgs<ExtArgs>
+    contact?: boolean | Commande$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["commande"]>
+
+  export type CommandeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    numeroCommande?: boolean
+    clientId?: boolean
+    nom?: boolean
+    tel?: boolean
+    adresseId?: boolean
+    contactId?: boolean
+    fournisseurId?: boolean
+    notesClient?: boolean
+    dateLivraisonEffective?: boolean
+    adresseLivraison?: boolean
+    enregistreParId?: boolean
+    statut?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | Commande$clientArgs<ExtArgs>
+    fournisseur?: boolean | Commande$fournisseurArgs<ExtArgs>
+    adresse?: boolean | Commande$adresseArgs<ExtArgs>
+    contact?: boolean | Commande$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["commande"]>
+
+  export type CommandeSelectScalar = {
+    id?: boolean
+    numeroCommande?: boolean
+    clientId?: boolean
+    nom?: boolean
+    tel?: boolean
+    adresseId?: boolean
+    contactId?: boolean
+    fournisseurId?: boolean
+    notesClient?: boolean
+    dateLivraisonEffective?: boolean
+    adresseLivraison?: boolean
+    enregistreParId?: boolean
+    statut?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CommandeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "numeroCommande" | "clientId" | "nom" | "tel" | "adresseId" | "contactId" | "fournisseurId" | "notesClient" | "dateLivraisonEffective" | "adresseLivraison" | "enregistreParId" | "statut" | "createdAt" | "updatedAt", ExtArgs["result"]["commande"]>
+  export type CommandeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | Commande$clientArgs<ExtArgs>
+    fournisseur?: boolean | Commande$fournisseurArgs<ExtArgs>
+    adresse?: boolean | Commande$adresseArgs<ExtArgs>
+    contact?: boolean | Commande$contactArgs<ExtArgs>
+  }
+  export type CommandeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | Commande$clientArgs<ExtArgs>
+    fournisseur?: boolean | Commande$fournisseurArgs<ExtArgs>
+    adresse?: boolean | Commande$adresseArgs<ExtArgs>
+    contact?: boolean | Commande$contactArgs<ExtArgs>
+  }
+  export type CommandeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | Commande$clientArgs<ExtArgs>
+    fournisseur?: boolean | Commande$fournisseurArgs<ExtArgs>
+    adresse?: boolean | Commande$adresseArgs<ExtArgs>
+    contact?: boolean | Commande$contactArgs<ExtArgs>
+  }
+
+  export type $CommandePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Commande"
+    objects: {
+      client: Prisma.$UtilisateurPayload<ExtArgs> | null
+      fournisseur: Prisma.$FournisseurPayload<ExtArgs> | null
+      adresse: Prisma.$AdressePayload<ExtArgs> | null
+      contact: Prisma.$ContactPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      numeroCommande: string
+      clientId: number
+      nom: string | null
+      tel: string | null
+      adresseId: number | null
+      contactId: number | null
+      fournisseurId: number | null
+      notesClient: string | null
+      dateLivraisonEffective: Date | null
+      adresseLivraison: string | null
+      enregistreParId: number | null
+      statut: $Enums.StatutCommande
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["commande"]>
+    composites: {}
+  }
+
+  type CommandeGetPayload<S extends boolean | null | undefined | CommandeDefaultArgs> = $Result.GetResult<Prisma.$CommandePayload, S>
+
+  type CommandeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CommandeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CommandeCountAggregateInputType | true
+    }
+
+  export interface CommandeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Commande'], meta: { name: 'Commande' } }
+    /**
+     * Find zero or one Commande that matches the filter.
+     * @param {CommandeFindUniqueArgs} args - Arguments to find a Commande
+     * @example
+     * // Get one Commande
+     * const commande = await prisma.commande.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CommandeFindUniqueArgs>(args: SelectSubset<T, CommandeFindUniqueArgs<ExtArgs>>): Prisma__CommandeClient<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Commande that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CommandeFindUniqueOrThrowArgs} args - Arguments to find a Commande
+     * @example
+     * // Get one Commande
+     * const commande = await prisma.commande.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CommandeFindUniqueOrThrowArgs>(args: SelectSubset<T, CommandeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CommandeClient<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Commande that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommandeFindFirstArgs} args - Arguments to find a Commande
+     * @example
+     * // Get one Commande
+     * const commande = await prisma.commande.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CommandeFindFirstArgs>(args?: SelectSubset<T, CommandeFindFirstArgs<ExtArgs>>): Prisma__CommandeClient<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Commande that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommandeFindFirstOrThrowArgs} args - Arguments to find a Commande
+     * @example
+     * // Get one Commande
+     * const commande = await prisma.commande.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CommandeFindFirstOrThrowArgs>(args?: SelectSubset<T, CommandeFindFirstOrThrowArgs<ExtArgs>>): Prisma__CommandeClient<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Commandes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommandeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Commandes
+     * const commandes = await prisma.commande.findMany()
+     * 
+     * // Get first 10 Commandes
+     * const commandes = await prisma.commande.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const commandeWithIdOnly = await prisma.commande.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CommandeFindManyArgs>(args?: SelectSubset<T, CommandeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Commande.
+     * @param {CommandeCreateArgs} args - Arguments to create a Commande.
+     * @example
+     * // Create one Commande
+     * const Commande = await prisma.commande.create({
+     *   data: {
+     *     // ... data to create a Commande
+     *   }
+     * })
+     * 
+     */
+    create<T extends CommandeCreateArgs>(args: SelectSubset<T, CommandeCreateArgs<ExtArgs>>): Prisma__CommandeClient<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Commandes.
+     * @param {CommandeCreateManyArgs} args - Arguments to create many Commandes.
+     * @example
+     * // Create many Commandes
+     * const commande = await prisma.commande.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CommandeCreateManyArgs>(args?: SelectSubset<T, CommandeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Commandes and returns the data saved in the database.
+     * @param {CommandeCreateManyAndReturnArgs} args - Arguments to create many Commandes.
+     * @example
+     * // Create many Commandes
+     * const commande = await prisma.commande.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Commandes and only return the `id`
+     * const commandeWithIdOnly = await prisma.commande.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CommandeCreateManyAndReturnArgs>(args?: SelectSubset<T, CommandeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Commande.
+     * @param {CommandeDeleteArgs} args - Arguments to delete one Commande.
+     * @example
+     * // Delete one Commande
+     * const Commande = await prisma.commande.delete({
+     *   where: {
+     *     // ... filter to delete one Commande
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CommandeDeleteArgs>(args: SelectSubset<T, CommandeDeleteArgs<ExtArgs>>): Prisma__CommandeClient<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Commande.
+     * @param {CommandeUpdateArgs} args - Arguments to update one Commande.
+     * @example
+     * // Update one Commande
+     * const commande = await prisma.commande.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CommandeUpdateArgs>(args: SelectSubset<T, CommandeUpdateArgs<ExtArgs>>): Prisma__CommandeClient<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Commandes.
+     * @param {CommandeDeleteManyArgs} args - Arguments to filter Commandes to delete.
+     * @example
+     * // Delete a few Commandes
+     * const { count } = await prisma.commande.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CommandeDeleteManyArgs>(args?: SelectSubset<T, CommandeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Commandes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommandeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Commandes
+     * const commande = await prisma.commande.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CommandeUpdateManyArgs>(args: SelectSubset<T, CommandeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Commandes and returns the data updated in the database.
+     * @param {CommandeUpdateManyAndReturnArgs} args - Arguments to update many Commandes.
+     * @example
+     * // Update many Commandes
+     * const commande = await prisma.commande.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Commandes and only return the `id`
+     * const commandeWithIdOnly = await prisma.commande.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CommandeUpdateManyAndReturnArgs>(args: SelectSubset<T, CommandeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Commande.
+     * @param {CommandeUpsertArgs} args - Arguments to update or create a Commande.
+     * @example
+     * // Update or create a Commande
+     * const commande = await prisma.commande.upsert({
+     *   create: {
+     *     // ... data to create a Commande
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Commande we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CommandeUpsertArgs>(args: SelectSubset<T, CommandeUpsertArgs<ExtArgs>>): Prisma__CommandeClient<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Commandes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommandeCountArgs} args - Arguments to filter Commandes to count.
+     * @example
+     * // Count the number of Commandes
+     * const count = await prisma.commande.count({
+     *   where: {
+     *     // ... the filter for the Commandes we want to count
+     *   }
+     * })
+    **/
+    count<T extends CommandeCountArgs>(
+      args?: Subset<T, CommandeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CommandeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Commande.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommandeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CommandeAggregateArgs>(args: Subset<T, CommandeAggregateArgs>): Prisma.PrismaPromise<GetCommandeAggregateType<T>>
+
+    /**
+     * Group by Commande.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommandeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CommandeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CommandeGroupByArgs['orderBy'] }
+        : { orderBy?: CommandeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CommandeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCommandeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Commande model
+   */
+  readonly fields: CommandeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Commande.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CommandeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends Commande$clientArgs<ExtArgs> = {}>(args?: Subset<T, Commande$clientArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    fournisseur<T extends Commande$fournisseurArgs<ExtArgs> = {}>(args?: Subset<T, Commande$fournisseurArgs<ExtArgs>>): Prisma__FournisseurClient<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    adresse<T extends Commande$adresseArgs<ExtArgs> = {}>(args?: Subset<T, Commande$adresseArgs<ExtArgs>>): Prisma__AdresseClient<$Result.GetResult<Prisma.$AdressePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    contact<T extends Commande$contactArgs<ExtArgs> = {}>(args?: Subset<T, Commande$contactArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Commande model
+   */
+  interface CommandeFieldRefs {
+    readonly id: FieldRef<"Commande", 'Int'>
+    readonly numeroCommande: FieldRef<"Commande", 'String'>
+    readonly clientId: FieldRef<"Commande", 'Int'>
+    readonly nom: FieldRef<"Commande", 'String'>
+    readonly tel: FieldRef<"Commande", 'String'>
+    readonly adresseId: FieldRef<"Commande", 'Int'>
+    readonly contactId: FieldRef<"Commande", 'Int'>
+    readonly fournisseurId: FieldRef<"Commande", 'Int'>
+    readonly notesClient: FieldRef<"Commande", 'String'>
+    readonly dateLivraisonEffective: FieldRef<"Commande", 'DateTime'>
+    readonly adresseLivraison: FieldRef<"Commande", 'String'>
+    readonly enregistreParId: FieldRef<"Commande", 'Int'>
+    readonly statut: FieldRef<"Commande", 'StatutCommande'>
+    readonly createdAt: FieldRef<"Commande", 'DateTime'>
+    readonly updatedAt: FieldRef<"Commande", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Commande findUnique
+   */
+  export type CommandeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    /**
+     * Filter, which Commande to fetch.
+     */
+    where: CommandeWhereUniqueInput
+  }
+
+  /**
+   * Commande findUniqueOrThrow
+   */
+  export type CommandeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    /**
+     * Filter, which Commande to fetch.
+     */
+    where: CommandeWhereUniqueInput
+  }
+
+  /**
+   * Commande findFirst
+   */
+  export type CommandeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    /**
+     * Filter, which Commande to fetch.
+     */
+    where?: CommandeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Commandes to fetch.
+     */
+    orderBy?: CommandeOrderByWithRelationInput | CommandeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Commandes.
+     */
+    cursor?: CommandeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Commandes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Commandes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Commandes.
+     */
+    distinct?: CommandeScalarFieldEnum | CommandeScalarFieldEnum[]
+  }
+
+  /**
+   * Commande findFirstOrThrow
+   */
+  export type CommandeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    /**
+     * Filter, which Commande to fetch.
+     */
+    where?: CommandeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Commandes to fetch.
+     */
+    orderBy?: CommandeOrderByWithRelationInput | CommandeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Commandes.
+     */
+    cursor?: CommandeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Commandes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Commandes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Commandes.
+     */
+    distinct?: CommandeScalarFieldEnum | CommandeScalarFieldEnum[]
+  }
+
+  /**
+   * Commande findMany
+   */
+  export type CommandeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    /**
+     * Filter, which Commandes to fetch.
+     */
+    where?: CommandeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Commandes to fetch.
+     */
+    orderBy?: CommandeOrderByWithRelationInput | CommandeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Commandes.
+     */
+    cursor?: CommandeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Commandes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Commandes.
+     */
+    skip?: number
+    distinct?: CommandeScalarFieldEnum | CommandeScalarFieldEnum[]
+  }
+
+  /**
+   * Commande create
+   */
+  export type CommandeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Commande.
+     */
+    data: XOR<CommandeCreateInput, CommandeUncheckedCreateInput>
+  }
+
+  /**
+   * Commande createMany
+   */
+  export type CommandeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Commandes.
+     */
+    data: CommandeCreateManyInput | CommandeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Commande createManyAndReturn
+   */
+  export type CommandeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * The data used to create many Commandes.
+     */
+    data: CommandeCreateManyInput | CommandeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Commande update
+   */
+  export type CommandeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Commande.
+     */
+    data: XOR<CommandeUpdateInput, CommandeUncheckedUpdateInput>
+    /**
+     * Choose, which Commande to update.
+     */
+    where: CommandeWhereUniqueInput
+  }
+
+  /**
+   * Commande updateMany
+   */
+  export type CommandeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Commandes.
+     */
+    data: XOR<CommandeUpdateManyMutationInput, CommandeUncheckedUpdateManyInput>
+    /**
+     * Filter which Commandes to update
+     */
+    where?: CommandeWhereInput
+    /**
+     * Limit how many Commandes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Commande updateManyAndReturn
+   */
+  export type CommandeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * The data used to update Commandes.
+     */
+    data: XOR<CommandeUpdateManyMutationInput, CommandeUncheckedUpdateManyInput>
+    /**
+     * Filter which Commandes to update
+     */
+    where?: CommandeWhereInput
+    /**
+     * Limit how many Commandes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Commande upsert
+   */
+  export type CommandeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Commande to update in case it exists.
+     */
+    where: CommandeWhereUniqueInput
+    /**
+     * In case the Commande found by the `where` argument doesn't exist, create a new Commande with this data.
+     */
+    create: XOR<CommandeCreateInput, CommandeUncheckedCreateInput>
+    /**
+     * In case the Commande was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CommandeUpdateInput, CommandeUncheckedUpdateInput>
+  }
+
+  /**
+   * Commande delete
+   */
+  export type CommandeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    /**
+     * Filter which Commande to delete.
+     */
+    where: CommandeWhereUniqueInput
+  }
+
+  /**
+   * Commande deleteMany
+   */
+  export type CommandeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Commandes to delete
+     */
+    where?: CommandeWhereInput
+    /**
+     * Limit how many Commandes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Commande.client
+   */
+  export type Commande$clientArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Utilisateur
+     */
+    select?: UtilisateurSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Utilisateur
+     */
+    omit?: UtilisateurOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UtilisateurInclude<ExtArgs> | null
+    where?: UtilisateurWhereInput
+  }
+
+  /**
+   * Commande.fournisseur
+   */
+  export type Commande$fournisseurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fournisseur
+     */
+    select?: FournisseurSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fournisseur
+     */
+    omit?: FournisseurOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FournisseurInclude<ExtArgs> | null
+    where?: FournisseurWhereInput
+  }
+
+  /**
+   * Commande.adresse
+   */
+  export type Commande$adresseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adresse
+     */
+    select?: AdresseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adresse
+     */
+    omit?: AdresseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdresseInclude<ExtArgs> | null
+    where?: AdresseWhereInput
+  }
+
+  /**
+   * Commande.contact
+   */
+  export type Commande$contactArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    where?: ContactWhereInput
+  }
+
+  /**
+   * Commande without action
+   */
+  export type CommandeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -18118,6 +21410,48 @@ export namespace Prisma {
   export type AchatScalarFieldEnum = (typeof AchatScalarFieldEnum)[keyof typeof AchatScalarFieldEnum]
 
 
+  export const ReservationScalarFieldEnum: {
+    id: 'id',
+    dateLivraisonSouhaitee: 'dateLivraisonSouhaitee',
+    adresseLivraison: 'adresseLivraison',
+    statut: 'statut',
+    notesClient: 'notesClient',
+    clientId: 'clientId',
+    panierId: 'panierId',
+    nom: 'nom',
+    tel: 'tel',
+    adresseId: 'adresseId',
+    contactId: 'contactId',
+    enregistrerParId: 'enregistrerParId',
+    fournisseurId: 'fournisseurId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ReservationScalarFieldEnum = (typeof ReservationScalarFieldEnum)[keyof typeof ReservationScalarFieldEnum]
+
+
+  export const CommandeScalarFieldEnum: {
+    id: 'id',
+    numeroCommande: 'numeroCommande',
+    clientId: 'clientId',
+    nom: 'nom',
+    tel: 'tel',
+    adresseId: 'adresseId',
+    contactId: 'contactId',
+    fournisseurId: 'fournisseurId',
+    notesClient: 'notesClient',
+    dateLivraisonEffective: 'dateLivraisonEffective',
+    adresseLivraison: 'adresseLivraison',
+    enregistreParId: 'enregistreParId',
+    statut: 'statut',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CommandeScalarFieldEnum = (typeof CommandeScalarFieldEnum)[keyof typeof CommandeScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -18299,6 +21633,34 @@ export namespace Prisma {
    */
   export type ListEnumStatutAchatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutAchat[]'>
     
+
+
+  /**
+   * Reference to a field of type 'StatutReservation'
+   */
+  export type EnumStatutReservationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutReservation'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatutReservation[]'
+   */
+  export type ListEnumStatutReservationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutReservation[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatutCommande'
+   */
+  export type EnumStatutCommandeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutCommande'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatutCommande[]'
+   */
+  export type ListEnumStatutCommandeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutCommande[]'>
+    
   /**
    * Deep Input Types
    */
@@ -18406,6 +21768,8 @@ export namespace Prisma {
     Teneur?: TeneurListRelationFilter
     Devise?: DeviseListRelationFilter
     Panier?: PanierListRelationFilter
+    Reservation?: ReservationListRelationFilter
+    Commande?: CommandeListRelationFilter
   }
 
   export type UtilisateurOrderByWithRelationInput = {
@@ -18428,6 +21792,8 @@ export namespace Prisma {
     Teneur?: TeneurOrderByRelationAggregateInput
     Devise?: DeviseOrderByRelationAggregateInput
     Panier?: PanierOrderByRelationAggregateInput
+    Reservation?: ReservationOrderByRelationAggregateInput
+    Commande?: CommandeOrderByRelationAggregateInput
   }
 
   export type UtilisateurWhereUniqueInput = Prisma.AtLeast<{
@@ -18453,6 +21819,8 @@ export namespace Prisma {
     Teneur?: TeneurListRelationFilter
     Devise?: DeviseListRelationFilter
     Panier?: PanierListRelationFilter
+    Reservation?: ReservationListRelationFilter
+    Commande?: CommandeListRelationFilter
   }, "id" | "email">
 
   export type UtilisateurOrderByWithAggregationInput = {
@@ -18505,6 +21873,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Adresse"> | Date | string
     utilisateur?: XOR<UtilisateurNullableScalarRelationFilter, UtilisateurWhereInput> | null
     fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
+    Reservation?: ReservationListRelationFilter
+    Commande?: CommandeListRelationFilter
   }
 
   export type AdresseOrderByWithRelationInput = {
@@ -18518,6 +21888,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     utilisateur?: UtilisateurOrderByWithRelationInput
     fournisseur?: FournisseurOrderByWithRelationInput
+    Reservation?: ReservationOrderByRelationAggregateInput
+    Commande?: CommandeOrderByRelationAggregateInput
   }
 
   export type AdresseWhereUniqueInput = Prisma.AtLeast<{
@@ -18534,6 +21906,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Adresse"> | Date | string
     utilisateur?: XOR<UtilisateurNullableScalarRelationFilter, UtilisateurWhereInput> | null
     fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
+    Reservation?: ReservationListRelationFilter
+    Commande?: CommandeListRelationFilter
   }, "id">
 
   export type AdresseOrderByWithAggregationInput = {
@@ -18578,6 +21952,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Contact"> | Date | string
     utilisateur?: XOR<UtilisateurNullableScalarRelationFilter, UtilisateurWhereInput> | null
     fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
+    Reservation?: ReservationListRelationFilter
+    Commande?: CommandeListRelationFilter
   }
 
   export type ContactOrderByWithRelationInput = {
@@ -18589,6 +21965,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     utilisateur?: UtilisateurOrderByWithRelationInput
     fournisseur?: FournisseurOrderByWithRelationInput
+    Reservation?: ReservationOrderByRelationAggregateInput
+    Commande?: CommandeOrderByRelationAggregateInput
   }
 
   export type ContactWhereUniqueInput = Prisma.AtLeast<{
@@ -18603,6 +21981,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Contact"> | Date | string
     utilisateur?: XOR<UtilisateurNullableScalarRelationFilter, UtilisateurWhereInput> | null
     fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
+    Reservation?: ReservationListRelationFilter
+    Commande?: CommandeListRelationFilter
   }, "id" | "tel">
 
   export type ContactOrderByWithAggregationInput = {
@@ -18645,6 +22025,8 @@ export namespace Prisma {
     Achat?: AchatListRelationFilter
     Adresse?: AdresseListRelationFilter
     Contact?: ContactListRelationFilter
+    Reservation?: ReservationListRelationFilter
+    Commande?: CommandeListRelationFilter
   }
 
   export type FournisseurOrderByWithRelationInput = {
@@ -18658,6 +22040,8 @@ export namespace Prisma {
     Achat?: AchatOrderByRelationAggregateInput
     Adresse?: AdresseOrderByRelationAggregateInput
     Contact?: ContactOrderByRelationAggregateInput
+    Reservation?: ReservationOrderByRelationAggregateInput
+    Commande?: CommandeOrderByRelationAggregateInput
   }
 
   export type FournisseurWhereUniqueInput = Prisma.AtLeast<{
@@ -18674,6 +22058,8 @@ export namespace Prisma {
     Achat?: AchatListRelationFilter
     Adresse?: AdresseListRelationFilter
     Contact?: ContactListRelationFilter
+    Reservation?: ReservationListRelationFilter
+    Commande?: CommandeListRelationFilter
   }, "id" | "email">
 
   export type FournisseurOrderByWithAggregationInput = {
@@ -19112,6 +22498,7 @@ export namespace Prisma {
     DetailPanier?: DetailPanierListRelationFilter
     Achat?: AchatListRelationFilter
     Vente?: VenteListRelationFilter
+    Reservation?: ReservationListRelationFilter
   }
 
   export type PanierOrderByWithRelationInput = {
@@ -19123,6 +22510,7 @@ export namespace Prisma {
     DetailPanier?: DetailPanierOrderByRelationAggregateInput
     Achat?: AchatOrderByRelationAggregateInput
     Vente?: VenteOrderByRelationAggregateInput
+    Reservation?: ReservationOrderByRelationAggregateInput
   }
 
   export type PanierWhereUniqueInput = Prisma.AtLeast<{
@@ -19137,6 +22525,7 @@ export namespace Prisma {
     DetailPanier?: DetailPanierListRelationFilter
     Achat?: AchatListRelationFilter
     Vente?: VenteListRelationFilter
+    Reservation?: ReservationListRelationFilter
   }, "id">
 
   export type PanierOrderByWithAggregationInput = {
@@ -19317,6 +22706,241 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Achat"> | Date | string
   }
 
+  export type ReservationWhereInput = {
+    AND?: ReservationWhereInput | ReservationWhereInput[]
+    OR?: ReservationWhereInput[]
+    NOT?: ReservationWhereInput | ReservationWhereInput[]
+    id?: IntFilter<"Reservation"> | number
+    dateLivraisonSouhaitee?: DateTimeFilter<"Reservation"> | Date | string
+    adresseLivraison?: StringNullableFilter<"Reservation"> | string | null
+    statut?: EnumStatutReservationFilter<"Reservation"> | $Enums.StatutReservation
+    notesClient?: StringNullableFilter<"Reservation"> | string | null
+    clientId?: IntNullableFilter<"Reservation"> | number | null
+    panierId?: IntFilter<"Reservation"> | number
+    nom?: StringNullableFilter<"Reservation"> | string | null
+    tel?: StringNullableFilter<"Reservation"> | string | null
+    adresseId?: IntNullableFilter<"Reservation"> | number | null
+    contactId?: IntNullableFilter<"Reservation"> | number | null
+    enregistrerParId?: IntNullableFilter<"Reservation"> | number | null
+    fournisseurId?: IntNullableFilter<"Reservation"> | number | null
+    createdAt?: DateTimeFilter<"Reservation"> | Date | string
+    updatedAt?: DateTimeFilter<"Reservation"> | Date | string
+    panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
+    utilisateur?: XOR<UtilisateurNullableScalarRelationFilter, UtilisateurWhereInput> | null
+    fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
+    adresse?: XOR<AdresseNullableScalarRelationFilter, AdresseWhereInput> | null
+    contact?: XOR<ContactNullableScalarRelationFilter, ContactWhereInput> | null
+  }
+
+  export type ReservationOrderByWithRelationInput = {
+    id?: SortOrder
+    dateLivraisonSouhaitee?: SortOrder
+    adresseLivraison?: SortOrderInput | SortOrder
+    statut?: SortOrder
+    notesClient?: SortOrderInput | SortOrder
+    clientId?: SortOrderInput | SortOrder
+    panierId?: SortOrder
+    nom?: SortOrderInput | SortOrder
+    tel?: SortOrderInput | SortOrder
+    adresseId?: SortOrderInput | SortOrder
+    contactId?: SortOrderInput | SortOrder
+    enregistrerParId?: SortOrderInput | SortOrder
+    fournisseurId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    panier?: PanierOrderByWithRelationInput
+    utilisateur?: UtilisateurOrderByWithRelationInput
+    fournisseur?: FournisseurOrderByWithRelationInput
+    adresse?: AdresseOrderByWithRelationInput
+    contact?: ContactOrderByWithRelationInput
+  }
+
+  export type ReservationWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ReservationWhereInput | ReservationWhereInput[]
+    OR?: ReservationWhereInput[]
+    NOT?: ReservationWhereInput | ReservationWhereInput[]
+    dateLivraisonSouhaitee?: DateTimeFilter<"Reservation"> | Date | string
+    adresseLivraison?: StringNullableFilter<"Reservation"> | string | null
+    statut?: EnumStatutReservationFilter<"Reservation"> | $Enums.StatutReservation
+    notesClient?: StringNullableFilter<"Reservation"> | string | null
+    clientId?: IntNullableFilter<"Reservation"> | number | null
+    panierId?: IntFilter<"Reservation"> | number
+    nom?: StringNullableFilter<"Reservation"> | string | null
+    tel?: StringNullableFilter<"Reservation"> | string | null
+    adresseId?: IntNullableFilter<"Reservation"> | number | null
+    contactId?: IntNullableFilter<"Reservation"> | number | null
+    enregistrerParId?: IntNullableFilter<"Reservation"> | number | null
+    fournisseurId?: IntNullableFilter<"Reservation"> | number | null
+    createdAt?: DateTimeFilter<"Reservation"> | Date | string
+    updatedAt?: DateTimeFilter<"Reservation"> | Date | string
+    panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
+    utilisateur?: XOR<UtilisateurNullableScalarRelationFilter, UtilisateurWhereInput> | null
+    fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
+    adresse?: XOR<AdresseNullableScalarRelationFilter, AdresseWhereInput> | null
+    contact?: XOR<ContactNullableScalarRelationFilter, ContactWhereInput> | null
+  }, "id">
+
+  export type ReservationOrderByWithAggregationInput = {
+    id?: SortOrder
+    dateLivraisonSouhaitee?: SortOrder
+    adresseLivraison?: SortOrderInput | SortOrder
+    statut?: SortOrder
+    notesClient?: SortOrderInput | SortOrder
+    clientId?: SortOrderInput | SortOrder
+    panierId?: SortOrder
+    nom?: SortOrderInput | SortOrder
+    tel?: SortOrderInput | SortOrder
+    adresseId?: SortOrderInput | SortOrder
+    contactId?: SortOrderInput | SortOrder
+    enregistrerParId?: SortOrderInput | SortOrder
+    fournisseurId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ReservationCountOrderByAggregateInput
+    _avg?: ReservationAvgOrderByAggregateInput
+    _max?: ReservationMaxOrderByAggregateInput
+    _min?: ReservationMinOrderByAggregateInput
+    _sum?: ReservationSumOrderByAggregateInput
+  }
+
+  export type ReservationScalarWhereWithAggregatesInput = {
+    AND?: ReservationScalarWhereWithAggregatesInput | ReservationScalarWhereWithAggregatesInput[]
+    OR?: ReservationScalarWhereWithAggregatesInput[]
+    NOT?: ReservationScalarWhereWithAggregatesInput | ReservationScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Reservation"> | number
+    dateLivraisonSouhaitee?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
+    adresseLivraison?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
+    statut?: EnumStatutReservationWithAggregatesFilter<"Reservation"> | $Enums.StatutReservation
+    notesClient?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
+    clientId?: IntNullableWithAggregatesFilter<"Reservation"> | number | null
+    panierId?: IntWithAggregatesFilter<"Reservation"> | number
+    nom?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
+    tel?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
+    adresseId?: IntNullableWithAggregatesFilter<"Reservation"> | number | null
+    contactId?: IntNullableWithAggregatesFilter<"Reservation"> | number | null
+    enregistrerParId?: IntNullableWithAggregatesFilter<"Reservation"> | number | null
+    fournisseurId?: IntNullableWithAggregatesFilter<"Reservation"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
+  }
+
+  export type CommandeWhereInput = {
+    AND?: CommandeWhereInput | CommandeWhereInput[]
+    OR?: CommandeWhereInput[]
+    NOT?: CommandeWhereInput | CommandeWhereInput[]
+    id?: IntFilter<"Commande"> | number
+    numeroCommande?: StringFilter<"Commande"> | string
+    clientId?: IntFilter<"Commande"> | number
+    nom?: StringNullableFilter<"Commande"> | string | null
+    tel?: StringNullableFilter<"Commande"> | string | null
+    adresseId?: IntNullableFilter<"Commande"> | number | null
+    contactId?: IntNullableFilter<"Commande"> | number | null
+    fournisseurId?: IntNullableFilter<"Commande"> | number | null
+    notesClient?: StringNullableFilter<"Commande"> | string | null
+    dateLivraisonEffective?: DateTimeNullableFilter<"Commande"> | Date | string | null
+    adresseLivraison?: StringNullableFilter<"Commande"> | string | null
+    enregistreParId?: IntNullableFilter<"Commande"> | number | null
+    statut?: EnumStatutCommandeFilter<"Commande"> | $Enums.StatutCommande
+    createdAt?: DateTimeFilter<"Commande"> | Date | string
+    updatedAt?: DateTimeFilter<"Commande"> | Date | string
+    client?: XOR<UtilisateurNullableScalarRelationFilter, UtilisateurWhereInput> | null
+    fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
+    adresse?: XOR<AdresseNullableScalarRelationFilter, AdresseWhereInput> | null
+    contact?: XOR<ContactNullableScalarRelationFilter, ContactWhereInput> | null
+  }
+
+  export type CommandeOrderByWithRelationInput = {
+    id?: SortOrder
+    numeroCommande?: SortOrder
+    clientId?: SortOrder
+    nom?: SortOrderInput | SortOrder
+    tel?: SortOrderInput | SortOrder
+    adresseId?: SortOrderInput | SortOrder
+    contactId?: SortOrderInput | SortOrder
+    fournisseurId?: SortOrderInput | SortOrder
+    notesClient?: SortOrderInput | SortOrder
+    dateLivraisonEffective?: SortOrderInput | SortOrder
+    adresseLivraison?: SortOrderInput | SortOrder
+    enregistreParId?: SortOrderInput | SortOrder
+    statut?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: UtilisateurOrderByWithRelationInput
+    fournisseur?: FournisseurOrderByWithRelationInput
+    adresse?: AdresseOrderByWithRelationInput
+    contact?: ContactOrderByWithRelationInput
+  }
+
+  export type CommandeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    numeroCommande?: string
+    AND?: CommandeWhereInput | CommandeWhereInput[]
+    OR?: CommandeWhereInput[]
+    NOT?: CommandeWhereInput | CommandeWhereInput[]
+    clientId?: IntFilter<"Commande"> | number
+    nom?: StringNullableFilter<"Commande"> | string | null
+    tel?: StringNullableFilter<"Commande"> | string | null
+    adresseId?: IntNullableFilter<"Commande"> | number | null
+    contactId?: IntNullableFilter<"Commande"> | number | null
+    fournisseurId?: IntNullableFilter<"Commande"> | number | null
+    notesClient?: StringNullableFilter<"Commande"> | string | null
+    dateLivraisonEffective?: DateTimeNullableFilter<"Commande"> | Date | string | null
+    adresseLivraison?: StringNullableFilter<"Commande"> | string | null
+    enregistreParId?: IntNullableFilter<"Commande"> | number | null
+    statut?: EnumStatutCommandeFilter<"Commande"> | $Enums.StatutCommande
+    createdAt?: DateTimeFilter<"Commande"> | Date | string
+    updatedAt?: DateTimeFilter<"Commande"> | Date | string
+    client?: XOR<UtilisateurNullableScalarRelationFilter, UtilisateurWhereInput> | null
+    fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
+    adresse?: XOR<AdresseNullableScalarRelationFilter, AdresseWhereInput> | null
+    contact?: XOR<ContactNullableScalarRelationFilter, ContactWhereInput> | null
+  }, "id" | "numeroCommande">
+
+  export type CommandeOrderByWithAggregationInput = {
+    id?: SortOrder
+    numeroCommande?: SortOrder
+    clientId?: SortOrder
+    nom?: SortOrderInput | SortOrder
+    tel?: SortOrderInput | SortOrder
+    adresseId?: SortOrderInput | SortOrder
+    contactId?: SortOrderInput | SortOrder
+    fournisseurId?: SortOrderInput | SortOrder
+    notesClient?: SortOrderInput | SortOrder
+    dateLivraisonEffective?: SortOrderInput | SortOrder
+    adresseLivraison?: SortOrderInput | SortOrder
+    enregistreParId?: SortOrderInput | SortOrder
+    statut?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CommandeCountOrderByAggregateInput
+    _avg?: CommandeAvgOrderByAggregateInput
+    _max?: CommandeMaxOrderByAggregateInput
+    _min?: CommandeMinOrderByAggregateInput
+    _sum?: CommandeSumOrderByAggregateInput
+  }
+
+  export type CommandeScalarWhereWithAggregatesInput = {
+    AND?: CommandeScalarWhereWithAggregatesInput | CommandeScalarWhereWithAggregatesInput[]
+    OR?: CommandeScalarWhereWithAggregatesInput[]
+    NOT?: CommandeScalarWhereWithAggregatesInput | CommandeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Commande"> | number
+    numeroCommande?: StringWithAggregatesFilter<"Commande"> | string
+    clientId?: IntWithAggregatesFilter<"Commande"> | number
+    nom?: StringNullableWithAggregatesFilter<"Commande"> | string | null
+    tel?: StringNullableWithAggregatesFilter<"Commande"> | string | null
+    adresseId?: IntNullableWithAggregatesFilter<"Commande"> | number | null
+    contactId?: IntNullableWithAggregatesFilter<"Commande"> | number | null
+    fournisseurId?: IntNullableWithAggregatesFilter<"Commande"> | number | null
+    notesClient?: StringNullableWithAggregatesFilter<"Commande"> | string | null
+    dateLivraisonEffective?: DateTimeNullableWithAggregatesFilter<"Commande"> | Date | string | null
+    adresseLivraison?: StringNullableWithAggregatesFilter<"Commande"> | string | null
+    enregistreParId?: IntNullableWithAggregatesFilter<"Commande"> | number | null
+    statut?: EnumStatutCommandeWithAggregatesFilter<"Commande"> | $Enums.StatutCommande
+    createdAt?: DateTimeWithAggregatesFilter<"Commande"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Commande"> | Date | string
+  }
+
   export type EntrepriseCreateInput = {
     nom: string
     encronyme: string
@@ -19424,6 +23048,8 @@ export namespace Prisma {
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurUncheckedCreateInput = {
@@ -19446,6 +23072,8 @@ export namespace Prisma {
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurUpdateInput = {
@@ -19467,6 +23095,8 @@ export namespace Prisma {
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUpdateManyWithoutClientNestedInput
   }
 
   export type UtilisateurUncheckedUpdateInput = {
@@ -19489,6 +23119,8 @@ export namespace Prisma {
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type UtilisateurCreateManyInput = {
@@ -19540,6 +23172,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     utilisateur?: UtilisateurCreateNestedOneWithoutAdresseInput
     fournisseur?: FournisseurCreateNestedOneWithoutAdresseInput
+    Reservation?: ReservationCreateNestedManyWithoutAdresseInput
+    Commande?: CommandeCreateNestedManyWithoutAdresseInput
   }
 
   export type AdresseUncheckedCreateInput = {
@@ -19551,6 +23185,8 @@ export namespace Prisma {
     fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutAdresseInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutAdresseInput
   }
 
   export type AdresseUpdateInput = {
@@ -19561,6 +23197,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneWithoutAdresseNestedInput
     fournisseur?: FournisseurUpdateOneWithoutAdresseNestedInput
+    Reservation?: ReservationUpdateManyWithoutAdresseNestedInput
+    Commande?: CommandeUpdateManyWithoutAdresseNestedInput
   }
 
   export type AdresseUncheckedUpdateInput = {
@@ -19572,6 +23210,8 @@ export namespace Prisma {
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Reservation?: ReservationUncheckedUpdateManyWithoutAdresseNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutAdresseNestedInput
   }
 
   export type AdresseCreateManyInput = {
@@ -19610,6 +23250,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     utilisateur?: UtilisateurCreateNestedOneWithoutContactInput
     fournisseur?: FournisseurCreateNestedOneWithoutContactInput
+    Reservation?: ReservationCreateNestedManyWithoutContactInput
+    Commande?: CommandeCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateInput = {
@@ -19619,6 +23261,8 @@ export namespace Prisma {
     fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutContactInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactUpdateInput = {
@@ -19627,6 +23271,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneWithoutContactNestedInput
     fournisseur?: FournisseurUpdateOneWithoutContactNestedInput
+    Reservation?: ReservationUpdateManyWithoutContactNestedInput
+    Commande?: CommandeUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateInput = {
@@ -19636,6 +23282,8 @@ export namespace Prisma {
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Reservation?: ReservationUncheckedUpdateManyWithoutContactNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type ContactCreateManyInput = {
@@ -19672,6 +23320,8 @@ export namespace Prisma {
     Achat?: AchatCreateNestedManyWithoutFournisseurInput
     Adresse?: AdresseCreateNestedManyWithoutFournisseurInput
     Contact?: ContactCreateNestedManyWithoutFournisseurInput
+    Reservation?: ReservationCreateNestedManyWithoutFournisseurInput
+    Commande?: CommandeCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUncheckedCreateInput = {
@@ -19685,6 +23335,8 @@ export namespace Prisma {
     Achat?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
     Adresse?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     Contact?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutFournisseurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUpdateInput = {
@@ -19697,6 +23349,8 @@ export namespace Prisma {
     Achat?: AchatUpdateManyWithoutFournisseurNestedInput
     Adresse?: AdresseUpdateManyWithoutFournisseurNestedInput
     Contact?: ContactUpdateManyWithoutFournisseurNestedInput
+    Reservation?: ReservationUpdateManyWithoutFournisseurNestedInput
+    Commande?: CommandeUpdateManyWithoutFournisseurNestedInput
   }
 
   export type FournisseurUncheckedUpdateInput = {
@@ -19710,6 +23364,8 @@ export namespace Prisma {
     Achat?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
     Adresse?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     Contact?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutFournisseurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
   export type FournisseurCreateManyInput = {
@@ -20136,6 +23792,7 @@ export namespace Prisma {
     DetailPanier?: DetailPanierCreateNestedManyWithoutPanierInput
     Achat?: AchatCreateNestedManyWithoutPanierInput
     Vente?: VenteCreateNestedManyWithoutPanierInput
+    Reservation?: ReservationCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUncheckedCreateInput = {
@@ -20146,6 +23803,7 @@ export namespace Prisma {
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutPanierInput
     Achat?: AchatUncheckedCreateNestedManyWithoutPanierInput
     Vente?: VenteUncheckedCreateNestedManyWithoutPanierInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUpdateInput = {
@@ -20155,6 +23813,7 @@ export namespace Prisma {
     DetailPanier?: DetailPanierUpdateManyWithoutPanierNestedInput
     Achat?: AchatUpdateManyWithoutPanierNestedInput
     Vente?: VenteUpdateManyWithoutPanierNestedInput
+    Reservation?: ReservationUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateInput = {
@@ -20165,6 +23824,7 @@ export namespace Prisma {
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutPanierNestedInput
     Achat?: AchatUncheckedUpdateManyWithoutPanierNestedInput
     Vente?: VenteUncheckedUpdateManyWithoutPanierNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierCreateManyInput = {
@@ -20324,6 +23984,243 @@ export namespace Prisma {
     fournisseurId?: IntFieldUpdateOperationsInput | number
     enregisterParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationCreateInput = {
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    nom?: string | null
+    tel?: string | null
+    enregistrerParId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    panier: PanierCreateNestedOneWithoutReservationInput
+    utilisateur?: UtilisateurCreateNestedOneWithoutReservationInput
+    fournisseur?: FournisseurCreateNestedOneWithoutReservationInput
+    adresse?: AdresseCreateNestedOneWithoutReservationInput
+    contact?: ContactCreateNestedOneWithoutReservationInput
+  }
+
+  export type ReservationUncheckedCreateInput = {
+    id?: number
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    clientId?: number | null
+    panierId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    enregistrerParId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReservationUpdateInput = {
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    panier?: PanierUpdateOneRequiredWithoutReservationNestedInput
+    utilisateur?: UtilisateurUpdateOneWithoutReservationNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutReservationNestedInput
+    adresse?: AdresseUpdateOneWithoutReservationNestedInput
+    contact?: ContactUpdateOneWithoutReservationNestedInput
+  }
+
+  export type ReservationUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    panierId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationCreateManyInput = {
+    id?: number
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    clientId?: number | null
+    panierId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    enregistrerParId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReservationUpdateManyMutationInput = {
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    panierId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommandeCreateInput = {
+    numeroCommande: string
+    nom?: string | null
+    tel?: string | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client?: UtilisateurCreateNestedOneWithoutCommandeInput
+    fournisseur?: FournisseurCreateNestedOneWithoutCommandeInput
+    adresse?: AdresseCreateNestedOneWithoutCommandeInput
+    contact?: ContactCreateNestedOneWithoutCommandeInput
+  }
+
+  export type CommandeUncheckedCreateInput = {
+    id?: number
+    numeroCommande: string
+    clientId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    fournisseurId?: number | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommandeUpdateInput = {
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: UtilisateurUpdateOneWithoutCommandeNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutCommandeNestedInput
+    adresse?: AdresseUpdateOneWithoutCommandeNestedInput
+    contact?: ContactUpdateOneWithoutCommandeNestedInput
+  }
+
+  export type CommandeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    clientId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommandeCreateManyInput = {
+    id?: number
+    numeroCommande: string
+    clientId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    fournisseurId?: number | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommandeUpdateManyMutationInput = {
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommandeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    clientId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20553,6 +24450,18 @@ export namespace Prisma {
     none?: PanierWhereInput
   }
 
+  export type ReservationListRelationFilter = {
+    every?: ReservationWhereInput
+    some?: ReservationWhereInput
+    none?: ReservationWhereInput
+  }
+
+  export type CommandeListRelationFilter = {
+    every?: CommandeWhereInput
+    some?: CommandeWhereInput
+    none?: CommandeWhereInput
+  }
+
   export type AdresseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -20582,6 +24491,14 @@ export namespace Prisma {
   }
 
   export type PanierOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ReservationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CommandeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -21360,6 +25277,221 @@ export namespace Prisma {
     _max?: NestedEnumStatutAchatFilter<$PrismaModel>
   }
 
+  export type EnumStatutReservationFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutReservation | EnumStatutReservationFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutReservation[] | ListEnumStatutReservationFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutReservation[] | ListEnumStatutReservationFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutReservationFilter<$PrismaModel> | $Enums.StatutReservation
+  }
+
+  export type AdresseNullableScalarRelationFilter = {
+    is?: AdresseWhereInput | null
+    isNot?: AdresseWhereInput | null
+  }
+
+  export type ContactNullableScalarRelationFilter = {
+    is?: ContactWhereInput | null
+    isNot?: ContactWhereInput | null
+  }
+
+  export type ReservationCountOrderByAggregateInput = {
+    id?: SortOrder
+    dateLivraisonSouhaitee?: SortOrder
+    adresseLivraison?: SortOrder
+    statut?: SortOrder
+    notesClient?: SortOrder
+    clientId?: SortOrder
+    panierId?: SortOrder
+    nom?: SortOrder
+    tel?: SortOrder
+    adresseId?: SortOrder
+    contactId?: SortOrder
+    enregistrerParId?: SortOrder
+    fournisseurId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReservationAvgOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    panierId?: SortOrder
+    adresseId?: SortOrder
+    contactId?: SortOrder
+    enregistrerParId?: SortOrder
+    fournisseurId?: SortOrder
+  }
+
+  export type ReservationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    dateLivraisonSouhaitee?: SortOrder
+    adresseLivraison?: SortOrder
+    statut?: SortOrder
+    notesClient?: SortOrder
+    clientId?: SortOrder
+    panierId?: SortOrder
+    nom?: SortOrder
+    tel?: SortOrder
+    adresseId?: SortOrder
+    contactId?: SortOrder
+    enregistrerParId?: SortOrder
+    fournisseurId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReservationMinOrderByAggregateInput = {
+    id?: SortOrder
+    dateLivraisonSouhaitee?: SortOrder
+    adresseLivraison?: SortOrder
+    statut?: SortOrder
+    notesClient?: SortOrder
+    clientId?: SortOrder
+    panierId?: SortOrder
+    nom?: SortOrder
+    tel?: SortOrder
+    adresseId?: SortOrder
+    contactId?: SortOrder
+    enregistrerParId?: SortOrder
+    fournisseurId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReservationSumOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    panierId?: SortOrder
+    adresseId?: SortOrder
+    contactId?: SortOrder
+    enregistrerParId?: SortOrder
+    fournisseurId?: SortOrder
+  }
+
+  export type EnumStatutReservationWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutReservation | EnumStatutReservationFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutReservation[] | ListEnumStatutReservationFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutReservation[] | ListEnumStatutReservationFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutReservationWithAggregatesFilter<$PrismaModel> | $Enums.StatutReservation
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatutReservationFilter<$PrismaModel>
+    _max?: NestedEnumStatutReservationFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type EnumStatutCommandeFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutCommande | EnumStatutCommandeFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutCommande[] | ListEnumStatutCommandeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutCommande[] | ListEnumStatutCommandeFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutCommandeFilter<$PrismaModel> | $Enums.StatutCommande
+  }
+
+  export type CommandeCountOrderByAggregateInput = {
+    id?: SortOrder
+    numeroCommande?: SortOrder
+    clientId?: SortOrder
+    nom?: SortOrder
+    tel?: SortOrder
+    adresseId?: SortOrder
+    contactId?: SortOrder
+    fournisseurId?: SortOrder
+    notesClient?: SortOrder
+    dateLivraisonEffective?: SortOrder
+    adresseLivraison?: SortOrder
+    enregistreParId?: SortOrder
+    statut?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CommandeAvgOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    adresseId?: SortOrder
+    contactId?: SortOrder
+    fournisseurId?: SortOrder
+    enregistreParId?: SortOrder
+  }
+
+  export type CommandeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    numeroCommande?: SortOrder
+    clientId?: SortOrder
+    nom?: SortOrder
+    tel?: SortOrder
+    adresseId?: SortOrder
+    contactId?: SortOrder
+    fournisseurId?: SortOrder
+    notesClient?: SortOrder
+    dateLivraisonEffective?: SortOrder
+    adresseLivraison?: SortOrder
+    enregistreParId?: SortOrder
+    statut?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CommandeMinOrderByAggregateInput = {
+    id?: SortOrder
+    numeroCommande?: SortOrder
+    clientId?: SortOrder
+    nom?: SortOrder
+    tel?: SortOrder
+    adresseId?: SortOrder
+    contactId?: SortOrder
+    fournisseurId?: SortOrder
+    notesClient?: SortOrder
+    dateLivraisonEffective?: SortOrder
+    adresseLivraison?: SortOrder
+    enregistreParId?: SortOrder
+    statut?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CommandeSumOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    adresseId?: SortOrder
+    contactId?: SortOrder
+    fournisseurId?: SortOrder
+    enregistreParId?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type EnumStatutCommandeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutCommande | EnumStatutCommandeFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutCommande[] | ListEnumStatutCommandeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutCommande[] | ListEnumStatutCommandeFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutCommandeWithAggregatesFilter<$PrismaModel> | $Enums.StatutCommande
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatutCommandeFilter<$PrismaModel>
+    _max?: NestedEnumStatutCommandeFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -21432,6 +25564,20 @@ export namespace Prisma {
     connect?: PanierWhereUniqueInput | PanierWhereUniqueInput[]
   }
 
+  export type ReservationCreateNestedManyWithoutUtilisateurInput = {
+    create?: XOR<ReservationCreateWithoutUtilisateurInput, ReservationUncheckedCreateWithoutUtilisateurInput> | ReservationCreateWithoutUtilisateurInput[] | ReservationUncheckedCreateWithoutUtilisateurInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutUtilisateurInput | ReservationCreateOrConnectWithoutUtilisateurInput[]
+    createMany?: ReservationCreateManyUtilisateurInputEnvelope
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  }
+
+  export type CommandeCreateNestedManyWithoutClientInput = {
+    create?: XOR<CommandeCreateWithoutClientInput, CommandeUncheckedCreateWithoutClientInput> | CommandeCreateWithoutClientInput[] | CommandeUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutClientInput | CommandeCreateOrConnectWithoutClientInput[]
+    createMany?: CommandeCreateManyClientInputEnvelope
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+  }
+
   export type AdresseUncheckedCreateNestedManyWithoutUtilisateurInput = {
     create?: XOR<AdresseCreateWithoutUtilisateurInput, AdresseUncheckedCreateWithoutUtilisateurInput> | AdresseCreateWithoutUtilisateurInput[] | AdresseUncheckedCreateWithoutUtilisateurInput[]
     connectOrCreate?: AdresseCreateOrConnectWithoutUtilisateurInput | AdresseCreateOrConnectWithoutUtilisateurInput[]
@@ -21486,6 +25632,20 @@ export namespace Prisma {
     connectOrCreate?: PanierCreateOrConnectWithoutUtilisateurInput | PanierCreateOrConnectWithoutUtilisateurInput[]
     createMany?: PanierCreateManyUtilisateurInputEnvelope
     connect?: PanierWhereUniqueInput | PanierWhereUniqueInput[]
+  }
+
+  export type ReservationUncheckedCreateNestedManyWithoutUtilisateurInput = {
+    create?: XOR<ReservationCreateWithoutUtilisateurInput, ReservationUncheckedCreateWithoutUtilisateurInput> | ReservationCreateWithoutUtilisateurInput[] | ReservationUncheckedCreateWithoutUtilisateurInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutUtilisateurInput | ReservationCreateOrConnectWithoutUtilisateurInput[]
+    createMany?: ReservationCreateManyUtilisateurInputEnvelope
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  }
+
+  export type CommandeUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<CommandeCreateWithoutClientInput, CommandeUncheckedCreateWithoutClientInput> | CommandeCreateWithoutClientInput[] | CommandeUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutClientInput | CommandeCreateOrConnectWithoutClientInput[]
+    createMany?: CommandeCreateManyClientInputEnvelope
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
   }
 
   export type NullableEnumSexeFieldUpdateOperationsInput = {
@@ -21616,6 +25776,34 @@ export namespace Prisma {
     deleteMany?: PanierScalarWhereInput | PanierScalarWhereInput[]
   }
 
+  export type ReservationUpdateManyWithoutUtilisateurNestedInput = {
+    create?: XOR<ReservationCreateWithoutUtilisateurInput, ReservationUncheckedCreateWithoutUtilisateurInput> | ReservationCreateWithoutUtilisateurInput[] | ReservationUncheckedCreateWithoutUtilisateurInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutUtilisateurInput | ReservationCreateOrConnectWithoutUtilisateurInput[]
+    upsert?: ReservationUpsertWithWhereUniqueWithoutUtilisateurInput | ReservationUpsertWithWhereUniqueWithoutUtilisateurInput[]
+    createMany?: ReservationCreateManyUtilisateurInputEnvelope
+    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    update?: ReservationUpdateWithWhereUniqueWithoutUtilisateurInput | ReservationUpdateWithWhereUniqueWithoutUtilisateurInput[]
+    updateMany?: ReservationUpdateManyWithWhereWithoutUtilisateurInput | ReservationUpdateManyWithWhereWithoutUtilisateurInput[]
+    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  }
+
+  export type CommandeUpdateManyWithoutClientNestedInput = {
+    create?: XOR<CommandeCreateWithoutClientInput, CommandeUncheckedCreateWithoutClientInput> | CommandeCreateWithoutClientInput[] | CommandeUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutClientInput | CommandeCreateOrConnectWithoutClientInput[]
+    upsert?: CommandeUpsertWithWhereUniqueWithoutClientInput | CommandeUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: CommandeCreateManyClientInputEnvelope
+    set?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    disconnect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    delete?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    update?: CommandeUpdateWithWhereUniqueWithoutClientInput | CommandeUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: CommandeUpdateManyWithWhereWithoutClientInput | CommandeUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
+  }
+
   export type AdresseUncheckedUpdateManyWithoutUtilisateurNestedInput = {
     create?: XOR<AdresseCreateWithoutUtilisateurInput, AdresseUncheckedCreateWithoutUtilisateurInput> | AdresseCreateWithoutUtilisateurInput[] | AdresseUncheckedCreateWithoutUtilisateurInput[]
     connectOrCreate?: AdresseCreateOrConnectWithoutUtilisateurInput | AdresseCreateOrConnectWithoutUtilisateurInput[]
@@ -21728,6 +25916,34 @@ export namespace Prisma {
     deleteMany?: PanierScalarWhereInput | PanierScalarWhereInput[]
   }
 
+  export type ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput = {
+    create?: XOR<ReservationCreateWithoutUtilisateurInput, ReservationUncheckedCreateWithoutUtilisateurInput> | ReservationCreateWithoutUtilisateurInput[] | ReservationUncheckedCreateWithoutUtilisateurInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutUtilisateurInput | ReservationCreateOrConnectWithoutUtilisateurInput[]
+    upsert?: ReservationUpsertWithWhereUniqueWithoutUtilisateurInput | ReservationUpsertWithWhereUniqueWithoutUtilisateurInput[]
+    createMany?: ReservationCreateManyUtilisateurInputEnvelope
+    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    update?: ReservationUpdateWithWhereUniqueWithoutUtilisateurInput | ReservationUpdateWithWhereUniqueWithoutUtilisateurInput[]
+    updateMany?: ReservationUpdateManyWithWhereWithoutUtilisateurInput | ReservationUpdateManyWithWhereWithoutUtilisateurInput[]
+    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  }
+
+  export type CommandeUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<CommandeCreateWithoutClientInput, CommandeUncheckedCreateWithoutClientInput> | CommandeCreateWithoutClientInput[] | CommandeUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutClientInput | CommandeCreateOrConnectWithoutClientInput[]
+    upsert?: CommandeUpsertWithWhereUniqueWithoutClientInput | CommandeUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: CommandeCreateManyClientInputEnvelope
+    set?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    disconnect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    delete?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    update?: CommandeUpdateWithWhereUniqueWithoutClientInput | CommandeUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: CommandeUpdateManyWithWhereWithoutClientInput | CommandeUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
+  }
+
   export type UtilisateurCreateNestedOneWithoutAdresseInput = {
     create?: XOR<UtilisateurCreateWithoutAdresseInput, UtilisateurUncheckedCreateWithoutAdresseInput>
     connectOrCreate?: UtilisateurCreateOrConnectWithoutAdresseInput
@@ -21738,6 +25954,34 @@ export namespace Prisma {
     create?: XOR<FournisseurCreateWithoutAdresseInput, FournisseurUncheckedCreateWithoutAdresseInput>
     connectOrCreate?: FournisseurCreateOrConnectWithoutAdresseInput
     connect?: FournisseurWhereUniqueInput
+  }
+
+  export type ReservationCreateNestedManyWithoutAdresseInput = {
+    create?: XOR<ReservationCreateWithoutAdresseInput, ReservationUncheckedCreateWithoutAdresseInput> | ReservationCreateWithoutAdresseInput[] | ReservationUncheckedCreateWithoutAdresseInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutAdresseInput | ReservationCreateOrConnectWithoutAdresseInput[]
+    createMany?: ReservationCreateManyAdresseInputEnvelope
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  }
+
+  export type CommandeCreateNestedManyWithoutAdresseInput = {
+    create?: XOR<CommandeCreateWithoutAdresseInput, CommandeUncheckedCreateWithoutAdresseInput> | CommandeCreateWithoutAdresseInput[] | CommandeUncheckedCreateWithoutAdresseInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutAdresseInput | CommandeCreateOrConnectWithoutAdresseInput[]
+    createMany?: CommandeCreateManyAdresseInputEnvelope
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+  }
+
+  export type ReservationUncheckedCreateNestedManyWithoutAdresseInput = {
+    create?: XOR<ReservationCreateWithoutAdresseInput, ReservationUncheckedCreateWithoutAdresseInput> | ReservationCreateWithoutAdresseInput[] | ReservationUncheckedCreateWithoutAdresseInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutAdresseInput | ReservationCreateOrConnectWithoutAdresseInput[]
+    createMany?: ReservationCreateManyAdresseInputEnvelope
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  }
+
+  export type CommandeUncheckedCreateNestedManyWithoutAdresseInput = {
+    create?: XOR<CommandeCreateWithoutAdresseInput, CommandeUncheckedCreateWithoutAdresseInput> | CommandeCreateWithoutAdresseInput[] | CommandeUncheckedCreateWithoutAdresseInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutAdresseInput | CommandeCreateOrConnectWithoutAdresseInput[]
+    createMany?: CommandeCreateManyAdresseInputEnvelope
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
   }
 
   export type UtilisateurUpdateOneWithoutAdresseNestedInput = {
@@ -21760,12 +26004,68 @@ export namespace Prisma {
     update?: XOR<XOR<FournisseurUpdateToOneWithWhereWithoutAdresseInput, FournisseurUpdateWithoutAdresseInput>, FournisseurUncheckedUpdateWithoutAdresseInput>
   }
 
+  export type ReservationUpdateManyWithoutAdresseNestedInput = {
+    create?: XOR<ReservationCreateWithoutAdresseInput, ReservationUncheckedCreateWithoutAdresseInput> | ReservationCreateWithoutAdresseInput[] | ReservationUncheckedCreateWithoutAdresseInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutAdresseInput | ReservationCreateOrConnectWithoutAdresseInput[]
+    upsert?: ReservationUpsertWithWhereUniqueWithoutAdresseInput | ReservationUpsertWithWhereUniqueWithoutAdresseInput[]
+    createMany?: ReservationCreateManyAdresseInputEnvelope
+    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    update?: ReservationUpdateWithWhereUniqueWithoutAdresseInput | ReservationUpdateWithWhereUniqueWithoutAdresseInput[]
+    updateMany?: ReservationUpdateManyWithWhereWithoutAdresseInput | ReservationUpdateManyWithWhereWithoutAdresseInput[]
+    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  }
+
+  export type CommandeUpdateManyWithoutAdresseNestedInput = {
+    create?: XOR<CommandeCreateWithoutAdresseInput, CommandeUncheckedCreateWithoutAdresseInput> | CommandeCreateWithoutAdresseInput[] | CommandeUncheckedCreateWithoutAdresseInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutAdresseInput | CommandeCreateOrConnectWithoutAdresseInput[]
+    upsert?: CommandeUpsertWithWhereUniqueWithoutAdresseInput | CommandeUpsertWithWhereUniqueWithoutAdresseInput[]
+    createMany?: CommandeCreateManyAdresseInputEnvelope
+    set?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    disconnect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    delete?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    update?: CommandeUpdateWithWhereUniqueWithoutAdresseInput | CommandeUpdateWithWhereUniqueWithoutAdresseInput[]
+    updateMany?: CommandeUpdateManyWithWhereWithoutAdresseInput | CommandeUpdateManyWithWhereWithoutAdresseInput[]
+    deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type ReservationUncheckedUpdateManyWithoutAdresseNestedInput = {
+    create?: XOR<ReservationCreateWithoutAdresseInput, ReservationUncheckedCreateWithoutAdresseInput> | ReservationCreateWithoutAdresseInput[] | ReservationUncheckedCreateWithoutAdresseInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutAdresseInput | ReservationCreateOrConnectWithoutAdresseInput[]
+    upsert?: ReservationUpsertWithWhereUniqueWithoutAdresseInput | ReservationUpsertWithWhereUniqueWithoutAdresseInput[]
+    createMany?: ReservationCreateManyAdresseInputEnvelope
+    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    update?: ReservationUpdateWithWhereUniqueWithoutAdresseInput | ReservationUpdateWithWhereUniqueWithoutAdresseInput[]
+    updateMany?: ReservationUpdateManyWithWhereWithoutAdresseInput | ReservationUpdateManyWithWhereWithoutAdresseInput[]
+    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  }
+
+  export type CommandeUncheckedUpdateManyWithoutAdresseNestedInput = {
+    create?: XOR<CommandeCreateWithoutAdresseInput, CommandeUncheckedCreateWithoutAdresseInput> | CommandeCreateWithoutAdresseInput[] | CommandeUncheckedCreateWithoutAdresseInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutAdresseInput | CommandeCreateOrConnectWithoutAdresseInput[]
+    upsert?: CommandeUpsertWithWhereUniqueWithoutAdresseInput | CommandeUpsertWithWhereUniqueWithoutAdresseInput[]
+    createMany?: CommandeCreateManyAdresseInputEnvelope
+    set?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    disconnect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    delete?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    update?: CommandeUpdateWithWhereUniqueWithoutAdresseInput | CommandeUpdateWithWhereUniqueWithoutAdresseInput[]
+    updateMany?: CommandeUpdateManyWithWhereWithoutAdresseInput | CommandeUpdateManyWithWhereWithoutAdresseInput[]
+    deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
   }
 
   export type UtilisateurCreateNestedOneWithoutContactInput = {
@@ -21778,6 +26078,34 @@ export namespace Prisma {
     create?: XOR<FournisseurCreateWithoutContactInput, FournisseurUncheckedCreateWithoutContactInput>
     connectOrCreate?: FournisseurCreateOrConnectWithoutContactInput
     connect?: FournisseurWhereUniqueInput
+  }
+
+  export type ReservationCreateNestedManyWithoutContactInput = {
+    create?: XOR<ReservationCreateWithoutContactInput, ReservationUncheckedCreateWithoutContactInput> | ReservationCreateWithoutContactInput[] | ReservationUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutContactInput | ReservationCreateOrConnectWithoutContactInput[]
+    createMany?: ReservationCreateManyContactInputEnvelope
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  }
+
+  export type CommandeCreateNestedManyWithoutContactInput = {
+    create?: XOR<CommandeCreateWithoutContactInput, CommandeUncheckedCreateWithoutContactInput> | CommandeCreateWithoutContactInput[] | CommandeUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutContactInput | CommandeCreateOrConnectWithoutContactInput[]
+    createMany?: CommandeCreateManyContactInputEnvelope
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+  }
+
+  export type ReservationUncheckedCreateNestedManyWithoutContactInput = {
+    create?: XOR<ReservationCreateWithoutContactInput, ReservationUncheckedCreateWithoutContactInput> | ReservationCreateWithoutContactInput[] | ReservationUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutContactInput | ReservationCreateOrConnectWithoutContactInput[]
+    createMany?: ReservationCreateManyContactInputEnvelope
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  }
+
+  export type CommandeUncheckedCreateNestedManyWithoutContactInput = {
+    create?: XOR<CommandeCreateWithoutContactInput, CommandeUncheckedCreateWithoutContactInput> | CommandeCreateWithoutContactInput[] | CommandeUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutContactInput | CommandeCreateOrConnectWithoutContactInput[]
+    createMany?: CommandeCreateManyContactInputEnvelope
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
   }
 
   export type UtilisateurUpdateOneWithoutContactNestedInput = {
@@ -21798,6 +26126,62 @@ export namespace Prisma {
     delete?: FournisseurWhereInput | boolean
     connect?: FournisseurWhereUniqueInput
     update?: XOR<XOR<FournisseurUpdateToOneWithWhereWithoutContactInput, FournisseurUpdateWithoutContactInput>, FournisseurUncheckedUpdateWithoutContactInput>
+  }
+
+  export type ReservationUpdateManyWithoutContactNestedInput = {
+    create?: XOR<ReservationCreateWithoutContactInput, ReservationUncheckedCreateWithoutContactInput> | ReservationCreateWithoutContactInput[] | ReservationUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutContactInput | ReservationCreateOrConnectWithoutContactInput[]
+    upsert?: ReservationUpsertWithWhereUniqueWithoutContactInput | ReservationUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: ReservationCreateManyContactInputEnvelope
+    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    update?: ReservationUpdateWithWhereUniqueWithoutContactInput | ReservationUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: ReservationUpdateManyWithWhereWithoutContactInput | ReservationUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  }
+
+  export type CommandeUpdateManyWithoutContactNestedInput = {
+    create?: XOR<CommandeCreateWithoutContactInput, CommandeUncheckedCreateWithoutContactInput> | CommandeCreateWithoutContactInput[] | CommandeUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutContactInput | CommandeCreateOrConnectWithoutContactInput[]
+    upsert?: CommandeUpsertWithWhereUniqueWithoutContactInput | CommandeUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: CommandeCreateManyContactInputEnvelope
+    set?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    disconnect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    delete?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    update?: CommandeUpdateWithWhereUniqueWithoutContactInput | CommandeUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: CommandeUpdateManyWithWhereWithoutContactInput | CommandeUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
+  }
+
+  export type ReservationUncheckedUpdateManyWithoutContactNestedInput = {
+    create?: XOR<ReservationCreateWithoutContactInput, ReservationUncheckedCreateWithoutContactInput> | ReservationCreateWithoutContactInput[] | ReservationUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutContactInput | ReservationCreateOrConnectWithoutContactInput[]
+    upsert?: ReservationUpsertWithWhereUniqueWithoutContactInput | ReservationUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: ReservationCreateManyContactInputEnvelope
+    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    update?: ReservationUpdateWithWhereUniqueWithoutContactInput | ReservationUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: ReservationUpdateManyWithWhereWithoutContactInput | ReservationUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  }
+
+  export type CommandeUncheckedUpdateManyWithoutContactNestedInput = {
+    create?: XOR<CommandeCreateWithoutContactInput, CommandeUncheckedCreateWithoutContactInput> | CommandeCreateWithoutContactInput[] | CommandeUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutContactInput | CommandeCreateOrConnectWithoutContactInput[]
+    upsert?: CommandeUpsertWithWhereUniqueWithoutContactInput | CommandeUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: CommandeCreateManyContactInputEnvelope
+    set?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    disconnect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    delete?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    update?: CommandeUpdateWithWhereUniqueWithoutContactInput | CommandeUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: CommandeUpdateManyWithWhereWithoutContactInput | CommandeUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
   }
 
   export type VenteCreateNestedManyWithoutFournisseurInput = {
@@ -21828,6 +26212,20 @@ export namespace Prisma {
     connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
   }
 
+  export type ReservationCreateNestedManyWithoutFournisseurInput = {
+    create?: XOR<ReservationCreateWithoutFournisseurInput, ReservationUncheckedCreateWithoutFournisseurInput> | ReservationCreateWithoutFournisseurInput[] | ReservationUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutFournisseurInput | ReservationCreateOrConnectWithoutFournisseurInput[]
+    createMany?: ReservationCreateManyFournisseurInputEnvelope
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  }
+
+  export type CommandeCreateNestedManyWithoutFournisseurInput = {
+    create?: XOR<CommandeCreateWithoutFournisseurInput, CommandeUncheckedCreateWithoutFournisseurInput> | CommandeCreateWithoutFournisseurInput[] | CommandeUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutFournisseurInput | CommandeCreateOrConnectWithoutFournisseurInput[]
+    createMany?: CommandeCreateManyFournisseurInputEnvelope
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+  }
+
   export type VenteUncheckedCreateNestedManyWithoutFournisseurInput = {
     create?: XOR<VenteCreateWithoutFournisseurInput, VenteUncheckedCreateWithoutFournisseurInput> | VenteCreateWithoutFournisseurInput[] | VenteUncheckedCreateWithoutFournisseurInput[]
     connectOrCreate?: VenteCreateOrConnectWithoutFournisseurInput | VenteCreateOrConnectWithoutFournisseurInput[]
@@ -21854,6 +26252,20 @@ export namespace Prisma {
     connectOrCreate?: ContactCreateOrConnectWithoutFournisseurInput | ContactCreateOrConnectWithoutFournisseurInput[]
     createMany?: ContactCreateManyFournisseurInputEnvelope
     connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
+  }
+
+  export type ReservationUncheckedCreateNestedManyWithoutFournisseurInput = {
+    create?: XOR<ReservationCreateWithoutFournisseurInput, ReservationUncheckedCreateWithoutFournisseurInput> | ReservationCreateWithoutFournisseurInput[] | ReservationUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutFournisseurInput | ReservationCreateOrConnectWithoutFournisseurInput[]
+    createMany?: ReservationCreateManyFournisseurInputEnvelope
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  }
+
+  export type CommandeUncheckedCreateNestedManyWithoutFournisseurInput = {
+    create?: XOR<CommandeCreateWithoutFournisseurInput, CommandeUncheckedCreateWithoutFournisseurInput> | CommandeCreateWithoutFournisseurInput[] | CommandeUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutFournisseurInput | CommandeCreateOrConnectWithoutFournisseurInput[]
+    createMany?: CommandeCreateManyFournisseurInputEnvelope
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
   }
 
   export type VenteUpdateManyWithoutFournisseurNestedInput = {
@@ -21912,6 +26324,34 @@ export namespace Prisma {
     deleteMany?: ContactScalarWhereInput | ContactScalarWhereInput[]
   }
 
+  export type ReservationUpdateManyWithoutFournisseurNestedInput = {
+    create?: XOR<ReservationCreateWithoutFournisseurInput, ReservationUncheckedCreateWithoutFournisseurInput> | ReservationCreateWithoutFournisseurInput[] | ReservationUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutFournisseurInput | ReservationCreateOrConnectWithoutFournisseurInput[]
+    upsert?: ReservationUpsertWithWhereUniqueWithoutFournisseurInput | ReservationUpsertWithWhereUniqueWithoutFournisseurInput[]
+    createMany?: ReservationCreateManyFournisseurInputEnvelope
+    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    update?: ReservationUpdateWithWhereUniqueWithoutFournisseurInput | ReservationUpdateWithWhereUniqueWithoutFournisseurInput[]
+    updateMany?: ReservationUpdateManyWithWhereWithoutFournisseurInput | ReservationUpdateManyWithWhereWithoutFournisseurInput[]
+    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  }
+
+  export type CommandeUpdateManyWithoutFournisseurNestedInput = {
+    create?: XOR<CommandeCreateWithoutFournisseurInput, CommandeUncheckedCreateWithoutFournisseurInput> | CommandeCreateWithoutFournisseurInput[] | CommandeUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutFournisseurInput | CommandeCreateOrConnectWithoutFournisseurInput[]
+    upsert?: CommandeUpsertWithWhereUniqueWithoutFournisseurInput | CommandeUpsertWithWhereUniqueWithoutFournisseurInput[]
+    createMany?: CommandeCreateManyFournisseurInputEnvelope
+    set?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    disconnect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    delete?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    update?: CommandeUpdateWithWhereUniqueWithoutFournisseurInput | CommandeUpdateWithWhereUniqueWithoutFournisseurInput[]
+    updateMany?: CommandeUpdateManyWithWhereWithoutFournisseurInput | CommandeUpdateManyWithWhereWithoutFournisseurInput[]
+    deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
+  }
+
   export type VenteUncheckedUpdateManyWithoutFournisseurNestedInput = {
     create?: XOR<VenteCreateWithoutFournisseurInput, VenteUncheckedCreateWithoutFournisseurInput> | VenteCreateWithoutFournisseurInput[] | VenteUncheckedCreateWithoutFournisseurInput[]
     connectOrCreate?: VenteCreateOrConnectWithoutFournisseurInput | VenteCreateOrConnectWithoutFournisseurInput[]
@@ -21966,6 +26406,34 @@ export namespace Prisma {
     update?: ContactUpdateWithWhereUniqueWithoutFournisseurInput | ContactUpdateWithWhereUniqueWithoutFournisseurInput[]
     updateMany?: ContactUpdateManyWithWhereWithoutFournisseurInput | ContactUpdateManyWithWhereWithoutFournisseurInput[]
     deleteMany?: ContactScalarWhereInput | ContactScalarWhereInput[]
+  }
+
+  export type ReservationUncheckedUpdateManyWithoutFournisseurNestedInput = {
+    create?: XOR<ReservationCreateWithoutFournisseurInput, ReservationUncheckedCreateWithoutFournisseurInput> | ReservationCreateWithoutFournisseurInput[] | ReservationUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutFournisseurInput | ReservationCreateOrConnectWithoutFournisseurInput[]
+    upsert?: ReservationUpsertWithWhereUniqueWithoutFournisseurInput | ReservationUpsertWithWhereUniqueWithoutFournisseurInput[]
+    createMany?: ReservationCreateManyFournisseurInputEnvelope
+    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    update?: ReservationUpdateWithWhereUniqueWithoutFournisseurInput | ReservationUpdateWithWhereUniqueWithoutFournisseurInput[]
+    updateMany?: ReservationUpdateManyWithWhereWithoutFournisseurInput | ReservationUpdateManyWithWhereWithoutFournisseurInput[]
+    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  }
+
+  export type CommandeUncheckedUpdateManyWithoutFournisseurNestedInput = {
+    create?: XOR<CommandeCreateWithoutFournisseurInput, CommandeUncheckedCreateWithoutFournisseurInput> | CommandeCreateWithoutFournisseurInput[] | CommandeUncheckedCreateWithoutFournisseurInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutFournisseurInput | CommandeCreateOrConnectWithoutFournisseurInput[]
+    upsert?: CommandeUpsertWithWhereUniqueWithoutFournisseurInput | CommandeUpsertWithWhereUniqueWithoutFournisseurInput[]
+    createMany?: CommandeCreateManyFournisseurInputEnvelope
+    set?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    disconnect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    delete?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    update?: CommandeUpdateWithWhereUniqueWithoutFournisseurInput | CommandeUpdateWithWhereUniqueWithoutFournisseurInput[]
+    updateMany?: CommandeUpdateManyWithWhereWithoutFournisseurInput | CommandeUpdateManyWithWhereWithoutFournisseurInput[]
+    deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
   }
 
   export type UtilisateurCreateNestedOneWithoutTeneurInput = {
@@ -22409,6 +26877,13 @@ export namespace Prisma {
     connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
   }
 
+  export type ReservationCreateNestedManyWithoutPanierInput = {
+    create?: XOR<ReservationCreateWithoutPanierInput, ReservationUncheckedCreateWithoutPanierInput> | ReservationCreateWithoutPanierInput[] | ReservationUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutPanierInput | ReservationCreateOrConnectWithoutPanierInput[]
+    createMany?: ReservationCreateManyPanierInputEnvelope
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  }
+
   export type DetailPanierUncheckedCreateNestedManyWithoutPanierInput = {
     create?: XOR<DetailPanierCreateWithoutPanierInput, DetailPanierUncheckedCreateWithoutPanierInput> | DetailPanierCreateWithoutPanierInput[] | DetailPanierUncheckedCreateWithoutPanierInput[]
     connectOrCreate?: DetailPanierCreateOrConnectWithoutPanierInput | DetailPanierCreateOrConnectWithoutPanierInput[]
@@ -22428,6 +26903,13 @@ export namespace Prisma {
     connectOrCreate?: VenteCreateOrConnectWithoutPanierInput | VenteCreateOrConnectWithoutPanierInput[]
     createMany?: VenteCreateManyPanierInputEnvelope
     connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
+  }
+
+  export type ReservationUncheckedCreateNestedManyWithoutPanierInput = {
+    create?: XOR<ReservationCreateWithoutPanierInput, ReservationUncheckedCreateWithoutPanierInput> | ReservationCreateWithoutPanierInput[] | ReservationUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutPanierInput | ReservationCreateOrConnectWithoutPanierInput[]
+    createMany?: ReservationCreateManyPanierInputEnvelope
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
   }
 
   export type UtilisateurUpdateOneRequiredWithoutPanierNestedInput = {
@@ -22480,6 +26962,20 @@ export namespace Prisma {
     deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
   }
 
+  export type ReservationUpdateManyWithoutPanierNestedInput = {
+    create?: XOR<ReservationCreateWithoutPanierInput, ReservationUncheckedCreateWithoutPanierInput> | ReservationCreateWithoutPanierInput[] | ReservationUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutPanierInput | ReservationCreateOrConnectWithoutPanierInput[]
+    upsert?: ReservationUpsertWithWhereUniqueWithoutPanierInput | ReservationUpsertWithWhereUniqueWithoutPanierInput[]
+    createMany?: ReservationCreateManyPanierInputEnvelope
+    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    update?: ReservationUpdateWithWhereUniqueWithoutPanierInput | ReservationUpdateWithWhereUniqueWithoutPanierInput[]
+    updateMany?: ReservationUpdateManyWithWhereWithoutPanierInput | ReservationUpdateManyWithWhereWithoutPanierInput[]
+    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  }
+
   export type DetailPanierUncheckedUpdateManyWithoutPanierNestedInput = {
     create?: XOR<DetailPanierCreateWithoutPanierInput, DetailPanierUncheckedCreateWithoutPanierInput> | DetailPanierCreateWithoutPanierInput[] | DetailPanierUncheckedCreateWithoutPanierInput[]
     connectOrCreate?: DetailPanierCreateOrConnectWithoutPanierInput | DetailPanierCreateOrConnectWithoutPanierInput[]
@@ -22520,6 +27016,20 @@ export namespace Prisma {
     update?: VenteUpdateWithWhereUniqueWithoutPanierInput | VenteUpdateWithWhereUniqueWithoutPanierInput[]
     updateMany?: VenteUpdateManyWithWhereWithoutPanierInput | VenteUpdateManyWithWhereWithoutPanierInput[]
     deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
+  }
+
+  export type ReservationUncheckedUpdateManyWithoutPanierNestedInput = {
+    create?: XOR<ReservationCreateWithoutPanierInput, ReservationUncheckedCreateWithoutPanierInput> | ReservationCreateWithoutPanierInput[] | ReservationUncheckedCreateWithoutPanierInput[]
+    connectOrCreate?: ReservationCreateOrConnectWithoutPanierInput | ReservationCreateOrConnectWithoutPanierInput[]
+    upsert?: ReservationUpsertWithWhereUniqueWithoutPanierInput | ReservationUpsertWithWhereUniqueWithoutPanierInput[]
+    createMany?: ReservationCreateManyPanierInputEnvelope
+    set?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    disconnect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    delete?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+    update?: ReservationUpdateWithWhereUniqueWithoutPanierInput | ReservationUpdateWithWhereUniqueWithoutPanierInput[]
+    updateMany?: ReservationUpdateManyWithWhereWithoutPanierInput | ReservationUpdateManyWithWhereWithoutPanierInput[]
+    deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
   }
 
   export type ProduitCreateNestedOneWithoutDetailPanierInput = {
@@ -22608,6 +27118,160 @@ export namespace Prisma {
     upsert?: PaiementUpsertWithoutAchatInput
     connect?: PaiementWhereUniqueInput
     update?: XOR<XOR<PaiementUpdateToOneWithWhereWithoutAchatInput, PaiementUpdateWithoutAchatInput>, PaiementUncheckedUpdateWithoutAchatInput>
+  }
+
+  export type PanierCreateNestedOneWithoutReservationInput = {
+    create?: XOR<PanierCreateWithoutReservationInput, PanierUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: PanierCreateOrConnectWithoutReservationInput
+    connect?: PanierWhereUniqueInput
+  }
+
+  export type UtilisateurCreateNestedOneWithoutReservationInput = {
+    create?: XOR<UtilisateurCreateWithoutReservationInput, UtilisateurUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: UtilisateurCreateOrConnectWithoutReservationInput
+    connect?: UtilisateurWhereUniqueInput
+  }
+
+  export type FournisseurCreateNestedOneWithoutReservationInput = {
+    create?: XOR<FournisseurCreateWithoutReservationInput, FournisseurUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: FournisseurCreateOrConnectWithoutReservationInput
+    connect?: FournisseurWhereUniqueInput
+  }
+
+  export type AdresseCreateNestedOneWithoutReservationInput = {
+    create?: XOR<AdresseCreateWithoutReservationInput, AdresseUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: AdresseCreateOrConnectWithoutReservationInput
+    connect?: AdresseWhereUniqueInput
+  }
+
+  export type ContactCreateNestedOneWithoutReservationInput = {
+    create?: XOR<ContactCreateWithoutReservationInput, ContactUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: ContactCreateOrConnectWithoutReservationInput
+    connect?: ContactWhereUniqueInput
+  }
+
+  export type EnumStatutReservationFieldUpdateOperationsInput = {
+    set?: $Enums.StatutReservation
+  }
+
+  export type PanierUpdateOneRequiredWithoutReservationNestedInput = {
+    create?: XOR<PanierCreateWithoutReservationInput, PanierUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: PanierCreateOrConnectWithoutReservationInput
+    upsert?: PanierUpsertWithoutReservationInput
+    connect?: PanierWhereUniqueInput
+    update?: XOR<XOR<PanierUpdateToOneWithWhereWithoutReservationInput, PanierUpdateWithoutReservationInput>, PanierUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type UtilisateurUpdateOneWithoutReservationNestedInput = {
+    create?: XOR<UtilisateurCreateWithoutReservationInput, UtilisateurUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: UtilisateurCreateOrConnectWithoutReservationInput
+    upsert?: UtilisateurUpsertWithoutReservationInput
+    disconnect?: UtilisateurWhereInput | boolean
+    delete?: UtilisateurWhereInput | boolean
+    connect?: UtilisateurWhereUniqueInput
+    update?: XOR<XOR<UtilisateurUpdateToOneWithWhereWithoutReservationInput, UtilisateurUpdateWithoutReservationInput>, UtilisateurUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type FournisseurUpdateOneWithoutReservationNestedInput = {
+    create?: XOR<FournisseurCreateWithoutReservationInput, FournisseurUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: FournisseurCreateOrConnectWithoutReservationInput
+    upsert?: FournisseurUpsertWithoutReservationInput
+    disconnect?: FournisseurWhereInput | boolean
+    delete?: FournisseurWhereInput | boolean
+    connect?: FournisseurWhereUniqueInput
+    update?: XOR<XOR<FournisseurUpdateToOneWithWhereWithoutReservationInput, FournisseurUpdateWithoutReservationInput>, FournisseurUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type AdresseUpdateOneWithoutReservationNestedInput = {
+    create?: XOR<AdresseCreateWithoutReservationInput, AdresseUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: AdresseCreateOrConnectWithoutReservationInput
+    upsert?: AdresseUpsertWithoutReservationInput
+    disconnect?: AdresseWhereInput | boolean
+    delete?: AdresseWhereInput | boolean
+    connect?: AdresseWhereUniqueInput
+    update?: XOR<XOR<AdresseUpdateToOneWithWhereWithoutReservationInput, AdresseUpdateWithoutReservationInput>, AdresseUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type ContactUpdateOneWithoutReservationNestedInput = {
+    create?: XOR<ContactCreateWithoutReservationInput, ContactUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: ContactCreateOrConnectWithoutReservationInput
+    upsert?: ContactUpsertWithoutReservationInput
+    disconnect?: ContactWhereInput | boolean
+    delete?: ContactWhereInput | boolean
+    connect?: ContactWhereUniqueInput
+    update?: XOR<XOR<ContactUpdateToOneWithWhereWithoutReservationInput, ContactUpdateWithoutReservationInput>, ContactUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type UtilisateurCreateNestedOneWithoutCommandeInput = {
+    create?: XOR<UtilisateurCreateWithoutCommandeInput, UtilisateurUncheckedCreateWithoutCommandeInput>
+    connectOrCreate?: UtilisateurCreateOrConnectWithoutCommandeInput
+    connect?: UtilisateurWhereUniqueInput
+  }
+
+  export type FournisseurCreateNestedOneWithoutCommandeInput = {
+    create?: XOR<FournisseurCreateWithoutCommandeInput, FournisseurUncheckedCreateWithoutCommandeInput>
+    connectOrCreate?: FournisseurCreateOrConnectWithoutCommandeInput
+    connect?: FournisseurWhereUniqueInput
+  }
+
+  export type AdresseCreateNestedOneWithoutCommandeInput = {
+    create?: XOR<AdresseCreateWithoutCommandeInput, AdresseUncheckedCreateWithoutCommandeInput>
+    connectOrCreate?: AdresseCreateOrConnectWithoutCommandeInput
+    connect?: AdresseWhereUniqueInput
+  }
+
+  export type ContactCreateNestedOneWithoutCommandeInput = {
+    create?: XOR<ContactCreateWithoutCommandeInput, ContactUncheckedCreateWithoutCommandeInput>
+    connectOrCreate?: ContactCreateOrConnectWithoutCommandeInput
+    connect?: ContactWhereUniqueInput
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type EnumStatutCommandeFieldUpdateOperationsInput = {
+    set?: $Enums.StatutCommande
+  }
+
+  export type UtilisateurUpdateOneWithoutCommandeNestedInput = {
+    create?: XOR<UtilisateurCreateWithoutCommandeInput, UtilisateurUncheckedCreateWithoutCommandeInput>
+    connectOrCreate?: UtilisateurCreateOrConnectWithoutCommandeInput
+    upsert?: UtilisateurUpsertWithoutCommandeInput
+    disconnect?: UtilisateurWhereInput | boolean
+    delete?: UtilisateurWhereInput | boolean
+    connect?: UtilisateurWhereUniqueInput
+    update?: XOR<XOR<UtilisateurUpdateToOneWithWhereWithoutCommandeInput, UtilisateurUpdateWithoutCommandeInput>, UtilisateurUncheckedUpdateWithoutCommandeInput>
+  }
+
+  export type FournisseurUpdateOneWithoutCommandeNestedInput = {
+    create?: XOR<FournisseurCreateWithoutCommandeInput, FournisseurUncheckedCreateWithoutCommandeInput>
+    connectOrCreate?: FournisseurCreateOrConnectWithoutCommandeInput
+    upsert?: FournisseurUpsertWithoutCommandeInput
+    disconnect?: FournisseurWhereInput | boolean
+    delete?: FournisseurWhereInput | boolean
+    connect?: FournisseurWhereUniqueInput
+    update?: XOR<XOR<FournisseurUpdateToOneWithWhereWithoutCommandeInput, FournisseurUpdateWithoutCommandeInput>, FournisseurUncheckedUpdateWithoutCommandeInput>
+  }
+
+  export type AdresseUpdateOneWithoutCommandeNestedInput = {
+    create?: XOR<AdresseCreateWithoutCommandeInput, AdresseUncheckedCreateWithoutCommandeInput>
+    connectOrCreate?: AdresseCreateOrConnectWithoutCommandeInput
+    upsert?: AdresseUpsertWithoutCommandeInput
+    disconnect?: AdresseWhereInput | boolean
+    delete?: AdresseWhereInput | boolean
+    connect?: AdresseWhereUniqueInput
+    update?: XOR<XOR<AdresseUpdateToOneWithWhereWithoutCommandeInput, AdresseUpdateWithoutCommandeInput>, AdresseUncheckedUpdateWithoutCommandeInput>
+  }
+
+  export type ContactUpdateOneWithoutCommandeNestedInput = {
+    create?: XOR<ContactCreateWithoutCommandeInput, ContactUncheckedCreateWithoutCommandeInput>
+    connectOrCreate?: ContactCreateOrConnectWithoutCommandeInput
+    upsert?: ContactUpsertWithoutCommandeInput
+    disconnect?: ContactWhereInput | boolean
+    delete?: ContactWhereInput | boolean
+    connect?: ContactWhereUniqueInput
+    update?: XOR<XOR<ContactUpdateToOneWithWhereWithoutCommandeInput, ContactUpdateWithoutCommandeInput>, ContactUncheckedUpdateWithoutCommandeInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -22908,6 +27572,65 @@ export namespace Prisma {
     _max?: NestedEnumStatutAchatFilter<$PrismaModel>
   }
 
+  export type NestedEnumStatutReservationFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutReservation | EnumStatutReservationFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutReservation[] | ListEnumStatutReservationFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutReservation[] | ListEnumStatutReservationFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutReservationFilter<$PrismaModel> | $Enums.StatutReservation
+  }
+
+  export type NestedEnumStatutReservationWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutReservation | EnumStatutReservationFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutReservation[] | ListEnumStatutReservationFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutReservation[] | ListEnumStatutReservationFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutReservationWithAggregatesFilter<$PrismaModel> | $Enums.StatutReservation
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatutReservationFilter<$PrismaModel>
+    _max?: NestedEnumStatutReservationFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumStatutCommandeFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutCommande | EnumStatutCommandeFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutCommande[] | ListEnumStatutCommandeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutCommande[] | ListEnumStatutCommandeFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutCommandeFilter<$PrismaModel> | $Enums.StatutCommande
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatutCommandeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutCommande | EnumStatutCommandeFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutCommande[] | ListEnumStatutCommandeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatutCommande[] | ListEnumStatutCommandeFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatutCommandeWithAggregatesFilter<$PrismaModel> | $Enums.StatutCommande
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatutCommandeFilter<$PrismaModel>
+    _max?: NestedEnumStatutCommandeFilter<$PrismaModel>
+  }
+
   export type AdresseCreateWithoutUtilisateurInput = {
     ville: string
     commune: string
@@ -22915,6 +27638,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     fournisseur?: FournisseurCreateNestedOneWithoutAdresseInput
+    Reservation?: ReservationCreateNestedManyWithoutAdresseInput
+    Commande?: CommandeCreateNestedManyWithoutAdresseInput
   }
 
   export type AdresseUncheckedCreateWithoutUtilisateurInput = {
@@ -22925,6 +27650,8 @@ export namespace Prisma {
     fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutAdresseInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutAdresseInput
   }
 
   export type AdresseCreateOrConnectWithoutUtilisateurInput = {
@@ -22942,6 +27669,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     fournisseur?: FournisseurCreateNestedOneWithoutContactInput
+    Reservation?: ReservationCreateNestedManyWithoutContactInput
+    Commande?: CommandeCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutUtilisateurInput = {
@@ -22950,6 +27679,8 @@ export namespace Prisma {
     fournisseurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutContactInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutUtilisateurInput = {
@@ -23127,6 +27858,7 @@ export namespace Prisma {
     DetailPanier?: DetailPanierCreateNestedManyWithoutPanierInput
     Achat?: AchatCreateNestedManyWithoutPanierInput
     Vente?: VenteCreateNestedManyWithoutPanierInput
+    Reservation?: ReservationCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUncheckedCreateWithoutUtilisateurInput = {
@@ -23136,6 +27868,7 @@ export namespace Prisma {
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutPanierInput
     Achat?: AchatUncheckedCreateNestedManyWithoutPanierInput
     Vente?: VenteUncheckedCreateNestedManyWithoutPanierInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutPanierInput
   }
 
   export type PanierCreateOrConnectWithoutUtilisateurInput = {
@@ -23145,6 +27878,92 @@ export namespace Prisma {
 
   export type PanierCreateManyUtilisateurInputEnvelope = {
     data: PanierCreateManyUtilisateurInput | PanierCreateManyUtilisateurInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReservationCreateWithoutUtilisateurInput = {
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    nom?: string | null
+    tel?: string | null
+    enregistrerParId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    panier: PanierCreateNestedOneWithoutReservationInput
+    fournisseur?: FournisseurCreateNestedOneWithoutReservationInput
+    adresse?: AdresseCreateNestedOneWithoutReservationInput
+    contact?: ContactCreateNestedOneWithoutReservationInput
+  }
+
+  export type ReservationUncheckedCreateWithoutUtilisateurInput = {
+    id?: number
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    panierId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    enregistrerParId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReservationCreateOrConnectWithoutUtilisateurInput = {
+    where: ReservationWhereUniqueInput
+    create: XOR<ReservationCreateWithoutUtilisateurInput, ReservationUncheckedCreateWithoutUtilisateurInput>
+  }
+
+  export type ReservationCreateManyUtilisateurInputEnvelope = {
+    data: ReservationCreateManyUtilisateurInput | ReservationCreateManyUtilisateurInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommandeCreateWithoutClientInput = {
+    numeroCommande: string
+    nom?: string | null
+    tel?: string | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    fournisseur?: FournisseurCreateNestedOneWithoutCommandeInput
+    adresse?: AdresseCreateNestedOneWithoutCommandeInput
+    contact?: ContactCreateNestedOneWithoutCommandeInput
+  }
+
+  export type CommandeUncheckedCreateWithoutClientInput = {
+    id?: number
+    numeroCommande: string
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    fournisseurId?: number | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommandeCreateOrConnectWithoutClientInput = {
+    where: CommandeWhereUniqueInput
+    create: XOR<CommandeCreateWithoutClientInput, CommandeUncheckedCreateWithoutClientInput>
+  }
+
+  export type CommandeCreateManyClientInputEnvelope = {
+    data: CommandeCreateManyClientInput | CommandeCreateManyClientInput[]
     skipDuplicates?: boolean
   }
 
@@ -23385,6 +28204,80 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Panier"> | Date | string
   }
 
+  export type ReservationUpsertWithWhereUniqueWithoutUtilisateurInput = {
+    where: ReservationWhereUniqueInput
+    update: XOR<ReservationUpdateWithoutUtilisateurInput, ReservationUncheckedUpdateWithoutUtilisateurInput>
+    create: XOR<ReservationCreateWithoutUtilisateurInput, ReservationUncheckedCreateWithoutUtilisateurInput>
+  }
+
+  export type ReservationUpdateWithWhereUniqueWithoutUtilisateurInput = {
+    where: ReservationWhereUniqueInput
+    data: XOR<ReservationUpdateWithoutUtilisateurInput, ReservationUncheckedUpdateWithoutUtilisateurInput>
+  }
+
+  export type ReservationUpdateManyWithWhereWithoutUtilisateurInput = {
+    where: ReservationScalarWhereInput
+    data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyWithoutUtilisateurInput>
+  }
+
+  export type ReservationScalarWhereInput = {
+    AND?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+    OR?: ReservationScalarWhereInput[]
+    NOT?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+    id?: IntFilter<"Reservation"> | number
+    dateLivraisonSouhaitee?: DateTimeFilter<"Reservation"> | Date | string
+    adresseLivraison?: StringNullableFilter<"Reservation"> | string | null
+    statut?: EnumStatutReservationFilter<"Reservation"> | $Enums.StatutReservation
+    notesClient?: StringNullableFilter<"Reservation"> | string | null
+    clientId?: IntNullableFilter<"Reservation"> | number | null
+    panierId?: IntFilter<"Reservation"> | number
+    nom?: StringNullableFilter<"Reservation"> | string | null
+    tel?: StringNullableFilter<"Reservation"> | string | null
+    adresseId?: IntNullableFilter<"Reservation"> | number | null
+    contactId?: IntNullableFilter<"Reservation"> | number | null
+    enregistrerParId?: IntNullableFilter<"Reservation"> | number | null
+    fournisseurId?: IntNullableFilter<"Reservation"> | number | null
+    createdAt?: DateTimeFilter<"Reservation"> | Date | string
+    updatedAt?: DateTimeFilter<"Reservation"> | Date | string
+  }
+
+  export type CommandeUpsertWithWhereUniqueWithoutClientInput = {
+    where: CommandeWhereUniqueInput
+    update: XOR<CommandeUpdateWithoutClientInput, CommandeUncheckedUpdateWithoutClientInput>
+    create: XOR<CommandeCreateWithoutClientInput, CommandeUncheckedCreateWithoutClientInput>
+  }
+
+  export type CommandeUpdateWithWhereUniqueWithoutClientInput = {
+    where: CommandeWhereUniqueInput
+    data: XOR<CommandeUpdateWithoutClientInput, CommandeUncheckedUpdateWithoutClientInput>
+  }
+
+  export type CommandeUpdateManyWithWhereWithoutClientInput = {
+    where: CommandeScalarWhereInput
+    data: XOR<CommandeUpdateManyMutationInput, CommandeUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type CommandeScalarWhereInput = {
+    AND?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
+    OR?: CommandeScalarWhereInput[]
+    NOT?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
+    id?: IntFilter<"Commande"> | number
+    numeroCommande?: StringFilter<"Commande"> | string
+    clientId?: IntFilter<"Commande"> | number
+    nom?: StringNullableFilter<"Commande"> | string | null
+    tel?: StringNullableFilter<"Commande"> | string | null
+    adresseId?: IntNullableFilter<"Commande"> | number | null
+    contactId?: IntNullableFilter<"Commande"> | number | null
+    fournisseurId?: IntNullableFilter<"Commande"> | number | null
+    notesClient?: StringNullableFilter<"Commande"> | string | null
+    dateLivraisonEffective?: DateTimeNullableFilter<"Commande"> | Date | string | null
+    adresseLivraison?: StringNullableFilter<"Commande"> | string | null
+    enregistreParId?: IntNullableFilter<"Commande"> | number | null
+    statut?: EnumStatutCommandeFilter<"Commande"> | $Enums.StatutCommande
+    createdAt?: DateTimeFilter<"Commande"> | Date | string
+    updatedAt?: DateTimeFilter<"Commande"> | Date | string
+  }
+
   export type UtilisateurCreateWithoutAdresseInput = {
     email: string
     nom: string
@@ -23403,6 +28296,8 @@ export namespace Prisma {
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurUncheckedCreateWithoutAdresseInput = {
@@ -23424,6 +28319,8 @@ export namespace Prisma {
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurCreateOrConnectWithoutAdresseInput = {
@@ -23440,6 +28337,8 @@ export namespace Prisma {
     Vente?: VenteCreateNestedManyWithoutFournisseurInput
     Achat?: AchatCreateNestedManyWithoutFournisseurInput
     Contact?: ContactCreateNestedManyWithoutFournisseurInput
+    Reservation?: ReservationCreateNestedManyWithoutFournisseurInput
+    Commande?: CommandeCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUncheckedCreateWithoutAdresseInput = {
@@ -23452,11 +28351,99 @@ export namespace Prisma {
     Vente?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
     Achat?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
     Contact?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutFournisseurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurCreateOrConnectWithoutAdresseInput = {
     where: FournisseurWhereUniqueInput
     create: XOR<FournisseurCreateWithoutAdresseInput, FournisseurUncheckedCreateWithoutAdresseInput>
+  }
+
+  export type ReservationCreateWithoutAdresseInput = {
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    nom?: string | null
+    tel?: string | null
+    enregistrerParId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    panier: PanierCreateNestedOneWithoutReservationInput
+    utilisateur?: UtilisateurCreateNestedOneWithoutReservationInput
+    fournisseur?: FournisseurCreateNestedOneWithoutReservationInput
+    contact?: ContactCreateNestedOneWithoutReservationInput
+  }
+
+  export type ReservationUncheckedCreateWithoutAdresseInput = {
+    id?: number
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    clientId?: number | null
+    panierId: number
+    nom?: string | null
+    tel?: string | null
+    contactId?: number | null
+    enregistrerParId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReservationCreateOrConnectWithoutAdresseInput = {
+    where: ReservationWhereUniqueInput
+    create: XOR<ReservationCreateWithoutAdresseInput, ReservationUncheckedCreateWithoutAdresseInput>
+  }
+
+  export type ReservationCreateManyAdresseInputEnvelope = {
+    data: ReservationCreateManyAdresseInput | ReservationCreateManyAdresseInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommandeCreateWithoutAdresseInput = {
+    numeroCommande: string
+    nom?: string | null
+    tel?: string | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client?: UtilisateurCreateNestedOneWithoutCommandeInput
+    fournisseur?: FournisseurCreateNestedOneWithoutCommandeInput
+    contact?: ContactCreateNestedOneWithoutCommandeInput
+  }
+
+  export type CommandeUncheckedCreateWithoutAdresseInput = {
+    id?: number
+    numeroCommande: string
+    clientId: number
+    nom?: string | null
+    tel?: string | null
+    contactId?: number | null
+    fournisseurId?: number | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommandeCreateOrConnectWithoutAdresseInput = {
+    where: CommandeWhereUniqueInput
+    create: XOR<CommandeCreateWithoutAdresseInput, CommandeUncheckedCreateWithoutAdresseInput>
+  }
+
+  export type CommandeCreateManyAdresseInputEnvelope = {
+    data: CommandeCreateManyAdresseInput | CommandeCreateManyAdresseInput[]
+    skipDuplicates?: boolean
   }
 
   export type UtilisateurUpsertWithoutAdresseInput = {
@@ -23488,6 +28475,8 @@ export namespace Prisma {
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUpdateManyWithoutClientNestedInput
   }
 
   export type UtilisateurUncheckedUpdateWithoutAdresseInput = {
@@ -23509,6 +28498,8 @@ export namespace Prisma {
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type FournisseurUpsertWithoutAdresseInput = {
@@ -23531,6 +28522,8 @@ export namespace Prisma {
     Vente?: VenteUpdateManyWithoutFournisseurNestedInput
     Achat?: AchatUpdateManyWithoutFournisseurNestedInput
     Contact?: ContactUpdateManyWithoutFournisseurNestedInput
+    Reservation?: ReservationUpdateManyWithoutFournisseurNestedInput
+    Commande?: CommandeUpdateManyWithoutFournisseurNestedInput
   }
 
   export type FournisseurUncheckedUpdateWithoutAdresseInput = {
@@ -23543,6 +28536,40 @@ export namespace Prisma {
     Vente?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
     Achat?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
     Contact?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutFournisseurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
+  }
+
+  export type ReservationUpsertWithWhereUniqueWithoutAdresseInput = {
+    where: ReservationWhereUniqueInput
+    update: XOR<ReservationUpdateWithoutAdresseInput, ReservationUncheckedUpdateWithoutAdresseInput>
+    create: XOR<ReservationCreateWithoutAdresseInput, ReservationUncheckedCreateWithoutAdresseInput>
+  }
+
+  export type ReservationUpdateWithWhereUniqueWithoutAdresseInput = {
+    where: ReservationWhereUniqueInput
+    data: XOR<ReservationUpdateWithoutAdresseInput, ReservationUncheckedUpdateWithoutAdresseInput>
+  }
+
+  export type ReservationUpdateManyWithWhereWithoutAdresseInput = {
+    where: ReservationScalarWhereInput
+    data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyWithoutAdresseInput>
+  }
+
+  export type CommandeUpsertWithWhereUniqueWithoutAdresseInput = {
+    where: CommandeWhereUniqueInput
+    update: XOR<CommandeUpdateWithoutAdresseInput, CommandeUncheckedUpdateWithoutAdresseInput>
+    create: XOR<CommandeCreateWithoutAdresseInput, CommandeUncheckedCreateWithoutAdresseInput>
+  }
+
+  export type CommandeUpdateWithWhereUniqueWithoutAdresseInput = {
+    where: CommandeWhereUniqueInput
+    data: XOR<CommandeUpdateWithoutAdresseInput, CommandeUncheckedUpdateWithoutAdresseInput>
+  }
+
+  export type CommandeUpdateManyWithWhereWithoutAdresseInput = {
+    where: CommandeScalarWhereInput
+    data: XOR<CommandeUpdateManyMutationInput, CommandeUncheckedUpdateManyWithoutAdresseInput>
   }
 
   export type UtilisateurCreateWithoutContactInput = {
@@ -23563,6 +28590,8 @@ export namespace Prisma {
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurUncheckedCreateWithoutContactInput = {
@@ -23584,6 +28613,8 @@ export namespace Prisma {
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurCreateOrConnectWithoutContactInput = {
@@ -23600,6 +28631,8 @@ export namespace Prisma {
     Vente?: VenteCreateNestedManyWithoutFournisseurInput
     Achat?: AchatCreateNestedManyWithoutFournisseurInput
     Adresse?: AdresseCreateNestedManyWithoutFournisseurInput
+    Reservation?: ReservationCreateNestedManyWithoutFournisseurInput
+    Commande?: CommandeCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUncheckedCreateWithoutContactInput = {
@@ -23612,11 +28645,99 @@ export namespace Prisma {
     Vente?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
     Achat?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
     Adresse?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutFournisseurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurCreateOrConnectWithoutContactInput = {
     where: FournisseurWhereUniqueInput
     create: XOR<FournisseurCreateWithoutContactInput, FournisseurUncheckedCreateWithoutContactInput>
+  }
+
+  export type ReservationCreateWithoutContactInput = {
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    nom?: string | null
+    tel?: string | null
+    enregistrerParId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    panier: PanierCreateNestedOneWithoutReservationInput
+    utilisateur?: UtilisateurCreateNestedOneWithoutReservationInput
+    fournisseur?: FournisseurCreateNestedOneWithoutReservationInput
+    adresse?: AdresseCreateNestedOneWithoutReservationInput
+  }
+
+  export type ReservationUncheckedCreateWithoutContactInput = {
+    id?: number
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    clientId?: number | null
+    panierId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    enregistrerParId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReservationCreateOrConnectWithoutContactInput = {
+    where: ReservationWhereUniqueInput
+    create: XOR<ReservationCreateWithoutContactInput, ReservationUncheckedCreateWithoutContactInput>
+  }
+
+  export type ReservationCreateManyContactInputEnvelope = {
+    data: ReservationCreateManyContactInput | ReservationCreateManyContactInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommandeCreateWithoutContactInput = {
+    numeroCommande: string
+    nom?: string | null
+    tel?: string | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client?: UtilisateurCreateNestedOneWithoutCommandeInput
+    fournisseur?: FournisseurCreateNestedOneWithoutCommandeInput
+    adresse?: AdresseCreateNestedOneWithoutCommandeInput
+  }
+
+  export type CommandeUncheckedCreateWithoutContactInput = {
+    id?: number
+    numeroCommande: string
+    clientId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    fournisseurId?: number | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommandeCreateOrConnectWithoutContactInput = {
+    where: CommandeWhereUniqueInput
+    create: XOR<CommandeCreateWithoutContactInput, CommandeUncheckedCreateWithoutContactInput>
+  }
+
+  export type CommandeCreateManyContactInputEnvelope = {
+    data: CommandeCreateManyContactInput | CommandeCreateManyContactInput[]
+    skipDuplicates?: boolean
   }
 
   export type UtilisateurUpsertWithoutContactInput = {
@@ -23648,6 +28769,8 @@ export namespace Prisma {
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUpdateManyWithoutClientNestedInput
   }
 
   export type UtilisateurUncheckedUpdateWithoutContactInput = {
@@ -23669,6 +28792,8 @@ export namespace Prisma {
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type FournisseurUpsertWithoutContactInput = {
@@ -23691,6 +28816,8 @@ export namespace Prisma {
     Vente?: VenteUpdateManyWithoutFournisseurNestedInput
     Achat?: AchatUpdateManyWithoutFournisseurNestedInput
     Adresse?: AdresseUpdateManyWithoutFournisseurNestedInput
+    Reservation?: ReservationUpdateManyWithoutFournisseurNestedInput
+    Commande?: CommandeUpdateManyWithoutFournisseurNestedInput
   }
 
   export type FournisseurUncheckedUpdateWithoutContactInput = {
@@ -23703,6 +28830,40 @@ export namespace Prisma {
     Vente?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
     Achat?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
     Adresse?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutFournisseurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
+  }
+
+  export type ReservationUpsertWithWhereUniqueWithoutContactInput = {
+    where: ReservationWhereUniqueInput
+    update: XOR<ReservationUpdateWithoutContactInput, ReservationUncheckedUpdateWithoutContactInput>
+    create: XOR<ReservationCreateWithoutContactInput, ReservationUncheckedCreateWithoutContactInput>
+  }
+
+  export type ReservationUpdateWithWhereUniqueWithoutContactInput = {
+    where: ReservationWhereUniqueInput
+    data: XOR<ReservationUpdateWithoutContactInput, ReservationUncheckedUpdateWithoutContactInput>
+  }
+
+  export type ReservationUpdateManyWithWhereWithoutContactInput = {
+    where: ReservationScalarWhereInput
+    data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyWithoutContactInput>
+  }
+
+  export type CommandeUpsertWithWhereUniqueWithoutContactInput = {
+    where: CommandeWhereUniqueInput
+    update: XOR<CommandeUpdateWithoutContactInput, CommandeUncheckedUpdateWithoutContactInput>
+    create: XOR<CommandeCreateWithoutContactInput, CommandeUncheckedCreateWithoutContactInput>
+  }
+
+  export type CommandeUpdateWithWhereUniqueWithoutContactInput = {
+    where: CommandeWhereUniqueInput
+    data: XOR<CommandeUpdateWithoutContactInput, CommandeUncheckedUpdateWithoutContactInput>
+  }
+
+  export type CommandeUpdateManyWithWhereWithoutContactInput = {
+    where: CommandeScalarWhereInput
+    data: XOR<CommandeUpdateManyMutationInput, CommandeUncheckedUpdateManyWithoutContactInput>
   }
 
   export type VenteCreateWithoutFournisseurInput = {
@@ -23780,6 +28941,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     utilisateur?: UtilisateurCreateNestedOneWithoutAdresseInput
+    Reservation?: ReservationCreateNestedManyWithoutAdresseInput
+    Commande?: CommandeCreateNestedManyWithoutAdresseInput
   }
 
   export type AdresseUncheckedCreateWithoutFournisseurInput = {
@@ -23790,6 +28953,8 @@ export namespace Prisma {
     utilisateurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutAdresseInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutAdresseInput
   }
 
   export type AdresseCreateOrConnectWithoutFournisseurInput = {
@@ -23807,6 +28972,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     utilisateur?: UtilisateurCreateNestedOneWithoutContactInput
+    Reservation?: ReservationCreateNestedManyWithoutContactInput
+    Commande?: CommandeCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutFournisseurInput = {
@@ -23815,6 +28982,8 @@ export namespace Prisma {
     utilisateurId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutContactInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutFournisseurInput = {
@@ -23824,6 +28993,92 @@ export namespace Prisma {
 
   export type ContactCreateManyFournisseurInputEnvelope = {
     data: ContactCreateManyFournisseurInput | ContactCreateManyFournisseurInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReservationCreateWithoutFournisseurInput = {
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    nom?: string | null
+    tel?: string | null
+    enregistrerParId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    panier: PanierCreateNestedOneWithoutReservationInput
+    utilisateur?: UtilisateurCreateNestedOneWithoutReservationInput
+    adresse?: AdresseCreateNestedOneWithoutReservationInput
+    contact?: ContactCreateNestedOneWithoutReservationInput
+  }
+
+  export type ReservationUncheckedCreateWithoutFournisseurInput = {
+    id?: number
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    clientId?: number | null
+    panierId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    enregistrerParId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReservationCreateOrConnectWithoutFournisseurInput = {
+    where: ReservationWhereUniqueInput
+    create: XOR<ReservationCreateWithoutFournisseurInput, ReservationUncheckedCreateWithoutFournisseurInput>
+  }
+
+  export type ReservationCreateManyFournisseurInputEnvelope = {
+    data: ReservationCreateManyFournisseurInput | ReservationCreateManyFournisseurInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommandeCreateWithoutFournisseurInput = {
+    numeroCommande: string
+    nom?: string | null
+    tel?: string | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client?: UtilisateurCreateNestedOneWithoutCommandeInput
+    adresse?: AdresseCreateNestedOneWithoutCommandeInput
+    contact?: ContactCreateNestedOneWithoutCommandeInput
+  }
+
+  export type CommandeUncheckedCreateWithoutFournisseurInput = {
+    id?: number
+    numeroCommande: string
+    clientId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommandeCreateOrConnectWithoutFournisseurInput = {
+    where: CommandeWhereUniqueInput
+    create: XOR<CommandeCreateWithoutFournisseurInput, CommandeUncheckedCreateWithoutFournisseurInput>
+  }
+
+  export type CommandeCreateManyFournisseurInputEnvelope = {
+    data: CommandeCreateManyFournisseurInput | CommandeCreateManyFournisseurInput[]
     skipDuplicates?: boolean
   }
 
@@ -23891,6 +29146,38 @@ export namespace Prisma {
     data: XOR<ContactUpdateManyMutationInput, ContactUncheckedUpdateManyWithoutFournisseurInput>
   }
 
+  export type ReservationUpsertWithWhereUniqueWithoutFournisseurInput = {
+    where: ReservationWhereUniqueInput
+    update: XOR<ReservationUpdateWithoutFournisseurInput, ReservationUncheckedUpdateWithoutFournisseurInput>
+    create: XOR<ReservationCreateWithoutFournisseurInput, ReservationUncheckedCreateWithoutFournisseurInput>
+  }
+
+  export type ReservationUpdateWithWhereUniqueWithoutFournisseurInput = {
+    where: ReservationWhereUniqueInput
+    data: XOR<ReservationUpdateWithoutFournisseurInput, ReservationUncheckedUpdateWithoutFournisseurInput>
+  }
+
+  export type ReservationUpdateManyWithWhereWithoutFournisseurInput = {
+    where: ReservationScalarWhereInput
+    data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyWithoutFournisseurInput>
+  }
+
+  export type CommandeUpsertWithWhereUniqueWithoutFournisseurInput = {
+    where: CommandeWhereUniqueInput
+    update: XOR<CommandeUpdateWithoutFournisseurInput, CommandeUncheckedUpdateWithoutFournisseurInput>
+    create: XOR<CommandeCreateWithoutFournisseurInput, CommandeUncheckedCreateWithoutFournisseurInput>
+  }
+
+  export type CommandeUpdateWithWhereUniqueWithoutFournisseurInput = {
+    where: CommandeWhereUniqueInput
+    data: XOR<CommandeUpdateWithoutFournisseurInput, CommandeUncheckedUpdateWithoutFournisseurInput>
+  }
+
+  export type CommandeUpdateManyWithWhereWithoutFournisseurInput = {
+    where: CommandeScalarWhereInput
+    data: XOR<CommandeUpdateManyMutationInput, CommandeUncheckedUpdateManyWithoutFournisseurInput>
+  }
+
   export type UtilisateurCreateWithoutTeneurInput = {
     email: string
     nom: string
@@ -23909,6 +29196,8 @@ export namespace Prisma {
     Achat?: AchatCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurUncheckedCreateWithoutTeneurInput = {
@@ -23930,6 +29219,8 @@ export namespace Prisma {
     Achat?: AchatUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurCreateOrConnectWithoutTeneurInput = {
@@ -24001,6 +29292,8 @@ export namespace Prisma {
     Achat?: AchatUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUpdateManyWithoutClientNestedInput
   }
 
   export type UtilisateurUncheckedUpdateWithoutTeneurInput = {
@@ -24022,6 +29315,8 @@ export namespace Prisma {
     Achat?: AchatUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ProduitUpsertWithWhereUniqueWithoutTeneurInput = {
@@ -24058,6 +29353,8 @@ export namespace Prisma {
     Achat?: AchatCreateNestedManyWithoutUtilisateurInput
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurUncheckedCreateWithoutDeviseInput = {
@@ -24079,6 +29376,8 @@ export namespace Prisma {
     Achat?: AchatUncheckedCreateNestedManyWithoutUtilisateurInput
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurCreateOrConnectWithoutDeviseInput = {
@@ -24179,6 +29478,8 @@ export namespace Prisma {
     Achat?: AchatUpdateManyWithoutUtilisateurNestedInput
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUpdateManyWithoutClientNestedInput
   }
 
   export type UtilisateurUncheckedUpdateWithoutDeviseInput = {
@@ -24200,6 +29501,8 @@ export namespace Prisma {
     Achat?: AchatUncheckedUpdateManyWithoutUtilisateurNestedInput
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ProduitUpsertWithWhereUniqueWithoutDeviseInput = {
@@ -24310,6 +29613,8 @@ export namespace Prisma {
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurUncheckedCreateWithoutProduitInput = {
@@ -24331,6 +29636,8 @@ export namespace Prisma {
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurCreateOrConnectWithoutProduitInput = {
@@ -24454,6 +29761,8 @@ export namespace Prisma {
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUpdateManyWithoutClientNestedInput
   }
 
   export type UtilisateurUncheckedUpdateWithoutProduitInput = {
@@ -24475,6 +29784,8 @@ export namespace Prisma {
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type DetailPanierUpsertWithWhereUniqueWithoutProduitInput = {
@@ -24671,6 +29982,7 @@ export namespace Prisma {
     utilisateur: UtilisateurCreateNestedOneWithoutPanierInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutPanierInput
     Achat?: AchatCreateNestedManyWithoutPanierInput
+    Reservation?: ReservationCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUncheckedCreateWithoutVenteInput = {
@@ -24680,6 +29992,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutPanierInput
     Achat?: AchatUncheckedCreateNestedManyWithoutPanierInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutPanierInput
   }
 
   export type PanierCreateOrConnectWithoutVenteInput = {
@@ -24705,6 +30018,8 @@ export namespace Prisma {
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurUncheckedCreateWithoutVenteInput = {
@@ -24726,6 +30041,8 @@ export namespace Prisma {
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurCreateOrConnectWithoutVenteInput = {
@@ -24742,6 +30059,8 @@ export namespace Prisma {
     Achat?: AchatCreateNestedManyWithoutFournisseurInput
     Adresse?: AdresseCreateNestedManyWithoutFournisseurInput
     Contact?: ContactCreateNestedManyWithoutFournisseurInput
+    Reservation?: ReservationCreateNestedManyWithoutFournisseurInput
+    Commande?: CommandeCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUncheckedCreateWithoutVenteInput = {
@@ -24754,6 +30073,8 @@ export namespace Prisma {
     Achat?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
     Adresse?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     Contact?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutFournisseurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurCreateOrConnectWithoutVenteInput = {
@@ -24802,6 +30123,7 @@ export namespace Prisma {
     utilisateur?: UtilisateurUpdateOneRequiredWithoutPanierNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutPanierNestedInput
     Achat?: AchatUpdateManyWithoutPanierNestedInput
+    Reservation?: ReservationUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateWithoutVenteInput = {
@@ -24811,6 +30133,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutPanierNestedInput
     Achat?: AchatUncheckedUpdateManyWithoutPanierNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type UtilisateurUpsertWithoutVenteInput = {
@@ -24842,6 +30165,8 @@ export namespace Prisma {
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUpdateManyWithoutClientNestedInput
   }
 
   export type UtilisateurUncheckedUpdateWithoutVenteInput = {
@@ -24863,6 +30188,8 @@ export namespace Prisma {
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type FournisseurUpsertWithoutVenteInput = {
@@ -24885,6 +30212,8 @@ export namespace Prisma {
     Achat?: AchatUpdateManyWithoutFournisseurNestedInput
     Adresse?: AdresseUpdateManyWithoutFournisseurNestedInput
     Contact?: ContactUpdateManyWithoutFournisseurNestedInput
+    Reservation?: ReservationUpdateManyWithoutFournisseurNestedInput
+    Commande?: CommandeUpdateManyWithoutFournisseurNestedInput
   }
 
   export type FournisseurUncheckedUpdateWithoutVenteInput = {
@@ -24897,6 +30226,8 @@ export namespace Prisma {
     Achat?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
     Adresse?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     Contact?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutFournisseurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
   export type PaiementUpsertWithoutVenteInput = {
@@ -24947,6 +30278,8 @@ export namespace Prisma {
     Achat?: AchatCreateNestedManyWithoutUtilisateurInput
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurUncheckedCreateWithoutPanierInput = {
@@ -24968,6 +30301,8 @@ export namespace Prisma {
     Achat?: AchatUncheckedCreateNestedManyWithoutUtilisateurInput
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurCreateOrConnectWithoutPanierInput = {
@@ -25072,6 +30407,49 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ReservationCreateWithoutPanierInput = {
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    nom?: string | null
+    tel?: string | null
+    enregistrerParId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    utilisateur?: UtilisateurCreateNestedOneWithoutReservationInput
+    fournisseur?: FournisseurCreateNestedOneWithoutReservationInput
+    adresse?: AdresseCreateNestedOneWithoutReservationInput
+    contact?: ContactCreateNestedOneWithoutReservationInput
+  }
+
+  export type ReservationUncheckedCreateWithoutPanierInput = {
+    id?: number
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    clientId?: number | null
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    enregistrerParId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReservationCreateOrConnectWithoutPanierInput = {
+    where: ReservationWhereUniqueInput
+    create: XOR<ReservationCreateWithoutPanierInput, ReservationUncheckedCreateWithoutPanierInput>
+  }
+
+  export type ReservationCreateManyPanierInputEnvelope = {
+    data: ReservationCreateManyPanierInput | ReservationCreateManyPanierInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UtilisateurUpsertWithoutPanierInput = {
     update: XOR<UtilisateurUpdateWithoutPanierInput, UtilisateurUncheckedUpdateWithoutPanierInput>
     create: XOR<UtilisateurCreateWithoutPanierInput, UtilisateurUncheckedCreateWithoutPanierInput>
@@ -25101,6 +30479,8 @@ export namespace Prisma {
     Achat?: AchatUpdateManyWithoutUtilisateurNestedInput
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUpdateManyWithoutClientNestedInput
   }
 
   export type UtilisateurUncheckedUpdateWithoutPanierInput = {
@@ -25122,6 +30502,8 @@ export namespace Prisma {
     Achat?: AchatUncheckedUpdateManyWithoutUtilisateurNestedInput
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type DetailPanierUpsertWithWhereUniqueWithoutPanierInput = {
@@ -25172,6 +30554,22 @@ export namespace Prisma {
     data: XOR<VenteUpdateManyMutationInput, VenteUncheckedUpdateManyWithoutPanierInput>
   }
 
+  export type ReservationUpsertWithWhereUniqueWithoutPanierInput = {
+    where: ReservationWhereUniqueInput
+    update: XOR<ReservationUpdateWithoutPanierInput, ReservationUncheckedUpdateWithoutPanierInput>
+    create: XOR<ReservationCreateWithoutPanierInput, ReservationUncheckedCreateWithoutPanierInput>
+  }
+
+  export type ReservationUpdateWithWhereUniqueWithoutPanierInput = {
+    where: ReservationWhereUniqueInput
+    data: XOR<ReservationUpdateWithoutPanierInput, ReservationUncheckedUpdateWithoutPanierInput>
+  }
+
+  export type ReservationUpdateManyWithWhereWithoutPanierInput = {
+    where: ReservationScalarWhereInput
+    data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyWithoutPanierInput>
+  }
+
   export type ProduitCreateWithoutDetailPanierInput = {
     designation: string
     prix: number
@@ -25208,6 +30606,7 @@ export namespace Prisma {
     utilisateur: UtilisateurCreateNestedOneWithoutPanierInput
     Achat?: AchatCreateNestedManyWithoutPanierInput
     Vente?: VenteCreateNestedManyWithoutPanierInput
+    Reservation?: ReservationCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUncheckedCreateWithoutDetailPanierInput = {
@@ -25217,6 +30616,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     Achat?: AchatUncheckedCreateNestedManyWithoutPanierInput
     Vente?: VenteUncheckedCreateNestedManyWithoutPanierInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutPanierInput
   }
 
   export type PanierCreateOrConnectWithoutDetailPanierInput = {
@@ -25277,6 +30677,7 @@ export namespace Prisma {
     utilisateur?: UtilisateurUpdateOneRequiredWithoutPanierNestedInput
     Achat?: AchatUpdateManyWithoutPanierNestedInput
     Vente?: VenteUpdateManyWithoutPanierNestedInput
+    Reservation?: ReservationUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateWithoutDetailPanierInput = {
@@ -25286,6 +30687,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Achat?: AchatUncheckedUpdateManyWithoutPanierNestedInput
     Vente?: VenteUncheckedUpdateManyWithoutPanierNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierCreateWithoutAchatInput = {
@@ -25294,6 +30696,7 @@ export namespace Prisma {
     utilisateur: UtilisateurCreateNestedOneWithoutPanierInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutPanierInput
     Vente?: VenteCreateNestedManyWithoutPanierInput
+    Reservation?: ReservationCreateNestedManyWithoutPanierInput
   }
 
   export type PanierUncheckedCreateWithoutAchatInput = {
@@ -25303,6 +30706,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutPanierInput
     Vente?: VenteUncheckedCreateNestedManyWithoutPanierInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutPanierInput
   }
 
   export type PanierCreateOrConnectWithoutAchatInput = {
@@ -25319,6 +30723,8 @@ export namespace Prisma {
     Vente?: VenteCreateNestedManyWithoutFournisseurInput
     Adresse?: AdresseCreateNestedManyWithoutFournisseurInput
     Contact?: ContactCreateNestedManyWithoutFournisseurInput
+    Reservation?: ReservationCreateNestedManyWithoutFournisseurInput
+    Commande?: CommandeCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUncheckedCreateWithoutAchatInput = {
@@ -25331,6 +30737,8 @@ export namespace Prisma {
     Vente?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
     Adresse?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     Contact?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutFournisseurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurCreateOrConnectWithoutAchatInput = {
@@ -25356,6 +30764,8 @@ export namespace Prisma {
     Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurUncheckedCreateWithoutAchatInput = {
@@ -25377,6 +30787,8 @@ export namespace Prisma {
     Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
     Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type UtilisateurCreateOrConnectWithoutAchatInput = {
@@ -25425,6 +30837,7 @@ export namespace Prisma {
     utilisateur?: UtilisateurUpdateOneRequiredWithoutPanierNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutPanierNestedInput
     Vente?: VenteUpdateManyWithoutPanierNestedInput
+    Reservation?: ReservationUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateWithoutAchatInput = {
@@ -25434,6 +30847,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutPanierNestedInput
     Vente?: VenteUncheckedUpdateManyWithoutPanierNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type FournisseurUpsertWithoutAchatInput = {
@@ -25456,6 +30870,8 @@ export namespace Prisma {
     Vente?: VenteUpdateManyWithoutFournisseurNestedInput
     Adresse?: AdresseUpdateManyWithoutFournisseurNestedInput
     Contact?: ContactUpdateManyWithoutFournisseurNestedInput
+    Reservation?: ReservationUpdateManyWithoutFournisseurNestedInput
+    Commande?: CommandeUpdateManyWithoutFournisseurNestedInput
   }
 
   export type FournisseurUncheckedUpdateWithoutAchatInput = {
@@ -25468,6 +30884,8 @@ export namespace Prisma {
     Vente?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
     Adresse?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     Contact?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutFournisseurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
   export type UtilisateurUpsertWithoutAchatInput = {
@@ -25499,6 +30917,8 @@ export namespace Prisma {
     Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUpdateManyWithoutClientNestedInput
   }
 
   export type UtilisateurUncheckedUpdateWithoutAchatInput = {
@@ -25520,6 +30940,8 @@ export namespace Prisma {
     Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
     Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type PaiementUpsertWithoutAchatInput = {
@@ -25550,6 +30972,644 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Vente?: VenteUncheckedUpdateManyWithoutPaiementNestedInput
+  }
+
+  export type PanierCreateWithoutReservationInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    utilisateur: UtilisateurCreateNestedOneWithoutPanierInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutPanierInput
+    Achat?: AchatCreateNestedManyWithoutPanierInput
+    Vente?: VenteCreateNestedManyWithoutPanierInput
+  }
+
+  export type PanierUncheckedCreateWithoutReservationInput = {
+    id?: number
+    utilisateurId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutPanierInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutPanierInput
+    Vente?: VenteUncheckedCreateNestedManyWithoutPanierInput
+  }
+
+  export type PanierCreateOrConnectWithoutReservationInput = {
+    where: PanierWhereUniqueInput
+    create: XOR<PanierCreateWithoutReservationInput, PanierUncheckedCreateWithoutReservationInput>
+  }
+
+  export type UtilisateurCreateWithoutReservationInput = {
+    email: string
+    nom: string
+    postnom: string
+    nom_complet?: string | null
+    sexe?: $Enums.Sexe | null
+    role?: $Enums.Role
+    poste?: $Enums.Poste | null
+    picture?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Adresse?: AdresseCreateNestedManyWithoutUtilisateurInput
+    Contact?: ContactCreateNestedManyWithoutUtilisateurInput
+    Produit?: ProduitCreateNestedManyWithoutUtilisateurInput
+    Vente?: VenteCreateNestedManyWithoutUtilisateurInput
+    Achat?: AchatCreateNestedManyWithoutUtilisateurInput
+    Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
+    Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
+    Panier?: PanierCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeCreateNestedManyWithoutClientInput
+  }
+
+  export type UtilisateurUncheckedCreateWithoutReservationInput = {
+    id?: number
+    email: string
+    nom: string
+    postnom: string
+    nom_complet?: string | null
+    sexe?: $Enums.Sexe | null
+    role?: $Enums.Role
+    poste?: $Enums.Poste | null
+    picture?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Adresse?: AdresseUncheckedCreateNestedManyWithoutUtilisateurInput
+    Contact?: ContactUncheckedCreateNestedManyWithoutUtilisateurInput
+    Produit?: ProduitUncheckedCreateNestedManyWithoutUtilisateurInput
+    Vente?: VenteUncheckedCreateNestedManyWithoutUtilisateurInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutUtilisateurInput
+    Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
+    Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
+    Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type UtilisateurCreateOrConnectWithoutReservationInput = {
+    where: UtilisateurWhereUniqueInput
+    create: XOR<UtilisateurCreateWithoutReservationInput, UtilisateurUncheckedCreateWithoutReservationInput>
+  }
+
+  export type FournisseurCreateWithoutReservationInput = {
+    nom: string
+    email: string
+    code_postal?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Vente?: VenteCreateNestedManyWithoutFournisseurInput
+    Achat?: AchatCreateNestedManyWithoutFournisseurInput
+    Adresse?: AdresseCreateNestedManyWithoutFournisseurInput
+    Contact?: ContactCreateNestedManyWithoutFournisseurInput
+    Commande?: CommandeCreateNestedManyWithoutFournisseurInput
+  }
+
+  export type FournisseurUncheckedCreateWithoutReservationInput = {
+    id?: number
+    nom: string
+    email: string
+    code_postal?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Vente?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
+    Adresse?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
+    Contact?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
+    Commande?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
+  }
+
+  export type FournisseurCreateOrConnectWithoutReservationInput = {
+    where: FournisseurWhereUniqueInput
+    create: XOR<FournisseurCreateWithoutReservationInput, FournisseurUncheckedCreateWithoutReservationInput>
+  }
+
+  export type AdresseCreateWithoutReservationInput = {
+    ville: string
+    commune: string
+    adresse: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    utilisateur?: UtilisateurCreateNestedOneWithoutAdresseInput
+    fournisseur?: FournisseurCreateNestedOneWithoutAdresseInput
+    Commande?: CommandeCreateNestedManyWithoutAdresseInput
+  }
+
+  export type AdresseUncheckedCreateWithoutReservationInput = {
+    id?: number
+    ville: string
+    commune: string
+    adresse: string
+    utilisateurId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Commande?: CommandeUncheckedCreateNestedManyWithoutAdresseInput
+  }
+
+  export type AdresseCreateOrConnectWithoutReservationInput = {
+    where: AdresseWhereUniqueInput
+    create: XOR<AdresseCreateWithoutReservationInput, AdresseUncheckedCreateWithoutReservationInput>
+  }
+
+  export type ContactCreateWithoutReservationInput = {
+    tel: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    utilisateur?: UtilisateurCreateNestedOneWithoutContactInput
+    fournisseur?: FournisseurCreateNestedOneWithoutContactInput
+    Commande?: CommandeCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactUncheckedCreateWithoutReservationInput = {
+    id?: number
+    tel: string
+    utilisateurId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Commande?: CommandeUncheckedCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactCreateOrConnectWithoutReservationInput = {
+    where: ContactWhereUniqueInput
+    create: XOR<ContactCreateWithoutReservationInput, ContactUncheckedCreateWithoutReservationInput>
+  }
+
+  export type PanierUpsertWithoutReservationInput = {
+    update: XOR<PanierUpdateWithoutReservationInput, PanierUncheckedUpdateWithoutReservationInput>
+    create: XOR<PanierCreateWithoutReservationInput, PanierUncheckedCreateWithoutReservationInput>
+    where?: PanierWhereInput
+  }
+
+  export type PanierUpdateToOneWithWhereWithoutReservationInput = {
+    where?: PanierWhereInput
+    data: XOR<PanierUpdateWithoutReservationInput, PanierUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type PanierUpdateWithoutReservationInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateur?: UtilisateurUpdateOneRequiredWithoutPanierNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutPanierNestedInput
+    Achat?: AchatUpdateManyWithoutPanierNestedInput
+    Vente?: VenteUpdateManyWithoutPanierNestedInput
+  }
+
+  export type PanierUncheckedUpdateWithoutReservationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    utilisateurId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutPanierNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutPanierNestedInput
+    Vente?: VenteUncheckedUpdateManyWithoutPanierNestedInput
+  }
+
+  export type UtilisateurUpsertWithoutReservationInput = {
+    update: XOR<UtilisateurUpdateWithoutReservationInput, UtilisateurUncheckedUpdateWithoutReservationInput>
+    create: XOR<UtilisateurCreateWithoutReservationInput, UtilisateurUncheckedCreateWithoutReservationInput>
+    where?: UtilisateurWhereInput
+  }
+
+  export type UtilisateurUpdateToOneWithWhereWithoutReservationInput = {
+    where?: UtilisateurWhereInput
+    data: XOR<UtilisateurUpdateWithoutReservationInput, UtilisateurUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type UtilisateurUpdateWithoutReservationInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    postnom?: StringFieldUpdateOperationsInput | string
+    nom_complet?: NullableStringFieldUpdateOperationsInput | string | null
+    sexe?: NullableEnumSexeFieldUpdateOperationsInput | $Enums.Sexe | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    poste?: NullableEnumPosteFieldUpdateOperationsInput | $Enums.Poste | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Adresse?: AdresseUpdateManyWithoutUtilisateurNestedInput
+    Contact?: ContactUpdateManyWithoutUtilisateurNestedInput
+    Produit?: ProduitUpdateManyWithoutUtilisateurNestedInput
+    Vente?: VenteUpdateManyWithoutUtilisateurNestedInput
+    Achat?: AchatUpdateManyWithoutUtilisateurNestedInput
+    Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
+    Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
+    Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUpdateManyWithoutClientNestedInput
+  }
+
+  export type UtilisateurUncheckedUpdateWithoutReservationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    postnom?: StringFieldUpdateOperationsInput | string
+    nom_complet?: NullableStringFieldUpdateOperationsInput | string | null
+    sexe?: NullableEnumSexeFieldUpdateOperationsInput | $Enums.Sexe | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    poste?: NullableEnumPosteFieldUpdateOperationsInput | $Enums.Poste | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Adresse?: AdresseUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Contact?: ContactUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Produit?: ProduitUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Vente?: VenteUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type FournisseurUpsertWithoutReservationInput = {
+    update: XOR<FournisseurUpdateWithoutReservationInput, FournisseurUncheckedUpdateWithoutReservationInput>
+    create: XOR<FournisseurCreateWithoutReservationInput, FournisseurUncheckedCreateWithoutReservationInput>
+    where?: FournisseurWhereInput
+  }
+
+  export type FournisseurUpdateToOneWithWhereWithoutReservationInput = {
+    where?: FournisseurWhereInput
+    data: XOR<FournisseurUpdateWithoutReservationInput, FournisseurUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type FournisseurUpdateWithoutReservationInput = {
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Vente?: VenteUpdateManyWithoutFournisseurNestedInput
+    Achat?: AchatUpdateManyWithoutFournisseurNestedInput
+    Adresse?: AdresseUpdateManyWithoutFournisseurNestedInput
+    Contact?: ContactUpdateManyWithoutFournisseurNestedInput
+    Commande?: CommandeUpdateManyWithoutFournisseurNestedInput
+  }
+
+  export type FournisseurUncheckedUpdateWithoutReservationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Vente?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
+    Adresse?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
+    Contact?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
+  }
+
+  export type AdresseUpsertWithoutReservationInput = {
+    update: XOR<AdresseUpdateWithoutReservationInput, AdresseUncheckedUpdateWithoutReservationInput>
+    create: XOR<AdresseCreateWithoutReservationInput, AdresseUncheckedCreateWithoutReservationInput>
+    where?: AdresseWhereInput
+  }
+
+  export type AdresseUpdateToOneWithWhereWithoutReservationInput = {
+    where?: AdresseWhereInput
+    data: XOR<AdresseUpdateWithoutReservationInput, AdresseUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type AdresseUpdateWithoutReservationInput = {
+    ville?: StringFieldUpdateOperationsInput | string
+    commune?: StringFieldUpdateOperationsInput | string
+    adresse?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateur?: UtilisateurUpdateOneWithoutAdresseNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutAdresseNestedInput
+    Commande?: CommandeUpdateManyWithoutAdresseNestedInput
+  }
+
+  export type AdresseUncheckedUpdateWithoutReservationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ville?: StringFieldUpdateOperationsInput | string
+    commune?: StringFieldUpdateOperationsInput | string
+    adresse?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Commande?: CommandeUncheckedUpdateManyWithoutAdresseNestedInput
+  }
+
+  export type ContactUpsertWithoutReservationInput = {
+    update: XOR<ContactUpdateWithoutReservationInput, ContactUncheckedUpdateWithoutReservationInput>
+    create: XOR<ContactCreateWithoutReservationInput, ContactUncheckedCreateWithoutReservationInput>
+    where?: ContactWhereInput
+  }
+
+  export type ContactUpdateToOneWithWhereWithoutReservationInput = {
+    where?: ContactWhereInput
+    data: XOR<ContactUpdateWithoutReservationInput, ContactUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type ContactUpdateWithoutReservationInput = {
+    tel?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateur?: UtilisateurUpdateOneWithoutContactNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutContactNestedInput
+    Commande?: CommandeUpdateManyWithoutContactNestedInput
+  }
+
+  export type ContactUncheckedUpdateWithoutReservationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tel?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Commande?: CommandeUncheckedUpdateManyWithoutContactNestedInput
+  }
+
+  export type UtilisateurCreateWithoutCommandeInput = {
+    email: string
+    nom: string
+    postnom: string
+    nom_complet?: string | null
+    sexe?: $Enums.Sexe | null
+    role?: $Enums.Role
+    poste?: $Enums.Poste | null
+    picture?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Adresse?: AdresseCreateNestedManyWithoutUtilisateurInput
+    Contact?: ContactCreateNestedManyWithoutUtilisateurInput
+    Produit?: ProduitCreateNestedManyWithoutUtilisateurInput
+    Vente?: VenteCreateNestedManyWithoutUtilisateurInput
+    Achat?: AchatCreateNestedManyWithoutUtilisateurInput
+    Teneur?: TeneurCreateNestedManyWithoutUtilisateurInput
+    Devise?: DeviseCreateNestedManyWithoutUtilisateurInput
+    Panier?: PanierCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
+  }
+
+  export type UtilisateurUncheckedCreateWithoutCommandeInput = {
+    id?: number
+    email: string
+    nom: string
+    postnom: string
+    nom_complet?: string | null
+    sexe?: $Enums.Sexe | null
+    role?: $Enums.Role
+    poste?: $Enums.Poste | null
+    picture?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Adresse?: AdresseUncheckedCreateNestedManyWithoutUtilisateurInput
+    Contact?: ContactUncheckedCreateNestedManyWithoutUtilisateurInput
+    Produit?: ProduitUncheckedCreateNestedManyWithoutUtilisateurInput
+    Vente?: VenteUncheckedCreateNestedManyWithoutUtilisateurInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutUtilisateurInput
+    Teneur?: TeneurUncheckedCreateNestedManyWithoutUtilisateurInput
+    Devise?: DeviseUncheckedCreateNestedManyWithoutUtilisateurInput
+    Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
+  }
+
+  export type UtilisateurCreateOrConnectWithoutCommandeInput = {
+    where: UtilisateurWhereUniqueInput
+    create: XOR<UtilisateurCreateWithoutCommandeInput, UtilisateurUncheckedCreateWithoutCommandeInput>
+  }
+
+  export type FournisseurCreateWithoutCommandeInput = {
+    nom: string
+    email: string
+    code_postal?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Vente?: VenteCreateNestedManyWithoutFournisseurInput
+    Achat?: AchatCreateNestedManyWithoutFournisseurInput
+    Adresse?: AdresseCreateNestedManyWithoutFournisseurInput
+    Contact?: ContactCreateNestedManyWithoutFournisseurInput
+    Reservation?: ReservationCreateNestedManyWithoutFournisseurInput
+  }
+
+  export type FournisseurUncheckedCreateWithoutCommandeInput = {
+    id?: number
+    nom: string
+    email: string
+    code_postal?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Vente?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
+    Achat?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
+    Adresse?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
+    Contact?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutFournisseurInput
+  }
+
+  export type FournisseurCreateOrConnectWithoutCommandeInput = {
+    where: FournisseurWhereUniqueInput
+    create: XOR<FournisseurCreateWithoutCommandeInput, FournisseurUncheckedCreateWithoutCommandeInput>
+  }
+
+  export type AdresseCreateWithoutCommandeInput = {
+    ville: string
+    commune: string
+    adresse: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    utilisateur?: UtilisateurCreateNestedOneWithoutAdresseInput
+    fournisseur?: FournisseurCreateNestedOneWithoutAdresseInput
+    Reservation?: ReservationCreateNestedManyWithoutAdresseInput
+  }
+
+  export type AdresseUncheckedCreateWithoutCommandeInput = {
+    id?: number
+    ville: string
+    commune: string
+    adresse: string
+    utilisateurId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutAdresseInput
+  }
+
+  export type AdresseCreateOrConnectWithoutCommandeInput = {
+    where: AdresseWhereUniqueInput
+    create: XOR<AdresseCreateWithoutCommandeInput, AdresseUncheckedCreateWithoutCommandeInput>
+  }
+
+  export type ContactCreateWithoutCommandeInput = {
+    tel: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    utilisateur?: UtilisateurCreateNestedOneWithoutContactInput
+    fournisseur?: FournisseurCreateNestedOneWithoutContactInput
+    Reservation?: ReservationCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactUncheckedCreateWithoutCommandeInput = {
+    id?: number
+    tel: string
+    utilisateurId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Reservation?: ReservationUncheckedCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactCreateOrConnectWithoutCommandeInput = {
+    where: ContactWhereUniqueInput
+    create: XOR<ContactCreateWithoutCommandeInput, ContactUncheckedCreateWithoutCommandeInput>
+  }
+
+  export type UtilisateurUpsertWithoutCommandeInput = {
+    update: XOR<UtilisateurUpdateWithoutCommandeInput, UtilisateurUncheckedUpdateWithoutCommandeInput>
+    create: XOR<UtilisateurCreateWithoutCommandeInput, UtilisateurUncheckedCreateWithoutCommandeInput>
+    where?: UtilisateurWhereInput
+  }
+
+  export type UtilisateurUpdateToOneWithWhereWithoutCommandeInput = {
+    where?: UtilisateurWhereInput
+    data: XOR<UtilisateurUpdateWithoutCommandeInput, UtilisateurUncheckedUpdateWithoutCommandeInput>
+  }
+
+  export type UtilisateurUpdateWithoutCommandeInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    postnom?: StringFieldUpdateOperationsInput | string
+    nom_complet?: NullableStringFieldUpdateOperationsInput | string | null
+    sexe?: NullableEnumSexeFieldUpdateOperationsInput | $Enums.Sexe | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    poste?: NullableEnumPosteFieldUpdateOperationsInput | $Enums.Poste | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Adresse?: AdresseUpdateManyWithoutUtilisateurNestedInput
+    Contact?: ContactUpdateManyWithoutUtilisateurNestedInput
+    Produit?: ProduitUpdateManyWithoutUtilisateurNestedInput
+    Vente?: VenteUpdateManyWithoutUtilisateurNestedInput
+    Achat?: AchatUpdateManyWithoutUtilisateurNestedInput
+    Teneur?: TeneurUpdateManyWithoutUtilisateurNestedInput
+    Devise?: DeviseUpdateManyWithoutUtilisateurNestedInput
+    Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
+  }
+
+  export type UtilisateurUncheckedUpdateWithoutCommandeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    postnom?: StringFieldUpdateOperationsInput | string
+    nom_complet?: NullableStringFieldUpdateOperationsInput | string | null
+    sexe?: NullableEnumSexeFieldUpdateOperationsInput | $Enums.Sexe | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    poste?: NullableEnumPosteFieldUpdateOperationsInput | $Enums.Poste | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Adresse?: AdresseUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Contact?: ContactUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Produit?: ProduitUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Vente?: VenteUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Teneur?: TeneurUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Devise?: DeviseUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
+  }
+
+  export type FournisseurUpsertWithoutCommandeInput = {
+    update: XOR<FournisseurUpdateWithoutCommandeInput, FournisseurUncheckedUpdateWithoutCommandeInput>
+    create: XOR<FournisseurCreateWithoutCommandeInput, FournisseurUncheckedCreateWithoutCommandeInput>
+    where?: FournisseurWhereInput
+  }
+
+  export type FournisseurUpdateToOneWithWhereWithoutCommandeInput = {
+    where?: FournisseurWhereInput
+    data: XOR<FournisseurUpdateWithoutCommandeInput, FournisseurUncheckedUpdateWithoutCommandeInput>
+  }
+
+  export type FournisseurUpdateWithoutCommandeInput = {
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Vente?: VenteUpdateManyWithoutFournisseurNestedInput
+    Achat?: AchatUpdateManyWithoutFournisseurNestedInput
+    Adresse?: AdresseUpdateManyWithoutFournisseurNestedInput
+    Contact?: ContactUpdateManyWithoutFournisseurNestedInput
+    Reservation?: ReservationUpdateManyWithoutFournisseurNestedInput
+  }
+
+  export type FournisseurUncheckedUpdateWithoutCommandeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    code_postal?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Vente?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
+    Achat?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
+    Adresse?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
+    Contact?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutFournisseurNestedInput
+  }
+
+  export type AdresseUpsertWithoutCommandeInput = {
+    update: XOR<AdresseUpdateWithoutCommandeInput, AdresseUncheckedUpdateWithoutCommandeInput>
+    create: XOR<AdresseCreateWithoutCommandeInput, AdresseUncheckedCreateWithoutCommandeInput>
+    where?: AdresseWhereInput
+  }
+
+  export type AdresseUpdateToOneWithWhereWithoutCommandeInput = {
+    where?: AdresseWhereInput
+    data: XOR<AdresseUpdateWithoutCommandeInput, AdresseUncheckedUpdateWithoutCommandeInput>
+  }
+
+  export type AdresseUpdateWithoutCommandeInput = {
+    ville?: StringFieldUpdateOperationsInput | string
+    commune?: StringFieldUpdateOperationsInput | string
+    adresse?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateur?: UtilisateurUpdateOneWithoutAdresseNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutAdresseNestedInput
+    Reservation?: ReservationUpdateManyWithoutAdresseNestedInput
+  }
+
+  export type AdresseUncheckedUpdateWithoutCommandeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ville?: StringFieldUpdateOperationsInput | string
+    commune?: StringFieldUpdateOperationsInput | string
+    adresse?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Reservation?: ReservationUncheckedUpdateManyWithoutAdresseNestedInput
+  }
+
+  export type ContactUpsertWithoutCommandeInput = {
+    update: XOR<ContactUpdateWithoutCommandeInput, ContactUncheckedUpdateWithoutCommandeInput>
+    create: XOR<ContactCreateWithoutCommandeInput, ContactUncheckedCreateWithoutCommandeInput>
+    where?: ContactWhereInput
+  }
+
+  export type ContactUpdateToOneWithWhereWithoutCommandeInput = {
+    where?: ContactWhereInput
+    data: XOR<ContactUpdateWithoutCommandeInput, ContactUncheckedUpdateWithoutCommandeInput>
+  }
+
+  export type ContactUpdateWithoutCommandeInput = {
+    tel?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateur?: UtilisateurUpdateOneWithoutContactNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutContactNestedInput
+    Reservation?: ReservationUpdateManyWithoutContactNestedInput
+  }
+
+  export type ContactUncheckedUpdateWithoutCommandeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tel?: StringFieldUpdateOperationsInput | string
+    utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Reservation?: ReservationUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type AdresseCreateManyUtilisateurInput = {
@@ -25629,6 +31689,40 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ReservationCreateManyUtilisateurInput = {
+    id?: number
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    panierId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    enregistrerParId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommandeCreateManyClientInput = {
+    id?: number
+    numeroCommande: string
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    fournisseurId?: number | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AdresseUpdateWithoutUtilisateurInput = {
     ville?: StringFieldUpdateOperationsInput | string
     commune?: StringFieldUpdateOperationsInput | string
@@ -25636,6 +31730,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fournisseur?: FournisseurUpdateOneWithoutAdresseNestedInput
+    Reservation?: ReservationUpdateManyWithoutAdresseNestedInput
+    Commande?: CommandeUpdateManyWithoutAdresseNestedInput
   }
 
   export type AdresseUncheckedUpdateWithoutUtilisateurInput = {
@@ -25646,6 +31742,8 @@ export namespace Prisma {
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Reservation?: ReservationUncheckedUpdateManyWithoutAdresseNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutAdresseNestedInput
   }
 
   export type AdresseUncheckedUpdateManyWithoutUtilisateurInput = {
@@ -25663,6 +31761,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fournisseur?: FournisseurUpdateOneWithoutContactNestedInput
+    Reservation?: ReservationUpdateManyWithoutContactNestedInput
+    Commande?: CommandeUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutUtilisateurInput = {
@@ -25671,6 +31771,8 @@ export namespace Prisma {
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Reservation?: ReservationUncheckedUpdateManyWithoutContactNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateManyWithoutUtilisateurInput = {
@@ -25849,6 +31951,7 @@ export namespace Prisma {
     DetailPanier?: DetailPanierUpdateManyWithoutPanierNestedInput
     Achat?: AchatUpdateManyWithoutPanierNestedInput
     Vente?: VenteUpdateManyWithoutPanierNestedInput
+    Reservation?: ReservationUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateWithoutUtilisateurInput = {
@@ -25858,10 +31961,379 @@ export namespace Prisma {
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutPanierNestedInput
     Achat?: AchatUncheckedUpdateManyWithoutPanierNestedInput
     Vente?: VenteUncheckedUpdateManyWithoutPanierNestedInput
+    Reservation?: ReservationUncheckedUpdateManyWithoutPanierNestedInput
   }
 
   export type PanierUncheckedUpdateManyWithoutUtilisateurInput = {
     id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationUpdateWithoutUtilisateurInput = {
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    panier?: PanierUpdateOneRequiredWithoutReservationNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutReservationNestedInput
+    adresse?: AdresseUpdateOneWithoutReservationNestedInput
+    contact?: ContactUpdateOneWithoutReservationNestedInput
+  }
+
+  export type ReservationUncheckedUpdateWithoutUtilisateurInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    panierId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationUncheckedUpdateManyWithoutUtilisateurInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    panierId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommandeUpdateWithoutClientInput = {
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    fournisseur?: FournisseurUpdateOneWithoutCommandeNestedInput
+    adresse?: AdresseUpdateOneWithoutCommandeNestedInput
+    contact?: ContactUpdateOneWithoutCommandeNestedInput
+  }
+
+  export type CommandeUncheckedUpdateWithoutClientInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommandeUncheckedUpdateManyWithoutClientInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationCreateManyAdresseInput = {
+    id?: number
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    clientId?: number | null
+    panierId: number
+    nom?: string | null
+    tel?: string | null
+    contactId?: number | null
+    enregistrerParId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommandeCreateManyAdresseInput = {
+    id?: number
+    numeroCommande: string
+    clientId: number
+    nom?: string | null
+    tel?: string | null
+    contactId?: number | null
+    fournisseurId?: number | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReservationUpdateWithoutAdresseInput = {
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    panier?: PanierUpdateOneRequiredWithoutReservationNestedInput
+    utilisateur?: UtilisateurUpdateOneWithoutReservationNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutReservationNestedInput
+    contact?: ContactUpdateOneWithoutReservationNestedInput
+  }
+
+  export type ReservationUncheckedUpdateWithoutAdresseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    panierId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationUncheckedUpdateManyWithoutAdresseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    panierId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommandeUpdateWithoutAdresseInput = {
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: UtilisateurUpdateOneWithoutCommandeNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutCommandeNestedInput
+    contact?: ContactUpdateOneWithoutCommandeNestedInput
+  }
+
+  export type CommandeUncheckedUpdateWithoutAdresseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    clientId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommandeUncheckedUpdateManyWithoutAdresseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    clientId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationCreateManyContactInput = {
+    id?: number
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    clientId?: number | null
+    panierId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    enregistrerParId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommandeCreateManyContactInput = {
+    id?: number
+    numeroCommande: string
+    clientId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    fournisseurId?: number | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReservationUpdateWithoutContactInput = {
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    panier?: PanierUpdateOneRequiredWithoutReservationNestedInput
+    utilisateur?: UtilisateurUpdateOneWithoutReservationNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutReservationNestedInput
+    adresse?: AdresseUpdateOneWithoutReservationNestedInput
+  }
+
+  export type ReservationUncheckedUpdateWithoutContactInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    panierId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationUncheckedUpdateManyWithoutContactInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    panierId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommandeUpdateWithoutContactInput = {
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: UtilisateurUpdateOneWithoutCommandeNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutCommandeNestedInput
+    adresse?: AdresseUpdateOneWithoutCommandeNestedInput
+  }
+
+  export type CommandeUncheckedUpdateWithoutContactInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    clientId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommandeUncheckedUpdateManyWithoutContactInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    clientId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25905,6 +32377,40 @@ export namespace Prisma {
     id?: number
     tel: string
     utilisateurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReservationCreateManyFournisseurInput = {
+    id?: number
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    clientId?: number | null
+    panierId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    enregistrerParId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommandeCreateManyFournisseurInput = {
+    id?: number
+    numeroCommande: string
+    clientId: number
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    notesClient?: string | null
+    dateLivraisonEffective?: Date | string | null
+    adresseLivraison?: string | null
+    enregistreParId?: number | null
+    statut?: $Enums.StatutCommande
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25989,6 +32495,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneWithoutAdresseNestedInput
+    Reservation?: ReservationUpdateManyWithoutAdresseNestedInput
+    Commande?: CommandeUpdateManyWithoutAdresseNestedInput
   }
 
   export type AdresseUncheckedUpdateWithoutFournisseurInput = {
@@ -25999,6 +32507,8 @@ export namespace Prisma {
     utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Reservation?: ReservationUncheckedUpdateManyWithoutAdresseNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutAdresseNestedInput
   }
 
   export type AdresseUncheckedUpdateManyWithoutFournisseurInput = {
@@ -26016,6 +32526,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneWithoutContactNestedInput
+    Reservation?: ReservationUpdateManyWithoutContactNestedInput
+    Commande?: CommandeUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutFournisseurInput = {
@@ -26024,12 +32536,114 @@ export namespace Prisma {
     utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Reservation?: ReservationUncheckedUpdateManyWithoutContactNestedInput
+    Commande?: CommandeUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateManyWithoutFournisseurInput = {
     id?: IntFieldUpdateOperationsInput | number
     tel?: StringFieldUpdateOperationsInput | string
     utilisateurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationUpdateWithoutFournisseurInput = {
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    panier?: PanierUpdateOneRequiredWithoutReservationNestedInput
+    utilisateur?: UtilisateurUpdateOneWithoutReservationNestedInput
+    adresse?: AdresseUpdateOneWithoutReservationNestedInput
+    contact?: ContactUpdateOneWithoutReservationNestedInput
+  }
+
+  export type ReservationUncheckedUpdateWithoutFournisseurInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    panierId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationUncheckedUpdateManyWithoutFournisseurInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    panierId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommandeUpdateWithoutFournisseurInput = {
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: UtilisateurUpdateOneWithoutCommandeNestedInput
+    adresse?: AdresseUpdateOneWithoutCommandeNestedInput
+    contact?: ContactUpdateOneWithoutCommandeNestedInput
+  }
+
+  export type CommandeUncheckedUpdateWithoutFournisseurInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    clientId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommandeUncheckedUpdateManyWithoutFournisseurInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numeroCommande?: StringFieldUpdateOperationsInput | string
+    clientId?: IntFieldUpdateOperationsInput | number
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraisonEffective?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistreParId?: NullableIntFieldUpdateOperationsInput | number | null
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26339,6 +32953,23 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ReservationCreateManyPanierInput = {
+    id?: number
+    dateLivraisonSouhaitee: Date | string
+    adresseLivraison?: string | null
+    statut?: $Enums.StatutReservation
+    notesClient?: string | null
+    clientId?: number | null
+    nom?: string | null
+    tel?: string | null
+    adresseId?: number | null
+    contactId?: number | null
+    enregistrerParId?: number | null
+    fournisseurId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type DetailPanierUpdateWithoutPanierInput = {
     qtte?: IntFieldUpdateOperationsInput | number
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
@@ -26437,6 +33068,56 @@ export namespace Prisma {
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     paiementId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationUpdateWithoutPanierInput = {
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateur?: UtilisateurUpdateOneWithoutReservationNestedInput
+    fournisseur?: FournisseurUpdateOneWithoutReservationNestedInput
+    adresse?: AdresseUpdateOneWithoutReservationNestedInput
+    contact?: ContactUpdateOneWithoutReservationNestedInput
+  }
+
+  export type ReservationUncheckedUpdateWithoutPanierInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationUncheckedUpdateManyWithoutPanierInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateLivraisonSouhaitee?: DateTimeFieldUpdateOperationsInput | Date | string
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    statut?: EnumStatutReservationFieldUpdateOperationsInput | $Enums.StatutReservation
+    notesClient?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    adresseId?: NullableIntFieldUpdateOperationsInput | number | null
+    contactId?: NullableIntFieldUpdateOperationsInput | number | null
+    enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
+    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
