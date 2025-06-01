@@ -30,53 +30,54 @@ async function main() {
   //   }
   // });
 
-    // Create Default Teneur
-  await prisma.teneur.create({
-    data: {
-        valeur: 32.5,
-        utilisateurId: 1
-    },
-  });
+  //   // Create Default Teneur
+  // await prisma.teneur.create({
+  //   data: {
+  //       valeur: 32.5,
+  //       utilisateurId: 1
+  //   },
+  // });
 
-  await prisma.teneur.create({
-    data: {
-        valeur: 42.5,
-        utilisateurId: 1
-    },
-  });
+  // await prisma.teneur.create({
+  //   data: {
+  //       valeur: 42.5,
+  //       utilisateurId: 1
+  //   },
+  // });
 
   //   //   Create Default Devise
-    await prisma.devise.create({
-      data: {
-          nom: 'Dollard Américain',
-          symbole: '$',
-          code: 'USD',
-          utilisateurId: 1
-        }
-    });
+  //   await prisma.devise.create({
+  //     data: {
+  //         nom: 'Dollard Américain',
+  //         symbole: '$',
+  //         code: 'USD',
+  //         utilisateurId: 1
+  //       }
+  //   });
 
-    await prisma.devise.create({
-        data: {
-            nom: 'Franc Congolais',
-            symbole: 'FC',
-            code: 'CDF',
-            utilisateurId: 1
-        }
-    });
+  //   await prisma.devise.create({
+  //       data: {
+  //           nom: 'Franc Congolais',
+  //           symbole: 'FC',
+  //           code: 'CDF',
+  //           utilisateurId: 1
+  //       }
+  //   });
 
-  // //   // Create Product
+    // Create Product
     await prisma.produit.create({
         data: {
             designation: 'ciment-1',
-            prix: 100,
+            prix: 100.0,
+            qtte: 0,
             description: 'My product',
             deviseId: 1,
-            teneurId: 1,
+            teneurId: 2,
             utilisateurId: 1
         }
     });
 
-  // //   // Create Fournisseur
+    // Create Fournisseur
     await prisma.fournisseur.create({
         data: {
             nom: 'bralima',

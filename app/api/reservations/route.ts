@@ -32,12 +32,13 @@ export async function POST(req: NextRequest) {
                     tel: data.client_ordinaire.tel,
                     dateLivraisonSouhaitee: date,
                     adresseLivraison: data.adresseLivraison ? data.adresseLivraison : null,
+                    type_client: data.type_client ? data.type_client : null,
                     adresseId: data.adresseId ? parseInt(data.adresseId) : null,
                     clientId: data.clientId ? parseInt(data.clientId) : null,
                     contactId: data.contactId ? parseInt(data.contactId) : null,
                     enregistrerParId: data.enregistrerParId ? parseInt(data.enregistrerParId, 10): null,
                     fournisseurId: data.fournisseurId ? parseInt(data.fournisseurId) : null,
-                    notesClient: data.notesClient ? data.notesClient : null
+                    notes: data.notes ? data.notes : null
                 }
             });
             return new Response("Reservation successed!", { status: 201 });

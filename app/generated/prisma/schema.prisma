@@ -69,7 +69,7 @@ enum StatutVente {
   ANNULE
 }
 
-enum TypeAcheteur {
+enum TypeClient {
   ordinaire
   nouveau
   client
@@ -220,6 +220,7 @@ model Paiement {
   updatedAt      DateTime     @updatedAt
   Achat          Achat[]
   Vente          Vente[]
+  Commande       Commande[]
 }
 
 model Vente {
@@ -227,7 +228,7 @@ model Vente {
   statut          StatutVente  @default(EN_ATTENTE)
   total_ttc       Float
   total_ht        Float
-  type_acheteur   TypeAcheteur
+  type_acheteur   TypeClient
   clientId        Int?
   enregisterParId Int
   fournisseurId   Int?
@@ -252,6 +253,7 @@ model Panier {
   Achat         Achat[]
   Vente         Vente[]
   Reservation   Reservation[]
+  Commande      Commande[]
 }
 
 model DetailPanier {
@@ -311,7 +313,8 @@ model Reservation {
   dateLivraisonSouhaitee DateTime
   adresseLivraison       String?           @db.VarChar(255)
   statut                 StatutReservation @default(EN_ATTENTE)
-  notesClient            String?           @db.Text
+  notes                  String?           @db.Text
+  type_client            TypeClient        @default(ordinaire)
   clientId               Int?
   panierId               Int
   nom                    String?
@@ -331,23 +334,27 @@ model Reservation {
 
 model Commande {
   id                     Int            @id @default(autoincrement())
-  // Numéro de commande généré, ex: "CMD-20250001"
-  numeroCommande         String         @unique @db.VarChar(50)
-  clientId               Int
+  // numeroCommande         String         @unique @db.VarChar(50)
+  panierId               Int
+  clientId               Int?
   nom                    String?
   tel                    String?
+  type_client            TypeClient     @default(ordinaire)
+  paiementId             Int
   adresseId              Int?
   contactId              Int?
   fournisseurId          Int?
-  notesClient            String?        @db.Text
+  notes                  String?        @db.Text
   dateLivraisonEffective DateTime?
   adresseLivraison       String?        @db.VarChar(255)
-  enregistreParId        Int?
+  enregistrerParId       Int?
+  statut                 StatutCommande @default(EN_ATTENTE_PAIEMENT) // Statut de la commande
+  panier                 Panier         @relation(fields: [panierId], references: [id])
   client                 Utilisateur?   @relation(fields: [clientId], references: [id])
+  paiement               Paiement       @relation(fields: [paiementId], references: [id])
   fournisseur            Fournisseur?   @relation(fields: [fournisseurId], references: [id])
   adresse                Adresse?       @relation(fields: [adresseId], references: [id])
   contact                Contact?       @relation(fields: [contactId], references: [id])
-  statut                 StatutCommande @default(EN_ATTENTE_PAIEMENT) // Statut de la commande
   createdAt              DateTime       @default(now())
   updatedAt              DateTime       @updatedAt
 }

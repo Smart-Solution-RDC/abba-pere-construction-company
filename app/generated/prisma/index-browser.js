@@ -266,7 +266,8 @@ exports.Prisma.ReservationScalarFieldEnum = {
   dateLivraisonSouhaitee: 'dateLivraisonSouhaitee',
   adresseLivraison: 'adresseLivraison',
   statut: 'statut',
-  notesClient: 'notesClient',
+  notes: 'notes',
+  type_client: 'type_client',
   clientId: 'clientId',
   panierId: 'panierId',
   nom: 'nom',
@@ -281,17 +282,19 @@ exports.Prisma.ReservationScalarFieldEnum = {
 
 exports.Prisma.CommandeScalarFieldEnum = {
   id: 'id',
-  numeroCommande: 'numeroCommande',
+  panierId: 'panierId',
   clientId: 'clientId',
   nom: 'nom',
   tel: 'tel',
+  type_client: 'type_client',
+  paiementId: 'paiementId',
   adresseId: 'adresseId',
   contactId: 'contactId',
   fournisseurId: 'fournisseurId',
-  notesClient: 'notesClient',
+  notes: 'notes',
   dateLivraisonEffective: 'dateLivraisonEffective',
   adresseLivraison: 'adresseLivraison',
-  enregistreParId: 'enregistreParId',
+  enregistrerParId: 'enregistrerParId',
   statut: 'statut',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -344,7 +347,7 @@ exports.StatutVente = exports.$Enums.StatutVente = {
   ANNULE: 'ANNULE'
 };
 
-exports.TypeAcheteur = exports.$Enums.TypeAcheteur = {
+exports.TypeClient = exports.$Enums.TypeClient = {
   ordinaire: 'ordinaire',
   nouveau: 'nouveau',
   client: 'client',
