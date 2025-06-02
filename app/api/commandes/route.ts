@@ -41,6 +41,8 @@ export async function POST(req: NextRequest) {
             total_ht += detail_panier[i].prixTotal;
         }
 
+        total_ttc = (total_ht) * 0.16; // Pour une taxe de 16%
+
         const paiement = await prisma.paiement.create({
             data: {
                 montant: total_ht,
@@ -52,8 +54,8 @@ export async function POST(req: NextRequest) {
         const commande = await prisma.commande.create({
             data: {
                 panierId: panier.id,
-                nom: data.client_ordinaire.nom ? data.client_ordinaire.nom : null,
-                tel: data.client_ordinaire.tel ? data.client_ordinaire.tel : null,
+                nom: data.client.nom ? data.client.nom : null,
+                tel: data.client.tel ? data.client.tel : null,
                 type_client: data.type_client,
                 clientId: data.clientId ? data.clientId : null,
                 paiementId: paiement.id,
@@ -67,7 +69,9 @@ export async function POST(req: NextRequest) {
             }
         });
 
+        return new Response("Commande Successed!", { status: 201 });
+
     }
     
-    return new Response("got");
+    return new Response("Invalid Form!", { status: 201 });
 }

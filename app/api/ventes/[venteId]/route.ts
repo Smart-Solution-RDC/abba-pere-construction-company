@@ -49,13 +49,13 @@ export async function PUT(req: NextRequest, { params }: { params: RouteParams}) 
     }
 
     let paiementId = 0
-    const paiement = await prisma.paiement.findUnique({
-        where: { id: vente.paiementId }
-    });
+    // const paiement = await prisma.paiement.findUnique({
+        // where: { id: vente.paiementId }
+    // });
 
-    if (paiement) {
-        paiementId = paiement.id
-    }
+    // if (paiement) {
+        // paiementId = vente.paiementId
+    // }
 
     try {
         if (panierId) {
