@@ -93,27 +93,30 @@ model Entreprise {
 }
 
 model Utilisateur {
-  id          Int           @id @default(autoincrement())
-  email       String        @unique
-  nom         String
-  postnom     String
-  nom_complet String?
-  sexe        Sexe?
-  role        Role          @default(client)
-  poste       Poste?
-  picture     String?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  Adresse     Adresse[]
-  Contact     Contact[]
-  Produit     Produit[]
-  Vente       Vente[]
-  Achat       Achat[]
-  Teneur      Teneur[]
-  Devise      Devise[]
-  Panier      Panier[]
-  Reservation Reservation[]
-  Commande    Commande[]
+  id              Int               @id @default(autoincrement())
+  email           String            @unique
+  nom             String
+  postnom         String
+  nom_complet     String?
+  sexe            Sexe?
+  role            Role              @default(client)
+  poste           Poste?
+  picture         String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Adresse         Adresse[]
+  Contact         Contact[]
+  Produit         Produit[]
+  Vente           Vente[]
+  Achat           Achat[]
+  Teneur          Teneur[]
+  Devise          Devise[]
+  Panier          Panier[]
+  Reservation     Reservation[]
+  Commande        Commande[]
+  Caisse          Caisse[]
+  MouvementCaisse MouvementCaisse[]
+  ClotureCaisse   ClotureCaisse[]
 }
 
 // model Poste {
@@ -189,6 +192,7 @@ model Devise {
   updatedAt     DateTime    @updatedAt
   Produit       Produit[]
   Paiement      Paiement[]
+  Caisse        Caisse[]
 }
 
 model Produit {
@@ -334,7 +338,6 @@ model Reservation {
 
 model Commande {
   id                     Int            @id @default(autoincrement())
-  // numeroCommande         String         @unique @db.VarChar(50)
   panierId               Int
   clientId               Int?
   nom                    String?
@@ -357,4 +360,87 @@ model Commande {
   contact                Contact?       @relation(fields: [contactId], references: [id])
   createdAt              DateTime       @default(now())
   updatedAt              DateTime       @updatedAt
+}
+
+// --- Enumerations (Enums) ---
+
+enum TypeMouvementCaisse {
+  ENTREE
+  SORTIE
+}
+
+enum StatutCaisse {
+  OUVERTE
+  FERMEE
+  EN_ATTENTE
+}
+
+// --- Modèles (Tables) ---
+
+model Caisse {
+  id           Int          @id @default(autoincrement())
+  nom          String       @unique @db.VarChar(100)
+  description  String?      @db.Text
+  soldeInitial Decimal      @default(0) @db.Decimal(12, 2)
+  soldeActuel  Decimal      @db.Decimal(12, 2)
+  deviseId     Int
+  devise       Devise       @relation(fields: [deviseId], references: [id])
+  statut       StatutCaisse @default(OUVERTE)
+  // dateOuverture          DateTime     @default(now())
+  // dateFermeture          DateTime?
+  creeParId    Int
+  utilisateur  Utilisateur  @relation(fields: [creeParId], references: [id])
+  // utilisateurFermetureId Int?
+  // utilisateurFermeture Utilisateur? @relation("CaisseFermeture", fields: [utilisateurFermetureId], references: [id])
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  mouvements MouvementCaisse[]
+  clotures   ClotureCaisse[]
+}
+
+// Update moyen_paiement to modePaielent in every table
+// Add modePaiement as a table
+model MouvementCaisse {
+  id              Int                 @id @default(autoincrement())
+  caisseId        Int
+  caisse          Caisse              @relation(fields: [caisseId], references: [id])
+  typeMouvement   TypeMouvementCaisse
+  montant         Decimal             @db.Decimal(12, 2)
+  description     String?             @db.Text
+  // dateMouvement    DateTime            @default(now())
+  // modePaiementId   Int
+  moyenPaiement   MoyenPaiment // create a ModePaiement table
+  enregisterParId Int
+  enregisterPar   Utilisateur         @relation(fields: [enregisterParId], references: [id])
+  // referenceExterne String?             @unique @db.VarChar(100)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+}
+
+// model ModePaiement {
+//   id          Int      @id @default(autoincrement())
+//   nom         String   @unique @db.VarChar(100)
+//   description String?  @db.Text
+//   isActive    Boolean  @default(true)
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+
+//   // mouvements MouvementCaisse[]
+// }
+
+// It must generate a file
+model ClotureCaisse {
+  id                   Int         @id @default(autoincrement())
+  caisseId             Int
+  caisse               Caisse      @relation(fields: [caisseId], references: [id])
+  dateCloture          DateTime    @default(now())
+  // soldePhysique        Decimal  @db.Decimal(12, 2)
+  // soldeTheorique       Decimal  @db.Decimal(12, 2)
+  // ecart                Decimal  @db.Decimal(12, 2)
+  utilisateurClotureId Int
+  utilisateurCloture   Utilisateur @relation(fields: [utilisateurClotureId], references: [id])
+  notes                String?     @db.Text
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
 }
