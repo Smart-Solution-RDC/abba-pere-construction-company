@@ -135,31 +135,6 @@ export const Sexe: {
 export type Sexe = (typeof Sexe)[keyof typeof Sexe]
 
 
-export const Ville: {
-  Bandundu: 'Bandundu',
-  Kindu: 'Kindu',
-  Butembo: 'Butembo',
-  Kinshasa: 'Kinshasa',
-  Mbujimayi: 'Mbujimayi',
-  Lubumbashi: 'Lubumbashi',
-  Kananga: 'Kananga',
-  Kisangani: 'Kisangani',
-  Goma: 'Goma',
-  Bukavu: 'Bukavu',
-  Tshikapa: 'Tshikapa',
-  Kolwezi: 'Kolwezi',
-  Likasi: 'Likasi',
-  Kikwit: 'Kikwit',
-  Uvira: 'Uvira',
-  Bunia: 'Bunia',
-  Kalemie: 'Kalemie',
-  Mbandaka: 'Mbandaka',
-  Matadi: 'Matadi'
-};
-
-export type Ville = (typeof Ville)[keyof typeof Ville]
-
-
 export const MoyenPaiment: {
   cache: 'cache',
   banque: 'banque',
@@ -255,10 +230,6 @@ export const Poste: typeof $Enums.Poste
 export type Sexe = $Enums.Sexe
 
 export const Sexe: typeof $Enums.Sexe
-
-export type Ville = $Enums.Ville
-
-export const Ville: typeof $Enums.Ville
 
 export type MoyenPaiment = $Enums.MoyenPaiment
 
@@ -3126,12 +3097,12 @@ export namespace Prisma {
    */
 
   export type CaisseCountOutputType = {
-    mouvements: number
+    MouvementCaisse: number
     clotures: number
   }
 
   export type CaisseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    mouvements?: boolean | CaisseCountOutputTypeCountMouvementsArgs
+    MouvementCaisse?: boolean | CaisseCountOutputTypeCountMouvementCaisseArgs
     clotures?: boolean | CaisseCountOutputTypeCountCloturesArgs
   }
 
@@ -3149,7 +3120,7 @@ export namespace Prisma {
   /**
    * CaisseCountOutputType without action
    */
-  export type CaisseCountOutputTypeCountMouvementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CaisseCountOutputTypeCountMouvementCaisseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MouvementCaisseWhereInput
   }
 
@@ -21853,16 +21824,16 @@ export namespace Prisma {
 
   export type CaisseAvgAggregateOutputType = {
     id: number | null
-    soldeInitial: Decimal | null
-    soldeActuel: Decimal | null
+    soldeInitial: number | null
+    soldeActuel: number | null
     deviseId: number | null
     creeParId: number | null
   }
 
   export type CaisseSumAggregateOutputType = {
     id: number | null
-    soldeInitial: Decimal | null
-    soldeActuel: Decimal | null
+    soldeInitial: number | null
+    soldeActuel: number | null
     deviseId: number | null
     creeParId: number | null
   }
@@ -21871,11 +21842,11 @@ export namespace Prisma {
     id: number | null
     nom: string | null
     description: string | null
-    soldeInitial: Decimal | null
-    soldeActuel: Decimal | null
+    soldeInitial: number | null
+    soldeActuel: number | null
     deviseId: number | null
-    statut: $Enums.StatutCaisse | null
     creeParId: number | null
+    statut: $Enums.StatutCaisse | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -21884,11 +21855,11 @@ export namespace Prisma {
     id: number | null
     nom: string | null
     description: string | null
-    soldeInitial: Decimal | null
-    soldeActuel: Decimal | null
+    soldeInitial: number | null
+    soldeActuel: number | null
     deviseId: number | null
-    statut: $Enums.StatutCaisse | null
     creeParId: number | null
+    statut: $Enums.StatutCaisse | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -21900,8 +21871,8 @@ export namespace Prisma {
     soldeInitial: number
     soldeActuel: number
     deviseId: number
-    statut: number
     creeParId: number
+    statut: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -21931,8 +21902,8 @@ export namespace Prisma {
     soldeInitial?: true
     soldeActuel?: true
     deviseId?: true
-    statut?: true
     creeParId?: true
+    statut?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -21944,8 +21915,8 @@ export namespace Prisma {
     soldeInitial?: true
     soldeActuel?: true
     deviseId?: true
-    statut?: true
     creeParId?: true
+    statut?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -21957,8 +21928,8 @@ export namespace Prisma {
     soldeInitial?: true
     soldeActuel?: true
     deviseId?: true
-    statut?: true
     creeParId?: true
+    statut?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -22054,11 +22025,11 @@ export namespace Prisma {
     id: number
     nom: string
     description: string | null
-    soldeInitial: Decimal
-    soldeActuel: Decimal
+    soldeInitial: number
+    soldeActuel: number
     deviseId: number
-    statut: $Enums.StatutCaisse
     creeParId: number
+    statut: $Enums.StatutCaisse
     createdAt: Date
     updatedAt: Date
     _count: CaisseCountAggregateOutputType | null
@@ -22089,13 +22060,13 @@ export namespace Prisma {
     soldeInitial?: boolean
     soldeActuel?: boolean
     deviseId?: boolean
-    statut?: boolean
     creeParId?: boolean
+    statut?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    mouvements?: boolean | Caisse$mouvementsArgs<ExtArgs>
+    MouvementCaisse?: boolean | Caisse$MouvementCaisseArgs<ExtArgs>
     clotures?: boolean | Caisse$cloturesArgs<ExtArgs>
     _count?: boolean | CaisseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["caisse"]>
@@ -22107,8 +22078,8 @@ export namespace Prisma {
     soldeInitial?: boolean
     soldeActuel?: boolean
     deviseId?: boolean
-    statut?: boolean
     creeParId?: boolean
+    statut?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
@@ -22122,8 +22093,8 @@ export namespace Prisma {
     soldeInitial?: boolean
     soldeActuel?: boolean
     deviseId?: boolean
-    statut?: boolean
     creeParId?: boolean
+    statut?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
@@ -22137,17 +22108,17 @@ export namespace Prisma {
     soldeInitial?: boolean
     soldeActuel?: boolean
     deviseId?: boolean
-    statut?: boolean
     creeParId?: boolean
+    statut?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "soldeInitial" | "soldeActuel" | "deviseId" | "statut" | "creeParId" | "createdAt" | "updatedAt", ExtArgs["result"]["caisse"]>
+  export type CaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "soldeInitial" | "soldeActuel" | "deviseId" | "creeParId" | "statut" | "createdAt" | "updatedAt", ExtArgs["result"]["caisse"]>
   export type CaisseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    mouvements?: boolean | Caisse$mouvementsArgs<ExtArgs>
+    MouvementCaisse?: boolean | Caisse$MouvementCaisseArgs<ExtArgs>
     clotures?: boolean | Caisse$cloturesArgs<ExtArgs>
     _count?: boolean | CaisseCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -22165,18 +22136,18 @@ export namespace Prisma {
     objects: {
       devise: Prisma.$DevisePayload<ExtArgs>
       utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
-      mouvements: Prisma.$MouvementCaissePayload<ExtArgs>[]
+      MouvementCaisse: Prisma.$MouvementCaissePayload<ExtArgs>[]
       clotures: Prisma.$ClotureCaissePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nom: string
       description: string | null
-      soldeInitial: Prisma.Decimal
-      soldeActuel: Prisma.Decimal
+      soldeInitial: number
+      soldeActuel: number
       deviseId: number
-      statut: $Enums.StatutCaisse
       creeParId: number
+      statut: $Enums.StatutCaisse
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["caisse"]>
@@ -22575,7 +22546,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     devise<T extends DeviseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DeviseDefaultArgs<ExtArgs>>): Prisma__DeviseClient<$Result.GetResult<Prisma.$DevisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    mouvements<T extends Caisse$mouvementsArgs<ExtArgs> = {}>(args?: Subset<T, Caisse$mouvementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MouvementCaissePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    MouvementCaisse<T extends Caisse$MouvementCaisseArgs<ExtArgs> = {}>(args?: Subset<T, Caisse$MouvementCaisseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MouvementCaissePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     clotures<T extends Caisse$cloturesArgs<ExtArgs> = {}>(args?: Subset<T, Caisse$cloturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClotureCaissePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -22609,11 +22580,11 @@ export namespace Prisma {
     readonly id: FieldRef<"Caisse", 'Int'>
     readonly nom: FieldRef<"Caisse", 'String'>
     readonly description: FieldRef<"Caisse", 'String'>
-    readonly soldeInitial: FieldRef<"Caisse", 'Decimal'>
-    readonly soldeActuel: FieldRef<"Caisse", 'Decimal'>
+    readonly soldeInitial: FieldRef<"Caisse", 'Float'>
+    readonly soldeActuel: FieldRef<"Caisse", 'Float'>
     readonly deviseId: FieldRef<"Caisse", 'Int'>
-    readonly statut: FieldRef<"Caisse", 'StatutCaisse'>
     readonly creeParId: FieldRef<"Caisse", 'Int'>
+    readonly statut: FieldRef<"Caisse", 'StatutCaisse'>
     readonly createdAt: FieldRef<"Caisse", 'DateTime'>
     readonly updatedAt: FieldRef<"Caisse", 'DateTime'>
   }
@@ -23012,9 +22983,9 @@ export namespace Prisma {
   }
 
   /**
-   * Caisse.mouvements
+   * Caisse.MouvementCaisse
    */
-  export type Caisse$mouvementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Caisse$MouvementCaisseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the MouvementCaisse
      */
@@ -23093,25 +23064,26 @@ export namespace Prisma {
   export type MouvementCaisseAvgAggregateOutputType = {
     id: number | null
     caisseId: number | null
-    montant: Decimal | null
-    enregisterParId: number | null
+    montant: number | null
+    enregistrerParId: number | null
   }
 
   export type MouvementCaisseSumAggregateOutputType = {
     id: number | null
     caisseId: number | null
-    montant: Decimal | null
-    enregisterParId: number | null
+    montant: number | null
+    enregistrerParId: number | null
   }
 
   export type MouvementCaisseMinAggregateOutputType = {
     id: number | null
     caisseId: number | null
-    typeMouvement: $Enums.TypeMouvementCaisse | null
-    montant: Decimal | null
+    type_mouvement: $Enums.TypeMouvementCaisse | null
+    montant: number | null
     description: string | null
     moyenPaiement: $Enums.MoyenPaiment | null
-    enregisterParId: number | null
+    enregistrerParId: number | null
+    referenceExterne: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -23119,11 +23091,12 @@ export namespace Prisma {
   export type MouvementCaisseMaxAggregateOutputType = {
     id: number | null
     caisseId: number | null
-    typeMouvement: $Enums.TypeMouvementCaisse | null
-    montant: Decimal | null
+    type_mouvement: $Enums.TypeMouvementCaisse | null
+    montant: number | null
     description: string | null
     moyenPaiement: $Enums.MoyenPaiment | null
-    enregisterParId: number | null
+    enregistrerParId: number | null
+    referenceExterne: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -23131,11 +23104,12 @@ export namespace Prisma {
   export type MouvementCaisseCountAggregateOutputType = {
     id: number
     caisseId: number
-    typeMouvement: number
+    type_mouvement: number
     montant: number
     description: number
     moyenPaiement: number
-    enregisterParId: number
+    enregistrerParId: number
+    referenceExterne: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -23146,24 +23120,25 @@ export namespace Prisma {
     id?: true
     caisseId?: true
     montant?: true
-    enregisterParId?: true
+    enregistrerParId?: true
   }
 
   export type MouvementCaisseSumAggregateInputType = {
     id?: true
     caisseId?: true
     montant?: true
-    enregisterParId?: true
+    enregistrerParId?: true
   }
 
   export type MouvementCaisseMinAggregateInputType = {
     id?: true
     caisseId?: true
-    typeMouvement?: true
+    type_mouvement?: true
     montant?: true
     description?: true
     moyenPaiement?: true
-    enregisterParId?: true
+    enregistrerParId?: true
+    referenceExterne?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -23171,11 +23146,12 @@ export namespace Prisma {
   export type MouvementCaisseMaxAggregateInputType = {
     id?: true
     caisseId?: true
-    typeMouvement?: true
+    type_mouvement?: true
     montant?: true
     description?: true
     moyenPaiement?: true
-    enregisterParId?: true
+    enregistrerParId?: true
+    referenceExterne?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -23183,11 +23159,12 @@ export namespace Prisma {
   export type MouvementCaisseCountAggregateInputType = {
     id?: true
     caisseId?: true
-    typeMouvement?: true
+    type_mouvement?: true
     montant?: true
     description?: true
     moyenPaiement?: true
-    enregisterParId?: true
+    enregistrerParId?: true
+    referenceExterne?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -23282,11 +23259,12 @@ export namespace Prisma {
   export type MouvementCaisseGroupByOutputType = {
     id: number
     caisseId: number
-    typeMouvement: $Enums.TypeMouvementCaisse
-    montant: Decimal
+    type_mouvement: $Enums.TypeMouvementCaisse
+    montant: number
     description: string | null
     moyenPaiement: $Enums.MoyenPaiment
-    enregisterParId: number
+    enregistrerParId: number
+    referenceExterne: string | null
     createdAt: Date
     updatedAt: Date
     _count: MouvementCaisseCountAggregateOutputType | null
@@ -23313,85 +23291,90 @@ export namespace Prisma {
   export type MouvementCaisseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     caisseId?: boolean
-    typeMouvement?: boolean
+    type_mouvement?: boolean
     montant?: boolean
     description?: boolean
     moyenPaiement?: boolean
-    enregisterParId?: boolean
+    enregistrerParId?: boolean
+    referenceExterne?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     caisse?: boolean | CaisseDefaultArgs<ExtArgs>
-    enregisterPar?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mouvementCaisse"]>
 
   export type MouvementCaisseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     caisseId?: boolean
-    typeMouvement?: boolean
+    type_mouvement?: boolean
     montant?: boolean
     description?: boolean
     moyenPaiement?: boolean
-    enregisterParId?: boolean
+    enregistrerParId?: boolean
+    referenceExterne?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     caisse?: boolean | CaisseDefaultArgs<ExtArgs>
-    enregisterPar?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mouvementCaisse"]>
 
   export type MouvementCaisseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     caisseId?: boolean
-    typeMouvement?: boolean
+    type_mouvement?: boolean
     montant?: boolean
     description?: boolean
     moyenPaiement?: boolean
-    enregisterParId?: boolean
+    enregistrerParId?: boolean
+    referenceExterne?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     caisse?: boolean | CaisseDefaultArgs<ExtArgs>
-    enregisterPar?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mouvementCaisse"]>
 
   export type MouvementCaisseSelectScalar = {
     id?: boolean
     caisseId?: boolean
-    typeMouvement?: boolean
+    type_mouvement?: boolean
     montant?: boolean
     description?: boolean
     moyenPaiement?: boolean
-    enregisterParId?: boolean
+    enregistrerParId?: boolean
+    referenceExterne?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type MouvementCaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caisseId" | "typeMouvement" | "montant" | "description" | "moyenPaiement" | "enregisterParId" | "createdAt" | "updatedAt", ExtArgs["result"]["mouvementCaisse"]>
+  export type MouvementCaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caisseId" | "type_mouvement" | "montant" | "description" | "moyenPaiement" | "enregistrerParId" | "referenceExterne" | "createdAt" | "updatedAt", ExtArgs["result"]["mouvementCaisse"]>
   export type MouvementCaisseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     caisse?: boolean | CaisseDefaultArgs<ExtArgs>
-    enregisterPar?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
   }
   export type MouvementCaisseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     caisse?: boolean | CaisseDefaultArgs<ExtArgs>
-    enregisterPar?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
   }
   export type MouvementCaisseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     caisse?: boolean | CaisseDefaultArgs<ExtArgs>
-    enregisterPar?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
   }
 
   export type $MouvementCaissePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MouvementCaisse"
     objects: {
       caisse: Prisma.$CaissePayload<ExtArgs>
-      enregisterPar: Prisma.$UtilisateurPayload<ExtArgs>
+      utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       caisseId: number
-      typeMouvement: $Enums.TypeMouvementCaisse
-      montant: Prisma.Decimal
+      type_mouvement: $Enums.TypeMouvementCaisse
+      montant: number
       description: string | null
       moyenPaiement: $Enums.MoyenPaiment
-      enregisterParId: number
+      enregistrerParId: number
+      referenceExterne: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["mouvementCaisse"]>
@@ -23789,7 +23772,7 @@ export namespace Prisma {
   export interface Prisma__MouvementCaisseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     caisse<T extends CaisseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CaisseDefaultArgs<ExtArgs>>): Prisma__CaisseClient<$Result.GetResult<Prisma.$CaissePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    enregisterPar<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23821,11 +23804,12 @@ export namespace Prisma {
   interface MouvementCaisseFieldRefs {
     readonly id: FieldRef<"MouvementCaisse", 'Int'>
     readonly caisseId: FieldRef<"MouvementCaisse", 'Int'>
-    readonly typeMouvement: FieldRef<"MouvementCaisse", 'TypeMouvementCaisse'>
-    readonly montant: FieldRef<"MouvementCaisse", 'Decimal'>
+    readonly type_mouvement: FieldRef<"MouvementCaisse", 'TypeMouvementCaisse'>
+    readonly montant: FieldRef<"MouvementCaisse", 'Float'>
     readonly description: FieldRef<"MouvementCaisse", 'String'>
     readonly moyenPaiement: FieldRef<"MouvementCaisse", 'MoyenPaiment'>
-    readonly enregisterParId: FieldRef<"MouvementCaisse", 'Int'>
+    readonly enregistrerParId: FieldRef<"MouvementCaisse", 'Int'>
+    readonly referenceExterne: FieldRef<"MouvementCaisse", 'String'>
     readonly createdAt: FieldRef<"MouvementCaisse", 'DateTime'>
     readonly updatedAt: FieldRef<"MouvementCaisse", 'DateTime'>
   }
@@ -25622,8 +25606,8 @@ export namespace Prisma {
     soldeInitial: 'soldeInitial',
     soldeActuel: 'soldeActuel',
     deviseId: 'deviseId',
-    statut: 'statut',
     creeParId: 'creeParId',
+    statut: 'statut',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -25634,11 +25618,12 @@ export namespace Prisma {
   export const MouvementCaisseScalarFieldEnum: {
     id: 'id',
     caisseId: 'caisseId',
-    typeMouvement: 'typeMouvement',
+    type_mouvement: 'type_mouvement',
     montant: 'montant',
     description: 'description',
     moyenPaiement: 'moyenPaiement',
-    enregisterParId: 'enregisterParId',
+    enregistrerParId: 'enregistrerParId',
+    referenceExterne: 'referenceExterne',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -25867,20 +25852,6 @@ export namespace Prisma {
    * Reference to a field of type 'StatutCommande[]'
    */
   export type ListEnumStatutCommandeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutCommande[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Decimal'
-   */
-  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
-    
-
-
-  /**
-   * Reference to a field of type 'Decimal[]'
-   */
-  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
@@ -27236,16 +27207,16 @@ export namespace Prisma {
     id?: IntFilter<"Caisse"> | number
     nom?: StringFilter<"Caisse"> | string
     description?: StringNullableFilter<"Caisse"> | string | null
-    soldeInitial?: DecimalFilter<"Caisse"> | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFilter<"Caisse"> | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFilter<"Caisse"> | number
+    soldeActuel?: FloatFilter<"Caisse"> | number
     deviseId?: IntFilter<"Caisse"> | number
-    statut?: EnumStatutCaisseFilter<"Caisse"> | $Enums.StatutCaisse
     creeParId?: IntFilter<"Caisse"> | number
+    statut?: EnumStatutCaisseFilter<"Caisse"> | $Enums.StatutCaisse
     createdAt?: DateTimeFilter<"Caisse"> | Date | string
     updatedAt?: DateTimeFilter<"Caisse"> | Date | string
     devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    mouvements?: MouvementCaisseListRelationFilter
+    MouvementCaisse?: MouvementCaisseListRelationFilter
     clotures?: ClotureCaisseListRelationFilter
   }
 
@@ -27256,13 +27227,13 @@ export namespace Prisma {
     soldeInitial?: SortOrder
     soldeActuel?: SortOrder
     deviseId?: SortOrder
-    statut?: SortOrder
     creeParId?: SortOrder
+    statut?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     devise?: DeviseOrderByWithRelationInput
     utilisateur?: UtilisateurOrderByWithRelationInput
-    mouvements?: MouvementCaisseOrderByRelationAggregateInput
+    MouvementCaisse?: MouvementCaisseOrderByRelationAggregateInput
     clotures?: ClotureCaisseOrderByRelationAggregateInput
   }
 
@@ -27273,16 +27244,16 @@ export namespace Prisma {
     OR?: CaisseWhereInput[]
     NOT?: CaisseWhereInput | CaisseWhereInput[]
     description?: StringNullableFilter<"Caisse"> | string | null
-    soldeInitial?: DecimalFilter<"Caisse"> | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFilter<"Caisse"> | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFilter<"Caisse"> | number
+    soldeActuel?: FloatFilter<"Caisse"> | number
     deviseId?: IntFilter<"Caisse"> | number
-    statut?: EnumStatutCaisseFilter<"Caisse"> | $Enums.StatutCaisse
     creeParId?: IntFilter<"Caisse"> | number
+    statut?: EnumStatutCaisseFilter<"Caisse"> | $Enums.StatutCaisse
     createdAt?: DateTimeFilter<"Caisse"> | Date | string
     updatedAt?: DateTimeFilter<"Caisse"> | Date | string
     devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    mouvements?: MouvementCaisseListRelationFilter
+    MouvementCaisse?: MouvementCaisseListRelationFilter
     clotures?: ClotureCaisseListRelationFilter
   }, "id" | "nom">
 
@@ -27293,8 +27264,8 @@ export namespace Prisma {
     soldeInitial?: SortOrder
     soldeActuel?: SortOrder
     deviseId?: SortOrder
-    statut?: SortOrder
     creeParId?: SortOrder
+    statut?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CaisseCountOrderByAggregateInput
@@ -27311,11 +27282,11 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Caisse"> | number
     nom?: StringWithAggregatesFilter<"Caisse"> | string
     description?: StringNullableWithAggregatesFilter<"Caisse"> | string | null
-    soldeInitial?: DecimalWithAggregatesFilter<"Caisse"> | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalWithAggregatesFilter<"Caisse"> | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatWithAggregatesFilter<"Caisse"> | number
+    soldeActuel?: FloatWithAggregatesFilter<"Caisse"> | number
     deviseId?: IntWithAggregatesFilter<"Caisse"> | number
-    statut?: EnumStatutCaisseWithAggregatesFilter<"Caisse"> | $Enums.StatutCaisse
     creeParId?: IntWithAggregatesFilter<"Caisse"> | number
+    statut?: EnumStatutCaisseWithAggregatesFilter<"Caisse"> | $Enums.StatutCaisse
     createdAt?: DateTimeWithAggregatesFilter<"Caisse"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Caisse"> | Date | string
   }
@@ -27326,56 +27297,60 @@ export namespace Prisma {
     NOT?: MouvementCaisseWhereInput | MouvementCaisseWhereInput[]
     id?: IntFilter<"MouvementCaisse"> | number
     caisseId?: IntFilter<"MouvementCaisse"> | number
-    typeMouvement?: EnumTypeMouvementCaisseFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
-    montant?: DecimalFilter<"MouvementCaisse"> | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
+    montant?: FloatFilter<"MouvementCaisse"> | number
     description?: StringNullableFilter<"MouvementCaisse"> | string | null
     moyenPaiement?: EnumMoyenPaimentFilter<"MouvementCaisse"> | $Enums.MoyenPaiment
-    enregisterParId?: IntFilter<"MouvementCaisse"> | number
+    enregistrerParId?: IntFilter<"MouvementCaisse"> | number
+    referenceExterne?: StringNullableFilter<"MouvementCaisse"> | string | null
     createdAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
     updatedAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
     caisse?: XOR<CaisseScalarRelationFilter, CaisseWhereInput>
-    enregisterPar?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
+    utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
   }
 
   export type MouvementCaisseOrderByWithRelationInput = {
     id?: SortOrder
     caisseId?: SortOrder
-    typeMouvement?: SortOrder
+    type_mouvement?: SortOrder
     montant?: SortOrder
     description?: SortOrderInput | SortOrder
     moyenPaiement?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
+    referenceExterne?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     caisse?: CaisseOrderByWithRelationInput
-    enregisterPar?: UtilisateurOrderByWithRelationInput
+    utilisateur?: UtilisateurOrderByWithRelationInput
   }
 
   export type MouvementCaisseWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    referenceExterne?: string
     AND?: MouvementCaisseWhereInput | MouvementCaisseWhereInput[]
     OR?: MouvementCaisseWhereInput[]
     NOT?: MouvementCaisseWhereInput | MouvementCaisseWhereInput[]
     caisseId?: IntFilter<"MouvementCaisse"> | number
-    typeMouvement?: EnumTypeMouvementCaisseFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
-    montant?: DecimalFilter<"MouvementCaisse"> | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
+    montant?: FloatFilter<"MouvementCaisse"> | number
     description?: StringNullableFilter<"MouvementCaisse"> | string | null
     moyenPaiement?: EnumMoyenPaimentFilter<"MouvementCaisse"> | $Enums.MoyenPaiment
-    enregisterParId?: IntFilter<"MouvementCaisse"> | number
+    enregistrerParId?: IntFilter<"MouvementCaisse"> | number
     createdAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
     updatedAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
     caisse?: XOR<CaisseScalarRelationFilter, CaisseWhereInput>
-    enregisterPar?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-  }, "id">
+    utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
+  }, "id" | "referenceExterne">
 
   export type MouvementCaisseOrderByWithAggregationInput = {
     id?: SortOrder
     caisseId?: SortOrder
-    typeMouvement?: SortOrder
+    type_mouvement?: SortOrder
     montant?: SortOrder
     description?: SortOrderInput | SortOrder
     moyenPaiement?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
+    referenceExterne?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: MouvementCaisseCountOrderByAggregateInput
@@ -27391,11 +27366,12 @@ export namespace Prisma {
     NOT?: MouvementCaisseScalarWhereWithAggregatesInput | MouvementCaisseScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"MouvementCaisse"> | number
     caisseId?: IntWithAggregatesFilter<"MouvementCaisse"> | number
-    typeMouvement?: EnumTypeMouvementCaisseWithAggregatesFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
-    montant?: DecimalWithAggregatesFilter<"MouvementCaisse"> | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseWithAggregatesFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
+    montant?: FloatWithAggregatesFilter<"MouvementCaisse"> | number
     description?: StringNullableWithAggregatesFilter<"MouvementCaisse"> | string | null
     moyenPaiement?: EnumMoyenPaimentWithAggregatesFilter<"MouvementCaisse"> | $Enums.MoyenPaiment
-    enregisterParId?: IntWithAggregatesFilter<"MouvementCaisse"> | number
+    enregistrerParId?: IntWithAggregatesFilter<"MouvementCaisse"> | number
+    referenceExterne?: StringNullableWithAggregatesFilter<"MouvementCaisse"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"MouvementCaisse"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"MouvementCaisse"> | Date | string
   }
@@ -27580,7 +27556,7 @@ export namespace Prisma {
     Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeCreateNestedManyWithoutClientInput
     Caisse?: CaisseCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -27607,7 +27583,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
     Caisse?: CaisseUncheckedCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -27633,7 +27609,7 @@ export namespace Prisma {
     Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -27660,7 +27636,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -28800,14 +28776,14 @@ export namespace Prisma {
   export type CaisseCreateInput = {
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
+    soldeInitial: number
+    soldeActuel: number
     statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
     devise: DeviseCreateNestedOneWithoutCaisseInput
     utilisateur: UtilisateurCreateNestedOneWithoutCaisseInput
-    mouvements?: MouvementCaisseCreateNestedManyWithoutCaisseInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutCaisseInput
     clotures?: ClotureCaisseCreateNestedManyWithoutCaisseInput
   }
 
@@ -28815,28 +28791,28 @@ export namespace Prisma {
     id?: number
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
+    soldeInitial: number
+    soldeActuel: number
     deviseId: number
-    statut?: $Enums.StatutCaisse
     creeParId: number
+    statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
-    mouvements?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
     clotures?: ClotureCaisseUncheckedCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseUpdateInput = {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devise?: DeviseUpdateOneRequiredWithoutCaisseNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutCaisseNestedInput
-    mouvements?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
     clotures?: ClotureCaisseUpdateManyWithoutCaisseNestedInput
   }
 
@@ -28844,14 +28820,14 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
-    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     creeParId?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    mouvements?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
     clotures?: ClotureCaisseUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
@@ -28859,11 +28835,11 @@ export namespace Prisma {
     id?: number
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
+    soldeInitial: number
+    soldeActuel: number
     deviseId: number
-    statut?: $Enums.StatutCaisse
     creeParId: number
+    statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -28871,8 +28847,8 @@ export namespace Prisma {
   export type CaisseUpdateManyMutationInput = {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28882,57 +28858,61 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
-    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     creeParId?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MouvementCaisseCreateInput = {
-    typeMouvement: $Enums.TypeMouvementCaisse
-    montant: Decimal | DecimalJsLike | number | string
+    type_mouvement: $Enums.TypeMouvementCaisse
+    montant: number
     description?: string | null
     moyenPaiement: $Enums.MoyenPaiment
+    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    caisse: CaisseCreateNestedOneWithoutMouvementsInput
-    enregisterPar: UtilisateurCreateNestedOneWithoutMouvementCaisseInput
+    caisse: CaisseCreateNestedOneWithoutMouvementCaisseInput
+    utilisateur: UtilisateurCreateNestedOneWithoutMouvementCaisseInput
   }
 
   export type MouvementCaisseUncheckedCreateInput = {
     id?: number
     caisseId: number
-    typeMouvement: $Enums.TypeMouvementCaisse
-    montant: Decimal | DecimalJsLike | number | string
+    type_mouvement: $Enums.TypeMouvementCaisse
+    montant: number
     description?: string | null
     moyenPaiement: $Enums.MoyenPaiment
-    enregisterParId: number
+    enregistrerParId: number
+    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type MouvementCaisseUpdateInput = {
-    typeMouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
-    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    caisse?: CaisseUpdateOneRequiredWithoutMouvementsNestedInput
-    enregisterPar?: UtilisateurUpdateOneRequiredWithoutMouvementCaisseNestedInput
+    caisse?: CaisseUpdateOneRequiredWithoutMouvementCaisseNestedInput
+    utilisateur?: UtilisateurUpdateOneRequiredWithoutMouvementCaisseNestedInput
   }
 
   export type MouvementCaisseUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
-    typeMouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
-    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28940,20 +28920,22 @@ export namespace Prisma {
   export type MouvementCaisseCreateManyInput = {
     id?: number
     caisseId: number
-    typeMouvement: $Enums.TypeMouvementCaisse
-    montant: Decimal | DecimalJsLike | number | string
+    type_mouvement: $Enums.TypeMouvementCaisse
+    montant: number
     description?: string | null
     moyenPaiement: $Enums.MoyenPaiment
-    enregisterParId: number
+    enregistrerParId: number
+    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type MouvementCaisseUpdateManyMutationInput = {
-    typeMouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
-    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28961,11 +28943,12 @@ export namespace Prisma {
   export type MouvementCaisseUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
-    typeMouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
-    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30345,17 +30328,6 @@ export namespace Prisma {
     _max?: NestedEnumStatutCommandeFilter<$PrismaModel>
   }
 
-  export type DecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
   export type EnumStatutCaisseFilter<$PrismaModel = never> = {
     equals?: $Enums.StatutCaisse | EnumStatutCaisseFieldRefInput<$PrismaModel>
     in?: $Enums.StatutCaisse[] | ListEnumStatutCaisseFieldRefInput<$PrismaModel>
@@ -30370,8 +30342,8 @@ export namespace Prisma {
     soldeInitial?: SortOrder
     soldeActuel?: SortOrder
     deviseId?: SortOrder
-    statut?: SortOrder
     creeParId?: SortOrder
+    statut?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -30391,8 +30363,8 @@ export namespace Prisma {
     soldeInitial?: SortOrder
     soldeActuel?: SortOrder
     deviseId?: SortOrder
-    statut?: SortOrder
     creeParId?: SortOrder
+    statut?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -30404,8 +30376,8 @@ export namespace Prisma {
     soldeInitial?: SortOrder
     soldeActuel?: SortOrder
     deviseId?: SortOrder
-    statut?: SortOrder
     creeParId?: SortOrder
+    statut?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -30416,22 +30388,6 @@ export namespace Prisma {
     soldeActuel?: SortOrder
     deviseId?: SortOrder
     creeParId?: SortOrder
-  }
-
-  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type EnumStatutCaisseWithAggregatesFilter<$PrismaModel = never> = {
@@ -30459,11 +30415,12 @@ export namespace Prisma {
   export type MouvementCaisseCountOrderByAggregateInput = {
     id?: SortOrder
     caisseId?: SortOrder
-    typeMouvement?: SortOrder
+    type_mouvement?: SortOrder
     montant?: SortOrder
     description?: SortOrder
     moyenPaiement?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
+    referenceExterne?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -30472,17 +30429,18 @@ export namespace Prisma {
     id?: SortOrder
     caisseId?: SortOrder
     montant?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
   }
 
   export type MouvementCaisseMaxOrderByAggregateInput = {
     id?: SortOrder
     caisseId?: SortOrder
-    typeMouvement?: SortOrder
+    type_mouvement?: SortOrder
     montant?: SortOrder
     description?: SortOrder
     moyenPaiement?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
+    referenceExterne?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -30490,11 +30448,12 @@ export namespace Prisma {
   export type MouvementCaisseMinOrderByAggregateInput = {
     id?: SortOrder
     caisseId?: SortOrder
-    typeMouvement?: SortOrder
+    type_mouvement?: SortOrder
     montant?: SortOrder
     description?: SortOrder
     moyenPaiement?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
+    referenceExterne?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -30503,7 +30462,7 @@ export namespace Prisma {
     id?: SortOrder
     caisseId?: SortOrder
     montant?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
   }
 
   export type EnumTypeMouvementCaisseWithAggregatesFilter<$PrismaModel = never> = {
@@ -30651,10 +30610,10 @@ export namespace Prisma {
     connect?: CaisseWhereUniqueInput | CaisseWhereUniqueInput[]
   }
 
-  export type MouvementCaisseCreateNestedManyWithoutEnregisterParInput = {
-    create?: XOR<MouvementCaisseCreateWithoutEnregisterParInput, MouvementCaisseUncheckedCreateWithoutEnregisterParInput> | MouvementCaisseCreateWithoutEnregisterParInput[] | MouvementCaisseUncheckedCreateWithoutEnregisterParInput[]
-    connectOrCreate?: MouvementCaisseCreateOrConnectWithoutEnregisterParInput | MouvementCaisseCreateOrConnectWithoutEnregisterParInput[]
-    createMany?: MouvementCaisseCreateManyEnregisterParInputEnvelope
+  export type MouvementCaisseCreateNestedManyWithoutUtilisateurInput = {
+    create?: XOR<MouvementCaisseCreateWithoutUtilisateurInput, MouvementCaisseUncheckedCreateWithoutUtilisateurInput> | MouvementCaisseCreateWithoutUtilisateurInput[] | MouvementCaisseUncheckedCreateWithoutUtilisateurInput[]
+    connectOrCreate?: MouvementCaisseCreateOrConnectWithoutUtilisateurInput | MouvementCaisseCreateOrConnectWithoutUtilisateurInput[]
+    createMany?: MouvementCaisseCreateManyUtilisateurInputEnvelope
     connect?: MouvementCaisseWhereUniqueInput | MouvementCaisseWhereUniqueInput[]
   }
 
@@ -30742,10 +30701,10 @@ export namespace Prisma {
     connect?: CaisseWhereUniqueInput | CaisseWhereUniqueInput[]
   }
 
-  export type MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput = {
-    create?: XOR<MouvementCaisseCreateWithoutEnregisterParInput, MouvementCaisseUncheckedCreateWithoutEnregisterParInput> | MouvementCaisseCreateWithoutEnregisterParInput[] | MouvementCaisseUncheckedCreateWithoutEnregisterParInput[]
-    connectOrCreate?: MouvementCaisseCreateOrConnectWithoutEnregisterParInput | MouvementCaisseCreateOrConnectWithoutEnregisterParInput[]
-    createMany?: MouvementCaisseCreateManyEnregisterParInputEnvelope
+  export type MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput = {
+    create?: XOR<MouvementCaisseCreateWithoutUtilisateurInput, MouvementCaisseUncheckedCreateWithoutUtilisateurInput> | MouvementCaisseCreateWithoutUtilisateurInput[] | MouvementCaisseUncheckedCreateWithoutUtilisateurInput[]
+    connectOrCreate?: MouvementCaisseCreateOrConnectWithoutUtilisateurInput | MouvementCaisseCreateOrConnectWithoutUtilisateurInput[]
+    createMany?: MouvementCaisseCreateManyUtilisateurInputEnvelope
     connect?: MouvementCaisseWhereUniqueInput | MouvementCaisseWhereUniqueInput[]
   }
 
@@ -30926,17 +30885,17 @@ export namespace Prisma {
     deleteMany?: CaisseScalarWhereInput | CaisseScalarWhereInput[]
   }
 
-  export type MouvementCaisseUpdateManyWithoutEnregisterParNestedInput = {
-    create?: XOR<MouvementCaisseCreateWithoutEnregisterParInput, MouvementCaisseUncheckedCreateWithoutEnregisterParInput> | MouvementCaisseCreateWithoutEnregisterParInput[] | MouvementCaisseUncheckedCreateWithoutEnregisterParInput[]
-    connectOrCreate?: MouvementCaisseCreateOrConnectWithoutEnregisterParInput | MouvementCaisseCreateOrConnectWithoutEnregisterParInput[]
-    upsert?: MouvementCaisseUpsertWithWhereUniqueWithoutEnregisterParInput | MouvementCaisseUpsertWithWhereUniqueWithoutEnregisterParInput[]
-    createMany?: MouvementCaisseCreateManyEnregisterParInputEnvelope
+  export type MouvementCaisseUpdateManyWithoutUtilisateurNestedInput = {
+    create?: XOR<MouvementCaisseCreateWithoutUtilisateurInput, MouvementCaisseUncheckedCreateWithoutUtilisateurInput> | MouvementCaisseCreateWithoutUtilisateurInput[] | MouvementCaisseUncheckedCreateWithoutUtilisateurInput[]
+    connectOrCreate?: MouvementCaisseCreateOrConnectWithoutUtilisateurInput | MouvementCaisseCreateOrConnectWithoutUtilisateurInput[]
+    upsert?: MouvementCaisseUpsertWithWhereUniqueWithoutUtilisateurInput | MouvementCaisseUpsertWithWhereUniqueWithoutUtilisateurInput[]
+    createMany?: MouvementCaisseCreateManyUtilisateurInputEnvelope
     set?: MouvementCaisseWhereUniqueInput | MouvementCaisseWhereUniqueInput[]
     disconnect?: MouvementCaisseWhereUniqueInput | MouvementCaisseWhereUniqueInput[]
     delete?: MouvementCaisseWhereUniqueInput | MouvementCaisseWhereUniqueInput[]
     connect?: MouvementCaisseWhereUniqueInput | MouvementCaisseWhereUniqueInput[]
-    update?: MouvementCaisseUpdateWithWhereUniqueWithoutEnregisterParInput | MouvementCaisseUpdateWithWhereUniqueWithoutEnregisterParInput[]
-    updateMany?: MouvementCaisseUpdateManyWithWhereWithoutEnregisterParInput | MouvementCaisseUpdateManyWithWhereWithoutEnregisterParInput[]
+    update?: MouvementCaisseUpdateWithWhereUniqueWithoutUtilisateurInput | MouvementCaisseUpdateWithWhereUniqueWithoutUtilisateurInput[]
+    updateMany?: MouvementCaisseUpdateManyWithWhereWithoutUtilisateurInput | MouvementCaisseUpdateManyWithWhereWithoutUtilisateurInput[]
     deleteMany?: MouvementCaisseScalarWhereInput | MouvementCaisseScalarWhereInput[]
   }
 
@@ -31108,17 +31067,17 @@ export namespace Prisma {
     deleteMany?: CaisseScalarWhereInput | CaisseScalarWhereInput[]
   }
 
-  export type MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput = {
-    create?: XOR<MouvementCaisseCreateWithoutEnregisterParInput, MouvementCaisseUncheckedCreateWithoutEnregisterParInput> | MouvementCaisseCreateWithoutEnregisterParInput[] | MouvementCaisseUncheckedCreateWithoutEnregisterParInput[]
-    connectOrCreate?: MouvementCaisseCreateOrConnectWithoutEnregisterParInput | MouvementCaisseCreateOrConnectWithoutEnregisterParInput[]
-    upsert?: MouvementCaisseUpsertWithWhereUniqueWithoutEnregisterParInput | MouvementCaisseUpsertWithWhereUniqueWithoutEnregisterParInput[]
-    createMany?: MouvementCaisseCreateManyEnregisterParInputEnvelope
+  export type MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput = {
+    create?: XOR<MouvementCaisseCreateWithoutUtilisateurInput, MouvementCaisseUncheckedCreateWithoutUtilisateurInput> | MouvementCaisseCreateWithoutUtilisateurInput[] | MouvementCaisseUncheckedCreateWithoutUtilisateurInput[]
+    connectOrCreate?: MouvementCaisseCreateOrConnectWithoutUtilisateurInput | MouvementCaisseCreateOrConnectWithoutUtilisateurInput[]
+    upsert?: MouvementCaisseUpsertWithWhereUniqueWithoutUtilisateurInput | MouvementCaisseUpsertWithWhereUniqueWithoutUtilisateurInput[]
+    createMany?: MouvementCaisseCreateManyUtilisateurInputEnvelope
     set?: MouvementCaisseWhereUniqueInput | MouvementCaisseWhereUniqueInput[]
     disconnect?: MouvementCaisseWhereUniqueInput | MouvementCaisseWhereUniqueInput[]
     delete?: MouvementCaisseWhereUniqueInput | MouvementCaisseWhereUniqueInput[]
     connect?: MouvementCaisseWhereUniqueInput | MouvementCaisseWhereUniqueInput[]
-    update?: MouvementCaisseUpdateWithWhereUniqueWithoutEnregisterParInput | MouvementCaisseUpdateWithWhereUniqueWithoutEnregisterParInput[]
-    updateMany?: MouvementCaisseUpdateManyWithWhereWithoutEnregisterParInput | MouvementCaisseUpdateManyWithWhereWithoutEnregisterParInput[]
+    update?: MouvementCaisseUpdateWithWhereUniqueWithoutUtilisateurInput | MouvementCaisseUpdateWithWhereUniqueWithoutUtilisateurInput[]
+    updateMany?: MouvementCaisseUpdateManyWithWhereWithoutUtilisateurInput | MouvementCaisseUpdateManyWithWhereWithoutUtilisateurInput[]
     deleteMany?: MouvementCaisseScalarWhereInput | MouvementCaisseScalarWhereInput[]
   }
 
@@ -32660,14 +32619,6 @@ export namespace Prisma {
     connect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
   }
 
-  export type DecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
-  }
-
   export type EnumStatutCaisseFieldUpdateOperationsInput = {
     set?: $Enums.StatutCaisse
   }
@@ -32744,9 +32695,9 @@ export namespace Prisma {
     deleteMany?: ClotureCaisseScalarWhereInput | ClotureCaisseScalarWhereInput[]
   }
 
-  export type CaisseCreateNestedOneWithoutMouvementsInput = {
-    create?: XOR<CaisseCreateWithoutMouvementsInput, CaisseUncheckedCreateWithoutMouvementsInput>
-    connectOrCreate?: CaisseCreateOrConnectWithoutMouvementsInput
+  export type CaisseCreateNestedOneWithoutMouvementCaisseInput = {
+    create?: XOR<CaisseCreateWithoutMouvementCaisseInput, CaisseUncheckedCreateWithoutMouvementCaisseInput>
+    connectOrCreate?: CaisseCreateOrConnectWithoutMouvementCaisseInput
     connect?: CaisseWhereUniqueInput
   }
 
@@ -32760,12 +32711,12 @@ export namespace Prisma {
     set?: $Enums.TypeMouvementCaisse
   }
 
-  export type CaisseUpdateOneRequiredWithoutMouvementsNestedInput = {
-    create?: XOR<CaisseCreateWithoutMouvementsInput, CaisseUncheckedCreateWithoutMouvementsInput>
-    connectOrCreate?: CaisseCreateOrConnectWithoutMouvementsInput
-    upsert?: CaisseUpsertWithoutMouvementsInput
+  export type CaisseUpdateOneRequiredWithoutMouvementCaisseNestedInput = {
+    create?: XOR<CaisseCreateWithoutMouvementCaisseInput, CaisseUncheckedCreateWithoutMouvementCaisseInput>
+    connectOrCreate?: CaisseCreateOrConnectWithoutMouvementCaisseInput
+    upsert?: CaisseUpsertWithoutMouvementCaisseInput
     connect?: CaisseWhereUniqueInput
-    update?: XOR<XOR<CaisseUpdateToOneWithWhereWithoutMouvementsInput, CaisseUpdateWithoutMouvementsInput>, CaisseUncheckedUpdateWithoutMouvementsInput>
+    update?: XOR<XOR<CaisseUpdateToOneWithWhereWithoutMouvementCaisseInput, CaisseUpdateWithoutMouvementCaisseInput>, CaisseUncheckedUpdateWithoutMouvementCaisseInput>
   }
 
   export type UtilisateurUpdateOneRequiredWithoutMouvementCaisseNestedInput = {
@@ -33161,38 +33112,11 @@ export namespace Prisma {
     _max?: NestedEnumStatutCommandeFilter<$PrismaModel>
   }
 
-  export type NestedDecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
   export type NestedEnumStatutCaisseFilter<$PrismaModel = never> = {
     equals?: $Enums.StatutCaisse | EnumStatutCaisseFieldRefInput<$PrismaModel>
     in?: $Enums.StatutCaisse[] | ListEnumStatutCaisseFieldRefInput<$PrismaModel>
     notIn?: $Enums.StatutCaisse[] | ListEnumStatutCaisseFieldRefInput<$PrismaModel>
     not?: NestedEnumStatutCaisseFilter<$PrismaModel> | $Enums.StatutCaisse
-  }
-
-  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type NestedEnumStatutCaisseWithAggregatesFilter<$PrismaModel = never> = {
@@ -33571,13 +33495,13 @@ export namespace Prisma {
   export type CaisseCreateWithoutUtilisateurInput = {
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
+    soldeInitial: number
+    soldeActuel: number
     statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
     devise: DeviseCreateNestedOneWithoutCaisseInput
-    mouvements?: MouvementCaisseCreateNestedManyWithoutCaisseInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutCaisseInput
     clotures?: ClotureCaisseCreateNestedManyWithoutCaisseInput
   }
 
@@ -33585,13 +33509,13 @@ export namespace Prisma {
     id?: number
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
+    soldeInitial: number
+    soldeActuel: number
     deviseId: number
     statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
-    mouvements?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
     clotures?: ClotureCaisseUncheckedCreateNestedManyWithoutCaisseInput
   }
 
@@ -33605,34 +33529,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type MouvementCaisseCreateWithoutEnregisterParInput = {
-    typeMouvement: $Enums.TypeMouvementCaisse
-    montant: Decimal | DecimalJsLike | number | string
+  export type MouvementCaisseCreateWithoutUtilisateurInput = {
+    type_mouvement: $Enums.TypeMouvementCaisse
+    montant: number
     description?: string | null
     moyenPaiement: $Enums.MoyenPaiment
+    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    caisse: CaisseCreateNestedOneWithoutMouvementsInput
+    caisse: CaisseCreateNestedOneWithoutMouvementCaisseInput
   }
 
-  export type MouvementCaisseUncheckedCreateWithoutEnregisterParInput = {
+  export type MouvementCaisseUncheckedCreateWithoutUtilisateurInput = {
     id?: number
     caisseId: number
-    typeMouvement: $Enums.TypeMouvementCaisse
-    montant: Decimal | DecimalJsLike | number | string
+    type_mouvement: $Enums.TypeMouvementCaisse
+    montant: number
     description?: string | null
     moyenPaiement: $Enums.MoyenPaiment
+    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type MouvementCaisseCreateOrConnectWithoutEnregisterParInput = {
+  export type MouvementCaisseCreateOrConnectWithoutUtilisateurInput = {
     where: MouvementCaisseWhereUniqueInput
-    create: XOR<MouvementCaisseCreateWithoutEnregisterParInput, MouvementCaisseUncheckedCreateWithoutEnregisterParInput>
+    create: XOR<MouvementCaisseCreateWithoutUtilisateurInput, MouvementCaisseUncheckedCreateWithoutUtilisateurInput>
   }
 
-  export type MouvementCaisseCreateManyEnregisterParInputEnvelope = {
-    data: MouvementCaisseCreateManyEnregisterParInput | MouvementCaisseCreateManyEnregisterParInput[]
+  export type MouvementCaisseCreateManyUtilisateurInputEnvelope = {
+    data: MouvementCaisseCreateManyUtilisateurInput | MouvementCaisseCreateManyUtilisateurInput[]
     skipDuplicates?: boolean
   }
 
@@ -34000,29 +33926,29 @@ export namespace Prisma {
     id?: IntFilter<"Caisse"> | number
     nom?: StringFilter<"Caisse"> | string
     description?: StringNullableFilter<"Caisse"> | string | null
-    soldeInitial?: DecimalFilter<"Caisse"> | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFilter<"Caisse"> | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFilter<"Caisse"> | number
+    soldeActuel?: FloatFilter<"Caisse"> | number
     deviseId?: IntFilter<"Caisse"> | number
-    statut?: EnumStatutCaisseFilter<"Caisse"> | $Enums.StatutCaisse
     creeParId?: IntFilter<"Caisse"> | number
+    statut?: EnumStatutCaisseFilter<"Caisse"> | $Enums.StatutCaisse
     createdAt?: DateTimeFilter<"Caisse"> | Date | string
     updatedAt?: DateTimeFilter<"Caisse"> | Date | string
   }
 
-  export type MouvementCaisseUpsertWithWhereUniqueWithoutEnregisterParInput = {
+  export type MouvementCaisseUpsertWithWhereUniqueWithoutUtilisateurInput = {
     where: MouvementCaisseWhereUniqueInput
-    update: XOR<MouvementCaisseUpdateWithoutEnregisterParInput, MouvementCaisseUncheckedUpdateWithoutEnregisterParInput>
-    create: XOR<MouvementCaisseCreateWithoutEnregisterParInput, MouvementCaisseUncheckedCreateWithoutEnregisterParInput>
+    update: XOR<MouvementCaisseUpdateWithoutUtilisateurInput, MouvementCaisseUncheckedUpdateWithoutUtilisateurInput>
+    create: XOR<MouvementCaisseCreateWithoutUtilisateurInput, MouvementCaisseUncheckedCreateWithoutUtilisateurInput>
   }
 
-  export type MouvementCaisseUpdateWithWhereUniqueWithoutEnregisterParInput = {
+  export type MouvementCaisseUpdateWithWhereUniqueWithoutUtilisateurInput = {
     where: MouvementCaisseWhereUniqueInput
-    data: XOR<MouvementCaisseUpdateWithoutEnregisterParInput, MouvementCaisseUncheckedUpdateWithoutEnregisterParInput>
+    data: XOR<MouvementCaisseUpdateWithoutUtilisateurInput, MouvementCaisseUncheckedUpdateWithoutUtilisateurInput>
   }
 
-  export type MouvementCaisseUpdateManyWithWhereWithoutEnregisterParInput = {
+  export type MouvementCaisseUpdateManyWithWhereWithoutUtilisateurInput = {
     where: MouvementCaisseScalarWhereInput
-    data: XOR<MouvementCaisseUpdateManyMutationInput, MouvementCaisseUncheckedUpdateManyWithoutEnregisterParInput>
+    data: XOR<MouvementCaisseUpdateManyMutationInput, MouvementCaisseUncheckedUpdateManyWithoutUtilisateurInput>
   }
 
   export type MouvementCaisseScalarWhereInput = {
@@ -34031,11 +33957,12 @@ export namespace Prisma {
     NOT?: MouvementCaisseScalarWhereInput | MouvementCaisseScalarWhereInput[]
     id?: IntFilter<"MouvementCaisse"> | number
     caisseId?: IntFilter<"MouvementCaisse"> | number
-    typeMouvement?: EnumTypeMouvementCaisseFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
-    montant?: DecimalFilter<"MouvementCaisse"> | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
+    montant?: FloatFilter<"MouvementCaisse"> | number
     description?: StringNullableFilter<"MouvementCaisse"> | string | null
     moyenPaiement?: EnumMoyenPaimentFilter<"MouvementCaisse"> | $Enums.MoyenPaiment
-    enregisterParId?: IntFilter<"MouvementCaisse"> | number
+    enregistrerParId?: IntFilter<"MouvementCaisse"> | number
+    referenceExterne?: StringNullableFilter<"MouvementCaisse"> | string | null
     createdAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
     updatedAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
   }
@@ -34090,7 +34017,7 @@ export namespace Prisma {
     Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeCreateNestedManyWithoutClientInput
     Caisse?: CaisseCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -34116,7 +34043,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
     Caisse?: CaisseUncheckedCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -34281,7 +34208,7 @@ export namespace Prisma {
     Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -34307,7 +34234,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -34402,7 +34329,7 @@ export namespace Prisma {
     Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeCreateNestedManyWithoutClientInput
     Caisse?: CaisseCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -34428,7 +34355,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
     Caisse?: CaisseUncheckedCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -34593,7 +34520,7 @@ export namespace Prisma {
     Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -34619,7 +34546,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -35032,7 +34959,7 @@ export namespace Prisma {
     Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeCreateNestedManyWithoutClientInput
     Caisse?: CaisseCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -35058,7 +34985,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
     Caisse?: CaisseUncheckedCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -35134,7 +35061,7 @@ export namespace Prisma {
     Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -35160,7 +35087,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -35201,7 +35128,7 @@ export namespace Prisma {
     Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeCreateNestedManyWithoutClientInput
     Caisse?: CaisseCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -35227,7 +35154,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
     Caisse?: CaisseUncheckedCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -35305,13 +35232,13 @@ export namespace Prisma {
   export type CaisseCreateWithoutDeviseInput = {
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
+    soldeInitial: number
+    soldeActuel: number
     statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
     utilisateur: UtilisateurCreateNestedOneWithoutCaisseInput
-    mouvements?: MouvementCaisseCreateNestedManyWithoutCaisseInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutCaisseInput
     clotures?: ClotureCaisseCreateNestedManyWithoutCaisseInput
   }
 
@@ -35319,13 +35246,13 @@ export namespace Prisma {
     id?: number
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
-    statut?: $Enums.StatutCaisse
+    soldeInitial: number
+    soldeActuel: number
     creeParId: number
+    statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
-    mouvements?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
     clotures?: ClotureCaisseUncheckedCreateNestedManyWithoutCaisseInput
   }
 
@@ -35371,7 +35298,7 @@ export namespace Prisma {
     Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -35397,7 +35324,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -35530,7 +35457,7 @@ export namespace Prisma {
     Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeCreateNestedManyWithoutClientInput
     Caisse?: CaisseCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -35556,7 +35483,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
     Caisse?: CaisseUncheckedCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -35686,7 +35613,7 @@ export namespace Prisma {
     Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -35712,7 +35639,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -36018,7 +35945,7 @@ export namespace Prisma {
     Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeCreateNestedManyWithoutClientInput
     Caisse?: CaisseCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -36044,7 +35971,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
     Caisse?: CaisseUncheckedCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -36175,7 +36102,7 @@ export namespace Prisma {
     Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -36201,7 +36128,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -36296,7 +36223,7 @@ export namespace Prisma {
     Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeCreateNestedManyWithoutClientInput
     Caisse?: CaisseCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -36322,7 +36249,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
     Caisse?: CaisseUncheckedCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -36552,7 +36479,7 @@ export namespace Prisma {
     Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -36578,7 +36505,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -36865,7 +36792,7 @@ export namespace Prisma {
     Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeCreateNestedManyWithoutClientInput
     Caisse?: CaisseCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -36891,7 +36818,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
     Caisse?: CaisseUncheckedCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -37028,7 +36955,7 @@ export namespace Prisma {
     Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -37054,7 +36981,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -37137,7 +37064,7 @@ export namespace Prisma {
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeCreateNestedManyWithoutClientInput
     Caisse?: CaisseCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -37163,7 +37090,7 @@ export namespace Prisma {
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
     Caisse?: CaisseUncheckedCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -37320,7 +37247,7 @@ export namespace Prisma {
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -37346,7 +37273,7 @@ export namespace Prisma {
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -37499,7 +37426,7 @@ export namespace Prisma {
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
     Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
     Caisse?: CaisseCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -37525,7 +37452,7 @@ export namespace Prisma {
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
     Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
     Caisse?: CaisseUncheckedCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -37708,7 +37635,7 @@ export namespace Prisma {
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
     Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
     Caisse?: CaisseUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -37734,7 +37661,7 @@ export namespace Prisma {
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
     Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
     Caisse?: CaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -37921,7 +37848,7 @@ export namespace Prisma {
     Panier?: PanierCreateNestedManyWithoutUtilisateurInput
     Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeCreateNestedManyWithoutClientInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -37947,7 +37874,7 @@ export namespace Prisma {
     Panier?: PanierUncheckedCreateNestedManyWithoutUtilisateurInput
     Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
     ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutUtilisateurClotureInput
   }
 
@@ -37957,22 +37884,24 @@ export namespace Prisma {
   }
 
   export type MouvementCaisseCreateWithoutCaisseInput = {
-    typeMouvement: $Enums.TypeMouvementCaisse
-    montant: Decimal | DecimalJsLike | number | string
+    type_mouvement: $Enums.TypeMouvementCaisse
+    montant: number
     description?: string | null
     moyenPaiement: $Enums.MoyenPaiment
+    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    enregisterPar: UtilisateurCreateNestedOneWithoutMouvementCaisseInput
+    utilisateur: UtilisateurCreateNestedOneWithoutMouvementCaisseInput
   }
 
   export type MouvementCaisseUncheckedCreateWithoutCaisseInput = {
     id?: number
-    typeMouvement: $Enums.TypeMouvementCaisse
-    montant: Decimal | DecimalJsLike | number | string
+    type_mouvement: $Enums.TypeMouvementCaisse
+    montant: number
     description?: string | null
     moyenPaiement: $Enums.MoyenPaiment
-    enregisterParId: number
+    enregistrerParId: number
+    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -38080,7 +38009,7 @@ export namespace Prisma {
     Panier?: PanierUpdateManyWithoutUtilisateurNestedInput
     Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUpdateManyWithoutClientNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -38106,7 +38035,7 @@ export namespace Prisma {
     Panier?: PanierUncheckedUpdateManyWithoutUtilisateurNestedInput
     Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
@@ -38142,11 +38071,11 @@ export namespace Prisma {
     data: XOR<ClotureCaisseUpdateManyMutationInput, ClotureCaisseUncheckedUpdateManyWithoutCaisseInput>
   }
 
-  export type CaisseCreateWithoutMouvementsInput = {
+  export type CaisseCreateWithoutMouvementCaisseInput = {
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
+    soldeInitial: number
+    soldeActuel: number
     statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38155,23 +38084,23 @@ export namespace Prisma {
     clotures?: ClotureCaisseCreateNestedManyWithoutCaisseInput
   }
 
-  export type CaisseUncheckedCreateWithoutMouvementsInput = {
+  export type CaisseUncheckedCreateWithoutMouvementCaisseInput = {
     id?: number
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
+    soldeInitial: number
+    soldeActuel: number
     deviseId: number
-    statut?: $Enums.StatutCaisse
     creeParId: number
+    statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
     clotures?: ClotureCaisseUncheckedCreateNestedManyWithoutCaisseInput
   }
 
-  export type CaisseCreateOrConnectWithoutMouvementsInput = {
+  export type CaisseCreateOrConnectWithoutMouvementCaisseInput = {
     where: CaisseWhereUniqueInput
-    create: XOR<CaisseCreateWithoutMouvementsInput, CaisseUncheckedCreateWithoutMouvementsInput>
+    create: XOR<CaisseCreateWithoutMouvementCaisseInput, CaisseUncheckedCreateWithoutMouvementCaisseInput>
   }
 
   export type UtilisateurCreateWithoutMouvementCaisseInput = {
@@ -38230,22 +38159,22 @@ export namespace Prisma {
     create: XOR<UtilisateurCreateWithoutMouvementCaisseInput, UtilisateurUncheckedCreateWithoutMouvementCaisseInput>
   }
 
-  export type CaisseUpsertWithoutMouvementsInput = {
-    update: XOR<CaisseUpdateWithoutMouvementsInput, CaisseUncheckedUpdateWithoutMouvementsInput>
-    create: XOR<CaisseCreateWithoutMouvementsInput, CaisseUncheckedCreateWithoutMouvementsInput>
+  export type CaisseUpsertWithoutMouvementCaisseInput = {
+    update: XOR<CaisseUpdateWithoutMouvementCaisseInput, CaisseUncheckedUpdateWithoutMouvementCaisseInput>
+    create: XOR<CaisseCreateWithoutMouvementCaisseInput, CaisseUncheckedCreateWithoutMouvementCaisseInput>
     where?: CaisseWhereInput
   }
 
-  export type CaisseUpdateToOneWithWhereWithoutMouvementsInput = {
+  export type CaisseUpdateToOneWithWhereWithoutMouvementCaisseInput = {
     where?: CaisseWhereInput
-    data: XOR<CaisseUpdateWithoutMouvementsInput, CaisseUncheckedUpdateWithoutMouvementsInput>
+    data: XOR<CaisseUpdateWithoutMouvementCaisseInput, CaisseUncheckedUpdateWithoutMouvementCaisseInput>
   }
 
-  export type CaisseUpdateWithoutMouvementsInput = {
+  export type CaisseUpdateWithoutMouvementCaisseInput = {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38254,15 +38183,15 @@ export namespace Prisma {
     clotures?: ClotureCaisseUpdateManyWithoutCaisseNestedInput
   }
 
-  export type CaisseUncheckedUpdateWithoutMouvementsInput = {
+  export type CaisseUncheckedUpdateWithoutMouvementCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
-    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     creeParId?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     clotures?: ClotureCaisseUncheckedUpdateManyWithoutCaisseNestedInput
@@ -38333,28 +38262,28 @@ export namespace Prisma {
   export type CaisseCreateWithoutCloturesInput = {
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
+    soldeInitial: number
+    soldeActuel: number
     statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
     devise: DeviseCreateNestedOneWithoutCaisseInput
     utilisateur: UtilisateurCreateNestedOneWithoutCaisseInput
-    mouvements?: MouvementCaisseCreateNestedManyWithoutCaisseInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseUncheckedCreateWithoutCloturesInput = {
     id?: number
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
+    soldeInitial: number
+    soldeActuel: number
     deviseId: number
-    statut?: $Enums.StatutCaisse
     creeParId: number
+    statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
-    mouvements?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseCreateOrConnectWithoutCloturesInput = {
@@ -38384,7 +38313,7 @@ export namespace Prisma {
     Reservation?: ReservationCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeCreateNestedManyWithoutClientInput
     Caisse?: CaisseCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutUtilisateurInput
   }
 
   export type UtilisateurUncheckedCreateWithoutClotureCaisseInput = {
@@ -38410,7 +38339,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedCreateNestedManyWithoutUtilisateurInput
     Commande?: CommandeUncheckedCreateNestedManyWithoutClientInput
     Caisse?: CaisseUncheckedCreateNestedManyWithoutUtilisateurInput
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutEnregisterParInput
+    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutUtilisateurInput
   }
 
   export type UtilisateurCreateOrConnectWithoutClotureCaisseInput = {
@@ -38432,28 +38361,28 @@ export namespace Prisma {
   export type CaisseUpdateWithoutCloturesInput = {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devise?: DeviseUpdateOneRequiredWithoutCaisseNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutCaisseNestedInput
-    mouvements?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
   }
 
   export type CaisseUncheckedUpdateWithoutCloturesInput = {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
-    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     creeParId?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    mouvements?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
   export type UtilisateurUpsertWithoutClotureCaisseInput = {
@@ -38489,7 +38418,7 @@ export namespace Prisma {
     Reservation?: ReservationUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutUtilisateurNestedInput
   }
 
   export type UtilisateurUncheckedUpdateWithoutClotureCaisseInput = {
@@ -38515,7 +38444,7 @@ export namespace Prisma {
     Reservation?: ReservationUncheckedUpdateManyWithoutUtilisateurNestedInput
     Commande?: CommandeUncheckedUpdateManyWithoutClientNestedInput
     Caisse?: CaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutEnregisterParNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
   }
 
   export type AdresseCreateManyUtilisateurInput = {
@@ -38636,21 +38565,22 @@ export namespace Prisma {
     id?: number
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
+    soldeInitial: number
+    soldeActuel: number
     deviseId: number
     statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type MouvementCaisseCreateManyEnregisterParInput = {
+  export type MouvementCaisseCreateManyUtilisateurInput = {
     id?: number
     caisseId: number
-    typeMouvement: $Enums.TypeMouvementCaisse
-    montant: Decimal | DecimalJsLike | number | string
+    type_mouvement: $Enums.TypeMouvementCaisse
+    montant: number
     description?: string | null
     moyenPaiement: $Enums.MoyenPaiment
+    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -39027,13 +38957,13 @@ export namespace Prisma {
   export type CaisseUpdateWithoutUtilisateurInput = {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devise?: DeviseUpdateOneRequiredWithoutCaisseNestedInput
-    mouvements?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
     clotures?: ClotureCaisseUpdateManyWithoutCaisseNestedInput
   }
 
@@ -39041,13 +38971,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    mouvements?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
     clotures?: ClotureCaisseUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
@@ -39055,42 +38985,45 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MouvementCaisseUpdateWithoutEnregisterParInput = {
-    typeMouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
-    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  export type MouvementCaisseUpdateWithoutUtilisateurInput = {
+    type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    caisse?: CaisseUpdateOneRequiredWithoutMouvementsNestedInput
+    caisse?: CaisseUpdateOneRequiredWithoutMouvementCaisseNestedInput
   }
 
-  export type MouvementCaisseUncheckedUpdateWithoutEnregisterParInput = {
+  export type MouvementCaisseUncheckedUpdateWithoutUtilisateurInput = {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
-    typeMouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
-    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MouvementCaisseUncheckedUpdateManyWithoutEnregisterParInput = {
+  export type MouvementCaisseUncheckedUpdateManyWithoutUtilisateurInput = {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
-    typeMouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
-    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39808,10 +39741,10 @@ export namespace Prisma {
     id?: number
     nom: string
     description?: string | null
-    soldeInitial?: Decimal | DecimalJsLike | number | string
-    soldeActuel: Decimal | DecimalJsLike | number | string
-    statut?: $Enums.StatutCaisse
+    soldeInitial: number
+    soldeActuel: number
     creeParId: number
+    statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -39885,13 +39818,13 @@ export namespace Prisma {
   export type CaisseUpdateWithoutDeviseInput = {
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneRequiredWithoutCaisseNestedInput
-    mouvements?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
+    MouvementCaisse?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
     clotures?: ClotureCaisseUpdateManyWithoutCaisseNestedInput
   }
 
@@ -39899,13 +39832,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     creeParId?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    mouvements?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
+    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
     clotures?: ClotureCaisseUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
@@ -39913,10 +39846,10 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    soldeActuel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    soldeInitial?: FloatFieldUpdateOperationsInput | number
+    soldeActuel?: FloatFieldUpdateOperationsInput | number
     creeParId?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -40418,11 +40351,12 @@ export namespace Prisma {
 
   export type MouvementCaisseCreateManyCaisseInput = {
     id?: number
-    typeMouvement: $Enums.TypeMouvementCaisse
-    montant: Decimal | DecimalJsLike | number | string
+    type_mouvement: $Enums.TypeMouvementCaisse
+    montant: number
     description?: string | null
     moyenPaiement: $Enums.MoyenPaiment
-    enregisterParId: number
+    enregistrerParId: number
+    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -40437,33 +40371,36 @@ export namespace Prisma {
   }
 
   export type MouvementCaisseUpdateWithoutCaisseInput = {
-    typeMouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
-    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    enregisterPar?: UtilisateurUpdateOneRequiredWithoutMouvementCaisseNestedInput
+    utilisateur?: UtilisateurUpdateOneRequiredWithoutMouvementCaisseNestedInput
   }
 
   export type MouvementCaisseUncheckedUpdateWithoutCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
-    typeMouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
-    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MouvementCaisseUncheckedUpdateManyWithoutCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
-    typeMouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
-    montant?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

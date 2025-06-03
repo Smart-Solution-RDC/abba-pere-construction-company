@@ -145,7 +145,7 @@ export async function DELETE (req: Request, { params }: RouteParams ) {
     })
 
     if (!commande) {
-        return new Response("Commande Not Found", { status: 201 });
+        return new Response("Commande Not Found", { status: 404 });
     }
 
     try {
@@ -157,5 +157,4 @@ export async function DELETE (req: Request, { params }: RouteParams ) {
     } catch (error) {
         return new Response("Invalid Data!", { status: 201 });
     }
-
 }

@@ -307,8 +307,8 @@ exports.Prisma.CaisseScalarFieldEnum = {
   soldeInitial: 'soldeInitial',
   soldeActuel: 'soldeActuel',
   deviseId: 'deviseId',
-  statut: 'statut',
   creeParId: 'creeParId',
+  statut: 'statut',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -316,11 +316,12 @@ exports.Prisma.CaisseScalarFieldEnum = {
 exports.Prisma.MouvementCaisseScalarFieldEnum = {
   id: 'id',
   caisseId: 'caisseId',
-  typeMouvement: 'typeMouvement',
+  type_mouvement: 'type_mouvement',
   montant: 'montant',
   description: 'description',
   moyenPaiement: 'moyenPaiement',
-  enregisterParId: 'enregisterParId',
+  enregistrerParId: 'enregistrerParId',
+  referenceExterne: 'referenceExterne',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
