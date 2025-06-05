@@ -223,7 +223,7 @@ exports.Prisma.VenteScalarFieldEnum = {
   total_ht: 'total_ht',
   type_acheteur: 'type_acheteur',
   clientId: 'clientId',
-  enregisterParId: 'enregisterParId',
+  enregistrerParId: 'enregistrerParId',
   fournisseurId: 'fournisseurId',
   agentId: 'agentId',
   paiementId: 'paiementId',
@@ -255,7 +255,7 @@ exports.Prisma.AchatScalarFieldEnum = {
   statut: 'statut',
   panierId: 'panierId',
   fournisseurId: 'fournisseurId',
-  enregisterParId: 'enregisterParId',
+  enregistrerParId: 'enregistrerParId',
   paiementId: 'paiementId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -317,9 +317,9 @@ exports.Prisma.MouvementCaisseScalarFieldEnum = {
   id: 'id',
   caisseId: 'caisseId',
   type_mouvement: 'type_mouvement',
+  categorie: 'categorie',
   montant: 'montant',
   description: 'description',
-  moyenPaiement: 'moyenPaiement',
   enregistrerParId: 'enregistrerParId',
   referenceExterne: 'referenceExterne',
   createdAt: 'createdAt',
@@ -425,6 +425,17 @@ exports.StatutCaisse = exports.$Enums.StatutCaisse = {
 exports.TypeMouvementCaisse = exports.$Enums.TypeMouvementCaisse = {
   ENTREE: 'ENTREE',
   SORTIE: 'SORTIE'
+};
+
+exports.CategorieMouvement = exports.$Enums.CategorieMouvement = {
+  ACHAT: 'ACHAT',
+  VENTE: 'VENTE',
+  FOURNISSEUR: 'FOURNISSEUR',
+  SALAIRE: 'SALAIRE',
+  LOYER: 'LOYER',
+  EMPRUNT: 'EMPRUNT',
+  TAXE: 'TAXE',
+  AUTRES: 'AUTRES'
 };
 
 exports.Prisma.ModelName = {

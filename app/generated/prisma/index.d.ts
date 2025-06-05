@@ -217,6 +217,20 @@ export const StatutCaisse: {
 
 export type StatutCaisse = (typeof StatutCaisse)[keyof typeof StatutCaisse]
 
+
+export const CategorieMouvement: {
+  ACHAT: 'ACHAT',
+  VENTE: 'VENTE',
+  FOURNISSEUR: 'FOURNISSEUR',
+  SALAIRE: 'SALAIRE',
+  LOYER: 'LOYER',
+  EMPRUNT: 'EMPRUNT',
+  TAXE: 'TAXE',
+  AUTRES: 'AUTRES'
+};
+
+export type CategorieMouvement = (typeof CategorieMouvement)[keyof typeof CategorieMouvement]
+
 }
 
 export type Role = $Enums.Role
@@ -262,6 +276,10 @@ export const TypeMouvementCaisse: typeof $Enums.TypeMouvementCaisse
 export type StatutCaisse = $Enums.StatutCaisse
 
 export const StatutCaisse: typeof $Enums.StatutCaisse
+
+export type CategorieMouvement = $Enums.CategorieMouvement
+
+export const CategorieMouvement: typeof $Enums.CategorieMouvement
 
 /**
  * ##  Prisma Client ʲˢ
@@ -14242,7 +14260,7 @@ export namespace Prisma {
     total_ttc: number | null
     total_ht: number | null
     clientId: number | null
-    enregisterParId: number | null
+    enregistrerParId: number | null
     fournisseurId: number | null
     agentId: number | null
     paiementId: number | null
@@ -14254,7 +14272,7 @@ export namespace Prisma {
     total_ttc: number | null
     total_ht: number | null
     clientId: number | null
-    enregisterParId: number | null
+    enregistrerParId: number | null
     fournisseurId: number | null
     agentId: number | null
     paiementId: number | null
@@ -14268,7 +14286,7 @@ export namespace Prisma {
     total_ht: number | null
     type_acheteur: $Enums.TypeClient | null
     clientId: number | null
-    enregisterParId: number | null
+    enregistrerParId: number | null
     fournisseurId: number | null
     agentId: number | null
     paiementId: number | null
@@ -14284,7 +14302,7 @@ export namespace Prisma {
     total_ht: number | null
     type_acheteur: $Enums.TypeClient | null
     clientId: number | null
-    enregisterParId: number | null
+    enregistrerParId: number | null
     fournisseurId: number | null
     agentId: number | null
     paiementId: number | null
@@ -14300,7 +14318,7 @@ export namespace Prisma {
     total_ht: number
     type_acheteur: number
     clientId: number
-    enregisterParId: number
+    enregistrerParId: number
     fournisseurId: number
     agentId: number
     paiementId: number
@@ -14316,7 +14334,7 @@ export namespace Prisma {
     total_ttc?: true
     total_ht?: true
     clientId?: true
-    enregisterParId?: true
+    enregistrerParId?: true
     fournisseurId?: true
     agentId?: true
     paiementId?: true
@@ -14328,7 +14346,7 @@ export namespace Prisma {
     total_ttc?: true
     total_ht?: true
     clientId?: true
-    enregisterParId?: true
+    enregistrerParId?: true
     fournisseurId?: true
     agentId?: true
     paiementId?: true
@@ -14342,7 +14360,7 @@ export namespace Prisma {
     total_ht?: true
     type_acheteur?: true
     clientId?: true
-    enregisterParId?: true
+    enregistrerParId?: true
     fournisseurId?: true
     agentId?: true
     paiementId?: true
@@ -14358,7 +14376,7 @@ export namespace Prisma {
     total_ht?: true
     type_acheteur?: true
     clientId?: true
-    enregisterParId?: true
+    enregistrerParId?: true
     fournisseurId?: true
     agentId?: true
     paiementId?: true
@@ -14374,7 +14392,7 @@ export namespace Prisma {
     total_ht?: true
     type_acheteur?: true
     clientId?: true
-    enregisterParId?: true
+    enregistrerParId?: true
     fournisseurId?: true
     agentId?: true
     paiementId?: true
@@ -14477,7 +14495,7 @@ export namespace Prisma {
     total_ht: number
     type_acheteur: $Enums.TypeClient
     clientId: number | null
-    enregisterParId: number
+    enregistrerParId: number
     fournisseurId: number | null
     agentId: number | null
     paiementId: number
@@ -14512,7 +14530,7 @@ export namespace Prisma {
     total_ht?: boolean
     type_acheteur?: boolean
     clientId?: boolean
-    enregisterParId?: boolean
+    enregistrerParId?: boolean
     fournisseurId?: boolean
     agentId?: boolean
     paiementId?: boolean
@@ -14532,7 +14550,7 @@ export namespace Prisma {
     total_ht?: boolean
     type_acheteur?: boolean
     clientId?: boolean
-    enregisterParId?: boolean
+    enregistrerParId?: boolean
     fournisseurId?: boolean
     agentId?: boolean
     paiementId?: boolean
@@ -14552,7 +14570,7 @@ export namespace Prisma {
     total_ht?: boolean
     type_acheteur?: boolean
     clientId?: boolean
-    enregisterParId?: boolean
+    enregistrerParId?: boolean
     fournisseurId?: boolean
     agentId?: boolean
     paiementId?: boolean
@@ -14572,7 +14590,7 @@ export namespace Prisma {
     total_ht?: boolean
     type_acheteur?: boolean
     clientId?: boolean
-    enregisterParId?: boolean
+    enregistrerParId?: boolean
     fournisseurId?: boolean
     agentId?: boolean
     paiementId?: boolean
@@ -14581,7 +14599,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type VenteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "total_ttc" | "total_ht" | "type_acheteur" | "clientId" | "enregisterParId" | "fournisseurId" | "agentId" | "paiementId" | "panierId" | "createdAt" | "updatedAt", ExtArgs["result"]["vente"]>
+  export type VenteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "total_ttc" | "total_ht" | "type_acheteur" | "clientId" | "enregistrerParId" | "fournisseurId" | "agentId" | "paiementId" | "panierId" | "createdAt" | "updatedAt", ExtArgs["result"]["vente"]>
   export type VenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     panier?: boolean | PanierDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
@@ -14616,7 +14634,7 @@ export namespace Prisma {
       total_ht: number
       type_acheteur: $Enums.TypeClient
       clientId: number | null
-      enregisterParId: number
+      enregistrerParId: number
       fournisseurId: number | null
       agentId: number | null
       paiementId: number
@@ -15056,7 +15074,7 @@ export namespace Prisma {
     readonly total_ht: FieldRef<"Vente", 'Float'>
     readonly type_acheteur: FieldRef<"Vente", 'TypeClient'>
     readonly clientId: FieldRef<"Vente", 'Int'>
-    readonly enregisterParId: FieldRef<"Vente", 'Int'>
+    readonly enregistrerParId: FieldRef<"Vente", 'Int'>
     readonly fournisseurId: FieldRef<"Vente", 'Int'>
     readonly agentId: FieldRef<"Vente", 'Int'>
     readonly paiementId: FieldRef<"Vente", 'Int'>
@@ -17896,7 +17914,7 @@ export namespace Prisma {
     id: number | null
     panierId: number | null
     fournisseurId: number | null
-    enregisterParId: number | null
+    enregistrerParId: number | null
     paiementId: number | null
   }
 
@@ -17904,7 +17922,7 @@ export namespace Prisma {
     id: number | null
     panierId: number | null
     fournisseurId: number | null
-    enregisterParId: number | null
+    enregistrerParId: number | null
     paiementId: number | null
   }
 
@@ -17913,7 +17931,7 @@ export namespace Prisma {
     statut: $Enums.StatutAchat | null
     panierId: number | null
     fournisseurId: number | null
-    enregisterParId: number | null
+    enregistrerParId: number | null
     paiementId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -17924,7 +17942,7 @@ export namespace Prisma {
     statut: $Enums.StatutAchat | null
     panierId: number | null
     fournisseurId: number | null
-    enregisterParId: number | null
+    enregistrerParId: number | null
     paiementId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -17935,7 +17953,7 @@ export namespace Prisma {
     statut: number
     panierId: number
     fournisseurId: number
-    enregisterParId: number
+    enregistrerParId: number
     paiementId: number
     createdAt: number
     updatedAt: number
@@ -17947,7 +17965,7 @@ export namespace Prisma {
     id?: true
     panierId?: true
     fournisseurId?: true
-    enregisterParId?: true
+    enregistrerParId?: true
     paiementId?: true
   }
 
@@ -17955,7 +17973,7 @@ export namespace Prisma {
     id?: true
     panierId?: true
     fournisseurId?: true
-    enregisterParId?: true
+    enregistrerParId?: true
     paiementId?: true
   }
 
@@ -17964,7 +17982,7 @@ export namespace Prisma {
     statut?: true
     panierId?: true
     fournisseurId?: true
-    enregisterParId?: true
+    enregistrerParId?: true
     paiementId?: true
     createdAt?: true
     updatedAt?: true
@@ -17975,7 +17993,7 @@ export namespace Prisma {
     statut?: true
     panierId?: true
     fournisseurId?: true
-    enregisterParId?: true
+    enregistrerParId?: true
     paiementId?: true
     createdAt?: true
     updatedAt?: true
@@ -17986,7 +18004,7 @@ export namespace Prisma {
     statut?: true
     panierId?: true
     fournisseurId?: true
-    enregisterParId?: true
+    enregistrerParId?: true
     paiementId?: true
     createdAt?: true
     updatedAt?: true
@@ -18084,7 +18102,7 @@ export namespace Prisma {
     statut: $Enums.StatutAchat
     panierId: number
     fournisseurId: number
-    enregisterParId: number
+    enregistrerParId: number
     paiementId: number
     createdAt: Date
     updatedAt: Date
@@ -18114,7 +18132,7 @@ export namespace Prisma {
     statut?: boolean
     panierId?: boolean
     fournisseurId?: boolean
-    enregisterParId?: boolean
+    enregistrerParId?: boolean
     paiementId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -18129,7 +18147,7 @@ export namespace Prisma {
     statut?: boolean
     panierId?: boolean
     fournisseurId?: boolean
-    enregisterParId?: boolean
+    enregistrerParId?: boolean
     paiementId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -18144,7 +18162,7 @@ export namespace Prisma {
     statut?: boolean
     panierId?: boolean
     fournisseurId?: boolean
-    enregisterParId?: boolean
+    enregistrerParId?: boolean
     paiementId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -18159,13 +18177,13 @@ export namespace Prisma {
     statut?: boolean
     panierId?: boolean
     fournisseurId?: boolean
-    enregisterParId?: boolean
+    enregistrerParId?: boolean
     paiementId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AchatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "panierId" | "fournisseurId" | "enregisterParId" | "paiementId" | "createdAt" | "updatedAt", ExtArgs["result"]["achat"]>
+  export type AchatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "panierId" | "fournisseurId" | "enregistrerParId" | "paiementId" | "createdAt" | "updatedAt", ExtArgs["result"]["achat"]>
   export type AchatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     panier?: boolean | PanierDefaultArgs<ExtArgs>
     fournisseur?: boolean | FournisseurDefaultArgs<ExtArgs>
@@ -18198,7 +18216,7 @@ export namespace Prisma {
       statut: $Enums.StatutAchat
       panierId: number
       fournisseurId: number
-      enregisterParId: number
+      enregistrerParId: number
       paiementId: number
       createdAt: Date
       updatedAt: Date
@@ -18633,7 +18651,7 @@ export namespace Prisma {
     readonly statut: FieldRef<"Achat", 'StatutAchat'>
     readonly panierId: FieldRef<"Achat", 'Int'>
     readonly fournisseurId: FieldRef<"Achat", 'Int'>
-    readonly enregisterParId: FieldRef<"Achat", 'Int'>
+    readonly enregistrerParId: FieldRef<"Achat", 'Int'>
     readonly paiementId: FieldRef<"Achat", 'Int'>
     readonly createdAt: FieldRef<"Achat", 'DateTime'>
     readonly updatedAt: FieldRef<"Achat", 'DateTime'>
@@ -23079,9 +23097,9 @@ export namespace Prisma {
     id: number | null
     caisseId: number | null
     type_mouvement: $Enums.TypeMouvementCaisse | null
+    categorie: $Enums.CategorieMouvement | null
     montant: number | null
     description: string | null
-    moyenPaiement: $Enums.MoyenPaiment | null
     enregistrerParId: number | null
     referenceExterne: string | null
     createdAt: Date | null
@@ -23092,9 +23110,9 @@ export namespace Prisma {
     id: number | null
     caisseId: number | null
     type_mouvement: $Enums.TypeMouvementCaisse | null
+    categorie: $Enums.CategorieMouvement | null
     montant: number | null
     description: string | null
-    moyenPaiement: $Enums.MoyenPaiment | null
     enregistrerParId: number | null
     referenceExterne: string | null
     createdAt: Date | null
@@ -23105,9 +23123,9 @@ export namespace Prisma {
     id: number
     caisseId: number
     type_mouvement: number
+    categorie: number
     montant: number
     description: number
-    moyenPaiement: number
     enregistrerParId: number
     referenceExterne: number
     createdAt: number
@@ -23134,9 +23152,9 @@ export namespace Prisma {
     id?: true
     caisseId?: true
     type_mouvement?: true
+    categorie?: true
     montant?: true
     description?: true
-    moyenPaiement?: true
     enregistrerParId?: true
     referenceExterne?: true
     createdAt?: true
@@ -23147,9 +23165,9 @@ export namespace Prisma {
     id?: true
     caisseId?: true
     type_mouvement?: true
+    categorie?: true
     montant?: true
     description?: true
-    moyenPaiement?: true
     enregistrerParId?: true
     referenceExterne?: true
     createdAt?: true
@@ -23160,9 +23178,9 @@ export namespace Prisma {
     id?: true
     caisseId?: true
     type_mouvement?: true
+    categorie?: true
     montant?: true
     description?: true
-    moyenPaiement?: true
     enregistrerParId?: true
     referenceExterne?: true
     createdAt?: true
@@ -23260,9 +23278,9 @@ export namespace Prisma {
     id: number
     caisseId: number
     type_mouvement: $Enums.TypeMouvementCaisse
+    categorie: $Enums.CategorieMouvement
     montant: number
     description: string | null
-    moyenPaiement: $Enums.MoyenPaiment
     enregistrerParId: number
     referenceExterne: string | null
     createdAt: Date
@@ -23292,9 +23310,9 @@ export namespace Prisma {
     id?: boolean
     caisseId?: boolean
     type_mouvement?: boolean
+    categorie?: boolean
     montant?: boolean
     description?: boolean
-    moyenPaiement?: boolean
     enregistrerParId?: boolean
     referenceExterne?: boolean
     createdAt?: boolean
@@ -23307,9 +23325,9 @@ export namespace Prisma {
     id?: boolean
     caisseId?: boolean
     type_mouvement?: boolean
+    categorie?: boolean
     montant?: boolean
     description?: boolean
-    moyenPaiement?: boolean
     enregistrerParId?: boolean
     referenceExterne?: boolean
     createdAt?: boolean
@@ -23322,9 +23340,9 @@ export namespace Prisma {
     id?: boolean
     caisseId?: boolean
     type_mouvement?: boolean
+    categorie?: boolean
     montant?: boolean
     description?: boolean
-    moyenPaiement?: boolean
     enregistrerParId?: boolean
     referenceExterne?: boolean
     createdAt?: boolean
@@ -23337,16 +23355,16 @@ export namespace Prisma {
     id?: boolean
     caisseId?: boolean
     type_mouvement?: boolean
+    categorie?: boolean
     montant?: boolean
     description?: boolean
-    moyenPaiement?: boolean
     enregistrerParId?: boolean
     referenceExterne?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type MouvementCaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caisseId" | "type_mouvement" | "montant" | "description" | "moyenPaiement" | "enregistrerParId" | "referenceExterne" | "createdAt" | "updatedAt", ExtArgs["result"]["mouvementCaisse"]>
+  export type MouvementCaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caisseId" | "type_mouvement" | "categorie" | "montant" | "description" | "enregistrerParId" | "referenceExterne" | "createdAt" | "updatedAt", ExtArgs["result"]["mouvementCaisse"]>
   export type MouvementCaisseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     caisse?: boolean | CaisseDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
@@ -23370,9 +23388,9 @@ export namespace Prisma {
       id: number
       caisseId: number
       type_mouvement: $Enums.TypeMouvementCaisse
+      categorie: $Enums.CategorieMouvement
       montant: number
       description: string | null
-      moyenPaiement: $Enums.MoyenPaiment
       enregistrerParId: number
       referenceExterne: string | null
       createdAt: Date
@@ -23805,9 +23823,9 @@ export namespace Prisma {
     readonly id: FieldRef<"MouvementCaisse", 'Int'>
     readonly caisseId: FieldRef<"MouvementCaisse", 'Int'>
     readonly type_mouvement: FieldRef<"MouvementCaisse", 'TypeMouvementCaisse'>
+    readonly categorie: FieldRef<"MouvementCaisse", 'CategorieMouvement'>
     readonly montant: FieldRef<"MouvementCaisse", 'Float'>
     readonly description: FieldRef<"MouvementCaisse", 'String'>
-    readonly moyenPaiement: FieldRef<"MouvementCaisse", 'MoyenPaiment'>
     readonly enregistrerParId: FieldRef<"MouvementCaisse", 'Int'>
     readonly referenceExterne: FieldRef<"MouvementCaisse", 'String'>
     readonly createdAt: FieldRef<"MouvementCaisse", 'DateTime'>
@@ -25504,7 +25522,7 @@ export namespace Prisma {
     total_ht: 'total_ht',
     type_acheteur: 'type_acheteur',
     clientId: 'clientId',
-    enregisterParId: 'enregisterParId',
+    enregistrerParId: 'enregistrerParId',
     fournisseurId: 'fournisseurId',
     agentId: 'agentId',
     paiementId: 'paiementId',
@@ -25545,7 +25563,7 @@ export namespace Prisma {
     statut: 'statut',
     panierId: 'panierId',
     fournisseurId: 'fournisseurId',
-    enregisterParId: 'enregisterParId',
+    enregistrerParId: 'enregistrerParId',
     paiementId: 'paiementId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -25619,9 +25637,9 @@ export namespace Prisma {
     id: 'id',
     caisseId: 'caisseId',
     type_mouvement: 'type_mouvement',
+    categorie: 'categorie',
     montant: 'montant',
     description: 'description',
-    moyenPaiement: 'moyenPaiement',
     enregistrerParId: 'enregistrerParId',
     referenceExterne: 'referenceExterne',
     createdAt: 'createdAt',
@@ -25880,6 +25898,20 @@ export namespace Prisma {
    * Reference to a field of type 'TypeMouvementCaisse[]'
    */
   export type ListEnumTypeMouvementCaisseFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeMouvementCaisse[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CategorieMouvement'
+   */
+  export type EnumCategorieMouvementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CategorieMouvement'>
+    
+
+
+  /**
+   * Reference to a field of type 'CategorieMouvement[]'
+   */
+  export type ListEnumCategorieMouvementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CategorieMouvement[]'>
     
   /**
    * Deep Input Types
@@ -26625,7 +26657,7 @@ export namespace Prisma {
     total_ht?: FloatFilter<"Vente"> | number
     type_acheteur?: EnumTypeClientFilter<"Vente"> | $Enums.TypeClient
     clientId?: IntNullableFilter<"Vente"> | number | null
-    enregisterParId?: IntFilter<"Vente"> | number
+    enregistrerParId?: IntFilter<"Vente"> | number
     fournisseurId?: IntNullableFilter<"Vente"> | number | null
     agentId?: IntNullableFilter<"Vente"> | number | null
     paiementId?: IntFilter<"Vente"> | number
@@ -26645,7 +26677,7 @@ export namespace Prisma {
     total_ht?: SortOrder
     type_acheteur?: SortOrder
     clientId?: SortOrderInput | SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     fournisseurId?: SortOrderInput | SortOrder
     agentId?: SortOrderInput | SortOrder
     paiementId?: SortOrder
@@ -26668,7 +26700,7 @@ export namespace Prisma {
     total_ht?: FloatFilter<"Vente"> | number
     type_acheteur?: EnumTypeClientFilter<"Vente"> | $Enums.TypeClient
     clientId?: IntNullableFilter<"Vente"> | number | null
-    enregisterParId?: IntFilter<"Vente"> | number
+    enregistrerParId?: IntFilter<"Vente"> | number
     fournisseurId?: IntNullableFilter<"Vente"> | number | null
     agentId?: IntNullableFilter<"Vente"> | number | null
     paiementId?: IntFilter<"Vente"> | number
@@ -26688,7 +26720,7 @@ export namespace Prisma {
     total_ht?: SortOrder
     type_acheteur?: SortOrder
     clientId?: SortOrderInput | SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     fournisseurId?: SortOrderInput | SortOrder
     agentId?: SortOrderInput | SortOrder
     paiementId?: SortOrder
@@ -26712,7 +26744,7 @@ export namespace Prisma {
     total_ht?: FloatWithAggregatesFilter<"Vente"> | number
     type_acheteur?: EnumTypeClientWithAggregatesFilter<"Vente"> | $Enums.TypeClient
     clientId?: IntNullableWithAggregatesFilter<"Vente"> | number | null
-    enregisterParId?: IntWithAggregatesFilter<"Vente"> | number
+    enregistrerParId?: IntWithAggregatesFilter<"Vente"> | number
     fournisseurId?: IntNullableWithAggregatesFilter<"Vente"> | number | null
     agentId?: IntNullableWithAggregatesFilter<"Vente"> | number | null
     paiementId?: IntWithAggregatesFilter<"Vente"> | number
@@ -26871,7 +26903,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFilter<"Achat"> | $Enums.StatutAchat
     panierId?: IntFilter<"Achat"> | number
     fournisseurId?: IntFilter<"Achat"> | number
-    enregisterParId?: IntFilter<"Achat"> | number
+    enregistrerParId?: IntFilter<"Achat"> | number
     paiementId?: IntFilter<"Achat"> | number
     createdAt?: DateTimeFilter<"Achat"> | Date | string
     updatedAt?: DateTimeFilter<"Achat"> | Date | string
@@ -26886,7 +26918,7 @@ export namespace Prisma {
     statut?: SortOrder
     panierId?: SortOrder
     fournisseurId?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     paiementId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26904,7 +26936,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFilter<"Achat"> | $Enums.StatutAchat
     panierId?: IntFilter<"Achat"> | number
     fournisseurId?: IntFilter<"Achat"> | number
-    enregisterParId?: IntFilter<"Achat"> | number
+    enregistrerParId?: IntFilter<"Achat"> | number
     paiementId?: IntFilter<"Achat"> | number
     createdAt?: DateTimeFilter<"Achat"> | Date | string
     updatedAt?: DateTimeFilter<"Achat"> | Date | string
@@ -26919,7 +26951,7 @@ export namespace Prisma {
     statut?: SortOrder
     panierId?: SortOrder
     fournisseurId?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     paiementId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26938,7 +26970,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatWithAggregatesFilter<"Achat"> | $Enums.StatutAchat
     panierId?: IntWithAggregatesFilter<"Achat"> | number
     fournisseurId?: IntWithAggregatesFilter<"Achat"> | number
-    enregisterParId?: IntWithAggregatesFilter<"Achat"> | number
+    enregistrerParId?: IntWithAggregatesFilter<"Achat"> | number
     paiementId?: IntWithAggregatesFilter<"Achat"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Achat"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Achat"> | Date | string
@@ -27298,9 +27330,9 @@ export namespace Prisma {
     id?: IntFilter<"MouvementCaisse"> | number
     caisseId?: IntFilter<"MouvementCaisse"> | number
     type_mouvement?: EnumTypeMouvementCaisseFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFilter<"MouvementCaisse"> | $Enums.CategorieMouvement
     montant?: FloatFilter<"MouvementCaisse"> | number
     description?: StringNullableFilter<"MouvementCaisse"> | string | null
-    moyenPaiement?: EnumMoyenPaimentFilter<"MouvementCaisse"> | $Enums.MoyenPaiment
     enregistrerParId?: IntFilter<"MouvementCaisse"> | number
     referenceExterne?: StringNullableFilter<"MouvementCaisse"> | string | null
     createdAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
@@ -27313,9 +27345,9 @@ export namespace Prisma {
     id?: SortOrder
     caisseId?: SortOrder
     type_mouvement?: SortOrder
+    categorie?: SortOrder
     montant?: SortOrder
     description?: SortOrderInput | SortOrder
-    moyenPaiement?: SortOrder
     enregistrerParId?: SortOrder
     referenceExterne?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -27332,9 +27364,9 @@ export namespace Prisma {
     NOT?: MouvementCaisseWhereInput | MouvementCaisseWhereInput[]
     caisseId?: IntFilter<"MouvementCaisse"> | number
     type_mouvement?: EnumTypeMouvementCaisseFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFilter<"MouvementCaisse"> | $Enums.CategorieMouvement
     montant?: FloatFilter<"MouvementCaisse"> | number
     description?: StringNullableFilter<"MouvementCaisse"> | string | null
-    moyenPaiement?: EnumMoyenPaimentFilter<"MouvementCaisse"> | $Enums.MoyenPaiment
     enregistrerParId?: IntFilter<"MouvementCaisse"> | number
     createdAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
     updatedAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
@@ -27346,9 +27378,9 @@ export namespace Prisma {
     id?: SortOrder
     caisseId?: SortOrder
     type_mouvement?: SortOrder
+    categorie?: SortOrder
     montant?: SortOrder
     description?: SortOrderInput | SortOrder
-    moyenPaiement?: SortOrder
     enregistrerParId?: SortOrder
     referenceExterne?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -27367,9 +27399,9 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"MouvementCaisse"> | number
     caisseId?: IntWithAggregatesFilter<"MouvementCaisse"> | number
     type_mouvement?: EnumTypeMouvementCaisseWithAggregatesFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementWithAggregatesFilter<"MouvementCaisse"> | $Enums.CategorieMouvement
     montant?: FloatWithAggregatesFilter<"MouvementCaisse"> | number
     description?: StringNullableWithAggregatesFilter<"MouvementCaisse"> | string | null
-    moyenPaiement?: EnumMoyenPaimentWithAggregatesFilter<"MouvementCaisse"> | $Enums.MoyenPaiment
     enregistrerParId?: IntWithAggregatesFilter<"MouvementCaisse"> | number
     referenceExterne?: StringNullableWithAggregatesFilter<"MouvementCaisse"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"MouvementCaisse"> | Date | string
@@ -28227,7 +28259,7 @@ export namespace Prisma {
     total_ht: number
     type_acheteur: $Enums.TypeClient
     clientId?: number | null
-    enregisterParId: number
+    enregistrerParId: number
     fournisseurId?: number | null
     agentId?: number | null
     paiementId: number
@@ -28258,7 +28290,7 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     type_acheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     paiementId?: IntFieldUpdateOperationsInput | number
@@ -28274,7 +28306,7 @@ export namespace Prisma {
     total_ht: number
     type_acheteur: $Enums.TypeClient
     clientId?: number | null
-    enregisterParId: number
+    enregistrerParId: number
     fournisseurId?: number | null
     agentId?: number | null
     paiementId: number
@@ -28301,7 +28333,7 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     type_acheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     paiementId?: IntFieldUpdateOperationsInput | number
@@ -28462,7 +28494,7 @@ export namespace Prisma {
     statut?: $Enums.StatutAchat
     panierId: number
     fournisseurId: number
-    enregisterParId: number
+    enregistrerParId: number
     paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28483,7 +28515,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28494,7 +28526,7 @@ export namespace Prisma {
     statut?: $Enums.StatutAchat
     panierId: number
     fournisseurId: number
-    enregisterParId: number
+    enregistrerParId: number
     paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28511,7 +28543,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28868,10 +28900,10 @@ export namespace Prisma {
   }
 
   export type MouvementCaisseCreateInput = {
-    type_mouvement: $Enums.TypeMouvementCaisse
+    type_mouvement?: $Enums.TypeMouvementCaisse
+    categorie?: $Enums.CategorieMouvement
     montant: number
     description?: string | null
-    moyenPaiement: $Enums.MoyenPaiment
     referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28882,10 +28914,10 @@ export namespace Prisma {
   export type MouvementCaisseUncheckedCreateInput = {
     id?: number
     caisseId: number
-    type_mouvement: $Enums.TypeMouvementCaisse
+    type_mouvement?: $Enums.TypeMouvementCaisse
+    categorie?: $Enums.CategorieMouvement
     montant: number
     description?: string | null
-    moyenPaiement: $Enums.MoyenPaiment
     enregistrerParId: number
     referenceExterne?: string | null
     createdAt?: Date | string
@@ -28894,9 +28926,9 @@ export namespace Prisma {
 
   export type MouvementCaisseUpdateInput = {
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28908,9 +28940,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     enregistrerParId?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28920,10 +28952,10 @@ export namespace Prisma {
   export type MouvementCaisseCreateManyInput = {
     id?: number
     caisseId: number
-    type_mouvement: $Enums.TypeMouvementCaisse
+    type_mouvement?: $Enums.TypeMouvementCaisse
+    categorie?: $Enums.CategorieMouvement
     montant: number
     description?: string | null
-    moyenPaiement: $Enums.MoyenPaiment
     enregistrerParId: number
     referenceExterne?: string | null
     createdAt?: Date | string
@@ -28932,9 +28964,9 @@ export namespace Prisma {
 
   export type MouvementCaisseUpdateManyMutationInput = {
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28944,9 +28976,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     enregistrerParId?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29857,7 +29889,7 @@ export namespace Prisma {
     total_ht?: SortOrder
     type_acheteur?: SortOrder
     clientId?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     fournisseurId?: SortOrder
     agentId?: SortOrder
     paiementId?: SortOrder
@@ -29871,7 +29903,7 @@ export namespace Prisma {
     total_ttc?: SortOrder
     total_ht?: SortOrder
     clientId?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     fournisseurId?: SortOrder
     agentId?: SortOrder
     paiementId?: SortOrder
@@ -29885,7 +29917,7 @@ export namespace Prisma {
     total_ht?: SortOrder
     type_acheteur?: SortOrder
     clientId?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     fournisseurId?: SortOrder
     agentId?: SortOrder
     paiementId?: SortOrder
@@ -29901,7 +29933,7 @@ export namespace Prisma {
     total_ht?: SortOrder
     type_acheteur?: SortOrder
     clientId?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     fournisseurId?: SortOrder
     agentId?: SortOrder
     paiementId?: SortOrder
@@ -29915,7 +29947,7 @@ export namespace Prisma {
     total_ttc?: SortOrder
     total_ht?: SortOrder
     clientId?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     fournisseurId?: SortOrder
     agentId?: SortOrder
     paiementId?: SortOrder
@@ -30046,7 +30078,7 @@ export namespace Prisma {
     statut?: SortOrder
     panierId?: SortOrder
     fournisseurId?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     paiementId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -30056,7 +30088,7 @@ export namespace Prisma {
     id?: SortOrder
     panierId?: SortOrder
     fournisseurId?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     paiementId?: SortOrder
   }
 
@@ -30065,7 +30097,7 @@ export namespace Prisma {
     statut?: SortOrder
     panierId?: SortOrder
     fournisseurId?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     paiementId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -30076,7 +30108,7 @@ export namespace Prisma {
     statut?: SortOrder
     panierId?: SortOrder
     fournisseurId?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     paiementId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -30086,7 +30118,7 @@ export namespace Prisma {
     id?: SortOrder
     panierId?: SortOrder
     fournisseurId?: SortOrder
-    enregisterParId?: SortOrder
+    enregistrerParId?: SortOrder
     paiementId?: SortOrder
   }
 
@@ -30407,6 +30439,13 @@ export namespace Prisma {
     not?: NestedEnumTypeMouvementCaisseFilter<$PrismaModel> | $Enums.TypeMouvementCaisse
   }
 
+  export type EnumCategorieMouvementFilter<$PrismaModel = never> = {
+    equals?: $Enums.CategorieMouvement | EnumCategorieMouvementFieldRefInput<$PrismaModel>
+    in?: $Enums.CategorieMouvement[] | ListEnumCategorieMouvementFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CategorieMouvement[] | ListEnumCategorieMouvementFieldRefInput<$PrismaModel>
+    not?: NestedEnumCategorieMouvementFilter<$PrismaModel> | $Enums.CategorieMouvement
+  }
+
   export type CaisseScalarRelationFilter = {
     is?: CaisseWhereInput
     isNot?: CaisseWhereInput
@@ -30416,9 +30455,9 @@ export namespace Prisma {
     id?: SortOrder
     caisseId?: SortOrder
     type_mouvement?: SortOrder
+    categorie?: SortOrder
     montant?: SortOrder
     description?: SortOrder
-    moyenPaiement?: SortOrder
     enregistrerParId?: SortOrder
     referenceExterne?: SortOrder
     createdAt?: SortOrder
@@ -30436,9 +30475,9 @@ export namespace Prisma {
     id?: SortOrder
     caisseId?: SortOrder
     type_mouvement?: SortOrder
+    categorie?: SortOrder
     montant?: SortOrder
     description?: SortOrder
-    moyenPaiement?: SortOrder
     enregistrerParId?: SortOrder
     referenceExterne?: SortOrder
     createdAt?: SortOrder
@@ -30449,9 +30488,9 @@ export namespace Prisma {
     id?: SortOrder
     caisseId?: SortOrder
     type_mouvement?: SortOrder
+    categorie?: SortOrder
     montant?: SortOrder
     description?: SortOrder
-    moyenPaiement?: SortOrder
     enregistrerParId?: SortOrder
     referenceExterne?: SortOrder
     createdAt?: SortOrder
@@ -30473,6 +30512,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTypeMouvementCaisseFilter<$PrismaModel>
     _max?: NestedEnumTypeMouvementCaisseFilter<$PrismaModel>
+  }
+
+  export type EnumCategorieMouvementWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CategorieMouvement | EnumCategorieMouvementFieldRefInput<$PrismaModel>
+    in?: $Enums.CategorieMouvement[] | ListEnumCategorieMouvementFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CategorieMouvement[] | ListEnumCategorieMouvementFieldRefInput<$PrismaModel>
+    not?: NestedEnumCategorieMouvementWithAggregatesFilter<$PrismaModel> | $Enums.CategorieMouvement
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCategorieMouvementFilter<$PrismaModel>
+    _max?: NestedEnumCategorieMouvementFilter<$PrismaModel>
   }
 
   export type ClotureCaisseCountOrderByAggregateInput = {
@@ -32711,6 +32760,10 @@ export namespace Prisma {
     set?: $Enums.TypeMouvementCaisse
   }
 
+  export type EnumCategorieMouvementFieldUpdateOperationsInput = {
+    set?: $Enums.CategorieMouvement
+  }
+
   export type CaisseUpdateOneRequiredWithoutMouvementCaisseNestedInput = {
     create?: XOR<CaisseCreateWithoutMouvementCaisseInput, CaisseUncheckedCreateWithoutMouvementCaisseInput>
     connectOrCreate?: CaisseCreateOrConnectWithoutMouvementCaisseInput
@@ -33136,6 +33189,13 @@ export namespace Prisma {
     not?: NestedEnumTypeMouvementCaisseFilter<$PrismaModel> | $Enums.TypeMouvementCaisse
   }
 
+  export type NestedEnumCategorieMouvementFilter<$PrismaModel = never> = {
+    equals?: $Enums.CategorieMouvement | EnumCategorieMouvementFieldRefInput<$PrismaModel>
+    in?: $Enums.CategorieMouvement[] | ListEnumCategorieMouvementFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CategorieMouvement[] | ListEnumCategorieMouvementFieldRefInput<$PrismaModel>
+    not?: NestedEnumCategorieMouvementFilter<$PrismaModel> | $Enums.CategorieMouvement
+  }
+
   export type NestedEnumTypeMouvementCaisseWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.TypeMouvementCaisse | EnumTypeMouvementCaisseFieldRefInput<$PrismaModel>
     in?: $Enums.TypeMouvementCaisse[] | ListEnumTypeMouvementCaisseFieldRefInput<$PrismaModel>
@@ -33144,6 +33204,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTypeMouvementCaisseFilter<$PrismaModel>
     _max?: NestedEnumTypeMouvementCaisseFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCategorieMouvementWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CategorieMouvement | EnumCategorieMouvementFieldRefInput<$PrismaModel>
+    in?: $Enums.CategorieMouvement[] | ListEnumCategorieMouvementFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CategorieMouvement[] | ListEnumCategorieMouvementFieldRefInput<$PrismaModel>
+    not?: NestedEnumCategorieMouvementWithAggregatesFilter<$PrismaModel> | $Enums.CategorieMouvement
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCategorieMouvementFilter<$PrismaModel>
+    _max?: NestedEnumCategorieMouvementFilter<$PrismaModel>
   }
 
   export type AdresseCreateWithoutUtilisateurInput = {
@@ -33530,10 +33600,10 @@ export namespace Prisma {
   }
 
   export type MouvementCaisseCreateWithoutUtilisateurInput = {
-    type_mouvement: $Enums.TypeMouvementCaisse
+    type_mouvement?: $Enums.TypeMouvementCaisse
+    categorie?: $Enums.CategorieMouvement
     montant: number
     description?: string | null
-    moyenPaiement: $Enums.MoyenPaiment
     referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -33543,10 +33613,10 @@ export namespace Prisma {
   export type MouvementCaisseUncheckedCreateWithoutUtilisateurInput = {
     id?: number
     caisseId: number
-    type_mouvement: $Enums.TypeMouvementCaisse
+    type_mouvement?: $Enums.TypeMouvementCaisse
+    categorie?: $Enums.CategorieMouvement
     montant: number
     description?: string | null
-    moyenPaiement: $Enums.MoyenPaiment
     referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -33705,7 +33775,7 @@ export namespace Prisma {
     total_ht?: FloatFilter<"Vente"> | number
     type_acheteur?: EnumTypeClientFilter<"Vente"> | $Enums.TypeClient
     clientId?: IntNullableFilter<"Vente"> | number | null
-    enregisterParId?: IntFilter<"Vente"> | number
+    enregistrerParId?: IntFilter<"Vente"> | number
     fournisseurId?: IntNullableFilter<"Vente"> | number | null
     agentId?: IntNullableFilter<"Vente"> | number | null
     paiementId?: IntFilter<"Vente"> | number
@@ -33738,7 +33808,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFilter<"Achat"> | $Enums.StatutAchat
     panierId?: IntFilter<"Achat"> | number
     fournisseurId?: IntFilter<"Achat"> | number
-    enregisterParId?: IntFilter<"Achat"> | number
+    enregistrerParId?: IntFilter<"Achat"> | number
     paiementId?: IntFilter<"Achat"> | number
     createdAt?: DateTimeFilter<"Achat"> | Date | string
     updatedAt?: DateTimeFilter<"Achat"> | Date | string
@@ -33958,9 +34028,9 @@ export namespace Prisma {
     id?: IntFilter<"MouvementCaisse"> | number
     caisseId?: IntFilter<"MouvementCaisse"> | number
     type_mouvement?: EnumTypeMouvementCaisseFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFilter<"MouvementCaisse"> | $Enums.CategorieMouvement
     montant?: FloatFilter<"MouvementCaisse"> | number
     description?: StringNullableFilter<"MouvementCaisse"> | string | null
-    moyenPaiement?: EnumMoyenPaimentFilter<"MouvementCaisse"> | $Enums.MoyenPaiment
     enregistrerParId?: IntFilter<"MouvementCaisse"> | number
     referenceExterne?: StringNullableFilter<"MouvementCaisse"> | string | null
     createdAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
@@ -34641,7 +34711,7 @@ export namespace Prisma {
     total_ht: number
     type_acheteur: $Enums.TypeClient
     clientId?: number | null
-    enregisterParId: number
+    enregistrerParId: number
     agentId?: number | null
     paiementId: number
     panierId: number
@@ -34672,7 +34742,7 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     panierId: number
-    enregisterParId: number
+    enregistrerParId: number
     paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35715,7 +35785,7 @@ export namespace Prisma {
     statut?: $Enums.StatutAchat
     panierId: number
     fournisseurId: number
-    enregisterParId: number
+    enregistrerParId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -35751,7 +35821,7 @@ export namespace Prisma {
     total_ht: number
     type_acheteur: $Enums.TypeClient
     clientId?: number | null
-    enregisterParId: number
+    enregistrerParId: number
     fournisseurId?: number | null
     agentId?: number | null
     panierId: number
@@ -36300,7 +36370,7 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     fournisseurId: number
-    enregisterParId: number
+    enregistrerParId: number
     paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36337,7 +36407,7 @@ export namespace Prisma {
     total_ht: number
     type_acheteur: $Enums.TypeClient
     clientId?: number | null
-    enregisterParId: number
+    enregistrerParId: number
     fournisseurId?: number | null
     agentId?: number | null
     paiementId: number
@@ -37884,10 +37954,10 @@ export namespace Prisma {
   }
 
   export type MouvementCaisseCreateWithoutCaisseInput = {
-    type_mouvement: $Enums.TypeMouvementCaisse
+    type_mouvement?: $Enums.TypeMouvementCaisse
+    categorie?: $Enums.CategorieMouvement
     montant: number
     description?: string | null
-    moyenPaiement: $Enums.MoyenPaiment
     referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -37896,10 +37966,10 @@ export namespace Prisma {
 
   export type MouvementCaisseUncheckedCreateWithoutCaisseInput = {
     id?: number
-    type_mouvement: $Enums.TypeMouvementCaisse
+    type_mouvement?: $Enums.TypeMouvementCaisse
+    categorie?: $Enums.CategorieMouvement
     montant: number
     description?: string | null
-    moyenPaiement: $Enums.MoyenPaiment
     enregistrerParId: number
     referenceExterne?: string | null
     createdAt?: Date | string
@@ -38576,10 +38646,10 @@ export namespace Prisma {
   export type MouvementCaisseCreateManyUtilisateurInput = {
     id?: number
     caisseId: number
-    type_mouvement: $Enums.TypeMouvementCaisse
+    type_mouvement?: $Enums.TypeMouvementCaisse
+    categorie?: $Enums.CategorieMouvement
     montant: number
     description?: string | null
-    moyenPaiement: $Enums.MoyenPaiment
     referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38995,9 +39065,9 @@ export namespace Prisma {
 
   export type MouvementCaisseUpdateWithoutUtilisateurInput = {
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39008,9 +39078,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39020,9 +39090,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39353,7 +39423,7 @@ export namespace Prisma {
     total_ht: number
     type_acheteur: $Enums.TypeClient
     clientId?: number | null
-    enregisterParId: number
+    enregistrerParId: number
     agentId?: number | null
     paiementId: number
     panierId: number
@@ -39365,7 +39435,7 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     panierId: number
-    enregisterParId: number
+    enregistrerParId: number
     paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39447,7 +39517,7 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     type_acheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     paiementId?: IntFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
@@ -39462,7 +39532,7 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     type_acheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     paiementId?: IntFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
@@ -39483,7 +39553,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39493,7 +39563,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39898,7 +39968,7 @@ export namespace Prisma {
     statut?: $Enums.StatutAchat
     panierId: number
     fournisseurId: number
-    enregisterParId: number
+    enregistrerParId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -39910,7 +39980,7 @@ export namespace Prisma {
     total_ht: number
     type_acheteur: $Enums.TypeClient
     clientId?: number | null
-    enregisterParId: number
+    enregistrerParId: number
     fournisseurId?: number | null
     agentId?: number | null
     panierId: number
@@ -39951,7 +40021,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39961,7 +40031,7 @@ export namespace Prisma {
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39987,7 +40057,7 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     type_acheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     panierId?: IntFieldUpdateOperationsInput | number
@@ -40002,7 +40072,7 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     type_acheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     panierId?: IntFieldUpdateOperationsInput | number
@@ -40080,7 +40150,7 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     fournisseurId: number
-    enregisterParId: number
+    enregistrerParId: number
     paiementId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -40093,7 +40163,7 @@ export namespace Prisma {
     total_ht: number
     type_acheteur: $Enums.TypeClient
     clientId?: number | null
-    enregisterParId: number
+    enregistrerParId: number
     fournisseurId?: number | null
     agentId?: number | null
     paiementId: number
@@ -40180,7 +40250,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40190,7 +40260,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     fournisseurId?: IntFieldUpdateOperationsInput | number
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     paiementId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40217,7 +40287,7 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     type_acheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     paiementId?: IntFieldUpdateOperationsInput | number
@@ -40232,7 +40302,7 @@ export namespace Prisma {
     total_ht?: FloatFieldUpdateOperationsInput | number
     type_acheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregisterParId?: IntFieldUpdateOperationsInput | number
+    enregistrerParId?: IntFieldUpdateOperationsInput | number
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     paiementId?: IntFieldUpdateOperationsInput | number
@@ -40351,10 +40421,10 @@ export namespace Prisma {
 
   export type MouvementCaisseCreateManyCaisseInput = {
     id?: number
-    type_mouvement: $Enums.TypeMouvementCaisse
+    type_mouvement?: $Enums.TypeMouvementCaisse
+    categorie?: $Enums.CategorieMouvement
     montant: number
     description?: string | null
-    moyenPaiement: $Enums.MoyenPaiment
     enregistrerParId: number
     referenceExterne?: string | null
     createdAt?: Date | string
@@ -40372,9 +40442,9 @@ export namespace Prisma {
 
   export type MouvementCaisseUpdateWithoutCaisseInput = {
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40384,9 +40454,9 @@ export namespace Prisma {
   export type MouvementCaisseUncheckedUpdateWithoutCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     enregistrerParId?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40396,9 +40466,9 @@ export namespace Prisma {
   export type MouvementCaisseUncheckedUpdateManyWithoutCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
+    categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    moyenPaiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     enregistrerParId?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

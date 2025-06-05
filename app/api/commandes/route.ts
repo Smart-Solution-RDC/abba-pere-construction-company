@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { CreateMouvementCaisse, UpdateCaisse } from "@/prisma/utils";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -9,69 +10,4 @@ export async function GET(req: NextRequest) {
         // where: { OR: [{ id: idCommande ? { contains: id, mode: 'insensitive' } : undefined }]}
     });
     return new Response(JSON.stringify(commandes));
-}
-
-export async function POST(req: NextRequest) {
-    const data = await req.json();
-    const searchParams = req.nextUrl.searchParams;
-    const panierId = searchParams.get('panierId');
-    const dateLivraisonEffective = new Date(data.dateLivraisonEffective);
-    let total_ttc = 0;
-    let total_ht = 0;
-
-    if (panierId) {
-        const panier = await prisma.panier.findUnique({
-            where: { id: parseInt(panierId) }
-        });
-
-        if (!panier) {
-            return new Response("Panier not found", { status: 201 });
-        }
-
-        const detail_panier = await prisma.detailPanier.findMany({
-            where: { panierId: panier.id },
-            select: {
-                produitId: true,
-                qtte: true,
-                prixTotal: true
-            }
-        });
-
-        for (let i = 0; i < detail_panier.length; i++) {
-            total_ht += detail_panier[i].prixTotal;
-        }
-
-        total_ttc = (total_ht) * 0.16; // Pour une taxe de 16%
-
-        const paiement = await prisma.paiement.create({
-            data: {
-                montant: total_ht,
-                moyen_paiement: data.moyen_paiement,
-                deviseId: data.deviseId
-            }
-        });
-
-        const commande = await prisma.commande.create({
-            data: {
-                panierId: panier.id,
-                nom: data.client.nom ? data.client.nom : null,
-                tel: data.client.tel ? data.client.tel : null,
-                type_client: data.type_client,
-                clientId: data.clientId ? data.clientId : null,
-                paiementId: paiement.id,
-                adresseId: data.adresseId ? data.adresseId : null,
-                contactId: data.contactId ? data.contactId : null,
-                fournisseurId: data.fournisseurId ? data.fournisseurId : null,
-                notes: data.notes ? data.notes : null,
-                dateLivraisonEffective: dateLivraisonEffective,
-                adresseLivraison: data.adresseLivraison ? data.adresseLivraison : null,
-                enregistrerParId: data.enregistrerParId ? data.enregistrerParId : null
-            }
-        });
-
-        return new Response("Commande Successed!", { status: 201 });
-
-    }
-    
-    return new Response("Invalid Form!", { status: 201 });
 }

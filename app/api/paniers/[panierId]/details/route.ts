@@ -1,13 +1,10 @@
 import { prisma } from "@/lib/prisma";
+import { PanierParams } from "@/prisma/definitions";
 import { NextRequest } from "next/server";
 
-interface RouteParams {
-    panierId: string
-}
 
-export async function GET(req: NextRequest) {
-    const requestParams = req.nextUrl.searchParams;
-    const panierId = requestParams.get('panierId');
+export async function GET(req: NextRequest, { params }: PanierParams) {
+    const { panierId } = await params
     
     if (panierId) {
 
@@ -28,9 +25,9 @@ export async function GET(req: NextRequest) {
     return new Response("Panier required", { status: 200 });    
 }
 
-export async function POST(req: NextRequest) {
-    const requestParams = req.nextUrl.searchParams;
-    const panierId = requestParams.get('panierId');
+export async function POST(req: NextRequest, { params }: PanierParams) {
+    const { panierId } = await params
+    // const panierId = requestParams.get('panierId');
 
     const data = await req.json();
 

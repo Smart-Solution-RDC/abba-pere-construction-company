@@ -206,23 +206,23 @@ model Paiement {
 }
 
 model Vente {
-  id              Int          @id @default(autoincrement())
-  statut          StatutVente  @default(EN_ATTENTE)
-  total_ttc       Float
-  total_ht        Float
-  type_acheteur   TypeClient
-  clientId        Int?
-  enregisterParId Int
-  fournisseurId   Int?
-  agentId         Int?
-  paiementId      Int
-  panierId        Int
-  panier          Panier       @relation(fields: [panierId], references: [id])
-  utilisateur     Utilisateur  @relation(fields: [enregisterParId], references: [id])
-  fournisseur     Fournisseur? @relation(fields: [fournisseurId], references: [id])
-  paiement        Paiement     @relation(fields: [paiementId], references: [id])
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
+  id               Int          @id @default(autoincrement())
+  statut           StatutVente  @default(EN_ATTENTE)
+  total_ttc        Float
+  total_ht         Float
+  type_acheteur    TypeClient
+  clientId         Int?
+  enregistrerParId Int
+  fournisseurId    Int?
+  agentId          Int?
+  paiementId       Int
+  panierId         Int
+  panier           Panier       @relation(fields: [panierId], references: [id])
+  utilisateur      Utilisateur  @relation(fields: [enregistrerParId], references: [id])
+  fournisseur      Fournisseur? @relation(fields: [fournisseurId], references: [id])
+  paiement         Paiement     @relation(fields: [paiementId], references: [id])
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
 }
 
 model Panier {
@@ -252,18 +252,18 @@ model DetailPanier {
 }
 
 model Achat {
-  id              Int         @id @default(autoincrement())
-  statut          StatutAchat @default(EN_COURS)
-  panierId        Int
-  fournisseurId   Int
-  enregisterParId Int
-  paiementId      Int
-  panier          Panier      @relation(fields: [panierId], references: [id])
-  fournisseur     Fournisseur @relation(fields: [fournisseurId], references: [id])
-  utilisateur     Utilisateur @relation(fields: [enregisterParId], references: [id])
-  paiement        Paiement    @relation(fields: [paiementId], references: [id])
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
+  id               Int         @id @default(autoincrement())
+  statut           StatutAchat @default(EN_COURS)
+  panierId         Int
+  fournisseurId    Int
+  enregistrerParId Int
+  paiementId       Int
+  panier           Panier      @relation(fields: [panierId], references: [id])
+  fournisseur      Fournisseur @relation(fields: [fournisseurId], references: [id])
+  utilisateur      Utilisateur @relation(fields: [enregistrerParId], references: [id])
+  paiement         Paiement    @relation(fields: [paiementId], references: [id])
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
 }
 
 enum StatutReservation {
@@ -375,13 +375,26 @@ model Caisse {
 
 // Update moyen_paiement to modePaielent in every table
 // Add modePaiement as a table
+// and remve moyen_paiement*
+
+enum CategorieMouvement {
+  ACHAT
+  VENTE
+  FOURNISSEUR
+  SALAIRE
+  LOYER
+  EMPRUNT
+  TAXE
+  AUTRES
+}
+
 model MouvementCaisse {
   id               Int                 @id @default(autoincrement())
   caisseId         Int
-  type_mouvement   TypeMouvementCaisse
+  type_mouvement   TypeMouvementCaisse @default(SORTIE)
+  categorie        CategorieMouvement  @default(VENTE)
   montant          Float
   description      String?             @db.Text
-  moyenPaiement    MoyenPaiment // create moyenPaiement by ModePaiement table
   enregistrerParId Int
   caisse           Caisse              @relation(fields: [caisseId], references: [id])
   utilisateur      Utilisateur         @relation(fields: [enregistrerParId], references: [id])

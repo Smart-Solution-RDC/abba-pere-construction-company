@@ -1,10 +1,7 @@
 import { prisma } from "@/lib/prisma";
+import { PanierParams } from "@/prisma/definitions";
 
-interface RouteParams {
-    panierId: string
-}
-
-export async function GET(req: Request, { params } : { params: RouteParams }) {
+export async function GET(req: Request, { params } : PanierParams) {
     const { panierId } = await params;
 
     try {

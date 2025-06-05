@@ -1,15 +1,12 @@
 import { prisma } from "@/lib/prisma";
+import { DetailParams } from "@/prisma/definitions";
 
-interface RouteParams { 
-    panierId: string, 
-    detailPanierId: string 
-}
 
-export async function GET (req: Request, { params }: { params: RouteParams }) {
-    const { panierId, detailPanierId } = await params;
+export async function GET (req: Request, { params }: DetailParams) {
+    const { panierId, detailId } = await params;
     const detailPanier = await prisma.detailPanier.findUnique({
         where: {
-            id: parseInt(detailPanierId, 10),
+            id: parseInt(detailId, 10),
             panierId: parseInt(panierId, 10)
         }
     });
@@ -22,14 +19,14 @@ export async function GET (req: Request, { params }: { params: RouteParams }) {
 }
 
 
-export async function PUT (req: Request, { params }: { params: RouteParams }) {
-    const { panierId, detailPanierId } = await params;
+export async function PUT (req: Request, { params }: DetailParams) {
+    const { panierId, detailId } = await params;
     const data = await req.json();
 
     try {
         const updateddetailPanier = await prisma.detailPanier.update({
             where: {
-                id: parseInt(detailPanierId, 10),
+                id: parseInt(detailId, 10),
                 panierId: parseInt(panierId, 10)
             },
             data: {
@@ -48,13 +45,13 @@ export async function PUT (req: Request, { params }: { params: RouteParams }) {
 }
 
 
-export async function DELETE (req: Request, { params }: { params: RouteParams }) {
-    const { panierId, detailPanierId } = await params;
+export async function DELETE (req: Request, { params }: DetailParams) {
+    const { panierId, detailId } = await params;
 
     try {
         await prisma.detailPanier.delete({
             where: {
-                id: parseInt(detailPanierId, 10),
+                id: parseInt(detailId, 10),
                 panierId: parseInt(panierId, 10)
             }
         });
