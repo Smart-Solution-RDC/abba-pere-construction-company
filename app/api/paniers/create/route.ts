@@ -5,7 +5,7 @@ export async function POST(req: Request) {
 
     try {
         await prisma.panier.create({
-            data: { utilisateurId: utilisateurId }
+            data: { utilisateurId: parseInt(utilisateurId) }
         });
     
         return new Response("Panier Created!", { status: 201 });

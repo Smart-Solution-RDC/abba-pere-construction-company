@@ -212,6 +212,20 @@ exports.Prisma.PaiementScalarFieldEnum = {
   montant: 'montant',
   moyen_paiement: 'moyen_paiement',
   deviseId: 'deviseId',
+  caisseId: 'caisseId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CaisseScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  description: 'description',
+  soldeInitial: 'soldeInitial',
+  soldeActuel: 'soldeActuel',
+  deviseId: 'deviseId',
+  creeParId: 'creeParId',
+  statut: 'statut',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -300,19 +314,6 @@ exports.Prisma.CommandeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.CaisseScalarFieldEnum = {
-  id: 'id',
-  nom: 'nom',
-  description: 'description',
-  soldeInitial: 'soldeInitial',
-  soldeActuel: 'soldeActuel',
-  deviseId: 'deviseId',
-  creeParId: 'creeParId',
-  statut: 'statut',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.MouvementCaisseScalarFieldEnum = {
   id: 'id',
   caisseId: 'caisseId',
@@ -322,6 +323,16 @@ exports.Prisma.MouvementCaisseScalarFieldEnum = {
   description: 'description',
   enregistrerParId: 'enregistrerParId',
   referenceExterne: 'referenceExterne',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DetailClotureCaisseScalarFieldEnum = {
+  id: 'id',
+  produitId: 'produitId',
+  teneurId: 'teneurId',
+  qtteRestante: 'qtteRestante',
+  clotureCaisseId: 'clotureCaisseId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -376,6 +387,12 @@ exports.MoyenPaiment = exports.$Enums.MoyenPaiment = {
   autres: 'autres'
 };
 
+exports.StatutCaisse = exports.$Enums.StatutCaisse = {
+  OUVERTE: 'OUVERTE',
+  FERMEE: 'FERMEE',
+  EN_ATTENTE: 'EN_ATTENTE'
+};
+
 exports.StatutVente = exports.$Enums.StatutVente = {
   EN_ATTENTE: 'EN_ATTENTE',
   CONFIRME: 'CONFIRME',
@@ -416,12 +433,6 @@ exports.StatutCommande = exports.$Enums.StatutCommande = {
   ECHEC_PAIEMENT: 'ECHEC_PAIEMENT'
 };
 
-exports.StatutCaisse = exports.$Enums.StatutCaisse = {
-  OUVERTE: 'OUVERTE',
-  FERMEE: 'FERMEE',
-  EN_ATTENTE: 'EN_ATTENTE'
-};
-
 exports.TypeMouvementCaisse = exports.$Enums.TypeMouvementCaisse = {
   ENTREE: 'ENTREE',
   SORTIE: 'SORTIE'
@@ -448,14 +459,15 @@ exports.Prisma.ModelName = {
   Devise: 'Devise',
   Produit: 'Produit',
   Paiement: 'Paiement',
+  Caisse: 'Caisse',
   Vente: 'Vente',
   Panier: 'Panier',
   DetailPanier: 'DetailPanier',
   Achat: 'Achat',
   Reservation: 'Reservation',
   Commande: 'Commande',
-  Caisse: 'Caisse',
   MouvementCaisse: 'MouvementCaisse',
+  DetailClotureCaisse: 'DetailClotureCaisse',
   ClotureCaisse: 'ClotureCaisse'
 };
 

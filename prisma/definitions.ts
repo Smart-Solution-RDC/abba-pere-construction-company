@@ -90,3 +90,17 @@ export interface DeviseParams {
         deviseId: string;
     }
 }
+
+export interface ClotureRouteParams {
+    params: {
+        caisseId: string
+    }
+}
+
+export interface ClotureParams {
+    params: {
+        caisseId: string,
+        clotureId: string,
+    }
+}
+
