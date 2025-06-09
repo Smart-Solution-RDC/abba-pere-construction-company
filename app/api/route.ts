@@ -1,3 +1,3 @@
 export async function GET (req: Request) {
-    return new Response("Hello world...", { status: 200 });
+    return new Response("Hello world...", { status: 201 });
 }

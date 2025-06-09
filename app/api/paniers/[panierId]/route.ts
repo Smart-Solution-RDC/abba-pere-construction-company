@@ -4,14 +4,13 @@ import { PanierParams } from "@/prisma/definitions";
 export async function GET(req: Request, { params } : PanierParams) {
     const { panierId } = await params;
 
-    try {
-        const panier = await prisma.panier.findUnique({
-            where: { id: parseInt(panierId, 10) }
-        });
+    const panier = await prisma.panier.findUnique({
+        where: { id: parseInt(panierId, 10) }
+    });
 
-        return new Response(JSON.stringify(panier), { status: 201 });        
-    } catch (error) {
-        return new Response('not existed');
-    }
+    if(!panier) return new Response('Panier Not Existed', { status: 404 });
+
+
+    return new Response(JSON.stringify(panier), { status: 201 });
 }
 

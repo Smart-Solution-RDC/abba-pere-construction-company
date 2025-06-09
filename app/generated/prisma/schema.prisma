@@ -58,16 +58,17 @@ enum TypeClient {
 // This is the main model for the application
 
 model Entreprise {
-  id           Int     @id @default(autoincrement())
-  nom          String  @unique
-  encronyme    String  @unique
-  code_postale String  @unique
-  adresse      String
-  tel          String  @unique
-  site         String?
-  email        String  @unique
-  description  String?
-  logo         String?
+  id            Int             @id @default(autoincrement())
+  nom           String          @unique
+  encronyme     String          @unique
+  code_postale  String          @unique
+  adresse       String
+  tel           String          @unique
+  site          String?
+  email         String          @unique
+  description   String?
+  logo          String?
+  ClotureCaisse ClotureCaisse[]
 }
 
 model Utilisateur {
@@ -150,14 +151,13 @@ model Fournisseur {
 }
 
 model Teneur {
-  id                  Int                   @id @default(autoincrement())
-  valeur              Float                 @unique
-  utilisateurId       Int
-  utilisateur         Utilisateur           @relation(fields: [utilisateurId], references: [id])
-  createdAt           DateTime              @default(now())
-  updatedAt           DateTime              @updatedAt
-  Produit             Produit[]
-  DetailClotureCaisse DetailClotureCaisse[]
+  id            Int         @id @default(autoincrement())
+  valeur        Float       @unique
+  utilisateurId Int
+  utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  Produit       Produit[]
 }
 
 model Devise {
@@ -175,21 +175,20 @@ model Devise {
 }
 
 model Produit {
-  id                  Int                   @id @default(autoincrement())
-  designation         String
-  prix                Float
-  qtte                Int                   @default(0)
-  description         String
-  deviseId            Int
-  devise              Devise                @relation(fields: [deviseId], references: [id])
-  teneurId            Int
-  teneur              Teneur                @relation(fields: [teneurId], references: [id])
-  utilisateurId       Int
-  utilisateur         Utilisateur           @relation(fields: [utilisateurId], references: [id])
-  createdAt           DateTime              @default(now())
-  updatedAt           DateTime              @updatedAt
-  DetailPanier        DetailPanier[]
-  DetailClotureCaisse DetailClotureCaisse[]
+  id            Int            @id @default(autoincrement())
+  designation   String
+  prix          Float
+  qtte          Int            @default(0)
+  description   String
+  deviseId      Int
+  devise        Devise         @relation(fields: [deviseId], references: [id])
+  teneurId      Int
+  teneur        Teneur         @relation(fields: [teneurId], references: [id])
+  utilisateurId Int
+  utilisateur   Utilisateur    @relation(fields: [utilisateurId], references: [id])
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  DetailPanier  DetailPanier[]
 }
 
 // Models de la Vente...
@@ -225,7 +224,6 @@ model Caisse {
   updatedAt    DateTime     @updatedAt
 
   MouvementCaisse MouvementCaisse[]
-  clotures        ClotureCaisse[]
   Paiement        Paiement[]
 }
 
@@ -384,7 +382,8 @@ enum StatutCaisse {
 enum CategorieMouvement {
   ACHAT
   VENTE
-  FOURNISSEUR
+  COMMANDE
+  FOURNITUR
   SALAIRE
   LOYER
   EMPRUNT
@@ -395,14 +394,15 @@ enum CategorieMouvement {
 model MouvementCaisse {
   id               Int                 @id @default(autoincrement())
   caisseId         Int
+  referenceExterne String?             @unique @db.VarChar(100) // Référence à une commande, une vente, une facture, etc.
   type_mouvement   TypeMouvementCaisse @default(SORTIE)
   categorie        CategorieMouvement  @default(VENTE)
+  moyen_paiement   MoyenPaiment
   montant          Float
   description      String?             @db.Text
   enregistrerParId Int
   caisse           Caisse              @relation(fields: [caisseId], references: [id])
   utilisateur      Utilisateur         @relation(fields: [enregistrerParId], references: [id])
-  referenceExterne String?             @unique @db.VarChar(100) // Référence à une commande, une vente, une facture, etc.
   createdAt        DateTime            @default(now())
   updatedAt        DateTime            @updatedAt
 }
@@ -418,29 +418,29 @@ model MouvementCaisse {
 //   // mouvements MouvementCaisse[]
 // }
 
-model DetailClotureCaisse {
-  id              Int           @id @default(autoincrement())
-  produitId       Int
-  teneurId        Int
-  qtteRestante    Int
-  clotureCaisseId Int
-  produit         Produit       @relation(fields: [produitId], references: [id])
-  teneur          Teneur        @relation(fields: [teneurId], references: [id])
-  clotureCaisse   ClotureCaisse @relation(fields: [clotureCaisseId], references: [id])
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-}
+// model DetailClotureCaisse {
+//   id              Int           @id @default(autoincrement())
+//   produitId       Int
+//   qtteVendue      Int
+//   qtteRestante    Int // Tres Important*
+//   clotureCaisseId Int
+//   venteId         Int
+//   produit         Produit       @relation(fields: [produitId], references: [id])
+//   clotureCaisse   ClotureCaisse @relation(fields: [clotureCaisseId], references: [id])
+//   vente           Vente         @relation(fields: [venteId], references: [id])
+//   createdAt       DateTime      @default(now())
+//   updatedAt       DateTime      @updatedAt
+// }
 
 // It must generate a file
 model ClotureCaisse {
-  id                   Int                   @id @default(autoincrement())
-  caisseId             Int
-  caisse               Caisse                @relation(fields: [caisseId], references: [id])
-  dateCloture          DateTime              @default(now())
+  id                   Int         @id @default(autoincrement())
+  dateCloture          DateTime    @unique @default(now())
   utilisateurClotureId Int
-  utilisateurCloture   Utilisateur           @relation(fields: [utilisateurClotureId], references: [id])
-  notes                String?               @db.Text
-  createdAt            DateTime              @default(now())
-  updatedAt            DateTime              @updatedAt
-  DetailClotureCaisse  DetailClotureCaisse[]
+  entrepriseId         Int?
+  notes                String?     @db.Text
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+  utilisateurCloture   Utilisateur @relation(fields: [utilisateurClotureId], references: [id])
+  entreprise           Entreprise? @relation(fields: [entrepriseId], references: [id])
 }

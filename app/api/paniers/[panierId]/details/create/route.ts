@@ -16,7 +16,7 @@ export async function POST(req: NextRequest, { params }: PanierParams) {
         produits[i].qtte = parseInt(produits[i].qtte, 10);
         produits[i].prixUnitaire = parseFloat(produits[i].prixUnitaire);
         produits[i].prixTotal = parseFloat(produits[i].prixUnitaire) * parseFloat(produits[i].qtte);
-        produits[i].panierId = panierId && parseInt(panierId[i], 10);
+        produits[i].panierId = panierId && parseInt(panierId);
     }
 
     try {

@@ -6,6 +6,7 @@ export async function POST(req: Request, { params }: PanierParams) {
     const { panierId } = await params;
     const data = await req.json();
     data.type_mouvement = 'ENTREE';
+    data.categorie = 'ACHAT';
     let montant = 0;
 
     try {
@@ -16,9 +17,7 @@ export async function POST(req: Request, { params }: PanierParams) {
             }
         });
 
-        if (!panier) {
-            return new Response("Panier not found", { status: 404 });
-        }
+        if (!panier) return new Response("Panier not found", { status: 404 });
 
         const detail_panier = await prisma.detailPanier.findMany({
             where: { panierId: parseInt(panierId, 10) },
@@ -38,6 +37,7 @@ export async function POST(req: Request, { params }: PanierParams) {
                 montant: montant,
                 deviseId: parseInt(data.deviseId, 10),
                 moyen_paiement: data.moyen_paiement,
+                caisseId: parseInt(data.caisseId)
             }
         });
 
@@ -59,7 +59,7 @@ export async function POST(req: Request, { params }: PanierParams) {
         // let default_type_mouvement: TypeMouvement = 'ENTREE'
         
         UpdateCaisse(montant, data);
-        CreateMouvementCaisse(montant, data);
+        CreateMouvementCaisse(montant, achat.id, data);
 
         return new Response("Achat Successed!", { status: 201 });
     } catch (error) {

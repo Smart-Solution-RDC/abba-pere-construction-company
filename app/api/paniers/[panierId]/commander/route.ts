@@ -6,6 +6,7 @@ import { NextRequest } from "next/server";
 export async function POST(req: NextRequest, { params }: PanierParams) {
     const data = await req.json();
     data.type_mouvement = 'SORTIE'
+    data.categorie = 'COMMANDE'
     const { panierId } = await params;
     const dateLivraisonEffective = new Date(data.dateLivraisonEffective);
     let total_ttc = 0;
@@ -37,7 +38,8 @@ export async function POST(req: NextRequest, { params }: PanierParams) {
             data: {
                 montant: total_ht,
                 moyen_paiement: data.moyen_paiement,
-                deviseId: data.deviseId
+                deviseId: data.deviseId,
+                caisseId: parseInt(data.caisseId)
             }
         });
 
@@ -47,22 +49,22 @@ export async function POST(req: NextRequest, { params }: PanierParams) {
                 nom: data.client.nom ? data.client.nom : null,
                 tel: data.client.tel ? data.client.tel : null,
                 type_client: data.type_client,
-                clientId: data.clientId ? data.clientId : null,
+                clientId: data.clientId ? parseInt(data.clientId) : null,
                 paiementId: paiement.id,
-                adresseId: data.adresseId ? data.adresseId : null,
-                contactId: data.contactId ? data.contactId : null,
-                fournisseurId: data.fournisseurId ? data.fournisseurId : null,
+                adresseId: data.adresseId ? parseInt(data.adresseId) : null,
+                contactId: data.contactId ? parseInt(data.contactId) : null,
+                fournisseurId: data.fournisseurId ? parseInt(data.fournisseurId) : null,
                 notes: data.notes ? data.notes : null,
                 dateLivraisonEffective: dateLivraisonEffective,
                 adresseLivraison: data.adresseLivraison ? data.adresseLivraison : null,
-                enregistrerParId: data.enregistrerParId ? data.enregistrerParId : null
+                enregistrerParId: data.enregistrerParId ? parseInt(data.enregistrerParId) : null
             }
         });
 
         UpdateCaisse(total_ht, data);
-        CreateMouvementCaisse(total_ht, data);
+        CreateMouvementCaisse(total_ht, commande.id, data);
 
-        return new Response("Commande Successed!", { status: 201 });
+        return new Response("Commande created!", { status: 201 });
 
     }
     

@@ -1,4 +1,4 @@
-export type tableType = 'caisse' | 'contact' | 'mouvementCaisse'
+export type tableType = 'caisse' | 'contact' | 'mouvementCaisse' | 'panier'
 
 export interface PanierParams { 
     params: {
@@ -34,9 +34,16 @@ export interface AchatParams {
     }
 }
 
+export type MoyenPaiment = 'cache' | 'banque' | 'mobile' | 'cheque' | 'autres'
+
+// Changer fournisseur a fourniture
+export type CategorieMouvement = 'ACHAT' | 'VENTE' | 'COMMANDE' | 'FOURNITUR' | 'SALAIRE' | 'LOYER' | 'TAXE' | 'AUTRES'
+
 export interface AchatRouteParams {
     caisseId: string
+    moyen_paiement: MoyenPaiment
     type_mouvement: TypeMouvement
+    categorie: CategorieMouvement
     enregistrerParId: string
     referenceExterne: string
     description: string
@@ -104,3 +111,6 @@ export interface ClotureParams {
     }
 }
 
+export interface ClotureCaisseValid {
+    utilisateurClotureId: string,
+}

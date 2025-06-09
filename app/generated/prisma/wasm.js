@@ -317,31 +317,22 @@ exports.Prisma.CommandeScalarFieldEnum = {
 exports.Prisma.MouvementCaisseScalarFieldEnum = {
   id: 'id',
   caisseId: 'caisseId',
+  referenceExterne: 'referenceExterne',
   type_mouvement: 'type_mouvement',
   categorie: 'categorie',
+  moyen_paiement: 'moyen_paiement',
   montant: 'montant',
   description: 'description',
   enregistrerParId: 'enregistrerParId',
-  referenceExterne: 'referenceExterne',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.DetailClotureCaisseScalarFieldEnum = {
-  id: 'id',
-  produitId: 'produitId',
-  teneurId: 'teneurId',
-  qtteRestante: 'qtteRestante',
-  clotureCaisseId: 'clotureCaisseId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ClotureCaisseScalarFieldEnum = {
   id: 'id',
-  caisseId: 'caisseId',
   dateCloture: 'dateCloture',
   utilisateurClotureId: 'utilisateurClotureId',
+  entrepriseId: 'entrepriseId',
   notes: 'notes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -441,7 +432,8 @@ exports.TypeMouvementCaisse = exports.$Enums.TypeMouvementCaisse = {
 exports.CategorieMouvement = exports.$Enums.CategorieMouvement = {
   ACHAT: 'ACHAT',
   VENTE: 'VENTE',
-  FOURNISSEUR: 'FOURNISSEUR',
+  COMMANDE: 'COMMANDE',
+  FOURNITUR: 'FOURNITUR',
   SALAIRE: 'SALAIRE',
   LOYER: 'LOYER',
   EMPRUNT: 'EMPRUNT',
@@ -467,7 +459,6 @@ exports.Prisma.ModelName = {
   Reservation: 'Reservation',
   Commande: 'Commande',
   MouvementCaisse: 'MouvementCaisse',
-  DetailClotureCaisse: 'DetailClotureCaisse',
   ClotureCaisse: 'ClotureCaisse'
 };
 

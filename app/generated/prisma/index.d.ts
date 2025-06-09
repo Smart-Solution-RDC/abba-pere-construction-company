@@ -99,11 +99,6 @@ export type Commande = $Result.DefaultSelection<Prisma.$CommandePayload>
  */
 export type MouvementCaisse = $Result.DefaultSelection<Prisma.$MouvementCaissePayload>
 /**
- * Model DetailClotureCaisse
- * 
- */
-export type DetailClotureCaisse = $Result.DefaultSelection<Prisma.$DetailClotureCaissePayload>
-/**
  * Model ClotureCaisse
  * 
  */
@@ -226,7 +221,8 @@ export type StatutCaisse = (typeof StatutCaisse)[keyof typeof StatutCaisse]
 export const CategorieMouvement: {
   ACHAT: 'ACHAT',
   VENTE: 'VENTE',
-  FOURNISSEUR: 'FOURNISSEUR',
+  COMMANDE: 'COMMANDE',
+  FOURNITUR: 'FOURNITUR',
   SALAIRE: 'SALAIRE',
   LOYER: 'LOYER',
   EMPRUNT: 'EMPRUNT',
@@ -580,16 +576,6 @@ export class PrismaClient<
     * ```
     */
   get mouvementCaisse(): Prisma.MouvementCaisseDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.detailClotureCaisse`: Exposes CRUD operations for the **DetailClotureCaisse** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more DetailClotureCaisses
-    * const detailClotureCaisses = await prisma.detailClotureCaisse.findMany()
-    * ```
-    */
-  get detailClotureCaisse(): Prisma.DetailClotureCaisseDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.clotureCaisse`: Exposes CRUD operations for the **ClotureCaisse** model.
@@ -1057,7 +1043,6 @@ export namespace Prisma {
     Reservation: 'Reservation',
     Commande: 'Commande',
     MouvementCaisse: 'MouvementCaisse',
-    DetailClotureCaisse: 'DetailClotureCaisse',
     ClotureCaisse: 'ClotureCaisse'
   };
 
@@ -1077,7 +1062,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "entreprise" | "utilisateur" | "adresse" | "contact" | "fournisseur" | "teneur" | "devise" | "produit" | "paiement" | "caisse" | "vente" | "panier" | "detailPanier" | "achat" | "reservation" | "commande" | "mouvementCaisse" | "detailClotureCaisse" | "clotureCaisse"
+      modelProps: "entreprise" | "utilisateur" | "adresse" | "contact" | "fournisseur" | "teneur" | "devise" | "produit" | "paiement" | "caisse" | "vente" | "panier" | "detailPanier" | "achat" | "reservation" | "commande" | "mouvementCaisse" | "clotureCaisse"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2339,80 +2324,6 @@ export namespace Prisma {
           }
         }
       }
-      DetailClotureCaisse: {
-        payload: Prisma.$DetailClotureCaissePayload<ExtArgs>
-        fields: Prisma.DetailClotureCaisseFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.DetailClotureCaisseFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailClotureCaissePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.DetailClotureCaisseFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailClotureCaissePayload>
-          }
-          findFirst: {
-            args: Prisma.DetailClotureCaisseFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailClotureCaissePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.DetailClotureCaisseFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailClotureCaissePayload>
-          }
-          findMany: {
-            args: Prisma.DetailClotureCaisseFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailClotureCaissePayload>[]
-          }
-          create: {
-            args: Prisma.DetailClotureCaisseCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailClotureCaissePayload>
-          }
-          createMany: {
-            args: Prisma.DetailClotureCaisseCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.DetailClotureCaisseCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailClotureCaissePayload>[]
-          }
-          delete: {
-            args: Prisma.DetailClotureCaisseDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailClotureCaissePayload>
-          }
-          update: {
-            args: Prisma.DetailClotureCaisseUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailClotureCaissePayload>
-          }
-          deleteMany: {
-            args: Prisma.DetailClotureCaisseDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.DetailClotureCaisseUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.DetailClotureCaisseUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailClotureCaissePayload>[]
-          }
-          upsert: {
-            args: Prisma.DetailClotureCaisseUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DetailClotureCaissePayload>
-          }
-          aggregate: {
-            args: Prisma.DetailClotureCaisseAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDetailClotureCaisse>
-          }
-          groupBy: {
-            args: Prisma.DetailClotureCaisseGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DetailClotureCaisseGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.DetailClotureCaisseCountArgs<ExtArgs>
-            result: $Utils.Optional<DetailClotureCaisseCountAggregateOutputType> | number
-          }
-        }
-      }
       ClotureCaisse: {
         payload: Prisma.$ClotureCaissePayload<ExtArgs>
         fields: Prisma.ClotureCaisseFieldRefs
@@ -2588,7 +2499,6 @@ export namespace Prisma {
     reservation?: ReservationOmit
     commande?: CommandeOmit
     mouvementCaisse?: MouvementCaisseOmit
-    detailClotureCaisse?: DetailClotureCaisseOmit
     clotureCaisse?: ClotureCaisseOmit
   }
 
@@ -2677,6 +2587,37 @@ export namespace Prisma {
   /**
    * Count Types
    */
+
+
+  /**
+   * Count Type EntrepriseCountOutputType
+   */
+
+  export type EntrepriseCountOutputType = {
+    ClotureCaisse: number
+  }
+
+  export type EntrepriseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ClotureCaisse?: boolean | EntrepriseCountOutputTypeCountClotureCaisseArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EntrepriseCountOutputType without action
+   */
+  export type EntrepriseCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EntrepriseCountOutputType
+     */
+    select?: EntrepriseCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EntrepriseCountOutputType without action
+   */
+  export type EntrepriseCountOutputTypeCountClotureCaisseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClotureCaisseWhereInput
+  }
 
 
   /**
@@ -2980,12 +2921,10 @@ export namespace Prisma {
 
   export type TeneurCountOutputType = {
     Produit: number
-    DetailClotureCaisse: number
   }
 
   export type TeneurCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Produit?: boolean | TeneurCountOutputTypeCountProduitArgs
-    DetailClotureCaisse?: boolean | TeneurCountOutputTypeCountDetailClotureCaisseArgs
   }
 
   // Custom InputTypes
@@ -3004,13 +2943,6 @@ export namespace Prisma {
    */
   export type TeneurCountOutputTypeCountProduitArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProduitWhereInput
-  }
-
-  /**
-   * TeneurCountOutputType without action
-   */
-  export type TeneurCountOutputTypeCountDetailClotureCaisseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DetailClotureCaisseWhereInput
   }
 
 
@@ -3069,12 +3001,10 @@ export namespace Prisma {
 
   export type ProduitCountOutputType = {
     DetailPanier: number
-    DetailClotureCaisse: number
   }
 
   export type ProduitCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     DetailPanier?: boolean | ProduitCountOutputTypeCountDetailPanierArgs
-    DetailClotureCaisse?: boolean | ProduitCountOutputTypeCountDetailClotureCaisseArgs
   }
 
   // Custom InputTypes
@@ -3093,13 +3023,6 @@ export namespace Prisma {
    */
   export type ProduitCountOutputTypeCountDetailPanierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DetailPanierWhereInput
-  }
-
-  /**
-   * ProduitCountOutputType without action
-   */
-  export type ProduitCountOutputTypeCountDetailClotureCaisseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DetailClotureCaisseWhereInput
   }
 
 
@@ -3158,13 +3081,11 @@ export namespace Prisma {
 
   export type CaisseCountOutputType = {
     MouvementCaisse: number
-    clotures: number
     Paiement: number
   }
 
   export type CaisseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     MouvementCaisse?: boolean | CaisseCountOutputTypeCountMouvementCaisseArgs
-    clotures?: boolean | CaisseCountOutputTypeCountCloturesArgs
     Paiement?: boolean | CaisseCountOutputTypeCountPaiementArgs
   }
 
@@ -3184,13 +3105,6 @@ export namespace Prisma {
    */
   export type CaisseCountOutputTypeCountMouvementCaisseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MouvementCaisseWhereInput
-  }
-
-  /**
-   * CaisseCountOutputType without action
-   */
-  export type CaisseCountOutputTypeCountCloturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ClotureCaisseWhereInput
   }
 
   /**
@@ -3265,37 +3179,6 @@ export namespace Prisma {
    */
   export type PanierCountOutputTypeCountCommandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommandeWhereInput
-  }
-
-
-  /**
-   * Count Type ClotureCaisseCountOutputType
-   */
-
-  export type ClotureCaisseCountOutputType = {
-    DetailClotureCaisse: number
-  }
-
-  export type ClotureCaisseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    DetailClotureCaisse?: boolean | ClotureCaisseCountOutputTypeCountDetailClotureCaisseArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ClotureCaisseCountOutputType without action
-   */
-  export type ClotureCaisseCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ClotureCaisseCountOutputType
-     */
-    select?: ClotureCaisseCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * ClotureCaisseCountOutputType without action
-   */
-  export type ClotureCaisseCountOutputTypeCountDetailClotureCaisseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DetailClotureCaisseWhereInput
   }
 
 
@@ -3541,6 +3424,8 @@ export namespace Prisma {
     email?: boolean
     description?: boolean
     logo?: boolean
+    ClotureCaisse?: boolean | Entreprise$ClotureCaisseArgs<ExtArgs>
+    _count?: boolean | EntrepriseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["entreprise"]>
 
   export type EntrepriseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3583,10 +3468,18 @@ export namespace Prisma {
   }
 
   export type EntrepriseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "encronyme" | "code_postale" | "adresse" | "tel" | "site" | "email" | "description" | "logo", ExtArgs["result"]["entreprise"]>
+  export type EntrepriseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ClotureCaisse?: boolean | Entreprise$ClotureCaisseArgs<ExtArgs>
+    _count?: boolean | EntrepriseCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EntrepriseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type EntrepriseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $EntreprisePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Entreprise"
-    objects: {}
+    objects: {
+      ClotureCaisse: Prisma.$ClotureCaissePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nom: string
@@ -3992,6 +3885,7 @@ export namespace Prisma {
    */
   export interface Prisma__EntrepriseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    ClotureCaisse<T extends Entreprise$ClotureCaisseArgs<ExtArgs> = {}>(args?: Subset<T, Entreprise$ClotureCaisseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClotureCaissePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4048,6 +3942,10 @@ export namespace Prisma {
      */
     omit?: EntrepriseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntrepriseInclude<ExtArgs> | null
+    /**
      * Filter, which Entreprise to fetch.
      */
     where: EntrepriseWhereUniqueInput
@@ -4066,6 +3964,10 @@ export namespace Prisma {
      */
     omit?: EntrepriseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntrepriseInclude<ExtArgs> | null
+    /**
      * Filter, which Entreprise to fetch.
      */
     where: EntrepriseWhereUniqueInput
@@ -4083,6 +3985,10 @@ export namespace Prisma {
      * Omit specific fields from the Entreprise
      */
     omit?: EntrepriseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntrepriseInclude<ExtArgs> | null
     /**
      * Filter, which Entreprise to fetch.
      */
@@ -4132,6 +4038,10 @@ export namespace Prisma {
      */
     omit?: EntrepriseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntrepriseInclude<ExtArgs> | null
+    /**
      * Filter, which Entreprise to fetch.
      */
     where?: EntrepriseWhereInput
@@ -4180,6 +4090,10 @@ export namespace Prisma {
      */
     omit?: EntrepriseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntrepriseInclude<ExtArgs> | null
+    /**
      * Filter, which Entreprises to fetch.
      */
     where?: EntrepriseWhereInput
@@ -4222,6 +4136,10 @@ export namespace Prisma {
      * Omit specific fields from the Entreprise
      */
     omit?: EntrepriseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntrepriseInclude<ExtArgs> | null
     /**
      * The data needed to create a Entreprise.
      */
@@ -4270,6 +4188,10 @@ export namespace Prisma {
      * Omit specific fields from the Entreprise
      */
     omit?: EntrepriseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntrepriseInclude<ExtArgs> | null
     /**
      * The data needed to update a Entreprise.
      */
@@ -4337,6 +4259,10 @@ export namespace Prisma {
      */
     omit?: EntrepriseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntrepriseInclude<ExtArgs> | null
+    /**
      * The filter to search for the Entreprise to update in case it exists.
      */
     where: EntrepriseWhereUniqueInput
@@ -4363,6 +4289,10 @@ export namespace Prisma {
      */
     omit?: EntrepriseOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntrepriseInclude<ExtArgs> | null
+    /**
      * Filter which Entreprise to delete.
      */
     where: EntrepriseWhereUniqueInput
@@ -4383,6 +4313,30 @@ export namespace Prisma {
   }
 
   /**
+   * Entreprise.ClotureCaisse
+   */
+  export type Entreprise$ClotureCaisseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClotureCaisse
+     */
+    select?: ClotureCaisseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClotureCaisse
+     */
+    omit?: ClotureCaisseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClotureCaisseInclude<ExtArgs> | null
+    where?: ClotureCaisseWhereInput
+    orderBy?: ClotureCaisseOrderByWithRelationInput | ClotureCaisseOrderByWithRelationInput[]
+    cursor?: ClotureCaisseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClotureCaisseScalarFieldEnum | ClotureCaisseScalarFieldEnum[]
+  }
+
+  /**
    * Entreprise without action
    */
   export type EntrepriseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4394,6 +4348,10 @@ export namespace Prisma {
      * Omit specific fields from the Entreprise
      */
     omit?: EntrepriseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EntrepriseInclude<ExtArgs> | null
   }
 
 
@@ -9840,7 +9798,6 @@ export namespace Prisma {
     updatedAt?: boolean
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     Produit?: boolean | Teneur$ProduitArgs<ExtArgs>
-    DetailClotureCaisse?: boolean | Teneur$DetailClotureCaisseArgs<ExtArgs>
     _count?: boolean | TeneurCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["teneur"]>
 
@@ -9874,7 +9831,6 @@ export namespace Prisma {
   export type TeneurInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     Produit?: boolean | Teneur$ProduitArgs<ExtArgs>
-    DetailClotureCaisse?: boolean | Teneur$DetailClotureCaisseArgs<ExtArgs>
     _count?: boolean | TeneurCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TeneurIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9889,7 +9845,6 @@ export namespace Prisma {
     objects: {
       utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
       Produit: Prisma.$ProduitPayload<ExtArgs>[]
-      DetailClotureCaisse: Prisma.$DetailClotureCaissePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -10293,7 +10248,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Produit<T extends Teneur$ProduitArgs<ExtArgs> = {}>(args?: Subset<T, Teneur$ProduitArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProduitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    DetailClotureCaisse<T extends Teneur$DetailClotureCaisseArgs<ExtArgs> = {}>(args?: Subset<T, Teneur$DetailClotureCaisseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10745,30 +10699,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProduitScalarFieldEnum | ProduitScalarFieldEnum[]
-  }
-
-  /**
-   * Teneur.DetailClotureCaisse
-   */
-  export type Teneur$DetailClotureCaisseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-    where?: DetailClotureCaisseWhereInput
-    orderBy?: DetailClotureCaisseOrderByWithRelationInput | DetailClotureCaisseOrderByWithRelationInput[]
-    cursor?: DetailClotureCaisseWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: DetailClotureCaisseScalarFieldEnum | DetailClotureCaisseScalarFieldEnum[]
   }
 
   /**
@@ -12260,7 +12190,6 @@ export namespace Prisma {
     teneur?: boolean | TeneurDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     DetailPanier?: boolean | Produit$DetailPanierArgs<ExtArgs>
-    DetailClotureCaisse?: boolean | Produit$DetailClotureCaisseArgs<ExtArgs>
     _count?: boolean | ProduitCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["produit"]>
 
@@ -12315,7 +12244,6 @@ export namespace Prisma {
     teneur?: boolean | TeneurDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     DetailPanier?: boolean | Produit$DetailPanierArgs<ExtArgs>
-    DetailClotureCaisse?: boolean | Produit$DetailClotureCaisseArgs<ExtArgs>
     _count?: boolean | ProduitCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProduitIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12336,7 +12264,6 @@ export namespace Prisma {
       teneur: Prisma.$TeneurPayload<ExtArgs>
       utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
       DetailPanier: Prisma.$DetailPanierPayload<ExtArgs>[]
-      DetailClotureCaisse: Prisma.$DetailClotureCaissePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -12747,7 +12674,6 @@ export namespace Prisma {
     teneur<T extends TeneurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TeneurDefaultArgs<ExtArgs>>): Prisma__TeneurClient<$Result.GetResult<Prisma.$TeneurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     DetailPanier<T extends Produit$DetailPanierArgs<ExtArgs> = {}>(args?: Subset<T, Produit$DetailPanierArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    DetailClotureCaisse<T extends Produit$DetailClotureCaisseArgs<ExtArgs> = {}>(args?: Subset<T, Produit$DetailClotureCaisseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13204,30 +13130,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DetailPanierScalarFieldEnum | DetailPanierScalarFieldEnum[]
-  }
-
-  /**
-   * Produit.DetailClotureCaisse
-   */
-  export type Produit$DetailClotureCaisseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-    where?: DetailClotureCaisseWhereInput
-    orderBy?: DetailClotureCaisseOrderByWithRelationInput | DetailClotureCaisseOrderByWithRelationInput[]
-    cursor?: DetailClotureCaisseWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: DetailClotureCaisseScalarFieldEnum | DetailClotureCaisseScalarFieldEnum[]
   }
 
   /**
@@ -14730,7 +14632,6 @@ export namespace Prisma {
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     MouvementCaisse?: boolean | Caisse$MouvementCaisseArgs<ExtArgs>
-    clotures?: boolean | Caisse$cloturesArgs<ExtArgs>
     Paiement?: boolean | Caisse$PaiementArgs<ExtArgs>
     _count?: boolean | CaisseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["caisse"]>
@@ -14783,7 +14684,6 @@ export namespace Prisma {
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
     MouvementCaisse?: boolean | Caisse$MouvementCaisseArgs<ExtArgs>
-    clotures?: boolean | Caisse$cloturesArgs<ExtArgs>
     Paiement?: boolean | Caisse$PaiementArgs<ExtArgs>
     _count?: boolean | CaisseCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -14802,7 +14702,6 @@ export namespace Prisma {
       devise: Prisma.$DevisePayload<ExtArgs>
       utilisateur: Prisma.$UtilisateurPayload<ExtArgs>
       MouvementCaisse: Prisma.$MouvementCaissePayload<ExtArgs>[]
-      clotures: Prisma.$ClotureCaissePayload<ExtArgs>[]
       Paiement: Prisma.$PaiementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -15213,7 +15112,6 @@ export namespace Prisma {
     devise<T extends DeviseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DeviseDefaultArgs<ExtArgs>>): Prisma__DeviseClient<$Result.GetResult<Prisma.$DevisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     utilisateur<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     MouvementCaisse<T extends Caisse$MouvementCaisseArgs<ExtArgs> = {}>(args?: Subset<T, Caisse$MouvementCaisseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MouvementCaissePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    clotures<T extends Caisse$cloturesArgs<ExtArgs> = {}>(args?: Subset<T, Caisse$cloturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClotureCaissePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Paiement<T extends Caisse$PaiementArgs<ExtArgs> = {}>(args?: Subset<T, Caisse$PaiementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -15671,30 +15569,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MouvementCaisseScalarFieldEnum | MouvementCaisseScalarFieldEnum[]
-  }
-
-  /**
-   * Caisse.clotures
-   */
-  export type Caisse$cloturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ClotureCaisse
-     */
-    select?: ClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ClotureCaisse
-     */
-    omit?: ClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClotureCaisseInclude<ExtArgs> | null
-    where?: ClotureCaisseWhereInput
-    orderBy?: ClotureCaisseOrderByWithRelationInput | ClotureCaisseOrderByWithRelationInput[]
-    cursor?: ClotureCaisseWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ClotureCaisseScalarFieldEnum | ClotureCaisseScalarFieldEnum[]
   }
 
   /**
@@ -23373,12 +23247,13 @@ export namespace Prisma {
   export type MouvementCaisseMinAggregateOutputType = {
     id: number | null
     caisseId: number | null
+    referenceExterne: string | null
     type_mouvement: $Enums.TypeMouvementCaisse | null
     categorie: $Enums.CategorieMouvement | null
+    moyen_paiement: $Enums.MoyenPaiment | null
     montant: number | null
     description: string | null
     enregistrerParId: number | null
-    referenceExterne: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -23386,12 +23261,13 @@ export namespace Prisma {
   export type MouvementCaisseMaxAggregateOutputType = {
     id: number | null
     caisseId: number | null
+    referenceExterne: string | null
     type_mouvement: $Enums.TypeMouvementCaisse | null
     categorie: $Enums.CategorieMouvement | null
+    moyen_paiement: $Enums.MoyenPaiment | null
     montant: number | null
     description: string | null
     enregistrerParId: number | null
-    referenceExterne: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -23399,12 +23275,13 @@ export namespace Prisma {
   export type MouvementCaisseCountAggregateOutputType = {
     id: number
     caisseId: number
+    referenceExterne: number
     type_mouvement: number
     categorie: number
+    moyen_paiement: number
     montant: number
     description: number
     enregistrerParId: number
-    referenceExterne: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -23428,12 +23305,13 @@ export namespace Prisma {
   export type MouvementCaisseMinAggregateInputType = {
     id?: true
     caisseId?: true
+    referenceExterne?: true
     type_mouvement?: true
     categorie?: true
+    moyen_paiement?: true
     montant?: true
     description?: true
     enregistrerParId?: true
-    referenceExterne?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -23441,12 +23319,13 @@ export namespace Prisma {
   export type MouvementCaisseMaxAggregateInputType = {
     id?: true
     caisseId?: true
+    referenceExterne?: true
     type_mouvement?: true
     categorie?: true
+    moyen_paiement?: true
     montant?: true
     description?: true
     enregistrerParId?: true
-    referenceExterne?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -23454,12 +23333,13 @@ export namespace Prisma {
   export type MouvementCaisseCountAggregateInputType = {
     id?: true
     caisseId?: true
+    referenceExterne?: true
     type_mouvement?: true
     categorie?: true
+    moyen_paiement?: true
     montant?: true
     description?: true
     enregistrerParId?: true
-    referenceExterne?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -23554,12 +23434,13 @@ export namespace Prisma {
   export type MouvementCaisseGroupByOutputType = {
     id: number
     caisseId: number
+    referenceExterne: string | null
     type_mouvement: $Enums.TypeMouvementCaisse
     categorie: $Enums.CategorieMouvement
+    moyen_paiement: $Enums.MoyenPaiment
     montant: number
     description: string | null
     enregistrerParId: number
-    referenceExterne: string | null
     createdAt: Date
     updatedAt: Date
     _count: MouvementCaisseCountAggregateOutputType | null
@@ -23586,12 +23467,13 @@ export namespace Prisma {
   export type MouvementCaisseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     caisseId?: boolean
+    referenceExterne?: boolean
     type_mouvement?: boolean
     categorie?: boolean
+    moyen_paiement?: boolean
     montant?: boolean
     description?: boolean
     enregistrerParId?: boolean
-    referenceExterne?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     caisse?: boolean | CaisseDefaultArgs<ExtArgs>
@@ -23601,12 +23483,13 @@ export namespace Prisma {
   export type MouvementCaisseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     caisseId?: boolean
+    referenceExterne?: boolean
     type_mouvement?: boolean
     categorie?: boolean
+    moyen_paiement?: boolean
     montant?: boolean
     description?: boolean
     enregistrerParId?: boolean
-    referenceExterne?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     caisse?: boolean | CaisseDefaultArgs<ExtArgs>
@@ -23616,12 +23499,13 @@ export namespace Prisma {
   export type MouvementCaisseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     caisseId?: boolean
+    referenceExterne?: boolean
     type_mouvement?: boolean
     categorie?: boolean
+    moyen_paiement?: boolean
     montant?: boolean
     description?: boolean
     enregistrerParId?: boolean
-    referenceExterne?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     caisse?: boolean | CaisseDefaultArgs<ExtArgs>
@@ -23631,17 +23515,18 @@ export namespace Prisma {
   export type MouvementCaisseSelectScalar = {
     id?: boolean
     caisseId?: boolean
+    referenceExterne?: boolean
     type_mouvement?: boolean
     categorie?: boolean
+    moyen_paiement?: boolean
     montant?: boolean
     description?: boolean
     enregistrerParId?: boolean
-    referenceExterne?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type MouvementCaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caisseId" | "type_mouvement" | "categorie" | "montant" | "description" | "enregistrerParId" | "referenceExterne" | "createdAt" | "updatedAt", ExtArgs["result"]["mouvementCaisse"]>
+  export type MouvementCaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caisseId" | "referenceExterne" | "type_mouvement" | "categorie" | "moyen_paiement" | "montant" | "description" | "enregistrerParId" | "createdAt" | "updatedAt", ExtArgs["result"]["mouvementCaisse"]>
   export type MouvementCaisseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     caisse?: boolean | CaisseDefaultArgs<ExtArgs>
     utilisateur?: boolean | UtilisateurDefaultArgs<ExtArgs>
@@ -23664,12 +23549,13 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       caisseId: number
+      referenceExterne: string | null
       type_mouvement: $Enums.TypeMouvementCaisse
       categorie: $Enums.CategorieMouvement
+      moyen_paiement: $Enums.MoyenPaiment
       montant: number
       description: string | null
       enregistrerParId: number
-      referenceExterne: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["mouvementCaisse"]>
@@ -24099,12 +23985,13 @@ export namespace Prisma {
   interface MouvementCaisseFieldRefs {
     readonly id: FieldRef<"MouvementCaisse", 'Int'>
     readonly caisseId: FieldRef<"MouvementCaisse", 'Int'>
+    readonly referenceExterne: FieldRef<"MouvementCaisse", 'String'>
     readonly type_mouvement: FieldRef<"MouvementCaisse", 'TypeMouvementCaisse'>
     readonly categorie: FieldRef<"MouvementCaisse", 'CategorieMouvement'>
+    readonly moyen_paiement: FieldRef<"MouvementCaisse", 'MoyenPaiment'>
     readonly montant: FieldRef<"MouvementCaisse", 'Float'>
     readonly description: FieldRef<"MouvementCaisse", 'String'>
     readonly enregistrerParId: FieldRef<"MouvementCaisse", 'Int'>
-    readonly referenceExterne: FieldRef<"MouvementCaisse", 'String'>
     readonly createdAt: FieldRef<"MouvementCaisse", 'DateTime'>
     readonly updatedAt: FieldRef<"MouvementCaisse", 'DateTime'>
   }
@@ -24522,1156 +24409,6 @@ export namespace Prisma {
 
 
   /**
-   * Model DetailClotureCaisse
-   */
-
-  export type AggregateDetailClotureCaisse = {
-    _count: DetailClotureCaisseCountAggregateOutputType | null
-    _avg: DetailClotureCaisseAvgAggregateOutputType | null
-    _sum: DetailClotureCaisseSumAggregateOutputType | null
-    _min: DetailClotureCaisseMinAggregateOutputType | null
-    _max: DetailClotureCaisseMaxAggregateOutputType | null
-  }
-
-  export type DetailClotureCaisseAvgAggregateOutputType = {
-    id: number | null
-    produitId: number | null
-    teneurId: number | null
-    qtteRestante: number | null
-    clotureCaisseId: number | null
-  }
-
-  export type DetailClotureCaisseSumAggregateOutputType = {
-    id: number | null
-    produitId: number | null
-    teneurId: number | null
-    qtteRestante: number | null
-    clotureCaisseId: number | null
-  }
-
-  export type DetailClotureCaisseMinAggregateOutputType = {
-    id: number | null
-    produitId: number | null
-    teneurId: number | null
-    qtteRestante: number | null
-    clotureCaisseId: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type DetailClotureCaisseMaxAggregateOutputType = {
-    id: number | null
-    produitId: number | null
-    teneurId: number | null
-    qtteRestante: number | null
-    clotureCaisseId: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type DetailClotureCaisseCountAggregateOutputType = {
-    id: number
-    produitId: number
-    teneurId: number
-    qtteRestante: number
-    clotureCaisseId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type DetailClotureCaisseAvgAggregateInputType = {
-    id?: true
-    produitId?: true
-    teneurId?: true
-    qtteRestante?: true
-    clotureCaisseId?: true
-  }
-
-  export type DetailClotureCaisseSumAggregateInputType = {
-    id?: true
-    produitId?: true
-    teneurId?: true
-    qtteRestante?: true
-    clotureCaisseId?: true
-  }
-
-  export type DetailClotureCaisseMinAggregateInputType = {
-    id?: true
-    produitId?: true
-    teneurId?: true
-    qtteRestante?: true
-    clotureCaisseId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type DetailClotureCaisseMaxAggregateInputType = {
-    id?: true
-    produitId?: true
-    teneurId?: true
-    qtteRestante?: true
-    clotureCaisseId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type DetailClotureCaisseCountAggregateInputType = {
-    id?: true
-    produitId?: true
-    teneurId?: true
-    qtteRestante?: true
-    clotureCaisseId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type DetailClotureCaisseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which DetailClotureCaisse to aggregate.
-     */
-    where?: DetailClotureCaisseWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DetailClotureCaisses to fetch.
-     */
-    orderBy?: DetailClotureCaisseOrderByWithRelationInput | DetailClotureCaisseOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: DetailClotureCaisseWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DetailClotureCaisses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DetailClotureCaisses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned DetailClotureCaisses
-    **/
-    _count?: true | DetailClotureCaisseCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: DetailClotureCaisseAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: DetailClotureCaisseSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: DetailClotureCaisseMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: DetailClotureCaisseMaxAggregateInputType
-  }
-
-  export type GetDetailClotureCaisseAggregateType<T extends DetailClotureCaisseAggregateArgs> = {
-        [P in keyof T & keyof AggregateDetailClotureCaisse]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateDetailClotureCaisse[P]>
-      : GetScalarType<T[P], AggregateDetailClotureCaisse[P]>
-  }
-
-
-
-
-  export type DetailClotureCaisseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DetailClotureCaisseWhereInput
-    orderBy?: DetailClotureCaisseOrderByWithAggregationInput | DetailClotureCaisseOrderByWithAggregationInput[]
-    by: DetailClotureCaisseScalarFieldEnum[] | DetailClotureCaisseScalarFieldEnum
-    having?: DetailClotureCaisseScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: DetailClotureCaisseCountAggregateInputType | true
-    _avg?: DetailClotureCaisseAvgAggregateInputType
-    _sum?: DetailClotureCaisseSumAggregateInputType
-    _min?: DetailClotureCaisseMinAggregateInputType
-    _max?: DetailClotureCaisseMaxAggregateInputType
-  }
-
-  export type DetailClotureCaisseGroupByOutputType = {
-    id: number
-    produitId: number
-    teneurId: number
-    qtteRestante: number
-    clotureCaisseId: number
-    createdAt: Date
-    updatedAt: Date
-    _count: DetailClotureCaisseCountAggregateOutputType | null
-    _avg: DetailClotureCaisseAvgAggregateOutputType | null
-    _sum: DetailClotureCaisseSumAggregateOutputType | null
-    _min: DetailClotureCaisseMinAggregateOutputType | null
-    _max: DetailClotureCaisseMaxAggregateOutputType | null
-  }
-
-  type GetDetailClotureCaisseGroupByPayload<T extends DetailClotureCaisseGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<DetailClotureCaisseGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof DetailClotureCaisseGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], DetailClotureCaisseGroupByOutputType[P]>
-            : GetScalarType<T[P], DetailClotureCaisseGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type DetailClotureCaisseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    produitId?: boolean
-    teneurId?: boolean
-    qtteRestante?: boolean
-    clotureCaisseId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    produit?: boolean | ProduitDefaultArgs<ExtArgs>
-    teneur?: boolean | TeneurDefaultArgs<ExtArgs>
-    clotureCaisse?: boolean | ClotureCaisseDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["detailClotureCaisse"]>
-
-  export type DetailClotureCaisseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    produitId?: boolean
-    teneurId?: boolean
-    qtteRestante?: boolean
-    clotureCaisseId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    produit?: boolean | ProduitDefaultArgs<ExtArgs>
-    teneur?: boolean | TeneurDefaultArgs<ExtArgs>
-    clotureCaisse?: boolean | ClotureCaisseDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["detailClotureCaisse"]>
-
-  export type DetailClotureCaisseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    produitId?: boolean
-    teneurId?: boolean
-    qtteRestante?: boolean
-    clotureCaisseId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    produit?: boolean | ProduitDefaultArgs<ExtArgs>
-    teneur?: boolean | TeneurDefaultArgs<ExtArgs>
-    clotureCaisse?: boolean | ClotureCaisseDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["detailClotureCaisse"]>
-
-  export type DetailClotureCaisseSelectScalar = {
-    id?: boolean
-    produitId?: boolean
-    teneurId?: boolean
-    qtteRestante?: boolean
-    clotureCaisseId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type DetailClotureCaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "produitId" | "teneurId" | "qtteRestante" | "clotureCaisseId" | "createdAt" | "updatedAt", ExtArgs["result"]["detailClotureCaisse"]>
-  export type DetailClotureCaisseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    produit?: boolean | ProduitDefaultArgs<ExtArgs>
-    teneur?: boolean | TeneurDefaultArgs<ExtArgs>
-    clotureCaisse?: boolean | ClotureCaisseDefaultArgs<ExtArgs>
-  }
-  export type DetailClotureCaisseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    produit?: boolean | ProduitDefaultArgs<ExtArgs>
-    teneur?: boolean | TeneurDefaultArgs<ExtArgs>
-    clotureCaisse?: boolean | ClotureCaisseDefaultArgs<ExtArgs>
-  }
-  export type DetailClotureCaisseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    produit?: boolean | ProduitDefaultArgs<ExtArgs>
-    teneur?: boolean | TeneurDefaultArgs<ExtArgs>
-    clotureCaisse?: boolean | ClotureCaisseDefaultArgs<ExtArgs>
-  }
-
-  export type $DetailClotureCaissePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "DetailClotureCaisse"
-    objects: {
-      produit: Prisma.$ProduitPayload<ExtArgs>
-      teneur: Prisma.$TeneurPayload<ExtArgs>
-      clotureCaisse: Prisma.$ClotureCaissePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      produitId: number
-      teneurId: number
-      qtteRestante: number
-      clotureCaisseId: number
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["detailClotureCaisse"]>
-    composites: {}
-  }
-
-  type DetailClotureCaisseGetPayload<S extends boolean | null | undefined | DetailClotureCaisseDefaultArgs> = $Result.GetResult<Prisma.$DetailClotureCaissePayload, S>
-
-  type DetailClotureCaisseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<DetailClotureCaisseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: DetailClotureCaisseCountAggregateInputType | true
-    }
-
-  export interface DetailClotureCaisseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DetailClotureCaisse'], meta: { name: 'DetailClotureCaisse' } }
-    /**
-     * Find zero or one DetailClotureCaisse that matches the filter.
-     * @param {DetailClotureCaisseFindUniqueArgs} args - Arguments to find a DetailClotureCaisse
-     * @example
-     * // Get one DetailClotureCaisse
-     * const detailClotureCaisse = await prisma.detailClotureCaisse.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends DetailClotureCaisseFindUniqueArgs>(args: SelectSubset<T, DetailClotureCaisseFindUniqueArgs<ExtArgs>>): Prisma__DetailClotureCaisseClient<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one DetailClotureCaisse that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {DetailClotureCaisseFindUniqueOrThrowArgs} args - Arguments to find a DetailClotureCaisse
-     * @example
-     * // Get one DetailClotureCaisse
-     * const detailClotureCaisse = await prisma.detailClotureCaisse.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends DetailClotureCaisseFindUniqueOrThrowArgs>(args: SelectSubset<T, DetailClotureCaisseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DetailClotureCaisseClient<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first DetailClotureCaisse that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailClotureCaisseFindFirstArgs} args - Arguments to find a DetailClotureCaisse
-     * @example
-     * // Get one DetailClotureCaisse
-     * const detailClotureCaisse = await prisma.detailClotureCaisse.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends DetailClotureCaisseFindFirstArgs>(args?: SelectSubset<T, DetailClotureCaisseFindFirstArgs<ExtArgs>>): Prisma__DetailClotureCaisseClient<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first DetailClotureCaisse that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailClotureCaisseFindFirstOrThrowArgs} args - Arguments to find a DetailClotureCaisse
-     * @example
-     * // Get one DetailClotureCaisse
-     * const detailClotureCaisse = await prisma.detailClotureCaisse.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends DetailClotureCaisseFindFirstOrThrowArgs>(args?: SelectSubset<T, DetailClotureCaisseFindFirstOrThrowArgs<ExtArgs>>): Prisma__DetailClotureCaisseClient<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more DetailClotureCaisses that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailClotureCaisseFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all DetailClotureCaisses
-     * const detailClotureCaisses = await prisma.detailClotureCaisse.findMany()
-     * 
-     * // Get first 10 DetailClotureCaisses
-     * const detailClotureCaisses = await prisma.detailClotureCaisse.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const detailClotureCaisseWithIdOnly = await prisma.detailClotureCaisse.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends DetailClotureCaisseFindManyArgs>(args?: SelectSubset<T, DetailClotureCaisseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a DetailClotureCaisse.
-     * @param {DetailClotureCaisseCreateArgs} args - Arguments to create a DetailClotureCaisse.
-     * @example
-     * // Create one DetailClotureCaisse
-     * const DetailClotureCaisse = await prisma.detailClotureCaisse.create({
-     *   data: {
-     *     // ... data to create a DetailClotureCaisse
-     *   }
-     * })
-     * 
-     */
-    create<T extends DetailClotureCaisseCreateArgs>(args: SelectSubset<T, DetailClotureCaisseCreateArgs<ExtArgs>>): Prisma__DetailClotureCaisseClient<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many DetailClotureCaisses.
-     * @param {DetailClotureCaisseCreateManyArgs} args - Arguments to create many DetailClotureCaisses.
-     * @example
-     * // Create many DetailClotureCaisses
-     * const detailClotureCaisse = await prisma.detailClotureCaisse.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends DetailClotureCaisseCreateManyArgs>(args?: SelectSubset<T, DetailClotureCaisseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many DetailClotureCaisses and returns the data saved in the database.
-     * @param {DetailClotureCaisseCreateManyAndReturnArgs} args - Arguments to create many DetailClotureCaisses.
-     * @example
-     * // Create many DetailClotureCaisses
-     * const detailClotureCaisse = await prisma.detailClotureCaisse.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many DetailClotureCaisses and only return the `id`
-     * const detailClotureCaisseWithIdOnly = await prisma.detailClotureCaisse.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends DetailClotureCaisseCreateManyAndReturnArgs>(args?: SelectSubset<T, DetailClotureCaisseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a DetailClotureCaisse.
-     * @param {DetailClotureCaisseDeleteArgs} args - Arguments to delete one DetailClotureCaisse.
-     * @example
-     * // Delete one DetailClotureCaisse
-     * const DetailClotureCaisse = await prisma.detailClotureCaisse.delete({
-     *   where: {
-     *     // ... filter to delete one DetailClotureCaisse
-     *   }
-     * })
-     * 
-     */
-    delete<T extends DetailClotureCaisseDeleteArgs>(args: SelectSubset<T, DetailClotureCaisseDeleteArgs<ExtArgs>>): Prisma__DetailClotureCaisseClient<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one DetailClotureCaisse.
-     * @param {DetailClotureCaisseUpdateArgs} args - Arguments to update one DetailClotureCaisse.
-     * @example
-     * // Update one DetailClotureCaisse
-     * const detailClotureCaisse = await prisma.detailClotureCaisse.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends DetailClotureCaisseUpdateArgs>(args: SelectSubset<T, DetailClotureCaisseUpdateArgs<ExtArgs>>): Prisma__DetailClotureCaisseClient<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more DetailClotureCaisses.
-     * @param {DetailClotureCaisseDeleteManyArgs} args - Arguments to filter DetailClotureCaisses to delete.
-     * @example
-     * // Delete a few DetailClotureCaisses
-     * const { count } = await prisma.detailClotureCaisse.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends DetailClotureCaisseDeleteManyArgs>(args?: SelectSubset<T, DetailClotureCaisseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more DetailClotureCaisses.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailClotureCaisseUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many DetailClotureCaisses
-     * const detailClotureCaisse = await prisma.detailClotureCaisse.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends DetailClotureCaisseUpdateManyArgs>(args: SelectSubset<T, DetailClotureCaisseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more DetailClotureCaisses and returns the data updated in the database.
-     * @param {DetailClotureCaisseUpdateManyAndReturnArgs} args - Arguments to update many DetailClotureCaisses.
-     * @example
-     * // Update many DetailClotureCaisses
-     * const detailClotureCaisse = await prisma.detailClotureCaisse.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more DetailClotureCaisses and only return the `id`
-     * const detailClotureCaisseWithIdOnly = await prisma.detailClotureCaisse.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends DetailClotureCaisseUpdateManyAndReturnArgs>(args: SelectSubset<T, DetailClotureCaisseUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one DetailClotureCaisse.
-     * @param {DetailClotureCaisseUpsertArgs} args - Arguments to update or create a DetailClotureCaisse.
-     * @example
-     * // Update or create a DetailClotureCaisse
-     * const detailClotureCaisse = await prisma.detailClotureCaisse.upsert({
-     *   create: {
-     *     // ... data to create a DetailClotureCaisse
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the DetailClotureCaisse we want to update
-     *   }
-     * })
-     */
-    upsert<T extends DetailClotureCaisseUpsertArgs>(args: SelectSubset<T, DetailClotureCaisseUpsertArgs<ExtArgs>>): Prisma__DetailClotureCaisseClient<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of DetailClotureCaisses.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailClotureCaisseCountArgs} args - Arguments to filter DetailClotureCaisses to count.
-     * @example
-     * // Count the number of DetailClotureCaisses
-     * const count = await prisma.detailClotureCaisse.count({
-     *   where: {
-     *     // ... the filter for the DetailClotureCaisses we want to count
-     *   }
-     * })
-    **/
-    count<T extends DetailClotureCaisseCountArgs>(
-      args?: Subset<T, DetailClotureCaisseCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], DetailClotureCaisseCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a DetailClotureCaisse.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailClotureCaisseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends DetailClotureCaisseAggregateArgs>(args: Subset<T, DetailClotureCaisseAggregateArgs>): Prisma.PrismaPromise<GetDetailClotureCaisseAggregateType<T>>
-
-    /**
-     * Group by DetailClotureCaisse.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DetailClotureCaisseGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends DetailClotureCaisseGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: DetailClotureCaisseGroupByArgs['orderBy'] }
-        : { orderBy?: DetailClotureCaisseGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, DetailClotureCaisseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDetailClotureCaisseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the DetailClotureCaisse model
-   */
-  readonly fields: DetailClotureCaisseFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for DetailClotureCaisse.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__DetailClotureCaisseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    produit<T extends ProduitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProduitDefaultArgs<ExtArgs>>): Prisma__ProduitClient<$Result.GetResult<Prisma.$ProduitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    teneur<T extends TeneurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TeneurDefaultArgs<ExtArgs>>): Prisma__TeneurClient<$Result.GetResult<Prisma.$TeneurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    clotureCaisse<T extends ClotureCaisseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClotureCaisseDefaultArgs<ExtArgs>>): Prisma__ClotureCaisseClient<$Result.GetResult<Prisma.$ClotureCaissePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the DetailClotureCaisse model
-   */
-  interface DetailClotureCaisseFieldRefs {
-    readonly id: FieldRef<"DetailClotureCaisse", 'Int'>
-    readonly produitId: FieldRef<"DetailClotureCaisse", 'Int'>
-    readonly teneurId: FieldRef<"DetailClotureCaisse", 'Int'>
-    readonly qtteRestante: FieldRef<"DetailClotureCaisse", 'Int'>
-    readonly clotureCaisseId: FieldRef<"DetailClotureCaisse", 'Int'>
-    readonly createdAt: FieldRef<"DetailClotureCaisse", 'DateTime'>
-    readonly updatedAt: FieldRef<"DetailClotureCaisse", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * DetailClotureCaisse findUnique
-   */
-  export type DetailClotureCaisseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-    /**
-     * Filter, which DetailClotureCaisse to fetch.
-     */
-    where: DetailClotureCaisseWhereUniqueInput
-  }
-
-  /**
-   * DetailClotureCaisse findUniqueOrThrow
-   */
-  export type DetailClotureCaisseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-    /**
-     * Filter, which DetailClotureCaisse to fetch.
-     */
-    where: DetailClotureCaisseWhereUniqueInput
-  }
-
-  /**
-   * DetailClotureCaisse findFirst
-   */
-  export type DetailClotureCaisseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-    /**
-     * Filter, which DetailClotureCaisse to fetch.
-     */
-    where?: DetailClotureCaisseWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DetailClotureCaisses to fetch.
-     */
-    orderBy?: DetailClotureCaisseOrderByWithRelationInput | DetailClotureCaisseOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for DetailClotureCaisses.
-     */
-    cursor?: DetailClotureCaisseWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DetailClotureCaisses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DetailClotureCaisses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of DetailClotureCaisses.
-     */
-    distinct?: DetailClotureCaisseScalarFieldEnum | DetailClotureCaisseScalarFieldEnum[]
-  }
-
-  /**
-   * DetailClotureCaisse findFirstOrThrow
-   */
-  export type DetailClotureCaisseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-    /**
-     * Filter, which DetailClotureCaisse to fetch.
-     */
-    where?: DetailClotureCaisseWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DetailClotureCaisses to fetch.
-     */
-    orderBy?: DetailClotureCaisseOrderByWithRelationInput | DetailClotureCaisseOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for DetailClotureCaisses.
-     */
-    cursor?: DetailClotureCaisseWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DetailClotureCaisses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DetailClotureCaisses.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of DetailClotureCaisses.
-     */
-    distinct?: DetailClotureCaisseScalarFieldEnum | DetailClotureCaisseScalarFieldEnum[]
-  }
-
-  /**
-   * DetailClotureCaisse findMany
-   */
-  export type DetailClotureCaisseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-    /**
-     * Filter, which DetailClotureCaisses to fetch.
-     */
-    where?: DetailClotureCaisseWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DetailClotureCaisses to fetch.
-     */
-    orderBy?: DetailClotureCaisseOrderByWithRelationInput | DetailClotureCaisseOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing DetailClotureCaisses.
-     */
-    cursor?: DetailClotureCaisseWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DetailClotureCaisses from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DetailClotureCaisses.
-     */
-    skip?: number
-    distinct?: DetailClotureCaisseScalarFieldEnum | DetailClotureCaisseScalarFieldEnum[]
-  }
-
-  /**
-   * DetailClotureCaisse create
-   */
-  export type DetailClotureCaisseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-    /**
-     * The data needed to create a DetailClotureCaisse.
-     */
-    data: XOR<DetailClotureCaisseCreateInput, DetailClotureCaisseUncheckedCreateInput>
-  }
-
-  /**
-   * DetailClotureCaisse createMany
-   */
-  export type DetailClotureCaisseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many DetailClotureCaisses.
-     */
-    data: DetailClotureCaisseCreateManyInput | DetailClotureCaisseCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * DetailClotureCaisse createManyAndReturn
-   */
-  export type DetailClotureCaisseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * The data used to create many DetailClotureCaisses.
-     */
-    data: DetailClotureCaisseCreateManyInput | DetailClotureCaisseCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * DetailClotureCaisse update
-   */
-  export type DetailClotureCaisseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-    /**
-     * The data needed to update a DetailClotureCaisse.
-     */
-    data: XOR<DetailClotureCaisseUpdateInput, DetailClotureCaisseUncheckedUpdateInput>
-    /**
-     * Choose, which DetailClotureCaisse to update.
-     */
-    where: DetailClotureCaisseWhereUniqueInput
-  }
-
-  /**
-   * DetailClotureCaisse updateMany
-   */
-  export type DetailClotureCaisseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update DetailClotureCaisses.
-     */
-    data: XOR<DetailClotureCaisseUpdateManyMutationInput, DetailClotureCaisseUncheckedUpdateManyInput>
-    /**
-     * Filter which DetailClotureCaisses to update
-     */
-    where?: DetailClotureCaisseWhereInput
-    /**
-     * Limit how many DetailClotureCaisses to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * DetailClotureCaisse updateManyAndReturn
-   */
-  export type DetailClotureCaisseUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * The data used to update DetailClotureCaisses.
-     */
-    data: XOR<DetailClotureCaisseUpdateManyMutationInput, DetailClotureCaisseUncheckedUpdateManyInput>
-    /**
-     * Filter which DetailClotureCaisses to update
-     */
-    where?: DetailClotureCaisseWhereInput
-    /**
-     * Limit how many DetailClotureCaisses to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * DetailClotureCaisse upsert
-   */
-  export type DetailClotureCaisseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-    /**
-     * The filter to search for the DetailClotureCaisse to update in case it exists.
-     */
-    where: DetailClotureCaisseWhereUniqueInput
-    /**
-     * In case the DetailClotureCaisse found by the `where` argument doesn't exist, create a new DetailClotureCaisse with this data.
-     */
-    create: XOR<DetailClotureCaisseCreateInput, DetailClotureCaisseUncheckedCreateInput>
-    /**
-     * In case the DetailClotureCaisse was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<DetailClotureCaisseUpdateInput, DetailClotureCaisseUncheckedUpdateInput>
-  }
-
-  /**
-   * DetailClotureCaisse delete
-   */
-  export type DetailClotureCaisseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-    /**
-     * Filter which DetailClotureCaisse to delete.
-     */
-    where: DetailClotureCaisseWhereUniqueInput
-  }
-
-  /**
-   * DetailClotureCaisse deleteMany
-   */
-  export type DetailClotureCaisseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which DetailClotureCaisses to delete
-     */
-    where?: DetailClotureCaisseWhereInput
-    /**
-     * Limit how many DetailClotureCaisses to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * DetailClotureCaisse without action
-   */
-  export type DetailClotureCaisseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DetailClotureCaisse
-     */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DetailClotureCaisse
-     */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model ClotureCaisse
    */
 
@@ -25685,21 +24422,21 @@ export namespace Prisma {
 
   export type ClotureCaisseAvgAggregateOutputType = {
     id: number | null
-    caisseId: number | null
     utilisateurClotureId: number | null
+    entrepriseId: number | null
   }
 
   export type ClotureCaisseSumAggregateOutputType = {
     id: number | null
-    caisseId: number | null
     utilisateurClotureId: number | null
+    entrepriseId: number | null
   }
 
   export type ClotureCaisseMinAggregateOutputType = {
     id: number | null
-    caisseId: number | null
     dateCloture: Date | null
     utilisateurClotureId: number | null
+    entrepriseId: number | null
     notes: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -25707,9 +24444,9 @@ export namespace Prisma {
 
   export type ClotureCaisseMaxAggregateOutputType = {
     id: number | null
-    caisseId: number | null
     dateCloture: Date | null
     utilisateurClotureId: number | null
+    entrepriseId: number | null
     notes: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -25717,9 +24454,9 @@ export namespace Prisma {
 
   export type ClotureCaisseCountAggregateOutputType = {
     id: number
-    caisseId: number
     dateCloture: number
     utilisateurClotureId: number
+    entrepriseId: number
     notes: number
     createdAt: number
     updatedAt: number
@@ -25729,21 +24466,21 @@ export namespace Prisma {
 
   export type ClotureCaisseAvgAggregateInputType = {
     id?: true
-    caisseId?: true
     utilisateurClotureId?: true
+    entrepriseId?: true
   }
 
   export type ClotureCaisseSumAggregateInputType = {
     id?: true
-    caisseId?: true
     utilisateurClotureId?: true
+    entrepriseId?: true
   }
 
   export type ClotureCaisseMinAggregateInputType = {
     id?: true
-    caisseId?: true
     dateCloture?: true
     utilisateurClotureId?: true
+    entrepriseId?: true
     notes?: true
     createdAt?: true
     updatedAt?: true
@@ -25751,9 +24488,9 @@ export namespace Prisma {
 
   export type ClotureCaisseMaxAggregateInputType = {
     id?: true
-    caisseId?: true
     dateCloture?: true
     utilisateurClotureId?: true
+    entrepriseId?: true
     notes?: true
     createdAt?: true
     updatedAt?: true
@@ -25761,9 +24498,9 @@ export namespace Prisma {
 
   export type ClotureCaisseCountAggregateInputType = {
     id?: true
-    caisseId?: true
     dateCloture?: true
     utilisateurClotureId?: true
+    entrepriseId?: true
     notes?: true
     createdAt?: true
     updatedAt?: true
@@ -25858,9 +24595,9 @@ export namespace Prisma {
 
   export type ClotureCaisseGroupByOutputType = {
     id: number
-    caisseId: number
     dateCloture: Date
     utilisateurClotureId: number
+    entrepriseId: number | null
     notes: string | null
     createdAt: Date
     updatedAt: Date
@@ -25887,80 +24624,75 @@ export namespace Prisma {
 
   export type ClotureCaisseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    caisseId?: boolean
     dateCloture?: boolean
     utilisateurClotureId?: boolean
+    entrepriseId?: boolean
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    caisse?: boolean | CaisseDefaultArgs<ExtArgs>
     utilisateurCloture?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    DetailClotureCaisse?: boolean | ClotureCaisse$DetailClotureCaisseArgs<ExtArgs>
-    _count?: boolean | ClotureCaisseCountOutputTypeDefaultArgs<ExtArgs>
+    entreprise?: boolean | ClotureCaisse$entrepriseArgs<ExtArgs>
   }, ExtArgs["result"]["clotureCaisse"]>
 
   export type ClotureCaisseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    caisseId?: boolean
     dateCloture?: boolean
     utilisateurClotureId?: boolean
+    entrepriseId?: boolean
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    caisse?: boolean | CaisseDefaultArgs<ExtArgs>
     utilisateurCloture?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    entreprise?: boolean | ClotureCaisse$entrepriseArgs<ExtArgs>
   }, ExtArgs["result"]["clotureCaisse"]>
 
   export type ClotureCaisseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    caisseId?: boolean
     dateCloture?: boolean
     utilisateurClotureId?: boolean
+    entrepriseId?: boolean
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    caisse?: boolean | CaisseDefaultArgs<ExtArgs>
     utilisateurCloture?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    entreprise?: boolean | ClotureCaisse$entrepriseArgs<ExtArgs>
   }, ExtArgs["result"]["clotureCaisse"]>
 
   export type ClotureCaisseSelectScalar = {
     id?: boolean
-    caisseId?: boolean
     dateCloture?: boolean
     utilisateurClotureId?: boolean
+    entrepriseId?: boolean
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ClotureCaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caisseId" | "dateCloture" | "utilisateurClotureId" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["clotureCaisse"]>
+  export type ClotureCaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dateCloture" | "utilisateurClotureId" | "entrepriseId" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["clotureCaisse"]>
   export type ClotureCaisseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    caisse?: boolean | CaisseDefaultArgs<ExtArgs>
     utilisateurCloture?: boolean | UtilisateurDefaultArgs<ExtArgs>
-    DetailClotureCaisse?: boolean | ClotureCaisse$DetailClotureCaisseArgs<ExtArgs>
-    _count?: boolean | ClotureCaisseCountOutputTypeDefaultArgs<ExtArgs>
+    entreprise?: boolean | ClotureCaisse$entrepriseArgs<ExtArgs>
   }
   export type ClotureCaisseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    caisse?: boolean | CaisseDefaultArgs<ExtArgs>
     utilisateurCloture?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    entreprise?: boolean | ClotureCaisse$entrepriseArgs<ExtArgs>
   }
   export type ClotureCaisseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    caisse?: boolean | CaisseDefaultArgs<ExtArgs>
     utilisateurCloture?: boolean | UtilisateurDefaultArgs<ExtArgs>
+    entreprise?: boolean | ClotureCaisse$entrepriseArgs<ExtArgs>
   }
 
   export type $ClotureCaissePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ClotureCaisse"
     objects: {
-      caisse: Prisma.$CaissePayload<ExtArgs>
       utilisateurCloture: Prisma.$UtilisateurPayload<ExtArgs>
-      DetailClotureCaisse: Prisma.$DetailClotureCaissePayload<ExtArgs>[]
+      entreprise: Prisma.$EntreprisePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      caisseId: number
       dateCloture: Date
       utilisateurClotureId: number
+      entrepriseId: number | null
       notes: string | null
       createdAt: Date
       updatedAt: Date
@@ -26358,9 +25090,8 @@ export namespace Prisma {
    */
   export interface Prisma__ClotureCaisseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    caisse<T extends CaisseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CaisseDefaultArgs<ExtArgs>>): Prisma__CaisseClient<$Result.GetResult<Prisma.$CaissePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     utilisateurCloture<T extends UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UtilisateurDefaultArgs<ExtArgs>>): Prisma__UtilisateurClient<$Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    DetailClotureCaisse<T extends ClotureCaisse$DetailClotureCaisseArgs<ExtArgs> = {}>(args?: Subset<T, ClotureCaisse$DetailClotureCaisseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailClotureCaissePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    entreprise<T extends ClotureCaisse$entrepriseArgs<ExtArgs> = {}>(args?: Subset<T, ClotureCaisse$entrepriseArgs<ExtArgs>>): Prisma__EntrepriseClient<$Result.GetResult<Prisma.$EntreprisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -26391,9 +25122,9 @@ export namespace Prisma {
    */
   interface ClotureCaisseFieldRefs {
     readonly id: FieldRef<"ClotureCaisse", 'Int'>
-    readonly caisseId: FieldRef<"ClotureCaisse", 'Int'>
     readonly dateCloture: FieldRef<"ClotureCaisse", 'DateTime'>
     readonly utilisateurClotureId: FieldRef<"ClotureCaisse", 'Int'>
+    readonly entrepriseId: FieldRef<"ClotureCaisse", 'Int'>
     readonly notes: FieldRef<"ClotureCaisse", 'String'>
     readonly createdAt: FieldRef<"ClotureCaisse", 'DateTime'>
     readonly updatedAt: FieldRef<"ClotureCaisse", 'DateTime'>
@@ -26793,27 +25524,22 @@ export namespace Prisma {
   }
 
   /**
-   * ClotureCaisse.DetailClotureCaisse
+   * ClotureCaisse.entreprise
    */
-  export type ClotureCaisse$DetailClotureCaisseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClotureCaisse$entrepriseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DetailClotureCaisse
+     * Select specific fields to fetch from the Entreprise
      */
-    select?: DetailClotureCaisseSelect<ExtArgs> | null
+    select?: EntrepriseSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DetailClotureCaisse
+     * Omit specific fields from the Entreprise
      */
-    omit?: DetailClotureCaisseOmit<ExtArgs> | null
+    omit?: EntrepriseOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DetailClotureCaisseInclude<ExtArgs> | null
-    where?: DetailClotureCaisseWhereInput
-    orderBy?: DetailClotureCaisseOrderByWithRelationInput | DetailClotureCaisseOrderByWithRelationInput[]
-    cursor?: DetailClotureCaisseWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: DetailClotureCaisseScalarFieldEnum | DetailClotureCaisseScalarFieldEnum[]
+    include?: EntrepriseInclude<ExtArgs> | null
+    where?: EntrepriseWhereInput
   }
 
   /**
@@ -27094,12 +25820,13 @@ export namespace Prisma {
   export const MouvementCaisseScalarFieldEnum: {
     id: 'id',
     caisseId: 'caisseId',
+    referenceExterne: 'referenceExterne',
     type_mouvement: 'type_mouvement',
     categorie: 'categorie',
+    moyen_paiement: 'moyen_paiement',
     montant: 'montant',
     description: 'description',
     enregistrerParId: 'enregistrerParId',
-    referenceExterne: 'referenceExterne',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -27107,24 +25834,11 @@ export namespace Prisma {
   export type MouvementCaisseScalarFieldEnum = (typeof MouvementCaisseScalarFieldEnum)[keyof typeof MouvementCaisseScalarFieldEnum]
 
 
-  export const DetailClotureCaisseScalarFieldEnum: {
-    id: 'id',
-    produitId: 'produitId',
-    teneurId: 'teneurId',
-    qtteRestante: 'qtteRestante',
-    clotureCaisseId: 'clotureCaisseId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type DetailClotureCaisseScalarFieldEnum = (typeof DetailClotureCaisseScalarFieldEnum)[keyof typeof DetailClotureCaisseScalarFieldEnum]
-
-
   export const ClotureCaisseScalarFieldEnum: {
     id: 'id',
-    caisseId: 'caisseId',
     dateCloture: 'dateCloture',
     utilisateurClotureId: 'utilisateurClotureId',
+    entrepriseId: 'entrepriseId',
     notes: 'notes',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -27403,6 +26117,7 @@ export namespace Prisma {
     email?: StringFilter<"Entreprise"> | string
     description?: StringNullableFilter<"Entreprise"> | string | null
     logo?: StringNullableFilter<"Entreprise"> | string | null
+    ClotureCaisse?: ClotureCaisseListRelationFilter
   }
 
   export type EntrepriseOrderByWithRelationInput = {
@@ -27416,6 +26131,7 @@ export namespace Prisma {
     email?: SortOrder
     description?: SortOrderInput | SortOrder
     logo?: SortOrderInput | SortOrder
+    ClotureCaisse?: ClotureCaisseOrderByRelationAggregateInput
   }
 
   export type EntrepriseWhereUniqueInput = Prisma.AtLeast<{
@@ -27432,6 +26148,7 @@ export namespace Prisma {
     site?: StringNullableFilter<"Entreprise"> | string | null
     description?: StringNullableFilter<"Entreprise"> | string | null
     logo?: StringNullableFilter<"Entreprise"> | string | null
+    ClotureCaisse?: ClotureCaisseListRelationFilter
   }, "id" | "nom" | "encronyme" | "code_postale" | "tel" | "email">
 
   export type EntrepriseOrderByWithAggregationInput = {
@@ -27831,7 +26548,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Teneur"> | Date | string
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     Produit?: ProduitListRelationFilter
-    DetailClotureCaisse?: DetailClotureCaisseListRelationFilter
   }
 
   export type TeneurOrderByWithRelationInput = {
@@ -27842,7 +26558,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     utilisateur?: UtilisateurOrderByWithRelationInput
     Produit?: ProduitOrderByRelationAggregateInput
-    DetailClotureCaisse?: DetailClotureCaisseOrderByRelationAggregateInput
   }
 
   export type TeneurWhereUniqueInput = Prisma.AtLeast<{
@@ -27856,7 +26571,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Teneur"> | Date | string
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     Produit?: ProduitListRelationFilter
-    DetailClotureCaisse?: DetailClotureCaisseListRelationFilter
   }, "id" | "valeur">
 
   export type TeneurOrderByWithAggregationInput = {
@@ -27977,7 +26691,6 @@ export namespace Prisma {
     teneur?: XOR<TeneurScalarRelationFilter, TeneurWhereInput>
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     DetailPanier?: DetailPanierListRelationFilter
-    DetailClotureCaisse?: DetailClotureCaisseListRelationFilter
   }
 
   export type ProduitOrderByWithRelationInput = {
@@ -27995,7 +26708,6 @@ export namespace Prisma {
     teneur?: TeneurOrderByWithRelationInput
     utilisateur?: UtilisateurOrderByWithRelationInput
     DetailPanier?: DetailPanierOrderByRelationAggregateInput
-    DetailClotureCaisse?: DetailClotureCaisseOrderByRelationAggregateInput
   }
 
   export type ProduitWhereUniqueInput = Prisma.AtLeast<{
@@ -28016,7 +26728,6 @@ export namespace Prisma {
     teneur?: XOR<TeneurScalarRelationFilter, TeneurWhereInput>
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     DetailPanier?: DetailPanierListRelationFilter
-    DetailClotureCaisse?: DetailClotureCaisseListRelationFilter
   }, "id">
 
   export type ProduitOrderByWithAggregationInput = {
@@ -28149,7 +26860,6 @@ export namespace Prisma {
     devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     MouvementCaisse?: MouvementCaisseListRelationFilter
-    clotures?: ClotureCaisseListRelationFilter
     Paiement?: PaiementListRelationFilter
   }
 
@@ -28167,7 +26877,6 @@ export namespace Prisma {
     devise?: DeviseOrderByWithRelationInput
     utilisateur?: UtilisateurOrderByWithRelationInput
     MouvementCaisse?: MouvementCaisseOrderByRelationAggregateInput
-    clotures?: ClotureCaisseOrderByRelationAggregateInput
     Paiement?: PaiementOrderByRelationAggregateInput
   }
 
@@ -28188,7 +26897,6 @@ export namespace Prisma {
     devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
     utilisateur?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
     MouvementCaisse?: MouvementCaisseListRelationFilter
-    clotures?: ClotureCaisseListRelationFilter
     Paiement?: PaiementListRelationFilter
   }, "id" | "nom">
 
@@ -28817,12 +27525,13 @@ export namespace Prisma {
     NOT?: MouvementCaisseWhereInput | MouvementCaisseWhereInput[]
     id?: IntFilter<"MouvementCaisse"> | number
     caisseId?: IntFilter<"MouvementCaisse"> | number
+    referenceExterne?: StringNullableFilter<"MouvementCaisse"> | string | null
     type_mouvement?: EnumTypeMouvementCaisseFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFilter<"MouvementCaisse"> | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFilter<"MouvementCaisse"> | $Enums.MoyenPaiment
     montant?: FloatFilter<"MouvementCaisse"> | number
     description?: StringNullableFilter<"MouvementCaisse"> | string | null
     enregistrerParId?: IntFilter<"MouvementCaisse"> | number
-    referenceExterne?: StringNullableFilter<"MouvementCaisse"> | string | null
     createdAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
     updatedAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
     caisse?: XOR<CaisseScalarRelationFilter, CaisseWhereInput>
@@ -28832,12 +27541,13 @@ export namespace Prisma {
   export type MouvementCaisseOrderByWithRelationInput = {
     id?: SortOrder
     caisseId?: SortOrder
+    referenceExterne?: SortOrderInput | SortOrder
     type_mouvement?: SortOrder
     categorie?: SortOrder
+    moyen_paiement?: SortOrder
     montant?: SortOrder
     description?: SortOrderInput | SortOrder
     enregistrerParId?: SortOrder
-    referenceExterne?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     caisse?: CaisseOrderByWithRelationInput
@@ -28853,6 +27563,7 @@ export namespace Prisma {
     caisseId?: IntFilter<"MouvementCaisse"> | number
     type_mouvement?: EnumTypeMouvementCaisseFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFilter<"MouvementCaisse"> | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFilter<"MouvementCaisse"> | $Enums.MoyenPaiment
     montant?: FloatFilter<"MouvementCaisse"> | number
     description?: StringNullableFilter<"MouvementCaisse"> | string | null
     enregistrerParId?: IntFilter<"MouvementCaisse"> | number
@@ -28865,12 +27576,13 @@ export namespace Prisma {
   export type MouvementCaisseOrderByWithAggregationInput = {
     id?: SortOrder
     caisseId?: SortOrder
+    referenceExterne?: SortOrderInput | SortOrder
     type_mouvement?: SortOrder
     categorie?: SortOrder
+    moyen_paiement?: SortOrder
     montant?: SortOrder
     description?: SortOrderInput | SortOrder
     enregistrerParId?: SortOrder
-    referenceExterne?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: MouvementCaisseCountOrderByAggregateInput
@@ -28886,87 +27598,15 @@ export namespace Prisma {
     NOT?: MouvementCaisseScalarWhereWithAggregatesInput | MouvementCaisseScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"MouvementCaisse"> | number
     caisseId?: IntWithAggregatesFilter<"MouvementCaisse"> | number
+    referenceExterne?: StringNullableWithAggregatesFilter<"MouvementCaisse"> | string | null
     type_mouvement?: EnumTypeMouvementCaisseWithAggregatesFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementWithAggregatesFilter<"MouvementCaisse"> | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentWithAggregatesFilter<"MouvementCaisse"> | $Enums.MoyenPaiment
     montant?: FloatWithAggregatesFilter<"MouvementCaisse"> | number
     description?: StringNullableWithAggregatesFilter<"MouvementCaisse"> | string | null
     enregistrerParId?: IntWithAggregatesFilter<"MouvementCaisse"> | number
-    referenceExterne?: StringNullableWithAggregatesFilter<"MouvementCaisse"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"MouvementCaisse"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"MouvementCaisse"> | Date | string
-  }
-
-  export type DetailClotureCaisseWhereInput = {
-    AND?: DetailClotureCaisseWhereInput | DetailClotureCaisseWhereInput[]
-    OR?: DetailClotureCaisseWhereInput[]
-    NOT?: DetailClotureCaisseWhereInput | DetailClotureCaisseWhereInput[]
-    id?: IntFilter<"DetailClotureCaisse"> | number
-    produitId?: IntFilter<"DetailClotureCaisse"> | number
-    teneurId?: IntFilter<"DetailClotureCaisse"> | number
-    qtteRestante?: IntFilter<"DetailClotureCaisse"> | number
-    clotureCaisseId?: IntFilter<"DetailClotureCaisse"> | number
-    createdAt?: DateTimeFilter<"DetailClotureCaisse"> | Date | string
-    updatedAt?: DateTimeFilter<"DetailClotureCaisse"> | Date | string
-    produit?: XOR<ProduitScalarRelationFilter, ProduitWhereInput>
-    teneur?: XOR<TeneurScalarRelationFilter, TeneurWhereInput>
-    clotureCaisse?: XOR<ClotureCaisseScalarRelationFilter, ClotureCaisseWhereInput>
-  }
-
-  export type DetailClotureCaisseOrderByWithRelationInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    teneurId?: SortOrder
-    qtteRestante?: SortOrder
-    clotureCaisseId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    produit?: ProduitOrderByWithRelationInput
-    teneur?: TeneurOrderByWithRelationInput
-    clotureCaisse?: ClotureCaisseOrderByWithRelationInput
-  }
-
-  export type DetailClotureCaisseWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: DetailClotureCaisseWhereInput | DetailClotureCaisseWhereInput[]
-    OR?: DetailClotureCaisseWhereInput[]
-    NOT?: DetailClotureCaisseWhereInput | DetailClotureCaisseWhereInput[]
-    produitId?: IntFilter<"DetailClotureCaisse"> | number
-    teneurId?: IntFilter<"DetailClotureCaisse"> | number
-    qtteRestante?: IntFilter<"DetailClotureCaisse"> | number
-    clotureCaisseId?: IntFilter<"DetailClotureCaisse"> | number
-    createdAt?: DateTimeFilter<"DetailClotureCaisse"> | Date | string
-    updatedAt?: DateTimeFilter<"DetailClotureCaisse"> | Date | string
-    produit?: XOR<ProduitScalarRelationFilter, ProduitWhereInput>
-    teneur?: XOR<TeneurScalarRelationFilter, TeneurWhereInput>
-    clotureCaisse?: XOR<ClotureCaisseScalarRelationFilter, ClotureCaisseWhereInput>
-  }, "id">
-
-  export type DetailClotureCaisseOrderByWithAggregationInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    teneurId?: SortOrder
-    qtteRestante?: SortOrder
-    clotureCaisseId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: DetailClotureCaisseCountOrderByAggregateInput
-    _avg?: DetailClotureCaisseAvgOrderByAggregateInput
-    _max?: DetailClotureCaisseMaxOrderByAggregateInput
-    _min?: DetailClotureCaisseMinOrderByAggregateInput
-    _sum?: DetailClotureCaisseSumOrderByAggregateInput
-  }
-
-  export type DetailClotureCaisseScalarWhereWithAggregatesInput = {
-    AND?: DetailClotureCaisseScalarWhereWithAggregatesInput | DetailClotureCaisseScalarWhereWithAggregatesInput[]
-    OR?: DetailClotureCaisseScalarWhereWithAggregatesInput[]
-    NOT?: DetailClotureCaisseScalarWhereWithAggregatesInput | DetailClotureCaisseScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"DetailClotureCaisse"> | number
-    produitId?: IntWithAggregatesFilter<"DetailClotureCaisse"> | number
-    teneurId?: IntWithAggregatesFilter<"DetailClotureCaisse"> | number
-    qtteRestante?: IntWithAggregatesFilter<"DetailClotureCaisse"> | number
-    clotureCaisseId?: IntWithAggregatesFilter<"DetailClotureCaisse"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"DetailClotureCaisse"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"DetailClotureCaisse"> | Date | string
   }
 
   export type ClotureCaisseWhereInput = {
@@ -28974,51 +27614,48 @@ export namespace Prisma {
     OR?: ClotureCaisseWhereInput[]
     NOT?: ClotureCaisseWhereInput | ClotureCaisseWhereInput[]
     id?: IntFilter<"ClotureCaisse"> | number
-    caisseId?: IntFilter<"ClotureCaisse"> | number
     dateCloture?: DateTimeFilter<"ClotureCaisse"> | Date | string
     utilisateurClotureId?: IntFilter<"ClotureCaisse"> | number
+    entrepriseId?: IntNullableFilter<"ClotureCaisse"> | number | null
     notes?: StringNullableFilter<"ClotureCaisse"> | string | null
     createdAt?: DateTimeFilter<"ClotureCaisse"> | Date | string
     updatedAt?: DateTimeFilter<"ClotureCaisse"> | Date | string
-    caisse?: XOR<CaisseScalarRelationFilter, CaisseWhereInput>
     utilisateurCloture?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    DetailClotureCaisse?: DetailClotureCaisseListRelationFilter
+    entreprise?: XOR<EntrepriseNullableScalarRelationFilter, EntrepriseWhereInput> | null
   }
 
   export type ClotureCaisseOrderByWithRelationInput = {
     id?: SortOrder
-    caisseId?: SortOrder
     dateCloture?: SortOrder
     utilisateurClotureId?: SortOrder
+    entrepriseId?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    caisse?: CaisseOrderByWithRelationInput
     utilisateurCloture?: UtilisateurOrderByWithRelationInput
-    DetailClotureCaisse?: DetailClotureCaisseOrderByRelationAggregateInput
+    entreprise?: EntrepriseOrderByWithRelationInput
   }
 
   export type ClotureCaisseWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    dateCloture?: Date | string
     AND?: ClotureCaisseWhereInput | ClotureCaisseWhereInput[]
     OR?: ClotureCaisseWhereInput[]
     NOT?: ClotureCaisseWhereInput | ClotureCaisseWhereInput[]
-    caisseId?: IntFilter<"ClotureCaisse"> | number
-    dateCloture?: DateTimeFilter<"ClotureCaisse"> | Date | string
     utilisateurClotureId?: IntFilter<"ClotureCaisse"> | number
+    entrepriseId?: IntNullableFilter<"ClotureCaisse"> | number | null
     notes?: StringNullableFilter<"ClotureCaisse"> | string | null
     createdAt?: DateTimeFilter<"ClotureCaisse"> | Date | string
     updatedAt?: DateTimeFilter<"ClotureCaisse"> | Date | string
-    caisse?: XOR<CaisseScalarRelationFilter, CaisseWhereInput>
     utilisateurCloture?: XOR<UtilisateurScalarRelationFilter, UtilisateurWhereInput>
-    DetailClotureCaisse?: DetailClotureCaisseListRelationFilter
-  }, "id">
+    entreprise?: XOR<EntrepriseNullableScalarRelationFilter, EntrepriseWhereInput> | null
+  }, "id" | "dateCloture">
 
   export type ClotureCaisseOrderByWithAggregationInput = {
     id?: SortOrder
-    caisseId?: SortOrder
     dateCloture?: SortOrder
     utilisateurClotureId?: SortOrder
+    entrepriseId?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -29034,9 +27671,9 @@ export namespace Prisma {
     OR?: ClotureCaisseScalarWhereWithAggregatesInput[]
     NOT?: ClotureCaisseScalarWhereWithAggregatesInput | ClotureCaisseScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"ClotureCaisse"> | number
-    caisseId?: IntWithAggregatesFilter<"ClotureCaisse"> | number
     dateCloture?: DateTimeWithAggregatesFilter<"ClotureCaisse"> | Date | string
     utilisateurClotureId?: IntWithAggregatesFilter<"ClotureCaisse"> | number
+    entrepriseId?: IntNullableWithAggregatesFilter<"ClotureCaisse"> | number | null
     notes?: StringNullableWithAggregatesFilter<"ClotureCaisse"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ClotureCaisse"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ClotureCaisse"> | Date | string
@@ -29052,6 +27689,7 @@ export namespace Prisma {
     email: string
     description?: string | null
     logo?: string | null
+    ClotureCaisse?: ClotureCaisseCreateNestedManyWithoutEntrepriseInput
   }
 
   export type EntrepriseUncheckedCreateInput = {
@@ -29065,6 +27703,7 @@ export namespace Prisma {
     email: string
     description?: string | null
     logo?: string | null
+    ClotureCaisse?: ClotureCaisseUncheckedCreateNestedManyWithoutEntrepriseInput
   }
 
   export type EntrepriseUpdateInput = {
@@ -29077,6 +27716,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
+    ClotureCaisse?: ClotureCaisseUpdateManyWithoutEntrepriseNestedInput
   }
 
   export type EntrepriseUncheckedUpdateInput = {
@@ -29090,6 +27730,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
+    ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutEntrepriseNestedInput
   }
 
   export type EntrepriseCreateManyInput = {
@@ -29513,7 +28154,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     utilisateur: UtilisateurCreateNestedOneWithoutTeneurInput
     Produit?: ProduitCreateNestedManyWithoutTeneurInput
-    DetailClotureCaisse?: DetailClotureCaisseCreateNestedManyWithoutTeneurInput
   }
 
   export type TeneurUncheckedCreateInput = {
@@ -29523,7 +28163,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Produit?: ProduitUncheckedCreateNestedManyWithoutTeneurInput
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedCreateNestedManyWithoutTeneurInput
   }
 
   export type TeneurUpdateInput = {
@@ -29532,7 +28171,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneRequiredWithoutTeneurNestedInput
     Produit?: ProduitUpdateManyWithoutTeneurNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUpdateManyWithoutTeneurNestedInput
   }
 
   export type TeneurUncheckedUpdateInput = {
@@ -29542,7 +28180,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Produit?: ProduitUncheckedUpdateManyWithoutTeneurNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedUpdateManyWithoutTeneurNestedInput
   }
 
   export type TeneurCreateManyInput = {
@@ -29656,7 +28293,6 @@ export namespace Prisma {
     teneur: TeneurCreateNestedOneWithoutProduitInput
     utilisateur: UtilisateurCreateNestedOneWithoutProduitInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutProduitInput
-    DetailClotureCaisse?: DetailClotureCaisseCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitUncheckedCreateInput = {
@@ -29671,7 +28307,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutProduitInput
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitUpdateInput = {
@@ -29685,7 +28320,6 @@ export namespace Prisma {
     teneur?: TeneurUpdateOneRequiredWithoutProduitNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutProduitNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutProduitNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateInput = {
@@ -29700,7 +28334,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutProduitNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitCreateManyInput = {
@@ -29826,7 +28459,6 @@ export namespace Prisma {
     devise: DeviseCreateNestedOneWithoutCaisseInput
     utilisateur: UtilisateurCreateNestedOneWithoutCaisseInput
     MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutCaisseInput
-    clotures?: ClotureCaisseCreateNestedManyWithoutCaisseInput
     Paiement?: PaiementCreateNestedManyWithoutCaisseInput
   }
 
@@ -29842,7 +28474,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
-    clotures?: ClotureCaisseUncheckedCreateNestedManyWithoutCaisseInput
     Paiement?: PaiementUncheckedCreateNestedManyWithoutCaisseInput
   }
 
@@ -29857,7 +28488,6 @@ export namespace Prisma {
     devise?: DeviseUpdateOneRequiredWithoutCaisseNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutCaisseNestedInput
     MouvementCaisse?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
-    clotures?: ClotureCaisseUpdateManyWithoutCaisseNestedInput
     Paiement?: PaiementUpdateManyWithoutCaisseNestedInput
   }
 
@@ -29873,7 +28503,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
-    clotures?: ClotureCaisseUncheckedUpdateManyWithoutCaisseNestedInput
     Paiement?: PaiementUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
@@ -30482,11 +29111,12 @@ export namespace Prisma {
   }
 
   export type MouvementCaisseCreateInput = {
+    referenceExterne?: string | null
     type_mouvement?: $Enums.TypeMouvementCaisse
     categorie?: $Enums.CategorieMouvement
+    moyen_paiement: $Enums.MoyenPaiment
     montant: number
     description?: string | null
-    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     caisse: CaisseCreateNestedOneWithoutMouvementCaisseInput
@@ -30496,22 +29126,24 @@ export namespace Prisma {
   export type MouvementCaisseUncheckedCreateInput = {
     id?: number
     caisseId: number
+    referenceExterne?: string | null
     type_mouvement?: $Enums.TypeMouvementCaisse
     categorie?: $Enums.CategorieMouvement
+    moyen_paiement: $Enums.MoyenPaiment
     montant: number
     description?: string | null
     enregistrerParId: number
-    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type MouvementCaisseUpdateInput = {
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     caisse?: CaisseUpdateOneRequiredWithoutMouvementCaisseNestedInput
@@ -30521,12 +29153,13 @@ export namespace Prisma {
   export type MouvementCaisseUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerParId?: IntFieldUpdateOperationsInput | number
-    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30534,22 +29167,24 @@ export namespace Prisma {
   export type MouvementCaisseCreateManyInput = {
     id?: number
     caisseId: number
+    referenceExterne?: string | null
     type_mouvement?: $Enums.TypeMouvementCaisse
     categorie?: $Enums.CategorieMouvement
+    moyen_paiement: $Enums.MoyenPaiment
     montant: number
     description?: string | null
     enregistrerParId: number
-    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type MouvementCaisseUpdateManyMutationInput = {
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30557,76 +29192,13 @@ export namespace Prisma {
   export type MouvementCaisseUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerParId?: IntFieldUpdateOperationsInput | number
-    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DetailClotureCaisseCreateInput = {
-    qtteRestante: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    produit: ProduitCreateNestedOneWithoutDetailClotureCaisseInput
-    teneur: TeneurCreateNestedOneWithoutDetailClotureCaisseInput
-    clotureCaisse: ClotureCaisseCreateNestedOneWithoutDetailClotureCaisseInput
-  }
-
-  export type DetailClotureCaisseUncheckedCreateInput = {
-    id?: number
-    produitId: number
-    teneurId: number
-    qtteRestante: number
-    clotureCaisseId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DetailClotureCaisseUpdateInput = {
-    qtteRestante?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    produit?: ProduitUpdateOneRequiredWithoutDetailClotureCaisseNestedInput
-    teneur?: TeneurUpdateOneRequiredWithoutDetailClotureCaisseNestedInput
-    clotureCaisse?: ClotureCaisseUpdateOneRequiredWithoutDetailClotureCaisseNestedInput
-  }
-
-  export type DetailClotureCaisseUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    produitId?: IntFieldUpdateOperationsInput | number
-    teneurId?: IntFieldUpdateOperationsInput | number
-    qtteRestante?: IntFieldUpdateOperationsInput | number
-    clotureCaisseId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DetailClotureCaisseCreateManyInput = {
-    id?: number
-    produitId: number
-    teneurId: number
-    qtteRestante: number
-    clotureCaisseId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DetailClotureCaisseUpdateManyMutationInput = {
-    qtteRestante?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DetailClotureCaisseUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    produitId?: IntFieldUpdateOperationsInput | number
-    teneurId?: IntFieldUpdateOperationsInput | number
-    qtteRestante?: IntFieldUpdateOperationsInput | number
-    clotureCaisseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30636,20 +29208,18 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    caisse: CaisseCreateNestedOneWithoutCloturesInput
     utilisateurCloture: UtilisateurCreateNestedOneWithoutClotureCaisseInput
-    DetailClotureCaisse?: DetailClotureCaisseCreateNestedManyWithoutClotureCaisseInput
+    entreprise?: EntrepriseCreateNestedOneWithoutClotureCaisseInput
   }
 
   export type ClotureCaisseUncheckedCreateInput = {
     id?: number
-    caisseId: number
     dateCloture?: Date | string
     utilisateurClotureId: number
+    entrepriseId?: number | null
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedCreateNestedManyWithoutClotureCaisseInput
   }
 
   export type ClotureCaisseUpdateInput = {
@@ -30657,27 +29227,25 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    caisse?: CaisseUpdateOneRequiredWithoutCloturesNestedInput
     utilisateurCloture?: UtilisateurUpdateOneRequiredWithoutClotureCaisseNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUpdateManyWithoutClotureCaisseNestedInput
+    entreprise?: EntrepriseUpdateOneWithoutClotureCaisseNestedInput
   }
 
   export type ClotureCaisseUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    caisseId?: IntFieldUpdateOperationsInput | number
     dateCloture?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateurClotureId?: IntFieldUpdateOperationsInput | number
+    entrepriseId?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedUpdateManyWithoutClotureCaisseNestedInput
   }
 
   export type ClotureCaisseCreateManyInput = {
     id?: number
-    caisseId: number
     dateCloture?: Date | string
     utilisateurClotureId: number
+    entrepriseId?: number | null
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30692,9 +29260,9 @@ export namespace Prisma {
 
   export type ClotureCaisseUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    caisseId?: IntFieldUpdateOperationsInput | number
     dateCloture?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateurClotureId?: IntFieldUpdateOperationsInput | number
+    entrepriseId?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30741,9 +29309,19 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type ClotureCaisseListRelationFilter = {
+    every?: ClotureCaisseWhereInput
+    some?: ClotureCaisseWhereInput
+    none?: ClotureCaisseWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type ClotureCaisseOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type EntrepriseCountOrderByAggregateInput = {
@@ -30949,12 +29527,6 @@ export namespace Prisma {
     none?: MouvementCaisseWhereInput
   }
 
-  export type ClotureCaisseListRelationFilter = {
-    every?: ClotureCaisseWhereInput
-    some?: ClotureCaisseWhereInput
-    none?: ClotureCaisseWhereInput
-  }
-
   export type AdresseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -31000,10 +29572,6 @@ export namespace Prisma {
   }
 
   export type MouvementCaisseOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ClotureCaisseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -31271,16 +29839,6 @@ export namespace Prisma {
   export type UtilisateurScalarRelationFilter = {
     is?: UtilisateurWhereInput
     isNot?: UtilisateurWhereInput
-  }
-
-  export type DetailClotureCaisseListRelationFilter = {
-    every?: DetailClotureCaisseWhereInput
-    some?: DetailClotureCaisseWhereInput
-    none?: DetailClotureCaisseWhereInput
-  }
-
-  export type DetailClotureCaisseOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type TeneurCountOrderByAggregateInput = {
@@ -32124,12 +30682,13 @@ export namespace Prisma {
   export type MouvementCaisseCountOrderByAggregateInput = {
     id?: SortOrder
     caisseId?: SortOrder
+    referenceExterne?: SortOrder
     type_mouvement?: SortOrder
     categorie?: SortOrder
+    moyen_paiement?: SortOrder
     montant?: SortOrder
     description?: SortOrder
     enregistrerParId?: SortOrder
-    referenceExterne?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -32144,12 +30703,13 @@ export namespace Prisma {
   export type MouvementCaisseMaxOrderByAggregateInput = {
     id?: SortOrder
     caisseId?: SortOrder
+    referenceExterne?: SortOrder
     type_mouvement?: SortOrder
     categorie?: SortOrder
+    moyen_paiement?: SortOrder
     montant?: SortOrder
     description?: SortOrder
     enregistrerParId?: SortOrder
-    referenceExterne?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -32157,12 +30717,13 @@ export namespace Prisma {
   export type MouvementCaisseMinOrderByAggregateInput = {
     id?: SortOrder
     caisseId?: SortOrder
+    referenceExterne?: SortOrder
     type_mouvement?: SortOrder
     categorie?: SortOrder
+    moyen_paiement?: SortOrder
     montant?: SortOrder
     description?: SortOrder
     enregistrerParId?: SortOrder
-    referenceExterne?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -32194,62 +30755,16 @@ export namespace Prisma {
     _max?: NestedEnumCategorieMouvementFilter<$PrismaModel>
   }
 
-  export type ClotureCaisseScalarRelationFilter = {
-    is?: ClotureCaisseWhereInput
-    isNot?: ClotureCaisseWhereInput
-  }
-
-  export type DetailClotureCaisseCountOrderByAggregateInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    teneurId?: SortOrder
-    qtteRestante?: SortOrder
-    clotureCaisseId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DetailClotureCaisseAvgOrderByAggregateInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    teneurId?: SortOrder
-    qtteRestante?: SortOrder
-    clotureCaisseId?: SortOrder
-  }
-
-  export type DetailClotureCaisseMaxOrderByAggregateInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    teneurId?: SortOrder
-    qtteRestante?: SortOrder
-    clotureCaisseId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DetailClotureCaisseMinOrderByAggregateInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    teneurId?: SortOrder
-    qtteRestante?: SortOrder
-    clotureCaisseId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DetailClotureCaisseSumOrderByAggregateInput = {
-    id?: SortOrder
-    produitId?: SortOrder
-    teneurId?: SortOrder
-    qtteRestante?: SortOrder
-    clotureCaisseId?: SortOrder
+  export type EntrepriseNullableScalarRelationFilter = {
+    is?: EntrepriseWhereInput | null
+    isNot?: EntrepriseWhereInput | null
   }
 
   export type ClotureCaisseCountOrderByAggregateInput = {
     id?: SortOrder
-    caisseId?: SortOrder
     dateCloture?: SortOrder
     utilisateurClotureId?: SortOrder
+    entrepriseId?: SortOrder
     notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -32257,15 +30772,15 @@ export namespace Prisma {
 
   export type ClotureCaisseAvgOrderByAggregateInput = {
     id?: SortOrder
-    caisseId?: SortOrder
     utilisateurClotureId?: SortOrder
+    entrepriseId?: SortOrder
   }
 
   export type ClotureCaisseMaxOrderByAggregateInput = {
     id?: SortOrder
-    caisseId?: SortOrder
     dateCloture?: SortOrder
     utilisateurClotureId?: SortOrder
+    entrepriseId?: SortOrder
     notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -32273,9 +30788,9 @@ export namespace Prisma {
 
   export type ClotureCaisseMinOrderByAggregateInput = {
     id?: SortOrder
-    caisseId?: SortOrder
     dateCloture?: SortOrder
     utilisateurClotureId?: SortOrder
+    entrepriseId?: SortOrder
     notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -32283,8 +30798,22 @@ export namespace Prisma {
 
   export type ClotureCaisseSumOrderByAggregateInput = {
     id?: SortOrder
-    caisseId?: SortOrder
     utilisateurClotureId?: SortOrder
+    entrepriseId?: SortOrder
+  }
+
+  export type ClotureCaisseCreateNestedManyWithoutEntrepriseInput = {
+    create?: XOR<ClotureCaisseCreateWithoutEntrepriseInput, ClotureCaisseUncheckedCreateWithoutEntrepriseInput> | ClotureCaisseCreateWithoutEntrepriseInput[] | ClotureCaisseUncheckedCreateWithoutEntrepriseInput[]
+    connectOrCreate?: ClotureCaisseCreateOrConnectWithoutEntrepriseInput | ClotureCaisseCreateOrConnectWithoutEntrepriseInput[]
+    createMany?: ClotureCaisseCreateManyEntrepriseInputEnvelope
+    connect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
+  }
+
+  export type ClotureCaisseUncheckedCreateNestedManyWithoutEntrepriseInput = {
+    create?: XOR<ClotureCaisseCreateWithoutEntrepriseInput, ClotureCaisseUncheckedCreateWithoutEntrepriseInput> | ClotureCaisseCreateWithoutEntrepriseInput[] | ClotureCaisseUncheckedCreateWithoutEntrepriseInput[]
+    connectOrCreate?: ClotureCaisseCreateOrConnectWithoutEntrepriseInput | ClotureCaisseCreateOrConnectWithoutEntrepriseInput[]
+    createMany?: ClotureCaisseCreateManyEntrepriseInputEnvelope
+    connect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -32295,12 +30824,40 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type ClotureCaisseUpdateManyWithoutEntrepriseNestedInput = {
+    create?: XOR<ClotureCaisseCreateWithoutEntrepriseInput, ClotureCaisseUncheckedCreateWithoutEntrepriseInput> | ClotureCaisseCreateWithoutEntrepriseInput[] | ClotureCaisseUncheckedCreateWithoutEntrepriseInput[]
+    connectOrCreate?: ClotureCaisseCreateOrConnectWithoutEntrepriseInput | ClotureCaisseCreateOrConnectWithoutEntrepriseInput[]
+    upsert?: ClotureCaisseUpsertWithWhereUniqueWithoutEntrepriseInput | ClotureCaisseUpsertWithWhereUniqueWithoutEntrepriseInput[]
+    createMany?: ClotureCaisseCreateManyEntrepriseInputEnvelope
+    set?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
+    disconnect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
+    delete?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
+    connect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
+    update?: ClotureCaisseUpdateWithWhereUniqueWithoutEntrepriseInput | ClotureCaisseUpdateWithWhereUniqueWithoutEntrepriseInput[]
+    updateMany?: ClotureCaisseUpdateManyWithWhereWithoutEntrepriseInput | ClotureCaisseUpdateManyWithWhereWithoutEntrepriseInput[]
+    deleteMany?: ClotureCaisseScalarWhereInput | ClotureCaisseScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type ClotureCaisseUncheckedUpdateManyWithoutEntrepriseNestedInput = {
+    create?: XOR<ClotureCaisseCreateWithoutEntrepriseInput, ClotureCaisseUncheckedCreateWithoutEntrepriseInput> | ClotureCaisseCreateWithoutEntrepriseInput[] | ClotureCaisseUncheckedCreateWithoutEntrepriseInput[]
+    connectOrCreate?: ClotureCaisseCreateOrConnectWithoutEntrepriseInput | ClotureCaisseCreateOrConnectWithoutEntrepriseInput[]
+    upsert?: ClotureCaisseUpsertWithWhereUniqueWithoutEntrepriseInput | ClotureCaisseUpsertWithWhereUniqueWithoutEntrepriseInput[]
+    createMany?: ClotureCaisseCreateManyEntrepriseInputEnvelope
+    set?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
+    disconnect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
+    delete?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
+    connect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
+    update?: ClotureCaisseUpdateWithWhereUniqueWithoutEntrepriseInput | ClotureCaisseUpdateWithWhereUniqueWithoutEntrepriseInput[]
+    updateMany?: ClotureCaisseUpdateManyWithWhereWithoutEntrepriseInput | ClotureCaisseUpdateManyWithWhereWithoutEntrepriseInput[]
+    deleteMany?: ClotureCaisseScalarWhereInput | ClotureCaisseScalarWhereInput[]
   }
 
   export type AdresseCreateNestedManyWithoutUtilisateurInput = {
@@ -33370,25 +31927,11 @@ export namespace Prisma {
     connect?: ProduitWhereUniqueInput | ProduitWhereUniqueInput[]
   }
 
-  export type DetailClotureCaisseCreateNestedManyWithoutTeneurInput = {
-    create?: XOR<DetailClotureCaisseCreateWithoutTeneurInput, DetailClotureCaisseUncheckedCreateWithoutTeneurInput> | DetailClotureCaisseCreateWithoutTeneurInput[] | DetailClotureCaisseUncheckedCreateWithoutTeneurInput[]
-    connectOrCreate?: DetailClotureCaisseCreateOrConnectWithoutTeneurInput | DetailClotureCaisseCreateOrConnectWithoutTeneurInput[]
-    createMany?: DetailClotureCaisseCreateManyTeneurInputEnvelope
-    connect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-  }
-
   export type ProduitUncheckedCreateNestedManyWithoutTeneurInput = {
     create?: XOR<ProduitCreateWithoutTeneurInput, ProduitUncheckedCreateWithoutTeneurInput> | ProduitCreateWithoutTeneurInput[] | ProduitUncheckedCreateWithoutTeneurInput[]
     connectOrCreate?: ProduitCreateOrConnectWithoutTeneurInput | ProduitCreateOrConnectWithoutTeneurInput[]
     createMany?: ProduitCreateManyTeneurInputEnvelope
     connect?: ProduitWhereUniqueInput | ProduitWhereUniqueInput[]
-  }
-
-  export type DetailClotureCaisseUncheckedCreateNestedManyWithoutTeneurInput = {
-    create?: XOR<DetailClotureCaisseCreateWithoutTeneurInput, DetailClotureCaisseUncheckedCreateWithoutTeneurInput> | DetailClotureCaisseCreateWithoutTeneurInput[] | DetailClotureCaisseUncheckedCreateWithoutTeneurInput[]
-    connectOrCreate?: DetailClotureCaisseCreateOrConnectWithoutTeneurInput | DetailClotureCaisseCreateOrConnectWithoutTeneurInput[]
-    createMany?: DetailClotureCaisseCreateManyTeneurInputEnvelope
-    connect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -33421,20 +31964,6 @@ export namespace Prisma {
     deleteMany?: ProduitScalarWhereInput | ProduitScalarWhereInput[]
   }
 
-  export type DetailClotureCaisseUpdateManyWithoutTeneurNestedInput = {
-    create?: XOR<DetailClotureCaisseCreateWithoutTeneurInput, DetailClotureCaisseUncheckedCreateWithoutTeneurInput> | DetailClotureCaisseCreateWithoutTeneurInput[] | DetailClotureCaisseUncheckedCreateWithoutTeneurInput[]
-    connectOrCreate?: DetailClotureCaisseCreateOrConnectWithoutTeneurInput | DetailClotureCaisseCreateOrConnectWithoutTeneurInput[]
-    upsert?: DetailClotureCaisseUpsertWithWhereUniqueWithoutTeneurInput | DetailClotureCaisseUpsertWithWhereUniqueWithoutTeneurInput[]
-    createMany?: DetailClotureCaisseCreateManyTeneurInputEnvelope
-    set?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    disconnect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    delete?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    connect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    update?: DetailClotureCaisseUpdateWithWhereUniqueWithoutTeneurInput | DetailClotureCaisseUpdateWithWhereUniqueWithoutTeneurInput[]
-    updateMany?: DetailClotureCaisseUpdateManyWithWhereWithoutTeneurInput | DetailClotureCaisseUpdateManyWithWhereWithoutTeneurInput[]
-    deleteMany?: DetailClotureCaisseScalarWhereInput | DetailClotureCaisseScalarWhereInput[]
-  }
-
   export type ProduitUncheckedUpdateManyWithoutTeneurNestedInput = {
     create?: XOR<ProduitCreateWithoutTeneurInput, ProduitUncheckedCreateWithoutTeneurInput> | ProduitCreateWithoutTeneurInput[] | ProduitUncheckedCreateWithoutTeneurInput[]
     connectOrCreate?: ProduitCreateOrConnectWithoutTeneurInput | ProduitCreateOrConnectWithoutTeneurInput[]
@@ -33447,20 +31976,6 @@ export namespace Prisma {
     update?: ProduitUpdateWithWhereUniqueWithoutTeneurInput | ProduitUpdateWithWhereUniqueWithoutTeneurInput[]
     updateMany?: ProduitUpdateManyWithWhereWithoutTeneurInput | ProduitUpdateManyWithWhereWithoutTeneurInput[]
     deleteMany?: ProduitScalarWhereInput | ProduitScalarWhereInput[]
-  }
-
-  export type DetailClotureCaisseUncheckedUpdateManyWithoutTeneurNestedInput = {
-    create?: XOR<DetailClotureCaisseCreateWithoutTeneurInput, DetailClotureCaisseUncheckedCreateWithoutTeneurInput> | DetailClotureCaisseCreateWithoutTeneurInput[] | DetailClotureCaisseUncheckedCreateWithoutTeneurInput[]
-    connectOrCreate?: DetailClotureCaisseCreateOrConnectWithoutTeneurInput | DetailClotureCaisseCreateOrConnectWithoutTeneurInput[]
-    upsert?: DetailClotureCaisseUpsertWithWhereUniqueWithoutTeneurInput | DetailClotureCaisseUpsertWithWhereUniqueWithoutTeneurInput[]
-    createMany?: DetailClotureCaisseCreateManyTeneurInputEnvelope
-    set?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    disconnect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    delete?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    connect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    update?: DetailClotureCaisseUpdateWithWhereUniqueWithoutTeneurInput | DetailClotureCaisseUpdateWithWhereUniqueWithoutTeneurInput[]
-    updateMany?: DetailClotureCaisseUpdateManyWithWhereWithoutTeneurInput | DetailClotureCaisseUpdateManyWithWhereWithoutTeneurInput[]
-    deleteMany?: DetailClotureCaisseScalarWhereInput | DetailClotureCaisseScalarWhereInput[]
   }
 
   export type UtilisateurCreateNestedOneWithoutDeviseInput = {
@@ -33628,25 +32143,11 @@ export namespace Prisma {
     connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
   }
 
-  export type DetailClotureCaisseCreateNestedManyWithoutProduitInput = {
-    create?: XOR<DetailClotureCaisseCreateWithoutProduitInput, DetailClotureCaisseUncheckedCreateWithoutProduitInput> | DetailClotureCaisseCreateWithoutProduitInput[] | DetailClotureCaisseUncheckedCreateWithoutProduitInput[]
-    connectOrCreate?: DetailClotureCaisseCreateOrConnectWithoutProduitInput | DetailClotureCaisseCreateOrConnectWithoutProduitInput[]
-    createMany?: DetailClotureCaisseCreateManyProduitInputEnvelope
-    connect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-  }
-
   export type DetailPanierUncheckedCreateNestedManyWithoutProduitInput = {
     create?: XOR<DetailPanierCreateWithoutProduitInput, DetailPanierUncheckedCreateWithoutProduitInput> | DetailPanierCreateWithoutProduitInput[] | DetailPanierUncheckedCreateWithoutProduitInput[]
     connectOrCreate?: DetailPanierCreateOrConnectWithoutProduitInput | DetailPanierCreateOrConnectWithoutProduitInput[]
     createMany?: DetailPanierCreateManyProduitInputEnvelope
     connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
-  }
-
-  export type DetailClotureCaisseUncheckedCreateNestedManyWithoutProduitInput = {
-    create?: XOR<DetailClotureCaisseCreateWithoutProduitInput, DetailClotureCaisseUncheckedCreateWithoutProduitInput> | DetailClotureCaisseCreateWithoutProduitInput[] | DetailClotureCaisseUncheckedCreateWithoutProduitInput[]
-    connectOrCreate?: DetailClotureCaisseCreateOrConnectWithoutProduitInput | DetailClotureCaisseCreateOrConnectWithoutProduitInput[]
-    createMany?: DetailClotureCaisseCreateManyProduitInputEnvelope
-    connect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
   }
 
   export type DeviseUpdateOneRequiredWithoutProduitNestedInput = {
@@ -33687,20 +32188,6 @@ export namespace Prisma {
     deleteMany?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
   }
 
-  export type DetailClotureCaisseUpdateManyWithoutProduitNestedInput = {
-    create?: XOR<DetailClotureCaisseCreateWithoutProduitInput, DetailClotureCaisseUncheckedCreateWithoutProduitInput> | DetailClotureCaisseCreateWithoutProduitInput[] | DetailClotureCaisseUncheckedCreateWithoutProduitInput[]
-    connectOrCreate?: DetailClotureCaisseCreateOrConnectWithoutProduitInput | DetailClotureCaisseCreateOrConnectWithoutProduitInput[]
-    upsert?: DetailClotureCaisseUpsertWithWhereUniqueWithoutProduitInput | DetailClotureCaisseUpsertWithWhereUniqueWithoutProduitInput[]
-    createMany?: DetailClotureCaisseCreateManyProduitInputEnvelope
-    set?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    disconnect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    delete?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    connect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    update?: DetailClotureCaisseUpdateWithWhereUniqueWithoutProduitInput | DetailClotureCaisseUpdateWithWhereUniqueWithoutProduitInput[]
-    updateMany?: DetailClotureCaisseUpdateManyWithWhereWithoutProduitInput | DetailClotureCaisseUpdateManyWithWhereWithoutProduitInput[]
-    deleteMany?: DetailClotureCaisseScalarWhereInput | DetailClotureCaisseScalarWhereInput[]
-  }
-
   export type DetailPanierUncheckedUpdateManyWithoutProduitNestedInput = {
     create?: XOR<DetailPanierCreateWithoutProduitInput, DetailPanierUncheckedCreateWithoutProduitInput> | DetailPanierCreateWithoutProduitInput[] | DetailPanierUncheckedCreateWithoutProduitInput[]
     connectOrCreate?: DetailPanierCreateOrConnectWithoutProduitInput | DetailPanierCreateOrConnectWithoutProduitInput[]
@@ -33713,20 +32200,6 @@ export namespace Prisma {
     update?: DetailPanierUpdateWithWhereUniqueWithoutProduitInput | DetailPanierUpdateWithWhereUniqueWithoutProduitInput[]
     updateMany?: DetailPanierUpdateManyWithWhereWithoutProduitInput | DetailPanierUpdateManyWithWhereWithoutProduitInput[]
     deleteMany?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
-  }
-
-  export type DetailClotureCaisseUncheckedUpdateManyWithoutProduitNestedInput = {
-    create?: XOR<DetailClotureCaisseCreateWithoutProduitInput, DetailClotureCaisseUncheckedCreateWithoutProduitInput> | DetailClotureCaisseCreateWithoutProduitInput[] | DetailClotureCaisseUncheckedCreateWithoutProduitInput[]
-    connectOrCreate?: DetailClotureCaisseCreateOrConnectWithoutProduitInput | DetailClotureCaisseCreateOrConnectWithoutProduitInput[]
-    upsert?: DetailClotureCaisseUpsertWithWhereUniqueWithoutProduitInput | DetailClotureCaisseUpsertWithWhereUniqueWithoutProduitInput[]
-    createMany?: DetailClotureCaisseCreateManyProduitInputEnvelope
-    set?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    disconnect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    delete?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    connect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    update?: DetailClotureCaisseUpdateWithWhereUniqueWithoutProduitInput | DetailClotureCaisseUpdateWithWhereUniqueWithoutProduitInput[]
-    updateMany?: DetailClotureCaisseUpdateManyWithWhereWithoutProduitInput | DetailClotureCaisseUpdateManyWithWhereWithoutProduitInput[]
-    deleteMany?: DetailClotureCaisseScalarWhereInput | DetailClotureCaisseScalarWhereInput[]
   }
 
   export type CaisseCreateNestedOneWithoutPaiementInput = {
@@ -33906,13 +32379,6 @@ export namespace Prisma {
     connect?: MouvementCaisseWhereUniqueInput | MouvementCaisseWhereUniqueInput[]
   }
 
-  export type ClotureCaisseCreateNestedManyWithoutCaisseInput = {
-    create?: XOR<ClotureCaisseCreateWithoutCaisseInput, ClotureCaisseUncheckedCreateWithoutCaisseInput> | ClotureCaisseCreateWithoutCaisseInput[] | ClotureCaisseUncheckedCreateWithoutCaisseInput[]
-    connectOrCreate?: ClotureCaisseCreateOrConnectWithoutCaisseInput | ClotureCaisseCreateOrConnectWithoutCaisseInput[]
-    createMany?: ClotureCaisseCreateManyCaisseInputEnvelope
-    connect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
-  }
-
   export type PaiementCreateNestedManyWithoutCaisseInput = {
     create?: XOR<PaiementCreateWithoutCaisseInput, PaiementUncheckedCreateWithoutCaisseInput> | PaiementCreateWithoutCaisseInput[] | PaiementUncheckedCreateWithoutCaisseInput[]
     connectOrCreate?: PaiementCreateOrConnectWithoutCaisseInput | PaiementCreateOrConnectWithoutCaisseInput[]
@@ -33925,13 +32391,6 @@ export namespace Prisma {
     connectOrCreate?: MouvementCaisseCreateOrConnectWithoutCaisseInput | MouvementCaisseCreateOrConnectWithoutCaisseInput[]
     createMany?: MouvementCaisseCreateManyCaisseInputEnvelope
     connect?: MouvementCaisseWhereUniqueInput | MouvementCaisseWhereUniqueInput[]
-  }
-
-  export type ClotureCaisseUncheckedCreateNestedManyWithoutCaisseInput = {
-    create?: XOR<ClotureCaisseCreateWithoutCaisseInput, ClotureCaisseUncheckedCreateWithoutCaisseInput> | ClotureCaisseCreateWithoutCaisseInput[] | ClotureCaisseUncheckedCreateWithoutCaisseInput[]
-    connectOrCreate?: ClotureCaisseCreateOrConnectWithoutCaisseInput | ClotureCaisseCreateOrConnectWithoutCaisseInput[]
-    createMany?: ClotureCaisseCreateManyCaisseInputEnvelope
-    connect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
   }
 
   export type PaiementUncheckedCreateNestedManyWithoutCaisseInput = {
@@ -33975,20 +32434,6 @@ export namespace Prisma {
     deleteMany?: MouvementCaisseScalarWhereInput | MouvementCaisseScalarWhereInput[]
   }
 
-  export type ClotureCaisseUpdateManyWithoutCaisseNestedInput = {
-    create?: XOR<ClotureCaisseCreateWithoutCaisseInput, ClotureCaisseUncheckedCreateWithoutCaisseInput> | ClotureCaisseCreateWithoutCaisseInput[] | ClotureCaisseUncheckedCreateWithoutCaisseInput[]
-    connectOrCreate?: ClotureCaisseCreateOrConnectWithoutCaisseInput | ClotureCaisseCreateOrConnectWithoutCaisseInput[]
-    upsert?: ClotureCaisseUpsertWithWhereUniqueWithoutCaisseInput | ClotureCaisseUpsertWithWhereUniqueWithoutCaisseInput[]
-    createMany?: ClotureCaisseCreateManyCaisseInputEnvelope
-    set?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
-    disconnect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
-    delete?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
-    connect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
-    update?: ClotureCaisseUpdateWithWhereUniqueWithoutCaisseInput | ClotureCaisseUpdateWithWhereUniqueWithoutCaisseInput[]
-    updateMany?: ClotureCaisseUpdateManyWithWhereWithoutCaisseInput | ClotureCaisseUpdateManyWithWhereWithoutCaisseInput[]
-    deleteMany?: ClotureCaisseScalarWhereInput | ClotureCaisseScalarWhereInput[]
-  }
-
   export type PaiementUpdateManyWithoutCaisseNestedInput = {
     create?: XOR<PaiementCreateWithoutCaisseInput, PaiementUncheckedCreateWithoutCaisseInput> | PaiementCreateWithoutCaisseInput[] | PaiementUncheckedCreateWithoutCaisseInput[]
     connectOrCreate?: PaiementCreateOrConnectWithoutCaisseInput | PaiementCreateOrConnectWithoutCaisseInput[]
@@ -34015,20 +32460,6 @@ export namespace Prisma {
     update?: MouvementCaisseUpdateWithWhereUniqueWithoutCaisseInput | MouvementCaisseUpdateWithWhereUniqueWithoutCaisseInput[]
     updateMany?: MouvementCaisseUpdateManyWithWhereWithoutCaisseInput | MouvementCaisseUpdateManyWithWhereWithoutCaisseInput[]
     deleteMany?: MouvementCaisseScalarWhereInput | MouvementCaisseScalarWhereInput[]
-  }
-
-  export type ClotureCaisseUncheckedUpdateManyWithoutCaisseNestedInput = {
-    create?: XOR<ClotureCaisseCreateWithoutCaisseInput, ClotureCaisseUncheckedCreateWithoutCaisseInput> | ClotureCaisseCreateWithoutCaisseInput[] | ClotureCaisseUncheckedCreateWithoutCaisseInput[]
-    connectOrCreate?: ClotureCaisseCreateOrConnectWithoutCaisseInput | ClotureCaisseCreateOrConnectWithoutCaisseInput[]
-    upsert?: ClotureCaisseUpsertWithWhereUniqueWithoutCaisseInput | ClotureCaisseUpsertWithWhereUniqueWithoutCaisseInput[]
-    createMany?: ClotureCaisseCreateManyCaisseInputEnvelope
-    set?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
-    disconnect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
-    delete?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
-    connect?: ClotureCaisseWhereUniqueInput | ClotureCaisseWhereUniqueInput[]
-    update?: ClotureCaisseUpdateWithWhereUniqueWithoutCaisseInput | ClotureCaisseUpdateWithWhereUniqueWithoutCaisseInput[]
-    updateMany?: ClotureCaisseUpdateManyWithWhereWithoutCaisseInput | ClotureCaisseUpdateManyWithWhereWithoutCaisseInput[]
-    deleteMany?: ClotureCaisseScalarWhereInput | ClotureCaisseScalarWhereInput[]
   }
 
   export type PaiementUncheckedUpdateManyWithoutCaisseNestedInput = {
@@ -34643,80 +33074,16 @@ export namespace Prisma {
     update?: XOR<XOR<UtilisateurUpdateToOneWithWhereWithoutMouvementCaisseInput, UtilisateurUpdateWithoutMouvementCaisseInput>, UtilisateurUncheckedUpdateWithoutMouvementCaisseInput>
   }
 
-  export type ProduitCreateNestedOneWithoutDetailClotureCaisseInput = {
-    create?: XOR<ProduitCreateWithoutDetailClotureCaisseInput, ProduitUncheckedCreateWithoutDetailClotureCaisseInput>
-    connectOrCreate?: ProduitCreateOrConnectWithoutDetailClotureCaisseInput
-    connect?: ProduitWhereUniqueInput
-  }
-
-  export type TeneurCreateNestedOneWithoutDetailClotureCaisseInput = {
-    create?: XOR<TeneurCreateWithoutDetailClotureCaisseInput, TeneurUncheckedCreateWithoutDetailClotureCaisseInput>
-    connectOrCreate?: TeneurCreateOrConnectWithoutDetailClotureCaisseInput
-    connect?: TeneurWhereUniqueInput
-  }
-
-  export type ClotureCaisseCreateNestedOneWithoutDetailClotureCaisseInput = {
-    create?: XOR<ClotureCaisseCreateWithoutDetailClotureCaisseInput, ClotureCaisseUncheckedCreateWithoutDetailClotureCaisseInput>
-    connectOrCreate?: ClotureCaisseCreateOrConnectWithoutDetailClotureCaisseInput
-    connect?: ClotureCaisseWhereUniqueInput
-  }
-
-  export type ProduitUpdateOneRequiredWithoutDetailClotureCaisseNestedInput = {
-    create?: XOR<ProduitCreateWithoutDetailClotureCaisseInput, ProduitUncheckedCreateWithoutDetailClotureCaisseInput>
-    connectOrCreate?: ProduitCreateOrConnectWithoutDetailClotureCaisseInput
-    upsert?: ProduitUpsertWithoutDetailClotureCaisseInput
-    connect?: ProduitWhereUniqueInput
-    update?: XOR<XOR<ProduitUpdateToOneWithWhereWithoutDetailClotureCaisseInput, ProduitUpdateWithoutDetailClotureCaisseInput>, ProduitUncheckedUpdateWithoutDetailClotureCaisseInput>
-  }
-
-  export type TeneurUpdateOneRequiredWithoutDetailClotureCaisseNestedInput = {
-    create?: XOR<TeneurCreateWithoutDetailClotureCaisseInput, TeneurUncheckedCreateWithoutDetailClotureCaisseInput>
-    connectOrCreate?: TeneurCreateOrConnectWithoutDetailClotureCaisseInput
-    upsert?: TeneurUpsertWithoutDetailClotureCaisseInput
-    connect?: TeneurWhereUniqueInput
-    update?: XOR<XOR<TeneurUpdateToOneWithWhereWithoutDetailClotureCaisseInput, TeneurUpdateWithoutDetailClotureCaisseInput>, TeneurUncheckedUpdateWithoutDetailClotureCaisseInput>
-  }
-
-  export type ClotureCaisseUpdateOneRequiredWithoutDetailClotureCaisseNestedInput = {
-    create?: XOR<ClotureCaisseCreateWithoutDetailClotureCaisseInput, ClotureCaisseUncheckedCreateWithoutDetailClotureCaisseInput>
-    connectOrCreate?: ClotureCaisseCreateOrConnectWithoutDetailClotureCaisseInput
-    upsert?: ClotureCaisseUpsertWithoutDetailClotureCaisseInput
-    connect?: ClotureCaisseWhereUniqueInput
-    update?: XOR<XOR<ClotureCaisseUpdateToOneWithWhereWithoutDetailClotureCaisseInput, ClotureCaisseUpdateWithoutDetailClotureCaisseInput>, ClotureCaisseUncheckedUpdateWithoutDetailClotureCaisseInput>
-  }
-
-  export type CaisseCreateNestedOneWithoutCloturesInput = {
-    create?: XOR<CaisseCreateWithoutCloturesInput, CaisseUncheckedCreateWithoutCloturesInput>
-    connectOrCreate?: CaisseCreateOrConnectWithoutCloturesInput
-    connect?: CaisseWhereUniqueInput
-  }
-
   export type UtilisateurCreateNestedOneWithoutClotureCaisseInput = {
     create?: XOR<UtilisateurCreateWithoutClotureCaisseInput, UtilisateurUncheckedCreateWithoutClotureCaisseInput>
     connectOrCreate?: UtilisateurCreateOrConnectWithoutClotureCaisseInput
     connect?: UtilisateurWhereUniqueInput
   }
 
-  export type DetailClotureCaisseCreateNestedManyWithoutClotureCaisseInput = {
-    create?: XOR<DetailClotureCaisseCreateWithoutClotureCaisseInput, DetailClotureCaisseUncheckedCreateWithoutClotureCaisseInput> | DetailClotureCaisseCreateWithoutClotureCaisseInput[] | DetailClotureCaisseUncheckedCreateWithoutClotureCaisseInput[]
-    connectOrCreate?: DetailClotureCaisseCreateOrConnectWithoutClotureCaisseInput | DetailClotureCaisseCreateOrConnectWithoutClotureCaisseInput[]
-    createMany?: DetailClotureCaisseCreateManyClotureCaisseInputEnvelope
-    connect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-  }
-
-  export type DetailClotureCaisseUncheckedCreateNestedManyWithoutClotureCaisseInput = {
-    create?: XOR<DetailClotureCaisseCreateWithoutClotureCaisseInput, DetailClotureCaisseUncheckedCreateWithoutClotureCaisseInput> | DetailClotureCaisseCreateWithoutClotureCaisseInput[] | DetailClotureCaisseUncheckedCreateWithoutClotureCaisseInput[]
-    connectOrCreate?: DetailClotureCaisseCreateOrConnectWithoutClotureCaisseInput | DetailClotureCaisseCreateOrConnectWithoutClotureCaisseInput[]
-    createMany?: DetailClotureCaisseCreateManyClotureCaisseInputEnvelope
-    connect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-  }
-
-  export type CaisseUpdateOneRequiredWithoutCloturesNestedInput = {
-    create?: XOR<CaisseCreateWithoutCloturesInput, CaisseUncheckedCreateWithoutCloturesInput>
-    connectOrCreate?: CaisseCreateOrConnectWithoutCloturesInput
-    upsert?: CaisseUpsertWithoutCloturesInput
-    connect?: CaisseWhereUniqueInput
-    update?: XOR<XOR<CaisseUpdateToOneWithWhereWithoutCloturesInput, CaisseUpdateWithoutCloturesInput>, CaisseUncheckedUpdateWithoutCloturesInput>
+  export type EntrepriseCreateNestedOneWithoutClotureCaisseInput = {
+    create?: XOR<EntrepriseCreateWithoutClotureCaisseInput, EntrepriseUncheckedCreateWithoutClotureCaisseInput>
+    connectOrCreate?: EntrepriseCreateOrConnectWithoutClotureCaisseInput
+    connect?: EntrepriseWhereUniqueInput
   }
 
   export type UtilisateurUpdateOneRequiredWithoutClotureCaisseNestedInput = {
@@ -34727,32 +33094,14 @@ export namespace Prisma {
     update?: XOR<XOR<UtilisateurUpdateToOneWithWhereWithoutClotureCaisseInput, UtilisateurUpdateWithoutClotureCaisseInput>, UtilisateurUncheckedUpdateWithoutClotureCaisseInput>
   }
 
-  export type DetailClotureCaisseUpdateManyWithoutClotureCaisseNestedInput = {
-    create?: XOR<DetailClotureCaisseCreateWithoutClotureCaisseInput, DetailClotureCaisseUncheckedCreateWithoutClotureCaisseInput> | DetailClotureCaisseCreateWithoutClotureCaisseInput[] | DetailClotureCaisseUncheckedCreateWithoutClotureCaisseInput[]
-    connectOrCreate?: DetailClotureCaisseCreateOrConnectWithoutClotureCaisseInput | DetailClotureCaisseCreateOrConnectWithoutClotureCaisseInput[]
-    upsert?: DetailClotureCaisseUpsertWithWhereUniqueWithoutClotureCaisseInput | DetailClotureCaisseUpsertWithWhereUniqueWithoutClotureCaisseInput[]
-    createMany?: DetailClotureCaisseCreateManyClotureCaisseInputEnvelope
-    set?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    disconnect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    delete?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    connect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    update?: DetailClotureCaisseUpdateWithWhereUniqueWithoutClotureCaisseInput | DetailClotureCaisseUpdateWithWhereUniqueWithoutClotureCaisseInput[]
-    updateMany?: DetailClotureCaisseUpdateManyWithWhereWithoutClotureCaisseInput | DetailClotureCaisseUpdateManyWithWhereWithoutClotureCaisseInput[]
-    deleteMany?: DetailClotureCaisseScalarWhereInput | DetailClotureCaisseScalarWhereInput[]
-  }
-
-  export type DetailClotureCaisseUncheckedUpdateManyWithoutClotureCaisseNestedInput = {
-    create?: XOR<DetailClotureCaisseCreateWithoutClotureCaisseInput, DetailClotureCaisseUncheckedCreateWithoutClotureCaisseInput> | DetailClotureCaisseCreateWithoutClotureCaisseInput[] | DetailClotureCaisseUncheckedCreateWithoutClotureCaisseInput[]
-    connectOrCreate?: DetailClotureCaisseCreateOrConnectWithoutClotureCaisseInput | DetailClotureCaisseCreateOrConnectWithoutClotureCaisseInput[]
-    upsert?: DetailClotureCaisseUpsertWithWhereUniqueWithoutClotureCaisseInput | DetailClotureCaisseUpsertWithWhereUniqueWithoutClotureCaisseInput[]
-    createMany?: DetailClotureCaisseCreateManyClotureCaisseInputEnvelope
-    set?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    disconnect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    delete?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    connect?: DetailClotureCaisseWhereUniqueInput | DetailClotureCaisseWhereUniqueInput[]
-    update?: DetailClotureCaisseUpdateWithWhereUniqueWithoutClotureCaisseInput | DetailClotureCaisseUpdateWithWhereUniqueWithoutClotureCaisseInput[]
-    updateMany?: DetailClotureCaisseUpdateManyWithWhereWithoutClotureCaisseInput | DetailClotureCaisseUpdateManyWithWhereWithoutClotureCaisseInput[]
-    deleteMany?: DetailClotureCaisseScalarWhereInput | DetailClotureCaisseScalarWhereInput[]
+  export type EntrepriseUpdateOneWithoutClotureCaisseNestedInput = {
+    create?: XOR<EntrepriseCreateWithoutClotureCaisseInput, EntrepriseUncheckedCreateWithoutClotureCaisseInput>
+    connectOrCreate?: EntrepriseCreateOrConnectWithoutClotureCaisseInput
+    upsert?: EntrepriseUpsertWithoutClotureCaisseInput
+    disconnect?: EntrepriseWhereInput | boolean
+    delete?: EntrepriseWhereInput | boolean
+    connect?: EntrepriseWhereUniqueInput
+    update?: XOR<XOR<EntrepriseUpdateToOneWithWhereWithoutClotureCaisseInput, EntrepriseUpdateWithoutClotureCaisseInput>, EntrepriseUncheckedUpdateWithoutClotureCaisseInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -35163,6 +33512,62 @@ export namespace Prisma {
     _max?: NestedEnumCategorieMouvementFilter<$PrismaModel>
   }
 
+  export type ClotureCaisseCreateWithoutEntrepriseInput = {
+    dateCloture?: Date | string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    utilisateurCloture: UtilisateurCreateNestedOneWithoutClotureCaisseInput
+  }
+
+  export type ClotureCaisseUncheckedCreateWithoutEntrepriseInput = {
+    id?: number
+    dateCloture?: Date | string
+    utilisateurClotureId: number
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClotureCaisseCreateOrConnectWithoutEntrepriseInput = {
+    where: ClotureCaisseWhereUniqueInput
+    create: XOR<ClotureCaisseCreateWithoutEntrepriseInput, ClotureCaisseUncheckedCreateWithoutEntrepriseInput>
+  }
+
+  export type ClotureCaisseCreateManyEntrepriseInputEnvelope = {
+    data: ClotureCaisseCreateManyEntrepriseInput | ClotureCaisseCreateManyEntrepriseInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClotureCaisseUpsertWithWhereUniqueWithoutEntrepriseInput = {
+    where: ClotureCaisseWhereUniqueInput
+    update: XOR<ClotureCaisseUpdateWithoutEntrepriseInput, ClotureCaisseUncheckedUpdateWithoutEntrepriseInput>
+    create: XOR<ClotureCaisseCreateWithoutEntrepriseInput, ClotureCaisseUncheckedCreateWithoutEntrepriseInput>
+  }
+
+  export type ClotureCaisseUpdateWithWhereUniqueWithoutEntrepriseInput = {
+    where: ClotureCaisseWhereUniqueInput
+    data: XOR<ClotureCaisseUpdateWithoutEntrepriseInput, ClotureCaisseUncheckedUpdateWithoutEntrepriseInput>
+  }
+
+  export type ClotureCaisseUpdateManyWithWhereWithoutEntrepriseInput = {
+    where: ClotureCaisseScalarWhereInput
+    data: XOR<ClotureCaisseUpdateManyMutationInput, ClotureCaisseUncheckedUpdateManyWithoutEntrepriseInput>
+  }
+
+  export type ClotureCaisseScalarWhereInput = {
+    AND?: ClotureCaisseScalarWhereInput | ClotureCaisseScalarWhereInput[]
+    OR?: ClotureCaisseScalarWhereInput[]
+    NOT?: ClotureCaisseScalarWhereInput | ClotureCaisseScalarWhereInput[]
+    id?: IntFilter<"ClotureCaisse"> | number
+    dateCloture?: DateTimeFilter<"ClotureCaisse"> | Date | string
+    utilisateurClotureId?: IntFilter<"ClotureCaisse"> | number
+    entrepriseId?: IntNullableFilter<"ClotureCaisse"> | number | null
+    notes?: StringNullableFilter<"ClotureCaisse"> | string | null
+    createdAt?: DateTimeFilter<"ClotureCaisse"> | Date | string
+    updatedAt?: DateTimeFilter<"ClotureCaisse"> | Date | string
+  }
+
   export type AdresseCreateWithoutUtilisateurInput = {
     ville: string
     commune: string
@@ -35235,7 +33640,6 @@ export namespace Prisma {
     devise: DeviseCreateNestedOneWithoutProduitInput
     teneur: TeneurCreateNestedOneWithoutProduitInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutProduitInput
-    DetailClotureCaisse?: DetailClotureCaisseCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitUncheckedCreateWithoutUtilisateurInput = {
@@ -35249,7 +33653,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutProduitInput
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitCreateOrConnectWithoutUtilisateurInput = {
@@ -35335,7 +33738,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Produit?: ProduitCreateNestedManyWithoutTeneurInput
-    DetailClotureCaisse?: DetailClotureCaisseCreateNestedManyWithoutTeneurInput
   }
 
   export type TeneurUncheckedCreateWithoutUtilisateurInput = {
@@ -35344,7 +33746,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Produit?: ProduitUncheckedCreateNestedManyWithoutTeneurInput
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedCreateNestedManyWithoutTeneurInput
   }
 
   export type TeneurCreateOrConnectWithoutUtilisateurInput = {
@@ -35523,7 +33924,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     devise: DeviseCreateNestedOneWithoutCaisseInput
     MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutCaisseInput
-    clotures?: ClotureCaisseCreateNestedManyWithoutCaisseInput
     Paiement?: PaiementCreateNestedManyWithoutCaisseInput
   }
 
@@ -35538,7 +33938,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
-    clotures?: ClotureCaisseUncheckedCreateNestedManyWithoutCaisseInput
     Paiement?: PaiementUncheckedCreateNestedManyWithoutCaisseInput
   }
 
@@ -35553,11 +33952,12 @@ export namespace Prisma {
   }
 
   export type MouvementCaisseCreateWithoutUtilisateurInput = {
+    referenceExterne?: string | null
     type_mouvement?: $Enums.TypeMouvementCaisse
     categorie?: $Enums.CategorieMouvement
+    moyen_paiement: $Enums.MoyenPaiment
     montant: number
     description?: string | null
-    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     caisse: CaisseCreateNestedOneWithoutMouvementCaisseInput
@@ -35566,11 +33966,12 @@ export namespace Prisma {
   export type MouvementCaisseUncheckedCreateWithoutUtilisateurInput = {
     id?: number
     caisseId: number
+    referenceExterne?: string | null
     type_mouvement?: $Enums.TypeMouvementCaisse
     categorie?: $Enums.CategorieMouvement
+    moyen_paiement: $Enums.MoyenPaiment
     montant: number
     description?: string | null
-    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -35590,18 +33991,16 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    caisse: CaisseCreateNestedOneWithoutCloturesInput
-    DetailClotureCaisse?: DetailClotureCaisseCreateNestedManyWithoutClotureCaisseInput
+    entreprise?: EntrepriseCreateNestedOneWithoutClotureCaisseInput
   }
 
   export type ClotureCaisseUncheckedCreateWithoutUtilisateurClotureInput = {
     id?: number
-    caisseId: number
     dateCloture?: Date | string
+    entrepriseId?: number | null
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedCreateNestedManyWithoutClotureCaisseInput
   }
 
   export type ClotureCaisseCreateOrConnectWithoutUtilisateurClotureInput = {
@@ -35982,12 +34381,13 @@ export namespace Prisma {
     NOT?: MouvementCaisseScalarWhereInput | MouvementCaisseScalarWhereInput[]
     id?: IntFilter<"MouvementCaisse"> | number
     caisseId?: IntFilter<"MouvementCaisse"> | number
+    referenceExterne?: StringNullableFilter<"MouvementCaisse"> | string | null
     type_mouvement?: EnumTypeMouvementCaisseFilter<"MouvementCaisse"> | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFilter<"MouvementCaisse"> | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFilter<"MouvementCaisse"> | $Enums.MoyenPaiment
     montant?: FloatFilter<"MouvementCaisse"> | number
     description?: StringNullableFilter<"MouvementCaisse"> | string | null
     enregistrerParId?: IntFilter<"MouvementCaisse"> | number
-    referenceExterne?: StringNullableFilter<"MouvementCaisse"> | string | null
     createdAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
     updatedAt?: DateTimeFilter<"MouvementCaisse"> | Date | string
   }
@@ -36006,19 +34406,6 @@ export namespace Prisma {
   export type ClotureCaisseUpdateManyWithWhereWithoutUtilisateurClotureInput = {
     where: ClotureCaisseScalarWhereInput
     data: XOR<ClotureCaisseUpdateManyMutationInput, ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureInput>
-  }
-
-  export type ClotureCaisseScalarWhereInput = {
-    AND?: ClotureCaisseScalarWhereInput | ClotureCaisseScalarWhereInput[]
-    OR?: ClotureCaisseScalarWhereInput[]
-    NOT?: ClotureCaisseScalarWhereInput | ClotureCaisseScalarWhereInput[]
-    id?: IntFilter<"ClotureCaisse"> | number
-    caisseId?: IntFilter<"ClotureCaisse"> | number
-    dateCloture?: DateTimeFilter<"ClotureCaisse"> | Date | string
-    utilisateurClotureId?: IntFilter<"ClotureCaisse"> | number
-    notes?: StringNullableFilter<"ClotureCaisse"> | string | null
-    createdAt?: DateTimeFilter<"ClotureCaisse"> | Date | string
-    updatedAt?: DateTimeFilter<"ClotureCaisse"> | Date | string
   }
 
   export type UtilisateurCreateWithoutAdresseInput = {
@@ -37029,7 +35416,6 @@ export namespace Prisma {
     devise: DeviseCreateNestedOneWithoutProduitInput
     utilisateur: UtilisateurCreateNestedOneWithoutProduitInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutProduitInput
-    DetailClotureCaisse?: DetailClotureCaisseCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitUncheckedCreateWithoutTeneurInput = {
@@ -37043,7 +35429,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutProduitInput
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitCreateOrConnectWithoutTeneurInput = {
@@ -37053,33 +35438,6 @@ export namespace Prisma {
 
   export type ProduitCreateManyTeneurInputEnvelope = {
     data: ProduitCreateManyTeneurInput | ProduitCreateManyTeneurInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type DetailClotureCaisseCreateWithoutTeneurInput = {
-    qtteRestante: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    produit: ProduitCreateNestedOneWithoutDetailClotureCaisseInput
-    clotureCaisse: ClotureCaisseCreateNestedOneWithoutDetailClotureCaisseInput
-  }
-
-  export type DetailClotureCaisseUncheckedCreateWithoutTeneurInput = {
-    id?: number
-    produitId: number
-    qtteRestante: number
-    clotureCaisseId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DetailClotureCaisseCreateOrConnectWithoutTeneurInput = {
-    where: DetailClotureCaisseWhereUniqueInput
-    create: XOR<DetailClotureCaisseCreateWithoutTeneurInput, DetailClotureCaisseUncheckedCreateWithoutTeneurInput>
-  }
-
-  export type DetailClotureCaisseCreateManyTeneurInputEnvelope = {
-    data: DetailClotureCaisseCreateManyTeneurInput | DetailClotureCaisseCreateManyTeneurInput[]
     skipDuplicates?: boolean
   }
 
@@ -37161,35 +35519,6 @@ export namespace Prisma {
     data: XOR<ProduitUpdateManyMutationInput, ProduitUncheckedUpdateManyWithoutTeneurInput>
   }
 
-  export type DetailClotureCaisseUpsertWithWhereUniqueWithoutTeneurInput = {
-    where: DetailClotureCaisseWhereUniqueInput
-    update: XOR<DetailClotureCaisseUpdateWithoutTeneurInput, DetailClotureCaisseUncheckedUpdateWithoutTeneurInput>
-    create: XOR<DetailClotureCaisseCreateWithoutTeneurInput, DetailClotureCaisseUncheckedCreateWithoutTeneurInput>
-  }
-
-  export type DetailClotureCaisseUpdateWithWhereUniqueWithoutTeneurInput = {
-    where: DetailClotureCaisseWhereUniqueInput
-    data: XOR<DetailClotureCaisseUpdateWithoutTeneurInput, DetailClotureCaisseUncheckedUpdateWithoutTeneurInput>
-  }
-
-  export type DetailClotureCaisseUpdateManyWithWhereWithoutTeneurInput = {
-    where: DetailClotureCaisseScalarWhereInput
-    data: XOR<DetailClotureCaisseUpdateManyMutationInput, DetailClotureCaisseUncheckedUpdateManyWithoutTeneurInput>
-  }
-
-  export type DetailClotureCaisseScalarWhereInput = {
-    AND?: DetailClotureCaisseScalarWhereInput | DetailClotureCaisseScalarWhereInput[]
-    OR?: DetailClotureCaisseScalarWhereInput[]
-    NOT?: DetailClotureCaisseScalarWhereInput | DetailClotureCaisseScalarWhereInput[]
-    id?: IntFilter<"DetailClotureCaisse"> | number
-    produitId?: IntFilter<"DetailClotureCaisse"> | number
-    teneurId?: IntFilter<"DetailClotureCaisse"> | number
-    qtteRestante?: IntFilter<"DetailClotureCaisse"> | number
-    clotureCaisseId?: IntFilter<"DetailClotureCaisse"> | number
-    createdAt?: DateTimeFilter<"DetailClotureCaisse"> | Date | string
-    updatedAt?: DateTimeFilter<"DetailClotureCaisse"> | Date | string
-  }
-
   export type UtilisateurCreateWithoutDeviseInput = {
     email: string
     nom: string
@@ -37256,7 +35585,6 @@ export namespace Prisma {
     teneur: TeneurCreateNestedOneWithoutProduitInput
     utilisateur: UtilisateurCreateNestedOneWithoutProduitInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutProduitInput
-    DetailClotureCaisse?: DetailClotureCaisseCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitUncheckedCreateWithoutDeviseInput = {
@@ -37270,7 +35598,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutProduitInput
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitCreateOrConnectWithoutDeviseInput = {
@@ -37326,7 +35653,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     utilisateur: UtilisateurCreateNestedOneWithoutCaisseInput
     MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutCaisseInput
-    clotures?: ClotureCaisseCreateNestedManyWithoutCaisseInput
     Paiement?: PaiementCreateNestedManyWithoutCaisseInput
   }
 
@@ -37341,7 +35667,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
-    clotures?: ClotureCaisseUncheckedCreateNestedManyWithoutCaisseInput
     Paiement?: PaiementUncheckedCreateNestedManyWithoutCaisseInput
   }
 
@@ -37511,7 +35836,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     utilisateur: UtilisateurCreateNestedOneWithoutTeneurInput
-    DetailClotureCaisse?: DetailClotureCaisseCreateNestedManyWithoutTeneurInput
   }
 
   export type TeneurUncheckedCreateWithoutProduitInput = {
@@ -37520,7 +35844,6 @@ export namespace Prisma {
     utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedCreateNestedManyWithoutTeneurInput
   }
 
   export type TeneurCreateOrConnectWithoutProduitInput = {
@@ -37613,33 +35936,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type DetailClotureCaisseCreateWithoutProduitInput = {
-    qtteRestante: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    teneur: TeneurCreateNestedOneWithoutDetailClotureCaisseInput
-    clotureCaisse: ClotureCaisseCreateNestedOneWithoutDetailClotureCaisseInput
-  }
-
-  export type DetailClotureCaisseUncheckedCreateWithoutProduitInput = {
-    id?: number
-    teneurId: number
-    qtteRestante: number
-    clotureCaisseId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DetailClotureCaisseCreateOrConnectWithoutProduitInput = {
-    where: DetailClotureCaisseWhereUniqueInput
-    create: XOR<DetailClotureCaisseCreateWithoutProduitInput, DetailClotureCaisseUncheckedCreateWithoutProduitInput>
-  }
-
-  export type DetailClotureCaisseCreateManyProduitInputEnvelope = {
-    data: DetailClotureCaisseCreateManyProduitInput | DetailClotureCaisseCreateManyProduitInput[]
-    skipDuplicates?: boolean
-  }
-
   export type DeviseUpsertWithoutProduitInput = {
     update: XOR<DeviseUpdateWithoutProduitInput, DeviseUncheckedUpdateWithoutProduitInput>
     create: XOR<DeviseCreateWithoutProduitInput, DeviseUncheckedCreateWithoutProduitInput>
@@ -37690,7 +35986,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneRequiredWithoutTeneurNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUpdateManyWithoutTeneurNestedInput
   }
 
   export type TeneurUncheckedUpdateWithoutProduitInput = {
@@ -37699,7 +35994,6 @@ export namespace Prisma {
     utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedUpdateManyWithoutTeneurNestedInput
   }
 
   export type UtilisateurUpsertWithoutProduitInput = {
@@ -37794,22 +36088,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"DetailPanier"> | Date | string
   }
 
-  export type DetailClotureCaisseUpsertWithWhereUniqueWithoutProduitInput = {
-    where: DetailClotureCaisseWhereUniqueInput
-    update: XOR<DetailClotureCaisseUpdateWithoutProduitInput, DetailClotureCaisseUncheckedUpdateWithoutProduitInput>
-    create: XOR<DetailClotureCaisseCreateWithoutProduitInput, DetailClotureCaisseUncheckedCreateWithoutProduitInput>
-  }
-
-  export type DetailClotureCaisseUpdateWithWhereUniqueWithoutProduitInput = {
-    where: DetailClotureCaisseWhereUniqueInput
-    data: XOR<DetailClotureCaisseUpdateWithoutProduitInput, DetailClotureCaisseUncheckedUpdateWithoutProduitInput>
-  }
-
-  export type DetailClotureCaisseUpdateManyWithWhereWithoutProduitInput = {
-    where: DetailClotureCaisseScalarWhereInput
-    data: XOR<DetailClotureCaisseUpdateManyMutationInput, DetailClotureCaisseUncheckedUpdateManyWithoutProduitInput>
-  }
-
   export type CaisseCreateWithoutPaiementInput = {
     nom: string
     description?: string | null
@@ -37821,7 +36099,6 @@ export namespace Prisma {
     devise: DeviseCreateNestedOneWithoutCaisseInput
     utilisateur: UtilisateurCreateNestedOneWithoutCaisseInput
     MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutCaisseInput
-    clotures?: ClotureCaisseCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseUncheckedCreateWithoutPaiementInput = {
@@ -37836,7 +36113,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
-    clotures?: ClotureCaisseUncheckedCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseCreateOrConnectWithoutPaiementInput = {
@@ -38009,7 +36285,6 @@ export namespace Prisma {
     devise?: DeviseUpdateOneRequiredWithoutCaisseNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutCaisseNestedInput
     MouvementCaisse?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
-    clotures?: ClotureCaisseUpdateManyWithoutCaisseNestedInput
   }
 
   export type CaisseUncheckedUpdateWithoutPaiementInput = {
@@ -38024,7 +36299,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
-    clotures?: ClotureCaisseUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
   export type DeviseUpsertWithoutPaiementInput = {
@@ -38194,11 +36468,12 @@ export namespace Prisma {
   }
 
   export type MouvementCaisseCreateWithoutCaisseInput = {
+    referenceExterne?: string | null
     type_mouvement?: $Enums.TypeMouvementCaisse
     categorie?: $Enums.CategorieMouvement
+    moyen_paiement: $Enums.MoyenPaiment
     montant: number
     description?: string | null
-    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     utilisateur: UtilisateurCreateNestedOneWithoutMouvementCaisseInput
@@ -38206,12 +36481,13 @@ export namespace Prisma {
 
   export type MouvementCaisseUncheckedCreateWithoutCaisseInput = {
     id?: number
+    referenceExterne?: string | null
     type_mouvement?: $Enums.TypeMouvementCaisse
     categorie?: $Enums.CategorieMouvement
+    moyen_paiement: $Enums.MoyenPaiment
     montant: number
     description?: string | null
     enregistrerParId: number
-    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -38223,35 +36499,6 @@ export namespace Prisma {
 
   export type MouvementCaisseCreateManyCaisseInputEnvelope = {
     data: MouvementCaisseCreateManyCaisseInput | MouvementCaisseCreateManyCaisseInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ClotureCaisseCreateWithoutCaisseInput = {
-    dateCloture?: Date | string
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    utilisateurCloture: UtilisateurCreateNestedOneWithoutClotureCaisseInput
-    DetailClotureCaisse?: DetailClotureCaisseCreateNestedManyWithoutClotureCaisseInput
-  }
-
-  export type ClotureCaisseUncheckedCreateWithoutCaisseInput = {
-    id?: number
-    dateCloture?: Date | string
-    utilisateurClotureId: number
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedCreateNestedManyWithoutClotureCaisseInput
-  }
-
-  export type ClotureCaisseCreateOrConnectWithoutCaisseInput = {
-    where: ClotureCaisseWhereUniqueInput
-    create: XOR<ClotureCaisseCreateWithoutCaisseInput, ClotureCaisseUncheckedCreateWithoutCaisseInput>
-  }
-
-  export type ClotureCaisseCreateManyCaisseInputEnvelope = {
-    data: ClotureCaisseCreateManyCaisseInput | ClotureCaisseCreateManyCaisseInput[]
     skipDuplicates?: boolean
   }
 
@@ -38398,22 +36645,6 @@ export namespace Prisma {
   export type MouvementCaisseUpdateManyWithWhereWithoutCaisseInput = {
     where: MouvementCaisseScalarWhereInput
     data: XOR<MouvementCaisseUpdateManyMutationInput, MouvementCaisseUncheckedUpdateManyWithoutCaisseInput>
-  }
-
-  export type ClotureCaisseUpsertWithWhereUniqueWithoutCaisseInput = {
-    where: ClotureCaisseWhereUniqueInput
-    update: XOR<ClotureCaisseUpdateWithoutCaisseInput, ClotureCaisseUncheckedUpdateWithoutCaisseInput>
-    create: XOR<ClotureCaisseCreateWithoutCaisseInput, ClotureCaisseUncheckedCreateWithoutCaisseInput>
-  }
-
-  export type ClotureCaisseUpdateWithWhereUniqueWithoutCaisseInput = {
-    where: ClotureCaisseWhereUniqueInput
-    data: XOR<ClotureCaisseUpdateWithoutCaisseInput, ClotureCaisseUncheckedUpdateWithoutCaisseInput>
-  }
-
-  export type ClotureCaisseUpdateManyWithWhereWithoutCaisseInput = {
-    where: ClotureCaisseScalarWhereInput
-    data: XOR<ClotureCaisseUpdateManyMutationInput, ClotureCaisseUncheckedUpdateManyWithoutCaisseInput>
   }
 
   export type PaiementUpsertWithWhereUniqueWithoutCaisseInput = {
@@ -39137,7 +37368,6 @@ export namespace Prisma {
     devise: DeviseCreateNestedOneWithoutProduitInput
     teneur: TeneurCreateNestedOneWithoutProduitInput
     utilisateur: UtilisateurCreateNestedOneWithoutProduitInput
-    DetailClotureCaisse?: DetailClotureCaisseCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitUncheckedCreateWithoutDetailPanierInput = {
@@ -39151,7 +37381,6 @@ export namespace Prisma {
     utilisateurId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedCreateNestedManyWithoutProduitInput
   }
 
   export type ProduitCreateOrConnectWithoutDetailPanierInput = {
@@ -39206,7 +37435,6 @@ export namespace Prisma {
     devise?: DeviseUpdateOneRequiredWithoutProduitNestedInput
     teneur?: TeneurUpdateOneRequiredWithoutProduitNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutProduitNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateWithoutDetailPanierInput = {
@@ -39220,7 +37448,6 @@ export namespace Prisma {
     utilisateurId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedUpdateManyWithoutProduitNestedInput
   }
 
   export type PanierUpsertWithoutDetailPanierInput = {
@@ -40359,7 +38586,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     devise: DeviseCreateNestedOneWithoutCaisseInput
     utilisateur: UtilisateurCreateNestedOneWithoutCaisseInput
-    clotures?: ClotureCaisseCreateNestedManyWithoutCaisseInput
     Paiement?: PaiementCreateNestedManyWithoutCaisseInput
   }
 
@@ -40374,7 +38600,6 @@ export namespace Prisma {
     statut?: $Enums.StatutCaisse
     createdAt?: Date | string
     updatedAt?: Date | string
-    clotures?: ClotureCaisseUncheckedCreateNestedManyWithoutCaisseInput
     Paiement?: PaiementUncheckedCreateNestedManyWithoutCaisseInput
   }
 
@@ -40460,7 +38685,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devise?: DeviseUpdateOneRequiredWithoutCaisseNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutCaisseNestedInput
-    clotures?: ClotureCaisseUpdateManyWithoutCaisseNestedInput
     Paiement?: PaiementUpdateManyWithoutCaisseNestedInput
   }
 
@@ -40475,7 +38699,6 @@ export namespace Prisma {
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    clotures?: ClotureCaisseUncheckedUpdateManyWithoutCaisseNestedInput
     Paiement?: PaiementUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
@@ -40541,214 +38764,6 @@ export namespace Prisma {
     ClotureCaisse?: ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureNestedInput
   }
 
-  export type ProduitCreateWithoutDetailClotureCaisseInput = {
-    designation: string
-    prix: number
-    qtte?: number
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    devise: DeviseCreateNestedOneWithoutProduitInput
-    teneur: TeneurCreateNestedOneWithoutProduitInput
-    utilisateur: UtilisateurCreateNestedOneWithoutProduitInput
-    DetailPanier?: DetailPanierCreateNestedManyWithoutProduitInput
-  }
-
-  export type ProduitUncheckedCreateWithoutDetailClotureCaisseInput = {
-    id?: number
-    designation: string
-    prix: number
-    qtte?: number
-    description: string
-    deviseId: number
-    teneurId: number
-    utilisateurId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutProduitInput
-  }
-
-  export type ProduitCreateOrConnectWithoutDetailClotureCaisseInput = {
-    where: ProduitWhereUniqueInput
-    create: XOR<ProduitCreateWithoutDetailClotureCaisseInput, ProduitUncheckedCreateWithoutDetailClotureCaisseInput>
-  }
-
-  export type TeneurCreateWithoutDetailClotureCaisseInput = {
-    valeur: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    utilisateur: UtilisateurCreateNestedOneWithoutTeneurInput
-    Produit?: ProduitCreateNestedManyWithoutTeneurInput
-  }
-
-  export type TeneurUncheckedCreateWithoutDetailClotureCaisseInput = {
-    id?: number
-    valeur: number
-    utilisateurId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Produit?: ProduitUncheckedCreateNestedManyWithoutTeneurInput
-  }
-
-  export type TeneurCreateOrConnectWithoutDetailClotureCaisseInput = {
-    where: TeneurWhereUniqueInput
-    create: XOR<TeneurCreateWithoutDetailClotureCaisseInput, TeneurUncheckedCreateWithoutDetailClotureCaisseInput>
-  }
-
-  export type ClotureCaisseCreateWithoutDetailClotureCaisseInput = {
-    dateCloture?: Date | string
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    caisse: CaisseCreateNestedOneWithoutCloturesInput
-    utilisateurCloture: UtilisateurCreateNestedOneWithoutClotureCaisseInput
-  }
-
-  export type ClotureCaisseUncheckedCreateWithoutDetailClotureCaisseInput = {
-    id?: number
-    caisseId: number
-    dateCloture?: Date | string
-    utilisateurClotureId: number
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ClotureCaisseCreateOrConnectWithoutDetailClotureCaisseInput = {
-    where: ClotureCaisseWhereUniqueInput
-    create: XOR<ClotureCaisseCreateWithoutDetailClotureCaisseInput, ClotureCaisseUncheckedCreateWithoutDetailClotureCaisseInput>
-  }
-
-  export type ProduitUpsertWithoutDetailClotureCaisseInput = {
-    update: XOR<ProduitUpdateWithoutDetailClotureCaisseInput, ProduitUncheckedUpdateWithoutDetailClotureCaisseInput>
-    create: XOR<ProduitCreateWithoutDetailClotureCaisseInput, ProduitUncheckedCreateWithoutDetailClotureCaisseInput>
-    where?: ProduitWhereInput
-  }
-
-  export type ProduitUpdateToOneWithWhereWithoutDetailClotureCaisseInput = {
-    where?: ProduitWhereInput
-    data: XOR<ProduitUpdateWithoutDetailClotureCaisseInput, ProduitUncheckedUpdateWithoutDetailClotureCaisseInput>
-  }
-
-  export type ProduitUpdateWithoutDetailClotureCaisseInput = {
-    designation?: StringFieldUpdateOperationsInput | string
-    prix?: FloatFieldUpdateOperationsInput | number
-    qtte?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    devise?: DeviseUpdateOneRequiredWithoutProduitNestedInput
-    teneur?: TeneurUpdateOneRequiredWithoutProduitNestedInput
-    utilisateur?: UtilisateurUpdateOneRequiredWithoutProduitNestedInput
-    DetailPanier?: DetailPanierUpdateManyWithoutProduitNestedInput
-  }
-
-  export type ProduitUncheckedUpdateWithoutDetailClotureCaisseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    designation?: StringFieldUpdateOperationsInput | string
-    prix?: FloatFieldUpdateOperationsInput | number
-    qtte?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
-    deviseId?: IntFieldUpdateOperationsInput | number
-    teneurId?: IntFieldUpdateOperationsInput | number
-    utilisateurId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutProduitNestedInput
-  }
-
-  export type TeneurUpsertWithoutDetailClotureCaisseInput = {
-    update: XOR<TeneurUpdateWithoutDetailClotureCaisseInput, TeneurUncheckedUpdateWithoutDetailClotureCaisseInput>
-    create: XOR<TeneurCreateWithoutDetailClotureCaisseInput, TeneurUncheckedCreateWithoutDetailClotureCaisseInput>
-    where?: TeneurWhereInput
-  }
-
-  export type TeneurUpdateToOneWithWhereWithoutDetailClotureCaisseInput = {
-    where?: TeneurWhereInput
-    data: XOR<TeneurUpdateWithoutDetailClotureCaisseInput, TeneurUncheckedUpdateWithoutDetailClotureCaisseInput>
-  }
-
-  export type TeneurUpdateWithoutDetailClotureCaisseInput = {
-    valeur?: FloatFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    utilisateur?: UtilisateurUpdateOneRequiredWithoutTeneurNestedInput
-    Produit?: ProduitUpdateManyWithoutTeneurNestedInput
-  }
-
-  export type TeneurUncheckedUpdateWithoutDetailClotureCaisseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    valeur?: FloatFieldUpdateOperationsInput | number
-    utilisateurId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Produit?: ProduitUncheckedUpdateManyWithoutTeneurNestedInput
-  }
-
-  export type ClotureCaisseUpsertWithoutDetailClotureCaisseInput = {
-    update: XOR<ClotureCaisseUpdateWithoutDetailClotureCaisseInput, ClotureCaisseUncheckedUpdateWithoutDetailClotureCaisseInput>
-    create: XOR<ClotureCaisseCreateWithoutDetailClotureCaisseInput, ClotureCaisseUncheckedCreateWithoutDetailClotureCaisseInput>
-    where?: ClotureCaisseWhereInput
-  }
-
-  export type ClotureCaisseUpdateToOneWithWhereWithoutDetailClotureCaisseInput = {
-    where?: ClotureCaisseWhereInput
-    data: XOR<ClotureCaisseUpdateWithoutDetailClotureCaisseInput, ClotureCaisseUncheckedUpdateWithoutDetailClotureCaisseInput>
-  }
-
-  export type ClotureCaisseUpdateWithoutDetailClotureCaisseInput = {
-    dateCloture?: DateTimeFieldUpdateOperationsInput | Date | string
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    caisse?: CaisseUpdateOneRequiredWithoutCloturesNestedInput
-    utilisateurCloture?: UtilisateurUpdateOneRequiredWithoutClotureCaisseNestedInput
-  }
-
-  export type ClotureCaisseUncheckedUpdateWithoutDetailClotureCaisseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    caisseId?: IntFieldUpdateOperationsInput | number
-    dateCloture?: DateTimeFieldUpdateOperationsInput | Date | string
-    utilisateurClotureId?: IntFieldUpdateOperationsInput | number
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CaisseCreateWithoutCloturesInput = {
-    nom: string
-    description?: string | null
-    soldeInitial: number
-    soldeActuel: number
-    statut?: $Enums.StatutCaisse
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    devise: DeviseCreateNestedOneWithoutCaisseInput
-    utilisateur: UtilisateurCreateNestedOneWithoutCaisseInput
-    MouvementCaisse?: MouvementCaisseCreateNestedManyWithoutCaisseInput
-    Paiement?: PaiementCreateNestedManyWithoutCaisseInput
-  }
-
-  export type CaisseUncheckedCreateWithoutCloturesInput = {
-    id?: number
-    nom: string
-    description?: string | null
-    soldeInitial: number
-    soldeActuel: number
-    deviseId: number
-    creeParId: number
-    statut?: $Enums.StatutCaisse
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    MouvementCaisse?: MouvementCaisseUncheckedCreateNestedManyWithoutCaisseInput
-    Paiement?: PaiementUncheckedCreateNestedManyWithoutCaisseInput
-  }
-
-  export type CaisseCreateOrConnectWithoutCloturesInput = {
-    where: CaisseWhereUniqueInput
-    create: XOR<CaisseCreateWithoutCloturesInput, CaisseUncheckedCreateWithoutCloturesInput>
-  }
-
   export type UtilisateurCreateWithoutClotureCaisseInput = {
     email: string
     nom: string
@@ -40805,71 +38820,34 @@ export namespace Prisma {
     create: XOR<UtilisateurCreateWithoutClotureCaisseInput, UtilisateurUncheckedCreateWithoutClotureCaisseInput>
   }
 
-  export type DetailClotureCaisseCreateWithoutClotureCaisseInput = {
-    qtteRestante: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    produit: ProduitCreateNestedOneWithoutDetailClotureCaisseInput
-    teneur: TeneurCreateNestedOneWithoutDetailClotureCaisseInput
+  export type EntrepriseCreateWithoutClotureCaisseInput = {
+    nom: string
+    encronyme: string
+    code_postale: string
+    adresse: string
+    tel: string
+    site?: string | null
+    email: string
+    description?: string | null
+    logo?: string | null
   }
 
-  export type DetailClotureCaisseUncheckedCreateWithoutClotureCaisseInput = {
+  export type EntrepriseUncheckedCreateWithoutClotureCaisseInput = {
     id?: number
-    produitId: number
-    teneurId: number
-    qtteRestante: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    nom: string
+    encronyme: string
+    code_postale: string
+    adresse: string
+    tel: string
+    site?: string | null
+    email: string
+    description?: string | null
+    logo?: string | null
   }
 
-  export type DetailClotureCaisseCreateOrConnectWithoutClotureCaisseInput = {
-    where: DetailClotureCaisseWhereUniqueInput
-    create: XOR<DetailClotureCaisseCreateWithoutClotureCaisseInput, DetailClotureCaisseUncheckedCreateWithoutClotureCaisseInput>
-  }
-
-  export type DetailClotureCaisseCreateManyClotureCaisseInputEnvelope = {
-    data: DetailClotureCaisseCreateManyClotureCaisseInput | DetailClotureCaisseCreateManyClotureCaisseInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type CaisseUpsertWithoutCloturesInput = {
-    update: XOR<CaisseUpdateWithoutCloturesInput, CaisseUncheckedUpdateWithoutCloturesInput>
-    create: XOR<CaisseCreateWithoutCloturesInput, CaisseUncheckedCreateWithoutCloturesInput>
-    where?: CaisseWhereInput
-  }
-
-  export type CaisseUpdateToOneWithWhereWithoutCloturesInput = {
-    where?: CaisseWhereInput
-    data: XOR<CaisseUpdateWithoutCloturesInput, CaisseUncheckedUpdateWithoutCloturesInput>
-  }
-
-  export type CaisseUpdateWithoutCloturesInput = {
-    nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: FloatFieldUpdateOperationsInput | number
-    soldeActuel?: FloatFieldUpdateOperationsInput | number
-    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    devise?: DeviseUpdateOneRequiredWithoutCaisseNestedInput
-    utilisateur?: UtilisateurUpdateOneRequiredWithoutCaisseNestedInput
-    MouvementCaisse?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
-    Paiement?: PaiementUpdateManyWithoutCaisseNestedInput
-  }
-
-  export type CaisseUncheckedUpdateWithoutCloturesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeInitial?: FloatFieldUpdateOperationsInput | number
-    soldeActuel?: FloatFieldUpdateOperationsInput | number
-    deviseId?: IntFieldUpdateOperationsInput | number
-    creeParId?: IntFieldUpdateOperationsInput | number
-    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
-    Paiement?: PaiementUncheckedUpdateManyWithoutCaisseNestedInput
+  export type EntrepriseCreateOrConnectWithoutClotureCaisseInput = {
+    where: EntrepriseWhereUniqueInput
+    create: XOR<EntrepriseCreateWithoutClotureCaisseInput, EntrepriseUncheckedCreateWithoutClotureCaisseInput>
   }
 
   export type UtilisateurUpsertWithoutClotureCaisseInput = {
@@ -40934,20 +38912,75 @@ export namespace Prisma {
     MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutUtilisateurNestedInput
   }
 
-  export type DetailClotureCaisseUpsertWithWhereUniqueWithoutClotureCaisseInput = {
-    where: DetailClotureCaisseWhereUniqueInput
-    update: XOR<DetailClotureCaisseUpdateWithoutClotureCaisseInput, DetailClotureCaisseUncheckedUpdateWithoutClotureCaisseInput>
-    create: XOR<DetailClotureCaisseCreateWithoutClotureCaisseInput, DetailClotureCaisseUncheckedCreateWithoutClotureCaisseInput>
+  export type EntrepriseUpsertWithoutClotureCaisseInput = {
+    update: XOR<EntrepriseUpdateWithoutClotureCaisseInput, EntrepriseUncheckedUpdateWithoutClotureCaisseInput>
+    create: XOR<EntrepriseCreateWithoutClotureCaisseInput, EntrepriseUncheckedCreateWithoutClotureCaisseInput>
+    where?: EntrepriseWhereInput
   }
 
-  export type DetailClotureCaisseUpdateWithWhereUniqueWithoutClotureCaisseInput = {
-    where: DetailClotureCaisseWhereUniqueInput
-    data: XOR<DetailClotureCaisseUpdateWithoutClotureCaisseInput, DetailClotureCaisseUncheckedUpdateWithoutClotureCaisseInput>
+  export type EntrepriseUpdateToOneWithWhereWithoutClotureCaisseInput = {
+    where?: EntrepriseWhereInput
+    data: XOR<EntrepriseUpdateWithoutClotureCaisseInput, EntrepriseUncheckedUpdateWithoutClotureCaisseInput>
   }
 
-  export type DetailClotureCaisseUpdateManyWithWhereWithoutClotureCaisseInput = {
-    where: DetailClotureCaisseScalarWhereInput
-    data: XOR<DetailClotureCaisseUpdateManyMutationInput, DetailClotureCaisseUncheckedUpdateManyWithoutClotureCaisseInput>
+  export type EntrepriseUpdateWithoutClotureCaisseInput = {
+    nom?: StringFieldUpdateOperationsInput | string
+    encronyme?: StringFieldUpdateOperationsInput | string
+    code_postale?: StringFieldUpdateOperationsInput | string
+    adresse?: StringFieldUpdateOperationsInput | string
+    tel?: StringFieldUpdateOperationsInput | string
+    site?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type EntrepriseUncheckedUpdateWithoutClotureCaisseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    encronyme?: StringFieldUpdateOperationsInput | string
+    code_postale?: StringFieldUpdateOperationsInput | string
+    adresse?: StringFieldUpdateOperationsInput | string
+    tel?: StringFieldUpdateOperationsInput | string
+    site?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ClotureCaisseCreateManyEntrepriseInput = {
+    id?: number
+    dateCloture?: Date | string
+    utilisateurClotureId: number
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClotureCaisseUpdateWithoutEntrepriseInput = {
+    dateCloture?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateurCloture?: UtilisateurUpdateOneRequiredWithoutClotureCaisseNestedInput
+  }
+
+  export type ClotureCaisseUncheckedUpdateWithoutEntrepriseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateCloture?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateurClotureId?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClotureCaisseUncheckedUpdateManyWithoutEntrepriseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    dateCloture?: DateTimeFieldUpdateOperationsInput | Date | string
+    utilisateurClotureId?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AdresseCreateManyUtilisateurInput = {
@@ -41079,19 +39112,20 @@ export namespace Prisma {
   export type MouvementCaisseCreateManyUtilisateurInput = {
     id?: number
     caisseId: number
+    referenceExterne?: string | null
     type_mouvement?: $Enums.TypeMouvementCaisse
     categorie?: $Enums.CategorieMouvement
+    moyen_paiement: $Enums.MoyenPaiment
     montant: number
     description?: string | null
-    referenceExterne?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type ClotureCaisseCreateManyUtilisateurClotureInput = {
     id?: number
-    caisseId: number
     dateCloture?: Date | string
+    entrepriseId?: number | null
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -41167,7 +39201,6 @@ export namespace Prisma {
     devise?: DeviseUpdateOneRequiredWithoutProduitNestedInput
     teneur?: TeneurUpdateOneRequiredWithoutProduitNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutProduitNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateWithoutUtilisateurInput = {
@@ -41181,7 +39214,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutProduitNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateManyWithoutUtilisateurInput = {
@@ -41274,7 +39306,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Produit?: ProduitUpdateManyWithoutTeneurNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUpdateManyWithoutTeneurNestedInput
   }
 
   export type TeneurUncheckedUpdateWithoutUtilisateurInput = {
@@ -41283,7 +39314,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Produit?: ProduitUncheckedUpdateManyWithoutTeneurNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedUpdateManyWithoutTeneurNestedInput
   }
 
   export type TeneurUncheckedUpdateManyWithoutUtilisateurInput = {
@@ -41471,7 +39501,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devise?: DeviseUpdateOneRequiredWithoutCaisseNestedInput
     MouvementCaisse?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
-    clotures?: ClotureCaisseUpdateManyWithoutCaisseNestedInput
     Paiement?: PaiementUpdateManyWithoutCaisseNestedInput
   }
 
@@ -41486,7 +39515,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
-    clotures?: ClotureCaisseUncheckedUpdateManyWithoutCaisseNestedInput
     Paiement?: PaiementUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
@@ -41503,11 +39531,12 @@ export namespace Prisma {
   }
 
   export type MouvementCaisseUpdateWithoutUtilisateurInput = {
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     caisse?: CaisseUpdateOneRequiredWithoutMouvementCaisseNestedInput
@@ -41516,11 +39545,12 @@ export namespace Prisma {
   export type MouvementCaisseUncheckedUpdateWithoutUtilisateurInput = {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -41528,11 +39558,12 @@ export namespace Prisma {
   export type MouvementCaisseUncheckedUpdateManyWithoutUtilisateurInput = {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -41542,24 +39573,22 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    caisse?: CaisseUpdateOneRequiredWithoutCloturesNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUpdateManyWithoutClotureCaisseNestedInput
+    entreprise?: EntrepriseUpdateOneWithoutClotureCaisseNestedInput
   }
 
   export type ClotureCaisseUncheckedUpdateWithoutUtilisateurClotureInput = {
     id?: IntFieldUpdateOperationsInput | number
-    caisseId?: IntFieldUpdateOperationsInput | number
     dateCloture?: DateTimeFieldUpdateOperationsInput | Date | string
+    entrepriseId?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedUpdateManyWithoutClotureCaisseNestedInput
   }
 
   export type ClotureCaisseUncheckedUpdateManyWithoutUtilisateurClotureInput = {
     id?: IntFieldUpdateOperationsInput | number
-    caisseId?: IntFieldUpdateOperationsInput | number
     dateCloture?: DateTimeFieldUpdateOperationsInput | Date | string
+    entrepriseId?: NullableIntFieldUpdateOperationsInput | number | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42191,15 +40220,6 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type DetailClotureCaisseCreateManyTeneurInput = {
-    id?: number
-    produitId: number
-    qtteRestante: number
-    clotureCaisseId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type ProduitUpdateWithoutTeneurInput = {
     designation?: StringFieldUpdateOperationsInput | string
     prix?: FloatFieldUpdateOperationsInput | number
@@ -42210,7 +40230,6 @@ export namespace Prisma {
     devise?: DeviseUpdateOneRequiredWithoutProduitNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutProduitNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutProduitNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateWithoutTeneurInput = {
@@ -42224,7 +40243,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutProduitNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateManyWithoutTeneurInput = {
@@ -42235,32 +40253,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     deviseId?: IntFieldUpdateOperationsInput | number
     utilisateurId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DetailClotureCaisseUpdateWithoutTeneurInput = {
-    qtteRestante?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    produit?: ProduitUpdateOneRequiredWithoutDetailClotureCaisseNestedInput
-    clotureCaisse?: ClotureCaisseUpdateOneRequiredWithoutDetailClotureCaisseNestedInput
-  }
-
-  export type DetailClotureCaisseUncheckedUpdateWithoutTeneurInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    produitId?: IntFieldUpdateOperationsInput | number
-    qtteRestante?: IntFieldUpdateOperationsInput | number
-    clotureCaisseId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DetailClotureCaisseUncheckedUpdateManyWithoutTeneurInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    produitId?: IntFieldUpdateOperationsInput | number
-    qtteRestante?: IntFieldUpdateOperationsInput | number
-    clotureCaisseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42308,7 +40300,6 @@ export namespace Prisma {
     teneur?: TeneurUpdateOneRequiredWithoutProduitNestedInput
     utilisateur?: UtilisateurUpdateOneRequiredWithoutProduitNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutProduitNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateWithoutDeviseInput = {
@@ -42322,7 +40313,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutProduitNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedUpdateManyWithoutProduitNestedInput
   }
 
   export type ProduitUncheckedUpdateManyWithoutDeviseInput = {
@@ -42379,7 +40369,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneRequiredWithoutCaisseNestedInput
     MouvementCaisse?: MouvementCaisseUpdateManyWithoutCaisseNestedInput
-    clotures?: ClotureCaisseUpdateManyWithoutCaisseNestedInput
     Paiement?: PaiementUpdateManyWithoutCaisseNestedInput
   }
 
@@ -42394,7 +40383,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     MouvementCaisse?: MouvementCaisseUncheckedUpdateManyWithoutCaisseNestedInput
-    clotures?: ClotureCaisseUncheckedUpdateManyWithoutCaisseNestedInput
     Paiement?: PaiementUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
@@ -42416,15 +40404,6 @@ export namespace Prisma {
     prixUnitaire: number
     prixTotal: number
     panierId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DetailClotureCaisseCreateManyProduitInput = {
-    id?: number
-    teneurId: number
-    qtteRestante: number
-    clotureCaisseId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -42454,32 +40433,6 @@ export namespace Prisma {
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotal?: FloatFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DetailClotureCaisseUpdateWithoutProduitInput = {
-    qtteRestante?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    teneur?: TeneurUpdateOneRequiredWithoutDetailClotureCaisseNestedInput
-    clotureCaisse?: ClotureCaisseUpdateOneRequiredWithoutDetailClotureCaisseNestedInput
-  }
-
-  export type DetailClotureCaisseUncheckedUpdateWithoutProduitInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    teneurId?: IntFieldUpdateOperationsInput | number
-    qtteRestante?: IntFieldUpdateOperationsInput | number
-    clotureCaisseId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DetailClotureCaisseUncheckedUpdateManyWithoutProduitInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    teneurId?: IntFieldUpdateOperationsInput | number
-    qtteRestante?: IntFieldUpdateOperationsInput | number
-    clotureCaisseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42659,21 +40612,13 @@ export namespace Prisma {
 
   export type MouvementCaisseCreateManyCaisseInput = {
     id?: number
+    referenceExterne?: string | null
     type_mouvement?: $Enums.TypeMouvementCaisse
     categorie?: $Enums.CategorieMouvement
+    moyen_paiement: $Enums.MoyenPaiment
     montant: number
     description?: string | null
     enregistrerParId: number
-    referenceExterne?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ClotureCaisseCreateManyCaisseInput = {
-    id?: number
-    dateCloture?: Date | string
-    utilisateurClotureId: number
-    notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -42688,11 +40633,12 @@ export namespace Prisma {
   }
 
   export type MouvementCaisseUpdateWithoutCaisseInput = {
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     utilisateur?: UtilisateurUpdateOneRequiredWithoutMouvementCaisseNestedInput
@@ -42700,52 +40646,26 @@ export namespace Prisma {
 
   export type MouvementCaisseUncheckedUpdateWithoutCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerParId?: IntFieldUpdateOperationsInput | number
-    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MouvementCaisseUncheckedUpdateManyWithoutCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
+    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
     type_mouvement?: EnumTypeMouvementCaisseFieldUpdateOperationsInput | $Enums.TypeMouvementCaisse
     categorie?: EnumCategorieMouvementFieldUpdateOperationsInput | $Enums.CategorieMouvement
+    moyen_paiement?: EnumMoyenPaimentFieldUpdateOperationsInput | $Enums.MoyenPaiment
     montant?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerParId?: IntFieldUpdateOperationsInput | number
-    referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ClotureCaisseUpdateWithoutCaisseInput = {
-    dateCloture?: DateTimeFieldUpdateOperationsInput | Date | string
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    utilisateurCloture?: UtilisateurUpdateOneRequiredWithoutClotureCaisseNestedInput
-    DetailClotureCaisse?: DetailClotureCaisseUpdateManyWithoutClotureCaisseNestedInput
-  }
-
-  export type ClotureCaisseUncheckedUpdateWithoutCaisseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    dateCloture?: DateTimeFieldUpdateOperationsInput | Date | string
-    utilisateurClotureId?: IntFieldUpdateOperationsInput | number
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    DetailClotureCaisse?: DetailClotureCaisseUncheckedUpdateManyWithoutClotureCaisseNestedInput
-  }
-
-  export type ClotureCaisseUncheckedUpdateManyWithoutCaisseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    dateCloture?: DateTimeFieldUpdateOperationsInput | Date | string
-    utilisateurClotureId?: IntFieldUpdateOperationsInput | number
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -43061,41 +40981,6 @@ export namespace Prisma {
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerParId?: NullableIntFieldUpdateOperationsInput | number | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DetailClotureCaisseCreateManyClotureCaisseInput = {
-    id?: number
-    produitId: number
-    teneurId: number
-    qtteRestante: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DetailClotureCaisseUpdateWithoutClotureCaisseInput = {
-    qtteRestante?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    produit?: ProduitUpdateOneRequiredWithoutDetailClotureCaisseNestedInput
-    teneur?: TeneurUpdateOneRequiredWithoutDetailClotureCaisseNestedInput
-  }
-
-  export type DetailClotureCaisseUncheckedUpdateWithoutClotureCaisseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    produitId?: IntFieldUpdateOperationsInput | number
-    teneurId?: IntFieldUpdateOperationsInput | number
-    qtteRestante?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type DetailClotureCaisseUncheckedUpdateManyWithoutClotureCaisseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    produitId?: IntFieldUpdateOperationsInput | number
-    teneurId?: IntFieldUpdateOperationsInput | number
-    qtteRestante?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

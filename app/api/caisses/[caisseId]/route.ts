@@ -26,9 +26,7 @@ export async function GET (req: Request, { params }: CaisseParams ) {
         }
     });
 
-    if (!caisse) {
-        return new Response("Caisse not Found", { status: 404 });
-    }
+    if (!caisse) return new Response("Caisse not Found", { status: 404 });
 
     return new Response(JSON.stringify(caisse), { status: 201 });
 } 
