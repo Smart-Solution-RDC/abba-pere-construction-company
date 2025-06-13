@@ -1,35 +1,109 @@
-export type tableType = 'caisse' | 'contact' | 'mouvementCaisse' | 'panier'
+import { DetailPanier } from "@/app/generated/prisma"
 
-export interface PanierParams { 
+export interface AgentRouteParams { 
     params: {
-        panierId: string, 
+        agentId: string
     }
 }
 
-export interface DetailParams { 
+export interface TeneurRouteParams { 
     params: {
-        panierId: string, 
-        detailId: string 
-    }    
+        agentId: string
+        teneurId: string
+    }
 }
 
-export interface CaisseParams { 
+export interface ContactRouteParams { 
+    params: {
+        agentId: string
+        contactId: string
+    }
+}
+
+export interface AdresseRouteParams { 
+    params: {
+        agentId: string
+        adresseId: string
+    }
+}
+
+export interface DeviseRouteParams { 
+    params: {
+        agentId: string
+        deviseId: string
+    }
+}
+
+export interface ProduitRouteParams { 
+    params: {
+        agentId: string
+        produitId: string
+    }
+}
+
+export interface ClientRouteParams { 
+    params: {
+        agentId: string
+        clientId: string
+    }
+}
+
+export interface FournisseurRouteParams {
+    params: {
+        agentId: string
+        fournisseurId: string
+    }
+}
+
+export interface CaisseRouteParams { 
     params: { 
         caisseId: string
+        agentId: string
     }
 }
 
-export interface MouvementParams { 
+export interface MouvementRouteParams { 
     params: { 
+        agentId: string
         caisseId: string
         mouvementId: string
     }
 } 
 
+export interface PanierRouteParams { 
+    params: {
+        agentId: string
+        panierId: string
+    }
+}
+
+export interface DetailRouteParams { 
+    params: {
+        agentId: string
+        panierId: string
+        detailId: string 
+    }    
+}
+
+export interface DetailPanierForm {
+    produits: DetailPanier[]
+} 
+
+export type tableType = 
+    'caisse' | 'client' | 'produit' | 
+    'contact' | 'mouvementCaisse' | 'fournisseur' | 
+    'panier' | 'agent' | 'achat' | 'vente' | 
+    'commande' | 'clotureCaisse'
+
+export type Type = 'inc' | 'dec'
+
 export type TypeMouvement = 'ENTREE' | 'SORTIE'
 
-export interface AchatParams {
+export type TypeAcheteur = 'NOUVEAU' | 'ORDINAIRE' | 'FOURNISSEUR' | 'CLIENT' | 'AGENT'
+
+export interface AchatRouteParams {
     params: {
+        agentId: string
         achatId: string
     }
 }
@@ -64,15 +138,6 @@ export interface CommandeParams {
     }
 }
 
-export interface TeneurParams { 
-    utilisateurId: string
-}
-
-export interface UtilisateurParams { 
-    params: {
-        utilisateurId: string
-    }
-}
 
 export interface ReservationParams {
     params: {
@@ -111,6 +176,4 @@ export interface ClotureParams {
     }
 }
 
-export interface ClotureCaisseValid {
-    utilisateurClotureId: string,
-}
+

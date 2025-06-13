@@ -10,19 +10,22 @@ async function main() {
   await prisma.entreprise.deleteMany({});
   await prisma.produit.deleteMany({});
   await prisma.teneur.deleteMany({});
+  await prisma.vente.deleteMany({});
+  await prisma.paiement.deleteMany({});
+  await prisma.caisse.deleteMany({});
   await prisma.devise.deleteMany({});
+  await prisma.panier.deleteMany({});
   await prisma.fournisseur.deleteMany({});
-  await prisma.utilisateur.deleteMany({});
+  await prisma.client.deleteMany({});
+  await prisma.agent.deleteMany({});
 
   await prisma.entreprise.upsert({
     where: {nom: 'Abba Père Conctruction Company'},
     update: {},
     create: {
         nom: 'Abba Père Conctruction Company',
-        encronyme: 'accp',
-        code_postale: "sd90K12",
-        adresse: "Siege : uvira - Bukavu",
-        tel: "0979411354",
+        encronyme: 'ACCP',
+        codePostale: "sd90K12",
         site: "http://accp.vercel.com",
         email: "accp@gmail.com",
         description: "My site description",
@@ -30,13 +33,13 @@ async function main() {
     }
   })
   
-  const users = await prisma.utilisateur.upsert({
+  const agent = await prisma.agent.upsert({
     where: { email: 'admin@example.com' },
     update: {},
     create: {
         nom: 'Admin',
         postnom: 'Admin',
-        role: 'admin',
+        role: 'ADMIN',
         email: 'admin@example.com',
     }
   });
@@ -47,7 +50,7 @@ async function main() {
     update: {},
     create: {
       valeur: 32.5,
-      utilisateurId: users.id
+      agentId: agent.id
     }
   });
 
@@ -56,7 +59,7 @@ async function main() {
     update: {},
     create: {
       valeur: 42.5,
-      utilisateurId: users.id
+      agentId: agent.id
     }
   });
 
@@ -68,55 +71,99 @@ async function main() {
       nom: 'Dollard Américain',
       symbole: '$',
       code: 'USD',
-      utilisateurId: users.id
+      agentId: agent.id
     }
   });
 
   const devise2 = await prisma.devise.upsert({
-    where: {nom: 'Franc Congolais'},
+    where: {nom: 'franc congolais'},
     update: {},
     create: {
-        nom: 'Franc Congolais',
-        symbole: 'FC',
-        code: 'CDF',
-        utilisateurId: users.id
+      nom: 'franc congolais',
+      symbole: 'FC',
+      code: 'CDF',
+      agentId: agent.id
     }
-  });  
+  }); 
 
-  // Create at least 2 Caisses
+  // Product
+  const produit1 = await prisma.produit.create({
+    data: {
+      designation: 'ciment-1',
+      prixUnitaire: 100.0,
+      deviseId: devise1.id,
+      teneurId: teneur1.id,
+      agentId: agent.id
+    }
+  });
 
-    // Create Product
-    await prisma.produit.createMany({
-        data: [
-          {
-            designation: 'ciment-1',
-            prix: 100.0,
-            qtte: 0,
-            description: 'My product',
-            deviseId: devise1.id,
-            teneurId: teneur1.id,
-            utilisateurId: users.id
-          }, {
-            designation: 'ciment-2',
-            prix: 100.0,
-            qtte: 0,
-            description: 'My product',
-            deviseId: devise2.id,
-            teneurId: teneur2.id,
-            utilisateurId: users.id
-          }]
-    });
+  const produit2 = await prisma.produit.create({
+    data: {
+      designation: 'ciment-2',
+      prixUnitaire: 100.0,
+      deviseId: devise2.id,
+      teneurId: teneur2.id,
+      agentId: agent.id
+    }
+  });
 
-    // Create Fournisseur
-    await prisma.fournisseur.create({
-        data: {
-            nom: 'bralima',
-            email: 'bralima@gmail.com',
-            code_postal: 'sd90K12',
-        }
-    });    
+  // Fournisseur
+  const fournisseur = await prisma.fournisseur.upsert({
+    where: { email: 'bralima@gmail.com' },
+    update: {},
+    create: {
+      nom: 'bralima',
+      email: 'bralima@gmail.com',
+      codePostale: 'sd90K12',
+      agentId: agent.id
+    }
+  });    
 
-    // Create Default Roles
+  // Caisse
+  await prisma.caisse.create({
+    data: {
+      nom: "Franc Congolais",
+      deviseId: devise1.id,
+      agentId: agent.id
+    }
+  });
+
+  await prisma.client.upsert({
+    where: { email: 'client@gmail.com' },
+    update: {},
+    create: {
+      email: 'client@gmail.com',
+      nom: 'client'
+    }
+  });
+
+  const panier = await prisma.panier.create({
+    data: {
+      agentId: agent.id,
+    }
+  })
+
+  const details_panier = await prisma.detailPanier.createMany({
+    data: [
+      {
+        produitId: produit1.id,
+        qtte: 3,
+        prixUnitaire: 10,
+        prixTotalHT: 30,
+        prixTotalTTC: 4.8,
+        panierId: panier.id
+      },
+      {
+        produitId: produit2.id,
+        qtte: 3,
+        prixUnitaire: 10,
+        prixTotalHT: 30,
+        prixTotalTTC: 4.8,
+        panierId: panier.id
+      },
+    ]
+  })
+
   console.log(`Seeding terminé. 🎉`);
 }
 

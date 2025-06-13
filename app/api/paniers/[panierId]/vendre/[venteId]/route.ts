@@ -1,2 +1,0 @@
-// categorie: data.categorie,
-

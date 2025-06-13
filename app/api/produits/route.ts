@@ -1,9 +1,22 @@
-import { prisma } from "@/lib/prisma";
+import { Pagination } from "@/prisma/utils";
 import { NextRequest } from "next/server";
 
-export async function GET(req: NextRequest) {    
-    const produits = await prisma.produit.findMany({});
-    return new Response(JSON.stringify(produits), { status: 200 });
+export async function GET(request: NextRequest) {    
+
+    const requestParams = request.nextUrl.searchParams;
+    const search = requestParams.get('search');
+
+    const condition = search ? {
+        OR: [{ nom_complet: search ? { contains: search, mode: 'insensitive' } : undefined }] 
+    } : {}
+
+    const selection = {
+        nom_complet: true,
+        email: true
+    }
+
+    const data = await Pagination(request, 'produit', condition, selection, null);
+    return new Response(JSON.stringify('data'), { status: 200 });
 }
 
 
