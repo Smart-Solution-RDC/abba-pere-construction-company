@@ -65,12 +65,13 @@ async function main() {
 
     //   Create Default Devise
   const devise1 = await prisma.devise.upsert({
-    where: {nom: 'Dollard Américain'},
+    where: {nom: 'dollard américain'},
     update: {},
     create: {
-      nom: 'Dollard Américain',
+      nom: 'dollard américain',
       symbole: '$',
       code: 'USD',
+      tauxDEchange: 2845,
       agentId: agent.id
     }
   });
@@ -82,6 +83,7 @@ async function main() {
       nom: 'franc congolais',
       symbole: 'FC',
       code: 'CDF',
+      tauxDEchange: 2885,
       agentId: agent.id
     }
   }); 
@@ -148,17 +150,21 @@ async function main() {
       {
         produitId: produit1.id,
         qtte: 3,
-        prixUnitaire: 10,
-        prixTotalHT: 30,
-        prixTotalTTC: 4.8,
+        prixUnitaire: produit1.prixUnitaire,
+        prixTotalHT: produit1.prixUnitaire * 3,
+        prixTotalTTC: (produit1.prixUnitaire * 3) * 0.16,
+        modePaiement: 'CACHE',
+        deviseId: devise1.id,
         panierId: panier.id
       },
       {
         produitId: produit2.id,
         qtte: 3,
-        prixUnitaire: 10,
-        prixTotalHT: 30,
-        prixTotalTTC: 4.8,
+        prixUnitaire: produit2.prixUnitaire,
+        prixTotalHT: produit2.prixUnitaire * 3,
+        prixTotalTTC: (produit2.prixUnitaire * 3) * 0.16,
+        modePaiement: 'BANQUE',
+        deviseId: devise1.id,
         panierId: panier.id
       },
     ]

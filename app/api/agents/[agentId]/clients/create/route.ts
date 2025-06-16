@@ -20,8 +20,9 @@ export async function POST(request: Request, { params }: RouteParams) {
         await prisma.client.create({
             data: data
         });
-        return new Response("Client Created!", { status: 201 });   
+        return new Response(JSON.stringify(agent), { status: 201 });   
     } catch (error) {
         return new Response("Invalid Form", { status: 201 });   
     }
 }
+

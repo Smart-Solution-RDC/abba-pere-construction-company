@@ -2722,12 +2722,14 @@ export namespace Prisma {
     produits: number
     paiements: number
     caisses: number
+    DetailPanier: number
   }
 
   export type DeviseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     produits?: boolean | DeviseCountOutputTypeCountProduitsArgs
     paiements?: boolean | DeviseCountOutputTypeCountPaiementsArgs
     caisses?: boolean | DeviseCountOutputTypeCountCaissesArgs
+    DetailPanier?: boolean | DeviseCountOutputTypeCountDetailPanierArgs
   }
 
   // Custom InputTypes
@@ -2760,6 +2762,13 @@ export namespace Prisma {
    */
   export type DeviseCountOutputTypeCountCaissesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CaisseWhereInput
+  }
+
+  /**
+   * DeviseCountOutputType without action
+   */
+  export type DeviseCountOutputTypeCountDetailPanierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DetailPanierWhereInput
   }
 
 
@@ -4518,11 +4527,13 @@ export namespace Prisma {
 
   export type DeviseAvgAggregateOutputType = {
     id: number | null
+    tauxDEchange: number | null
     agentId: number | null
   }
 
   export type DeviseSumAggregateOutputType = {
     id: number | null
+    tauxDEchange: number | null
     agentId: number | null
   }
 
@@ -4531,6 +4542,7 @@ export namespace Prisma {
     nom: string | null
     code: string | null
     symbole: string | null
+    tauxDEchange: number | null
     agentId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -4541,6 +4553,7 @@ export namespace Prisma {
     nom: string | null
     code: string | null
     symbole: string | null
+    tauxDEchange: number | null
     agentId: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -4551,6 +4564,7 @@ export namespace Prisma {
     nom: number
     code: number
     symbole: number
+    tauxDEchange: number
     agentId: number
     createdAt: number
     updatedAt: number
@@ -4560,11 +4574,13 @@ export namespace Prisma {
 
   export type DeviseAvgAggregateInputType = {
     id?: true
+    tauxDEchange?: true
     agentId?: true
   }
 
   export type DeviseSumAggregateInputType = {
     id?: true
+    tauxDEchange?: true
     agentId?: true
   }
 
@@ -4573,6 +4589,7 @@ export namespace Prisma {
     nom?: true
     code?: true
     symbole?: true
+    tauxDEchange?: true
     agentId?: true
     createdAt?: true
     updatedAt?: true
@@ -4583,6 +4600,7 @@ export namespace Prisma {
     nom?: true
     code?: true
     symbole?: true
+    tauxDEchange?: true
     agentId?: true
     createdAt?: true
     updatedAt?: true
@@ -4593,6 +4611,7 @@ export namespace Prisma {
     nom?: true
     code?: true
     symbole?: true
+    tauxDEchange?: true
     agentId?: true
     createdAt?: true
     updatedAt?: true
@@ -4690,6 +4709,7 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     agentId: number
     createdAt: Date
     updatedAt: Date
@@ -4719,6 +4739,7 @@ export namespace Prisma {
     nom?: boolean
     code?: boolean
     symbole?: boolean
+    tauxDEchange?: boolean
     agentId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4726,6 +4747,7 @@ export namespace Prisma {
     produits?: boolean | Devise$produitsArgs<ExtArgs>
     paiements?: boolean | Devise$paiementsArgs<ExtArgs>
     caisses?: boolean | Devise$caissesArgs<ExtArgs>
+    DetailPanier?: boolean | Devise$DetailPanierArgs<ExtArgs>
     _count?: boolean | DeviseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["devise"]>
 
@@ -4734,6 +4756,7 @@ export namespace Prisma {
     nom?: boolean
     code?: boolean
     symbole?: boolean
+    tauxDEchange?: boolean
     agentId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4745,6 +4768,7 @@ export namespace Prisma {
     nom?: boolean
     code?: boolean
     symbole?: boolean
+    tauxDEchange?: boolean
     agentId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4756,17 +4780,19 @@ export namespace Prisma {
     nom?: boolean
     code?: boolean
     symbole?: boolean
+    tauxDEchange?: boolean
     agentId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type DeviseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "code" | "symbole" | "agentId" | "createdAt" | "updatedAt", ExtArgs["result"]["devise"]>
+  export type DeviseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "code" | "symbole" | "tauxDEchange" | "agentId" | "createdAt" | "updatedAt", ExtArgs["result"]["devise"]>
   export type DeviseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     agent?: boolean | AgentDefaultArgs<ExtArgs>
     produits?: boolean | Devise$produitsArgs<ExtArgs>
     paiements?: boolean | Devise$paiementsArgs<ExtArgs>
     caisses?: boolean | Devise$caissesArgs<ExtArgs>
+    DetailPanier?: boolean | Devise$DetailPanierArgs<ExtArgs>
     _count?: boolean | DeviseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DeviseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4783,12 +4809,14 @@ export namespace Prisma {
       produits: Prisma.$ProduitPayload<ExtArgs>[]
       paiements: Prisma.$PaiementPayload<ExtArgs>[]
       caisses: Prisma.$CaissePayload<ExtArgs>[]
+      DetailPanier: Prisma.$DetailPanierPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nom: string
       code: string
       symbole: string
+      tauxDEchange: number
       agentId: number
       createdAt: Date
       updatedAt: Date
@@ -5190,6 +5218,7 @@ export namespace Prisma {
     produits<T extends Devise$produitsArgs<ExtArgs> = {}>(args?: Subset<T, Devise$produitsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProduitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     paiements<T extends Devise$paiementsArgs<ExtArgs> = {}>(args?: Subset<T, Devise$paiementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     caisses<T extends Devise$caissesArgs<ExtArgs> = {}>(args?: Subset<T, Devise$caissesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CaissePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    DetailPanier<T extends Devise$DetailPanierArgs<ExtArgs> = {}>(args?: Subset<T, Devise$DetailPanierArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5223,6 +5252,7 @@ export namespace Prisma {
     readonly nom: FieldRef<"Devise", 'String'>
     readonly code: FieldRef<"Devise", 'String'>
     readonly symbole: FieldRef<"Devise", 'String'>
+    readonly tauxDEchange: FieldRef<"Devise", 'Int'>
     readonly agentId: FieldRef<"Devise", 'Int'>
     readonly createdAt: FieldRef<"Devise", 'DateTime'>
     readonly updatedAt: FieldRef<"Devise", 'DateTime'>
@@ -5691,6 +5721,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CaisseScalarFieldEnum | CaisseScalarFieldEnum[]
+  }
+
+  /**
+   * Devise.DetailPanier
+   */
+  export type Devise$DetailPanierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DetailPanier
+     */
+    select?: DetailPanierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DetailPanier
+     */
+    omit?: DetailPanierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DetailPanierInclude<ExtArgs> | null
+    where?: DetailPanierWhereInput
+    orderBy?: DetailPanierOrderByWithRelationInput | DetailPanierOrderByWithRelationInput[]
+    cursor?: DetailPanierWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DetailPanierScalarFieldEnum | DetailPanierScalarFieldEnum[]
   }
 
   /**
@@ -19995,6 +20049,7 @@ export namespace Prisma {
     prixTotalHT: number | null
     prixTotalTTC: number | null
     panierId: number | null
+    deviseId: number | null
   }
 
   export type DetailPanierSumAggregateOutputType = {
@@ -20005,16 +20060,19 @@ export namespace Prisma {
     prixTotalHT: number | null
     prixTotalTTC: number | null
     panierId: number | null
+    deviseId: number | null
   }
 
   export type DetailPanierMinAggregateOutputType = {
     id: number | null
     produitId: number | null
     qtte: number | null
+    modePaiement: $Enums.ModePaiment | null
     prixUnitaire: number | null
     prixTotalHT: number | null
     prixTotalTTC: number | null
     panierId: number | null
+    deviseId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -20023,10 +20081,12 @@ export namespace Prisma {
     id: number | null
     produitId: number | null
     qtte: number | null
+    modePaiement: $Enums.ModePaiment | null
     prixUnitaire: number | null
     prixTotalHT: number | null
     prixTotalTTC: number | null
     panierId: number | null
+    deviseId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -20035,10 +20095,12 @@ export namespace Prisma {
     id: number
     produitId: number
     qtte: number
+    modePaiement: number
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
+    deviseId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -20053,6 +20115,7 @@ export namespace Prisma {
     prixTotalHT?: true
     prixTotalTTC?: true
     panierId?: true
+    deviseId?: true
   }
 
   export type DetailPanierSumAggregateInputType = {
@@ -20063,16 +20126,19 @@ export namespace Prisma {
     prixTotalHT?: true
     prixTotalTTC?: true
     panierId?: true
+    deviseId?: true
   }
 
   export type DetailPanierMinAggregateInputType = {
     id?: true
     produitId?: true
     qtte?: true
+    modePaiement?: true
     prixUnitaire?: true
     prixTotalHT?: true
     prixTotalTTC?: true
     panierId?: true
+    deviseId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -20081,10 +20147,12 @@ export namespace Prisma {
     id?: true
     produitId?: true
     qtte?: true
+    modePaiement?: true
     prixUnitaire?: true
     prixTotalHT?: true
     prixTotalTTC?: true
     panierId?: true
+    deviseId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -20093,10 +20161,12 @@ export namespace Prisma {
     id?: true
     produitId?: true
     qtte?: true
+    modePaiement?: true
     prixUnitaire?: true
     prixTotalHT?: true
     prixTotalTTC?: true
     panierId?: true
+    deviseId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -20192,10 +20262,12 @@ export namespace Prisma {
     id: number
     produitId: number
     qtte: number
+    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
+    deviseId: number
     createdAt: Date
     updatedAt: Date
     _count: DetailPanierCountAggregateOutputType | null
@@ -20223,12 +20295,15 @@ export namespace Prisma {
     id?: boolean
     produitId?: boolean
     qtte?: boolean
+    modePaiement?: boolean
     prixUnitaire?: boolean
     prixTotalHT?: boolean
     prixTotalTTC?: boolean
     panierId?: boolean
+    deviseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    devise?: boolean | DeviseDefaultArgs<ExtArgs>
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["detailPanier"]>
@@ -20237,12 +20312,15 @@ export namespace Prisma {
     id?: boolean
     produitId?: boolean
     qtte?: boolean
+    modePaiement?: boolean
     prixUnitaire?: boolean
     prixTotalHT?: boolean
     prixTotalTTC?: boolean
     panierId?: boolean
+    deviseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    devise?: boolean | DeviseDefaultArgs<ExtArgs>
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["detailPanier"]>
@@ -20251,12 +20329,15 @@ export namespace Prisma {
     id?: boolean
     produitId?: boolean
     qtte?: boolean
+    modePaiement?: boolean
     prixUnitaire?: boolean
     prixTotalHT?: boolean
     prixTotalTTC?: boolean
     panierId?: boolean
+    deviseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    devise?: boolean | DeviseDefaultArgs<ExtArgs>
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["detailPanier"]>
@@ -20265,24 +20346,29 @@ export namespace Prisma {
     id?: boolean
     produitId?: boolean
     qtte?: boolean
+    modePaiement?: boolean
     prixUnitaire?: boolean
     prixTotalHT?: boolean
     prixTotalTTC?: boolean
     panierId?: boolean
+    deviseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type DetailPanierOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "produitId" | "qtte" | "prixUnitaire" | "prixTotalHT" | "prixTotalTTC" | "panierId" | "createdAt" | "updatedAt", ExtArgs["result"]["detailPanier"]>
+  export type DetailPanierOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "produitId" | "qtte" | "modePaiement" | "prixUnitaire" | "prixTotalHT" | "prixTotalTTC" | "panierId" | "deviseId" | "createdAt" | "updatedAt", ExtArgs["result"]["detailPanier"]>
   export type DetailPanierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    devise?: boolean | DeviseDefaultArgs<ExtArgs>
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }
   export type DetailPanierIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    devise?: boolean | DeviseDefaultArgs<ExtArgs>
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }
   export type DetailPanierIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    devise?: boolean | DeviseDefaultArgs<ExtArgs>
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }
@@ -20290,6 +20376,7 @@ export namespace Prisma {
   export type $DetailPanierPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "DetailPanier"
     objects: {
+      devise: Prisma.$DevisePayload<ExtArgs>
       produit: Prisma.$ProduitPayload<ExtArgs>
       panier: Prisma.$PanierPayload<ExtArgs>
     }
@@ -20297,10 +20384,12 @@ export namespace Prisma {
       id: number
       produitId: number
       qtte: number
+      modePaiement: $Enums.ModePaiment
       prixUnitaire: number
       prixTotalHT: number
       prixTotalTTC: number
       panierId: number
+      deviseId: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["detailPanier"]>
@@ -20697,6 +20786,7 @@ export namespace Prisma {
    */
   export interface Prisma__DetailPanierClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    devise<T extends DeviseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DeviseDefaultArgs<ExtArgs>>): Prisma__DeviseClient<$Result.GetResult<Prisma.$DevisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     produit<T extends ProduitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProduitDefaultArgs<ExtArgs>>): Prisma__ProduitClient<$Result.GetResult<Prisma.$ProduitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     panier<T extends PanierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PanierDefaultArgs<ExtArgs>>): Prisma__PanierClient<$Result.GetResult<Prisma.$PanierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -20731,10 +20821,12 @@ export namespace Prisma {
     readonly id: FieldRef<"DetailPanier", 'Int'>
     readonly produitId: FieldRef<"DetailPanier", 'Int'>
     readonly qtte: FieldRef<"DetailPanier", 'Int'>
+    readonly modePaiement: FieldRef<"DetailPanier", 'ModePaiment'>
     readonly prixUnitaire: FieldRef<"DetailPanier", 'Float'>
     readonly prixTotalHT: FieldRef<"DetailPanier", 'Float'>
     readonly prixTotalTTC: FieldRef<"DetailPanier", 'Float'>
     readonly panierId: FieldRef<"DetailPanier", 'Int'>
+    readonly deviseId: FieldRef<"DetailPanier", 'Int'>
     readonly createdAt: FieldRef<"DetailPanier", 'DateTime'>
     readonly updatedAt: FieldRef<"DetailPanier", 'DateTime'>
   }
@@ -27498,6 +27590,7 @@ export namespace Prisma {
     nom: 'nom',
     code: 'code',
     symbole: 'symbole',
+    tauxDEchange: 'tauxDEchange',
     agentId: 'agentId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -27677,10 +27770,12 @@ export namespace Prisma {
     id: 'id',
     produitId: 'produitId',
     qtte: 'qtte',
+    modePaiement: 'modePaiement',
     prixUnitaire: 'prixUnitaire',
     prixTotalHT: 'prixTotalHT',
     prixTotalTTC: 'prixTotalTTC',
     panierId: 'panierId',
+    deviseId: 'deviseId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -28123,6 +28218,7 @@ export namespace Prisma {
     nom?: StringFilter<"Devise"> | string
     code?: StringFilter<"Devise"> | string
     symbole?: StringFilter<"Devise"> | string
+    tauxDEchange?: IntFilter<"Devise"> | number
     agentId?: IntFilter<"Devise"> | number
     createdAt?: DateTimeFilter<"Devise"> | Date | string
     updatedAt?: DateTimeFilter<"Devise"> | Date | string
@@ -28130,6 +28226,7 @@ export namespace Prisma {
     produits?: ProduitListRelationFilter
     paiements?: PaiementListRelationFilter
     caisses?: CaisseListRelationFilter
+    DetailPanier?: DetailPanierListRelationFilter
   }
 
   export type DeviseOrderByWithRelationInput = {
@@ -28137,6 +28234,7 @@ export namespace Prisma {
     nom?: SortOrder
     code?: SortOrder
     symbole?: SortOrder
+    tauxDEchange?: SortOrder
     agentId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -28144,6 +28242,7 @@ export namespace Prisma {
     produits?: ProduitOrderByRelationAggregateInput
     paiements?: PaiementOrderByRelationAggregateInput
     caisses?: CaisseOrderByRelationAggregateInput
+    DetailPanier?: DetailPanierOrderByRelationAggregateInput
   }
 
   export type DeviseWhereUniqueInput = Prisma.AtLeast<{
@@ -28154,6 +28253,7 @@ export namespace Prisma {
     OR?: DeviseWhereInput[]
     NOT?: DeviseWhereInput | DeviseWhereInput[]
     symbole?: StringFilter<"Devise"> | string
+    tauxDEchange?: IntFilter<"Devise"> | number
     agentId?: IntFilter<"Devise"> | number
     createdAt?: DateTimeFilter<"Devise"> | Date | string
     updatedAt?: DateTimeFilter<"Devise"> | Date | string
@@ -28161,6 +28261,7 @@ export namespace Prisma {
     produits?: ProduitListRelationFilter
     paiements?: PaiementListRelationFilter
     caisses?: CaisseListRelationFilter
+    DetailPanier?: DetailPanierListRelationFilter
   }, "id" | "nom" | "code">
 
   export type DeviseOrderByWithAggregationInput = {
@@ -28168,6 +28269,7 @@ export namespace Prisma {
     nom?: SortOrder
     code?: SortOrder
     symbole?: SortOrder
+    tauxDEchange?: SortOrder
     agentId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -28186,6 +28288,7 @@ export namespace Prisma {
     nom?: StringWithAggregatesFilter<"Devise"> | string
     code?: StringWithAggregatesFilter<"Devise"> | string
     symbole?: StringWithAggregatesFilter<"Devise"> | string
+    tauxDEchange?: IntWithAggregatesFilter<"Devise"> | number
     agentId?: IntWithAggregatesFilter<"Devise"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Devise"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Devise"> | Date | string
@@ -29220,12 +29323,15 @@ export namespace Prisma {
     id?: IntFilter<"DetailPanier"> | number
     produitId?: IntFilter<"DetailPanier"> | number
     qtte?: IntFilter<"DetailPanier"> | number
+    modePaiement?: EnumModePaimentFilter<"DetailPanier"> | $Enums.ModePaiment
     prixUnitaire?: FloatFilter<"DetailPanier"> | number
     prixTotalHT?: FloatFilter<"DetailPanier"> | number
     prixTotalTTC?: FloatFilter<"DetailPanier"> | number
     panierId?: IntFilter<"DetailPanier"> | number
+    deviseId?: IntFilter<"DetailPanier"> | number
     createdAt?: DateTimeFilter<"DetailPanier"> | Date | string
     updatedAt?: DateTimeFilter<"DetailPanier"> | Date | string
+    devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
     produit?: XOR<ProduitScalarRelationFilter, ProduitWhereInput>
     panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
   }
@@ -29234,12 +29340,15 @@ export namespace Prisma {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
+    modePaiement?: SortOrder
     prixUnitaire?: SortOrder
     prixTotalHT?: SortOrder
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
+    deviseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    devise?: DeviseOrderByWithRelationInput
     produit?: ProduitOrderByWithRelationInput
     panier?: PanierOrderByWithRelationInput
   }
@@ -29251,12 +29360,15 @@ export namespace Prisma {
     NOT?: DetailPanierWhereInput | DetailPanierWhereInput[]
     produitId?: IntFilter<"DetailPanier"> | number
     qtte?: IntFilter<"DetailPanier"> | number
+    modePaiement?: EnumModePaimentFilter<"DetailPanier"> | $Enums.ModePaiment
     prixUnitaire?: FloatFilter<"DetailPanier"> | number
     prixTotalHT?: FloatFilter<"DetailPanier"> | number
     prixTotalTTC?: FloatFilter<"DetailPanier"> | number
     panierId?: IntFilter<"DetailPanier"> | number
+    deviseId?: IntFilter<"DetailPanier"> | number
     createdAt?: DateTimeFilter<"DetailPanier"> | Date | string
     updatedAt?: DateTimeFilter<"DetailPanier"> | Date | string
+    devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
     produit?: XOR<ProduitScalarRelationFilter, ProduitWhereInput>
     panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
   }, "id">
@@ -29265,10 +29377,12 @@ export namespace Prisma {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
+    modePaiement?: SortOrder
     prixUnitaire?: SortOrder
     prixTotalHT?: SortOrder
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
+    deviseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: DetailPanierCountOrderByAggregateInput
@@ -29285,10 +29399,12 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"DetailPanier"> | number
     produitId?: IntWithAggregatesFilter<"DetailPanier"> | number
     qtte?: IntWithAggregatesFilter<"DetailPanier"> | number
+    modePaiement?: EnumModePaimentWithAggregatesFilter<"DetailPanier"> | $Enums.ModePaiment
     prixUnitaire?: FloatWithAggregatesFilter<"DetailPanier"> | number
     prixTotalHT?: FloatWithAggregatesFilter<"DetailPanier"> | number
     prixTotalTTC?: FloatWithAggregatesFilter<"DetailPanier"> | number
     panierId?: IntWithAggregatesFilter<"DetailPanier"> | number
+    deviseId?: IntWithAggregatesFilter<"DetailPanier"> | number
     createdAt?: DateTimeWithAggregatesFilter<"DetailPanier"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"DetailPanier"> | Date | string
   }
@@ -29858,12 +29974,14 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     createdAt?: Date | string
     updatedAt?: Date | string
     agent: AgentCreateNestedOneWithoutDevisesInput
     produits?: ProduitCreateNestedManyWithoutDeviseInput
     paiements?: PaiementCreateNestedManyWithoutDeviseInput
     caisses?: CaisseCreateNestedManyWithoutDeviseInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseUncheckedCreateInput = {
@@ -29871,24 +29989,28 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     agentId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     produits?: ProduitUncheckedCreateNestedManyWithoutDeviseInput
     paiements?: PaiementUncheckedCreateNestedManyWithoutDeviseInput
     caisses?: CaisseUncheckedCreateNestedManyWithoutDeviseInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseUpdateInput = {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agent?: AgentUpdateOneRequiredWithoutDevisesNestedInput
     produits?: ProduitUpdateManyWithoutDeviseNestedInput
     paiements?: PaiementUpdateManyWithoutDeviseNestedInput
     caisses?: CaisseUpdateManyWithoutDeviseNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutDeviseNestedInput
   }
 
   export type DeviseUncheckedUpdateInput = {
@@ -29896,12 +30018,14 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     agentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     produits?: ProduitUncheckedUpdateManyWithoutDeviseNestedInput
     paiements?: PaiementUncheckedUpdateManyWithoutDeviseNestedInput
     caisses?: CaisseUncheckedUpdateManyWithoutDeviseNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutDeviseNestedInput
   }
 
   export type DeviseCreateManyInput = {
@@ -29909,6 +30033,7 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     agentId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29918,6 +30043,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -29927,6 +30053,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     agentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30988,11 +31115,13 @@ export namespace Prisma {
 
   export type DetailPanierCreateInput = {
     qtte: number
+    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    devise: DeviseCreateNestedOneWithoutDetailPanierInput
     produit: ProduitCreateNestedOneWithoutDetailsPaniersInput
     panier: PanierCreateNestedOneWithoutDetailPaniersInput
   }
@@ -31001,21 +31130,25 @@ export namespace Prisma {
     id?: number
     produitId: number
     qtte: number
+    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
+    deviseId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type DetailPanierUpdateInput = {
     qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    devise?: DeviseUpdateOneRequiredWithoutDetailPanierNestedInput
     produit?: ProduitUpdateOneRequiredWithoutDetailsPaniersNestedInput
     panier?: PanierUpdateOneRequiredWithoutDetailPaniersNestedInput
   }
@@ -31024,10 +31157,12 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
+    deviseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31036,16 +31171,19 @@ export namespace Prisma {
     id?: number
     produitId: number
     qtte: number
+    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
+    deviseId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type DetailPanierUpdateManyMutationInput = {
     qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
@@ -31057,10 +31195,12 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
+    deviseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31712,6 +31852,12 @@ export namespace Prisma {
     none?: CaisseWhereInput
   }
 
+  export type DetailPanierListRelationFilter = {
+    every?: DetailPanierWhereInput
+    some?: DetailPanierWhereInput
+    none?: DetailPanierWhereInput
+  }
+
   export type PaiementOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -31720,11 +31866,16 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type DetailPanierOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type DeviseCountOrderByAggregateInput = {
     id?: SortOrder
     nom?: SortOrder
     code?: SortOrder
     symbole?: SortOrder
+    tauxDEchange?: SortOrder
     agentId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -31732,6 +31883,7 @@ export namespace Prisma {
 
   export type DeviseAvgOrderByAggregateInput = {
     id?: SortOrder
+    tauxDEchange?: SortOrder
     agentId?: SortOrder
   }
 
@@ -31740,6 +31892,7 @@ export namespace Prisma {
     nom?: SortOrder
     code?: SortOrder
     symbole?: SortOrder
+    tauxDEchange?: SortOrder
     agentId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -31750,6 +31903,7 @@ export namespace Prisma {
     nom?: SortOrder
     code?: SortOrder
     symbole?: SortOrder
+    tauxDEchange?: SortOrder
     agentId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -31757,6 +31911,7 @@ export namespace Prisma {
 
   export type DeviseSumOrderByAggregateInput = {
     id?: SortOrder
+    tauxDEchange?: SortOrder
     agentId?: SortOrder
   }
 
@@ -32335,12 +32490,6 @@ export namespace Prisma {
     agentId?: SortOrder
   }
 
-  export type DetailPanierListRelationFilter = {
-    every?: DetailPanierWhereInput
-    some?: DetailPanierWhereInput
-    none?: DetailPanierWhereInput
-  }
-
   export type DeviseScalarRelationFilter = {
     is?: DeviseWhereInput
     isNot?: DeviseWhereInput
@@ -32349,10 +32498,6 @@ export namespace Prisma {
   export type TeneurScalarRelationFilter = {
     is?: TeneurWhereInput
     isNot?: TeneurWhereInput
-  }
-
-  export type DetailPanierOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type ProduitCountOrderByAggregateInput = {
@@ -32751,10 +32896,12 @@ export namespace Prisma {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
+    modePaiement?: SortOrder
     prixUnitaire?: SortOrder
     prixTotalHT?: SortOrder
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
+    deviseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -32767,16 +32914,19 @@ export namespace Prisma {
     prixTotalHT?: SortOrder
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
+    deviseId?: SortOrder
   }
 
   export type DetailPanierMaxOrderByAggregateInput = {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
+    modePaiement?: SortOrder
     prixUnitaire?: SortOrder
     prixTotalHT?: SortOrder
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
+    deviseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -32785,10 +32935,12 @@ export namespace Prisma {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
+    modePaiement?: SortOrder
     prixUnitaire?: SortOrder
     prixTotalHT?: SortOrder
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
+    deviseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -32801,6 +32953,7 @@ export namespace Prisma {
     prixTotalHT?: SortOrder
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
+    deviseId?: SortOrder
   }
 
   export type EnumStatutAchatFilter<$PrismaModel = never> = {
@@ -33347,6 +33500,13 @@ export namespace Prisma {
     connect?: CaisseWhereUniqueInput | CaisseWhereUniqueInput[]
   }
 
+  export type DetailPanierCreateNestedManyWithoutDeviseInput = {
+    create?: XOR<DetailPanierCreateWithoutDeviseInput, DetailPanierUncheckedCreateWithoutDeviseInput> | DetailPanierCreateWithoutDeviseInput[] | DetailPanierUncheckedCreateWithoutDeviseInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutDeviseInput | DetailPanierCreateOrConnectWithoutDeviseInput[]
+    createMany?: DetailPanierCreateManyDeviseInputEnvelope
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+  }
+
   export type ProduitUncheckedCreateNestedManyWithoutDeviseInput = {
     create?: XOR<ProduitCreateWithoutDeviseInput, ProduitUncheckedCreateWithoutDeviseInput> | ProduitCreateWithoutDeviseInput[] | ProduitUncheckedCreateWithoutDeviseInput[]
     connectOrCreate?: ProduitCreateOrConnectWithoutDeviseInput | ProduitCreateOrConnectWithoutDeviseInput[]
@@ -33366,6 +33526,13 @@ export namespace Prisma {
     connectOrCreate?: CaisseCreateOrConnectWithoutDeviseInput | CaisseCreateOrConnectWithoutDeviseInput[]
     createMany?: CaisseCreateManyDeviseInputEnvelope
     connect?: CaisseWhereUniqueInput | CaisseWhereUniqueInput[]
+  }
+
+  export type DetailPanierUncheckedCreateNestedManyWithoutDeviseInput = {
+    create?: XOR<DetailPanierCreateWithoutDeviseInput, DetailPanierUncheckedCreateWithoutDeviseInput> | DetailPanierCreateWithoutDeviseInput[] | DetailPanierUncheckedCreateWithoutDeviseInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutDeviseInput | DetailPanierCreateOrConnectWithoutDeviseInput[]
+    createMany?: DetailPanierCreateManyDeviseInputEnvelope
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -33422,6 +33589,20 @@ export namespace Prisma {
     deleteMany?: CaisseScalarWhereInput | CaisseScalarWhereInput[]
   }
 
+  export type DetailPanierUpdateManyWithoutDeviseNestedInput = {
+    create?: XOR<DetailPanierCreateWithoutDeviseInput, DetailPanierUncheckedCreateWithoutDeviseInput> | DetailPanierCreateWithoutDeviseInput[] | DetailPanierUncheckedCreateWithoutDeviseInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutDeviseInput | DetailPanierCreateOrConnectWithoutDeviseInput[]
+    upsert?: DetailPanierUpsertWithWhereUniqueWithoutDeviseInput | DetailPanierUpsertWithWhereUniqueWithoutDeviseInput[]
+    createMany?: DetailPanierCreateManyDeviseInputEnvelope
+    set?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    disconnect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    delete?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    update?: DetailPanierUpdateWithWhereUniqueWithoutDeviseInput | DetailPanierUpdateWithWhereUniqueWithoutDeviseInput[]
+    updateMany?: DetailPanierUpdateManyWithWhereWithoutDeviseInput | DetailPanierUpdateManyWithWhereWithoutDeviseInput[]
+    deleteMany?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
+  }
+
   export type ProduitUncheckedUpdateManyWithoutDeviseNestedInput = {
     create?: XOR<ProduitCreateWithoutDeviseInput, ProduitUncheckedCreateWithoutDeviseInput> | ProduitCreateWithoutDeviseInput[] | ProduitUncheckedCreateWithoutDeviseInput[]
     connectOrCreate?: ProduitCreateOrConnectWithoutDeviseInput | ProduitCreateOrConnectWithoutDeviseInput[]
@@ -33462,6 +33643,20 @@ export namespace Prisma {
     update?: CaisseUpdateWithWhereUniqueWithoutDeviseInput | CaisseUpdateWithWhereUniqueWithoutDeviseInput[]
     updateMany?: CaisseUpdateManyWithWhereWithoutDeviseInput | CaisseUpdateManyWithWhereWithoutDeviseInput[]
     deleteMany?: CaisseScalarWhereInput | CaisseScalarWhereInput[]
+  }
+
+  export type DetailPanierUncheckedUpdateManyWithoutDeviseNestedInput = {
+    create?: XOR<DetailPanierCreateWithoutDeviseInput, DetailPanierUncheckedCreateWithoutDeviseInput> | DetailPanierCreateWithoutDeviseInput[] | DetailPanierUncheckedCreateWithoutDeviseInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutDeviseInput | DetailPanierCreateOrConnectWithoutDeviseInput[]
+    upsert?: DetailPanierUpsertWithWhereUniqueWithoutDeviseInput | DetailPanierUpsertWithWhereUniqueWithoutDeviseInput[]
+    createMany?: DetailPanierCreateManyDeviseInputEnvelope
+    set?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    disconnect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    delete?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    update?: DetailPanierUpdateWithWhereUniqueWithoutDeviseInput | DetailPanierUpdateWithWhereUniqueWithoutDeviseInput[]
+    updateMany?: DetailPanierUpdateManyWithWhereWithoutDeviseInput | DetailPanierUpdateManyWithWhereWithoutDeviseInput[]
+    deleteMany?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
   }
 
   export type ClotureCaisseCreateNestedManyWithoutEntrepriseInput = {
@@ -35674,6 +35869,12 @@ export namespace Prisma {
     deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
   }
 
+  export type DeviseCreateNestedOneWithoutDetailPanierInput = {
+    create?: XOR<DeviseCreateWithoutDetailPanierInput, DeviseUncheckedCreateWithoutDetailPanierInput>
+    connectOrCreate?: DeviseCreateOrConnectWithoutDetailPanierInput
+    connect?: DeviseWhereUniqueInput
+  }
+
   export type ProduitCreateNestedOneWithoutDetailsPaniersInput = {
     create?: XOR<ProduitCreateWithoutDetailsPaniersInput, ProduitUncheckedCreateWithoutDetailsPaniersInput>
     connectOrCreate?: ProduitCreateOrConnectWithoutDetailsPaniersInput
@@ -35684,6 +35885,14 @@ export namespace Prisma {
     create?: XOR<PanierCreateWithoutDetailPaniersInput, PanierUncheckedCreateWithoutDetailPaniersInput>
     connectOrCreate?: PanierCreateOrConnectWithoutDetailPaniersInput
     connect?: PanierWhereUniqueInput
+  }
+
+  export type DeviseUpdateOneRequiredWithoutDetailPanierNestedInput = {
+    create?: XOR<DeviseCreateWithoutDetailPanierInput, DeviseUncheckedCreateWithoutDetailPanierInput>
+    connectOrCreate?: DeviseCreateOrConnectWithoutDetailPanierInput
+    upsert?: DeviseUpsertWithoutDetailPanierInput
+    connect?: DeviseWhereUniqueInput
+    update?: XOR<XOR<DeviseUpdateToOneWithWhereWithoutDetailPanierInput, DeviseUpdateWithoutDetailPanierInput>, DeviseUncheckedUpdateWithoutDetailPanierInput>
   }
 
   export type ProduitUpdateOneRequiredWithoutDetailsPaniersNestedInput = {
@@ -36818,6 +37027,41 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type DetailPanierCreateWithoutDeviseInput = {
+    qtte: number
+    modePaiement: $Enums.ModePaiment
+    prixUnitaire: number
+    prixTotalHT: number
+    prixTotalTTC: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    produit: ProduitCreateNestedOneWithoutDetailsPaniersInput
+    panier: PanierCreateNestedOneWithoutDetailPaniersInput
+  }
+
+  export type DetailPanierUncheckedCreateWithoutDeviseInput = {
+    id?: number
+    produitId: number
+    qtte: number
+    modePaiement: $Enums.ModePaiment
+    prixUnitaire: number
+    prixTotalHT: number
+    prixTotalTTC: number
+    panierId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DetailPanierCreateOrConnectWithoutDeviseInput = {
+    where: DetailPanierWhereUniqueInput
+    create: XOR<DetailPanierCreateWithoutDeviseInput, DetailPanierUncheckedCreateWithoutDeviseInput>
+  }
+
+  export type DetailPanierCreateManyDeviseInputEnvelope = {
+    data: DetailPanierCreateManyDeviseInput | DetailPanierCreateManyDeviseInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AgentUpsertWithoutDevisesInput = {
     update: XOR<AgentUpdateWithoutDevisesInput, AgentUncheckedUpdateWithoutDevisesInput>
     create: XOR<AgentCreateWithoutDevisesInput, AgentUncheckedCreateWithoutDevisesInput>
@@ -36952,6 +37196,39 @@ export namespace Prisma {
     statut?: EnumStatutCaisseFilter<"Caisse"> | $Enums.StatutCaisse
     createdAt?: DateTimeFilter<"Caisse"> | Date | string
     updatedAt?: DateTimeFilter<"Caisse"> | Date | string
+  }
+
+  export type DetailPanierUpsertWithWhereUniqueWithoutDeviseInput = {
+    where: DetailPanierWhereUniqueInput
+    update: XOR<DetailPanierUpdateWithoutDeviseInput, DetailPanierUncheckedUpdateWithoutDeviseInput>
+    create: XOR<DetailPanierCreateWithoutDeviseInput, DetailPanierUncheckedCreateWithoutDeviseInput>
+  }
+
+  export type DetailPanierUpdateWithWhereUniqueWithoutDeviseInput = {
+    where: DetailPanierWhereUniqueInput
+    data: XOR<DetailPanierUpdateWithoutDeviseInput, DetailPanierUncheckedUpdateWithoutDeviseInput>
+  }
+
+  export type DetailPanierUpdateManyWithWhereWithoutDeviseInput = {
+    where: DetailPanierScalarWhereInput
+    data: XOR<DetailPanierUpdateManyMutationInput, DetailPanierUncheckedUpdateManyWithoutDeviseInput>
+  }
+
+  export type DetailPanierScalarWhereInput = {
+    AND?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
+    OR?: DetailPanierScalarWhereInput[]
+    NOT?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
+    id?: IntFilter<"DetailPanier"> | number
+    produitId?: IntFilter<"DetailPanier"> | number
+    qtte?: IntFilter<"DetailPanier"> | number
+    modePaiement?: EnumModePaimentFilter<"DetailPanier"> | $Enums.ModePaiment
+    prixUnitaire?: FloatFilter<"DetailPanier"> | number
+    prixTotalHT?: FloatFilter<"DetailPanier"> | number
+    prixTotalTTC?: FloatFilter<"DetailPanier"> | number
+    panierId?: IntFilter<"DetailPanier"> | number
+    deviseId?: IntFilter<"DetailPanier"> | number
+    createdAt?: DateTimeFilter<"DetailPanier"> | Date | string
+    updatedAt?: DateTimeFilter<"DetailPanier"> | Date | string
   }
 
   export type ClotureCaisseCreateWithoutEntrepriseInput = {
@@ -37351,11 +37628,13 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     createdAt?: Date | string
     updatedAt?: Date | string
     produits?: ProduitCreateNestedManyWithoutDeviseInput
     paiements?: PaiementCreateNestedManyWithoutDeviseInput
     caisses?: CaisseCreateNestedManyWithoutDeviseInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseUncheckedCreateWithoutAgentInput = {
@@ -37363,11 +37642,13 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     createdAt?: Date | string
     updatedAt?: Date | string
     produits?: ProduitUncheckedCreateNestedManyWithoutDeviseInput
     paiements?: PaiementUncheckedCreateNestedManyWithoutDeviseInput
     caisses?: CaisseUncheckedCreateNestedManyWithoutDeviseInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseCreateOrConnectWithoutAgentInput = {
@@ -37716,6 +37997,7 @@ export namespace Prisma {
     nom?: StringFilter<"Devise"> | string
     code?: StringFilter<"Devise"> | string
     symbole?: StringFilter<"Devise"> | string
+    tauxDEchange?: IntFilter<"Devise"> | number
     agentId?: IntFilter<"Devise"> | number
     createdAt?: DateTimeFilter<"Devise"> | Date | string
     updatedAt?: DateTimeFilter<"Devise"> | Date | string
@@ -39659,21 +39941,25 @@ export namespace Prisma {
 
   export type DetailPanierCreateWithoutProduitInput = {
     qtte: number
+    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    devise: DeviseCreateNestedOneWithoutDetailPanierInput
     panier: PanierCreateNestedOneWithoutDetailPaniersInput
   }
 
   export type DetailPanierUncheckedCreateWithoutProduitInput = {
     id?: number
     qtte: number
+    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
+    deviseId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -39746,11 +40032,13 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     createdAt?: Date | string
     updatedAt?: Date | string
     agent: AgentCreateNestedOneWithoutDevisesInput
     paiements?: PaiementCreateNestedManyWithoutDeviseInput
     caisses?: CaisseCreateNestedManyWithoutDeviseInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseUncheckedCreateWithoutProduitsInput = {
@@ -39758,11 +40046,13 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     agentId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     paiements?: PaiementUncheckedCreateNestedManyWithoutDeviseInput
     caisses?: CaisseUncheckedCreateNestedManyWithoutDeviseInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseCreateOrConnectWithoutProduitsInput = {
@@ -39804,21 +40094,6 @@ export namespace Prisma {
   export type DetailPanierUpdateManyWithWhereWithoutProduitInput = {
     where: DetailPanierScalarWhereInput
     data: XOR<DetailPanierUpdateManyMutationInput, DetailPanierUncheckedUpdateManyWithoutProduitInput>
-  }
-
-  export type DetailPanierScalarWhereInput = {
-    AND?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
-    OR?: DetailPanierScalarWhereInput[]
-    NOT?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
-    id?: IntFilter<"DetailPanier"> | number
-    produitId?: IntFilter<"DetailPanier"> | number
-    qtte?: IntFilter<"DetailPanier"> | number
-    prixUnitaire?: FloatFilter<"DetailPanier"> | number
-    prixTotalHT?: FloatFilter<"DetailPanier"> | number
-    prixTotalTTC?: FloatFilter<"DetailPanier"> | number
-    panierId?: IntFilter<"DetailPanier"> | number
-    createdAt?: DateTimeFilter<"DetailPanier"> | Date | string
-    updatedAt?: DateTimeFilter<"DetailPanier"> | Date | string
   }
 
   export type AgentUpsertWithoutProduitsInput = {
@@ -39896,11 +40171,13 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agent?: AgentUpdateOneRequiredWithoutDevisesNestedInput
     paiements?: PaiementUpdateManyWithoutDeviseNestedInput
     caisses?: CaisseUpdateManyWithoutDeviseNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutDeviseNestedInput
   }
 
   export type DeviseUncheckedUpdateWithoutProduitsInput = {
@@ -39908,11 +40185,13 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     agentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paiements?: PaiementUncheckedUpdateManyWithoutDeviseNestedInput
     caisses?: CaisseUncheckedUpdateManyWithoutDeviseNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutDeviseNestedInput
   }
 
   export type TeneurUpsertWithoutProduitsInput = {
@@ -39975,11 +40254,13 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     createdAt?: Date | string
     updatedAt?: Date | string
     agent: AgentCreateNestedOneWithoutDevisesInput
     produits?: ProduitCreateNestedManyWithoutDeviseInput
     caisses?: CaisseCreateNestedManyWithoutDeviseInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseUncheckedCreateWithoutPaiementsInput = {
@@ -39987,11 +40268,13 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     agentId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     produits?: ProduitUncheckedCreateNestedManyWithoutDeviseInput
     caisses?: CaisseUncheckedCreateNestedManyWithoutDeviseInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseCreateOrConnectWithoutPaiementsInput = {
@@ -40167,11 +40450,13 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agent?: AgentUpdateOneRequiredWithoutDevisesNestedInput
     produits?: ProduitUpdateManyWithoutDeviseNestedInput
     caisses?: CaisseUpdateManyWithoutDeviseNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutDeviseNestedInput
   }
 
   export type DeviseUncheckedUpdateWithoutPaiementsInput = {
@@ -40179,11 +40464,13 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     agentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     produits?: ProduitUncheckedUpdateManyWithoutDeviseNestedInput
     caisses?: CaisseUncheckedUpdateManyWithoutDeviseNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutDeviseNestedInput
   }
 
   export type AchatUpsertWithWhereUniqueWithoutPaiementInput = {
@@ -40238,11 +40525,13 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     createdAt?: Date | string
     updatedAt?: Date | string
     agent: AgentCreateNestedOneWithoutDevisesInput
     produits?: ProduitCreateNestedManyWithoutDeviseInput
     paiements?: PaiementCreateNestedManyWithoutDeviseInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseUncheckedCreateWithoutCaissesInput = {
@@ -40250,11 +40539,13 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     agentId: number
     createdAt?: Date | string
     updatedAt?: Date | string
     produits?: ProduitUncheckedCreateNestedManyWithoutDeviseInput
     paiements?: PaiementUncheckedCreateNestedManyWithoutDeviseInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutDeviseInput
   }
 
   export type DeviseCreateOrConnectWithoutCaissesInput = {
@@ -40399,11 +40690,13 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agent?: AgentUpdateOneRequiredWithoutDevisesNestedInput
     produits?: ProduitUpdateManyWithoutDeviseNestedInput
     paiements?: PaiementUpdateManyWithoutDeviseNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutDeviseNestedInput
   }
 
   export type DeviseUncheckedUpdateWithoutCaissesInput = {
@@ -40411,11 +40704,13 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     agentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     produits?: ProduitUncheckedUpdateManyWithoutDeviseNestedInput
     paiements?: PaiementUncheckedUpdateManyWithoutDeviseNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutDeviseNestedInput
   }
 
   export type AgentUpsertWithoutCaissesInput = {
@@ -41008,11 +41303,13 @@ export namespace Prisma {
 
   export type DetailPanierCreateWithoutPanierInput = {
     qtte: number
+    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    devise: DeviseCreateNestedOneWithoutDetailPanierInput
     produit: ProduitCreateNestedOneWithoutDetailsPaniersInput
   }
 
@@ -41020,9 +41317,11 @@ export namespace Prisma {
     id?: number
     produitId: number
     qtte: number
+    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
+    deviseId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -41385,6 +41684,38 @@ export namespace Prisma {
     data: XOR<CommandeUpdateManyMutationInput, CommandeUncheckedUpdateManyWithoutPanierInput>
   }
 
+  export type DeviseCreateWithoutDetailPanierInput = {
+    nom: string
+    code: string
+    symbole: string
+    tauxDEchange: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    agent: AgentCreateNestedOneWithoutDevisesInput
+    produits?: ProduitCreateNestedManyWithoutDeviseInput
+    paiements?: PaiementCreateNestedManyWithoutDeviseInput
+    caisses?: CaisseCreateNestedManyWithoutDeviseInput
+  }
+
+  export type DeviseUncheckedCreateWithoutDetailPanierInput = {
+    id?: number
+    nom: string
+    code: string
+    symbole: string
+    tauxDEchange: number
+    agentId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    produits?: ProduitUncheckedCreateNestedManyWithoutDeviseInput
+    paiements?: PaiementUncheckedCreateNestedManyWithoutDeviseInput
+    caisses?: CaisseUncheckedCreateNestedManyWithoutDeviseInput
+  }
+
+  export type DeviseCreateOrConnectWithoutDetailPanierInput = {
+    where: DeviseWhereUniqueInput
+    create: XOR<DeviseCreateWithoutDetailPanierInput, DeviseUncheckedCreateWithoutDetailPanierInput>
+  }
+
   export type ProduitCreateWithoutDetailsPaniersInput = {
     designation: string
     prixUnitaire: number
@@ -41443,6 +41774,44 @@ export namespace Prisma {
   export type PanierCreateOrConnectWithoutDetailPaniersInput = {
     where: PanierWhereUniqueInput
     create: XOR<PanierCreateWithoutDetailPaniersInput, PanierUncheckedCreateWithoutDetailPaniersInput>
+  }
+
+  export type DeviseUpsertWithoutDetailPanierInput = {
+    update: XOR<DeviseUpdateWithoutDetailPanierInput, DeviseUncheckedUpdateWithoutDetailPanierInput>
+    create: XOR<DeviseCreateWithoutDetailPanierInput, DeviseUncheckedCreateWithoutDetailPanierInput>
+    where?: DeviseWhereInput
+  }
+
+  export type DeviseUpdateToOneWithWhereWithoutDetailPanierInput = {
+    where?: DeviseWhereInput
+    data: XOR<DeviseUpdateWithoutDetailPanierInput, DeviseUncheckedUpdateWithoutDetailPanierInput>
+  }
+
+  export type DeviseUpdateWithoutDetailPanierInput = {
+    nom?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    agent?: AgentUpdateOneRequiredWithoutDevisesNestedInput
+    produits?: ProduitUpdateManyWithoutDeviseNestedInput
+    paiements?: PaiementUpdateManyWithoutDeviseNestedInput
+    caisses?: CaisseUpdateManyWithoutDeviseNestedInput
+  }
+
+  export type DeviseUncheckedUpdateWithoutDetailPanierInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
+    agentId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    produits?: ProduitUncheckedUpdateManyWithoutDeviseNestedInput
+    paiements?: PaiementUncheckedUpdateManyWithoutDeviseNestedInput
+    caisses?: CaisseUncheckedUpdateManyWithoutDeviseNestedInput
   }
 
   export type ProduitUpsertWithoutDetailsPaniersInput = {
@@ -43154,6 +43523,19 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type DetailPanierCreateManyDeviseInput = {
+    id?: number
+    produitId: number
+    qtte: number
+    modePaiement: $Enums.ModePaiment
+    prixUnitaire: number
+    prixTotalHT: number
+    prixTotalTTC: number
+    panierId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ProduitUpdateWithoutDeviseInput = {
     designation?: StringFieldUpdateOperationsInput | string
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
@@ -43255,6 +43637,44 @@ export namespace Prisma {
     soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     agentId?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DetailPanierUpdateWithoutDeviseInput = {
+    qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    prixUnitaire?: FloatFieldUpdateOperationsInput | number
+    prixTotalHT?: FloatFieldUpdateOperationsInput | number
+    prixTotalTTC?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    produit?: ProduitUpdateOneRequiredWithoutDetailsPaniersNestedInput
+    panier?: PanierUpdateOneRequiredWithoutDetailPaniersNestedInput
+  }
+
+  export type DetailPanierUncheckedUpdateWithoutDeviseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    produitId?: IntFieldUpdateOperationsInput | number
+    qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    prixUnitaire?: FloatFieldUpdateOperationsInput | number
+    prixTotalHT?: FloatFieldUpdateOperationsInput | number
+    prixTotalTTC?: FloatFieldUpdateOperationsInput | number
+    panierId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DetailPanierUncheckedUpdateManyWithoutDeviseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    produitId?: IntFieldUpdateOperationsInput | number
+    qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    prixUnitaire?: FloatFieldUpdateOperationsInput | number
+    prixTotalHT?: FloatFieldUpdateOperationsInput | number
+    prixTotalTTC?: FloatFieldUpdateOperationsInput | number
+    panierId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -43465,6 +43885,7 @@ export namespace Prisma {
     nom: string
     code: string
     symbole: string
+    tauxDEchange: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -43733,11 +44154,13 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     produits?: ProduitUpdateManyWithoutDeviseNestedInput
     paiements?: PaiementUpdateManyWithoutDeviseNestedInput
     caisses?: CaisseUpdateManyWithoutDeviseNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutDeviseNestedInput
   }
 
   export type DeviseUncheckedUpdateWithoutAgentInput = {
@@ -43745,11 +44168,13 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     produits?: ProduitUncheckedUpdateManyWithoutDeviseNestedInput
     paiements?: PaiementUncheckedUpdateManyWithoutDeviseNestedInput
     caisses?: CaisseUncheckedUpdateManyWithoutDeviseNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutDeviseNestedInput
   }
 
   export type DeviseUncheckedUpdateManyWithoutAgentInput = {
@@ -43757,6 +44182,7 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     symbole?: StringFieldUpdateOperationsInput | string
+    tauxDEchange?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44960,31 +45386,37 @@ export namespace Prisma {
   export type DetailPanierCreateManyProduitInput = {
     id?: number
     qtte: number
+    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
+    deviseId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type DetailPanierUpdateWithoutProduitInput = {
     qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    devise?: DeviseUpdateOneRequiredWithoutDetailPanierNestedInput
     panier?: PanierUpdateOneRequiredWithoutDetailPaniersNestedInput
   }
 
   export type DetailPanierUncheckedUpdateWithoutProduitInput = {
     id?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
+    deviseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44992,10 +45424,12 @@ export namespace Prisma {
   export type DetailPanierUncheckedUpdateManyWithoutProduitInput = {
     id?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
+    deviseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -45273,9 +45707,11 @@ export namespace Prisma {
     id?: number
     produitId: number
     qtte: number
+    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
+    deviseId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -45345,11 +45781,13 @@ export namespace Prisma {
 
   export type DetailPanierUpdateWithoutPanierInput = {
     qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    devise?: DeviseUpdateOneRequiredWithoutDetailPanierNestedInput
     produit?: ProduitUpdateOneRequiredWithoutDetailsPaniersNestedInput
   }
 
@@ -45357,9 +45795,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
+    deviseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -45368,9 +45808,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
+    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
+    deviseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

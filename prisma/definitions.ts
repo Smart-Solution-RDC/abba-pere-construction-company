@@ -1,4 +1,4 @@
-import { DetailPanier } from "@/app/generated/prisma"
+import { DetailPanier, ModePaiment } from "@/app/generated/prisma"
 
 export interface AgentRouteParams { 
     params: {
@@ -93,7 +93,7 @@ export type tableType =
     'caisse' | 'client' | 'produit' | 
     'contact' | 'mouvementCaisse' | 'fournisseur' | 
     'panier' | 'agent' | 'achat' | 'vente' | 
-    'commande' | 'clotureCaisse'
+    'commande' | 'clotureCaisse' | 'detailPanier' | 'devise'
 
 export type Type = 'inc' | 'dec'
 
@@ -108,11 +108,19 @@ export interface AchatRouteParams {
     }
 }
 
+export interface ProduitsDisponible { 
+    designation: string;
+    qtteDisponible: number; 
+    prixUnitaire: number 
+}
+
 export type MoyenPaiment = 'cache' | 'banque' | 'mobile' | 'cheque' | 'autres'
 
 // Changer fournisseur a fourniture
 export type CategorieMouvement = 'ACHAT' | 'VENTE' | 'COMMANDE' | 'FOURNITUR' | 'SALAIRE' | 'LOYER' | 'TAXE' | 'AUTRES'
 
+export type ModePaiement = 'CACHE' | 'BANQUE' | 'MOBILE'
+ 
 export interface AchatRouteParams {
     caisseId: string
     moyen_paiement: MoyenPaiment
@@ -126,6 +134,7 @@ export interface AchatRouteParams {
 
 export interface VenteRouteParams {
     params: {
+        agentId: string, 
         panierId: string, 
         venteId: string
     }
@@ -176,4 +185,7 @@ export interface ClotureParams {
     }
 }
 
-
+export interface PaiementForm {
+    montant: number,
+    modePaiement: ModePaiment
+} 

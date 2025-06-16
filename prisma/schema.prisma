@@ -19,18 +19,19 @@ model Teneur {
 }
 
 model Devise {
-  id           Int        @id @default(autoincrement())
-  nom          String     @unique
-  code         String     @unique @db.VarChar(5)
-  symbole      String     @db.VarChar(5)
+  id           Int            @id @default(autoincrement())
+  nom          String         @unique
+  code         String         @unique @db.VarChar(5)
+  symbole      String         @db.VarChar(5)
   tauxDEchange Int
   agentId      Int
-  agent        Agent      @relation(fields: [agentId], references: [id])
+  agent        Agent          @relation(fields: [agentId], references: [id])
   produits     Produit[]
   paiements    Paiement[]
   caisses      Caisse[]
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  DetailPanier DetailPanier[]
 }
 
 enum Role {
@@ -278,17 +279,20 @@ model Panier {
 }
 
 model DetailPanier {
-  id           Int      @id @default(autoincrement())
+  id           Int         @id @default(autoincrement())
   produitId    Int
   qtte         Int
+  modePaiement ModePaiment
   prixUnitaire Float
   prixTotalHT  Float
   prixTotalTTC Float
   panierId     Int
-  produit      Produit  @relation(fields: [produitId], references: [id])
-  panier       Panier   @relation(fields: [panierId], references: [id])
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  deviseId     Int
+  devise       Devise      @relation(fields: [deviseId], references: [id])
+  produit      Produit     @relation(fields: [produitId], references: [id])
+  panier       Panier      @relation(fields: [panierId], references: [id])
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 enum StatutAchat {

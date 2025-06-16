@@ -133,6 +133,7 @@ exports.Prisma.DeviseScalarFieldEnum = {
   nom: 'nom',
   code: 'code',
   symbole: 'symbole',
+  tauxDEchange: 'tauxDEchange',
   agentId: 'agentId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -276,10 +277,12 @@ exports.Prisma.DetailPanierScalarFieldEnum = {
   id: 'id',
   produitId: 'produitId',
   qtte: 'qtte',
+  modePaiement: 'modePaiement',
   prixUnitaire: 'prixUnitaire',
   prixTotalHT: 'prixTotalHT',
   prixTotalTTC: 'prixTotalTTC',
   panierId: 'panierId',
+  deviseId: 'deviseId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

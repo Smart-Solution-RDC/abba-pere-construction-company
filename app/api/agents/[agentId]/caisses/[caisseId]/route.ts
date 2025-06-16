@@ -20,11 +20,31 @@ export async function GET (req: Request, { params }: CaisseRouteParams ) {
                 select: {
                     symbole: true
                 }
-            }
+            },
         }
+    });
+
+    const modePaiement = await prisma.paiement.groupBy({
+        where: {caisseId: parseInt(caisseId)},
+        by: ['modePaiement'],
+        _sum: {
+            montant: true
+        }
+        // paiements: {
+        //     select: {
+        //         id: true,
+        //         montant: true,
+        //         modePaiement: true
+        //     },
+        //     take: 5
+        // }
     });
 
     if (!caisse) return new Response("Caisse not Found", { status: 404 });
 
-    return new Response(JSON.stringify(caisse), { status: 201 });
+    return new Response(JSON.stringify({
+        caisse: caisse,
+        modePaiement: modePaiement,
+    }), { status: 201 });
 } 
+

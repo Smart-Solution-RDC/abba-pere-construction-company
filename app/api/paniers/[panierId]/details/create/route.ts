@@ -8,6 +8,12 @@ export async function POST(request: NextRequest, { params }: PanierRouteParams) 
     const data: DetailPanierForm = await request.json();
 
     const produits = data.produits;
+
+    const panier = await prisma.panier.findUnique({
+        where: {id: parseInt(panierId)}
+    });
+
+    if(!panier) return new Response("Panier Not Found", { status: 404 });
     
     for (let i=0; i < produits.length; i++) {
         produits[i].prixTotalHT = produits[i].prixUnitaire * produits[i].qtte;
@@ -20,9 +26,9 @@ export async function POST(request: NextRequest, { params }: PanierRouteParams) 
             data: produits           
         });
 
-        return new Response("Detail Panier Added!", { status: 201 });
+        return new Response(JSON.stringify("Detail Panier Added!"), { status: 201 });
     } catch (error) {
-        return new Response("Invalid Form", { status: 201 });
+        return new Response("Invalid Formdd", { status: 201 });
     }
 }
 
