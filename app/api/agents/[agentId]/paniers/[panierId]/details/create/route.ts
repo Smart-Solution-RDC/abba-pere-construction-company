@@ -30,27 +30,22 @@ export async function POST(request: NextRequest, { params }: PanierRouteParams) 
     for (let i=0; i < form.length; i++) {
         let field = form[i];
         field.prixUnitaire = await PrixUnitaireSystem(field.produitId, field.prixUnitaire);
-        // field.prixTotalHT = devises[i].id
+        // field.modePaiement = GetModePaiement()
+        if (field.deviseId == devises[i].id) {
+            field.prixTotalHT = field.prixUnitaire * field.qtte
+        } else {
+            field.prixTotalHT = (field.prixUnitaire * field.qtte) * devises[i].tauxDEchange
+        }
         field.prixTotalTTC = field.prixTotalHT * 0.16
-
-        // if (field.deviseId == devises[i].id) {
-        //     field.prixTotalHT = field.prixUnitaire * field.qtte;
-        // }
-
-        // 
-        //  else {
-        //     field.prixTotalHT = (field.prixUnitaire * field.qtte) * devises[i].tauxDEchange;
-        // }
-    }   
-        
+    }           
 
     try {
         // await prisma.detailPanier.createMany({
-        //     data: produits           
+        //     data: form
         // });
 
         // "Detail Panier Added!"
-        return new Response(JSON.stringify(produits), { status: 201 });
+        return new Response(JSON.stringify(form), { status: 201 });
     } catch (error) {
         return new Response("Invalid Form", { status: 201 });
     }
