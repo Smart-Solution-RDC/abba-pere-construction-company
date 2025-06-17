@@ -1,19 +1,17 @@
 export const fetchUsers = async () => {
     try {
-        const res = await fetch(`http://localhost:3000/api/utilisateurs`, {
+        const result = await fetch(`http://localhost:3000/api/agents`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-        const response = await res.json();
-        return response;
+        return await result.json();
     } catch (error) {
         console.log(error);
         return [];
     }
 }
-
 
 export const uniqueUser = async (id: number) => {
     try {

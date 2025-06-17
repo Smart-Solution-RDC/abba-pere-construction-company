@@ -228,10 +228,14 @@ exports.Prisma.ProduitScalarFieldEnum = {
 
 exports.Prisma.PaiementScalarFieldEnum = {
   id: 'id',
-  montant: 'montant',
+  totalHT: 'totalHT',
+  totalTTC: 'totalTTC',
   modePaiement: 'modePaiement',
   deviseId: 'deviseId',
   caisseId: 'caisseId',
+  venteId: 'venteId',
+  achatId: 'achatId',
+  commandeId: 'commandeId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -251,15 +255,12 @@ exports.Prisma.CaisseScalarFieldEnum = {
 exports.Prisma.VenteScalarFieldEnum = {
   id: 'id',
   statut: 'statut',
-  totalTTC: 'totalTTC',
-  totalHT: 'totalHT',
   typeAcheteur: 'typeAcheteur',
   clientId: 'clientId',
   agentId: 'agentId',
   fournisseurId: 'fournisseurId',
-  paiementId: 'paiementId',
   panierId: 'panierId',
-  creerPar: 'creerPar',
+  enregistrerPar: 'enregistrerPar',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -293,7 +294,6 @@ exports.Prisma.AchatScalarFieldEnum = {
   panierId: 'panierId',
   fournisseurId: 'fournisseurId',
   agentId: 'agentId',
-  paiementId: 'paiementId',
   clientId: 'clientId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -325,10 +325,10 @@ exports.Prisma.CommandeScalarFieldEnum = {
   nom: 'nom',
   tel: 'tel',
   type_client: 'type_client',
-  paiementId: 'paiementId',
   adresseId: 'adresseId',
   contactId: 'contactId',
   fournisseurId: 'fournisseurId',
+  commandeId: 'commandeId',
   notes: 'notes',
   dateLivraisonEffective: 'dateLivraisonEffective',
   adresseLivraison: 'adresseLivraison',

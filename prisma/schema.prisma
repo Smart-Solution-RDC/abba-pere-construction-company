@@ -191,15 +191,19 @@ enum ModePaiment {
 
 model Paiement {
   id           Int         @id @default(autoincrement())
-  montant      Float
+  totalHT      Float?
+  totalTTC     Float?
   modePaiement ModePaiment
   deviseId     Int
   caisseId     Int
+  venteId      Int?
+  achatId      Int?
+  commandeId   Int?
+  vente        Vente?      @relation(fields: [venteId], references: [id])
+  achat        Achat?      @relation(fields: [achatId], references: [id])
+  commande     Commande?   @relation(fields: [commandeId], references: [id])
   caisse       Caisse      @relation(fields: [caisseId], references: [id])
   devise       Devise      @relation(fields: [deviseId], references: [id])
-  achats       Achat[]
-  commandes    Commande[]
-  ventes       Vente[]
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
 }
@@ -236,24 +240,21 @@ enum TypeClient {
 }
 
 model Vente {
-  id            Int          @id @default(autoincrement())
-  statut        StatutVente  @default(CONFIRME)
-  totalTTC      Float
-  totalHT       Float
-  typeAcheteur  TypeClient
-  clientId      Int?
-  agentId       Int
-  fournisseurId Int?
-  paiementId    Int
-  panierId      Int
-  creerPar      String?
-  paiement      Paiement?    @relation(fields: [paiementId], references: [id])
-  panier        Panier       @relation(fields: [panierId], references: [id])
-  agent         Agent        @relation(fields: [agentId], references: [id])
-  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
-  client        Client?      @relation(fields: [clientId], references: [id])
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  id             Int          @id @default(autoincrement())
+  statut         StatutVente  @default(CONFIRME)
+  typeAcheteur   TypeClient
+  clientId       Int?
+  agentId        Int?
+  fournisseurId  Int?
+  panierId       Int
+  enregistrerPar String?
+  panier         Panier       @relation(fields: [panierId], references: [id])
+  agent          Agent?       @relation(fields: [agentId], references: [id])
+  fournisseur    Fournisseur? @relation(fields: [fournisseurId], references: [id])
+  client         Client?      @relation(fields: [clientId], references: [id])
+  paiements      Paiement[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }
 
 enum statutPanier {
@@ -307,13 +308,12 @@ model Achat {
   panierId      Int
   fournisseurId Int
   agentId       Int
-  paiementId    Int
   clientId      Int?
   panier        Panier      @relation(fields: [panierId], references: [id])
   fournisseur   Fournisseur @relation(fields: [fournisseurId], references: [id])
   agent         Agent       @relation(fields: [agentId], references: [id])
-  paiement      Paiement    @relation(fields: [paiementId], references: [id])
   Client        Client?     @relation(fields: [clientId], references: [id])
+  paiements     Paiement[]
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 }
@@ -362,17 +362,17 @@ model Commande {
   nom                    String?
   tel                    String?
   type_client            TypeClient     @default(ORDINAIRE)
-  paiementId             Int
   adresseId              Int?
   contactId              Int?
   fournisseurId          Int?
+  commandeId             Int?
   notes                  String?        @db.Text
   dateLivraisonEffective DateTime?
   adresseLivraison       String?        @db.VarChar(255)
   enregistrerParId       Int?
+  Paiement               Paiement[]
   statut                 StatutCommande @default(EN_ATTENTE_PAIEMENT) // Statut de la commande
   panier                 Panier         @relation(fields: [panierId], references: [id])
-  paiement               Paiement       @relation(fields: [paiementId], references: [id])
   fournisseur            Fournisseur?   @relation(fields: [fournisseurId], references: [id])
   adresse                Adresse?       @relation(fields: [adresseId], references: [id])
   contact                Contact?       @relation(fields: [contactId], references: [id])

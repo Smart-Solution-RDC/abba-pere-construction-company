@@ -3,14 +3,23 @@ import { fetchUsers } from "@/actions/users";
 import { User } from "@/utils/definitions";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Agent } from "../generated/prisma";
 
 export default function Page() {
   
-  type Users = User[];
+  type Users = Agent[];
   const [users, setUsers] = useState<Users>([]);
 
   const getUsers = async () => {
-    setUsers(await fetchUsers());
+    const result = await fetchUsers();
+    // if (result instanceof Response) {
+      // const data = await result.json();
+    console.log(result);
+
+      // console.log(data);
+    // } else {
+      // setUsers(result);
+    // }
   };
 
   useEffect(() => {
