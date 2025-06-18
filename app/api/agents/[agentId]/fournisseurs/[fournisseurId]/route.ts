@@ -1,16 +1,22 @@
 import { prisma } from "@/lib/prisma";
-import { AgentRouteParams } from "@/prisma/definitions";
+import { Pagination } from "@/prisma/utils";
+import { NextRequest } from "next/server";
 
-export async function GET(req: Request, { params }: AgentRouteParams) {
-    const { agentId } = await params; 
+interface RoutePage {
+    params: {
+        fournisseurId: string
+    }
+}
 
-    const agent = await prisma.agent.findUnique({
-        where: { id: parseInt(agentId) },
+export async function GET(request: NextRequest, { params }: RoutePage) {
+    const { fournisseurId } = await params;
+    const fournisseur = await prisma.fournisseur.findUnique({
+        where: { id: parseInt(fournisseurId) },
         select: {
-            nom_complet: true,
+            id: true,
+            nom: true,
             email: true,
-            sexe: true,
-            picture: true,
+            codePostale: true,
             adresses: {
                 select: {
                     ville: true,
@@ -56,14 +62,13 @@ export async function GET(req: Request, { params }: AgentRouteParams) {
                     }
                 }
             },
-            // commandes: true // Paiement...
+            commandes: true // Paiement...
         }
     });
-
-    if (!agent) return new Response("Agent Not Found", { status: 404 });
-
-    return new Response(JSON.stringify(agent), { status: 201 });
+    
+    return new Response(JSON.stringify(fournisseur), { status: 201 });
 }
+
 
 
 

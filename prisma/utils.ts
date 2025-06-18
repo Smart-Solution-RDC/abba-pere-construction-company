@@ -31,10 +31,26 @@ export async function GetModePaiement(modePaiement: ModePaiement) {
 }
 
 export async function FindVente(venteId: number) {
-    return await prisma.vente.findFirst({
+    // Prisma's select does not support renaming keys directly.
+    // You need to rename keys after fetching the data.
+    const vente = await prisma.vente.findFirst({
         where: { panierId: venteId },
-        select: { id: true, paiementId: true }
+        select: {
+            id: true,
+            paiements: {
+                select: {
+                    id: true
+                }
+            }
+        }
     });
+
+    // Example: Rename 'paiements' to 'payments' in the result
+    // if (vente) {
+    //     const { paiements, ...rest } = vente;
+    //     return { ...rest, payments: paiements };
+    // }
+    return vente;
 }
 
 export async function UpdateDetailPanier(detailId: number, form: DetailPanier) {
@@ -45,7 +61,7 @@ export async function UpdateDetailPanier(detailId: number, form: DetailPanier) {
     });
 }
 
-export async function UpdateProduit (produitId:number, type: Type, difference: number) {
+export async function VariationProduitVente (produitId:number, type: Type, difference: number) {
     await prisma.produit.update({
         where: {id: produitId}, 
         data: {qtteDisponible: type == 'dec' ? { decrement: difference } : { increment: difference }}
@@ -62,12 +78,53 @@ export async function UpdateVente(venteId: number, type: Type, totalHT: number, 
     });
 }
 
-export async function UpdatePaiement(paiementId: number, type: Type, montant: number) {
-    return await prisma.paiement.update({
-        where: { id: paiementId },
-        data: { montant: type == 'dec' ? { decrement: montant} : { decrement: montant} },
-        select: { caisseId: true }
+type id = number
+export async function RetraitPaiement(vente: any, data: any) {
+    let retraitPaiement = null;
+    let getPaiement = null;
+    let getProduit = null;
+
+    let totalHT = 0;
+    let totalTTC = 0;
+    getPaiement = await prisma.paiement.findMany({
+        where: { id: { in: vente.paiements.map((item: any) => parseInt(item.id)) } },
+        select: { id: true, deviseId: true, caisseId: true }
     });
+    
+    // la conversion
+    getProduit = await prisma.produit.findUnique({
+        where: { id: data.produitId },
+        select: { deviseId: true, devise: {
+            select: {
+                id: true,
+                nom: true,
+                tauxDEchange: true
+            }
+        } }
+    });
+
+    totalHT = data.montantRetrait;
+    totalTTC = totalHT * 0.16;
+    if (getProduit && getPaiement[0]?.deviseId !== getProduit?.deviseId) {
+        totalHT = data.montantRetrait * getProduit.devise.tauxDEchange;
+        totalTTC = totalHT * 0.16;
+    }
+
+    retraitPaiement = await prisma.paiement.updateMany({
+        where: { 
+            venteId: vente.id,
+            id: { in: vente.paiements.map((item: any) => item.id )},
+            deviseId: { in: getProduit ? (Array.isArray(getProduit) ? getProduit.map(item => item.deviseId) : [getProduit.deviseId]) : [] },
+            caisseId: { in: getPaiement.map(item => item.caisseId )},
+            },
+        data: { 
+            modePaiement: data.modePaiement,
+            totalHT: { decrement: totalHT },
+            totalTTC: { decrement: totalTTC } 
+        },  // select: { deviseId: true, caisseId: true }
+    });
+    
+    return retraitPaiement;
 }
 
 export async function UpdateCaisses(caisseId: number, type: Type, montant: number) {

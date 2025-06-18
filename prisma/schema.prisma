@@ -94,76 +94,76 @@ model Agent {
 }
 
 model Client {
-  id           Int           @id @default(autoincrement())
-  email        String        @unique
-  nom          String
-  postnom      String?
-  nom_complet  String?
-  sexe         Sexe?
-  picture      String?
-  adresses     Adresse[]
-  contacts     Contact[]
-  ventes       Vente[]
-  achats       Achat[]
-  paniers      Panier[]
-  reservations Reservation[]
-  commandes    Commande[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  id          Int        @id @default(autoincrement())
+  email       String     @unique
+  nom         String
+  postnom     String?
+  nom_complet String?
+  sexe        Sexe?
+  picture     String?
+  adresses    Adresse[]
+  contacts    Contact[]
+  ventes      Vente[]
+  achats      Achat[]
+  paniers     Panier[]
+  // reservations Reservation[]
+  commandes   Commande[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }
 
 model Adresse {
-  id            Int           @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   ville         String?
   adresse       String
-  isActive      Boolean       @default(true)
+  isActive      Boolean      @default(true)
   agentId       Int?
   fournisseurId Int?
   clientId      Int?
   entrepriseId  Int?
-  agent         Agent?        @relation(fields: [agentId], references: [id])
-  entreprise    Entreprise?   @relation(fields: [entrepriseId], references: [id])
-  fournisseur   Fournisseur?  @relation(fields: [fournisseurId], references: [id])
-  client        Client?       @relation(fields: [clientId], references: [id])
-  reservations  Reservation[]
+  agent         Agent?       @relation(fields: [agentId], references: [id])
+  entreprise    Entreprise?  @relation(fields: [entrepriseId], references: [id])
+  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
+  client        Client?      @relation(fields: [clientId], references: [id])
+  // reservations  Reservation[]
   commandes     Commande[]
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 }
 
 model Contact {
-  id            Int           @id @default(autoincrement())
-  tel           String        @unique
-  isActive      Boolean       @default(true)
+  id            Int          @id @default(autoincrement())
+  tel           String       @unique
+  isActive      Boolean      @default(true)
   agentId       Int?
   fournisseurId Int?
   clientId      Int?
   entrepriseId  Int?
-  entreprise    Entreprise?   @relation(fields: [entrepriseId], references: [id])
-  client        Client?       @relation(fields: [clientId], references: [id])
-  agent         Agent?        @relation(fields: [agentId], references: [id])
-  fournisseur   Fournisseur?  @relation(fields: [fournisseurId], references: [id])
-  reservations  Reservation[]
+  entreprise    Entreprise?  @relation(fields: [entrepriseId], references: [id])
+  client        Client?      @relation(fields: [clientId], references: [id])
+  agent         Agent?       @relation(fields: [agentId], references: [id])
+  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
+  // reservations  Reservation[]
   commandes     Commande[]
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 }
 
 model Fournisseur {
-  id           Int           @id @default(autoincrement())
-  nom          String        @unique
-  email        String        @unique
-  codePostale  String?
-  agentId      Int
-  agent        Agent         @relation(fields: [agentId], references: [id])
-  ventes       Vente[]
-  achats       Achat[]
-  adresses     Adresse[]
-  contacts     Contact[]
-  reservations Reservation[]
-  commandes    Commande[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  id          Int        @id @default(autoincrement())
+  nom         String     @unique
+  email       String     @unique
+  codePostale String?
+  agentId     Int
+  agent       Agent      @relation(fields: [agentId], references: [id])
+  ventes      Vente[]
+  achats      Achat[]
+  adresses    Adresse[]
+  contacts    Contact[]
+  // reservations Reservation[]
+  commandes   Commande[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }
 
 model Produit {
@@ -273,7 +273,7 @@ model Panier {
   detailPaniers DetailPanier[]
   achats        Achat[]
   ventes        Vente[]
-  reservations  Reservation[]
+  // reservations  Reservation[]
   commandes     Commande[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
@@ -318,36 +318,36 @@ model Achat {
   updatedAt     DateTime    @updatedAt
 }
 
-enum StatutReservation {
-  EN_ATTENTE
-  ANNULEE
-  REJETEE
-  CONVERTIE
-}
+// enum StatutReservation {
+//   EN_ATTENTE
+//   ANNULEE
+//   REJETEE
+//   CONVERTIE
+// }
 
-model Reservation {
-  id                     Int               @id @default(autoincrement())
-  dateLivraisonSouhaitee DateTime
-  adresseLivraison       String?           @db.VarChar(255)
-  statut                 StatutReservation @default(EN_ATTENTE)
-  notes                  String?           @db.Text
-  typeClient             TypeClient        @default(ORDINAIRE)
-  clientId               Int?
-  panierId               Int
-  nom                    String?
-  tel                    String?
-  adresseId              Int?
-  contactId              Int?
-  enregistrerParId       Int?
-  fournisseurId          Int?
-  panier                 Panier            @relation(fields: [panierId], references: [id])
-  fournisseur            Fournisseur?      @relation(fields: [fournisseurId], references: [id])
-  adresse                Adresse?          @relation(fields: [adresseId], references: [id])
-  contact                Contact?          @relation(fields: [contactId], references: [id])
-  Client                 Client?           @relation(fields: [clientId], references: [id])
-  createdAt              DateTime          @default(now())
-  updatedAt              DateTime          @updatedAt
-}
+// model Reservation {
+//   id                     Int               @id @default(autoincrement())
+//   dateLivraisonSouhaitee DateTime
+//   adresseLivraison       String?           @db.VarChar(255)
+//   statut                 StatutReservation @default(EN_ATTENTE)
+//   notes                  String?           @db.Text
+//   typeClient             TypeClient        @default(ORDINAIRE)
+//   clientId               Int?
+//   panierId               Int
+//   nom                    String?
+//   tel                    String?
+//   adresseId              Int?
+//   contactId              Int?
+//   enregistrerParId       Int?
+//   fournisseurId          Int?
+//   panier                 Panier            @relation(fields: [panierId], references: [id])
+//   fournisseur            Fournisseur?      @relation(fields: [fournisseurId], references: [id])
+//   adresse                Adresse?          @relation(fields: [adresseId], references: [id])
+//   contact                Contact?          @relation(fields: [contactId], references: [id])
+//   Client                 Client?           @relation(fields: [clientId], references: [id])
+//   createdAt              DateTime          @default(now())
+//   updatedAt              DateTime          @updatedAt
+// }
 
 enum StatutCommande {
   EN_ATTENTE_PAIEMENT

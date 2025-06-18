@@ -17,10 +17,10 @@ export async function POST(request: Request, { params }: RouteParams) {
     if (!agent) return new Response("Agent Not Found", { status: 404 });
 
     try {
-        await prisma.client.create({
+        const client = await prisma.client.create({
             data: data
         });
-        return new Response(JSON.stringify(agent), { status: 201 });   
+        return new Response(JSON.stringify(client), { status: 201 });   
     } catch (error) {
         return new Response("Invalid Form", { status: 201 });   
     }
