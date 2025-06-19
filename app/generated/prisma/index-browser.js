@@ -294,26 +294,6 @@ exports.Prisma.AchatScalarFieldEnum = {
   panierId: 'panierId',
   fournisseurId: 'fournisseurId',
   agentId: 'agentId',
-  clientId: 'clientId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.ReservationScalarFieldEnum = {
-  id: 'id',
-  dateLivraisonSouhaitee: 'dateLivraisonSouhaitee',
-  adresseLivraison: 'adresseLivraison',
-  statut: 'statut',
-  notes: 'notes',
-  typeClient: 'typeClient',
-  clientId: 'clientId',
-  panierId: 'panierId',
-  nom: 'nom',
-  tel: 'tel',
-  adresseId: 'adresseId',
-  contactId: 'contactId',
-  enregistrerParId: 'enregistrerParId',
-  fournisseurId: 'fournisseurId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -321,19 +301,16 @@ exports.Prisma.ReservationScalarFieldEnum = {
 exports.Prisma.CommandeScalarFieldEnum = {
   id: 'id',
   panierId: 'panierId',
-  clientId: 'clientId',
   nom: 'nom',
   tel: 'tel',
-  type_client: 'type_client',
-  adresseId: 'adresseId',
-  contactId: 'contactId',
-  fournisseurId: 'fournisseurId',
-  commandeId: 'commandeId',
-  notes: 'notes',
-  dateLivraisonEffective: 'dateLivraisonEffective',
-  adresseLivraison: 'adresseLivraison',
-  enregistrerParId: 'enregistrerParId',
   statut: 'statut',
+  dateLivraison: 'dateLivraison',
+  adresseLivraison: 'adresseLivraison',
+  notes: 'notes',
+  clientId: 'clientId',
+  fournisseurId: 'fournisseurId',
+  agentId: 'agentId',
+  enregistrerPar: 'enregistrerPar',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -431,15 +408,9 @@ exports.StatutAchat = exports.$Enums.StatutAchat = {
   ANNULE: 'ANNULE'
 };
 
-exports.StatutReservation = exports.$Enums.StatutReservation = {
-  EN_ATTENTE: 'EN_ATTENTE',
-  ANNULEE: 'ANNULEE',
-  REJETEE: 'REJETEE',
-  CONVERTIE: 'CONVERTIE'
-};
-
 exports.StatutCommande = exports.$Enums.StatutCommande = {
   EN_ATTENTE_PAIEMENT: 'EN_ATTENTE_PAIEMENT',
+  EN_COURS: 'EN_COURS',
   LIVREE: 'LIVREE',
   ANNULEE: 'ANNULEE'
 };
@@ -477,7 +448,6 @@ exports.Prisma.ModelName = {
   Panier: 'Panier',
   DetailPanier: 'DetailPanier',
   Achat: 'Achat',
-  Reservation: 'Reservation',
   Commande: 'Commande',
   ClotureCaisse: 'ClotureCaisse',
   MouvementCaisse: 'MouvementCaisse'

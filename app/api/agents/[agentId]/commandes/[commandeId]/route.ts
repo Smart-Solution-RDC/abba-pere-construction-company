@@ -1,12 +1,19 @@
-import { AgentRouteParams } from "@/prisma/definitions";
 import { Pagination } from "@/prisma/utils";
 import { NextRequest } from "next/server";
 
-export async function GET(request: NextRequest, { params }: AgentRouteParams) {
-    const { agentId } = await params;
+interface RouteParams {
+    params: {
+        agentId: string,
+        commandeId: string
+    }
+}
+
+export async function GET(request: NextRequest, { params }: RouteParams) {
+    const { agentId, commandeId } = await params;
 
     const condition = {
-        agentId: parseInt(agentId)
+        agentId: parseInt(agentId),
+        commandeId: parseInt(commandeId)
     }
 
     const selection = {
@@ -14,18 +21,6 @@ export async function GET(request: NextRequest, { params }: AgentRouteParams) {
         nom: true,
         statut: true,
         createdAt: true,
-        // paiement: {
-        //     select: {
-        //         totalHT: true,
-        //         totalTTC: true,
-        //         modePaiement: true,
-        //         devise: {
-        //             select: {
-        //                 symbole: true
-        //             }
-        //         }
-        //     }
-        // },
         client: {
             select: {
                 picture: true,

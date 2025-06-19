@@ -23,10 +23,7 @@ CREATE TYPE "statutPanier" AS ENUM ('EN_COURS', 'VALIDE', 'ANNULE');
 CREATE TYPE "StatutAchat" AS ENUM ('EN_COURS', 'TERMINE', 'ANNULE');
 
 -- CreateEnum
-CREATE TYPE "StatutReservation" AS ENUM ('EN_ATTENTE', 'ANNULEE', 'REJETEE', 'CONVERTIE');
-
--- CreateEnum
-CREATE TYPE "StatutCommande" AS ENUM ('EN_ATTENTE_PAIEMENT', 'LIVREE', 'ANNULEE');
+CREATE TYPE "StatutCommande" AS ENUM ('EN_ATTENTE_PAIEMENT', 'EN_COURS', 'LIVREE', 'ANNULEE');
 
 -- CreateEnum
 CREATE TYPE "TypeMouvementCaisse" AS ENUM ('ENTREE', 'SORTIE');
@@ -173,7 +170,8 @@ CREATE TABLE "Produit" (
 -- CreateTable
 CREATE TABLE "Paiement" (
     "id" SERIAL NOT NULL,
-    "montant" DOUBLE PRECISION NOT NULL,
+    "totalHT" DOUBLE PRECISION,
+    "totalTTC" DOUBLE PRECISION,
     "modePaiement" "ModePaiment" NOT NULL,
     "deviseId" INTEGER NOT NULL,
     "caisseId" INTEGER NOT NULL,
@@ -205,8 +203,6 @@ CREATE TABLE "Caisse" (
 CREATE TABLE "Vente" (
     "id" SERIAL NOT NULL,
     "statut" "StatutVente" NOT NULL DEFAULT 'CONFIRME',
-    "totalTTC" DOUBLE PRECISION NOT NULL,
-    "totalHT" DOUBLE PRECISION NOT NULL,
     "typeAcheteur" "TypeClient" NOT NULL,
     "clientId" INTEGER,
     "agentId" INTEGER,
@@ -253,9 +249,8 @@ CREATE TABLE "Achat" (
     "id" SERIAL NOT NULL,
     "statut" "StatutAchat" NOT NULL DEFAULT 'EN_COURS',
     "panierId" INTEGER NOT NULL,
-    "fournisseurId" INTEGER NOT NULL,
+    "fournisseurId" INTEGER,
     "agentId" INTEGER NOT NULL,
-    "clientId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -263,44 +258,19 @@ CREATE TABLE "Achat" (
 );
 
 -- CreateTable
-CREATE TABLE "Reservation" (
-    "id" SERIAL NOT NULL,
-    "dateLivraisonSouhaitee" TIMESTAMP(3) NOT NULL,
-    "adresseLivraison" VARCHAR(255),
-    "statut" "StatutReservation" NOT NULL DEFAULT 'EN_ATTENTE',
-    "notes" TEXT,
-    "typeClient" "TypeClient" NOT NULL DEFAULT 'ORDINAIRE',
-    "clientId" INTEGER,
-    "panierId" INTEGER NOT NULL,
-    "nom" TEXT,
-    "tel" TEXT,
-    "adresseId" INTEGER,
-    "contactId" INTEGER,
-    "enregistrerParId" INTEGER,
-    "fournisseurId" INTEGER,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "Reservation_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Commande" (
     "id" SERIAL NOT NULL,
     "panierId" INTEGER NOT NULL,
-    "clientId" INTEGER,
     "nom" TEXT,
     "tel" TEXT,
-    "type_client" "TypeClient" NOT NULL DEFAULT 'ORDINAIRE',
-    "adresseId" INTEGER,
-    "contactId" INTEGER,
-    "fournisseurId" INTEGER,
-    "commandeId" INTEGER,
-    "notes" TEXT,
-    "dateLivraisonEffective" TIMESTAMP(3),
-    "adresseLivraison" VARCHAR(255),
-    "enregistrerParId" INTEGER,
     "statut" "StatutCommande" NOT NULL DEFAULT 'EN_ATTENTE_PAIEMENT',
+    "dateLivraison" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "adresseLivraison" VARCHAR(255),
+    "notes" TEXT,
+    "clientId" INTEGER,
+    "fournisseurId" INTEGER,
+    "agentId" INTEGER,
+    "enregistrerPar" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -476,28 +446,10 @@ ALTER TABLE "DetailPanier" ADD CONSTRAINT "DetailPanier_panierId_fkey" FOREIGN K
 ALTER TABLE "Achat" ADD CONSTRAINT "Achat_panierId_fkey" FOREIGN KEY ("panierId") REFERENCES "Panier"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Achat" ADD CONSTRAINT "Achat_fournisseurId_fkey" FOREIGN KEY ("fournisseurId") REFERENCES "Fournisseur"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Achat" ADD CONSTRAINT "Achat_fournisseurId_fkey" FOREIGN KEY ("fournisseurId") REFERENCES "Fournisseur"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Achat" ADD CONSTRAINT "Achat_agentId_fkey" FOREIGN KEY ("agentId") REFERENCES "Agent"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Achat" ADD CONSTRAINT "Achat_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "Client"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_panierId_fkey" FOREIGN KEY ("panierId") REFERENCES "Panier"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_fournisseurId_fkey" FOREIGN KEY ("fournisseurId") REFERENCES "Fournisseur"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_adresseId_fkey" FOREIGN KEY ("adresseId") REFERENCES "Adresse"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_contactId_fkey" FOREIGN KEY ("contactId") REFERENCES "Contact"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "Client"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Commande" ADD CONSTRAINT "Commande_panierId_fkey" FOREIGN KEY ("panierId") REFERENCES "Panier"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -506,10 +458,7 @@ ALTER TABLE "Commande" ADD CONSTRAINT "Commande_panierId_fkey" FOREIGN KEY ("pan
 ALTER TABLE "Commande" ADD CONSTRAINT "Commande_fournisseurId_fkey" FOREIGN KEY ("fournisseurId") REFERENCES "Fournisseur"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Commande" ADD CONSTRAINT "Commande_adresseId_fkey" FOREIGN KEY ("adresseId") REFERENCES "Adresse"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Commande" ADD CONSTRAINT "Commande_contactId_fkey" FOREIGN KEY ("contactId") REFERENCES "Contact"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Commande" ADD CONSTRAINT "Commande_agentId_fkey" FOREIGN KEY ("agentId") REFERENCES "Agent"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Commande" ADD CONSTRAINT "Commande_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "Client"("id") ON DELETE SET NULL ON UPDATE CASCADE;

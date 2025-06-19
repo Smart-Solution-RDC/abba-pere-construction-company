@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { PanierRouteParams } from "@/prisma/definitions";
-import { CaisseIncrement, checkTable, DestockageVente, GetDetailPanier, getNomComplet, GetProduit, Paiement, UpdateCaisse, Vente } from "@/prisma/utils";
+import { checkTable, GetDetailPanier, GetProduit, Paiement, VariationCaisse, VariationStockage, Vente } from "@/prisma/utils";
 import { NextRequest } from "next/server";
 
 
@@ -32,19 +32,22 @@ export async function POST(request: NextRequest, { params }: PanierRouteParams) 
                         }
                     });
 
-                    await prisma.contact.create({
-                        data: {
-                            tel: form.client.tel,
-                            clientId: nouveauClient.id
-                        }
-                    });
+                    if (nouveauClient) {
+                        await prisma.contact.create({
+                            data: {
+                                tel: form.client.tel,
+                                clientId: nouveauClient.id
+                            }
+                        });
 
-                    await prisma.adresse.create({
-                        data: {
-                            adresse: form.client.adresse,
-                            clientId: nouveauClient.id
-                        }
-                    });
+                        await prisma.adresse.create({
+                            data: {
+                                adresse: form.client.adresse,
+                                clientId: nouveauClient.id
+                            }
+                        });
+                    }
+                    
                 } catch (error) {
                     return new Response("Formulaire Client Invalide", { status : 404 });
                 }
@@ -55,10 +58,10 @@ export async function POST(request: NextRequest, { params }: PanierRouteParams) 
                 panierId: parseInt(panierId)
             };
 
-            const destockage = await DestockageVente(DetailsDuPanier);
             const vente = await Vente(DetailsDuPanier, agentId, data, nouveauClient);            
-            const paiement = await Paiement(DetailsDuPanier, vente.id);
-            const encaissement = await CaisseIncrement(DetailsDuPanier);
+            const paiement = await Paiement(DetailsDuPanier, null, vente.id, null);
+            const destockage = await VariationStockage (DetailsDuPanier, null, true, null);
+            const encaissement = await VariationCaisse(DetailsDuPanier, null, true, null);
             
             // const clotureCaisse = await VerifyClotureCaisse(form.enregistrerParId);
             // CreateMouvementCaisse(totalHT, vente.id, form);

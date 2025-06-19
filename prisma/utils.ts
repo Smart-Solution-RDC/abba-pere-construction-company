@@ -323,22 +323,24 @@ export async function Pagination (
     }
 }
 
- export async function FetchMany (name: tableType, condition: object, selection: object | null) {
-    const myCondition = condition ? condition : {};
-    const mySelection = selection ? selection : {};
+ export async function FetchMany (name: tableType, condition: object, selection: object | null, orderBy: object | null) {
+    const condition_ = condition ? condition : {};
+    const selection_ = selection ? selection : {};
+    const orderBy_ = orderBy ? orderBy : {};
     return await prisma[name].findMany({
-        where: myCondition,
-        select: mySelection
+        where: condition_,
+        select: selection_,
+        orderBy: orderBy_
     });
 }
 
 export async function GetDetailPanier(panierId: number) {
-    return await FetchMany('detailPanier', {panierId: panierId}, {id: true, produitId: true, qtte: true, prixUnitaire: true, prixTotalHT: true, prixTotalTTC: true, deviseId: true, modePaiement: true}) as Array<DetailPanier>;;
+    const orderBy = { id: 'asc' }
+    return await FetchMany('detailPanier', {panierId: panierId}, {id: true, produitId: true, qtte: true, prixUnitaire: true, prixTotalHT: true, prixTotalTTC: true, deviseId: true, modePaiement: true}, orderBy) as Array<DetailPanier>;;
 }
 
 export async function GetProduit(DetailPanier: DetailPanier[]) {
-    return await FetchMany('produit', { id: { in: DetailPanier.map(item => item.produitId) } },
-    { qtteDisponible: true, designation: true, prixUnitaire: true}) as Array<ProduitsDisponible>;
+    return await FetchMany('produit', { id: { in: DetailPanier.map(item => item.produitId) }}, { qtteDisponible: true, designation: true, prixUnitaire: true }, null) as Array<ProduitsDisponible>;
 }
 
 type PaiementForm = {
@@ -365,37 +367,63 @@ async function isUniqueDeviseForm (DetailPanier: DetailPanier[]) {
     );
 }
 
-export async function DestockageVente (DetailPanier: DetailPanier[]) {
-    const UpdateProduits = await prisma.produit.updateMany({
+type ID = boolean | null
+
+export async function VariationStockage (DetailPanier: DetailPanier[], achatId: ID, venteId: ID, commandeId: ID) {
+    let produit: any = null;
+
+    let getProduit = await prisma.produit.findMany({
         where: { id: { in: DetailPanier.map(item => item.produitId) }},
-        data: { qtteDisponible: { decrement: DetailPanier.find(item => item.produitId === item.produitId)?.qtte || 0 } },
+        select: { id: true, designation: true, qtteDisponible: true, deviseId: true }
     });
-    return DetailPanier;
+
+    for (let i = 0; i < DetailPanier.length; i++) {
+        const detail = DetailPanier[i];
+        if (detail.produitId == getProduit[i].id) {
+            if (detail.qtte > getProduit[i].qtteDisponible) {
+                return getProduit[i].designation;
+            }
+        }
+        produit = await prisma.produit.update({
+            where: { id: detail.produitId },
+            data: { qtteDisponible: achatId ? { increment: detail.qtte } : { decrement: detail.qtte }},
+            select: { qtteDisponible: true }
+        });
+    }
+    
 }
 
-export async function Paiement (DetailPanier: DetailPanier[], venteId: number) {
+export async function Paiement (DetailPanier: DetailPanier[], achatId: number | null, venteId: number | null, commandeId: number | null) {
     let isUniqueDevise = [];
     let paiementForm = [];
     let prixTotalHT = 0;
     let prixTotalTTC = 0;
 
-    const getCaisses = await FetchMany ('caisse', {deviseId: { in: DetailPanier.map(item => item.deviseId)}}, {id: true, deviseId: true}) as Array<{id: number, deviseId: number}>
+    const getCaisses = await FetchMany ('caisse', {deviseId: { in: DetailPanier.map(item => item.deviseId)}}, {id: true, deviseId: true}, null) as Array<{id: number, deviseId: number}>
 
     for (let i = 0; i < DetailPanier.length; i++) {
         const detail = DetailPanier[i];
-        
         isUniqueDevise.push(detail.deviseId);
         if (isUniqueDevise.includes(detail.deviseId)) {
             prixTotalHT += detail.prixTotalHT;
             prixTotalTTC += detail.prixTotalTTC;
-            paiementForm.push({
-                deviseId: detail.deviseId,
-                modePaiement: detail.modePaiement,
-                totalHT: prixTotalHT,
-                totalTTC: prixTotalTTC,
-                caisseId: getCaisses[i].id,
-                venteId: venteId
-            });
+ 
+            for (let i = 0; i < getCaisses.length; i++) {
+                const caisse = getCaisses[i];                
+
+                if (detail.deviseId == caisse.deviseId) {
+                    paiementForm.push({
+                    deviseId: detail.deviseId,
+                    modePaiement: detail.modePaiement,
+                    totalHT: prixTotalHT,
+                    totalTTC: prixTotalTTC,
+                    caisseId: caisse.id,
+                    venteId: venteId,
+                    achatId: achatId,
+                    commandeId: commandeId,
+                });
+                }
+            }
         }
     }
 
@@ -406,8 +434,7 @@ export async function Paiement (DetailPanier: DetailPanier[], venteId: number) {
     return paiement;
 }
 
-
-export async function CaisseIncrement (DetailPanier: DetailPanier[]) {
+export async function VariationCaisse (DetailPanier: DetailPanier[], achatId: ID, venteId: ID, commandeId: ID) {
     
     if (await isUniqueDeviseForm(DetailPanier)) {
         let montant = 0;
@@ -429,22 +456,22 @@ export async function CaisseIncrement (DetailPanier: DetailPanier[]) {
     }
 
     if (!await isUniqueDeviseForm(DetailPanier)) {
-        const getCaisses = await FetchMany('caisse', { deviseId: { in: DetailPanier.map(item => item.deviseId)}}, { id: true, deviseId: true, soldeActuel: true }) as Array<{ id: number, deviseId: number, soldeActuel: number}>;
+        const getCaisses = await FetchMany('caisse', { deviseId: { in: DetailPanier.map(item => item.deviseId)}}, { id: true, nom: true, deviseId: true, soldeActuel: true }, null) as Array<{ id: number, nom: number, deviseId: number, soldeActuel: number}>;
 
-        let EncaissementCaisse:any = null;
+        let variation_caisse: any = null;
         for (let i = 0; i < DetailPanier.length; i++) {
             const detail = DetailPanier[i];
             if (detail.deviseId == getCaisses[i].deviseId) {
-                EncaissementCaisse = await prisma.caisse.update({
+                if (getCaisses[i].soldeActuel < detail.prixTotalHT) {
+                    return getCaisses[i].nom;
+                }
+                await prisma.caisse.update({
                     where: { id: getCaisses[i].id },
-                    data: { soldeActuel: { increment: detail.prixTotalHT }}
+                    data: { soldeActuel: achatId || commandeId ? { decrement: detail.prixTotalHT } :  { increment: detail.prixTotalHT }}
                 });
             }
         }
-
-        return EncaissementCaisse;
-    }
-    
+    }    
 }
 
 export async function Vente(DetailPanier: DetailPanier[], agentId: string, data: any, nouveauClient: Client) {

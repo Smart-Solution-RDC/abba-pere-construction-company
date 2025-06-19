@@ -31,7 +31,7 @@ async function main() {
         description: "My site description",
         logo: "/logo.png"
     }
-  })
+  });
   
   const agent = await prisma.agent.upsert({
     where: { email: 'admin@example.com' },
