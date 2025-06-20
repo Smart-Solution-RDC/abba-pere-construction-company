@@ -10,12 +10,6 @@ export async function POST(request: Request, { params }: RouteParams) {
     const { agentId } = await params;
     const data = await request.json();
 
-    const agent = await prisma.agent.findUnique({
-        where: { id: parseInt(agentId) }
-    });
-
-    if (!agent) return new Response("Agent Not Found", { status: 404 });
-
     try {
         const client = await prisma.client.create({
             data: data

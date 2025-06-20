@@ -53,6 +53,9 @@ model Entreprise {
   updatedAt      DateTime        @updatedAt
   Adresse        Adresse[]
   Contact        Contact[]
+  Vente          Vente[]
+  Achat          Achat[]
+  Commande       Commande[]
 }
 
 enum Sexe {
@@ -234,21 +237,28 @@ enum TypeClient {
 }
 
 model Vente {
-  id             Int          @id @default(autoincrement())
-  statut         StatutVente  @default(CONFIRME)
-  typeAcheteur   TypeClient
-  clientId       Int?
-  agentId        Int?
-  fournisseurId  Int?
-  panierId       Int
-  enregistrerPar String?
-  panier         Panier       @relation(fields: [panierId], references: [id])
-  agent          Agent?       @relation(fields: [agentId], references: [id])
-  fournisseur    Fournisseur? @relation(fields: [fournisseurId], references: [id])
-  client         Client?      @relation(fields: [clientId], references: [id])
-  paiements      Paiement[]
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
+  id               Int          @id @default(autoincrement())
+  statut           StatutVente  @default(CONFIRME)
+  // typeAcheteur     TypeClient
+  nom              String?
+  tel              String?
+  dateLivraison    DateTime?    @default(now())
+  adresseLivraison String?      @db.VarChar(255)
+  notes            String?      @db.Text
+  clientId         Int?
+  agentId          Int?
+  fournisseurId    Int?
+  entrepriseId     Int          @default(1)
+  panierId         Int
+  enregistrerPar   String?
+  panier           Panier       @relation(fields: [panierId], references: [id])
+  agent            Agent?       @relation(fields: [agentId], references: [id])
+  fournisseur      Fournisseur? @relation(fields: [fournisseurId], references: [id])
+  entreprise       Entreprise?  @relation(fields: [entrepriseId], references: [id])
+  client           Client?      @relation(fields: [clientId], references: [id])
+  paiements        Paiement[]
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
 }
 
 enum statutPanier {
@@ -301,6 +311,8 @@ model Achat {
   panierId      Int
   fournisseurId Int?
   agentId       Int
+  entrepriseId  Int          @default(1)
+  entreprise    Entreprise   @relation(fields: [entrepriseId], references: [id])
   panier        Panier       @relation(fields: [panierId], references: [id])
   fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
   agent         Agent        @relation(fields: [agentId], references: [id])
@@ -329,15 +341,18 @@ model Commande {
   fournisseurId    Int?
   agentId          Int?
   enregistrerPar   String?
+  entrepriseId     Int            @default(1)
   Paiement         Paiement[]
   panier           Panier         @relation(fields: [panierId], references: [id])
   fournisseur      Fournisseur?   @relation(fields: [fournisseurId], references: [id])
+  entreprise       Entreprise     @relation(fields: [entrepriseId], references: [id])
   agent            Agent?         @relation(fields: [agentId], references: [id])
   client           Client?        @relation(fields: [clientId], references: [id])
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
 }
 
+// Delete this model...
 model ClotureCaisse {
   id           Int         @id @default(autoincrement())
   dateCloture  DateTime    @unique @default(now())

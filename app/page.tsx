@@ -55,6 +55,14 @@ export default function HomePage() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
               Gérez vos commandes de ciment en toute simplicité
             </h1>
+            
+            <ul>
+              <li><a href="/auth/login" className="bg-red">Login</a></li>
+              <li><a href="/auth/logout">Logout</a></li>
+              <li><a href="/auth/profile">Profile</a></li>
+            </ul>
+            
+
             <p className="text-base sm:text-lg md:text-xl mb-8 text-gray-200 max-w-xl mx-auto md:mx-0">
               Solution complète pour la gestion de vos commandes de ciment 32.5
               et 42.5. Réservez, suivez et gérez vos commandes en quelques

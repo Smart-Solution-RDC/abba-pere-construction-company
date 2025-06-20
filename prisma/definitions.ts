@@ -143,6 +143,7 @@ export interface VenteRouteParams {
 
 export interface CommandeParams { 
     params: { 
+        agentId: string,
         commandeId: string
     }
 }

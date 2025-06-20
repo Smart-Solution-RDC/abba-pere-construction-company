@@ -17,18 +17,18 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
             id: true,
             statut: true,
             enregistrerPar: true,
-            paiements: {
-                select: {
-                    totalHT: true,
-                    totalTTC: true,
-                    modePaiement: true,
-                    devise: {
-                        select: {
-                            symbole: true
-                        }
-                    }
-                }
-            },
+            // paiements: {
+            //     select: {
+            //         totalHT: true,
+            //         totalTTC: true,
+            //         modePaiement: true,
+            //         devise: {
+            //             select: {
+            //                 symbole: true
+            //             }
+            //         }
+            //     }
+            // },
             client: {
                 select: {
                     picture: true,

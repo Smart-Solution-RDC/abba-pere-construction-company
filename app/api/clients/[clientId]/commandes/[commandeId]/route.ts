@@ -7,10 +7,9 @@ export async function GET (req: Request, { params }: CommandeParams ) {
     const commande = await prisma.commande.findUnique({
         where: { id: parseInt(commandeId) },
         select: {
-            type_client: true,
             panier: {
                 select: {
-                    DetailPanier: {
+                    detailPaniers: {
                         select: {
                             produit: {
                                 select: {
@@ -19,27 +18,20 @@ export async function GET (req: Request, { params }: CommandeParams ) {
                             },
                             qtte: true,
                             prixUnitaire: true,
-                            prixTotal: true
+                            prixTotalHT: true
                         }
                     }
                 }
             },
-            paiement: {
-                select: {
-                    moyen_paiement: true,
-                    montant: true,
-                    devise: {
-                        select: {
-                            nom: true,
-                            code: true
-                        }
-                    }
-                }
-            },
-            notes: true,
-            dateLivraisonEffective: true,
+            statut: true,
+            dateLivraison: true,
             adresseLivraison: true,
-            statut: true
+            notes: true,
+            client: {
+                select: {
+                    nom_complet: true
+                }
+            },
         }
     });
 

@@ -66,7 +66,10 @@ export async function POST(request: NextRequest, { params }: PanierRouteParams) 
             // const clotureCaisse = await VerifyClotureCaisse(form.enregistrerParId);
             // CreateMouvementCaisse(totalHT, vente.id, form);
             
-            return new Response("Vente Successed!", { status : 201 });
+            return new Response(JSON.stringify({ vente, paiement }), {
+                status: 201,
+                headers: { "Content-Type": "application/json" }
+            });
         }
     } catch (error) {
         return new Response("Invalid Form", { status : 201 });        

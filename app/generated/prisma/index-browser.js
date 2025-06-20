@@ -259,6 +259,7 @@ exports.Prisma.VenteScalarFieldEnum = {
   clientId: 'clientId',
   agentId: 'agentId',
   fournisseurId: 'fournisseurId',
+  entrepriseId: 'entrepriseId',
   panierId: 'panierId',
   enregistrerPar: 'enregistrerPar',
   createdAt: 'createdAt',
@@ -294,6 +295,7 @@ exports.Prisma.AchatScalarFieldEnum = {
   panierId: 'panierId',
   fournisseurId: 'fournisseurId',
   agentId: 'agentId',
+  entrepriseId: 'entrepriseId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -311,6 +313,7 @@ exports.Prisma.CommandeScalarFieldEnum = {
   fournisseurId: 'fournisseurId',
   agentId: 'agentId',
   enregistrerPar: 'enregistrerPar',
+  entrepriseId: 'entrepriseId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
