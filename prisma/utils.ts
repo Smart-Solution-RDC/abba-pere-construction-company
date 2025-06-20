@@ -20,8 +20,8 @@ export async function Table(req: NextRequest, name: tableType, id: string, selec
 
 export async function PrixUnitaireSystem(produitId: number, prixUnitaire: number) {
     const produit = await prisma.produit.findUnique({
-        where: {id: produitId},
-        select: {prixUnitaire: true}
+        where: { id: produitId },
+        select: { prixUnitaire: true }
     });
     return produit ? produit.prixUnitaire : prixUnitaire;
 }
@@ -53,12 +53,21 @@ export async function FindVente(venteId: number) {
     return vente;
 }
 
-export async function UpdateDetailPanier(detailId: number, form: DetailPanier) {
-    return await prisma.detailPanier.update({
-        where: { id: detailId },
-        data: form,
-        select: {qtte: true, produitId: true, panierId: true, prixTotalHT: true, prixTotalTTC: true}
+export async function UpdateDetailPanier (detailId: number, data: DetailPanier) {
+    // Verification
+    const getDetail = await prisma.detailPanier.findUnique({
+        where: { id: detailId }
     });
+
+    // if (!getDetail) {
+    //     return await prisma.detailPanier.update({
+    //         where: { id: detailId },
+    //         data: data,
+    //         select: {qtte: true, produitId: true, panierId: true, prixTotalHT: true, prixTotalTTC: true}
+    //     });
+    // }   
+
+    return "Ce produit existe déjà sur le panier";
 }
 
 export async function VariationProduitVente (produitId:number, type: Type, difference: number) {

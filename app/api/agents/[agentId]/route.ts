@@ -7,6 +7,9 @@ export async function GET(req: Request, { params }: AgentRouteParams) {
     const agent = await prisma.agent.findUnique({
         where: { id: parseInt(agentId) },
         select: {
+            id: true,
+            nom: true,
+            postnom: true,
             nom_complet: true,
             email: true,
             sexe: true,

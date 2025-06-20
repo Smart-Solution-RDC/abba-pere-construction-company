@@ -17283,7 +17283,11 @@ export namespace Prisma {
   export type VenteMinAggregateOutputType = {
     id: number | null
     statut: $Enums.StatutVente | null
-    typeAcheteur: $Enums.TypeClient | null
+    nom: string | null
+    tel: string | null
+    dateLivraison: Date | null
+    adresseLivraison: string | null
+    notes: string | null
     clientId: number | null
     agentId: number | null
     fournisseurId: number | null
@@ -17297,7 +17301,11 @@ export namespace Prisma {
   export type VenteMaxAggregateOutputType = {
     id: number | null
     statut: $Enums.StatutVente | null
-    typeAcheteur: $Enums.TypeClient | null
+    nom: string | null
+    tel: string | null
+    dateLivraison: Date | null
+    adresseLivraison: string | null
+    notes: string | null
     clientId: number | null
     agentId: number | null
     fournisseurId: number | null
@@ -17311,7 +17319,11 @@ export namespace Prisma {
   export type VenteCountAggregateOutputType = {
     id: number
     statut: number
-    typeAcheteur: number
+    nom: number
+    tel: number
+    dateLivraison: number
+    adresseLivraison: number
+    notes: number
     clientId: number
     agentId: number
     fournisseurId: number
@@ -17345,7 +17357,11 @@ export namespace Prisma {
   export type VenteMinAggregateInputType = {
     id?: true
     statut?: true
-    typeAcheteur?: true
+    nom?: true
+    tel?: true
+    dateLivraison?: true
+    adresseLivraison?: true
+    notes?: true
     clientId?: true
     agentId?: true
     fournisseurId?: true
@@ -17359,7 +17375,11 @@ export namespace Prisma {
   export type VenteMaxAggregateInputType = {
     id?: true
     statut?: true
-    typeAcheteur?: true
+    nom?: true
+    tel?: true
+    dateLivraison?: true
+    adresseLivraison?: true
+    notes?: true
     clientId?: true
     agentId?: true
     fournisseurId?: true
@@ -17373,7 +17393,11 @@ export namespace Prisma {
   export type VenteCountAggregateInputType = {
     id?: true
     statut?: true
-    typeAcheteur?: true
+    nom?: true
+    tel?: true
+    dateLivraison?: true
+    adresseLivraison?: true
+    notes?: true
     clientId?: true
     agentId?: true
     fournisseurId?: true
@@ -17474,7 +17498,11 @@ export namespace Prisma {
   export type VenteGroupByOutputType = {
     id: number
     statut: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom: string | null
+    tel: string | null
+    dateLivraison: Date | null
+    adresseLivraison: string | null
+    notes: string | null
     clientId: number | null
     agentId: number | null
     fournisseurId: number | null
@@ -17507,7 +17535,11 @@ export namespace Prisma {
   export type VenteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     statut?: boolean
-    typeAcheteur?: boolean
+    nom?: boolean
+    tel?: boolean
+    dateLivraison?: boolean
+    adresseLivraison?: boolean
+    notes?: boolean
     clientId?: boolean
     agentId?: boolean
     fournisseurId?: boolean
@@ -17528,7 +17560,11 @@ export namespace Prisma {
   export type VenteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     statut?: boolean
-    typeAcheteur?: boolean
+    nom?: boolean
+    tel?: boolean
+    dateLivraison?: boolean
+    adresseLivraison?: boolean
+    notes?: boolean
     clientId?: boolean
     agentId?: boolean
     fournisseurId?: boolean
@@ -17547,7 +17583,11 @@ export namespace Prisma {
   export type VenteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     statut?: boolean
-    typeAcheteur?: boolean
+    nom?: boolean
+    tel?: boolean
+    dateLivraison?: boolean
+    adresseLivraison?: boolean
+    notes?: boolean
     clientId?: boolean
     agentId?: boolean
     fournisseurId?: boolean
@@ -17566,7 +17606,11 @@ export namespace Prisma {
   export type VenteSelectScalar = {
     id?: boolean
     statut?: boolean
-    typeAcheteur?: boolean
+    nom?: boolean
+    tel?: boolean
+    dateLivraison?: boolean
+    adresseLivraison?: boolean
+    notes?: boolean
     clientId?: boolean
     agentId?: boolean
     fournisseurId?: boolean
@@ -17577,7 +17621,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type VenteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "typeAcheteur" | "clientId" | "agentId" | "fournisseurId" | "entrepriseId" | "panierId" | "enregistrerPar" | "createdAt" | "updatedAt", ExtArgs["result"]["vente"]>
+  export type VenteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "nom" | "tel" | "dateLivraison" | "adresseLivraison" | "notes" | "clientId" | "agentId" | "fournisseurId" | "entrepriseId" | "panierId" | "enregistrerPar" | "createdAt" | "updatedAt", ExtArgs["result"]["vente"]>
   export type VenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     panier?: boolean | PanierDefaultArgs<ExtArgs>
     agent?: boolean | Vente$agentArgs<ExtArgs>
@@ -17615,7 +17659,11 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       statut: $Enums.StatutVente
-      typeAcheteur: $Enums.TypeClient
+      nom: string | null
+      tel: string | null
+      dateLivraison: Date | null
+      adresseLivraison: string | null
+      notes: string | null
       clientId: number | null
       agentId: number | null
       fournisseurId: number | null
@@ -18055,7 +18103,11 @@ export namespace Prisma {
   interface VenteFieldRefs {
     readonly id: FieldRef<"Vente", 'Int'>
     readonly statut: FieldRef<"Vente", 'StatutVente'>
-    readonly typeAcheteur: FieldRef<"Vente", 'TypeClient'>
+    readonly nom: FieldRef<"Vente", 'String'>
+    readonly tel: FieldRef<"Vente", 'String'>
+    readonly dateLivraison: FieldRef<"Vente", 'DateTime'>
+    readonly adresseLivraison: FieldRef<"Vente", 'String'>
+    readonly notes: FieldRef<"Vente", 'String'>
     readonly clientId: FieldRef<"Vente", 'Int'>
     readonly agentId: FieldRef<"Vente", 'Int'>
     readonly fournisseurId: FieldRef<"Vente", 'Int'>
@@ -26171,7 +26223,11 @@ export namespace Prisma {
   export const VenteScalarFieldEnum: {
     id: 'id',
     statut: 'statut',
-    typeAcheteur: 'typeAcheteur',
+    nom: 'nom',
+    tel: 'tel',
+    dateLivraison: 'dateLivraison',
+    adresseLivraison: 'adresseLivraison',
+    notes: 'notes',
     clientId: 'clientId',
     agentId: 'agentId',
     fournisseurId: 'fournisseurId',
@@ -26452,20 +26508,6 @@ export namespace Prisma {
    * Reference to a field of type 'StatutVente[]'
    */
   export type ListEnumStatutVenteFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutVente[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'TypeClient'
-   */
-  export type EnumTypeClientFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeClient'>
-    
-
-
-  /**
-   * Reference to a field of type 'TypeClient[]'
-   */
-  export type ListEnumTypeClientFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeClient[]'>
     
 
 
@@ -27536,7 +27578,11 @@ export namespace Prisma {
     NOT?: VenteWhereInput | VenteWhereInput[]
     id?: IntFilter<"Vente"> | number
     statut?: EnumStatutVenteFilter<"Vente"> | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFilter<"Vente"> | $Enums.TypeClient
+    nom?: StringNullableFilter<"Vente"> | string | null
+    tel?: StringNullableFilter<"Vente"> | string | null
+    dateLivraison?: DateTimeNullableFilter<"Vente"> | Date | string | null
+    adresseLivraison?: StringNullableFilter<"Vente"> | string | null
+    notes?: StringNullableFilter<"Vente"> | string | null
     clientId?: IntNullableFilter<"Vente"> | number | null
     agentId?: IntNullableFilter<"Vente"> | number | null
     fournisseurId?: IntNullableFilter<"Vente"> | number | null
@@ -27556,7 +27602,11 @@ export namespace Prisma {
   export type VenteOrderByWithRelationInput = {
     id?: SortOrder
     statut?: SortOrder
-    typeAcheteur?: SortOrder
+    nom?: SortOrderInput | SortOrder
+    tel?: SortOrderInput | SortOrder
+    dateLivraison?: SortOrderInput | SortOrder
+    adresseLivraison?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
     clientId?: SortOrderInput | SortOrder
     agentId?: SortOrderInput | SortOrder
     fournisseurId?: SortOrderInput | SortOrder
@@ -27579,7 +27629,11 @@ export namespace Prisma {
     OR?: VenteWhereInput[]
     NOT?: VenteWhereInput | VenteWhereInput[]
     statut?: EnumStatutVenteFilter<"Vente"> | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFilter<"Vente"> | $Enums.TypeClient
+    nom?: StringNullableFilter<"Vente"> | string | null
+    tel?: StringNullableFilter<"Vente"> | string | null
+    dateLivraison?: DateTimeNullableFilter<"Vente"> | Date | string | null
+    adresseLivraison?: StringNullableFilter<"Vente"> | string | null
+    notes?: StringNullableFilter<"Vente"> | string | null
     clientId?: IntNullableFilter<"Vente"> | number | null
     agentId?: IntNullableFilter<"Vente"> | number | null
     fournisseurId?: IntNullableFilter<"Vente"> | number | null
@@ -27599,7 +27653,11 @@ export namespace Prisma {
   export type VenteOrderByWithAggregationInput = {
     id?: SortOrder
     statut?: SortOrder
-    typeAcheteur?: SortOrder
+    nom?: SortOrderInput | SortOrder
+    tel?: SortOrderInput | SortOrder
+    dateLivraison?: SortOrderInput | SortOrder
+    adresseLivraison?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
     clientId?: SortOrderInput | SortOrder
     agentId?: SortOrderInput | SortOrder
     fournisseurId?: SortOrderInput | SortOrder
@@ -27621,7 +27679,11 @@ export namespace Prisma {
     NOT?: VenteScalarWhereWithAggregatesInput | VenteScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Vente"> | number
     statut?: EnumStatutVenteWithAggregatesFilter<"Vente"> | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientWithAggregatesFilter<"Vente"> | $Enums.TypeClient
+    nom?: StringNullableWithAggregatesFilter<"Vente"> | string | null
+    tel?: StringNullableWithAggregatesFilter<"Vente"> | string | null
+    dateLivraison?: DateTimeNullableWithAggregatesFilter<"Vente"> | Date | string | null
+    adresseLivraison?: StringNullableWithAggregatesFilter<"Vente"> | string | null
+    notes?: StringNullableWithAggregatesFilter<"Vente"> | string | null
     clientId?: IntNullableWithAggregatesFilter<"Vente"> | number | null
     agentId?: IntNullableWithAggregatesFilter<"Vente"> | number | null
     fournisseurId?: IntNullableWithAggregatesFilter<"Vente"> | number | null
@@ -29188,7 +29250,11 @@ export namespace Prisma {
 
   export type VenteCreateInput = {
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     enregistrerPar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29203,7 +29269,11 @@ export namespace Prisma {
   export type VenteUncheckedCreateInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     clientId?: number | null
     agentId?: number | null
     fournisseurId?: number | null
@@ -29217,7 +29287,11 @@ export namespace Prisma {
 
   export type VenteUpdateInput = {
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29232,7 +29306,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -29247,7 +29325,11 @@ export namespace Prisma {
   export type VenteCreateManyInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     clientId?: number | null
     agentId?: number | null
     fournisseurId?: number | null
@@ -29260,7 +29342,11 @@ export namespace Prisma {
 
   export type VenteUpdateManyMutationInput = {
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29269,7 +29355,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -30854,11 +30944,15 @@ export namespace Prisma {
     not?: NestedEnumStatutVenteFilter<$PrismaModel> | $Enums.StatutVente
   }
 
-  export type EnumTypeClientFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeClient | EnumTypeClientFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeClient[] | ListEnumTypeClientFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeClient[] | ListEnumTypeClientFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeClientFilter<$PrismaModel> | $Enums.TypeClient
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type PanierScalarRelationFilter = {
@@ -30869,7 +30963,11 @@ export namespace Prisma {
   export type VenteCountOrderByAggregateInput = {
     id?: SortOrder
     statut?: SortOrder
-    typeAcheteur?: SortOrder
+    nom?: SortOrder
+    tel?: SortOrder
+    dateLivraison?: SortOrder
+    adresseLivraison?: SortOrder
+    notes?: SortOrder
     clientId?: SortOrder
     agentId?: SortOrder
     fournisseurId?: SortOrder
@@ -30892,7 +30990,11 @@ export namespace Prisma {
   export type VenteMaxOrderByAggregateInput = {
     id?: SortOrder
     statut?: SortOrder
-    typeAcheteur?: SortOrder
+    nom?: SortOrder
+    tel?: SortOrder
+    dateLivraison?: SortOrder
+    adresseLivraison?: SortOrder
+    notes?: SortOrder
     clientId?: SortOrder
     agentId?: SortOrder
     fournisseurId?: SortOrder
@@ -30906,7 +31008,11 @@ export namespace Prisma {
   export type VenteMinOrderByAggregateInput = {
     id?: SortOrder
     statut?: SortOrder
-    typeAcheteur?: SortOrder
+    nom?: SortOrder
+    tel?: SortOrder
+    dateLivraison?: SortOrder
+    adresseLivraison?: SortOrder
+    notes?: SortOrder
     clientId?: SortOrder
     agentId?: SortOrder
     fournisseurId?: SortOrder
@@ -30936,14 +31042,18 @@ export namespace Prisma {
     _max?: NestedEnumStatutVenteFilter<$PrismaModel>
   }
 
-  export type EnumTypeClientWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeClient | EnumTypeClientFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeClient[] | ListEnumTypeClientFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeClient[] | ListEnumTypeClientFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeClientWithAggregatesFilter<$PrismaModel> | $Enums.TypeClient
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeClientFilter<$PrismaModel>
-    _max?: NestedEnumTypeClientFilter<$PrismaModel>
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumstatutPanierFilter<$PrismaModel = never> = {
@@ -31149,17 +31259,6 @@ export namespace Prisma {
     not?: NestedEnumStatutCommandeFilter<$PrismaModel> | $Enums.StatutCommande
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type CommandeCountOrderByAggregateInput = {
     id?: SortOrder
     panierId?: SortOrder
@@ -31240,20 +31339,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutCommandeFilter<$PrismaModel>
     _max?: NestedEnumStatutCommandeFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type ClotureCaisseCountOrderByAggregateInput = {
@@ -33374,8 +33459,8 @@ export namespace Prisma {
     set?: $Enums.StatutVente
   }
 
-  export type EnumTypeClientFieldUpdateOperationsInput = {
-    set?: $Enums.TypeClient
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type PanierUpdateOneRequiredWithoutVentesNestedInput = {
@@ -33852,10 +33937,6 @@ export namespace Prisma {
     set?: $Enums.StatutCommande
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type PaiementUpdateManyWithoutCommandeNestedInput = {
     create?: XOR<PaiementCreateWithoutCommandeInput, PaiementUncheckedCreateWithoutCommandeInput> | PaiementCreateWithoutCommandeInput[] | PaiementUncheckedCreateWithoutCommandeInput[]
     connectOrCreate?: PaiementCreateOrConnectWithoutCommandeInput | PaiementCreateOrConnectWithoutCommandeInput[]
@@ -34296,11 +34377,15 @@ export namespace Prisma {
     not?: NestedEnumStatutVenteFilter<$PrismaModel> | $Enums.StatutVente
   }
 
-  export type NestedEnumTypeClientFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeClient | EnumTypeClientFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeClient[] | ListEnumTypeClientFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeClient[] | ListEnumTypeClientFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeClientFilter<$PrismaModel> | $Enums.TypeClient
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedEnumStatutVenteWithAggregatesFilter<$PrismaModel = never> = {
@@ -34313,14 +34398,18 @@ export namespace Prisma {
     _max?: NestedEnumStatutVenteFilter<$PrismaModel>
   }
 
-  export type NestedEnumTypeClientWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeClient | EnumTypeClientFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeClient[] | ListEnumTypeClientFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeClient[] | ListEnumTypeClientFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeClientWithAggregatesFilter<$PrismaModel> | $Enums.TypeClient
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeClientFilter<$PrismaModel>
-    _max?: NestedEnumTypeClientFilter<$PrismaModel>
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumstatutPanierFilter<$PrismaModel = never> = {
@@ -34364,17 +34453,6 @@ export namespace Prisma {
     not?: NestedEnumStatutCommandeFilter<$PrismaModel> | $Enums.StatutCommande
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedEnumStatutCommandeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.StatutCommande | EnumStatutCommandeFieldRefInput<$PrismaModel>
     in?: $Enums.StatutCommande[] | ListEnumStatutCommandeFieldRefInput<$PrismaModel>
@@ -34383,20 +34461,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutCommandeFilter<$PrismaModel>
     _max?: NestedEnumStatutCommandeFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumTypeMouvementCaisseFilter<$PrismaModel = never> = {
@@ -35082,7 +35146,11 @@ export namespace Prisma {
 
   export type VenteCreateWithoutEntrepriseInput = {
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     enregistrerPar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35096,7 +35164,11 @@ export namespace Prisma {
   export type VenteUncheckedCreateWithoutEntrepriseInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     clientId?: number | null
     agentId?: number | null
     fournisseurId?: number | null
@@ -35307,7 +35379,11 @@ export namespace Prisma {
     NOT?: VenteScalarWhereInput | VenteScalarWhereInput[]
     id?: IntFilter<"Vente"> | number
     statut?: EnumStatutVenteFilter<"Vente"> | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFilter<"Vente"> | $Enums.TypeClient
+    nom?: StringNullableFilter<"Vente"> | string | null
+    tel?: StringNullableFilter<"Vente"> | string | null
+    dateLivraison?: DateTimeNullableFilter<"Vente"> | Date | string | null
+    adresseLivraison?: StringNullableFilter<"Vente"> | string | null
+    notes?: StringNullableFilter<"Vente"> | string | null
     clientId?: IntNullableFilter<"Vente"> | number | null
     agentId?: IntNullableFilter<"Vente"> | number | null
     fournisseurId?: IntNullableFilter<"Vente"> | number | null
@@ -35486,7 +35562,11 @@ export namespace Prisma {
 
   export type VenteCreateWithoutAgentInput = {
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     enregistrerPar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35500,7 +35580,11 @@ export namespace Prisma {
   export type VenteUncheckedCreateWithoutAgentInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     clientId?: number | null
     fournisseurId?: number | null
     entrepriseId?: number
@@ -36167,7 +36251,11 @@ export namespace Prisma {
 
   export type VenteCreateWithoutClientInput = {
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     enregistrerPar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36181,7 +36269,11 @@ export namespace Prisma {
   export type VenteUncheckedCreateWithoutClientInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     agentId?: number | null
     fournisseurId?: number | null
     entrepriseId?: number
@@ -37122,7 +37214,11 @@ export namespace Prisma {
 
   export type VenteCreateWithoutFournisseurInput = {
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     enregistrerPar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -37136,7 +37232,11 @@ export namespace Prisma {
   export type VenteUncheckedCreateWithoutFournisseurInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     clientId?: number | null
     agentId?: number | null
     entrepriseId?: number
@@ -37726,7 +37826,11 @@ export namespace Prisma {
 
   export type VenteCreateWithoutPaiementsInput = {
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     enregistrerPar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -37740,7 +37844,11 @@ export namespace Prisma {
   export type VenteUncheckedCreateWithoutPaiementsInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     clientId?: number | null
     agentId?: number | null
     fournisseurId?: number | null
@@ -37897,7 +38005,11 @@ export namespace Prisma {
 
   export type VenteUpdateWithoutPaiementsInput = {
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37911,7 +38023,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateWithoutPaiementsInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -38989,7 +39105,11 @@ export namespace Prisma {
 
   export type VenteCreateWithoutPanierInput = {
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     enregistrerPar?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39003,7 +39123,11 @@ export namespace Prisma {
   export type VenteUncheckedCreateWithoutPanierInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     clientId?: number | null
     agentId?: number | null
     fournisseurId?: number | null
@@ -40957,7 +41081,11 @@ export namespace Prisma {
   export type VenteCreateManyEntrepriseInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     clientId?: number | null
     agentId?: number | null
     fournisseurId?: number | null
@@ -41089,7 +41217,11 @@ export namespace Prisma {
 
   export type VenteUpdateWithoutEntrepriseInput = {
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41103,7 +41235,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateWithoutEntrepriseInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41117,7 +41253,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateManyWithoutEntrepriseInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41248,7 +41388,11 @@ export namespace Prisma {
   export type VenteCreateManyAgentInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     clientId?: number | null
     fournisseurId?: number | null
     entrepriseId?: number
@@ -41458,7 +41602,11 @@ export namespace Prisma {
 
   export type VenteUpdateWithoutAgentInput = {
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41472,7 +41620,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateWithoutAgentInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
@@ -41486,7 +41638,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateManyWithoutAgentInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
@@ -41831,7 +41987,11 @@ export namespace Prisma {
   export type VenteCreateManyClientInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     agentId?: number | null
     fournisseurId?: number | null
     entrepriseId?: number
@@ -41935,7 +42095,11 @@ export namespace Prisma {
 
   export type VenteUpdateWithoutClientInput = {
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41949,7 +42113,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateWithoutClientInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
@@ -41963,7 +42131,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateManyWithoutClientInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
@@ -42059,7 +42231,11 @@ export namespace Prisma {
   export type VenteCreateManyFournisseurInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     clientId?: number | null
     agentId?: number | null
     entrepriseId?: number
@@ -42121,7 +42297,11 @@ export namespace Prisma {
 
   export type VenteUpdateWithoutFournisseurInput = {
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42135,7 +42315,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateWithoutFournisseurInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
@@ -42149,7 +42333,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateManyWithoutFournisseurInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
@@ -42539,7 +42727,11 @@ export namespace Prisma {
   export type VenteCreateManyPanierInput = {
     id?: number
     statut?: $Enums.StatutVente
-    typeAcheteur: $Enums.TypeClient
+    nom?: string | null
+    tel?: string | null
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
     clientId?: number | null
     agentId?: number | null
     fournisseurId?: number | null
@@ -42637,7 +42829,11 @@ export namespace Prisma {
 
   export type VenteUpdateWithoutPanierInput = {
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42651,7 +42847,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateWithoutPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -42665,7 +42865,11 @@ export namespace Prisma {
   export type VenteUncheckedUpdateManyWithoutPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutVenteFieldUpdateOperationsInput | $Enums.StatutVente
-    typeAcheteur?: EnumTypeClientFieldUpdateOperationsInput | $Enums.TypeClient
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    tel?: NullableStringFieldUpdateOperationsInput | string | null
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null

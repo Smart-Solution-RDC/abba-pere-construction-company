@@ -11,8 +11,12 @@ export async function GET(request: NextRequest) {
     } : {}
 
     const selection = {
+        id: true,
         nom_complet: true,
-        email: true
+        email: true,
+        role: true,
+        poste: true,
+        sexe: true
     }
 
     const data = await Pagination(request, 'agent', condition, selection, null);

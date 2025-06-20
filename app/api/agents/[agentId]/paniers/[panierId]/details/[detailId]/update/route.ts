@@ -1,10 +1,11 @@
 import { DetailPanier } from "@/app/generated/prisma";
 import { prisma } from "@/lib/prisma";
 import { DetailRouteParams } from "@/prisma/definitions";
-import { FindVente, PrixUnitaireSystem, UpdateDetailPanier, RetraitPaiement, VariationProduitVente } from "@/prisma/utils";
+import { FindVente, PrixUnitaireSystem, UpdateDetailPanier, RetraitPaiement } from "@/prisma/utils";
+import { NextRequest } from "next/server";
 
 
-export async function PUT (request: Request, { params }: DetailRouteParams) {
+export async function PUT (request: NextRequest, { params }: DetailRouteParams) {
     const { agentId, panierId, detailId } = await params;
     const form: DetailPanier = await request.json();
     form.prixUnitaire = await PrixUnitaireSystem(form.produitId, form.prixUnitaire);
@@ -39,11 +40,12 @@ export async function PUT (request: Request, { params }: DetailRouteParams) {
                 }
 
                 if (vente) {
-                    const updateDetailPanier = await UpdateDetailPanier(detailPanier.id, form);
+                    
+                    // const updateDetailPanier = await UpdateDetailPanier(detailPanier.id, form);
                     // const variation = await VariationProduitVente(updateDetailPanier.produitId, 'inc', differenceRecue);
                     // await UpdateVente(vente.id, 'dec', montantRetrait, nouveauPrixTotalTTC);
                     
-                    const retraitPaiement = await RetraitPaiement(vente, data); // complited
+                    // const retraitPaiement = await RetraitPaiement(vente, data); // complited
                     
                     // const caisse = await prisma.caisse.findUnique({
                     //     where: { id: paiement.caisseId },
@@ -53,7 +55,7 @@ export async function PUT (request: Request, { params }: DetailRouteParams) {
                     // if (caisse?.soldeActuel) if (caisse?.soldeActuel < montantRetrait) return new Response("Solde insuffisant!", {status: 404});
                     // await UpdateCaisses(paiement.caisseId, 'dec', montantRetrait);                
                     // "Detail updated!"
-                    return new Response(JSON.stringify('retraitPaiement'), { status: 201 });
+                    return new Response(JSON.stringify('updateDetailPanier'), { status: 201 });
                 }
                 
                 return new Response("Vente Not Found!", { status: 404 });
@@ -100,8 +102,10 @@ export async function PUT (request: Request, { params }: DetailRouteParams) {
         
     } catch (error) {
         return new Response("Invalid Form!", { status: 404 });
-    }    
+    }
 }
+
+
 
 
 

@@ -255,7 +255,11 @@ exports.Prisma.CaisseScalarFieldEnum = {
 exports.Prisma.VenteScalarFieldEnum = {
   id: 'id',
   statut: 'statut',
-  typeAcheteur: 'typeAcheteur',
+  nom: 'nom',
+  tel: 'tel',
+  dateLivraison: 'dateLivraison',
+  adresseLivraison: 'adresseLivraison',
+  notes: 'notes',
   clientId: 'clientId',
   agentId: 'agentId',
   fournisseurId: 'fournisseurId',
@@ -389,14 +393,6 @@ exports.StatutVente = exports.$Enums.StatutVente = {
   CONFIRME: 'CONFIRME',
   REMBOURSE: 'REMBOURSE',
   ANNULE: 'ANNULE'
-};
-
-exports.TypeClient = exports.$Enums.TypeClient = {
-  ORDINAIRE: 'ORDINAIRE',
-  NOUVEAU: 'NOUVEAU',
-  CLIENT: 'CLIENT',
-  FOURNISSEUR: 'FOURNISSEUR',
-  AGENT: 'AGENT'
 };
 
 exports.statutPanier = exports.$Enums.statutPanier = {
