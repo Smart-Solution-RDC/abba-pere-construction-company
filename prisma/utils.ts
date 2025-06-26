@@ -169,7 +169,7 @@ export function updateCaisseMouvement (type_mouvement: TypeMouvement, soldeActue
     
 }
 
-export function getNomComplet(nom: string, postnom: string) {
+export function getNomComplet(nom: string, postnom: string | null) {
     let nom_complet = ''
     if (nom && postnom) {
         nom_complet = `${nom} ${postnom}`

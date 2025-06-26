@@ -34,8 +34,17 @@ export async function GET(request: NextRequest, { params }: RouteParams ) {
         clientId: client.id
         // commandeId: commande.id
     }
+
+    const selection = {
+        id: true,
+        nom: true,
+        tel: true,
+        statut: true,
+        dateLivraison: true,
+        adresseLivraison: true
+    }
     
-    const data = await Pagination(request, 'commande', cond, null, null);
+    const data = await Pagination(request, 'commande', cond, selection, null);
     
     return new Response(JSON.stringify(data), { status: 201 });
 }

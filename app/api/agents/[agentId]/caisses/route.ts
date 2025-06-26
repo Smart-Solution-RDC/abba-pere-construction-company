@@ -13,9 +13,10 @@ export async function GET (request: Request, {params}: RouteParams) {
         select: {
             id: true,
             nom: true,
+            soldeActuel: true,
             devise: {
                 select: {
-                    nom: true,
+                    code: true,
                     symbole: true
                 }
             },

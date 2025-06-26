@@ -8,6 +8,8 @@ export async function GET(request: Request, { params }: ClientRouteParams) {
         where: { id: parseInt(clientId) },
         select: {
             id: true,
+            nom: true,
+            postnom: true,
             nom_complet: true,
             email: true,
             sexe: true,
@@ -23,23 +25,7 @@ export async function GET(request: Request, { params }: ClientRouteParams) {
                     tel: true
                 }
             },
-            achats: {
-                select: {
-                    id: true,
-                    statut: true,
-                    paiements: {
-                        select: {
-                            totalHT: true,
-                            modePaiement: true,
-                            devise: {
-                                select: {
-                                    symbole: true
-                                }
-                            }
-                        }
-                    }
-                }
-            },
+            
             ventes: {
                 select: {
                     id: true,

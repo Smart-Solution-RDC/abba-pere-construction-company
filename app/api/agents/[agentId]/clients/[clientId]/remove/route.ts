@@ -5,14 +5,16 @@ import { NextRequest } from "next/server";
 
 
 export async function DELETE(request: NextRequest, { params }: ClientRouteParams) {
-    const { clientId } = await params;
+    const { agentId, clientId } = await params;
 
     try {
         await prisma.client.delete({
             where: { id: parseInt(clientId) }
         });
 
-        const newList = await Pagination(request, 'client', null, null, null);
+        const newList = await Pagination(request, 'client', {
+            agentId: parseInt(agentId)
+        }, null, null);
 
         return new Response (JSON.stringify(newList), { status: 201 })
     } catch (error) {

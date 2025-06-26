@@ -13,7 +13,9 @@ export async function GET (req: Request, { params }: CaisseRouteParams ) {
     const caisse = await prisma.caisse.findUnique({
         where: { id: parseInt(caisseId) },
         select: {
+            id: true,
             nom: true,
+            statut: true,
             description: true,
             soldeActuel: true,
             devise: {

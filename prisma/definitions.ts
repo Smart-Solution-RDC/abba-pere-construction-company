@@ -2,6 +2,7 @@ import { DetailPanier, ModePaiment } from "@/app/generated/prisma"
 
 export interface AgentRouteParams { 
     params: {
+        clientId: string
         agentId: string
     }
 }
@@ -15,6 +16,7 @@ export interface TeneurRouteParams {
 
 export interface ContactRouteParams { 
     params: {
+        clientId: string,
         agentId: string
         contactId: string
     }

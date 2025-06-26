@@ -358,28 +358,28 @@ enum StatutCaisse {
 }
 
 // Add modePaiement as a table
-enum MotifsDepense {
-  ACHAT_FOURNITURES
-  PAIEMENT_SALAIRE
-  PAIEMENT_LOYER
-  PAIEMENT_EMPRUNT
-  PAIEMENT_TAXE
+enum TypeDepense {
+  FOURNITURE
+  SALAIRE
+  LOYER
+  EMPRUNT
+  TAXE
   AUTRES
 }
 
 // Or change to charge table...
 model Depense {
-  id               Int           @id @default(autoincrement())
+  id               Int         @id @default(autoincrement())
   caisseId         Int
-  referenceExterne String?       @db.VarChar(100)
-  motif            MotifsDepense
-  description      String?       @db.Text
+  referenceExterne String?     @db.VarChar(100) // Référence à une commande, une vente, une facture, etc.
+  type             TypeDepense
+  description      String?     @db.Text
   agentId          Int
-  entrepriseId     Int           @default(1)
+  entrepriseId     Int         @default(1)
   Paiement         Paiement[]
-  entreprise       Entreprise    @relation(fields: [entrepriseId], references: [id])
-  caisse           Caisse        @relation(fields: [caisseId], references: [id])
-  agent            Agent         @relation(fields: [agentId], references: [id])
-  createdAt        DateTime      @default(now())
-  updatedAt        DateTime      @updatedAt
+  entreprise       Entreprise  @relation(fields: [entrepriseId], references: [id])
+  caisse           Caisse      @relation(fields: [caisseId], references: [id])
+  agent            Agent       @relation(fields: [agentId], references: [id])
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
 }

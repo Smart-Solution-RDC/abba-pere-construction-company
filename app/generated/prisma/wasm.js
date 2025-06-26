@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.9.0
- * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
+ * Prisma Client JS version: 6.10.1
+ * Query Engine version: 9b628578b3b7cae625e8c927178f15a170e74a9c
  */
 Prisma.prismaVersion = {
-  client: "6.9.0",
-  engine: "81e4af48011447c3cc503a190e86995b66d2a28e"
+  client: "6.10.1",
+  engine: "9b628578b3b7cae625e8c927178f15a170e74a9c"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -236,6 +236,7 @@ exports.Prisma.PaiementScalarFieldEnum = {
   venteId: 'venteId',
   achatId: 'achatId',
   commandeId: 'commandeId',
+  depenseId: 'depenseId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -322,26 +323,14 @@ exports.Prisma.CommandeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ClotureCaisseScalarFieldEnum = {
-  id: 'id',
-  dateCloture: 'dateCloture',
-  agentId: 'agentId',
-  entrepriseId: 'entrepriseId',
-  updatedAt: 'updatedAt',
-  notes: 'notes',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.MouvementCaisseScalarFieldEnum = {
+exports.Prisma.DepenseScalarFieldEnum = {
   id: 'id',
   caisseId: 'caisseId',
   referenceExterne: 'referenceExterne',
-  type_mouvement: 'type_mouvement',
-  categorie: 'categorie',
-  moyen_paiement: 'moyen_paiement',
-  montant: 'montant',
+  type: 'type',
   description: 'description',
   agentId: 'agentId',
+  entrepriseId: 'entrepriseId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -414,16 +403,8 @@ exports.StatutCommande = exports.$Enums.StatutCommande = {
   ANNULEE: 'ANNULEE'
 };
 
-exports.TypeMouvementCaisse = exports.$Enums.TypeMouvementCaisse = {
-  ENTREE: 'ENTREE',
-  SORTIE: 'SORTIE'
-};
-
-exports.CategorieMouvement = exports.$Enums.CategorieMouvement = {
-  ACHAT: 'ACHAT',
-  VENTE: 'VENTE',
-  COMMANDE: 'COMMANDE',
-  FOURNITUR: 'FOURNITUR',
+exports.TypeDepense = exports.$Enums.TypeDepense = {
+  FOURNITURE: 'FOURNITURE',
   SALAIRE: 'SALAIRE',
   LOYER: 'LOYER',
   EMPRUNT: 'EMPRUNT',
@@ -448,8 +429,7 @@ exports.Prisma.ModelName = {
   DetailPanier: 'DetailPanier',
   Achat: 'Achat',
   Commande: 'Commande',
-  ClotureCaisse: 'ClotureCaisse',
-  MouvementCaisse: 'MouvementCaisse'
+  Depense: 'Depense'
 };
 
 /**

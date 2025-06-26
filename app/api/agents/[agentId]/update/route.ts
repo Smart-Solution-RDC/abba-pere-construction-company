@@ -1,12 +1,15 @@
 import { Agent } from "@/app/generated/prisma";
 import { prisma } from "@/lib/prisma";
 import { AgentRouteParams } from "@/prisma/definitions";
+import { getNomComplet } from "@/prisma/utils";
 
 
 export async function PUT(request: Request, { params }: AgentRouteParams) {
     // Valid form
     const data: Agent = await request.json();
-    const nom_complet = `${data.nom + ' ' + data.postnom}`
+    
+    data.nom_complet = getNomComplet(data.nom, data.postnom);
+    
     const { agentId } = await params; 
 
     const user = await prisma.agent.findUnique({
