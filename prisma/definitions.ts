@@ -1,4 +1,4 @@
-import { DetailPanier, ModePaiment } from "@/app/generated/prisma"
+import { DetailPanier } from "@/app/generated/prisma"
 
 export interface AgentRouteParams { 
     params: {
@@ -64,7 +64,7 @@ export interface CaisseRouteParams {
     }
 }
 
-export interface MouvementRouteParams { 
+export interface DepenseRouteParams { 
     params: { 
         agentId: string
         caisseId: string
@@ -95,7 +95,7 @@ export type tableType =
     'caisse' | 'client' | 'produit' | 
     'contact' | 'mouvementCaisse' | 'fournisseur' | 
     'panier' | 'agent' | 'achat' | 'vente' | 
-    'commande' | 'clotureCaisse' | 'detailPanier' | 'devise'
+    'commande' | 'clotureCaisse' | 'detailPanier' | 'devise' 
 
 export type Type = 'inc' | 'dec'
 
@@ -111,9 +111,14 @@ export interface AchatRouteParams {
 }
 
 export interface ProduitsDisponible { 
+    id: number;
     designation: string;
+    deviseId: true;
     qtteDisponible: number; 
-    prixUnitaire: number 
+    prixUnitaire: number;
+    devise: {
+        tauxDEchange: string
+    }
 }
 
 export type MoyenPaiment = 'cache' | 'banque' | 'mobile' | 'cheque' | 'autres'
@@ -121,7 +126,7 @@ export type MoyenPaiment = 'cache' | 'banque' | 'mobile' | 'cheque' | 'autres'
 // Changer fournisseur a fourniture
 export type CategorieMouvement = 'ACHAT' | 'VENTE' | 'COMMANDE' | 'FOURNITUR' | 'SALAIRE' | 'LOYER' | 'TAXE' | 'AUTRES'
 
-export type ModePaiement = 'CACHE' | 'BANQUE' | 'MOBILE'
+export type ModePaiement = 'CACHE' | 'BANQUE'
  
 export interface AchatRouteParams {
     caisseId: string
@@ -190,5 +195,5 @@ export interface ClotureParams {
 
 export interface PaiementForm {
     montant: number,
-    modePaiement: ModePaiment
+    modePaiement: ModePaiement
 } 

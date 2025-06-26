@@ -226,11 +226,19 @@ exports.Prisma.ProduitScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ModePaiementScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  soldeActuel: 'soldeActuel',
+  caisseId: 'caisseId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.PaiementScalarFieldEnum = {
   id: 'id',
-  totalHT: 'totalHT',
-  totalTTC: 'totalTTC',
-  modePaiement: 'modePaiement',
+  montant: 'montant',
+  modePaiementId: 'modePaiementId',
   deviseId: 'deviseId',
   caisseId: 'caisseId',
   venteId: 'venteId',
@@ -244,11 +252,10 @@ exports.Prisma.PaiementScalarFieldEnum = {
 exports.Prisma.CaisseScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
-  description: 'description',
-  soldeActuel: 'soldeActuel',
   deviseId: 'deviseId',
   agentId: 'agentId',
   statut: 'statut',
+  description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -284,12 +291,12 @@ exports.Prisma.DetailPanierScalarFieldEnum = {
   id: 'id',
   produitId: 'produitId',
   qtte: 'qtte',
-  modePaiement: 'modePaiement',
   prixUnitaire: 'prixUnitaire',
   prixTotalHT: 'prixTotalHT',
   prixTotalTTC: 'prixTotalTTC',
   panierId: 'panierId',
   deviseId: 'deviseId',
+  modePaiementId: 'modePaiementId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -327,7 +334,7 @@ exports.Prisma.DepenseScalarFieldEnum = {
   id: 'id',
   caisseId: 'caisseId',
   referenceExterne: 'referenceExterne',
-  type: 'type',
+  motif: 'motif',
   description: 'description',
   agentId: 'agentId',
   entrepriseId: 'entrepriseId',
@@ -366,10 +373,9 @@ exports.Poste = exports.$Enums.Poste = {
   GERANT: 'GERANT'
 };
 
-exports.ModePaiment = exports.$Enums.ModePaiment = {
+exports.TypeModePaiement = exports.$Enums.TypeModePaiement = {
   CACHE: 'CACHE',
-  BANQUE: 'BANQUE',
-  MOBILE: 'MOBILE'
+  BANQUE: 'BANQUE'
 };
 
 exports.StatutCaisse = exports.$Enums.StatutCaisse = {
@@ -403,12 +409,12 @@ exports.StatutCommande = exports.$Enums.StatutCommande = {
   ANNULEE: 'ANNULEE'
 };
 
-exports.TypeDepense = exports.$Enums.TypeDepense = {
-  FOURNITURE: 'FOURNITURE',
-  SALAIRE: 'SALAIRE',
-  LOYER: 'LOYER',
-  EMPRUNT: 'EMPRUNT',
-  TAXE: 'TAXE',
+exports.MotifsDepense = exports.$Enums.MotifsDepense = {
+  ACHAT_FOURNITURES: 'ACHAT_FOURNITURES',
+  PAIEMENT_SALAIRE: 'PAIEMENT_SALAIRE',
+  PAIEMENT_LOYER: 'PAIEMENT_LOYER',
+  PAIEMENT_EMPRUNT: 'PAIEMENT_EMPRUNT',
+  PAIEMENT_TAXE: 'PAIEMENT_TAXE',
   AUTRES: 'AUTRES'
 };
 
@@ -422,6 +428,7 @@ exports.Prisma.ModelName = {
   Contact: 'Contact',
   Fournisseur: 'Fournisseur',
   Produit: 'Produit',
+  ModePaiement: 'ModePaiement',
   Paiement: 'Paiement',
   Caisse: 'Caisse',
   Vente: 'Vente',

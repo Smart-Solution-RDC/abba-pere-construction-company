@@ -1,7 +1,12 @@
 import { prisma } from "@/lib/prisma";
-import { AchatRouteParams, ModePaiement, ProduitsDisponible, tableType, Type, TypeAcheteur, TypeMouvement } from "./definitions";
+import { AchatRouteParams, ProduitsDisponible, tableType, Type, TypeAcheteur, TypeMouvement } from "./definitions";
 import { NextRequest } from "next/server";
-import { Client, DetailPanier, ModePaiment, Produit } from "@/app/generated/prisma";
+import { Agent, Client, DetailPanier, ModePaiement, Produit } from "@/app/generated/prisma";
+
+
+
+export const API = 'http://localhost:3000/api/'
+
 
 export async function Table(req: NextRequest, name: tableType, id: string, selection: object | null) {
     const mySelection = selection ? selection : {}
@@ -18,12 +23,24 @@ export async function Table(req: NextRequest, name: tableType, id: string, selec
     return table;
 } 
 
-export async function PrixUnitaireSystem(produitId: number, prixUnitaire: number) {
+export async function PrixUnitaireSystem(produitId: number, prixUnitaire: number | null) {
+    if (prixUnitaire) return prixUnitaire;
     const produit = await prisma.produit.findUnique({
         where: { id: produitId },
         select: { prixUnitaire: true }
     });
-    return produit ? produit.prixUnitaire : prixUnitaire;
+    if (produit) return produit.prixUnitaire;
+}
+
+export async function DefaultModePaiement(modePaiementId: number | null) {
+    if (!modePaiementId) {
+        const mode = await prisma.modePaiement.findFirst({
+            where: { type: 'CACHE' },
+            select: { id: true }
+        });
+        return mode?.id;
+    }
+    return modePaiementId;
 }
 
 export async function GetModePaiement(modePaiement: ModePaiement) {
@@ -144,7 +161,7 @@ export async function UpdateCaisses(caisseId: number, type: Type, montant: numbe
 }
 
 export async function checkTable(tableName: tableType, tableId: string) {
-    const table = await prisma[tableName].findFirst({
+    const table = await (prisma as any)[tableName].findFirst({
         where: { id: parseInt(tableId) },
         // select: {}
     });
@@ -336,7 +353,7 @@ export async function Pagination (
     const condition_ = condition ? condition : {};
     const selection_ = selection ? selection : {};
     const orderBy_ = orderBy ? orderBy : {};
-    return await prisma[name].findMany({
+    return await (prisma as any)[name].findMany({
         where: condition_,
         select: selection_,
         orderBy: orderBy_
@@ -345,11 +362,38 @@ export async function Pagination (
 
 export async function GetDetailPanier(panierId: number) {
     const orderBy = { id: 'asc' }
-    return await FetchMany('detailPanier', {panierId: panierId}, {id: true, produitId: true, qtte: true, prixUnitaire: true, prixTotalHT: true, prixTotalTTC: true, deviseId: true, modePaiement: true}, orderBy) as Array<DetailPanier>;;
+    return await FetchMany('detailPanier', {panierId: panierId}, {
+        id: true, 
+        produitId: true, 
+        qtte: true, 
+        prixUnitaire: true, 
+        prixTotalHT: true, 
+        prixTotalTTC: true, 
+        deviseId: true, 
+        modePaiement: true,
+        devise: {
+            select: {
+                tauxDEchange: true
+            }
+        }
+    }, orderBy);
 }
 
 export async function GetProduit(DetailPanier: DetailPanier[]) {
-    return await FetchMany('produit', { id: { in: DetailPanier.map(item => item.produitId) }}, { qtteDisponible: true, designation: true, prixUnitaire: true }, null) as Array<ProduitsDisponible>;
+    return await FetchMany('produit', { id: { in: DetailPanier.map(item => item.produitId) }}, { 
+        id: true, 
+        qtteDisponible: true, 
+        designation: true, 
+        deviseId: true, 
+        prixUnitaire: true, 
+        devise: {
+            select: {
+                // id: true,
+                tauxDEchange: true
+            }
+            // devise: true,
+        } 
+    }, null) as Array<ProduitsDisponible>;
 }
 
 type PaiementForm = {
@@ -359,15 +403,19 @@ type PaiementForm = {
     caisseId: number
 }
 
-export async function CreatePaiement (form: PaiementForm) {
-    return await prisma.paiement.create({
+export async function CreatePaiement (data: any) {
+    const paiement = await prisma.paiement.create({
         data: {
-            montant: form.montant,
-            modePaiement: form.modePaiement,
-            deviseId: form.deviseId,
-            caisseId: form.caisseId
+            deviseId: data.deviseId,
+            montant: data.montant,
+            caisseId: data.caisseId,
+            modePaiementId: data.modePaiementId,
+            venteId: data.venteId,
+            achatId: data.achatId,
+            commandeId: data.commandeId,
         }
     });
+    return paiement.montant;
 }
 
 async function isUniqueDeviseForm (DetailPanier: DetailPanier[]) {
@@ -399,108 +447,207 @@ export async function VariationStockage (DetailPanier: DetailPanier[], achatId: 
             select: { qtteDisponible: true }
         });
     }
+
+    return true;
     
 }
 
-export async function Paiement (DetailPanier: DetailPanier[], achatId: number | null, venteId: number | null, commandeId: number | null) {
-    let isUniqueDevise = [];
-    let paiementForm = [];
-    let prixTotalHT = 0;
-    let prixTotalTTC = 0;
 
-    const getCaisses = await FetchMany ('caisse', {deviseId: { in: DetailPanier.map(item => item.deviseId)}}, {id: true, deviseId: true}, null) as Array<{id: number, deviseId: number}>
+type Type = number | null;
+
+export async function Paiement (DetailPanier: DetailPanier[], data: any, achatId: Type, venteId: Type, commandeId: Type) {
+    let paiementForm = [];
+    let montant = 0;
+
+    const getCaisse = await prisma.caisse.findFirst({
+        where: { deviseId: data.deviseId },
+        select: { id: true }
+    });
+
+    if (achatId) {
+        for (let i = 0; i < DetailPanier.length; i++) {
+            const detail = DetailPanier[i];
+            montant += detail.prixTotalHT;
+        }
+        
+        if (getCaisse?.id === undefined) throw new Error("Caisse ID is undefined.");
+
+        const paiement = await prisma.paiement.create({
+            data: {
+                deviseId: data.deviseId,
+                montant: montant,
+                caisseId: getCaisse.id,
+                modePaiementId: data.modePaiementId,
+                venteId: venteId,
+                achatId: achatId,
+                commandeId: commandeId
+            }
+        });
+
+        return montant;
+    }
 
     for (let i = 0; i < DetailPanier.length; i++) {
         const detail = DetailPanier[i];
-        isUniqueDevise.push(detail.deviseId);
-        if (isUniqueDevise.includes(detail.deviseId)) {
-            prixTotalHT += detail.prixTotalHT;
-            prixTotalTTC += detail.prixTotalTTC;
- 
-            for (let i = 0; i < getCaisses.length; i++) {
-                const caisse = getCaisses[i];                
-
-                if (detail.deviseId == caisse.deviseId) {
-                    paiementForm.push({
-                    deviseId: detail.deviseId,
-                    modePaiement: detail.modePaiement,
-                    totalHT: prixTotalHT,
-                    totalTTC: prixTotalTTC,
-                    caisseId: caisse.id,
-                    venteId: venteId,
-                    achatId: achatId,
-                    commandeId: commandeId,
-                });
+        
+        if (data.deviseId == detail.deviseId && data.deviseProduit[i].deviseId == detail.deviseId) {
+            detail.prixTotalHT = detail.prixUnitaire * detail.qtte;
+        } else {
+            if (detail.deviseId !== data.deviseId && data.deviseId == data.deviseProduit[i].deviseId) {
+                detail.prixTotalHT = (detail.prixTotalHT * detail.qtte) / detail.qtte / data.deviseProduit[i].tauxDEchange;
+                if (data.deviseId == data.deviseProduit[i].deviseId) {
+                    detail.prixUnitaire = detail.prixUnitaire / data.deviseProduit[i].tauxDEchange;
+                }
+            } else {
+                detail.prixUnitaire = detail.prixUnitaire * data.deviseProduit[i].tauxDEchange;
+                if (detail.deviseId !== data.deviseId && data.deviseId !== data.deviseProduit[i].deviseId) {
+                    detail.prixTotalHT = detail.prixUnitaire * detail.qtte;
                 }
             }
         }
+                
+        montant += detail.prixTotalHT;
+                
+        await prisma.detailPanier.update({
+            where: { id: detail.id, panierId: data.panierId },
+            data: {
+                deviseId: data.deviseId,
+                prixUnitaire: detail.prixUnitaire,
+                prixTotalHT: detail.prixTotalHT,
+                prixTotalTTC: detail.prixTotalHT * 0.16,
+                modePaiementId: data.modePaiementId
+            }
+        });
     }
 
-    const paiement = await prisma.paiement.createMany({
-        data: paiementForm
+    if (getCaisse?.id === undefined) throw new Error("Caisse ID is undefined.");
+
+    const createPaiement = await prisma.paiement.create({
+        data: {
+            deviseId: data.deviseId,
+            montant: montant,
+            caisseId: getCaisse.id,
+            modePaiementId: data.modePaiementId,
+            venteId: venteId,
+            achatId: achatId,
+            commandeId: commandeId,
+        },
+        select: { montant: true }
     });
     
-    return paiement;
+    return montant;
 }
 
-export async function VariationCaisse (DetailPanier: DetailPanier[], achatId: ID, venteId: ID, commandeId: ID) {
-    
-    if (await isUniqueDeviseForm(DetailPanier)) {
-        let montant = 0;
-        let deviseId = DetailPanier[0].deviseId;
+interface data {
+    deviseId: number;
+    modePaiementId: number;
+    montant: number
+}
 
-        const getCaisse = await prisma.caisse.findFirst({
-            where: { deviseId: deviseId }, select: { id: true }
-        });
 
-        for (let i = 0; i < DetailPanier.length; i++) {
-            const detail = DetailPanier[i];
-            montant += detail.prixTotalHT
-        }
+export async function GetMontantPanier(DetailPanier: DetailPanier[], data: any) {
+    let montant = 0;
 
-        return await prisma.caisse.update({
-            where: { id: getCaisse?.id },
-            data: { soldeActuel: { increment: montant }}
-        });
-    }
-
-    if (!await isUniqueDeviseForm(DetailPanier)) {
-        const getCaisses = await FetchMany('caisse', { deviseId: { in: DetailPanier.map(item => item.deviseId)}}, { id: true, nom: true, deviseId: true, soldeActuel: true }, null) as Array<{ id: number, nom: number, deviseId: number, soldeActuel: number}>;
-
-        let variation_caisse: any = null;
-        for (let i = 0; i < DetailPanier.length; i++) {
-            const detail = DetailPanier[i];
-            if (detail.deviseId == getCaisses[i].deviseId) {
-                if (getCaisses[i].soldeActuel < detail.prixTotalHT) {
-                    return getCaisses[i].nom;
+    for (let i = 0; i < DetailPanier.length; i++) {
+        const detail = DetailPanier[i];
+        
+        if (data.deviseId == detail.deviseId && data.deviseProduit[i].deviseId == detail.deviseId) {
+            detail.prixTotalHT = detail.prixUnitaire * detail.qtte;
+        } else {
+            if (detail.deviseId !== data.deviseId && data.deviseId == data.deviseProduit[i].deviseId) {
+                detail.prixTotalHT = (detail.prixTotalHT * detail.qtte) / detail.qtte / data.deviseProduit[i].tauxDEchange;
+                if (data.deviseId == data.deviseProduit[i].deviseId) {
+                    detail.prixUnitaire = detail.prixUnitaire / data.deviseProduit[i].tauxDEchange;
                 }
-                await prisma.caisse.update({
-                    where: { id: getCaisses[i].id },
-                    data: { soldeActuel: achatId || commandeId ? { decrement: detail.prixTotalHT } :  { increment: detail.prixTotalHT }}
-                });
+            } else {
+                detail.prixUnitaire = detail.prixUnitaire * data.deviseProduit[i].tauxDEchange;
+                if (detail.deviseId !== data.deviseId && data.deviseId !== data.deviseProduit[i].deviseId) {
+                    detail.prixTotalHT = detail.prixUnitaire * detail.qtte;
+                }
             }
         }
-    }    
+
+        // await prisma.detailPanier.update({
+        //     where: { id: detail.id, panierId: data.panierId },
+        //     data: {
+        //         deviseId: data.deviseId,
+        //         prixUnitaire: detail.prixUnitaire,
+        //         prixTotalHT: detail.prixTotalHT,
+        //         prixTotalTTC: detail.prixTotalHT * 0.16,
+        //         modePaiementId: data.modePaiementId
+        //     }
+        // });
+        
+        montant += detail.prixTotalHT;
+    }
+
+    return montant;
 }
 
-export async function Vente(DetailPanier: DetailPanier[], agentId: string, data: any, nouveauClient: Client) {
+export async function VerifierSoldeDiponible(modePaiementId: number, deviseId: number, montant: number) {
+    
+    const getCaisse = await prisma.caisse.findFirst({
+        where: { deviseId: deviseId },
+        select: { id: true, nom: true }
+    });
+    
+    if (!getCaisse) return { caisse: false }
 
-    let agent: any | null = null;
-    if (agentId) {
-        agent = await prisma.agent.findUnique({
-            where: { id: parseInt(agentId) },
-            select: { nom: true, postnom: true}
-        });
+    const getModePaiement = await prisma.modePaiement.findUnique({
+        where: { id: modePaiementId, caisseId: getCaisse.id },
+        select: { id: true, type: true, soldeActuel: true }
+    });
+
+    if (getModePaiement) {
+        if (getModePaiement.soldeActuel) {
+            return getModePaiement.soldeActuel >= montant ? { soldeActuel: true } : { soldeActuel: false, nomCaisse: getCaisse.nom, type: getModePaiement.type };
+        }
+    } else { return { modePaiement: false, nomCaisse: getCaisse.nom } }
+}
+
+
+export async function VariationCaisse (data: any, achatId: ID, venteId: ID, commandeId: ID) {    
+    const getModePaiement = await prisma.modePaiement.findUnique({
+        where: { id: data.modePaiementId },
+        select: { id: true, soldeActuel: true }
+    });
+
+    if (achatId) {
+        if (getModePaiement?.soldeActuel) {
+            if (getModePaiement.soldeActuel > data.montant) {
+                const update = await prisma.modePaiement.update({
+                    where: { id: data.modePaiementId },
+                    data: { soldeActuel: { decrement: data.montant }}
+                });
+                return true;
+            } 
+            return false;
+        }
     }
+
+    if (venteId || commandeId) {
+        const update = await prisma.modePaiement.update({
+            where: { id: data.modePaiementId },
+            data: { soldeActuel: { increment: data.montant }}
+        });
+        return true;
+    }
+
+}
+
+export async function Vente(agent: Agent, panierId: number, acheteur: any) {
 
     const vente = await prisma.vente.create({
         data: {
-            panierId: parseInt(data.panierId),
-            typeAcheteur: data.typeAcheteur,
-            fournisseurId: data.fournisseurId && data.typeAcheteur == 'FOURNISSEUR' ? parseInt(data.fournisseurId) : null,
-            clientId: data.clientId && data.typeAcheteur == 'CLIENT' ? parseInt(data.clientId) : nouveauClient ? nouveauClient?.id : null,
-            agentId: data.agentId && data.typeAcheteur == 'AGENT' ? parseInt(data.agentId) : null,
-            enregistrerPar: agent && `${agent?.nom} ${agent?.postnom}`
+            panierId: panierId,
+            nom: acheteur.nom != '' ? acheteur.nom : null,
+            tel: acheteur.tel != '' ? acheteur.tel : null,
+            dateLivraison: acheteur.dateLivraison != '' ? acheteur.dateLivraison : new Date(),
+            adresseLivraison: acheteur.adresseLivraison != '' ? acheteur.adresseLivraison : null,
+            fournisseurId: acheteur.fournisseurId ?? null,
+            clientId: acheteur.clientId ?? null,
+            agentId: acheteur.agentId ?? null,
+            enregistrerPar: getNomComplet(agent?.nom, agent?.postnom)
         }
     });
 

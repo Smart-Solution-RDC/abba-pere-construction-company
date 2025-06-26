@@ -103,7 +103,7 @@ async function main() {
     data: {
       designation: 'ciment-2',
       prixUnitaire: 100.0,
-      deviseId: devise2.id,
+      deviseId: devise1.id,
       teneurId: teneur2.id,
       agentId: agent.id
     }
@@ -124,8 +124,16 @@ async function main() {
   // Caisse
   await prisma.caisse.create({
     data: {
-      nom: "Franc Congolais",
+      nom: "dollars americain",
       deviseId: devise1.id,
+      agentId: agent.id
+    }
+  });
+
+  await prisma.caisse.create({
+    data: {
+      nom: "francs congolais",
+      deviseId: devise2.id,
       agentId: agent.id
     }
   });

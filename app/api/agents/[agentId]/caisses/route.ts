@@ -13,14 +13,13 @@ export async function GET (request: Request, {params}: RouteParams) {
         select: {
             id: true,
             nom: true,
-            soldeActuel: true,
+            statut: true,
             devise: {
                 select: {
                     code: true,
                     symbole: true
                 }
             },
-            statut: true,
         }
     });
 

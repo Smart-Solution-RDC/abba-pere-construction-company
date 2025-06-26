@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { AgentRouteParams } from "@/prisma/definitions";
 
 export async function POST(request: Request, { params }: AgentRouteParams) {
-    const data: Panier = await request.json();
+    const data = await request.json();
     const { agentId } = await params;
 
     const agent = await prisma.agent.findUnique({
@@ -13,24 +13,56 @@ export async function POST(request: Request, { params }: AgentRouteParams) {
     if (!agent) return new Response("Agent Not found", { status: 201 }); 
 
     try {
-        // VERIFIER SI UN OANIER EST EN COURS
-        // SINON, CREER UN.
-        // if (agentId) {
-        //     const verifyPanier = await prisma.panier.findFirst({
-        //         where: { 
-        //             agentId: parseInt(agentId),
-        //             statut: 'EN_COURS'
-        //         }
-        //     });
+        
+        const findPanier = await prisma.panier.findFirst({
+            where: { agent: { id: parseInt(agentId) }, statut: 'EN_COURS' },
+            select: { id: true }
+        });
 
-        //     if (!verifyPanier) {
-                await prisma.panier.create({
-                    data: { agentId: parseInt(agentId)}
-                });
+        if (findPanier) {
+            console.log(data);
+            data.prixTotalHT = data.qtte * data.prixUnitaire;
+            data.prixTotalTTC = data.prixTotalHT * 0.16;
+            data.panierId = findPanier.id;
+            
+            const detailPanier = await prisma.detailPanier.create({
+                data: data
+            });
 
-                return new Response("Panier Created!", { status: 201 });
+            const getAllDetail = await prisma.detailPanier.findMany({
+                where: { agentd: parseInt(agentId), statut: 'EN_COURS' },
+                select: {
+                    id: true,
+                    produit: {
+                        select: {
+                            designation: true
+                        }
+                    },
+                    qtte: true,
+                    prixUnitaire: true,
+                    prixTotalHT: true,
+                    devise: {
+                        select: {
+                            id: true,
+                            code: true
+                        }
+                    }
+                }
+            });
+
+            return new Response(JSON.stringify(data), { status: 201 });
+        }
+        
+        // const panier = await prisma.panier.create({
+        //     data: { agentId: parseInt(agentId)}
+        // });
+
+        // const detailPanier = await prisma.detailPanier.create({
+        //     data: data
+        // });
+
+        // return new Response(JSON.stringify([]), { status: 201 });
             // } else {
-
                 // await prisma.panier.update({
                 //     where: {
                 //         agentId: parseInt(agentId),
@@ -38,14 +70,13 @@ export async function POST(request: Request, { params }: AgentRouteParams) {
                 //     },
                 //     data: { statut: 'EN_COURS' }
                 // });
-
                 // return new Response("Statut updated!", { status: 201 });
             // }
         
         // }
         
     } catch (error) {
-        return new Response("Invalid Form", { status: 201 });
+        return new Response(JSON.stringify({error: "Invalid Form"}), { status: 201 });
     }
 }
 

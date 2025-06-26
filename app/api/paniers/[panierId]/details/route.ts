@@ -2,7 +2,6 @@ import { prisma } from "@/lib/prisma";
 import { PanierRouteParams } from "@/prisma/definitions";
 import { NextRequest } from "next/server";
 
-
 export async function GET(request: NextRequest, { params }: PanierRouteParams) {
     const { panierId } = await params
     

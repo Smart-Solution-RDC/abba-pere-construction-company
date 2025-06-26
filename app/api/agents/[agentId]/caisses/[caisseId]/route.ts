@@ -17,28 +17,31 @@ export async function GET (req: Request, { params }: CaisseRouteParams ) {
             nom: true,
             statut: true,
             description: true,
-            soldeActuel: true,
             devise: {
                 select: {
                     symbole: true
                 }
             },
+            ModePaiement: {
+                select: {
+                    id: true,
+                    type: true,
+                    soldeActuel: true
+                }
+            },
         }
     });
 
-    const modePaiement = await prisma.paiement.groupBy({
-        where: {caisseId: parseInt(caisseId)},
-        by: ['modePaiement'],
-        _sum: {
-            totalHT: true
-        }
-    });
+    // const modePaiement = await prisma.paiement.groupBy({
+    //     where: {caisseId: parseInt(caisseId)},
+    //     by: ['modePaiement'],
+    //     _sum: {
+    //         totalHT: true
+    //     }
+    // });
 
     if (!caisse) return new Response("Caisse not Found", { status: 404 });
 
-    return new Response(JSON.stringify({
-        caisse: caisse,
-        modePaiement: modePaiement,
-    }), { status: 201 });
+    return new Response(JSON.stringify(caisse), { status: 201 });
 } 
 

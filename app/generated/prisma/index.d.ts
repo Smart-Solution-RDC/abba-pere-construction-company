@@ -59,6 +59,11 @@ export type Fournisseur = $Result.DefaultSelection<Prisma.$FournisseurPayload>
  */
 export type Produit = $Result.DefaultSelection<Prisma.$ProduitPayload>
 /**
+ * Model ModePaiement
+ * 
+ */
+export type ModePaiement = $Result.DefaultSelection<Prisma.$ModePaiementPayload>
+/**
  * Model Paiement
  * 
  */
@@ -129,13 +134,12 @@ export const Poste: {
 export type Poste = (typeof Poste)[keyof typeof Poste]
 
 
-export const ModePaiment: {
+export const TypeModePaiement: {
   CACHE: 'CACHE',
-  BANQUE: 'BANQUE',
-  MOBILE: 'MOBILE'
+  BANQUE: 'BANQUE'
 };
 
-export type ModePaiment = (typeof ModePaiment)[keyof typeof ModePaiment]
+export type TypeModePaiement = (typeof TypeModePaiement)[keyof typeof TypeModePaiement]
 
 
 export const StatutVente: {
@@ -195,16 +199,16 @@ export const StatutCaisse: {
 export type StatutCaisse = (typeof StatutCaisse)[keyof typeof StatutCaisse]
 
 
-export const TypeDepense: {
-  FOURNITURE: 'FOURNITURE',
-  SALAIRE: 'SALAIRE',
-  LOYER: 'LOYER',
-  EMPRUNT: 'EMPRUNT',
-  TAXE: 'TAXE',
+export const MotifsDepense: {
+  ACHAT_FOURNITURES: 'ACHAT_FOURNITURES',
+  PAIEMENT_SALAIRE: 'PAIEMENT_SALAIRE',
+  PAIEMENT_LOYER: 'PAIEMENT_LOYER',
+  PAIEMENT_EMPRUNT: 'PAIEMENT_EMPRUNT',
+  PAIEMENT_TAXE: 'PAIEMENT_TAXE',
   AUTRES: 'AUTRES'
 };
 
-export type TypeDepense = (typeof TypeDepense)[keyof typeof TypeDepense]
+export type MotifsDepense = (typeof MotifsDepense)[keyof typeof MotifsDepense]
 
 }
 
@@ -220,9 +224,9 @@ export type Poste = $Enums.Poste
 
 export const Poste: typeof $Enums.Poste
 
-export type ModePaiment = $Enums.ModePaiment
+export type TypeModePaiement = $Enums.TypeModePaiement
 
-export const ModePaiment: typeof $Enums.ModePaiment
+export const TypeModePaiement: typeof $Enums.TypeModePaiement
 
 export type StatutVente = $Enums.StatutVente
 
@@ -248,9 +252,9 @@ export type StatutCaisse = $Enums.StatutCaisse
 
 export const StatutCaisse: typeof $Enums.StatutCaisse
 
-export type TypeDepense = $Enums.TypeDepense
+export type MotifsDepense = $Enums.MotifsDepense
 
-export const TypeDepense: typeof $Enums.TypeDepense
+export const MotifsDepense: typeof $Enums.MotifsDepense
 
 /**
  * ##  Prisma Client ʲˢ
@@ -466,6 +470,16 @@ export class PrismaClient<
     * ```
     */
   get produit(): Prisma.ProduitDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.modePaiement`: Exposes CRUD operations for the **ModePaiement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ModePaiements
+    * const modePaiements = await prisma.modePaiement.findMany()
+    * ```
+    */
+  get modePaiement(): Prisma.ModePaiementDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.paiement`: Exposes CRUD operations for the **Paiement** model.
@@ -995,6 +1009,7 @@ export namespace Prisma {
     Contact: 'Contact',
     Fournisseur: 'Fournisseur',
     Produit: 'Produit',
+    ModePaiement: 'ModePaiement',
     Paiement: 'Paiement',
     Caisse: 'Caisse',
     Vente: 'Vente',
@@ -1021,7 +1036,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "teneur" | "devise" | "entreprise" | "agent" | "client" | "adresse" | "contact" | "fournisseur" | "produit" | "paiement" | "caisse" | "vente" | "panier" | "detailPanier" | "achat" | "commande" | "depense"
+      modelProps: "teneur" | "devise" | "entreprise" | "agent" | "client" | "adresse" | "contact" | "fournisseur" | "produit" | "modePaiement" | "paiement" | "caisse" | "vente" | "panier" | "detailPanier" | "achat" | "commande" | "depense"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1688,6 +1703,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ProduitCountArgs<ExtArgs>
             result: $Utils.Optional<ProduitCountAggregateOutputType> | number
+          }
+        }
+      }
+      ModePaiement: {
+        payload: Prisma.$ModePaiementPayload<ExtArgs>
+        fields: Prisma.ModePaiementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ModePaiementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModePaiementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ModePaiementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModePaiementPayload>
+          }
+          findFirst: {
+            args: Prisma.ModePaiementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModePaiementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ModePaiementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModePaiementPayload>
+          }
+          findMany: {
+            args: Prisma.ModePaiementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModePaiementPayload>[]
+          }
+          create: {
+            args: Prisma.ModePaiementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModePaiementPayload>
+          }
+          createMany: {
+            args: Prisma.ModePaiementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ModePaiementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModePaiementPayload>[]
+          }
+          delete: {
+            args: Prisma.ModePaiementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModePaiementPayload>
+          }
+          update: {
+            args: Prisma.ModePaiementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModePaiementPayload>
+          }
+          deleteMany: {
+            args: Prisma.ModePaiementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ModePaiementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ModePaiementUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModePaiementPayload>[]
+          }
+          upsert: {
+            args: Prisma.ModePaiementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModePaiementPayload>
+          }
+          aggregate: {
+            args: Prisma.ModePaiementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateModePaiement>
+          }
+          groupBy: {
+            args: Prisma.ModePaiementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ModePaiementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ModePaiementCountArgs<ExtArgs>
+            result: $Utils.Optional<ModePaiementCountAggregateOutputType> | number
           }
         }
       }
@@ -2376,6 +2465,7 @@ export namespace Prisma {
     contact?: ContactOmit
     fournisseur?: FournisseurOmit
     produit?: ProduitOmit
+    modePaiement?: ModePaiementOmit
     paiement?: PaiementOmit
     caisse?: CaisseOmit
     vente?: VenteOmit
@@ -2934,17 +3024,59 @@ export namespace Prisma {
 
 
   /**
+   * Count Type ModePaiementCountOutputType
+   */
+
+  export type ModePaiementCountOutputType = {
+    Paiement: number
+    DetailPanier: number
+  }
+
+  export type ModePaiementCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Paiement?: boolean | ModePaiementCountOutputTypeCountPaiementArgs
+    DetailPanier?: boolean | ModePaiementCountOutputTypeCountDetailPanierArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ModePaiementCountOutputType without action
+   */
+  export type ModePaiementCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiementCountOutputType
+     */
+    select?: ModePaiementCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ModePaiementCountOutputType without action
+   */
+  export type ModePaiementCountOutputTypeCountPaiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaiementWhereInput
+  }
+
+  /**
+   * ModePaiementCountOutputType without action
+   */
+  export type ModePaiementCountOutputTypeCountDetailPanierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DetailPanierWhereInput
+  }
+
+
+  /**
    * Count Type CaisseCountOutputType
    */
 
   export type CaisseCountOutputType = {
     paiements: number
     Depense: number
+    ModePaiement: number
   }
 
   export type CaisseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     paiements?: boolean | CaisseCountOutputTypeCountPaiementsArgs
     Depense?: boolean | CaisseCountOutputTypeCountDepenseArgs
+    ModePaiement?: boolean | CaisseCountOutputTypeCountModePaiementArgs
   }
 
   // Custom InputTypes
@@ -2970,6 +3102,13 @@ export namespace Prisma {
    */
   export type CaisseCountOutputTypeCountDepenseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DepenseWhereInput
+  }
+
+  /**
+   * CaisseCountOutputType without action
+   */
+  export type CaisseCountOutputTypeCountModePaiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ModePaiementWhereInput
   }
 
 
@@ -14630,6 +14769,1177 @@ export namespace Prisma {
 
 
   /**
+   * Model ModePaiement
+   */
+
+  export type AggregateModePaiement = {
+    _count: ModePaiementCountAggregateOutputType | null
+    _avg: ModePaiementAvgAggregateOutputType | null
+    _sum: ModePaiementSumAggregateOutputType | null
+    _min: ModePaiementMinAggregateOutputType | null
+    _max: ModePaiementMaxAggregateOutputType | null
+  }
+
+  export type ModePaiementAvgAggregateOutputType = {
+    id: number | null
+    soldeActuel: number | null
+    caisseId: number | null
+  }
+
+  export type ModePaiementSumAggregateOutputType = {
+    id: number | null
+    soldeActuel: number | null
+    caisseId: number | null
+  }
+
+  export type ModePaiementMinAggregateOutputType = {
+    id: number | null
+    type: $Enums.TypeModePaiement | null
+    soldeActuel: number | null
+    caisseId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ModePaiementMaxAggregateOutputType = {
+    id: number | null
+    type: $Enums.TypeModePaiement | null
+    soldeActuel: number | null
+    caisseId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ModePaiementCountAggregateOutputType = {
+    id: number
+    type: number
+    soldeActuel: number
+    caisseId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ModePaiementAvgAggregateInputType = {
+    id?: true
+    soldeActuel?: true
+    caisseId?: true
+  }
+
+  export type ModePaiementSumAggregateInputType = {
+    id?: true
+    soldeActuel?: true
+    caisseId?: true
+  }
+
+  export type ModePaiementMinAggregateInputType = {
+    id?: true
+    type?: true
+    soldeActuel?: true
+    caisseId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ModePaiementMaxAggregateInputType = {
+    id?: true
+    type?: true
+    soldeActuel?: true
+    caisseId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ModePaiementCountAggregateInputType = {
+    id?: true
+    type?: true
+    soldeActuel?: true
+    caisseId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ModePaiementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ModePaiement to aggregate.
+     */
+    where?: ModePaiementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModePaiements to fetch.
+     */
+    orderBy?: ModePaiementOrderByWithRelationInput | ModePaiementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ModePaiementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModePaiements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModePaiements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ModePaiements
+    **/
+    _count?: true | ModePaiementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ModePaiementAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ModePaiementSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ModePaiementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ModePaiementMaxAggregateInputType
+  }
+
+  export type GetModePaiementAggregateType<T extends ModePaiementAggregateArgs> = {
+        [P in keyof T & keyof AggregateModePaiement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateModePaiement[P]>
+      : GetScalarType<T[P], AggregateModePaiement[P]>
+  }
+
+
+
+
+  export type ModePaiementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ModePaiementWhereInput
+    orderBy?: ModePaiementOrderByWithAggregationInput | ModePaiementOrderByWithAggregationInput[]
+    by: ModePaiementScalarFieldEnum[] | ModePaiementScalarFieldEnum
+    having?: ModePaiementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ModePaiementCountAggregateInputType | true
+    _avg?: ModePaiementAvgAggregateInputType
+    _sum?: ModePaiementSumAggregateInputType
+    _min?: ModePaiementMinAggregateInputType
+    _max?: ModePaiementMaxAggregateInputType
+  }
+
+  export type ModePaiementGroupByOutputType = {
+    id: number
+    type: $Enums.TypeModePaiement
+    soldeActuel: number | null
+    caisseId: number
+    createdAt: Date
+    updatedAt: Date
+    _count: ModePaiementCountAggregateOutputType | null
+    _avg: ModePaiementAvgAggregateOutputType | null
+    _sum: ModePaiementSumAggregateOutputType | null
+    _min: ModePaiementMinAggregateOutputType | null
+    _max: ModePaiementMaxAggregateOutputType | null
+  }
+
+  type GetModePaiementGroupByPayload<T extends ModePaiementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ModePaiementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ModePaiementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ModePaiementGroupByOutputType[P]>
+            : GetScalarType<T[P], ModePaiementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ModePaiementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    soldeActuel?: boolean
+    caisseId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    caisse?: boolean | CaisseDefaultArgs<ExtArgs>
+    Paiement?: boolean | ModePaiement$PaiementArgs<ExtArgs>
+    DetailPanier?: boolean | ModePaiement$DetailPanierArgs<ExtArgs>
+    _count?: boolean | ModePaiementCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["modePaiement"]>
+
+  export type ModePaiementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    soldeActuel?: boolean
+    caisseId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    caisse?: boolean | CaisseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["modePaiement"]>
+
+  export type ModePaiementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    soldeActuel?: boolean
+    caisseId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    caisse?: boolean | CaisseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["modePaiement"]>
+
+  export type ModePaiementSelectScalar = {
+    id?: boolean
+    type?: boolean
+    soldeActuel?: boolean
+    caisseId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ModePaiementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "soldeActuel" | "caisseId" | "createdAt" | "updatedAt", ExtArgs["result"]["modePaiement"]>
+  export type ModePaiementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    caisse?: boolean | CaisseDefaultArgs<ExtArgs>
+    Paiement?: boolean | ModePaiement$PaiementArgs<ExtArgs>
+    DetailPanier?: boolean | ModePaiement$DetailPanierArgs<ExtArgs>
+    _count?: boolean | ModePaiementCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ModePaiementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    caisse?: boolean | CaisseDefaultArgs<ExtArgs>
+  }
+  export type ModePaiementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    caisse?: boolean | CaisseDefaultArgs<ExtArgs>
+  }
+
+  export type $ModePaiementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ModePaiement"
+    objects: {
+      caisse: Prisma.$CaissePayload<ExtArgs>
+      Paiement: Prisma.$PaiementPayload<ExtArgs>[]
+      DetailPanier: Prisma.$DetailPanierPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      type: $Enums.TypeModePaiement
+      soldeActuel: number | null
+      caisseId: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["modePaiement"]>
+    composites: {}
+  }
+
+  type ModePaiementGetPayload<S extends boolean | null | undefined | ModePaiementDefaultArgs> = $Result.GetResult<Prisma.$ModePaiementPayload, S>
+
+  type ModePaiementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ModePaiementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ModePaiementCountAggregateInputType | true
+    }
+
+  export interface ModePaiementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ModePaiement'], meta: { name: 'ModePaiement' } }
+    /**
+     * Find zero or one ModePaiement that matches the filter.
+     * @param {ModePaiementFindUniqueArgs} args - Arguments to find a ModePaiement
+     * @example
+     * // Get one ModePaiement
+     * const modePaiement = await prisma.modePaiement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ModePaiementFindUniqueArgs>(args: SelectSubset<T, ModePaiementFindUniqueArgs<ExtArgs>>): Prisma__ModePaiementClient<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ModePaiement that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ModePaiementFindUniqueOrThrowArgs} args - Arguments to find a ModePaiement
+     * @example
+     * // Get one ModePaiement
+     * const modePaiement = await prisma.modePaiement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ModePaiementFindUniqueOrThrowArgs>(args: SelectSubset<T, ModePaiementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ModePaiementClient<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ModePaiement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModePaiementFindFirstArgs} args - Arguments to find a ModePaiement
+     * @example
+     * // Get one ModePaiement
+     * const modePaiement = await prisma.modePaiement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ModePaiementFindFirstArgs>(args?: SelectSubset<T, ModePaiementFindFirstArgs<ExtArgs>>): Prisma__ModePaiementClient<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ModePaiement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModePaiementFindFirstOrThrowArgs} args - Arguments to find a ModePaiement
+     * @example
+     * // Get one ModePaiement
+     * const modePaiement = await prisma.modePaiement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ModePaiementFindFirstOrThrowArgs>(args?: SelectSubset<T, ModePaiementFindFirstOrThrowArgs<ExtArgs>>): Prisma__ModePaiementClient<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ModePaiements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModePaiementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ModePaiements
+     * const modePaiements = await prisma.modePaiement.findMany()
+     * 
+     * // Get first 10 ModePaiements
+     * const modePaiements = await prisma.modePaiement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const modePaiementWithIdOnly = await prisma.modePaiement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ModePaiementFindManyArgs>(args?: SelectSubset<T, ModePaiementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ModePaiement.
+     * @param {ModePaiementCreateArgs} args - Arguments to create a ModePaiement.
+     * @example
+     * // Create one ModePaiement
+     * const ModePaiement = await prisma.modePaiement.create({
+     *   data: {
+     *     // ... data to create a ModePaiement
+     *   }
+     * })
+     * 
+     */
+    create<T extends ModePaiementCreateArgs>(args: SelectSubset<T, ModePaiementCreateArgs<ExtArgs>>): Prisma__ModePaiementClient<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ModePaiements.
+     * @param {ModePaiementCreateManyArgs} args - Arguments to create many ModePaiements.
+     * @example
+     * // Create many ModePaiements
+     * const modePaiement = await prisma.modePaiement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ModePaiementCreateManyArgs>(args?: SelectSubset<T, ModePaiementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ModePaiements and returns the data saved in the database.
+     * @param {ModePaiementCreateManyAndReturnArgs} args - Arguments to create many ModePaiements.
+     * @example
+     * // Create many ModePaiements
+     * const modePaiement = await prisma.modePaiement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ModePaiements and only return the `id`
+     * const modePaiementWithIdOnly = await prisma.modePaiement.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ModePaiementCreateManyAndReturnArgs>(args?: SelectSubset<T, ModePaiementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ModePaiement.
+     * @param {ModePaiementDeleteArgs} args - Arguments to delete one ModePaiement.
+     * @example
+     * // Delete one ModePaiement
+     * const ModePaiement = await prisma.modePaiement.delete({
+     *   where: {
+     *     // ... filter to delete one ModePaiement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ModePaiementDeleteArgs>(args: SelectSubset<T, ModePaiementDeleteArgs<ExtArgs>>): Prisma__ModePaiementClient<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ModePaiement.
+     * @param {ModePaiementUpdateArgs} args - Arguments to update one ModePaiement.
+     * @example
+     * // Update one ModePaiement
+     * const modePaiement = await prisma.modePaiement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ModePaiementUpdateArgs>(args: SelectSubset<T, ModePaiementUpdateArgs<ExtArgs>>): Prisma__ModePaiementClient<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ModePaiements.
+     * @param {ModePaiementDeleteManyArgs} args - Arguments to filter ModePaiements to delete.
+     * @example
+     * // Delete a few ModePaiements
+     * const { count } = await prisma.modePaiement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ModePaiementDeleteManyArgs>(args?: SelectSubset<T, ModePaiementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ModePaiements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModePaiementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ModePaiements
+     * const modePaiement = await prisma.modePaiement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ModePaiementUpdateManyArgs>(args: SelectSubset<T, ModePaiementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ModePaiements and returns the data updated in the database.
+     * @param {ModePaiementUpdateManyAndReturnArgs} args - Arguments to update many ModePaiements.
+     * @example
+     * // Update many ModePaiements
+     * const modePaiement = await prisma.modePaiement.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ModePaiements and only return the `id`
+     * const modePaiementWithIdOnly = await prisma.modePaiement.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ModePaiementUpdateManyAndReturnArgs>(args: SelectSubset<T, ModePaiementUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ModePaiement.
+     * @param {ModePaiementUpsertArgs} args - Arguments to update or create a ModePaiement.
+     * @example
+     * // Update or create a ModePaiement
+     * const modePaiement = await prisma.modePaiement.upsert({
+     *   create: {
+     *     // ... data to create a ModePaiement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ModePaiement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ModePaiementUpsertArgs>(args: SelectSubset<T, ModePaiementUpsertArgs<ExtArgs>>): Prisma__ModePaiementClient<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ModePaiements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModePaiementCountArgs} args - Arguments to filter ModePaiements to count.
+     * @example
+     * // Count the number of ModePaiements
+     * const count = await prisma.modePaiement.count({
+     *   where: {
+     *     // ... the filter for the ModePaiements we want to count
+     *   }
+     * })
+    **/
+    count<T extends ModePaiementCountArgs>(
+      args?: Subset<T, ModePaiementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ModePaiementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ModePaiement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModePaiementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ModePaiementAggregateArgs>(args: Subset<T, ModePaiementAggregateArgs>): Prisma.PrismaPromise<GetModePaiementAggregateType<T>>
+
+    /**
+     * Group by ModePaiement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModePaiementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ModePaiementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ModePaiementGroupByArgs['orderBy'] }
+        : { orderBy?: ModePaiementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ModePaiementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetModePaiementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ModePaiement model
+   */
+  readonly fields: ModePaiementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ModePaiement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ModePaiementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    caisse<T extends CaisseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CaisseDefaultArgs<ExtArgs>>): Prisma__CaisseClient<$Result.GetResult<Prisma.$CaissePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Paiement<T extends ModePaiement$PaiementArgs<ExtArgs> = {}>(args?: Subset<T, ModePaiement$PaiementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    DetailPanier<T extends ModePaiement$DetailPanierArgs<ExtArgs> = {}>(args?: Subset<T, ModePaiement$DetailPanierArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ModePaiement model
+   */
+  interface ModePaiementFieldRefs {
+    readonly id: FieldRef<"ModePaiement", 'Int'>
+    readonly type: FieldRef<"ModePaiement", 'TypeModePaiement'>
+    readonly soldeActuel: FieldRef<"ModePaiement", 'Float'>
+    readonly caisseId: FieldRef<"ModePaiement", 'Int'>
+    readonly createdAt: FieldRef<"ModePaiement", 'DateTime'>
+    readonly updatedAt: FieldRef<"ModePaiement", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ModePaiement findUnique
+   */
+  export type ModePaiementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementInclude<ExtArgs> | null
+    /**
+     * Filter, which ModePaiement to fetch.
+     */
+    where: ModePaiementWhereUniqueInput
+  }
+
+  /**
+   * ModePaiement findUniqueOrThrow
+   */
+  export type ModePaiementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementInclude<ExtArgs> | null
+    /**
+     * Filter, which ModePaiement to fetch.
+     */
+    where: ModePaiementWhereUniqueInput
+  }
+
+  /**
+   * ModePaiement findFirst
+   */
+  export type ModePaiementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementInclude<ExtArgs> | null
+    /**
+     * Filter, which ModePaiement to fetch.
+     */
+    where?: ModePaiementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModePaiements to fetch.
+     */
+    orderBy?: ModePaiementOrderByWithRelationInput | ModePaiementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ModePaiements.
+     */
+    cursor?: ModePaiementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModePaiements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModePaiements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ModePaiements.
+     */
+    distinct?: ModePaiementScalarFieldEnum | ModePaiementScalarFieldEnum[]
+  }
+
+  /**
+   * ModePaiement findFirstOrThrow
+   */
+  export type ModePaiementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementInclude<ExtArgs> | null
+    /**
+     * Filter, which ModePaiement to fetch.
+     */
+    where?: ModePaiementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModePaiements to fetch.
+     */
+    orderBy?: ModePaiementOrderByWithRelationInput | ModePaiementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ModePaiements.
+     */
+    cursor?: ModePaiementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModePaiements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModePaiements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ModePaiements.
+     */
+    distinct?: ModePaiementScalarFieldEnum | ModePaiementScalarFieldEnum[]
+  }
+
+  /**
+   * ModePaiement findMany
+   */
+  export type ModePaiementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementInclude<ExtArgs> | null
+    /**
+     * Filter, which ModePaiements to fetch.
+     */
+    where?: ModePaiementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModePaiements to fetch.
+     */
+    orderBy?: ModePaiementOrderByWithRelationInput | ModePaiementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ModePaiements.
+     */
+    cursor?: ModePaiementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModePaiements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModePaiements.
+     */
+    skip?: number
+    distinct?: ModePaiementScalarFieldEnum | ModePaiementScalarFieldEnum[]
+  }
+
+  /**
+   * ModePaiement create
+   */
+  export type ModePaiementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ModePaiement.
+     */
+    data: XOR<ModePaiementCreateInput, ModePaiementUncheckedCreateInput>
+  }
+
+  /**
+   * ModePaiement createMany
+   */
+  export type ModePaiementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ModePaiements.
+     */
+    data: ModePaiementCreateManyInput | ModePaiementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ModePaiement createManyAndReturn
+   */
+  export type ModePaiementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * The data used to create many ModePaiements.
+     */
+    data: ModePaiementCreateManyInput | ModePaiementCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ModePaiement update
+   */
+  export type ModePaiementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ModePaiement.
+     */
+    data: XOR<ModePaiementUpdateInput, ModePaiementUncheckedUpdateInput>
+    /**
+     * Choose, which ModePaiement to update.
+     */
+    where: ModePaiementWhereUniqueInput
+  }
+
+  /**
+   * ModePaiement updateMany
+   */
+  export type ModePaiementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ModePaiements.
+     */
+    data: XOR<ModePaiementUpdateManyMutationInput, ModePaiementUncheckedUpdateManyInput>
+    /**
+     * Filter which ModePaiements to update
+     */
+    where?: ModePaiementWhereInput
+    /**
+     * Limit how many ModePaiements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ModePaiement updateManyAndReturn
+   */
+  export type ModePaiementUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * The data used to update ModePaiements.
+     */
+    data: XOR<ModePaiementUpdateManyMutationInput, ModePaiementUncheckedUpdateManyInput>
+    /**
+     * Filter which ModePaiements to update
+     */
+    where?: ModePaiementWhereInput
+    /**
+     * Limit how many ModePaiements to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ModePaiement upsert
+   */
+  export type ModePaiementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ModePaiement to update in case it exists.
+     */
+    where: ModePaiementWhereUniqueInput
+    /**
+     * In case the ModePaiement found by the `where` argument doesn't exist, create a new ModePaiement with this data.
+     */
+    create: XOR<ModePaiementCreateInput, ModePaiementUncheckedCreateInput>
+    /**
+     * In case the ModePaiement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ModePaiementUpdateInput, ModePaiementUncheckedUpdateInput>
+  }
+
+  /**
+   * ModePaiement delete
+   */
+  export type ModePaiementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementInclude<ExtArgs> | null
+    /**
+     * Filter which ModePaiement to delete.
+     */
+    where: ModePaiementWhereUniqueInput
+  }
+
+  /**
+   * ModePaiement deleteMany
+   */
+  export type ModePaiementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ModePaiements to delete
+     */
+    where?: ModePaiementWhereInput
+    /**
+     * Limit how many ModePaiements to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ModePaiement.Paiement
+   */
+  export type ModePaiement$PaiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paiement
+     */
+    select?: PaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paiement
+     */
+    omit?: PaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaiementInclude<ExtArgs> | null
+    where?: PaiementWhereInput
+    orderBy?: PaiementOrderByWithRelationInput | PaiementOrderByWithRelationInput[]
+    cursor?: PaiementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaiementScalarFieldEnum | PaiementScalarFieldEnum[]
+  }
+
+  /**
+   * ModePaiement.DetailPanier
+   */
+  export type ModePaiement$DetailPanierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DetailPanier
+     */
+    select?: DetailPanierSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DetailPanier
+     */
+    omit?: DetailPanierOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DetailPanierInclude<ExtArgs> | null
+    where?: DetailPanierWhereInput
+    orderBy?: DetailPanierOrderByWithRelationInput | DetailPanierOrderByWithRelationInput[]
+    cursor?: DetailPanierWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DetailPanierScalarFieldEnum | DetailPanierScalarFieldEnum[]
+  }
+
+  /**
+   * ModePaiement without action
+   */
+  export type ModePaiementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Paiement
    */
 
@@ -14643,8 +15953,8 @@ export namespace Prisma {
 
   export type PaiementAvgAggregateOutputType = {
     id: number | null
-    totalHT: number | null
-    totalTTC: number | null
+    montant: number | null
+    modePaiementId: number | null
     deviseId: number | null
     caisseId: number | null
     venteId: number | null
@@ -14655,8 +15965,8 @@ export namespace Prisma {
 
   export type PaiementSumAggregateOutputType = {
     id: number | null
-    totalHT: number | null
-    totalTTC: number | null
+    montant: number | null
+    modePaiementId: number | null
     deviseId: number | null
     caisseId: number | null
     venteId: number | null
@@ -14667,9 +15977,8 @@ export namespace Prisma {
 
   export type PaiementMinAggregateOutputType = {
     id: number | null
-    totalHT: number | null
-    totalTTC: number | null
-    modePaiement: $Enums.ModePaiment | null
+    montant: number | null
+    modePaiementId: number | null
     deviseId: number | null
     caisseId: number | null
     venteId: number | null
@@ -14682,9 +15991,8 @@ export namespace Prisma {
 
   export type PaiementMaxAggregateOutputType = {
     id: number | null
-    totalHT: number | null
-    totalTTC: number | null
-    modePaiement: $Enums.ModePaiment | null
+    montant: number | null
+    modePaiementId: number | null
     deviseId: number | null
     caisseId: number | null
     venteId: number | null
@@ -14697,9 +16005,8 @@ export namespace Prisma {
 
   export type PaiementCountAggregateOutputType = {
     id: number
-    totalHT: number
-    totalTTC: number
-    modePaiement: number
+    montant: number
+    modePaiementId: number
     deviseId: number
     caisseId: number
     venteId: number
@@ -14714,8 +16021,8 @@ export namespace Prisma {
 
   export type PaiementAvgAggregateInputType = {
     id?: true
-    totalHT?: true
-    totalTTC?: true
+    montant?: true
+    modePaiementId?: true
     deviseId?: true
     caisseId?: true
     venteId?: true
@@ -14726,8 +16033,8 @@ export namespace Prisma {
 
   export type PaiementSumAggregateInputType = {
     id?: true
-    totalHT?: true
-    totalTTC?: true
+    montant?: true
+    modePaiementId?: true
     deviseId?: true
     caisseId?: true
     venteId?: true
@@ -14738,9 +16045,8 @@ export namespace Prisma {
 
   export type PaiementMinAggregateInputType = {
     id?: true
-    totalHT?: true
-    totalTTC?: true
-    modePaiement?: true
+    montant?: true
+    modePaiementId?: true
     deviseId?: true
     caisseId?: true
     venteId?: true
@@ -14753,9 +16059,8 @@ export namespace Prisma {
 
   export type PaiementMaxAggregateInputType = {
     id?: true
-    totalHT?: true
-    totalTTC?: true
-    modePaiement?: true
+    montant?: true
+    modePaiementId?: true
     deviseId?: true
     caisseId?: true
     venteId?: true
@@ -14768,9 +16073,8 @@ export namespace Prisma {
 
   export type PaiementCountAggregateInputType = {
     id?: true
-    totalHT?: true
-    totalTTC?: true
-    modePaiement?: true
+    montant?: true
+    modePaiementId?: true
     deviseId?: true
     caisseId?: true
     venteId?: true
@@ -14870,9 +16174,8 @@ export namespace Prisma {
 
   export type PaiementGroupByOutputType = {
     id: number
-    totalHT: number | null
-    totalTTC: number | null
-    modePaiement: $Enums.ModePaiment
+    montant: number | null
+    modePaiementId: number
     deviseId: number
     caisseId: number
     venteId: number | null
@@ -14904,9 +16207,8 @@ export namespace Prisma {
 
   export type PaiementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    totalHT?: boolean
-    totalTTC?: boolean
-    modePaiement?: boolean
+    montant?: boolean
+    modePaiementId?: boolean
     deviseId?: boolean
     caisseId?: boolean
     venteId?: boolean
@@ -14915,6 +16217,7 @@ export namespace Prisma {
     depenseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    modePaiement?: boolean | ModePaiementDefaultArgs<ExtArgs>
     vente?: boolean | Paiement$venteArgs<ExtArgs>
     achat?: boolean | Paiement$achatArgs<ExtArgs>
     commande?: boolean | Paiement$commandeArgs<ExtArgs>
@@ -14925,9 +16228,8 @@ export namespace Prisma {
 
   export type PaiementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    totalHT?: boolean
-    totalTTC?: boolean
-    modePaiement?: boolean
+    montant?: boolean
+    modePaiementId?: boolean
     deviseId?: boolean
     caisseId?: boolean
     venteId?: boolean
@@ -14936,6 +16238,7 @@ export namespace Prisma {
     depenseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    modePaiement?: boolean | ModePaiementDefaultArgs<ExtArgs>
     vente?: boolean | Paiement$venteArgs<ExtArgs>
     achat?: boolean | Paiement$achatArgs<ExtArgs>
     commande?: boolean | Paiement$commandeArgs<ExtArgs>
@@ -14946,9 +16249,8 @@ export namespace Prisma {
 
   export type PaiementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    totalHT?: boolean
-    totalTTC?: boolean
-    modePaiement?: boolean
+    montant?: boolean
+    modePaiementId?: boolean
     deviseId?: boolean
     caisseId?: boolean
     venteId?: boolean
@@ -14957,6 +16259,7 @@ export namespace Prisma {
     depenseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    modePaiement?: boolean | ModePaiementDefaultArgs<ExtArgs>
     vente?: boolean | Paiement$venteArgs<ExtArgs>
     achat?: boolean | Paiement$achatArgs<ExtArgs>
     commande?: boolean | Paiement$commandeArgs<ExtArgs>
@@ -14967,9 +16270,8 @@ export namespace Prisma {
 
   export type PaiementSelectScalar = {
     id?: boolean
-    totalHT?: boolean
-    totalTTC?: boolean
-    modePaiement?: boolean
+    montant?: boolean
+    modePaiementId?: boolean
     deviseId?: boolean
     caisseId?: boolean
     venteId?: boolean
@@ -14980,8 +16282,9 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type PaiementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "totalHT" | "totalTTC" | "modePaiement" | "deviseId" | "caisseId" | "venteId" | "achatId" | "commandeId" | "depenseId" | "createdAt" | "updatedAt", ExtArgs["result"]["paiement"]>
+  export type PaiementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "montant" | "modePaiementId" | "deviseId" | "caisseId" | "venteId" | "achatId" | "commandeId" | "depenseId" | "createdAt" | "updatedAt", ExtArgs["result"]["paiement"]>
   export type PaiementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modePaiement?: boolean | ModePaiementDefaultArgs<ExtArgs>
     vente?: boolean | Paiement$venteArgs<ExtArgs>
     achat?: boolean | Paiement$achatArgs<ExtArgs>
     commande?: boolean | Paiement$commandeArgs<ExtArgs>
@@ -14990,6 +16293,7 @@ export namespace Prisma {
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
   }
   export type PaiementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modePaiement?: boolean | ModePaiementDefaultArgs<ExtArgs>
     vente?: boolean | Paiement$venteArgs<ExtArgs>
     achat?: boolean | Paiement$achatArgs<ExtArgs>
     commande?: boolean | Paiement$commandeArgs<ExtArgs>
@@ -14998,6 +16302,7 @@ export namespace Prisma {
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
   }
   export type PaiementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modePaiement?: boolean | ModePaiementDefaultArgs<ExtArgs>
     vente?: boolean | Paiement$venteArgs<ExtArgs>
     achat?: boolean | Paiement$achatArgs<ExtArgs>
     commande?: boolean | Paiement$commandeArgs<ExtArgs>
@@ -15009,6 +16314,7 @@ export namespace Prisma {
   export type $PaiementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Paiement"
     objects: {
+      modePaiement: Prisma.$ModePaiementPayload<ExtArgs>
       vente: Prisma.$VentePayload<ExtArgs> | null
       achat: Prisma.$AchatPayload<ExtArgs> | null
       commande: Prisma.$CommandePayload<ExtArgs> | null
@@ -15018,9 +16324,8 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      totalHT: number | null
-      totalTTC: number | null
-      modePaiement: $Enums.ModePaiment
+      montant: number | null
+      modePaiementId: number
       deviseId: number
       caisseId: number
       venteId: number | null
@@ -15423,6 +16728,7 @@ export namespace Prisma {
    */
   export interface Prisma__PaiementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    modePaiement<T extends ModePaiementDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ModePaiementDefaultArgs<ExtArgs>>): Prisma__ModePaiementClient<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     vente<T extends Paiement$venteArgs<ExtArgs> = {}>(args?: Subset<T, Paiement$venteArgs<ExtArgs>>): Prisma__VenteClient<$Result.GetResult<Prisma.$VentePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     achat<T extends Paiement$achatArgs<ExtArgs> = {}>(args?: Subset<T, Paiement$achatArgs<ExtArgs>>): Prisma__AchatClient<$Result.GetResult<Prisma.$AchatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     commande<T extends Paiement$commandeArgs<ExtArgs> = {}>(args?: Subset<T, Paiement$commandeArgs<ExtArgs>>): Prisma__CommandeClient<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -15459,9 +16765,8 @@ export namespace Prisma {
    */
   interface PaiementFieldRefs {
     readonly id: FieldRef<"Paiement", 'Int'>
-    readonly totalHT: FieldRef<"Paiement", 'Float'>
-    readonly totalTTC: FieldRef<"Paiement", 'Float'>
-    readonly modePaiement: FieldRef<"Paiement", 'ModePaiment'>
+    readonly montant: FieldRef<"Paiement", 'Float'>
+    readonly modePaiementId: FieldRef<"Paiement", 'Int'>
     readonly deviseId: FieldRef<"Paiement", 'Int'>
     readonly caisseId: FieldRef<"Paiement", 'Int'>
     readonly venteId: FieldRef<"Paiement", 'Int'>
@@ -15974,14 +17279,12 @@ export namespace Prisma {
 
   export type CaisseAvgAggregateOutputType = {
     id: number | null
-    soldeActuel: number | null
     deviseId: number | null
     agentId: number | null
   }
 
   export type CaisseSumAggregateOutputType = {
     id: number | null
-    soldeActuel: number | null
     deviseId: number | null
     agentId: number | null
   }
@@ -15989,11 +17292,10 @@ export namespace Prisma {
   export type CaisseMinAggregateOutputType = {
     id: number | null
     nom: string | null
-    description: string | null
-    soldeActuel: number | null
     deviseId: number | null
     agentId: number | null
     statut: $Enums.StatutCaisse | null
+    description: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -16001,11 +17303,10 @@ export namespace Prisma {
   export type CaisseMaxAggregateOutputType = {
     id: number | null
     nom: string | null
-    description: string | null
-    soldeActuel: number | null
     deviseId: number | null
     agentId: number | null
     statut: $Enums.StatutCaisse | null
+    description: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -16013,11 +17314,10 @@ export namespace Prisma {
   export type CaisseCountAggregateOutputType = {
     id: number
     nom: number
-    description: number
-    soldeActuel: number
     deviseId: number
     agentId: number
     statut: number
+    description: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -16026,14 +17326,12 @@ export namespace Prisma {
 
   export type CaisseAvgAggregateInputType = {
     id?: true
-    soldeActuel?: true
     deviseId?: true
     agentId?: true
   }
 
   export type CaisseSumAggregateInputType = {
     id?: true
-    soldeActuel?: true
     deviseId?: true
     agentId?: true
   }
@@ -16041,11 +17339,10 @@ export namespace Prisma {
   export type CaisseMinAggregateInputType = {
     id?: true
     nom?: true
-    description?: true
-    soldeActuel?: true
     deviseId?: true
     agentId?: true
     statut?: true
+    description?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -16053,11 +17350,10 @@ export namespace Prisma {
   export type CaisseMaxAggregateInputType = {
     id?: true
     nom?: true
-    description?: true
-    soldeActuel?: true
     deviseId?: true
     agentId?: true
     statut?: true
+    description?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -16065,11 +17361,10 @@ export namespace Prisma {
   export type CaisseCountAggregateInputType = {
     id?: true
     nom?: true
-    description?: true
-    soldeActuel?: true
     deviseId?: true
     agentId?: true
     statut?: true
+    description?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -16164,11 +17459,10 @@ export namespace Prisma {
   export type CaisseGroupByOutputType = {
     id: number
     nom: string
-    description: string | null
-    soldeActuel: number | null
     deviseId: number
     agentId: number
     statut: $Enums.StatutCaisse
+    description: string | null
     createdAt: Date
     updatedAt: Date
     _count: CaisseCountAggregateOutputType | null
@@ -16195,28 +17489,27 @@ export namespace Prisma {
   export type CaisseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nom?: boolean
-    description?: boolean
-    soldeActuel?: boolean
     deviseId?: boolean
     agentId?: boolean
     statut?: boolean
+    description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
     agent?: boolean | AgentDefaultArgs<ExtArgs>
     paiements?: boolean | Caisse$paiementsArgs<ExtArgs>
     Depense?: boolean | Caisse$DepenseArgs<ExtArgs>
+    ModePaiement?: boolean | Caisse$ModePaiementArgs<ExtArgs>
     _count?: boolean | CaisseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["caisse"]>
 
   export type CaisseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nom?: boolean
-    description?: boolean
-    soldeActuel?: boolean
     deviseId?: boolean
     agentId?: boolean
     statut?: boolean
+    description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
@@ -16226,11 +17519,10 @@ export namespace Prisma {
   export type CaisseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nom?: boolean
-    description?: boolean
-    soldeActuel?: boolean
     deviseId?: boolean
     agentId?: boolean
     statut?: boolean
+    description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
@@ -16240,21 +17532,21 @@ export namespace Prisma {
   export type CaisseSelectScalar = {
     id?: boolean
     nom?: boolean
-    description?: boolean
-    soldeActuel?: boolean
     deviseId?: boolean
     agentId?: boolean
     statut?: boolean
+    description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "description" | "soldeActuel" | "deviseId" | "agentId" | "statut" | "createdAt" | "updatedAt", ExtArgs["result"]["caisse"]>
+  export type CaisseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "deviseId" | "agentId" | "statut" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["caisse"]>
   export type CaisseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     devise?: boolean | DeviseDefaultArgs<ExtArgs>
     agent?: boolean | AgentDefaultArgs<ExtArgs>
     paiements?: boolean | Caisse$paiementsArgs<ExtArgs>
     Depense?: boolean | Caisse$DepenseArgs<ExtArgs>
+    ModePaiement?: boolean | Caisse$ModePaiementArgs<ExtArgs>
     _count?: boolean | CaisseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CaisseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16273,15 +17565,15 @@ export namespace Prisma {
       agent: Prisma.$AgentPayload<ExtArgs>
       paiements: Prisma.$PaiementPayload<ExtArgs>[]
       Depense: Prisma.$DepensePayload<ExtArgs>[]
+      ModePaiement: Prisma.$ModePaiementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nom: string
-      description: string | null
-      soldeActuel: number | null
       deviseId: number
       agentId: number
       statut: $Enums.StatutCaisse
+      description: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["caisse"]>
@@ -16682,6 +17974,7 @@ export namespace Prisma {
     agent<T extends AgentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AgentDefaultArgs<ExtArgs>>): Prisma__AgentClient<$Result.GetResult<Prisma.$AgentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     paiements<T extends Caisse$paiementsArgs<ExtArgs> = {}>(args?: Subset<T, Caisse$paiementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Depense<T extends Caisse$DepenseArgs<ExtArgs> = {}>(args?: Subset<T, Caisse$DepenseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ModePaiement<T extends Caisse$ModePaiementArgs<ExtArgs> = {}>(args?: Subset<T, Caisse$ModePaiementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16713,11 +18006,10 @@ export namespace Prisma {
   interface CaisseFieldRefs {
     readonly id: FieldRef<"Caisse", 'Int'>
     readonly nom: FieldRef<"Caisse", 'String'>
-    readonly description: FieldRef<"Caisse", 'String'>
-    readonly soldeActuel: FieldRef<"Caisse", 'Float'>
     readonly deviseId: FieldRef<"Caisse", 'Int'>
     readonly agentId: FieldRef<"Caisse", 'Int'>
     readonly statut: FieldRef<"Caisse", 'StatutCaisse'>
+    readonly description: FieldRef<"Caisse", 'String'>
     readonly createdAt: FieldRef<"Caisse", 'DateTime'>
     readonly updatedAt: FieldRef<"Caisse", 'DateTime'>
   }
@@ -17161,6 +18453,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DepenseScalarFieldEnum | DepenseScalarFieldEnum[]
+  }
+
+  /**
+   * Caisse.ModePaiement
+   */
+  export type Caisse$ModePaiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementInclude<ExtArgs> | null
+    where?: ModePaiementWhereInput
+    orderBy?: ModePaiementOrderByWithRelationInput | ModePaiementOrderByWithRelationInput[]
+    cursor?: ModePaiementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ModePaiementScalarFieldEnum | ModePaiementScalarFieldEnum[]
   }
 
   /**
@@ -19856,6 +21172,7 @@ export namespace Prisma {
     prixTotalTTC: number | null
     panierId: number | null
     deviseId: number | null
+    modePaiementId: number | null
   }
 
   export type DetailPanierSumAggregateOutputType = {
@@ -19867,18 +21184,19 @@ export namespace Prisma {
     prixTotalTTC: number | null
     panierId: number | null
     deviseId: number | null
+    modePaiementId: number | null
   }
 
   export type DetailPanierMinAggregateOutputType = {
     id: number | null
     produitId: number | null
     qtte: number | null
-    modePaiement: $Enums.ModePaiment | null
     prixUnitaire: number | null
     prixTotalHT: number | null
     prixTotalTTC: number | null
     panierId: number | null
     deviseId: number | null
+    modePaiementId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -19887,12 +21205,12 @@ export namespace Prisma {
     id: number | null
     produitId: number | null
     qtte: number | null
-    modePaiement: $Enums.ModePaiment | null
     prixUnitaire: number | null
     prixTotalHT: number | null
     prixTotalTTC: number | null
     panierId: number | null
     deviseId: number | null
+    modePaiementId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -19901,12 +21219,12 @@ export namespace Prisma {
     id: number
     produitId: number
     qtte: number
-    modePaiement: number
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
     deviseId: number
+    modePaiementId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -19922,6 +21240,7 @@ export namespace Prisma {
     prixTotalTTC?: true
     panierId?: true
     deviseId?: true
+    modePaiementId?: true
   }
 
   export type DetailPanierSumAggregateInputType = {
@@ -19933,18 +21252,19 @@ export namespace Prisma {
     prixTotalTTC?: true
     panierId?: true
     deviseId?: true
+    modePaiementId?: true
   }
 
   export type DetailPanierMinAggregateInputType = {
     id?: true
     produitId?: true
     qtte?: true
-    modePaiement?: true
     prixUnitaire?: true
     prixTotalHT?: true
     prixTotalTTC?: true
     panierId?: true
     deviseId?: true
+    modePaiementId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -19953,12 +21273,12 @@ export namespace Prisma {
     id?: true
     produitId?: true
     qtte?: true
-    modePaiement?: true
     prixUnitaire?: true
     prixTotalHT?: true
     prixTotalTTC?: true
     panierId?: true
     deviseId?: true
+    modePaiementId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -19967,12 +21287,12 @@ export namespace Prisma {
     id?: true
     produitId?: true
     qtte?: true
-    modePaiement?: true
     prixUnitaire?: true
     prixTotalHT?: true
     prixTotalTTC?: true
     panierId?: true
     deviseId?: true
+    modePaiementId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -20068,12 +21388,12 @@ export namespace Prisma {
     id: number
     produitId: number
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
-    deviseId: number
+    deviseId: number | null
+    modePaiementId: number | null
     createdAt: Date
     updatedAt: Date
     _count: DetailPanierCountAggregateOutputType | null
@@ -20101,15 +21421,16 @@ export namespace Prisma {
     id?: boolean
     produitId?: boolean
     qtte?: boolean
-    modePaiement?: boolean
     prixUnitaire?: boolean
     prixTotalHT?: boolean
     prixTotalTTC?: boolean
     panierId?: boolean
     deviseId?: boolean
+    modePaiementId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    devise?: boolean | DeviseDefaultArgs<ExtArgs>
+    modePaiement?: boolean | DetailPanier$modePaiementArgs<ExtArgs>
+    devise?: boolean | DetailPanier$deviseArgs<ExtArgs>
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["detailPanier"]>
@@ -20118,15 +21439,16 @@ export namespace Prisma {
     id?: boolean
     produitId?: boolean
     qtte?: boolean
-    modePaiement?: boolean
     prixUnitaire?: boolean
     prixTotalHT?: boolean
     prixTotalTTC?: boolean
     panierId?: boolean
     deviseId?: boolean
+    modePaiementId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    devise?: boolean | DeviseDefaultArgs<ExtArgs>
+    modePaiement?: boolean | DetailPanier$modePaiementArgs<ExtArgs>
+    devise?: boolean | DetailPanier$deviseArgs<ExtArgs>
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["detailPanier"]>
@@ -20135,15 +21457,16 @@ export namespace Prisma {
     id?: boolean
     produitId?: boolean
     qtte?: boolean
-    modePaiement?: boolean
     prixUnitaire?: boolean
     prixTotalHT?: boolean
     prixTotalTTC?: boolean
     panierId?: boolean
     deviseId?: boolean
+    modePaiementId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    devise?: boolean | DeviseDefaultArgs<ExtArgs>
+    modePaiement?: boolean | DetailPanier$modePaiementArgs<ExtArgs>
+    devise?: boolean | DetailPanier$deviseArgs<ExtArgs>
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["detailPanier"]>
@@ -20152,29 +21475,32 @@ export namespace Prisma {
     id?: boolean
     produitId?: boolean
     qtte?: boolean
-    modePaiement?: boolean
     prixUnitaire?: boolean
     prixTotalHT?: boolean
     prixTotalTTC?: boolean
     panierId?: boolean
     deviseId?: boolean
+    modePaiementId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type DetailPanierOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "produitId" | "qtte" | "modePaiement" | "prixUnitaire" | "prixTotalHT" | "prixTotalTTC" | "panierId" | "deviseId" | "createdAt" | "updatedAt", ExtArgs["result"]["detailPanier"]>
+  export type DetailPanierOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "produitId" | "qtte" | "prixUnitaire" | "prixTotalHT" | "prixTotalTTC" | "panierId" | "deviseId" | "modePaiementId" | "createdAt" | "updatedAt", ExtArgs["result"]["detailPanier"]>
   export type DetailPanierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    devise?: boolean | DeviseDefaultArgs<ExtArgs>
+    modePaiement?: boolean | DetailPanier$modePaiementArgs<ExtArgs>
+    devise?: boolean | DetailPanier$deviseArgs<ExtArgs>
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }
   export type DetailPanierIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    devise?: boolean | DeviseDefaultArgs<ExtArgs>
+    modePaiement?: boolean | DetailPanier$modePaiementArgs<ExtArgs>
+    devise?: boolean | DetailPanier$deviseArgs<ExtArgs>
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }
   export type DetailPanierIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    devise?: boolean | DeviseDefaultArgs<ExtArgs>
+    modePaiement?: boolean | DetailPanier$modePaiementArgs<ExtArgs>
+    devise?: boolean | DetailPanier$deviseArgs<ExtArgs>
     produit?: boolean | ProduitDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
   }
@@ -20182,7 +21508,8 @@ export namespace Prisma {
   export type $DetailPanierPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "DetailPanier"
     objects: {
-      devise: Prisma.$DevisePayload<ExtArgs>
+      modePaiement: Prisma.$ModePaiementPayload<ExtArgs> | null
+      devise: Prisma.$DevisePayload<ExtArgs> | null
       produit: Prisma.$ProduitPayload<ExtArgs>
       panier: Prisma.$PanierPayload<ExtArgs>
     }
@@ -20190,12 +21517,12 @@ export namespace Prisma {
       id: number
       produitId: number
       qtte: number
-      modePaiement: $Enums.ModePaiment
       prixUnitaire: number
       prixTotalHT: number
       prixTotalTTC: number
       panierId: number
-      deviseId: number
+      deviseId: number | null
+      modePaiementId: number | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["detailPanier"]>
@@ -20592,7 +21919,8 @@ export namespace Prisma {
    */
   export interface Prisma__DetailPanierClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    devise<T extends DeviseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DeviseDefaultArgs<ExtArgs>>): Prisma__DeviseClient<$Result.GetResult<Prisma.$DevisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    modePaiement<T extends DetailPanier$modePaiementArgs<ExtArgs> = {}>(args?: Subset<T, DetailPanier$modePaiementArgs<ExtArgs>>): Prisma__ModePaiementClient<$Result.GetResult<Prisma.$ModePaiementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    devise<T extends DetailPanier$deviseArgs<ExtArgs> = {}>(args?: Subset<T, DetailPanier$deviseArgs<ExtArgs>>): Prisma__DeviseClient<$Result.GetResult<Prisma.$DevisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     produit<T extends ProduitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProduitDefaultArgs<ExtArgs>>): Prisma__ProduitClient<$Result.GetResult<Prisma.$ProduitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     panier<T extends PanierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PanierDefaultArgs<ExtArgs>>): Prisma__PanierClient<$Result.GetResult<Prisma.$PanierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -20627,12 +21955,12 @@ export namespace Prisma {
     readonly id: FieldRef<"DetailPanier", 'Int'>
     readonly produitId: FieldRef<"DetailPanier", 'Int'>
     readonly qtte: FieldRef<"DetailPanier", 'Int'>
-    readonly modePaiement: FieldRef<"DetailPanier", 'ModePaiment'>
     readonly prixUnitaire: FieldRef<"DetailPanier", 'Float'>
     readonly prixTotalHT: FieldRef<"DetailPanier", 'Float'>
     readonly prixTotalTTC: FieldRef<"DetailPanier", 'Float'>
     readonly panierId: FieldRef<"DetailPanier", 'Int'>
     readonly deviseId: FieldRef<"DetailPanier", 'Int'>
+    readonly modePaiementId: FieldRef<"DetailPanier", 'Int'>
     readonly createdAt: FieldRef<"DetailPanier", 'DateTime'>
     readonly updatedAt: FieldRef<"DetailPanier", 'DateTime'>
   }
@@ -21028,6 +22356,44 @@ export namespace Prisma {
      * Limit how many DetailPaniers to delete.
      */
     limit?: number
+  }
+
+  /**
+   * DetailPanier.modePaiement
+   */
+  export type DetailPanier$modePaiementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModePaiement
+     */
+    select?: ModePaiementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModePaiement
+     */
+    omit?: ModePaiementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModePaiementInclude<ExtArgs> | null
+    where?: ModePaiementWhereInput
+  }
+
+  /**
+   * DetailPanier.devise
+   */
+  export type DetailPanier$deviseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devise
+     */
+    select?: DeviseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devise
+     */
+    omit?: DeviseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeviseInclude<ExtArgs> | null
+    where?: DeviseWhereInput
   }
 
   /**
@@ -23660,7 +25026,7 @@ export namespace Prisma {
     id: number | null
     caisseId: number | null
     referenceExterne: string | null
-    type: $Enums.TypeDepense | null
+    motif: $Enums.MotifsDepense | null
     description: string | null
     agentId: number | null
     entrepriseId: number | null
@@ -23672,7 +25038,7 @@ export namespace Prisma {
     id: number | null
     caisseId: number | null
     referenceExterne: string | null
-    type: $Enums.TypeDepense | null
+    motif: $Enums.MotifsDepense | null
     description: string | null
     agentId: number | null
     entrepriseId: number | null
@@ -23684,7 +25050,7 @@ export namespace Prisma {
     id: number
     caisseId: number
     referenceExterne: number
-    type: number
+    motif: number
     description: number
     agentId: number
     entrepriseId: number
@@ -23712,7 +25078,7 @@ export namespace Prisma {
     id?: true
     caisseId?: true
     referenceExterne?: true
-    type?: true
+    motif?: true
     description?: true
     agentId?: true
     entrepriseId?: true
@@ -23724,7 +25090,7 @@ export namespace Prisma {
     id?: true
     caisseId?: true
     referenceExterne?: true
-    type?: true
+    motif?: true
     description?: true
     agentId?: true
     entrepriseId?: true
@@ -23736,7 +25102,7 @@ export namespace Prisma {
     id?: true
     caisseId?: true
     referenceExterne?: true
-    type?: true
+    motif?: true
     description?: true
     agentId?: true
     entrepriseId?: true
@@ -23835,7 +25201,7 @@ export namespace Prisma {
     id: number
     caisseId: number
     referenceExterne: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description: string | null
     agentId: number
     entrepriseId: number
@@ -23866,7 +25232,7 @@ export namespace Prisma {
     id?: boolean
     caisseId?: boolean
     referenceExterne?: boolean
-    type?: boolean
+    motif?: boolean
     description?: boolean
     agentId?: boolean
     entrepriseId?: boolean
@@ -23883,7 +25249,7 @@ export namespace Prisma {
     id?: boolean
     caisseId?: boolean
     referenceExterne?: boolean
-    type?: boolean
+    motif?: boolean
     description?: boolean
     agentId?: boolean
     entrepriseId?: boolean
@@ -23898,7 +25264,7 @@ export namespace Prisma {
     id?: boolean
     caisseId?: boolean
     referenceExterne?: boolean
-    type?: boolean
+    motif?: boolean
     description?: boolean
     agentId?: boolean
     entrepriseId?: boolean
@@ -23913,7 +25279,7 @@ export namespace Prisma {
     id?: boolean
     caisseId?: boolean
     referenceExterne?: boolean
-    type?: boolean
+    motif?: boolean
     description?: boolean
     agentId?: boolean
     entrepriseId?: boolean
@@ -23921,7 +25287,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type DepenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caisseId" | "referenceExterne" | "type" | "description" | "agentId" | "entrepriseId" | "createdAt" | "updatedAt", ExtArgs["result"]["depense"]>
+  export type DepenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "caisseId" | "referenceExterne" | "motif" | "description" | "agentId" | "entrepriseId" | "createdAt" | "updatedAt", ExtArgs["result"]["depense"]>
   export type DepenseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Paiement?: boolean | Depense$PaiementArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
@@ -23952,7 +25318,7 @@ export namespace Prisma {
       id: number
       caisseId: number
       referenceExterne: string | null
-      type: $Enums.TypeDepense
+      motif: $Enums.MotifsDepense
       description: string | null
       agentId: number
       entrepriseId: number
@@ -24388,7 +25754,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Depense", 'Int'>
     readonly caisseId: FieldRef<"Depense", 'Int'>
     readonly referenceExterne: FieldRef<"Depense", 'String'>
-    readonly type: FieldRef<"Depense", 'TypeDepense'>
+    readonly motif: FieldRef<"Depense", 'MotifsDepense'>
     readonly description: FieldRef<"Depense", 'String'>
     readonly agentId: FieldRef<"Depense", 'Int'>
     readonly entrepriseId: FieldRef<"Depense", 'Int'>
@@ -24979,11 +26345,22 @@ export namespace Prisma {
   export type ProduitScalarFieldEnum = (typeof ProduitScalarFieldEnum)[keyof typeof ProduitScalarFieldEnum]
 
 
+  export const ModePaiementScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    soldeActuel: 'soldeActuel',
+    caisseId: 'caisseId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ModePaiementScalarFieldEnum = (typeof ModePaiementScalarFieldEnum)[keyof typeof ModePaiementScalarFieldEnum]
+
+
   export const PaiementScalarFieldEnum: {
     id: 'id',
-    totalHT: 'totalHT',
-    totalTTC: 'totalTTC',
-    modePaiement: 'modePaiement',
+    montant: 'montant',
+    modePaiementId: 'modePaiementId',
     deviseId: 'deviseId',
     caisseId: 'caisseId',
     venteId: 'venteId',
@@ -25000,11 +26377,10 @@ export namespace Prisma {
   export const CaisseScalarFieldEnum: {
     id: 'id',
     nom: 'nom',
-    description: 'description',
-    soldeActuel: 'soldeActuel',
     deviseId: 'deviseId',
     agentId: 'agentId',
     statut: 'statut',
+    description: 'description',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -25049,12 +26425,12 @@ export namespace Prisma {
     id: 'id',
     produitId: 'produitId',
     qtte: 'qtte',
-    modePaiement: 'modePaiement',
     prixUnitaire: 'prixUnitaire',
     prixTotalHT: 'prixTotalHT',
     prixTotalTTC: 'prixTotalTTC',
     panierId: 'panierId',
     deviseId: 'deviseId',
+    modePaiementId: 'modePaiementId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -25101,7 +26477,7 @@ export namespace Prisma {
     id: 'id',
     caisseId: 'caisseId',
     referenceExterne: 'referenceExterne',
-    type: 'type',
+    motif: 'motif',
     description: 'description',
     agentId: 'agentId',
     entrepriseId: 'entrepriseId',
@@ -25247,16 +26623,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'ModePaiment'
+   * Reference to a field of type 'TypeModePaiement'
    */
-  export type EnumModePaimentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ModePaiment'>
+  export type EnumTypeModePaiementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeModePaiement'>
     
 
 
   /**
-   * Reference to a field of type 'ModePaiment[]'
+   * Reference to a field of type 'TypeModePaiement[]'
    */
-  export type ListEnumModePaimentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ModePaiment[]'>
+  export type ListEnumTypeModePaiementFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeModePaiement[]'>
     
 
 
@@ -25331,16 +26707,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'TypeDepense'
+   * Reference to a field of type 'MotifsDepense'
    */
-  export type EnumTypeDepenseFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeDepense'>
+  export type EnumMotifsDepenseFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MotifsDepense'>
     
 
 
   /**
-   * Reference to a field of type 'TypeDepense[]'
+   * Reference to a field of type 'MotifsDepense[]'
    */
-  export type ListEnumTypeDepenseFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeDepense[]'>
+  export type ListEnumMotifsDepenseFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MotifsDepense[]'>
     
   /**
    * Deep Input Types
@@ -26147,14 +27523,81 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Produit"> | Date | string
   }
 
+  export type ModePaiementWhereInput = {
+    AND?: ModePaiementWhereInput | ModePaiementWhereInput[]
+    OR?: ModePaiementWhereInput[]
+    NOT?: ModePaiementWhereInput | ModePaiementWhereInput[]
+    id?: IntFilter<"ModePaiement"> | number
+    type?: EnumTypeModePaiementFilter<"ModePaiement"> | $Enums.TypeModePaiement
+    soldeActuel?: FloatNullableFilter<"ModePaiement"> | number | null
+    caisseId?: IntFilter<"ModePaiement"> | number
+    createdAt?: DateTimeFilter<"ModePaiement"> | Date | string
+    updatedAt?: DateTimeFilter<"ModePaiement"> | Date | string
+    caisse?: XOR<CaisseScalarRelationFilter, CaisseWhereInput>
+    Paiement?: PaiementListRelationFilter
+    DetailPanier?: DetailPanierListRelationFilter
+  }
+
+  export type ModePaiementOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    soldeActuel?: SortOrderInput | SortOrder
+    caisseId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    caisse?: CaisseOrderByWithRelationInput
+    Paiement?: PaiementOrderByRelationAggregateInput
+    DetailPanier?: DetailPanierOrderByRelationAggregateInput
+  }
+
+  export type ModePaiementWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ModePaiementWhereInput | ModePaiementWhereInput[]
+    OR?: ModePaiementWhereInput[]
+    NOT?: ModePaiementWhereInput | ModePaiementWhereInput[]
+    type?: EnumTypeModePaiementFilter<"ModePaiement"> | $Enums.TypeModePaiement
+    soldeActuel?: FloatNullableFilter<"ModePaiement"> | number | null
+    caisseId?: IntFilter<"ModePaiement"> | number
+    createdAt?: DateTimeFilter<"ModePaiement"> | Date | string
+    updatedAt?: DateTimeFilter<"ModePaiement"> | Date | string
+    caisse?: XOR<CaisseScalarRelationFilter, CaisseWhereInput>
+    Paiement?: PaiementListRelationFilter
+    DetailPanier?: DetailPanierListRelationFilter
+  }, "id">
+
+  export type ModePaiementOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    soldeActuel?: SortOrderInput | SortOrder
+    caisseId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ModePaiementCountOrderByAggregateInput
+    _avg?: ModePaiementAvgOrderByAggregateInput
+    _max?: ModePaiementMaxOrderByAggregateInput
+    _min?: ModePaiementMinOrderByAggregateInput
+    _sum?: ModePaiementSumOrderByAggregateInput
+  }
+
+  export type ModePaiementScalarWhereWithAggregatesInput = {
+    AND?: ModePaiementScalarWhereWithAggregatesInput | ModePaiementScalarWhereWithAggregatesInput[]
+    OR?: ModePaiementScalarWhereWithAggregatesInput[]
+    NOT?: ModePaiementScalarWhereWithAggregatesInput | ModePaiementScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ModePaiement"> | number
+    type?: EnumTypeModePaiementWithAggregatesFilter<"ModePaiement"> | $Enums.TypeModePaiement
+    soldeActuel?: FloatNullableWithAggregatesFilter<"ModePaiement"> | number | null
+    caisseId?: IntWithAggregatesFilter<"ModePaiement"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"ModePaiement"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ModePaiement"> | Date | string
+  }
+
   export type PaiementWhereInput = {
     AND?: PaiementWhereInput | PaiementWhereInput[]
     OR?: PaiementWhereInput[]
     NOT?: PaiementWhereInput | PaiementWhereInput[]
     id?: IntFilter<"Paiement"> | number
-    totalHT?: FloatNullableFilter<"Paiement"> | number | null
-    totalTTC?: FloatNullableFilter<"Paiement"> | number | null
-    modePaiement?: EnumModePaimentFilter<"Paiement"> | $Enums.ModePaiment
+    montant?: FloatNullableFilter<"Paiement"> | number | null
+    modePaiementId?: IntFilter<"Paiement"> | number
     deviseId?: IntFilter<"Paiement"> | number
     caisseId?: IntFilter<"Paiement"> | number
     venteId?: IntNullableFilter<"Paiement"> | number | null
@@ -26163,6 +27606,7 @@ export namespace Prisma {
     depenseId?: IntNullableFilter<"Paiement"> | number | null
     createdAt?: DateTimeFilter<"Paiement"> | Date | string
     updatedAt?: DateTimeFilter<"Paiement"> | Date | string
+    modePaiement?: XOR<ModePaiementScalarRelationFilter, ModePaiementWhereInput>
     vente?: XOR<VenteNullableScalarRelationFilter, VenteWhereInput> | null
     achat?: XOR<AchatNullableScalarRelationFilter, AchatWhereInput> | null
     commande?: XOR<CommandeNullableScalarRelationFilter, CommandeWhereInput> | null
@@ -26173,9 +27617,8 @@ export namespace Prisma {
 
   export type PaiementOrderByWithRelationInput = {
     id?: SortOrder
-    totalHT?: SortOrderInput | SortOrder
-    totalTTC?: SortOrderInput | SortOrder
-    modePaiement?: SortOrder
+    montant?: SortOrderInput | SortOrder
+    modePaiementId?: SortOrder
     deviseId?: SortOrder
     caisseId?: SortOrder
     venteId?: SortOrderInput | SortOrder
@@ -26184,6 +27627,7 @@ export namespace Prisma {
     depenseId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    modePaiement?: ModePaiementOrderByWithRelationInput
     vente?: VenteOrderByWithRelationInput
     achat?: AchatOrderByWithRelationInput
     commande?: CommandeOrderByWithRelationInput
@@ -26197,9 +27641,8 @@ export namespace Prisma {
     AND?: PaiementWhereInput | PaiementWhereInput[]
     OR?: PaiementWhereInput[]
     NOT?: PaiementWhereInput | PaiementWhereInput[]
-    totalHT?: FloatNullableFilter<"Paiement"> | number | null
-    totalTTC?: FloatNullableFilter<"Paiement"> | number | null
-    modePaiement?: EnumModePaimentFilter<"Paiement"> | $Enums.ModePaiment
+    montant?: FloatNullableFilter<"Paiement"> | number | null
+    modePaiementId?: IntFilter<"Paiement"> | number
     deviseId?: IntFilter<"Paiement"> | number
     caisseId?: IntFilter<"Paiement"> | number
     venteId?: IntNullableFilter<"Paiement"> | number | null
@@ -26208,6 +27651,7 @@ export namespace Prisma {
     depenseId?: IntNullableFilter<"Paiement"> | number | null
     createdAt?: DateTimeFilter<"Paiement"> | Date | string
     updatedAt?: DateTimeFilter<"Paiement"> | Date | string
+    modePaiement?: XOR<ModePaiementScalarRelationFilter, ModePaiementWhereInput>
     vente?: XOR<VenteNullableScalarRelationFilter, VenteWhereInput> | null
     achat?: XOR<AchatNullableScalarRelationFilter, AchatWhereInput> | null
     commande?: XOR<CommandeNullableScalarRelationFilter, CommandeWhereInput> | null
@@ -26218,9 +27662,8 @@ export namespace Prisma {
 
   export type PaiementOrderByWithAggregationInput = {
     id?: SortOrder
-    totalHT?: SortOrderInput | SortOrder
-    totalTTC?: SortOrderInput | SortOrder
-    modePaiement?: SortOrder
+    montant?: SortOrderInput | SortOrder
+    modePaiementId?: SortOrder
     deviseId?: SortOrder
     caisseId?: SortOrder
     venteId?: SortOrderInput | SortOrder
@@ -26241,9 +27684,8 @@ export namespace Prisma {
     OR?: PaiementScalarWhereWithAggregatesInput[]
     NOT?: PaiementScalarWhereWithAggregatesInput | PaiementScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Paiement"> | number
-    totalHT?: FloatNullableWithAggregatesFilter<"Paiement"> | number | null
-    totalTTC?: FloatNullableWithAggregatesFilter<"Paiement"> | number | null
-    modePaiement?: EnumModePaimentWithAggregatesFilter<"Paiement"> | $Enums.ModePaiment
+    montant?: FloatNullableWithAggregatesFilter<"Paiement"> | number | null
+    modePaiementId?: IntWithAggregatesFilter<"Paiement"> | number
     deviseId?: IntWithAggregatesFilter<"Paiement"> | number
     caisseId?: IntWithAggregatesFilter<"Paiement"> | number
     venteId?: IntNullableWithAggregatesFilter<"Paiement"> | number | null
@@ -26260,33 +27702,33 @@ export namespace Prisma {
     NOT?: CaisseWhereInput | CaisseWhereInput[]
     id?: IntFilter<"Caisse"> | number
     nom?: StringFilter<"Caisse"> | string
-    description?: StringNullableFilter<"Caisse"> | string | null
-    soldeActuel?: FloatNullableFilter<"Caisse"> | number | null
     deviseId?: IntFilter<"Caisse"> | number
     agentId?: IntFilter<"Caisse"> | number
     statut?: EnumStatutCaisseFilter<"Caisse"> | $Enums.StatutCaisse
+    description?: StringNullableFilter<"Caisse"> | string | null
     createdAt?: DateTimeFilter<"Caisse"> | Date | string
     updatedAt?: DateTimeFilter<"Caisse"> | Date | string
     devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
     agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
     paiements?: PaiementListRelationFilter
     Depense?: DepenseListRelationFilter
+    ModePaiement?: ModePaiementListRelationFilter
   }
 
   export type CaisseOrderByWithRelationInput = {
     id?: SortOrder
     nom?: SortOrder
-    description?: SortOrderInput | SortOrder
-    soldeActuel?: SortOrderInput | SortOrder
     deviseId?: SortOrder
     agentId?: SortOrder
     statut?: SortOrder
+    description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     devise?: DeviseOrderByWithRelationInput
     agent?: AgentOrderByWithRelationInput
     paiements?: PaiementOrderByRelationAggregateInput
     Depense?: DepenseOrderByRelationAggregateInput
+    ModePaiement?: ModePaiementOrderByRelationAggregateInput
   }
 
   export type CaisseWhereUniqueInput = Prisma.AtLeast<{
@@ -26295,27 +27737,26 @@ export namespace Prisma {
     AND?: CaisseWhereInput | CaisseWhereInput[]
     OR?: CaisseWhereInput[]
     NOT?: CaisseWhereInput | CaisseWhereInput[]
-    description?: StringNullableFilter<"Caisse"> | string | null
-    soldeActuel?: FloatNullableFilter<"Caisse"> | number | null
     deviseId?: IntFilter<"Caisse"> | number
     agentId?: IntFilter<"Caisse"> | number
     statut?: EnumStatutCaisseFilter<"Caisse"> | $Enums.StatutCaisse
+    description?: StringNullableFilter<"Caisse"> | string | null
     createdAt?: DateTimeFilter<"Caisse"> | Date | string
     updatedAt?: DateTimeFilter<"Caisse"> | Date | string
     devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
     agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
     paiements?: PaiementListRelationFilter
     Depense?: DepenseListRelationFilter
+    ModePaiement?: ModePaiementListRelationFilter
   }, "id" | "nom">
 
   export type CaisseOrderByWithAggregationInput = {
     id?: SortOrder
     nom?: SortOrder
-    description?: SortOrderInput | SortOrder
-    soldeActuel?: SortOrderInput | SortOrder
     deviseId?: SortOrder
     agentId?: SortOrder
     statut?: SortOrder
+    description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CaisseCountOrderByAggregateInput
@@ -26331,11 +27772,10 @@ export namespace Prisma {
     NOT?: CaisseScalarWhereWithAggregatesInput | CaisseScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Caisse"> | number
     nom?: StringWithAggregatesFilter<"Caisse"> | string
-    description?: StringNullableWithAggregatesFilter<"Caisse"> | string | null
-    soldeActuel?: FloatNullableWithAggregatesFilter<"Caisse"> | number | null
     deviseId?: IntWithAggregatesFilter<"Caisse"> | number
     agentId?: IntWithAggregatesFilter<"Caisse"> | number
     statut?: EnumStatutCaisseWithAggregatesFilter<"Caisse"> | $Enums.StatutCaisse
+    description?: StringNullableWithAggregatesFilter<"Caisse"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Caisse"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Caisse"> | Date | string
   }
@@ -26546,15 +27986,16 @@ export namespace Prisma {
     id?: IntFilter<"DetailPanier"> | number
     produitId?: IntFilter<"DetailPanier"> | number
     qtte?: IntFilter<"DetailPanier"> | number
-    modePaiement?: EnumModePaimentFilter<"DetailPanier"> | $Enums.ModePaiment
     prixUnitaire?: FloatFilter<"DetailPanier"> | number
     prixTotalHT?: FloatFilter<"DetailPanier"> | number
     prixTotalTTC?: FloatFilter<"DetailPanier"> | number
     panierId?: IntFilter<"DetailPanier"> | number
-    deviseId?: IntFilter<"DetailPanier"> | number
+    deviseId?: IntNullableFilter<"DetailPanier"> | number | null
+    modePaiementId?: IntNullableFilter<"DetailPanier"> | number | null
     createdAt?: DateTimeFilter<"DetailPanier"> | Date | string
     updatedAt?: DateTimeFilter<"DetailPanier"> | Date | string
-    devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
+    modePaiement?: XOR<ModePaiementNullableScalarRelationFilter, ModePaiementWhereInput> | null
+    devise?: XOR<DeviseNullableScalarRelationFilter, DeviseWhereInput> | null
     produit?: XOR<ProduitScalarRelationFilter, ProduitWhereInput>
     panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
   }
@@ -26563,14 +28004,15 @@ export namespace Prisma {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
-    modePaiement?: SortOrder
     prixUnitaire?: SortOrder
     prixTotalHT?: SortOrder
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
-    deviseId?: SortOrder
+    deviseId?: SortOrderInput | SortOrder
+    modePaiementId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    modePaiement?: ModePaiementOrderByWithRelationInput
     devise?: DeviseOrderByWithRelationInput
     produit?: ProduitOrderByWithRelationInput
     panier?: PanierOrderByWithRelationInput
@@ -26583,15 +28025,16 @@ export namespace Prisma {
     NOT?: DetailPanierWhereInput | DetailPanierWhereInput[]
     produitId?: IntFilter<"DetailPanier"> | number
     qtte?: IntFilter<"DetailPanier"> | number
-    modePaiement?: EnumModePaimentFilter<"DetailPanier"> | $Enums.ModePaiment
     prixUnitaire?: FloatFilter<"DetailPanier"> | number
     prixTotalHT?: FloatFilter<"DetailPanier"> | number
     prixTotalTTC?: FloatFilter<"DetailPanier"> | number
     panierId?: IntFilter<"DetailPanier"> | number
-    deviseId?: IntFilter<"DetailPanier"> | number
+    deviseId?: IntNullableFilter<"DetailPanier"> | number | null
+    modePaiementId?: IntNullableFilter<"DetailPanier"> | number | null
     createdAt?: DateTimeFilter<"DetailPanier"> | Date | string
     updatedAt?: DateTimeFilter<"DetailPanier"> | Date | string
-    devise?: XOR<DeviseScalarRelationFilter, DeviseWhereInput>
+    modePaiement?: XOR<ModePaiementNullableScalarRelationFilter, ModePaiementWhereInput> | null
+    devise?: XOR<DeviseNullableScalarRelationFilter, DeviseWhereInput> | null
     produit?: XOR<ProduitScalarRelationFilter, ProduitWhereInput>
     panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
   }, "id">
@@ -26600,12 +28043,12 @@ export namespace Prisma {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
-    modePaiement?: SortOrder
     prixUnitaire?: SortOrder
     prixTotalHT?: SortOrder
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
-    deviseId?: SortOrder
+    deviseId?: SortOrderInput | SortOrder
+    modePaiementId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: DetailPanierCountOrderByAggregateInput
@@ -26622,12 +28065,12 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"DetailPanier"> | number
     produitId?: IntWithAggregatesFilter<"DetailPanier"> | number
     qtte?: IntWithAggregatesFilter<"DetailPanier"> | number
-    modePaiement?: EnumModePaimentWithAggregatesFilter<"DetailPanier"> | $Enums.ModePaiment
     prixUnitaire?: FloatWithAggregatesFilter<"DetailPanier"> | number
     prixTotalHT?: FloatWithAggregatesFilter<"DetailPanier"> | number
     prixTotalTTC?: FloatWithAggregatesFilter<"DetailPanier"> | number
     panierId?: IntWithAggregatesFilter<"DetailPanier"> | number
-    deviseId?: IntWithAggregatesFilter<"DetailPanier"> | number
+    deviseId?: IntNullableWithAggregatesFilter<"DetailPanier"> | number | null
+    modePaiementId?: IntNullableWithAggregatesFilter<"DetailPanier"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"DetailPanier"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"DetailPanier"> | Date | string
   }
@@ -26845,7 +28288,7 @@ export namespace Prisma {
     id?: IntFilter<"Depense"> | number
     caisseId?: IntFilter<"Depense"> | number
     referenceExterne?: StringNullableFilter<"Depense"> | string | null
-    type?: EnumTypeDepenseFilter<"Depense"> | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFilter<"Depense"> | $Enums.MotifsDepense
     description?: StringNullableFilter<"Depense"> | string | null
     agentId?: IntFilter<"Depense"> | number
     entrepriseId?: IntFilter<"Depense"> | number
@@ -26861,7 +28304,7 @@ export namespace Prisma {
     id?: SortOrder
     caisseId?: SortOrder
     referenceExterne?: SortOrderInput | SortOrder
-    type?: SortOrder
+    motif?: SortOrder
     description?: SortOrderInput | SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
@@ -26880,7 +28323,7 @@ export namespace Prisma {
     NOT?: DepenseWhereInput | DepenseWhereInput[]
     caisseId?: IntFilter<"Depense"> | number
     referenceExterne?: StringNullableFilter<"Depense"> | string | null
-    type?: EnumTypeDepenseFilter<"Depense"> | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFilter<"Depense"> | $Enums.MotifsDepense
     description?: StringNullableFilter<"Depense"> | string | null
     agentId?: IntFilter<"Depense"> | number
     entrepriseId?: IntFilter<"Depense"> | number
@@ -26896,7 +28339,7 @@ export namespace Prisma {
     id?: SortOrder
     caisseId?: SortOrder
     referenceExterne?: SortOrderInput | SortOrder
-    type?: SortOrder
+    motif?: SortOrder
     description?: SortOrderInput | SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
@@ -26916,7 +28359,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Depense"> | number
     caisseId?: IntWithAggregatesFilter<"Depense"> | number
     referenceExterne?: StringNullableWithAggregatesFilter<"Depense"> | string | null
-    type?: EnumTypeDepenseWithAggregatesFilter<"Depense"> | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseWithAggregatesFilter<"Depense"> | $Enums.MotifsDepense
     description?: StringNullableWithAggregatesFilter<"Depense"> | string | null
     agentId?: IntWithAggregatesFilter<"Depense"> | number
     entrepriseId?: IntWithAggregatesFilter<"Depense"> | number
@@ -27761,12 +29204,78 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PaiementCreateInput = {
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+  export type ModePaiementCreateInput = {
+    type?: $Enums.TypeModePaiement
+    soldeActuel?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    caisse: CaisseCreateNestedOneWithoutModePaiementInput
+    Paiement?: PaiementCreateNestedManyWithoutModePaiementInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutModePaiementInput
+  }
+
+  export type ModePaiementUncheckedCreateInput = {
+    id?: number
+    type?: $Enums.TypeModePaiement
+    soldeActuel?: number | null
+    caisseId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutModePaiementInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutModePaiementInput
+  }
+
+  export type ModePaiementUpdateInput = {
+    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    caisse?: CaisseUpdateOneRequiredWithoutModePaiementNestedInput
+    Paiement?: PaiementUpdateManyWithoutModePaiementNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutModePaiementNestedInput
+  }
+
+  export type ModePaiementUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
+    caisseId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Paiement?: PaiementUncheckedUpdateManyWithoutModePaiementNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutModePaiementNestedInput
+  }
+
+  export type ModePaiementCreateManyInput = {
+    id?: number
+    type?: $Enums.TypeModePaiement
+    soldeActuel?: number | null
+    caisseId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ModePaiementUpdateManyMutationInput = {
+    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ModePaiementUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
+    caisseId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaiementCreateInput = {
+    montant?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    modePaiement: ModePaiementCreateNestedOneWithoutPaiementInput
     vente?: VenteCreateNestedOneWithoutPaiementsInput
     achat?: AchatCreateNestedOneWithoutPaiementsInput
     commande?: CommandeCreateNestedOneWithoutPaiementInput
@@ -27777,9 +29286,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedCreateInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     deviseId: number
     caisseId: number
     venteId?: number | null
@@ -27791,11 +29299,10 @@ export namespace Prisma {
   }
 
   export type PaiementUpdateInput = {
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modePaiement?: ModePaiementUpdateOneRequiredWithoutPaiementNestedInput
     vente?: VenteUpdateOneWithoutPaiementsNestedInput
     achat?: AchatUpdateOneWithoutPaiementsNestedInput
     commande?: CommandeUpdateOneWithoutPaiementNestedInput
@@ -27806,9 +29313,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27821,9 +29327,8 @@ export namespace Prisma {
 
   export type PaiementCreateManyInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     deviseId: number
     caisseId: number
     venteId?: number | null
@@ -27835,18 +29340,15 @@ export namespace Prisma {
   }
 
   export type PaiementUpdateManyMutationInput = {
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaiementUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27859,75 +29361,73 @@ export namespace Prisma {
 
   export type CaisseCreateInput = {
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     devise: DeviseCreateNestedOneWithoutCaissesInput
     agent: AgentCreateNestedOneWithoutCaissesInput
     paiements?: PaiementCreateNestedManyWithoutCaisseInput
     Depense?: DepenseCreateNestedManyWithoutCaisseInput
+    ModePaiement?: ModePaiementCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseUncheckedCreateInput = {
     id?: number
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     deviseId: number
     agentId: number
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     paiements?: PaiementUncheckedCreateNestedManyWithoutCaisseInput
     Depense?: DepenseUncheckedCreateNestedManyWithoutCaisseInput
+    ModePaiement?: ModePaiementUncheckedCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseUpdateInput = {
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devise?: DeviseUpdateOneRequiredWithoutCaissesNestedInput
     agent?: AgentUpdateOneRequiredWithoutCaissesNestedInput
     paiements?: PaiementUpdateManyWithoutCaisseNestedInput
     Depense?: DepenseUpdateManyWithoutCaisseNestedInput
+    ModePaiement?: ModePaiementUpdateManyWithoutCaisseNestedInput
   }
 
   export type CaisseUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     deviseId?: IntFieldUpdateOperationsInput | number
     agentId?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paiements?: PaiementUncheckedUpdateManyWithoutCaisseNestedInput
     Depense?: DepenseUncheckedUpdateManyWithoutCaisseNestedInput
+    ModePaiement?: ModePaiementUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
   export type CaisseCreateManyInput = {
     id?: number
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     deviseId: number
     agentId: number
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type CaisseUpdateManyMutationInput = {
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27935,11 +29435,10 @@ export namespace Prisma {
   export type CaisseUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     deviseId?: IntFieldUpdateOperationsInput | number
     agentId?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28142,13 +29641,13 @@ export namespace Prisma {
 
   export type DetailPanierCreateInput = {
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    devise: DeviseCreateNestedOneWithoutDetailPanierInput
+    modePaiement?: ModePaiementCreateNestedOneWithoutDetailPanierInput
+    devise?: DeviseCreateNestedOneWithoutDetailPanierInput
     produit: ProduitCreateNestedOneWithoutDetailsPaniersInput
     panier: PanierCreateNestedOneWithoutDetailPaniersInput
   }
@@ -28157,25 +29656,25 @@ export namespace Prisma {
     id?: number
     produitId: number
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
-    deviseId: number
+    deviseId?: number | null
+    modePaiementId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type DetailPanierUpdateInput = {
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    devise?: DeviseUpdateOneRequiredWithoutDetailPanierNestedInput
+    modePaiement?: ModePaiementUpdateOneWithoutDetailPanierNestedInput
+    devise?: DeviseUpdateOneWithoutDetailPanierNestedInput
     produit?: ProduitUpdateOneRequiredWithoutDetailsPaniersNestedInput
     panier?: PanierUpdateOneRequiredWithoutDetailPaniersNestedInput
   }
@@ -28184,12 +29683,12 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    deviseId?: IntFieldUpdateOperationsInput | number
+    deviseId?: NullableIntFieldUpdateOperationsInput | number | null
+    modePaiementId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28198,19 +29697,18 @@ export namespace Prisma {
     id?: number
     produitId: number
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
-    deviseId: number
+    deviseId?: number | null
+    modePaiementId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type DetailPanierUpdateManyMutationInput = {
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
@@ -28222,12 +29720,12 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    deviseId?: IntFieldUpdateOperationsInput | number
+    deviseId?: NullableIntFieldUpdateOperationsInput | number | null
+    modePaiementId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28430,7 +29928,7 @@ export namespace Prisma {
 
   export type DepenseCreateInput = {
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28444,7 +29942,7 @@ export namespace Prisma {
     id?: number
     caisseId: number
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     agentId: number
     entrepriseId?: number
@@ -28455,7 +29953,7 @@ export namespace Prisma {
 
   export type DepenseUpdateInput = {
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28469,7 +29967,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     agentId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
@@ -28482,7 +29980,7 @@ export namespace Prisma {
     id?: number
     caisseId: number
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     agentId: number
     entrepriseId?: number
@@ -28492,7 +29990,7 @@ export namespace Prisma {
 
   export type DepenseUpdateManyMutationInput = {
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28502,7 +30000,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     agentId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
@@ -29352,6 +30850,13 @@ export namespace Prisma {
     agentId?: SortOrder
   }
 
+  export type EnumTypeModePaiementFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeModePaiement | EnumTypeModePaiementFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeModePaiementFilter<$PrismaModel> | $Enums.TypeModePaiement
+  }
+
   export type FloatNullableFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
@@ -29363,11 +30868,79 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type EnumModePaimentFilter<$PrismaModel = never> = {
-    equals?: $Enums.ModePaiment | EnumModePaimentFieldRefInput<$PrismaModel>
-    in?: $Enums.ModePaiment[] | ListEnumModePaimentFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ModePaiment[] | ListEnumModePaimentFieldRefInput<$PrismaModel>
-    not?: NestedEnumModePaimentFilter<$PrismaModel> | $Enums.ModePaiment
+  export type CaisseScalarRelationFilter = {
+    is?: CaisseWhereInput
+    isNot?: CaisseWhereInput
+  }
+
+  export type ModePaiementCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    soldeActuel?: SortOrder
+    caisseId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ModePaiementAvgOrderByAggregateInput = {
+    id?: SortOrder
+    soldeActuel?: SortOrder
+    caisseId?: SortOrder
+  }
+
+  export type ModePaiementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    soldeActuel?: SortOrder
+    caisseId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ModePaiementMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    soldeActuel?: SortOrder
+    caisseId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ModePaiementSumOrderByAggregateInput = {
+    id?: SortOrder
+    soldeActuel?: SortOrder
+    caisseId?: SortOrder
+  }
+
+  export type EnumTypeModePaiementWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeModePaiement | EnumTypeModePaiementFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeModePaiementWithAggregatesFilter<$PrismaModel> | $Enums.TypeModePaiement
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTypeModePaiementFilter<$PrismaModel>
+    _max?: NestedEnumTypeModePaiementFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type ModePaiementScalarRelationFilter = {
+    is?: ModePaiementWhereInput
+    isNot?: ModePaiementWhereInput
   }
 
   export type VenteNullableScalarRelationFilter = {
@@ -29390,16 +30963,10 @@ export namespace Prisma {
     isNot?: DepenseWhereInput | null
   }
 
-  export type CaisseScalarRelationFilter = {
-    is?: CaisseWhereInput
-    isNot?: CaisseWhereInput
-  }
-
   export type PaiementCountOrderByAggregateInput = {
     id?: SortOrder
-    totalHT?: SortOrder
-    totalTTC?: SortOrder
-    modePaiement?: SortOrder
+    montant?: SortOrder
+    modePaiementId?: SortOrder
     deviseId?: SortOrder
     caisseId?: SortOrder
     venteId?: SortOrder
@@ -29412,8 +30979,8 @@ export namespace Prisma {
 
   export type PaiementAvgOrderByAggregateInput = {
     id?: SortOrder
-    totalHT?: SortOrder
-    totalTTC?: SortOrder
+    montant?: SortOrder
+    modePaiementId?: SortOrder
     deviseId?: SortOrder
     caisseId?: SortOrder
     venteId?: SortOrder
@@ -29424,9 +30991,8 @@ export namespace Prisma {
 
   export type PaiementMaxOrderByAggregateInput = {
     id?: SortOrder
-    totalHT?: SortOrder
-    totalTTC?: SortOrder
-    modePaiement?: SortOrder
+    montant?: SortOrder
+    modePaiementId?: SortOrder
     deviseId?: SortOrder
     caisseId?: SortOrder
     venteId?: SortOrder
@@ -29439,9 +31005,8 @@ export namespace Prisma {
 
   export type PaiementMinOrderByAggregateInput = {
     id?: SortOrder
-    totalHT?: SortOrder
-    totalTTC?: SortOrder
-    modePaiement?: SortOrder
+    montant?: SortOrder
+    modePaiementId?: SortOrder
     deviseId?: SortOrder
     caisseId?: SortOrder
     venteId?: SortOrder
@@ -29454,40 +31019,14 @@ export namespace Prisma {
 
   export type PaiementSumOrderByAggregateInput = {
     id?: SortOrder
-    totalHT?: SortOrder
-    totalTTC?: SortOrder
+    montant?: SortOrder
+    modePaiementId?: SortOrder
     deviseId?: SortOrder
     caisseId?: SortOrder
     venteId?: SortOrder
     achatId?: SortOrder
     commandeId?: SortOrder
     depenseId?: SortOrder
-  }
-
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type EnumModePaimentWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ModePaiment | EnumModePaimentFieldRefInput<$PrismaModel>
-    in?: $Enums.ModePaiment[] | ListEnumModePaimentFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ModePaiment[] | ListEnumModePaimentFieldRefInput<$PrismaModel>
-    not?: NestedEnumModePaimentWithAggregatesFilter<$PrismaModel> | $Enums.ModePaiment
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumModePaimentFilter<$PrismaModel>
-    _max?: NestedEnumModePaimentFilter<$PrismaModel>
   }
 
   export type EnumStatutCaisseFilter<$PrismaModel = never> = {
@@ -29497,21 +31036,29 @@ export namespace Prisma {
     not?: NestedEnumStatutCaisseFilter<$PrismaModel> | $Enums.StatutCaisse
   }
 
+  export type ModePaiementListRelationFilter = {
+    every?: ModePaiementWhereInput
+    some?: ModePaiementWhereInput
+    none?: ModePaiementWhereInput
+  }
+
+  export type ModePaiementOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type CaisseCountOrderByAggregateInput = {
     id?: SortOrder
     nom?: SortOrder
-    description?: SortOrder
-    soldeActuel?: SortOrder
     deviseId?: SortOrder
     agentId?: SortOrder
     statut?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type CaisseAvgOrderByAggregateInput = {
     id?: SortOrder
-    soldeActuel?: SortOrder
     deviseId?: SortOrder
     agentId?: SortOrder
   }
@@ -29519,11 +31066,10 @@ export namespace Prisma {
   export type CaisseMaxOrderByAggregateInput = {
     id?: SortOrder
     nom?: SortOrder
-    description?: SortOrder
-    soldeActuel?: SortOrder
     deviseId?: SortOrder
     agentId?: SortOrder
     statut?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -29531,18 +31077,16 @@ export namespace Prisma {
   export type CaisseMinOrderByAggregateInput = {
     id?: SortOrder
     nom?: SortOrder
-    description?: SortOrder
-    soldeActuel?: SortOrder
     deviseId?: SortOrder
     agentId?: SortOrder
     statut?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type CaisseSumOrderByAggregateInput = {
     id?: SortOrder
-    soldeActuel?: SortOrder
     deviseId?: SortOrder
     agentId?: SortOrder
   }
@@ -29732,6 +31276,16 @@ export namespace Prisma {
     _max?: NestedEnumstatutPanierFilter<$PrismaModel>
   }
 
+  export type ModePaiementNullableScalarRelationFilter = {
+    is?: ModePaiementWhereInput | null
+    isNot?: ModePaiementWhereInput | null
+  }
+
+  export type DeviseNullableScalarRelationFilter = {
+    is?: DeviseWhereInput | null
+    isNot?: DeviseWhereInput | null
+  }
+
   export type ProduitScalarRelationFilter = {
     is?: ProduitWhereInput
     isNot?: ProduitWhereInput
@@ -29741,12 +31295,12 @@ export namespace Prisma {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
-    modePaiement?: SortOrder
     prixUnitaire?: SortOrder
     prixTotalHT?: SortOrder
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
     deviseId?: SortOrder
+    modePaiementId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -29760,18 +31314,19 @@ export namespace Prisma {
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
     deviseId?: SortOrder
+    modePaiementId?: SortOrder
   }
 
   export type DetailPanierMaxOrderByAggregateInput = {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
-    modePaiement?: SortOrder
     prixUnitaire?: SortOrder
     prixTotalHT?: SortOrder
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
     deviseId?: SortOrder
+    modePaiementId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -29780,12 +31335,12 @@ export namespace Prisma {
     id?: SortOrder
     produitId?: SortOrder
     qtte?: SortOrder
-    modePaiement?: SortOrder
     prixUnitaire?: SortOrder
     prixTotalHT?: SortOrder
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
     deviseId?: SortOrder
+    modePaiementId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -29799,6 +31354,7 @@ export namespace Prisma {
     prixTotalTTC?: SortOrder
     panierId?: SortOrder
     deviseId?: SortOrder
+    modePaiementId?: SortOrder
   }
 
   export type EnumStatutAchatFilter<$PrismaModel = never> = {
@@ -29961,18 +31517,18 @@ export namespace Prisma {
     _max?: NestedEnumStatutCommandeFilter<$PrismaModel>
   }
 
-  export type EnumTypeDepenseFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeDepense | EnumTypeDepenseFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeDepense[] | ListEnumTypeDepenseFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeDepense[] | ListEnumTypeDepenseFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeDepenseFilter<$PrismaModel> | $Enums.TypeDepense
+  export type EnumMotifsDepenseFilter<$PrismaModel = never> = {
+    equals?: $Enums.MotifsDepense | EnumMotifsDepenseFieldRefInput<$PrismaModel>
+    in?: $Enums.MotifsDepense[] | ListEnumMotifsDepenseFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MotifsDepense[] | ListEnumMotifsDepenseFieldRefInput<$PrismaModel>
+    not?: NestedEnumMotifsDepenseFilter<$PrismaModel> | $Enums.MotifsDepense
   }
 
   export type DepenseCountOrderByAggregateInput = {
     id?: SortOrder
     caisseId?: SortOrder
     referenceExterne?: SortOrder
-    type?: SortOrder
+    motif?: SortOrder
     description?: SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
@@ -29991,7 +31547,7 @@ export namespace Prisma {
     id?: SortOrder
     caisseId?: SortOrder
     referenceExterne?: SortOrder
-    type?: SortOrder
+    motif?: SortOrder
     description?: SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
@@ -30003,7 +31559,7 @@ export namespace Prisma {
     id?: SortOrder
     caisseId?: SortOrder
     referenceExterne?: SortOrder
-    type?: SortOrder
+    motif?: SortOrder
     description?: SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
@@ -30018,14 +31574,14 @@ export namespace Prisma {
     entrepriseId?: SortOrder
   }
 
-  export type EnumTypeDepenseWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeDepense | EnumTypeDepenseFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeDepense[] | ListEnumTypeDepenseFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeDepense[] | ListEnumTypeDepenseFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeDepenseWithAggregatesFilter<$PrismaModel> | $Enums.TypeDepense
+  export type EnumMotifsDepenseWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MotifsDepense | EnumMotifsDepenseFieldRefInput<$PrismaModel>
+    in?: $Enums.MotifsDepense[] | ListEnumMotifsDepenseFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MotifsDepense[] | ListEnumMotifsDepenseFieldRefInput<$PrismaModel>
+    not?: NestedEnumMotifsDepenseWithAggregatesFilter<$PrismaModel> | $Enums.MotifsDepense
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeDepenseFilter<$PrismaModel>
-    _max?: NestedEnumTypeDepenseFilter<$PrismaModel>
+    _min?: NestedEnumMotifsDepenseFilter<$PrismaModel>
+    _max?: NestedEnumMotifsDepenseFilter<$PrismaModel>
   }
 
   export type AgentCreateNestedOneWithoutTeneursInput = {
@@ -31720,6 +33276,122 @@ export namespace Prisma {
     deleteMany?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
   }
 
+  export type CaisseCreateNestedOneWithoutModePaiementInput = {
+    create?: XOR<CaisseCreateWithoutModePaiementInput, CaisseUncheckedCreateWithoutModePaiementInput>
+    connectOrCreate?: CaisseCreateOrConnectWithoutModePaiementInput
+    connect?: CaisseWhereUniqueInput
+  }
+
+  export type PaiementCreateNestedManyWithoutModePaiementInput = {
+    create?: XOR<PaiementCreateWithoutModePaiementInput, PaiementUncheckedCreateWithoutModePaiementInput> | PaiementCreateWithoutModePaiementInput[] | PaiementUncheckedCreateWithoutModePaiementInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutModePaiementInput | PaiementCreateOrConnectWithoutModePaiementInput[]
+    createMany?: PaiementCreateManyModePaiementInputEnvelope
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+  }
+
+  export type DetailPanierCreateNestedManyWithoutModePaiementInput = {
+    create?: XOR<DetailPanierCreateWithoutModePaiementInput, DetailPanierUncheckedCreateWithoutModePaiementInput> | DetailPanierCreateWithoutModePaiementInput[] | DetailPanierUncheckedCreateWithoutModePaiementInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutModePaiementInput | DetailPanierCreateOrConnectWithoutModePaiementInput[]
+    createMany?: DetailPanierCreateManyModePaiementInputEnvelope
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+  }
+
+  export type PaiementUncheckedCreateNestedManyWithoutModePaiementInput = {
+    create?: XOR<PaiementCreateWithoutModePaiementInput, PaiementUncheckedCreateWithoutModePaiementInput> | PaiementCreateWithoutModePaiementInput[] | PaiementUncheckedCreateWithoutModePaiementInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutModePaiementInput | PaiementCreateOrConnectWithoutModePaiementInput[]
+    createMany?: PaiementCreateManyModePaiementInputEnvelope
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+  }
+
+  export type DetailPanierUncheckedCreateNestedManyWithoutModePaiementInput = {
+    create?: XOR<DetailPanierCreateWithoutModePaiementInput, DetailPanierUncheckedCreateWithoutModePaiementInput> | DetailPanierCreateWithoutModePaiementInput[] | DetailPanierUncheckedCreateWithoutModePaiementInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutModePaiementInput | DetailPanierCreateOrConnectWithoutModePaiementInput[]
+    createMany?: DetailPanierCreateManyModePaiementInputEnvelope
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+  }
+
+  export type EnumTypeModePaiementFieldUpdateOperationsInput = {
+    set?: $Enums.TypeModePaiement
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type CaisseUpdateOneRequiredWithoutModePaiementNestedInput = {
+    create?: XOR<CaisseCreateWithoutModePaiementInput, CaisseUncheckedCreateWithoutModePaiementInput>
+    connectOrCreate?: CaisseCreateOrConnectWithoutModePaiementInput
+    upsert?: CaisseUpsertWithoutModePaiementInput
+    connect?: CaisseWhereUniqueInput
+    update?: XOR<XOR<CaisseUpdateToOneWithWhereWithoutModePaiementInput, CaisseUpdateWithoutModePaiementInput>, CaisseUncheckedUpdateWithoutModePaiementInput>
+  }
+
+  export type PaiementUpdateManyWithoutModePaiementNestedInput = {
+    create?: XOR<PaiementCreateWithoutModePaiementInput, PaiementUncheckedCreateWithoutModePaiementInput> | PaiementCreateWithoutModePaiementInput[] | PaiementUncheckedCreateWithoutModePaiementInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutModePaiementInput | PaiementCreateOrConnectWithoutModePaiementInput[]
+    upsert?: PaiementUpsertWithWhereUniqueWithoutModePaiementInput | PaiementUpsertWithWhereUniqueWithoutModePaiementInput[]
+    createMany?: PaiementCreateManyModePaiementInputEnvelope
+    set?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    disconnect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    delete?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    update?: PaiementUpdateWithWhereUniqueWithoutModePaiementInput | PaiementUpdateWithWhereUniqueWithoutModePaiementInput[]
+    updateMany?: PaiementUpdateManyWithWhereWithoutModePaiementInput | PaiementUpdateManyWithWhereWithoutModePaiementInput[]
+    deleteMany?: PaiementScalarWhereInput | PaiementScalarWhereInput[]
+  }
+
+  export type DetailPanierUpdateManyWithoutModePaiementNestedInput = {
+    create?: XOR<DetailPanierCreateWithoutModePaiementInput, DetailPanierUncheckedCreateWithoutModePaiementInput> | DetailPanierCreateWithoutModePaiementInput[] | DetailPanierUncheckedCreateWithoutModePaiementInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutModePaiementInput | DetailPanierCreateOrConnectWithoutModePaiementInput[]
+    upsert?: DetailPanierUpsertWithWhereUniqueWithoutModePaiementInput | DetailPanierUpsertWithWhereUniqueWithoutModePaiementInput[]
+    createMany?: DetailPanierCreateManyModePaiementInputEnvelope
+    set?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    disconnect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    delete?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    update?: DetailPanierUpdateWithWhereUniqueWithoutModePaiementInput | DetailPanierUpdateWithWhereUniqueWithoutModePaiementInput[]
+    updateMany?: DetailPanierUpdateManyWithWhereWithoutModePaiementInput | DetailPanierUpdateManyWithWhereWithoutModePaiementInput[]
+    deleteMany?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
+  }
+
+  export type PaiementUncheckedUpdateManyWithoutModePaiementNestedInput = {
+    create?: XOR<PaiementCreateWithoutModePaiementInput, PaiementUncheckedCreateWithoutModePaiementInput> | PaiementCreateWithoutModePaiementInput[] | PaiementUncheckedCreateWithoutModePaiementInput[]
+    connectOrCreate?: PaiementCreateOrConnectWithoutModePaiementInput | PaiementCreateOrConnectWithoutModePaiementInput[]
+    upsert?: PaiementUpsertWithWhereUniqueWithoutModePaiementInput | PaiementUpsertWithWhereUniqueWithoutModePaiementInput[]
+    createMany?: PaiementCreateManyModePaiementInputEnvelope
+    set?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    disconnect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    delete?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
+    update?: PaiementUpdateWithWhereUniqueWithoutModePaiementInput | PaiementUpdateWithWhereUniqueWithoutModePaiementInput[]
+    updateMany?: PaiementUpdateManyWithWhereWithoutModePaiementInput | PaiementUpdateManyWithWhereWithoutModePaiementInput[]
+    deleteMany?: PaiementScalarWhereInput | PaiementScalarWhereInput[]
+  }
+
+  export type DetailPanierUncheckedUpdateManyWithoutModePaiementNestedInput = {
+    create?: XOR<DetailPanierCreateWithoutModePaiementInput, DetailPanierUncheckedCreateWithoutModePaiementInput> | DetailPanierCreateWithoutModePaiementInput[] | DetailPanierUncheckedCreateWithoutModePaiementInput[]
+    connectOrCreate?: DetailPanierCreateOrConnectWithoutModePaiementInput | DetailPanierCreateOrConnectWithoutModePaiementInput[]
+    upsert?: DetailPanierUpsertWithWhereUniqueWithoutModePaiementInput | DetailPanierUpsertWithWhereUniqueWithoutModePaiementInput[]
+    createMany?: DetailPanierCreateManyModePaiementInputEnvelope
+    set?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    disconnect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    delete?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
+    update?: DetailPanierUpdateWithWhereUniqueWithoutModePaiementInput | DetailPanierUpdateWithWhereUniqueWithoutModePaiementInput[]
+    updateMany?: DetailPanierUpdateManyWithWhereWithoutModePaiementInput | DetailPanierUpdateManyWithWhereWithoutModePaiementInput[]
+    deleteMany?: DetailPanierScalarWhereInput | DetailPanierScalarWhereInput[]
+  }
+
+  export type ModePaiementCreateNestedOneWithoutPaiementInput = {
+    create?: XOR<ModePaiementCreateWithoutPaiementInput, ModePaiementUncheckedCreateWithoutPaiementInput>
+    connectOrCreate?: ModePaiementCreateOrConnectWithoutPaiementInput
+    connect?: ModePaiementWhereUniqueInput
+  }
+
   export type VenteCreateNestedOneWithoutPaiementsInput = {
     create?: XOR<VenteCreateWithoutPaiementsInput, VenteUncheckedCreateWithoutPaiementsInput>
     connectOrCreate?: VenteCreateOrConnectWithoutPaiementsInput
@@ -31756,16 +33428,12 @@ export namespace Prisma {
     connect?: DeviseWhereUniqueInput
   }
 
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type EnumModePaimentFieldUpdateOperationsInput = {
-    set?: $Enums.ModePaiment
+  export type ModePaiementUpdateOneRequiredWithoutPaiementNestedInput = {
+    create?: XOR<ModePaiementCreateWithoutPaiementInput, ModePaiementUncheckedCreateWithoutPaiementInput>
+    connectOrCreate?: ModePaiementCreateOrConnectWithoutPaiementInput
+    upsert?: ModePaiementUpsertWithoutPaiementInput
+    connect?: ModePaiementWhereUniqueInput
+    update?: XOR<XOR<ModePaiementUpdateToOneWithWhereWithoutPaiementInput, ModePaiementUpdateWithoutPaiementInput>, ModePaiementUncheckedUpdateWithoutPaiementInput>
   }
 
   export type VenteUpdateOneWithoutPaiementsNestedInput = {
@@ -31850,6 +33518,13 @@ export namespace Prisma {
     connect?: DepenseWhereUniqueInput | DepenseWhereUniqueInput[]
   }
 
+  export type ModePaiementCreateNestedManyWithoutCaisseInput = {
+    create?: XOR<ModePaiementCreateWithoutCaisseInput, ModePaiementUncheckedCreateWithoutCaisseInput> | ModePaiementCreateWithoutCaisseInput[] | ModePaiementUncheckedCreateWithoutCaisseInput[]
+    connectOrCreate?: ModePaiementCreateOrConnectWithoutCaisseInput | ModePaiementCreateOrConnectWithoutCaisseInput[]
+    createMany?: ModePaiementCreateManyCaisseInputEnvelope
+    connect?: ModePaiementWhereUniqueInput | ModePaiementWhereUniqueInput[]
+  }
+
   export type PaiementUncheckedCreateNestedManyWithoutCaisseInput = {
     create?: XOR<PaiementCreateWithoutCaisseInput, PaiementUncheckedCreateWithoutCaisseInput> | PaiementCreateWithoutCaisseInput[] | PaiementUncheckedCreateWithoutCaisseInput[]
     connectOrCreate?: PaiementCreateOrConnectWithoutCaisseInput | PaiementCreateOrConnectWithoutCaisseInput[]
@@ -31862,6 +33537,13 @@ export namespace Prisma {
     connectOrCreate?: DepenseCreateOrConnectWithoutCaisseInput | DepenseCreateOrConnectWithoutCaisseInput[]
     createMany?: DepenseCreateManyCaisseInputEnvelope
     connect?: DepenseWhereUniqueInput | DepenseWhereUniqueInput[]
+  }
+
+  export type ModePaiementUncheckedCreateNestedManyWithoutCaisseInput = {
+    create?: XOR<ModePaiementCreateWithoutCaisseInput, ModePaiementUncheckedCreateWithoutCaisseInput> | ModePaiementCreateWithoutCaisseInput[] | ModePaiementUncheckedCreateWithoutCaisseInput[]
+    connectOrCreate?: ModePaiementCreateOrConnectWithoutCaisseInput | ModePaiementCreateOrConnectWithoutCaisseInput[]
+    createMany?: ModePaiementCreateManyCaisseInputEnvelope
+    connect?: ModePaiementWhereUniqueInput | ModePaiementWhereUniqueInput[]
   }
 
   export type EnumStatutCaisseFieldUpdateOperationsInput = {
@@ -31912,6 +33594,20 @@ export namespace Prisma {
     deleteMany?: DepenseScalarWhereInput | DepenseScalarWhereInput[]
   }
 
+  export type ModePaiementUpdateManyWithoutCaisseNestedInput = {
+    create?: XOR<ModePaiementCreateWithoutCaisseInput, ModePaiementUncheckedCreateWithoutCaisseInput> | ModePaiementCreateWithoutCaisseInput[] | ModePaiementUncheckedCreateWithoutCaisseInput[]
+    connectOrCreate?: ModePaiementCreateOrConnectWithoutCaisseInput | ModePaiementCreateOrConnectWithoutCaisseInput[]
+    upsert?: ModePaiementUpsertWithWhereUniqueWithoutCaisseInput | ModePaiementUpsertWithWhereUniqueWithoutCaisseInput[]
+    createMany?: ModePaiementCreateManyCaisseInputEnvelope
+    set?: ModePaiementWhereUniqueInput | ModePaiementWhereUniqueInput[]
+    disconnect?: ModePaiementWhereUniqueInput | ModePaiementWhereUniqueInput[]
+    delete?: ModePaiementWhereUniqueInput | ModePaiementWhereUniqueInput[]
+    connect?: ModePaiementWhereUniqueInput | ModePaiementWhereUniqueInput[]
+    update?: ModePaiementUpdateWithWhereUniqueWithoutCaisseInput | ModePaiementUpdateWithWhereUniqueWithoutCaisseInput[]
+    updateMany?: ModePaiementUpdateManyWithWhereWithoutCaisseInput | ModePaiementUpdateManyWithWhereWithoutCaisseInput[]
+    deleteMany?: ModePaiementScalarWhereInput | ModePaiementScalarWhereInput[]
+  }
+
   export type PaiementUncheckedUpdateManyWithoutCaisseNestedInput = {
     create?: XOR<PaiementCreateWithoutCaisseInput, PaiementUncheckedCreateWithoutCaisseInput> | PaiementCreateWithoutCaisseInput[] | PaiementUncheckedCreateWithoutCaisseInput[]
     connectOrCreate?: PaiementCreateOrConnectWithoutCaisseInput | PaiementCreateOrConnectWithoutCaisseInput[]
@@ -31938,6 +33634,20 @@ export namespace Prisma {
     update?: DepenseUpdateWithWhereUniqueWithoutCaisseInput | DepenseUpdateWithWhereUniqueWithoutCaisseInput[]
     updateMany?: DepenseUpdateManyWithWhereWithoutCaisseInput | DepenseUpdateManyWithWhereWithoutCaisseInput[]
     deleteMany?: DepenseScalarWhereInput | DepenseScalarWhereInput[]
+  }
+
+  export type ModePaiementUncheckedUpdateManyWithoutCaisseNestedInput = {
+    create?: XOR<ModePaiementCreateWithoutCaisseInput, ModePaiementUncheckedCreateWithoutCaisseInput> | ModePaiementCreateWithoutCaisseInput[] | ModePaiementUncheckedCreateWithoutCaisseInput[]
+    connectOrCreate?: ModePaiementCreateOrConnectWithoutCaisseInput | ModePaiementCreateOrConnectWithoutCaisseInput[]
+    upsert?: ModePaiementUpsertWithWhereUniqueWithoutCaisseInput | ModePaiementUpsertWithWhereUniqueWithoutCaisseInput[]
+    createMany?: ModePaiementCreateManyCaisseInputEnvelope
+    set?: ModePaiementWhereUniqueInput | ModePaiementWhereUniqueInput[]
+    disconnect?: ModePaiementWhereUniqueInput | ModePaiementWhereUniqueInput[]
+    delete?: ModePaiementWhereUniqueInput | ModePaiementWhereUniqueInput[]
+    connect?: ModePaiementWhereUniqueInput | ModePaiementWhereUniqueInput[]
+    update?: ModePaiementUpdateWithWhereUniqueWithoutCaisseInput | ModePaiementUpdateWithWhereUniqueWithoutCaisseInput[]
+    updateMany?: ModePaiementUpdateManyWithWhereWithoutCaisseInput | ModePaiementUpdateManyWithWhereWithoutCaisseInput[]
+    deleteMany?: ModePaiementScalarWhereInput | ModePaiementScalarWhereInput[]
   }
 
   export type PanierCreateNestedOneWithoutVentesInput = {
@@ -32272,6 +33982,12 @@ export namespace Prisma {
     deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
   }
 
+  export type ModePaiementCreateNestedOneWithoutDetailPanierInput = {
+    create?: XOR<ModePaiementCreateWithoutDetailPanierInput, ModePaiementUncheckedCreateWithoutDetailPanierInput>
+    connectOrCreate?: ModePaiementCreateOrConnectWithoutDetailPanierInput
+    connect?: ModePaiementWhereUniqueInput
+  }
+
   export type DeviseCreateNestedOneWithoutDetailPanierInput = {
     create?: XOR<DeviseCreateWithoutDetailPanierInput, DeviseUncheckedCreateWithoutDetailPanierInput>
     connectOrCreate?: DeviseCreateOrConnectWithoutDetailPanierInput
@@ -32290,10 +34006,22 @@ export namespace Prisma {
     connect?: PanierWhereUniqueInput
   }
 
-  export type DeviseUpdateOneRequiredWithoutDetailPanierNestedInput = {
+  export type ModePaiementUpdateOneWithoutDetailPanierNestedInput = {
+    create?: XOR<ModePaiementCreateWithoutDetailPanierInput, ModePaiementUncheckedCreateWithoutDetailPanierInput>
+    connectOrCreate?: ModePaiementCreateOrConnectWithoutDetailPanierInput
+    upsert?: ModePaiementUpsertWithoutDetailPanierInput
+    disconnect?: ModePaiementWhereInput | boolean
+    delete?: ModePaiementWhereInput | boolean
+    connect?: ModePaiementWhereUniqueInput
+    update?: XOR<XOR<ModePaiementUpdateToOneWithWhereWithoutDetailPanierInput, ModePaiementUpdateWithoutDetailPanierInput>, ModePaiementUncheckedUpdateWithoutDetailPanierInput>
+  }
+
+  export type DeviseUpdateOneWithoutDetailPanierNestedInput = {
     create?: XOR<DeviseCreateWithoutDetailPanierInput, DeviseUncheckedCreateWithoutDetailPanierInput>
     connectOrCreate?: DeviseCreateOrConnectWithoutDetailPanierInput
     upsert?: DeviseUpsertWithoutDetailPanierInput
+    disconnect?: DeviseWhereInput | boolean
+    delete?: DeviseWhereInput | boolean
     connect?: DeviseWhereUniqueInput
     update?: XOR<XOR<DeviseUpdateToOneWithWhereWithoutDetailPanierInput, DeviseUpdateWithoutDetailPanierInput>, DeviseUncheckedUpdateWithoutDetailPanierInput>
   }
@@ -32572,8 +34300,8 @@ export namespace Prisma {
     connect?: PaiementWhereUniqueInput | PaiementWhereUniqueInput[]
   }
 
-  export type EnumTypeDepenseFieldUpdateOperationsInput = {
-    set?: $Enums.TypeDepense
+  export type EnumMotifsDepenseFieldUpdateOperationsInput = {
+    set?: $Enums.MotifsDepense
   }
 
   export type PaiementUpdateManyWithoutDepenseNestedInput = {
@@ -32871,11 +34599,21 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedEnumModePaimentFilter<$PrismaModel = never> = {
-    equals?: $Enums.ModePaiment | EnumModePaimentFieldRefInput<$PrismaModel>
-    in?: $Enums.ModePaiment[] | ListEnumModePaimentFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ModePaiment[] | ListEnumModePaimentFieldRefInput<$PrismaModel>
-    not?: NestedEnumModePaimentFilter<$PrismaModel> | $Enums.ModePaiment
+  export type NestedEnumTypeModePaiementFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeModePaiement | EnumTypeModePaiementFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeModePaiementFilter<$PrismaModel> | $Enums.TypeModePaiement
+  }
+
+  export type NestedEnumTypeModePaiementWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeModePaiement | EnumTypeModePaiementFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeModePaiementWithAggregatesFilter<$PrismaModel> | $Enums.TypeModePaiement
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTypeModePaiementFilter<$PrismaModel>
+    _max?: NestedEnumTypeModePaiementFilter<$PrismaModel>
   }
 
   export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -32892,16 +34630,6 @@ export namespace Prisma {
     _sum?: NestedFloatNullableFilter<$PrismaModel>
     _min?: NestedFloatNullableFilter<$PrismaModel>
     _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type NestedEnumModePaimentWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ModePaiment | EnumModePaimentFieldRefInput<$PrismaModel>
-    in?: $Enums.ModePaiment[] | ListEnumModePaimentFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ModePaiment[] | ListEnumModePaimentFieldRefInput<$PrismaModel>
-    not?: NestedEnumModePaimentWithAggregatesFilter<$PrismaModel> | $Enums.ModePaiment
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumModePaimentFilter<$PrismaModel>
-    _max?: NestedEnumModePaimentFilter<$PrismaModel>
   }
 
   export type NestedEnumStatutCaisseFilter<$PrismaModel = never> = {
@@ -33014,21 +34742,21 @@ export namespace Prisma {
     _max?: NestedEnumStatutCommandeFilter<$PrismaModel>
   }
 
-  export type NestedEnumTypeDepenseFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeDepense | EnumTypeDepenseFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeDepense[] | ListEnumTypeDepenseFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeDepense[] | ListEnumTypeDepenseFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeDepenseFilter<$PrismaModel> | $Enums.TypeDepense
+  export type NestedEnumMotifsDepenseFilter<$PrismaModel = never> = {
+    equals?: $Enums.MotifsDepense | EnumMotifsDepenseFieldRefInput<$PrismaModel>
+    in?: $Enums.MotifsDepense[] | ListEnumMotifsDepenseFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MotifsDepense[] | ListEnumMotifsDepenseFieldRefInput<$PrismaModel>
+    not?: NestedEnumMotifsDepenseFilter<$PrismaModel> | $Enums.MotifsDepense
   }
 
-  export type NestedEnumTypeDepenseWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeDepense | EnumTypeDepenseFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeDepense[] | ListEnumTypeDepenseFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeDepense[] | ListEnumTypeDepenseFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeDepenseWithAggregatesFilter<$PrismaModel> | $Enums.TypeDepense
+  export type NestedEnumMotifsDepenseWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MotifsDepense | EnumMotifsDepenseFieldRefInput<$PrismaModel>
+    in?: $Enums.MotifsDepense[] | ListEnumMotifsDepenseFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MotifsDepense[] | ListEnumMotifsDepenseFieldRefInput<$PrismaModel>
+    not?: NestedEnumMotifsDepenseWithAggregatesFilter<$PrismaModel> | $Enums.MotifsDepense
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeDepenseFilter<$PrismaModel>
-    _max?: NestedEnumTypeDepenseFilter<$PrismaModel>
+    _min?: NestedEnumMotifsDepenseFilter<$PrismaModel>
+    _max?: NestedEnumMotifsDepenseFilter<$PrismaModel>
   }
 
   export type AgentCreateWithoutTeneursInput = {
@@ -33302,11 +35030,10 @@ export namespace Prisma {
   }
 
   export type PaiementCreateWithoutDeviseInput = {
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    modePaiement: ModePaiementCreateNestedOneWithoutPaiementInput
     vente?: VenteCreateNestedOneWithoutPaiementsInput
     achat?: AchatCreateNestedOneWithoutPaiementsInput
     commande?: CommandeCreateNestedOneWithoutPaiementInput
@@ -33316,9 +35043,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedCreateWithoutDeviseInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     caisseId: number
     venteId?: number | null
     achatId?: number | null
@@ -33340,27 +35066,27 @@ export namespace Prisma {
 
   export type CaisseCreateWithoutDeviseInput = {
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     agent: AgentCreateNestedOneWithoutCaissesInput
     paiements?: PaiementCreateNestedManyWithoutCaisseInput
     Depense?: DepenseCreateNestedManyWithoutCaisseInput
+    ModePaiement?: ModePaiementCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseUncheckedCreateWithoutDeviseInput = {
     id?: number
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     agentId: number
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     paiements?: PaiementUncheckedCreateNestedManyWithoutCaisseInput
     Depense?: DepenseUncheckedCreateNestedManyWithoutCaisseInput
+    ModePaiement?: ModePaiementUncheckedCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseCreateOrConnectWithoutDeviseInput = {
@@ -33375,12 +35101,12 @@ export namespace Prisma {
 
   export type DetailPanierCreateWithoutDeviseInput = {
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    modePaiement?: ModePaiementCreateNestedOneWithoutDetailPanierInput
     produit: ProduitCreateNestedOneWithoutDetailsPaniersInput
     panier: PanierCreateNestedOneWithoutDetailPaniersInput
   }
@@ -33389,11 +35115,11 @@ export namespace Prisma {
     id?: number
     produitId: number
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
+    modePaiementId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -33505,9 +35231,8 @@ export namespace Prisma {
     OR?: PaiementScalarWhereInput[]
     NOT?: PaiementScalarWhereInput | PaiementScalarWhereInput[]
     id?: IntFilter<"Paiement"> | number
-    totalHT?: FloatNullableFilter<"Paiement"> | number | null
-    totalTTC?: FloatNullableFilter<"Paiement"> | number | null
-    modePaiement?: EnumModePaimentFilter<"Paiement"> | $Enums.ModePaiment
+    montant?: FloatNullableFilter<"Paiement"> | number | null
+    modePaiementId?: IntFilter<"Paiement"> | number
     deviseId?: IntFilter<"Paiement"> | number
     caisseId?: IntFilter<"Paiement"> | number
     venteId?: IntNullableFilter<"Paiement"> | number | null
@@ -33540,11 +35265,10 @@ export namespace Prisma {
     NOT?: CaisseScalarWhereInput | CaisseScalarWhereInput[]
     id?: IntFilter<"Caisse"> | number
     nom?: StringFilter<"Caisse"> | string
-    description?: StringNullableFilter<"Caisse"> | string | null
-    soldeActuel?: FloatNullableFilter<"Caisse"> | number | null
     deviseId?: IntFilter<"Caisse"> | number
     agentId?: IntFilter<"Caisse"> | number
     statut?: EnumStatutCaisseFilter<"Caisse"> | $Enums.StatutCaisse
+    description?: StringNullableFilter<"Caisse"> | string | null
     createdAt?: DateTimeFilter<"Caisse"> | Date | string
     updatedAt?: DateTimeFilter<"Caisse"> | Date | string
   }
@@ -33572,12 +35296,12 @@ export namespace Prisma {
     id?: IntFilter<"DetailPanier"> | number
     produitId?: IntFilter<"DetailPanier"> | number
     qtte?: IntFilter<"DetailPanier"> | number
-    modePaiement?: EnumModePaimentFilter<"DetailPanier"> | $Enums.ModePaiment
     prixUnitaire?: FloatFilter<"DetailPanier"> | number
     prixTotalHT?: FloatFilter<"DetailPanier"> | number
     prixTotalTTC?: FloatFilter<"DetailPanier"> | number
     panierId?: IntFilter<"DetailPanier"> | number
-    deviseId?: IntFilter<"DetailPanier"> | number
+    deviseId?: IntNullableFilter<"DetailPanier"> | number | null
+    modePaiementId?: IntNullableFilter<"DetailPanier"> | number | null
     createdAt?: DateTimeFilter<"DetailPanier"> | Date | string
     updatedAt?: DateTimeFilter<"DetailPanier"> | Date | string
   }
@@ -33769,7 +35493,7 @@ export namespace Prisma {
 
   export type DepenseCreateWithoutEntrepriseInput = {
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -33782,7 +35506,7 @@ export namespace Prisma {
     id?: number
     caisseId: number
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     agentId: number
     createdAt?: Date | string
@@ -33990,7 +35714,7 @@ export namespace Prisma {
     id?: IntFilter<"Depense"> | number
     caisseId?: IntFilter<"Depense"> | number
     referenceExterne?: StringNullableFilter<"Depense"> | string | null
-    type?: EnumTypeDepenseFilter<"Depense"> | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFilter<"Depense"> | $Enums.MotifsDepense
     description?: StringNullableFilter<"Depense"> | string | null
     agentId?: IntFilter<"Depense"> | number
     entrepriseId?: IntFilter<"Depense"> | number
@@ -34270,27 +35994,27 @@ export namespace Prisma {
 
   export type CaisseCreateWithoutAgentInput = {
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     devise: DeviseCreateNestedOneWithoutCaissesInput
     paiements?: PaiementCreateNestedManyWithoutCaisseInput
     Depense?: DepenseCreateNestedManyWithoutCaisseInput
+    ModePaiement?: ModePaiementCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseUncheckedCreateWithoutAgentInput = {
     id?: number
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     deviseId: number
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     paiements?: PaiementUncheckedCreateNestedManyWithoutCaisseInput
     Depense?: DepenseUncheckedCreateNestedManyWithoutCaisseInput
+    ModePaiement?: ModePaiementUncheckedCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseCreateOrConnectWithoutAgentInput = {
@@ -34387,7 +36111,7 @@ export namespace Prisma {
 
   export type DepenseCreateWithoutAgentInput = {
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34400,7 +36124,7 @@ export namespace Prisma {
     id?: number
     caisseId: number
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     entrepriseId?: number
     createdAt?: Date | string
@@ -36004,25 +37728,25 @@ export namespace Prisma {
 
   export type DetailPanierCreateWithoutProduitInput = {
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    devise: DeviseCreateNestedOneWithoutDetailPanierInput
+    modePaiement?: ModePaiementCreateNestedOneWithoutDetailPanierInput
+    devise?: DeviseCreateNestedOneWithoutDetailPanierInput
     panier: PanierCreateNestedOneWithoutDetailPaniersInput
   }
 
   export type DetailPanierUncheckedCreateWithoutProduitInput = {
     id?: number
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
-    deviseId: number
+    deviseId?: number | null
+    modePaiementId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -36283,6 +38007,198 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CaisseCreateWithoutModePaiementInput = {
+    nom: string
+    statut?: $Enums.StatutCaisse
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    devise: DeviseCreateNestedOneWithoutCaissesInput
+    agent: AgentCreateNestedOneWithoutCaissesInput
+    paiements?: PaiementCreateNestedManyWithoutCaisseInput
+    Depense?: DepenseCreateNestedManyWithoutCaisseInput
+  }
+
+  export type CaisseUncheckedCreateWithoutModePaiementInput = {
+    id?: number
+    nom: string
+    deviseId: number
+    agentId: number
+    statut?: $Enums.StatutCaisse
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    paiements?: PaiementUncheckedCreateNestedManyWithoutCaisseInput
+    Depense?: DepenseUncheckedCreateNestedManyWithoutCaisseInput
+  }
+
+  export type CaisseCreateOrConnectWithoutModePaiementInput = {
+    where: CaisseWhereUniqueInput
+    create: XOR<CaisseCreateWithoutModePaiementInput, CaisseUncheckedCreateWithoutModePaiementInput>
+  }
+
+  export type PaiementCreateWithoutModePaiementInput = {
+    montant?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    vente?: VenteCreateNestedOneWithoutPaiementsInput
+    achat?: AchatCreateNestedOneWithoutPaiementsInput
+    commande?: CommandeCreateNestedOneWithoutPaiementInput
+    depense?: DepenseCreateNestedOneWithoutPaiementInput
+    caisse: CaisseCreateNestedOneWithoutPaiementsInput
+    devise: DeviseCreateNestedOneWithoutPaiementsInput
+  }
+
+  export type PaiementUncheckedCreateWithoutModePaiementInput = {
+    id?: number
+    montant?: number | null
+    deviseId: number
+    caisseId: number
+    venteId?: number | null
+    achatId?: number | null
+    commandeId?: number | null
+    depenseId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaiementCreateOrConnectWithoutModePaiementInput = {
+    where: PaiementWhereUniqueInput
+    create: XOR<PaiementCreateWithoutModePaiementInput, PaiementUncheckedCreateWithoutModePaiementInput>
+  }
+
+  export type PaiementCreateManyModePaiementInputEnvelope = {
+    data: PaiementCreateManyModePaiementInput | PaiementCreateManyModePaiementInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DetailPanierCreateWithoutModePaiementInput = {
+    qtte: number
+    prixUnitaire: number
+    prixTotalHT: number
+    prixTotalTTC: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    devise?: DeviseCreateNestedOneWithoutDetailPanierInput
+    produit: ProduitCreateNestedOneWithoutDetailsPaniersInput
+    panier: PanierCreateNestedOneWithoutDetailPaniersInput
+  }
+
+  export type DetailPanierUncheckedCreateWithoutModePaiementInput = {
+    id?: number
+    produitId: number
+    qtte: number
+    prixUnitaire: number
+    prixTotalHT: number
+    prixTotalTTC: number
+    panierId: number
+    deviseId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DetailPanierCreateOrConnectWithoutModePaiementInput = {
+    where: DetailPanierWhereUniqueInput
+    create: XOR<DetailPanierCreateWithoutModePaiementInput, DetailPanierUncheckedCreateWithoutModePaiementInput>
+  }
+
+  export type DetailPanierCreateManyModePaiementInputEnvelope = {
+    data: DetailPanierCreateManyModePaiementInput | DetailPanierCreateManyModePaiementInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CaisseUpsertWithoutModePaiementInput = {
+    update: XOR<CaisseUpdateWithoutModePaiementInput, CaisseUncheckedUpdateWithoutModePaiementInput>
+    create: XOR<CaisseCreateWithoutModePaiementInput, CaisseUncheckedCreateWithoutModePaiementInput>
+    where?: CaisseWhereInput
+  }
+
+  export type CaisseUpdateToOneWithWhereWithoutModePaiementInput = {
+    where?: CaisseWhereInput
+    data: XOR<CaisseUpdateWithoutModePaiementInput, CaisseUncheckedUpdateWithoutModePaiementInput>
+  }
+
+  export type CaisseUpdateWithoutModePaiementInput = {
+    nom?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    devise?: DeviseUpdateOneRequiredWithoutCaissesNestedInput
+    agent?: AgentUpdateOneRequiredWithoutCaissesNestedInput
+    paiements?: PaiementUpdateManyWithoutCaisseNestedInput
+    Depense?: DepenseUpdateManyWithoutCaisseNestedInput
+  }
+
+  export type CaisseUncheckedUpdateWithoutModePaiementInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    deviseId?: IntFieldUpdateOperationsInput | number
+    agentId?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    paiements?: PaiementUncheckedUpdateManyWithoutCaisseNestedInput
+    Depense?: DepenseUncheckedUpdateManyWithoutCaisseNestedInput
+  }
+
+  export type PaiementUpsertWithWhereUniqueWithoutModePaiementInput = {
+    where: PaiementWhereUniqueInput
+    update: XOR<PaiementUpdateWithoutModePaiementInput, PaiementUncheckedUpdateWithoutModePaiementInput>
+    create: XOR<PaiementCreateWithoutModePaiementInput, PaiementUncheckedCreateWithoutModePaiementInput>
+  }
+
+  export type PaiementUpdateWithWhereUniqueWithoutModePaiementInput = {
+    where: PaiementWhereUniqueInput
+    data: XOR<PaiementUpdateWithoutModePaiementInput, PaiementUncheckedUpdateWithoutModePaiementInput>
+  }
+
+  export type PaiementUpdateManyWithWhereWithoutModePaiementInput = {
+    where: PaiementScalarWhereInput
+    data: XOR<PaiementUpdateManyMutationInput, PaiementUncheckedUpdateManyWithoutModePaiementInput>
+  }
+
+  export type DetailPanierUpsertWithWhereUniqueWithoutModePaiementInput = {
+    where: DetailPanierWhereUniqueInput
+    update: XOR<DetailPanierUpdateWithoutModePaiementInput, DetailPanierUncheckedUpdateWithoutModePaiementInput>
+    create: XOR<DetailPanierCreateWithoutModePaiementInput, DetailPanierUncheckedCreateWithoutModePaiementInput>
+  }
+
+  export type DetailPanierUpdateWithWhereUniqueWithoutModePaiementInput = {
+    where: DetailPanierWhereUniqueInput
+    data: XOR<DetailPanierUpdateWithoutModePaiementInput, DetailPanierUncheckedUpdateWithoutModePaiementInput>
+  }
+
+  export type DetailPanierUpdateManyWithWhereWithoutModePaiementInput = {
+    where: DetailPanierScalarWhereInput
+    data: XOR<DetailPanierUpdateManyMutationInput, DetailPanierUncheckedUpdateManyWithoutModePaiementInput>
+  }
+
+  export type ModePaiementCreateWithoutPaiementInput = {
+    type?: $Enums.TypeModePaiement
+    soldeActuel?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    caisse: CaisseCreateNestedOneWithoutModePaiementInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutModePaiementInput
+  }
+
+  export type ModePaiementUncheckedCreateWithoutPaiementInput = {
+    id?: number
+    type?: $Enums.TypeModePaiement
+    soldeActuel?: number | null
+    caisseId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutModePaiementInput
+  }
+
+  export type ModePaiementCreateOrConnectWithoutPaiementInput = {
+    where: ModePaiementWhereUniqueInput
+    create: XOR<ModePaiementCreateWithoutPaiementInput, ModePaiementUncheckedCreateWithoutPaiementInput>
+  }
+
   export type VenteCreateWithoutPaiementsInput = {
     statut?: $Enums.StatutVente
     nom?: string | null
@@ -36391,7 +38307,7 @@ export namespace Prisma {
 
   export type DepenseCreateWithoutPaiementInput = {
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36404,7 +38320,7 @@ export namespace Prisma {
     id?: number
     caisseId: number
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     agentId: number
     entrepriseId?: number
@@ -36419,27 +38335,27 @@ export namespace Prisma {
 
   export type CaisseCreateWithoutPaiementsInput = {
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     devise: DeviseCreateNestedOneWithoutCaissesInput
     agent: AgentCreateNestedOneWithoutCaissesInput
     Depense?: DepenseCreateNestedManyWithoutCaisseInput
+    ModePaiement?: ModePaiementCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseUncheckedCreateWithoutPaiementsInput = {
     id?: number
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     deviseId: number
     agentId: number
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Depense?: DepenseUncheckedCreateNestedManyWithoutCaisseInput
+    ModePaiement?: ModePaiementUncheckedCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseCreateOrConnectWithoutPaiementsInput = {
@@ -36477,6 +38393,36 @@ export namespace Prisma {
   export type DeviseCreateOrConnectWithoutPaiementsInput = {
     where: DeviseWhereUniqueInput
     create: XOR<DeviseCreateWithoutPaiementsInput, DeviseUncheckedCreateWithoutPaiementsInput>
+  }
+
+  export type ModePaiementUpsertWithoutPaiementInput = {
+    update: XOR<ModePaiementUpdateWithoutPaiementInput, ModePaiementUncheckedUpdateWithoutPaiementInput>
+    create: XOR<ModePaiementCreateWithoutPaiementInput, ModePaiementUncheckedCreateWithoutPaiementInput>
+    where?: ModePaiementWhereInput
+  }
+
+  export type ModePaiementUpdateToOneWithWhereWithoutPaiementInput = {
+    where?: ModePaiementWhereInput
+    data: XOR<ModePaiementUpdateWithoutPaiementInput, ModePaiementUncheckedUpdateWithoutPaiementInput>
+  }
+
+  export type ModePaiementUpdateWithoutPaiementInput = {
+    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    caisse?: CaisseUpdateOneRequiredWithoutModePaiementNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutModePaiementNestedInput
+  }
+
+  export type ModePaiementUncheckedUpdateWithoutPaiementInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
+    caisseId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutModePaiementNestedInput
   }
 
   export type VenteUpsertWithoutPaiementsInput = {
@@ -36616,7 +38562,7 @@ export namespace Prisma {
 
   export type DepenseUpdateWithoutPaiementInput = {
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36629,7 +38575,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     agentId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
@@ -36650,27 +38596,27 @@ export namespace Prisma {
 
   export type CaisseUpdateWithoutPaiementsInput = {
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devise?: DeviseUpdateOneRequiredWithoutCaissesNestedInput
     agent?: AgentUpdateOneRequiredWithoutCaissesNestedInput
     Depense?: DepenseUpdateManyWithoutCaisseNestedInput
+    ModePaiement?: ModePaiementUpdateManyWithoutCaisseNestedInput
   }
 
   export type CaisseUncheckedUpdateWithoutPaiementsInput = {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     deviseId?: IntFieldUpdateOperationsInput | number
     agentId?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Depense?: DepenseUncheckedUpdateManyWithoutCaisseNestedInput
+    ModePaiement?: ModePaiementUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
   export type DeviseUpsertWithoutPaiementsInput = {
@@ -36798,11 +38744,10 @@ export namespace Prisma {
   }
 
   export type PaiementCreateWithoutCaisseInput = {
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    modePaiement: ModePaiementCreateNestedOneWithoutPaiementInput
     vente?: VenteCreateNestedOneWithoutPaiementsInput
     achat?: AchatCreateNestedOneWithoutPaiementsInput
     commande?: CommandeCreateNestedOneWithoutPaiementInput
@@ -36812,9 +38757,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedCreateWithoutCaisseInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     deviseId: number
     venteId?: number | null
     achatId?: number | null
@@ -36836,7 +38780,7 @@ export namespace Prisma {
 
   export type DepenseCreateWithoutCaisseInput = {
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36848,7 +38792,7 @@ export namespace Prisma {
   export type DepenseUncheckedCreateWithoutCaisseInput = {
     id?: number
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     agentId: number
     entrepriseId?: number
@@ -36864,6 +38808,35 @@ export namespace Prisma {
 
   export type DepenseCreateManyCaisseInputEnvelope = {
     data: DepenseCreateManyCaisseInput | DepenseCreateManyCaisseInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ModePaiementCreateWithoutCaisseInput = {
+    type?: $Enums.TypeModePaiement
+    soldeActuel?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Paiement?: PaiementCreateNestedManyWithoutModePaiementInput
+    DetailPanier?: DetailPanierCreateNestedManyWithoutModePaiementInput
+  }
+
+  export type ModePaiementUncheckedCreateWithoutCaisseInput = {
+    id?: number
+    type?: $Enums.TypeModePaiement
+    soldeActuel?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutModePaiementInput
+    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutModePaiementInput
+  }
+
+  export type ModePaiementCreateOrConnectWithoutCaisseInput = {
+    where: ModePaiementWhereUniqueInput
+    create: XOR<ModePaiementCreateWithoutCaisseInput, ModePaiementUncheckedCreateWithoutCaisseInput>
+  }
+
+  export type ModePaiementCreateManyCaisseInputEnvelope = {
+    data: ModePaiementCreateManyCaisseInput | ModePaiementCreateManyCaisseInput[]
     skipDuplicates?: boolean
   }
 
@@ -36995,6 +38968,34 @@ export namespace Prisma {
   export type DepenseUpdateManyWithWhereWithoutCaisseInput = {
     where: DepenseScalarWhereInput
     data: XOR<DepenseUpdateManyMutationInput, DepenseUncheckedUpdateManyWithoutCaisseInput>
+  }
+
+  export type ModePaiementUpsertWithWhereUniqueWithoutCaisseInput = {
+    where: ModePaiementWhereUniqueInput
+    update: XOR<ModePaiementUpdateWithoutCaisseInput, ModePaiementUncheckedUpdateWithoutCaisseInput>
+    create: XOR<ModePaiementCreateWithoutCaisseInput, ModePaiementUncheckedCreateWithoutCaisseInput>
+  }
+
+  export type ModePaiementUpdateWithWhereUniqueWithoutCaisseInput = {
+    where: ModePaiementWhereUniqueInput
+    data: XOR<ModePaiementUpdateWithoutCaisseInput, ModePaiementUncheckedUpdateWithoutCaisseInput>
+  }
+
+  export type ModePaiementUpdateManyWithWhereWithoutCaisseInput = {
+    where: ModePaiementScalarWhereInput
+    data: XOR<ModePaiementUpdateManyMutationInput, ModePaiementUncheckedUpdateManyWithoutCaisseInput>
+  }
+
+  export type ModePaiementScalarWhereInput = {
+    AND?: ModePaiementScalarWhereInput | ModePaiementScalarWhereInput[]
+    OR?: ModePaiementScalarWhereInput[]
+    NOT?: ModePaiementScalarWhereInput | ModePaiementScalarWhereInput[]
+    id?: IntFilter<"ModePaiement"> | number
+    type?: EnumTypeModePaiementFilter<"ModePaiement"> | $Enums.TypeModePaiement
+    soldeActuel?: FloatNullableFilter<"ModePaiement"> | number | null
+    caisseId?: IntFilter<"ModePaiement"> | number
+    createdAt?: DateTimeFilter<"ModePaiement"> | Date | string
+    updatedAt?: DateTimeFilter<"ModePaiement"> | Date | string
   }
 
   export type PanierCreateWithoutVentesInput = {
@@ -37188,11 +39189,10 @@ export namespace Prisma {
   }
 
   export type PaiementCreateWithoutVenteInput = {
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    modePaiement: ModePaiementCreateNestedOneWithoutPaiementInput
     achat?: AchatCreateNestedOneWithoutPaiementsInput
     commande?: CommandeCreateNestedOneWithoutPaiementInput
     depense?: DepenseCreateNestedOneWithoutPaiementInput
@@ -37202,9 +39202,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedCreateWithoutVenteInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     deviseId: number
     caisseId: number
     achatId?: number | null
@@ -37552,13 +39551,13 @@ export namespace Prisma {
 
   export type DetailPanierCreateWithoutPanierInput = {
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    devise: DeviseCreateNestedOneWithoutDetailPanierInput
+    modePaiement?: ModePaiementCreateNestedOneWithoutDetailPanierInput
+    devise?: DeviseCreateNestedOneWithoutDetailPanierInput
     produit: ProduitCreateNestedOneWithoutDetailsPaniersInput
   }
 
@@ -37566,11 +39565,11 @@ export namespace Prisma {
     id?: number
     produitId: number
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
-    deviseId: number
+    deviseId?: number | null
+    modePaiementId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -37872,6 +39871,30 @@ export namespace Prisma {
     data: XOR<CommandeUpdateManyMutationInput, CommandeUncheckedUpdateManyWithoutPanierInput>
   }
 
+  export type ModePaiementCreateWithoutDetailPanierInput = {
+    type?: $Enums.TypeModePaiement
+    soldeActuel?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    caisse: CaisseCreateNestedOneWithoutModePaiementInput
+    Paiement?: PaiementCreateNestedManyWithoutModePaiementInput
+  }
+
+  export type ModePaiementUncheckedCreateWithoutDetailPanierInput = {
+    id?: number
+    type?: $Enums.TypeModePaiement
+    soldeActuel?: number | null
+    caisseId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutModePaiementInput
+  }
+
+  export type ModePaiementCreateOrConnectWithoutDetailPanierInput = {
+    where: ModePaiementWhereUniqueInput
+    create: XOR<ModePaiementCreateWithoutDetailPanierInput, ModePaiementUncheckedCreateWithoutDetailPanierInput>
+  }
+
   export type DeviseCreateWithoutDetailPanierInput = {
     nom: string
     code: string
@@ -37960,6 +39983,36 @@ export namespace Prisma {
   export type PanierCreateOrConnectWithoutDetailPaniersInput = {
     where: PanierWhereUniqueInput
     create: XOR<PanierCreateWithoutDetailPaniersInput, PanierUncheckedCreateWithoutDetailPaniersInput>
+  }
+
+  export type ModePaiementUpsertWithoutDetailPanierInput = {
+    update: XOR<ModePaiementUpdateWithoutDetailPanierInput, ModePaiementUncheckedUpdateWithoutDetailPanierInput>
+    create: XOR<ModePaiementCreateWithoutDetailPanierInput, ModePaiementUncheckedCreateWithoutDetailPanierInput>
+    where?: ModePaiementWhereInput
+  }
+
+  export type ModePaiementUpdateToOneWithWhereWithoutDetailPanierInput = {
+    where?: ModePaiementWhereInput
+    data: XOR<ModePaiementUpdateWithoutDetailPanierInput, ModePaiementUncheckedUpdateWithoutDetailPanierInput>
+  }
+
+  export type ModePaiementUpdateWithoutDetailPanierInput = {
+    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    caisse?: CaisseUpdateOneRequiredWithoutModePaiementNestedInput
+    Paiement?: PaiementUpdateManyWithoutModePaiementNestedInput
+  }
+
+  export type ModePaiementUncheckedUpdateWithoutDetailPanierInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
+    caisseId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Paiement?: PaiementUncheckedUpdateManyWithoutModePaiementNestedInput
   }
 
   export type DeviseUpsertWithoutDetailPanierInput = {
@@ -38225,11 +40278,10 @@ export namespace Prisma {
   }
 
   export type PaiementCreateWithoutAchatInput = {
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    modePaiement: ModePaiementCreateNestedOneWithoutPaiementInput
     vente?: VenteCreateNestedOneWithoutPaiementsInput
     commande?: CommandeCreateNestedOneWithoutPaiementInput
     depense?: DepenseCreateNestedOneWithoutPaiementInput
@@ -38239,9 +40291,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedCreateWithoutAchatInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     deviseId: number
     caisseId: number
     venteId?: number | null
@@ -38456,11 +40507,10 @@ export namespace Prisma {
   }
 
   export type PaiementCreateWithoutCommandeInput = {
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    modePaiement: ModePaiementCreateNestedOneWithoutPaiementInput
     vente?: VenteCreateNestedOneWithoutPaiementsInput
     achat?: AchatCreateNestedOneWithoutPaiementsInput
     depense?: DepenseCreateNestedOneWithoutPaiementInput
@@ -38470,9 +40520,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedCreateWithoutCommandeInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     deviseId: number
     caisseId: number
     venteId?: number | null
@@ -38919,11 +40968,10 @@ export namespace Prisma {
   }
 
   export type PaiementCreateWithoutDepenseInput = {
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    modePaiement: ModePaiementCreateNestedOneWithoutPaiementInput
     vente?: VenteCreateNestedOneWithoutPaiementsInput
     achat?: AchatCreateNestedOneWithoutPaiementsInput
     commande?: CommandeCreateNestedOneWithoutPaiementInput
@@ -38933,9 +40981,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedCreateWithoutDepenseInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     deviseId: number
     caisseId: number
     venteId?: number | null
@@ -38997,27 +41044,27 @@ export namespace Prisma {
 
   export type CaisseCreateWithoutDepenseInput = {
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     devise: DeviseCreateNestedOneWithoutCaissesInput
     agent: AgentCreateNestedOneWithoutCaissesInput
     paiements?: PaiementCreateNestedManyWithoutCaisseInput
+    ModePaiement?: ModePaiementCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseUncheckedCreateWithoutDepenseInput = {
     id?: number
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     deviseId: number
     agentId: number
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     paiements?: PaiementUncheckedCreateNestedManyWithoutCaisseInput
+    ModePaiement?: ModePaiementUncheckedCreateNestedManyWithoutCaisseInput
   }
 
   export type CaisseCreateOrConnectWithoutDepenseInput = {
@@ -39154,27 +41201,27 @@ export namespace Prisma {
 
   export type CaisseUpdateWithoutDepenseInput = {
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devise?: DeviseUpdateOneRequiredWithoutCaissesNestedInput
     agent?: AgentUpdateOneRequiredWithoutCaissesNestedInput
     paiements?: PaiementUpdateManyWithoutCaisseNestedInput
+    ModePaiement?: ModePaiementUpdateManyWithoutCaisseNestedInput
   }
 
   export type CaisseUncheckedUpdateWithoutDepenseInput = {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     deviseId?: IntFieldUpdateOperationsInput | number
     agentId?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paiements?: PaiementUncheckedUpdateManyWithoutCaisseNestedInput
+    ModePaiement?: ModePaiementUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
   export type AgentUpsertWithoutDepenseInput = {
@@ -39300,9 +41347,8 @@ export namespace Prisma {
 
   export type PaiementCreateManyDeviseInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     caisseId: number
     venteId?: number | null
     achatId?: number | null
@@ -39315,10 +41361,9 @@ export namespace Prisma {
   export type CaisseCreateManyDeviseInput = {
     id?: number
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     agentId: number
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -39327,11 +41372,11 @@ export namespace Prisma {
     id?: number
     produitId: number
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
+    modePaiementId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -39374,11 +41419,10 @@ export namespace Prisma {
   }
 
   export type PaiementUpdateWithoutDeviseInput = {
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modePaiement?: ModePaiementUpdateOneRequiredWithoutPaiementNestedInput
     vente?: VenteUpdateOneWithoutPaiementsNestedInput
     achat?: AchatUpdateOneWithoutPaiementsNestedInput
     commande?: CommandeUpdateOneWithoutPaiementNestedInput
@@ -39388,9 +41432,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateWithoutDeviseInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
     achatId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -39402,9 +41445,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateManyWithoutDeviseInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
     achatId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -39416,48 +41458,47 @@ export namespace Prisma {
 
   export type CaisseUpdateWithoutDeviseInput = {
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agent?: AgentUpdateOneRequiredWithoutCaissesNestedInput
     paiements?: PaiementUpdateManyWithoutCaisseNestedInput
     Depense?: DepenseUpdateManyWithoutCaisseNestedInput
+    ModePaiement?: ModePaiementUpdateManyWithoutCaisseNestedInput
   }
 
   export type CaisseUncheckedUpdateWithoutDeviseInput = {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     agentId?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paiements?: PaiementUncheckedUpdateManyWithoutCaisseNestedInput
     Depense?: DepenseUncheckedUpdateManyWithoutCaisseNestedInput
+    ModePaiement?: ModePaiementUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
   export type CaisseUncheckedUpdateManyWithoutDeviseInput = {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     agentId?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DetailPanierUpdateWithoutDeviseInput = {
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modePaiement?: ModePaiementUpdateOneWithoutDetailPanierNestedInput
     produit?: ProduitUpdateOneRequiredWithoutDetailsPaniersNestedInput
     panier?: PanierUpdateOneRequiredWithoutDetailPaniersNestedInput
   }
@@ -39466,11 +41507,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
+    modePaiementId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39479,11 +41520,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
+    modePaiementId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39559,7 +41600,7 @@ export namespace Prisma {
     id?: number
     caisseId: number
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     agentId: number
     createdAt?: Date | string
@@ -39770,7 +41811,7 @@ export namespace Prisma {
 
   export type DepenseUpdateWithoutEntrepriseInput = {
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39783,7 +41824,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     agentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39795,7 +41836,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     agentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39892,10 +41933,9 @@ export namespace Prisma {
   export type CaisseCreateManyAgentInput = {
     id?: number
     nom: string
-    description?: string | null
-    soldeActuel?: number | null
     deviseId: number
     statut?: $Enums.StatutCaisse
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -39930,7 +41970,7 @@ export namespace Prisma {
     id?: number
     caisseId: number
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     entrepriseId?: number
     createdAt?: Date | string
@@ -40216,36 +42256,35 @@ export namespace Prisma {
 
   export type CaisseUpdateWithoutAgentInput = {
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devise?: DeviseUpdateOneRequiredWithoutCaissesNestedInput
     paiements?: PaiementUpdateManyWithoutCaisseNestedInput
     Depense?: DepenseUpdateManyWithoutCaisseNestedInput
+    ModePaiement?: ModePaiementUpdateManyWithoutCaisseNestedInput
   }
 
   export type CaisseUncheckedUpdateWithoutAgentInput = {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     deviseId?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paiements?: PaiementUncheckedUpdateManyWithoutCaisseNestedInput
     Depense?: DepenseUncheckedUpdateManyWithoutCaisseNestedInput
+    ModePaiement?: ModePaiementUncheckedUpdateManyWithoutCaisseNestedInput
   }
 
   export type CaisseUncheckedUpdateManyWithoutAgentInput = {
     id?: IntFieldUpdateOperationsInput | number
     nom?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     deviseId?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutCaisseFieldUpdateOperationsInput | $Enums.StatutCaisse
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -40340,7 +42379,7 @@ export namespace Prisma {
 
   export type DepenseUpdateWithoutAgentInput = {
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40353,7 +42392,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40365,7 +42404,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40911,37 +42950,37 @@ export namespace Prisma {
   export type DetailPanierCreateManyProduitInput = {
     id?: number
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
     panierId: number
-    deviseId: number
+    deviseId?: number | null
+    modePaiementId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type DetailPanierUpdateWithoutProduitInput = {
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    devise?: DeviseUpdateOneRequiredWithoutDetailPanierNestedInput
+    modePaiement?: ModePaiementUpdateOneWithoutDetailPanierNestedInput
+    devise?: DeviseUpdateOneWithoutDetailPanierNestedInput
     panier?: PanierUpdateOneRequiredWithoutDetailPaniersNestedInput
   }
 
   export type DetailPanierUncheckedUpdateWithoutProduitInput = {
     id?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    deviseId?: IntFieldUpdateOperationsInput | number
+    deviseId?: NullableIntFieldUpdateOperationsInput | number | null
+    modePaiementId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -40949,21 +42988,122 @@ export namespace Prisma {
   export type DetailPanierUncheckedUpdateManyWithoutProduitInput = {
     id?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
+    deviseId?: NullableIntFieldUpdateOperationsInput | number | null
+    modePaiementId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaiementCreateManyModePaiementInput = {
+    id?: number
+    montant?: number | null
+    deviseId: number
+    caisseId: number
+    venteId?: number | null
+    achatId?: number | null
+    commandeId?: number | null
+    depenseId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DetailPanierCreateManyModePaiementInput = {
+    id?: number
+    produitId: number
+    qtte: number
+    prixUnitaire: number
+    prixTotalHT: number
+    prixTotalTTC: number
+    panierId: number
+    deviseId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaiementUpdateWithoutModePaiementInput = {
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vente?: VenteUpdateOneWithoutPaiementsNestedInput
+    achat?: AchatUpdateOneWithoutPaiementsNestedInput
+    commande?: CommandeUpdateOneWithoutPaiementNestedInput
+    depense?: DepenseUpdateOneWithoutPaiementNestedInput
+    caisse?: CaisseUpdateOneRequiredWithoutPaiementsNestedInput
+    devise?: DeviseUpdateOneRequiredWithoutPaiementsNestedInput
+  }
+
+  export type PaiementUncheckedUpdateWithoutModePaiementInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
     deviseId?: IntFieldUpdateOperationsInput | number
+    caisseId?: IntFieldUpdateOperationsInput | number
+    venteId?: NullableIntFieldUpdateOperationsInput | number | null
+    achatId?: NullableIntFieldUpdateOperationsInput | number | null
+    commandeId?: NullableIntFieldUpdateOperationsInput | number | null
+    depenseId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaiementUncheckedUpdateManyWithoutModePaiementInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    deviseId?: IntFieldUpdateOperationsInput | number
+    caisseId?: IntFieldUpdateOperationsInput | number
+    venteId?: NullableIntFieldUpdateOperationsInput | number | null
+    achatId?: NullableIntFieldUpdateOperationsInput | number | null
+    commandeId?: NullableIntFieldUpdateOperationsInput | number | null
+    depenseId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DetailPanierUpdateWithoutModePaiementInput = {
+    qtte?: IntFieldUpdateOperationsInput | number
+    prixUnitaire?: FloatFieldUpdateOperationsInput | number
+    prixTotalHT?: FloatFieldUpdateOperationsInput | number
+    prixTotalTTC?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    devise?: DeviseUpdateOneWithoutDetailPanierNestedInput
+    produit?: ProduitUpdateOneRequiredWithoutDetailsPaniersNestedInput
+    panier?: PanierUpdateOneRequiredWithoutDetailPaniersNestedInput
+  }
+
+  export type DetailPanierUncheckedUpdateWithoutModePaiementInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    produitId?: IntFieldUpdateOperationsInput | number
+    qtte?: IntFieldUpdateOperationsInput | number
+    prixUnitaire?: FloatFieldUpdateOperationsInput | number
+    prixTotalHT?: FloatFieldUpdateOperationsInput | number
+    prixTotalTTC?: FloatFieldUpdateOperationsInput | number
+    panierId?: IntFieldUpdateOperationsInput | number
+    deviseId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DetailPanierUncheckedUpdateManyWithoutModePaiementInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    produitId?: IntFieldUpdateOperationsInput | number
+    qtte?: IntFieldUpdateOperationsInput | number
+    prixUnitaire?: FloatFieldUpdateOperationsInput | number
+    prixTotalHT?: FloatFieldUpdateOperationsInput | number
+    prixTotalTTC?: FloatFieldUpdateOperationsInput | number
+    panierId?: IntFieldUpdateOperationsInput | number
+    deviseId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaiementCreateManyCaisseInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     deviseId: number
     venteId?: number | null
     achatId?: number | null
@@ -40976,7 +43116,7 @@ export namespace Prisma {
   export type DepenseCreateManyCaisseInput = {
     id?: number
     referenceExterne?: string | null
-    type: $Enums.TypeDepense
+    motif: $Enums.MotifsDepense
     description?: string | null
     agentId: number
     entrepriseId?: number
@@ -40984,12 +43124,19 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ModePaiementCreateManyCaisseInput = {
+    id?: number
+    type?: $Enums.TypeModePaiement
+    soldeActuel?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type PaiementUpdateWithoutCaisseInput = {
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modePaiement?: ModePaiementUpdateOneRequiredWithoutPaiementNestedInput
     vente?: VenteUpdateOneWithoutPaiementsNestedInput
     achat?: AchatUpdateOneWithoutPaiementsNestedInput
     commande?: CommandeUpdateOneWithoutPaiementNestedInput
@@ -40999,9 +43146,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateWithoutCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
     achatId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41013,9 +43159,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateManyWithoutCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
     achatId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41027,7 +43172,7 @@ export namespace Prisma {
 
   export type DepenseUpdateWithoutCaisseInput = {
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41039,7 +43184,7 @@ export namespace Prisma {
   export type DepenseUncheckedUpdateWithoutCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     agentId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
@@ -41051,7 +43196,7 @@ export namespace Prisma {
   export type DepenseUncheckedUpdateManyWithoutCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
     referenceExterne?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumTypeDepenseFieldUpdateOperationsInput | $Enums.TypeDepense
+    motif?: EnumMotifsDepenseFieldUpdateOperationsInput | $Enums.MotifsDepense
     description?: NullableStringFieldUpdateOperationsInput | string | null
     agentId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
@@ -41059,11 +43204,37 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ModePaiementUpdateWithoutCaisseInput = {
+    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Paiement?: PaiementUpdateManyWithoutModePaiementNestedInput
+    DetailPanier?: DetailPanierUpdateManyWithoutModePaiementNestedInput
+  }
+
+  export type ModePaiementUncheckedUpdateWithoutCaisseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Paiement?: PaiementUncheckedUpdateManyWithoutModePaiementNestedInput
+    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutModePaiementNestedInput
+  }
+
+  export type ModePaiementUncheckedUpdateManyWithoutCaisseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PaiementCreateManyVenteInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     deviseId: number
     caisseId: number
     achatId?: number | null
@@ -41074,11 +43245,10 @@ export namespace Prisma {
   }
 
   export type PaiementUpdateWithoutVenteInput = {
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modePaiement?: ModePaiementUpdateOneRequiredWithoutPaiementNestedInput
     achat?: AchatUpdateOneWithoutPaiementsNestedInput
     commande?: CommandeUpdateOneWithoutPaiementNestedInput
     depense?: DepenseUpdateOneWithoutPaiementNestedInput
@@ -41088,9 +43258,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateWithoutVenteInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     achatId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41102,9 +43271,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateManyWithoutVenteInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     achatId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41118,11 +43286,11 @@ export namespace Prisma {
     id?: number
     produitId: number
     qtte: number
-    modePaiement: $Enums.ModePaiment
     prixUnitaire: number
     prixTotalHT: number
     prixTotalTTC: number
-    deviseId: number
+    deviseId?: number | null
+    modePaiementId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -41173,13 +43341,13 @@ export namespace Prisma {
 
   export type DetailPanierUpdateWithoutPanierInput = {
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    devise?: DeviseUpdateOneRequiredWithoutDetailPanierNestedInput
+    modePaiement?: ModePaiementUpdateOneWithoutDetailPanierNestedInput
+    devise?: DeviseUpdateOneWithoutDetailPanierNestedInput
     produit?: ProduitUpdateOneRequiredWithoutDetailsPaniersNestedInput
   }
 
@@ -41187,11 +43355,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
-    deviseId?: IntFieldUpdateOperationsInput | number
+    deviseId?: NullableIntFieldUpdateOperationsInput | number | null
+    modePaiementId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -41200,11 +43368,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     produitId?: IntFieldUpdateOperationsInput | number
     qtte?: IntFieldUpdateOperationsInput | number
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
     prixUnitaire?: FloatFieldUpdateOperationsInput | number
     prixTotalHT?: FloatFieldUpdateOperationsInput | number
     prixTotalTTC?: FloatFieldUpdateOperationsInput | number
-    deviseId?: IntFieldUpdateOperationsInput | number
+    deviseId?: NullableIntFieldUpdateOperationsInput | number | null
+    modePaiementId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -41346,9 +43514,8 @@ export namespace Prisma {
 
   export type PaiementCreateManyAchatInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     deviseId: number
     caisseId: number
     venteId?: number | null
@@ -41359,11 +43526,10 @@ export namespace Prisma {
   }
 
   export type PaiementUpdateWithoutAchatInput = {
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modePaiement?: ModePaiementUpdateOneRequiredWithoutPaiementNestedInput
     vente?: VenteUpdateOneWithoutPaiementsNestedInput
     commande?: CommandeUpdateOneWithoutPaiementNestedInput
     depense?: DepenseUpdateOneWithoutPaiementNestedInput
@@ -41373,9 +43539,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateWithoutAchatInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41387,9 +43552,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateManyWithoutAchatInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41401,9 +43565,8 @@ export namespace Prisma {
 
   export type PaiementCreateManyCommandeInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     deviseId: number
     caisseId: number
     venteId?: number | null
@@ -41414,11 +43577,10 @@ export namespace Prisma {
   }
 
   export type PaiementUpdateWithoutCommandeInput = {
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modePaiement?: ModePaiementUpdateOneRequiredWithoutPaiementNestedInput
     vente?: VenteUpdateOneWithoutPaiementsNestedInput
     achat?: AchatUpdateOneWithoutPaiementsNestedInput
     depense?: DepenseUpdateOneWithoutPaiementNestedInput
@@ -41428,9 +43590,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateWithoutCommandeInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41442,9 +43603,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateManyWithoutCommandeInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41456,9 +43616,8 @@ export namespace Prisma {
 
   export type PaiementCreateManyDepenseInput = {
     id?: number
-    totalHT?: number | null
-    totalTTC?: number | null
-    modePaiement: $Enums.ModePaiment
+    montant?: number | null
+    modePaiementId: number
     deviseId: number
     caisseId: number
     venteId?: number | null
@@ -41469,11 +43628,10 @@ export namespace Prisma {
   }
 
   export type PaiementUpdateWithoutDepenseInput = {
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    modePaiement?: ModePaiementUpdateOneRequiredWithoutPaiementNestedInput
     vente?: VenteUpdateOneWithoutPaiementsNestedInput
     achat?: AchatUpdateOneWithoutPaiementsNestedInput
     commande?: CommandeUpdateOneWithoutPaiementNestedInput
@@ -41483,9 +43641,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateWithoutDepenseInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -41497,9 +43654,8 @@ export namespace Prisma {
 
   export type PaiementUncheckedUpdateManyWithoutDepenseInput = {
     id?: IntFieldUpdateOperationsInput | number
-    totalHT?: NullableFloatFieldUpdateOperationsInput | number | null
-    totalTTC?: NullableFloatFieldUpdateOperationsInput | number | null
-    modePaiement?: EnumModePaimentFieldUpdateOperationsInput | $Enums.ModePaiment
+    montant?: NullableFloatFieldUpdateOperationsInput | number | null
+    modePaiementId?: IntFieldUpdateOperationsInput | number
     deviseId?: IntFieldUpdateOperationsInput | number
     caisseId?: IntFieldUpdateOperationsInput | number
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
