@@ -15,6 +15,8 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
         where: { id: parseInt(venteId) },
         select: {
             id: true,
+            nom: true,
+            tel: true,
             statut: true,
             enregistrerPar: true,
             // paiements: {
@@ -31,6 +33,7 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
             // },
             client: {
                 select: {
+                    id: true,
                     picture: true,
                     nom_complet: true,
                     sexe: true,

@@ -9,18 +9,15 @@ export async function GET(request: NextRequest) {
 
     const selection = {
         id: true,
-        statut: true,
-        paiements: {
-            select: {
-                totalHT: true,
-                devise: {
-                    select: {
-                        symbole: true
-                    }
-                }
-            }
-        },
+        // statut: true,
+        nom: true,
+        // tel: true,
         client: {
+            select: {
+                nom_complet: true,
+            },
+        },
+        agent: {
             select: {
                 nom_complet: true,
             },
@@ -30,11 +27,22 @@ export async function GET(request: NextRequest) {
                 nom: true,
             },
         },
-        agent: {
+        paiements: {
             select: {
-                nom_complet: true,
+                montant: true,
+                devise: {
+                    select: {
+                        code: true
+                    }
+                },
+                modePaiement: {
+                    select: {
+                        type: true
+                    }
+                }
             }
-        }
+        },
+        createdAt: true
     }
     
     const data = await Pagination(request, 'vente', condition, selection, null);

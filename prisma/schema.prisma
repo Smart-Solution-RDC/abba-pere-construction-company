@@ -242,18 +242,10 @@ model Caisse {
 }
 
 enum StatutVente {
-  EN_ATTENTE
+  // EN_ATTENTE
   CONFIRME
   REMBOURSE
   ANNULE
-}
-
-enum TypeClient {
-  ORDINAIRE
-  NOUVEAU
-  CLIENT
-  FOURNISSEUR
-  AGENT
 }
 
 model Vente {

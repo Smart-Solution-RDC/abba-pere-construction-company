@@ -652,7 +652,7 @@ export async function Vente(agent: Agent, panierId: number, acheteur: Acheteur) 
             panierId: panierId,
             nom: acheteur.nom != '' ? acheteur.nom : null,
             tel: acheteur.tel != '' ? acheteur.tel : null,
-            dateLivraison: acheteur.dateLivraison != '' ? acheteur.dateLivraison : new Date(),
+            dateLivraison: acheteur.dateLivraison != '' ? acheteur.dateLivraison : null,
             adresseLivraison: acheteur.adresseLivraison != '' ? acheteur.adresseLivraison : null,
             fournisseurId: acheteur.fournisseurSelectedId ?? null,
             clientId: acheteur.clientSelectedId ?? null,

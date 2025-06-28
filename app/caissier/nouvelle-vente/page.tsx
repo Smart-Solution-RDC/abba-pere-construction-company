@@ -268,7 +268,7 @@ export default function NouvelleVentePage() {
         <>
           Visualisez la vente avant l'impression.
           <br />
-          <a href={`/caissier/ventes/${response.data}`} className="text-green-700 underline ml-1">
+          <a href={`/caissier/ventes/${response.data}/print`} className="text-green-700 underline ml-1">
             Voir le document.
           </a>
         </>
