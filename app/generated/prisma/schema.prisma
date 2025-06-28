@@ -40,22 +40,27 @@ enum Role {
 }
 
 model Entreprise {
-  id          Int        @id @default(autoincrement())
-  nom         String     @unique
-  email       String     @unique
-  encronyme   String     @unique
-  codePostale String     @unique
-  site        String?
-  description String?
-  logo        String?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  Adresse     Adresse[]
-  Contact     Contact[]
-  Vente       Vente[]
-  Achat       Achat[]
-  Commande    Commande[]
-  Depense     Depense[]
+  id                       Int        @id @default(autoincrement())
+  raison_sociale           String?
+  forme_juridique          String?
+  rccm                     String?
+  num_impot                String?
+  identification_nationale String?
+  email                    String     @unique
+  secteur_d_activite       String?
+  contenu                  String?
+  slogan                   String?
+  vision                   String?    @db.Text
+  date_de_creation         DateTime?
+  logo                     String?
+  createdAt                DateTime   @default(now())
+  updatedAt                DateTime   @updatedAt
+  Adresse                  Adresse[]
+  Contact                  Contact[]
+  Vente                    Vente[]
+  Achat                    Achat[]
+  Commande                 Commande[]
+  Depense                  Depense[]
 }
 
 enum Sexe {
@@ -180,18 +185,21 @@ model Produit {
 }
 
 enum TypeModePaiement {
-  CACHE
+  CASH
   BANQUE
+  CREDIT
+  MOITIER_CREDIT
+  MOITIER_CASH
 }
 
 model ModePaiement {
-  id           Int              @id @default(autoincrement())
-  type         TypeModePaiement @default(CACHE)
-  soldeActuel  Float?           @default(0)
+  id           Int               @id @default(autoincrement())
+  type         TypeModePaiement? @default(CASH)
+  soldeActuel  Float?            @default(0)
   caisseId     Int
-  caisse       Caisse           @relation(fields: [caisseId], references: [id])
-  createdAt    DateTime         @default(now())
-  updatedAt    DateTime         @updatedAt
+  caisse       Caisse            @relation(fields: [caisseId], references: [id])
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
   Paiement     Paiement[]
   DetailPanier DetailPanier[]
 }

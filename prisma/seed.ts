@@ -19,17 +19,37 @@ async function main() {
   await prisma.client.deleteMany({});
   await prisma.agent.deleteMany({});
 
-  await prisma.entreprise.upsert({
-    where: {nom: 'Abba Père Conctruction Company'},
+  const entreprise = await prisma.entreprise.upsert({
+    where: {email: "abbapereconstruction@gmail.com"},
     update: {},
     create: {
-        nom: 'Abba Père Conctruction Company',
-        encronyme: 'ACCP',
-        codePostale: "sd90K12",
-        site: "http://accp.vercel.com",
-        email: "accp@gmail.com",
-        description: "My site description",
+        raison_sociale: 'ABBA PERE CONSTRUCTION COMPANY, « APCC en sigle »',
+        forme_juridique: 'Av. de la poste, Q. Ndendere/C. Ibanda/ Ville de Bukavu/ Sud-Kivu',
+        rccm: "CD/BKV/RCCM/23-B-00275",
+        num_impot: "A2428850L",
+        identification_nationale: "ID.NAT. : 22-F4200-N37543S",
+        email: "abbapereconstruction@gmail.com",
+        secteur_d_activite: "Génie civile",
+        contenu: "Construction des bâtiments complets",
+        slogan: "Construis ton héritage avec APCC SARLU",
+        vision: "Construire des infrastructures durables et accessibles, devenir un acteur de référence dans la construction des bâtiments et la distribution des ciments",
+        date_de_creation: new Date("2023-11-15"),
         logo: "/logo.png"
+    }
+  });
+
+  await prisma.contact.create({
+    data: {
+      tel: "+243 991 556 439",
+      entrepriseId: entreprise.id
+    }
+  });
+
+  await prisma.adresse.create({
+    data: {
+      ville: "Ville de Bukavu",
+      adresse: "Av de la poste, Q. Ndendere/C. Ibanda/ Ville de Bukavu/ Sud-Kivu",
+      entrepriseId: entreprise.id
     }
   });
   
@@ -39,6 +59,7 @@ async function main() {
     create: {
         nom: 'Admin',
         postnom: 'Admin',
+        nom_complet: 'admin admin',
         role: 'ADMIN',
         email: 'admin@example.com',
     }
@@ -88,6 +109,31 @@ async function main() {
     }
   }); 
 
+  const caisse1 = await prisma.caisse.create({
+    data: {
+      nom: "dollars americain",
+      deviseId: devise1.id,
+      agentId: agent.id
+    }
+  });
+
+  const caisse2 = await prisma.caisse.create({
+    data: {
+      nom: "francs congolais",
+      deviseId: devise2.id,
+      agentId: agent.id
+    }
+  });
+
+  const mode_paiement = await prisma.modePaiement.createMany({
+    data: [
+      { type: 'CASH', caisseId: caisse1.id },
+      { type: 'BANQUE', caisseId: caisse1.id },
+      { type: 'CREDIT', caisseId: caisse2.id },
+      { type: 'MOITIER_CREDIT', caisseId: caisse2.id },
+    ]
+  });
+
   // Product
   const produit1 = await prisma.produit.create({
     data: {
@@ -121,23 +167,6 @@ async function main() {
     }
   });    
 
-  // Caisse
-  await prisma.caisse.create({
-    data: {
-      nom: "dollars americain",
-      deviseId: devise1.id,
-      agentId: agent.id
-    }
-  });
-
-  await prisma.caisse.create({
-    data: {
-      nom: "francs congolais",
-      deviseId: devise2.id,
-      agentId: agent.id
-    }
-  });
-
   await prisma.client.upsert({
     where: { email: 'client@gmail.com' },
     update: {},
@@ -161,7 +190,7 @@ async function main() {
         prixUnitaire: produit1.prixUnitaire,
         prixTotalHT: produit1.prixUnitaire * 3,
         prixTotalTTC: (produit1.prixUnitaire * 3) * 0.16,
-        modePaiement: 'CACHE',
+        // modePaiement: 'CACHE',
         deviseId: devise1.id,
         panierId: panier.id
       },
@@ -171,7 +200,7 @@ async function main() {
         prixUnitaire: produit2.prixUnitaire,
         prixTotalHT: produit2.prixUnitaire * 3,
         prixTotalTTC: (produit2.prixUnitaire * 3) * 0.16,
-        modePaiement: 'BANQUE',
+        // modePaiement: 'BANQUE',
         deviseId: devise1.id,
         panierId: panier.id
       },

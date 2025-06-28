@@ -141,12 +141,17 @@ exports.Prisma.DeviseScalarFieldEnum = {
 
 exports.Prisma.EntrepriseScalarFieldEnum = {
   id: 'id',
-  nom: 'nom',
+  raison_sociale: 'raison_sociale',
+  forme_juridique: 'forme_juridique',
+  rccm: 'rccm',
+  num_impot: 'num_impot',
+  identification_nationale: 'identification_nationale',
   email: 'email',
-  encronyme: 'encronyme',
-  codePostale: 'codePostale',
-  site: 'site',
-  description: 'description',
+  secteur_d_activite: 'secteur_d_activite',
+  contenu: 'contenu',
+  slogan: 'slogan',
+  vision: 'vision',
+  date_de_creation: 'date_de_creation',
   logo: 'logo',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -374,8 +379,11 @@ exports.Poste = exports.$Enums.Poste = {
 };
 
 exports.TypeModePaiement = exports.$Enums.TypeModePaiement = {
-  CACHE: 'CACHE',
-  BANQUE: 'BANQUE'
+  CASH: 'CASH',
+  BANQUE: 'BANQUE',
+  CREDIT: 'CREDIT',
+  MOITIER_CREDIT: 'MOITIER_CREDIT',
+  MOITIER_CASH: 'MOITIER_CASH'
 };
 
 exports.StatutCaisse = exports.$Enums.StatutCaisse = {

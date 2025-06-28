@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 import {
   Select,
   SelectContent,
@@ -23,50 +24,25 @@ import {
   formatCommandeForPDF,
 } from "@/utils/pdfGenerator";
 import { getProduits } from "@/actions/produits";
-import { DetailPanierForm, ProduitForm } from "@/prisma/defs-front";
+import { Acheteur, Agent, Client, DetailPanierForm, Devise, Fournisseur, ModePaiement, PaiementData, ProduitForm, Response } from "@/prisma/defs-front";
 import { getPanierId } from "@/actions/panier";
-import { createDetail } from "@/actions/details_panier";
 import { createVente } from "@/actions/vente";
+import { getDevises } from "@/actions/devises";
+import { getModePaiements } from "@/actions/mode-paiement";
+import { AcheteurDialog } from "@/components/acheteur-dialog";
 
-// const produits = [
-//   {
-//     id: "ciment-32.5",
-//     nom: "Ciment 32.5",
-//     prix: 6500,
-//     unite: "sac de 50kg",
-//     stock: 1250,
-//   },
-//   {
-//     id: "ciment-42.5",
-//     nom: "Ciment 42.5",
-//     prix: 7200,
-//     unite: "sac de 50kg",
-//     stock: 850,
-//   },
-//   {
-//     id: "mortier",
-//     nom: "Mortier Prêt",
-//     prix: 4800,
-//     unite: "sac de 25kg",
-//     stock: 500,
-//   },
-// ];
-
-// interface ProduitVente {
-//   id: string;
-//   nom: string;
-//   prix: number;
-//   quantite: number;
-//   total: number;
-// }
 
 export default function NouvelleVentePage() {
-  const [client, setClient] = useState({
-    nom: "demo",
-    tel: "09898990",
+  const [client, setClient] = useState<Acheteur>({
+    nom: "",
+    tel: "",
     dateLivraison: "",
     adresseLivraison: "",
+    clientSelectedId: null,
+    agentSelectedId: null,
+    fournisseurSelectedId: null
   });
+
   const [produitSelectionne, setProduitSelectionne] = useState("");
   const [quantite, setQuantite] = useState(1);
   // const [panier, setPanier] = useState<DetailPanier[]>([]);
@@ -77,9 +53,23 @@ export default function NouvelleVentePage() {
   const { toast } = useToast();
 
   const [produits, setProduits] = useState<ProduitForm[]>([]);
+  const [devises, setDevises] = useState<Devise[]>([]);
+  const [modePaiements, setModePaiements] = useState<ModePaiement[]>([]);
+  const [paiement, setPaiement] = useState<PaiementData>({
+    deviseId: 0,
+    modePaiementId: 0,
+    montant: 0
+  });
+
+  const [clientSelected, setClientSelected] = useState<Client>();
+  const [fournisseurSelected, setFournisseurSelected] = useState<Fournisseur>();
+  const [agentSelected, setAgentSelected] = useState<Agent>();
+
+  let [response, setResponse] = useState<Response>();
+
   const get_produits = async () => {
     setProduits(await getProduits());
-  };
+  }; 
 
   const get_panier_id = async () => {
     const data = await getPanierId();
@@ -89,9 +79,19 @@ export default function NouvelleVentePage() {
     setPanierId(data.panierId);
   }
 
+  const get_devises = async () => {
+    setDevises(await getDevises());
+  }
+
+  const get_mode_paiements = async () => {
+    setModePaiements(await getModePaiements());
+  }
+
   useEffect(() => {
     get_produits();
     get_panier_id();
+    get_devises();
+    get_mode_paiements();
   }, []);
 
   const ajouterAuPanier = () => {
@@ -157,10 +157,45 @@ export default function NouvelleVentePage() {
     );
   };
 
-  const totalVente = detailsPanier.reduce((sum, produit) => sum + produit.prixTotalHT, 0);
+  let totalVente = detailsPanier.reduce((sum, produit) => sum + produit.prixTotalHT, 0);
+  
+  let modes = [];
+  let prixTotalConverti = 0;
+  let deviseConverti = '';
+  if (paiement.deviseId) {
+
+    for (let i = 0; i < devises.length; i++) {
+      const devise = devises[i];
+      if (paiement.deviseId !== devise.id) {
+        prixTotalConverti = totalVente;
+        deviseConverti = 'USD';
+      } else {
+        prixTotalConverti = totalVente * devise.tauxDEchange;
+        deviseConverti = devise.code;
+      }
+    }
+
+    for (let i = 0; i < modePaiements.length; i++) {
+      const mode = modePaiements[i];
+      if (mode.caisse.deviseId == paiement.deviseId) {
+        modes.push(mode);
+      }
+      if (mode.id == paiement.modePaiementId) {
+        if (mode.type === 'MOITIER_CASH' || mode.type === 'MOITIER_CREDIT') {
+          prixTotalConverti = prixTotalConverti / 2;
+        }
+      }
+    }
+    
+  }
 
   const traiterVente = async () => {
-    if (!client.nom || detailsPanier.length === 0) {
+    if (clientSelected || fournisseurSelected || agentSelected) {
+      client.nom = "";
+      client.tel = "";
+    }
+    
+    if (detailsPanier.length === 0 || !paiement.deviseId || !paiement.modePaiementId || (!clientSelected && !fournisseurSelected && !agentSelected && !client.nom)) {
       toast({
         title: "Erreur",
         description:
@@ -194,30 +229,82 @@ export default function NouvelleVentePage() {
       notes: notes,
     };
 
-    // create vente du panier
+    paiement.montant = prixTotalConverti;
+
+    if (clientSelected) client.clientSelectedId = clientSelected.id
+    if (agentSelected) client.agentSelectedId = agentSelected.id
+    if (fournisseurSelected) client.fournisseurSelectedId = fournisseurSelected.id    
+
     if (panierId) {
-      console.log(await createVente(panierId, detailsPanier, client))
+      setResponse(await createVente(
+        panierId, 
+        detailsPanier, 
+        client, 
+        paiement
+      ));
     }
 
     // Simulation du traitement
     await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    if (response && response.error) {
+      toast({
+        title: "Erreur",
+        description:
+          response.error,
+        variant: "destructive",
+      });
+    } 
 
     // Générer le reçu et la facture
     // const formattedData = formatCommandeForPDF(venteData);
     // generateBonCommande(formattedData); // Reçu pour le client
     // generateFacture(formattedData); // Facture pour la comptabilité
 
-    toast({
-      title: "Vente enregistrée !",
-      description: `Numéro de commande: ${numeroCommande}. Reçu et facture générés.`,
-    });
+    if (response && response.message && response.data) {
+      toast({
+        title: `${response.message}`,
+        description: (
+        <>
+          Visualisez la vente avant l'impression.
+          <br />
+          <a href={`/caissier/ventes/${response.data}`} className="text-green-700 underline ml-1">
+            Voir le document.
+          </a>
+        </>
+        ),
+      });
+    }
 
     // Reset du formulaire
-    // setClient({ nom: "", tel: "", adresseLivraison: "" });
-    // setPanier([]);
+    setClient({
+      nom: "",
+      tel: "",
+      dateLivraison: "",
+      adresseLivraison: "",
+      clientSelectedId: null,
+      agentSelectedId: null,
+      fournisseurSelectedId: null
+    });
+    setClientSelected(undefined);
+    setAgentSelected(undefined);
+    setFournisseurSelected(undefined);
+    setDetailsPanier([]);
     // setNotes("");
-    // setIsProcessing(false);
+    setIsProcessing(false);
   };
+
+  const getClient = (client: Client | undefined) => {
+    setClientSelected(client);
+  }
+
+  const getFournisseur = (fournisseur: Fournisseur | undefined) => {
+    setFournisseurSelected(fournisseur);
+  }
+
+  const getAgent = (agent: Agent | undefined) => {
+    setAgentSelected(agent);
+  }
 
   return (
     <CaissierLayout breadcrumbs={[{ label: "Nouvelle Vente" }]}>
@@ -303,11 +390,8 @@ export default function NouvelleVentePage() {
                     <Plus className="mr-2 h-4 w-4" />
                     Ajouter au Panier
                   </Button>
+              </div>                
               </div>
-                
-              </div>
-                
-
               </CardContent>
             </Card>
 
@@ -382,7 +466,7 @@ export default function NouvelleVentePage() {
                     <div className="flex justify-between items-center text-lg font-bold">
                       <span>Total:</span>
                       <span className="text-green-600">
-                        {totalVente.toLocaleString()} CDF
+                        {totalVente.toLocaleString()} USD
                       </span>
                     </div>
                   </div>
@@ -416,6 +500,7 @@ export default function NouvelleVentePage() {
                   <Label htmlFor="nom">Nom du client *</Label>
                   <Input
                     id="nom"
+                    disabled={!!clientSelected || !!fournisseurSelected || !!agentSelected}
                     value={client.nom}
                     onChange={(e) =>
                       setClient({ ...client, nom: e.target.value })
@@ -427,6 +512,7 @@ export default function NouvelleVentePage() {
                   <Label htmlFor="tel">Téléphone *</Label>
                   <Input
                     id="tel"
+                    disabled={!!clientSelected || !!fournisseurSelected || !!agentSelected}
                     value={client.tel}
                     onChange={(e) =>
                       setClient({ ...client, tel: e.target.value })
@@ -446,15 +532,24 @@ export default function NouvelleVentePage() {
                   />
                 </div> */}
                 <div>
-                  <Label htmlFor="Adresse de livraison">Adresse de livraison</Label>
-                  <Input
+                  <Label htmlFor="AdresseLivraison">Adresse de livraison *</Label>
+                  <Textarea
                     id="adresseLivraison"
+                    // disabled={!!clientSelected || !!fournisseurSelected || !!agentSelected}
                     value={client.adresseLivraison}
+                    className="resize-none"
                     onChange={(e) =>
                       setClient({ ...client, adresseLivraison: e.target.value })
                     }
                     placeholder="Adresse de livraison"
                   />
+                </div>
+
+                <div>
+                  {clientSelected && <div><span>Client Séléctionné : </span><strong className="text-green-600">{clientSelected && clientSelected?.nom_complet.length > 15 ?clientSelected.nom_complet.slice(0,1).toUpperCase()+clientSelected.nom_complet.slice(1,15)+'...' : (clientSelected?.nom_complet?.slice(0,1).toUpperCase() ?? '') + (clientSelected?.nom_complet?.slice(1) ?? '')}</strong></div>}
+                  {fournisseurSelected && <div><span>Fournisseur Séléctionné : </span><strong className="text-green-600">{fournisseurSelected && fournisseurSelected?.nom.length > 15 ?fournisseurSelected.nom.slice(0,1).toUpperCase()+fournisseurSelected.nom.slice(1,15)+'...' : (fournisseurSelected?.nom?.slice(0,1).toUpperCase() ?? '') + (fournisseurSelected?.nom?.slice(1) ?? '')}</strong></div>}
+                  {agentSelected && <div><span>Agent Séléctionné : </span><strong className="text-green-600">{agentSelected && agentSelected?.nom_complet.length > 15 ?agentSelected.nom_complet.slice(0,1).toUpperCase()+agentSelected.nom_complet.slice(1,15)+'...' : (agentSelected?.nom_complet?.slice(0,1).toUpperCase() ?? '') + (agentSelected?.nom_complet?.slice(1) ?? '')}</strong></div>}
+                  <AcheteurDialog getClient={getClient} getFournisseur={getFournisseur} getAgent={getAgent} />
                 </div>
               </CardContent>
             </Card>
@@ -462,10 +557,53 @@ export default function NouvelleVentePage() {
             {/* Actions */}
             <Card>
               <CardHeader>
-                <CardTitle>Finaliser la Vente</CardTitle>
+                <CardTitle>Information de Paiement</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="bg-blue-50 p-4 rounded-lg">
+                <div>
+                  <Label>Devise</Label>
+                    <Select
+                    value={String(paiement.deviseId)}
+                    onValueChange={(value) =>
+                      setPaiement({ ...paiement, deviseId: Number(value) })
+                    }
+                    >
+                    <SelectTrigger >
+                      <SelectValue placeholder="Sélectionner une devise" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {devises.map((devise) => (
+                        <SelectItem key={devise.id} value={String(devise.id)}>
+                          {devise.code}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label>Mode de paiement</Label>
+                  <Select
+                    disabled={!paiement.deviseId || !detailsPanier.length }
+                    value={String(paiement.modePaiementId)}
+                    onValueChange={(value) => 
+                      setPaiement({ ...paiement, modePaiementId: Number(value) })
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Sélectionner le mode de paiement" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {modes.map((mode) => (
+                        <SelectItem key={mode.id} value={String(mode.id)} >
+                          {mode.type}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                { <div><Label className="text-green-600">Montant Total : {prixTotalConverti} {deviseConverti ? deviseConverti : 'USD'}</Label></div>}
+                {/* <div className="bg-blue-50 p-4 rounded-lg">
                   <h4 className="font-medium mb-2">Après validation :</h4>
                   <ul className="text-sm space-y-1">
                     <li className="flex items-center">
@@ -477,14 +615,15 @@ export default function NouvelleVentePage() {
                       Facture générée pour la comptabilité
                     </li>
                   </ul>
-                </div>
+                </div> */}
 
                 <Button
                   onClick={traiterVente}
                   disabled={
                     isProcessing ||
-                    !client.nom ||
-                    detailsPanier.length === 0
+                    (!clientSelected && !fournisseurSelected && !agentSelected && !client.nom) ||
+                    detailsPanier.length === 0 ||
+                    !paiement.deviseId || !paiement.modePaiementId
                   }
                   className="w-full bg-green-600 hover:bg-green-700"
                   size="lg"

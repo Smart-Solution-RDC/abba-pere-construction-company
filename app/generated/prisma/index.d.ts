@@ -135,8 +135,11 @@ export type Poste = (typeof Poste)[keyof typeof Poste]
 
 
 export const TypeModePaiement: {
-  CACHE: 'CACHE',
-  BANQUE: 'BANQUE'
+  CASH: 'CASH',
+  BANQUE: 'BANQUE',
+  CREDIT: 'CREDIT',
+  MOITIER_CREDIT: 'MOITIER_CREDIT',
+  MOITIER_CASH: 'MOITIER_CASH'
 };
 
 export type TypeModePaiement = (typeof TypeModePaiement)[keyof typeof TypeModePaiement]
@@ -5703,12 +5706,17 @@ export namespace Prisma {
 
   export type EntrepriseMinAggregateOutputType = {
     id: number | null
-    nom: string | null
+    raison_sociale: string | null
+    forme_juridique: string | null
+    rccm: string | null
+    num_impot: string | null
+    identification_nationale: string | null
     email: string | null
-    encronyme: string | null
-    codePostale: string | null
-    site: string | null
-    description: string | null
+    secteur_d_activite: string | null
+    contenu: string | null
+    slogan: string | null
+    vision: string | null
+    date_de_creation: Date | null
     logo: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -5716,12 +5724,17 @@ export namespace Prisma {
 
   export type EntrepriseMaxAggregateOutputType = {
     id: number | null
-    nom: string | null
+    raison_sociale: string | null
+    forme_juridique: string | null
+    rccm: string | null
+    num_impot: string | null
+    identification_nationale: string | null
     email: string | null
-    encronyme: string | null
-    codePostale: string | null
-    site: string | null
-    description: string | null
+    secteur_d_activite: string | null
+    contenu: string | null
+    slogan: string | null
+    vision: string | null
+    date_de_creation: Date | null
     logo: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -5729,12 +5742,17 @@ export namespace Prisma {
 
   export type EntrepriseCountAggregateOutputType = {
     id: number
-    nom: number
+    raison_sociale: number
+    forme_juridique: number
+    rccm: number
+    num_impot: number
+    identification_nationale: number
     email: number
-    encronyme: number
-    codePostale: number
-    site: number
-    description: number
+    secteur_d_activite: number
+    contenu: number
+    slogan: number
+    vision: number
+    date_de_creation: number
     logo: number
     createdAt: number
     updatedAt: number
@@ -5752,12 +5770,17 @@ export namespace Prisma {
 
   export type EntrepriseMinAggregateInputType = {
     id?: true
-    nom?: true
+    raison_sociale?: true
+    forme_juridique?: true
+    rccm?: true
+    num_impot?: true
+    identification_nationale?: true
     email?: true
-    encronyme?: true
-    codePostale?: true
-    site?: true
-    description?: true
+    secteur_d_activite?: true
+    contenu?: true
+    slogan?: true
+    vision?: true
+    date_de_creation?: true
     logo?: true
     createdAt?: true
     updatedAt?: true
@@ -5765,12 +5788,17 @@ export namespace Prisma {
 
   export type EntrepriseMaxAggregateInputType = {
     id?: true
-    nom?: true
+    raison_sociale?: true
+    forme_juridique?: true
+    rccm?: true
+    num_impot?: true
+    identification_nationale?: true
     email?: true
-    encronyme?: true
-    codePostale?: true
-    site?: true
-    description?: true
+    secteur_d_activite?: true
+    contenu?: true
+    slogan?: true
+    vision?: true
+    date_de_creation?: true
     logo?: true
     createdAt?: true
     updatedAt?: true
@@ -5778,12 +5806,17 @@ export namespace Prisma {
 
   export type EntrepriseCountAggregateInputType = {
     id?: true
-    nom?: true
+    raison_sociale?: true
+    forme_juridique?: true
+    rccm?: true
+    num_impot?: true
+    identification_nationale?: true
     email?: true
-    encronyme?: true
-    codePostale?: true
-    site?: true
-    description?: true
+    secteur_d_activite?: true
+    contenu?: true
+    slogan?: true
+    vision?: true
+    date_de_creation?: true
     logo?: true
     createdAt?: true
     updatedAt?: true
@@ -5878,12 +5911,17 @@ export namespace Prisma {
 
   export type EntrepriseGroupByOutputType = {
     id: number
-    nom: string
+    raison_sociale: string | null
+    forme_juridique: string | null
+    rccm: string | null
+    num_impot: string | null
+    identification_nationale: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site: string | null
-    description: string | null
+    secteur_d_activite: string | null
+    contenu: string | null
+    slogan: string | null
+    vision: string | null
+    date_de_creation: Date | null
     logo: string | null
     createdAt: Date
     updatedAt: Date
@@ -5910,12 +5948,17 @@ export namespace Prisma {
 
   export type EntrepriseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    nom?: boolean
+    raison_sociale?: boolean
+    forme_juridique?: boolean
+    rccm?: boolean
+    num_impot?: boolean
+    identification_nationale?: boolean
     email?: boolean
-    encronyme?: boolean
-    codePostale?: boolean
-    site?: boolean
-    description?: boolean
+    secteur_d_activite?: boolean
+    contenu?: boolean
+    slogan?: boolean
+    vision?: boolean
+    date_de_creation?: boolean
     logo?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5930,12 +5973,17 @@ export namespace Prisma {
 
   export type EntrepriseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    nom?: boolean
+    raison_sociale?: boolean
+    forme_juridique?: boolean
+    rccm?: boolean
+    num_impot?: boolean
+    identification_nationale?: boolean
     email?: boolean
-    encronyme?: boolean
-    codePostale?: boolean
-    site?: boolean
-    description?: boolean
+    secteur_d_activite?: boolean
+    contenu?: boolean
+    slogan?: boolean
+    vision?: boolean
+    date_de_creation?: boolean
     logo?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5943,12 +5991,17 @@ export namespace Prisma {
 
   export type EntrepriseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    nom?: boolean
+    raison_sociale?: boolean
+    forme_juridique?: boolean
+    rccm?: boolean
+    num_impot?: boolean
+    identification_nationale?: boolean
     email?: boolean
-    encronyme?: boolean
-    codePostale?: boolean
-    site?: boolean
-    description?: boolean
+    secteur_d_activite?: boolean
+    contenu?: boolean
+    slogan?: boolean
+    vision?: boolean
+    date_de_creation?: boolean
     logo?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5956,18 +6009,23 @@ export namespace Prisma {
 
   export type EntrepriseSelectScalar = {
     id?: boolean
-    nom?: boolean
+    raison_sociale?: boolean
+    forme_juridique?: boolean
+    rccm?: boolean
+    num_impot?: boolean
+    identification_nationale?: boolean
     email?: boolean
-    encronyme?: boolean
-    codePostale?: boolean
-    site?: boolean
-    description?: boolean
+    secteur_d_activite?: boolean
+    contenu?: boolean
+    slogan?: boolean
+    vision?: boolean
+    date_de_creation?: boolean
     logo?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EntrepriseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "email" | "encronyme" | "codePostale" | "site" | "description" | "logo" | "createdAt" | "updatedAt", ExtArgs["result"]["entreprise"]>
+  export type EntrepriseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "raison_sociale" | "forme_juridique" | "rccm" | "num_impot" | "identification_nationale" | "email" | "secteur_d_activite" | "contenu" | "slogan" | "vision" | "date_de_creation" | "logo" | "createdAt" | "updatedAt", ExtArgs["result"]["entreprise"]>
   export type EntrepriseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Adresse?: boolean | Entreprise$AdresseArgs<ExtArgs>
     Contact?: boolean | Entreprise$ContactArgs<ExtArgs>
@@ -5992,12 +6050,17 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      nom: string
+      raison_sociale: string | null
+      forme_juridique: string | null
+      rccm: string | null
+      num_impot: string | null
+      identification_nationale: string | null
       email: string
-      encronyme: string
-      codePostale: string
-      site: string | null
-      description: string | null
+      secteur_d_activite: string | null
+      contenu: string | null
+      slogan: string | null
+      vision: string | null
+      date_de_creation: Date | null
       logo: string | null
       createdAt: Date
       updatedAt: Date
@@ -6431,12 +6494,17 @@ export namespace Prisma {
    */
   interface EntrepriseFieldRefs {
     readonly id: FieldRef<"Entreprise", 'Int'>
-    readonly nom: FieldRef<"Entreprise", 'String'>
+    readonly raison_sociale: FieldRef<"Entreprise", 'String'>
+    readonly forme_juridique: FieldRef<"Entreprise", 'String'>
+    readonly rccm: FieldRef<"Entreprise", 'String'>
+    readonly num_impot: FieldRef<"Entreprise", 'String'>
+    readonly identification_nationale: FieldRef<"Entreprise", 'String'>
     readonly email: FieldRef<"Entreprise", 'String'>
-    readonly encronyme: FieldRef<"Entreprise", 'String'>
-    readonly codePostale: FieldRef<"Entreprise", 'String'>
-    readonly site: FieldRef<"Entreprise", 'String'>
-    readonly description: FieldRef<"Entreprise", 'String'>
+    readonly secteur_d_activite: FieldRef<"Entreprise", 'String'>
+    readonly contenu: FieldRef<"Entreprise", 'String'>
+    readonly slogan: FieldRef<"Entreprise", 'String'>
+    readonly vision: FieldRef<"Entreprise", 'String'>
+    readonly date_de_creation: FieldRef<"Entreprise", 'DateTime'>
     readonly logo: FieldRef<"Entreprise", 'String'>
     readonly createdAt: FieldRef<"Entreprise", 'DateTime'>
     readonly updatedAt: FieldRef<"Entreprise", 'DateTime'>
@@ -14949,7 +15017,7 @@ export namespace Prisma {
 
   export type ModePaiementGroupByOutputType = {
     id: number
-    type: $Enums.TypeModePaiement
+    type: $Enums.TypeModePaiement | null
     soldeActuel: number | null
     caisseId: number
     createdAt: Date
@@ -15040,7 +15108,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      type: $Enums.TypeModePaiement
+      type: $Enums.TypeModePaiement | null
       soldeActuel: number | null
       caisseId: number
       createdAt: Date
@@ -26239,12 +26307,17 @@ export namespace Prisma {
 
   export const EntrepriseScalarFieldEnum: {
     id: 'id',
-    nom: 'nom',
+    raison_sociale: 'raison_sociale',
+    forme_juridique: 'forme_juridique',
+    rccm: 'rccm',
+    num_impot: 'num_impot',
+    identification_nationale: 'identification_nationale',
     email: 'email',
-    encronyme: 'encronyme',
-    codePostale: 'codePostale',
-    site: 'site',
-    description: 'description',
+    secteur_d_activite: 'secteur_d_activite',
+    contenu: 'contenu',
+    slogan: 'slogan',
+    vision: 'vision',
+    date_de_creation: 'date_de_creation',
     logo: 'logo',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -26872,12 +26945,17 @@ export namespace Prisma {
     OR?: EntrepriseWhereInput[]
     NOT?: EntrepriseWhereInput | EntrepriseWhereInput[]
     id?: IntFilter<"Entreprise"> | number
-    nom?: StringFilter<"Entreprise"> | string
+    raison_sociale?: StringNullableFilter<"Entreprise"> | string | null
+    forme_juridique?: StringNullableFilter<"Entreprise"> | string | null
+    rccm?: StringNullableFilter<"Entreprise"> | string | null
+    num_impot?: StringNullableFilter<"Entreprise"> | string | null
+    identification_nationale?: StringNullableFilter<"Entreprise"> | string | null
     email?: StringFilter<"Entreprise"> | string
-    encronyme?: StringFilter<"Entreprise"> | string
-    codePostale?: StringFilter<"Entreprise"> | string
-    site?: StringNullableFilter<"Entreprise"> | string | null
-    description?: StringNullableFilter<"Entreprise"> | string | null
+    secteur_d_activite?: StringNullableFilter<"Entreprise"> | string | null
+    contenu?: StringNullableFilter<"Entreprise"> | string | null
+    slogan?: StringNullableFilter<"Entreprise"> | string | null
+    vision?: StringNullableFilter<"Entreprise"> | string | null
+    date_de_creation?: DateTimeNullableFilter<"Entreprise"> | Date | string | null
     logo?: StringNullableFilter<"Entreprise"> | string | null
     createdAt?: DateTimeFilter<"Entreprise"> | Date | string
     updatedAt?: DateTimeFilter<"Entreprise"> | Date | string
@@ -26891,12 +26969,17 @@ export namespace Prisma {
 
   export type EntrepriseOrderByWithRelationInput = {
     id?: SortOrder
-    nom?: SortOrder
+    raison_sociale?: SortOrderInput | SortOrder
+    forme_juridique?: SortOrderInput | SortOrder
+    rccm?: SortOrderInput | SortOrder
+    num_impot?: SortOrderInput | SortOrder
+    identification_nationale?: SortOrderInput | SortOrder
     email?: SortOrder
-    encronyme?: SortOrder
-    codePostale?: SortOrder
-    site?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
+    secteur_d_activite?: SortOrderInput | SortOrder
+    contenu?: SortOrderInput | SortOrder
+    slogan?: SortOrderInput | SortOrder
+    vision?: SortOrderInput | SortOrder
+    date_de_creation?: SortOrderInput | SortOrder
     logo?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26910,15 +26993,20 @@ export namespace Prisma {
 
   export type EntrepriseWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    nom?: string
     email?: string
-    encronyme?: string
-    codePostale?: string
     AND?: EntrepriseWhereInput | EntrepriseWhereInput[]
     OR?: EntrepriseWhereInput[]
     NOT?: EntrepriseWhereInput | EntrepriseWhereInput[]
-    site?: StringNullableFilter<"Entreprise"> | string | null
-    description?: StringNullableFilter<"Entreprise"> | string | null
+    raison_sociale?: StringNullableFilter<"Entreprise"> | string | null
+    forme_juridique?: StringNullableFilter<"Entreprise"> | string | null
+    rccm?: StringNullableFilter<"Entreprise"> | string | null
+    num_impot?: StringNullableFilter<"Entreprise"> | string | null
+    identification_nationale?: StringNullableFilter<"Entreprise"> | string | null
+    secteur_d_activite?: StringNullableFilter<"Entreprise"> | string | null
+    contenu?: StringNullableFilter<"Entreprise"> | string | null
+    slogan?: StringNullableFilter<"Entreprise"> | string | null
+    vision?: StringNullableFilter<"Entreprise"> | string | null
+    date_de_creation?: DateTimeNullableFilter<"Entreprise"> | Date | string | null
     logo?: StringNullableFilter<"Entreprise"> | string | null
     createdAt?: DateTimeFilter<"Entreprise"> | Date | string
     updatedAt?: DateTimeFilter<"Entreprise"> | Date | string
@@ -26928,16 +27016,21 @@ export namespace Prisma {
     Achat?: AchatListRelationFilter
     Commande?: CommandeListRelationFilter
     Depense?: DepenseListRelationFilter
-  }, "id" | "nom" | "email" | "encronyme" | "codePostale">
+  }, "id" | "email">
 
   export type EntrepriseOrderByWithAggregationInput = {
     id?: SortOrder
-    nom?: SortOrder
+    raison_sociale?: SortOrderInput | SortOrder
+    forme_juridique?: SortOrderInput | SortOrder
+    rccm?: SortOrderInput | SortOrder
+    num_impot?: SortOrderInput | SortOrder
+    identification_nationale?: SortOrderInput | SortOrder
     email?: SortOrder
-    encronyme?: SortOrder
-    codePostale?: SortOrder
-    site?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
+    secteur_d_activite?: SortOrderInput | SortOrder
+    contenu?: SortOrderInput | SortOrder
+    slogan?: SortOrderInput | SortOrder
+    vision?: SortOrderInput | SortOrder
+    date_de_creation?: SortOrderInput | SortOrder
     logo?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26953,12 +27046,17 @@ export namespace Prisma {
     OR?: EntrepriseScalarWhereWithAggregatesInput[]
     NOT?: EntrepriseScalarWhereWithAggregatesInput | EntrepriseScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Entreprise"> | number
-    nom?: StringWithAggregatesFilter<"Entreprise"> | string
+    raison_sociale?: StringNullableWithAggregatesFilter<"Entreprise"> | string | null
+    forme_juridique?: StringNullableWithAggregatesFilter<"Entreprise"> | string | null
+    rccm?: StringNullableWithAggregatesFilter<"Entreprise"> | string | null
+    num_impot?: StringNullableWithAggregatesFilter<"Entreprise"> | string | null
+    identification_nationale?: StringNullableWithAggregatesFilter<"Entreprise"> | string | null
     email?: StringWithAggregatesFilter<"Entreprise"> | string
-    encronyme?: StringWithAggregatesFilter<"Entreprise"> | string
-    codePostale?: StringWithAggregatesFilter<"Entreprise"> | string
-    site?: StringNullableWithAggregatesFilter<"Entreprise"> | string | null
-    description?: StringNullableWithAggregatesFilter<"Entreprise"> | string | null
+    secteur_d_activite?: StringNullableWithAggregatesFilter<"Entreprise"> | string | null
+    contenu?: StringNullableWithAggregatesFilter<"Entreprise"> | string | null
+    slogan?: StringNullableWithAggregatesFilter<"Entreprise"> | string | null
+    vision?: StringNullableWithAggregatesFilter<"Entreprise"> | string | null
+    date_de_creation?: DateTimeNullableWithAggregatesFilter<"Entreprise"> | Date | string | null
     logo?: StringNullableWithAggregatesFilter<"Entreprise"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Entreprise"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Entreprise"> | Date | string
@@ -27528,7 +27626,7 @@ export namespace Prisma {
     OR?: ModePaiementWhereInput[]
     NOT?: ModePaiementWhereInput | ModePaiementWhereInput[]
     id?: IntFilter<"ModePaiement"> | number
-    type?: EnumTypeModePaiementFilter<"ModePaiement"> | $Enums.TypeModePaiement
+    type?: EnumTypeModePaiementNullableFilter<"ModePaiement"> | $Enums.TypeModePaiement | null
     soldeActuel?: FloatNullableFilter<"ModePaiement"> | number | null
     caisseId?: IntFilter<"ModePaiement"> | number
     createdAt?: DateTimeFilter<"ModePaiement"> | Date | string
@@ -27540,7 +27638,7 @@ export namespace Prisma {
 
   export type ModePaiementOrderByWithRelationInput = {
     id?: SortOrder
-    type?: SortOrder
+    type?: SortOrderInput | SortOrder
     soldeActuel?: SortOrderInput | SortOrder
     caisseId?: SortOrder
     createdAt?: SortOrder
@@ -27555,7 +27653,7 @@ export namespace Prisma {
     AND?: ModePaiementWhereInput | ModePaiementWhereInput[]
     OR?: ModePaiementWhereInput[]
     NOT?: ModePaiementWhereInput | ModePaiementWhereInput[]
-    type?: EnumTypeModePaiementFilter<"ModePaiement"> | $Enums.TypeModePaiement
+    type?: EnumTypeModePaiementNullableFilter<"ModePaiement"> | $Enums.TypeModePaiement | null
     soldeActuel?: FloatNullableFilter<"ModePaiement"> | number | null
     caisseId?: IntFilter<"ModePaiement"> | number
     createdAt?: DateTimeFilter<"ModePaiement"> | Date | string
@@ -27567,7 +27665,7 @@ export namespace Prisma {
 
   export type ModePaiementOrderByWithAggregationInput = {
     id?: SortOrder
-    type?: SortOrder
+    type?: SortOrderInput | SortOrder
     soldeActuel?: SortOrderInput | SortOrder
     caisseId?: SortOrder
     createdAt?: SortOrder
@@ -27584,7 +27682,7 @@ export namespace Prisma {
     OR?: ModePaiementScalarWhereWithAggregatesInput[]
     NOT?: ModePaiementScalarWhereWithAggregatesInput | ModePaiementScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"ModePaiement"> | number
-    type?: EnumTypeModePaiementWithAggregatesFilter<"ModePaiement"> | $Enums.TypeModePaiement
+    type?: EnumTypeModePaiementNullableWithAggregatesFilter<"ModePaiement"> | $Enums.TypeModePaiement | null
     soldeActuel?: FloatNullableWithAggregatesFilter<"ModePaiement"> | number | null
     caisseId?: IntWithAggregatesFilter<"ModePaiement"> | number
     createdAt?: DateTimeWithAggregatesFilter<"ModePaiement"> | Date | string
@@ -28513,12 +28611,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseCreateInput = {
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28532,12 +28635,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedCreateInput = {
     id?: number
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28550,12 +28658,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseUpdateInput = {
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28569,12 +28682,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28588,24 +28706,34 @@ export namespace Prisma {
 
   export type EntrepriseCreateManyInput = {
     id?: number
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type EntrepriseUpdateManyMutationInput = {
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28613,12 +28741,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29205,7 +29338,7 @@ export namespace Prisma {
   }
 
   export type ModePaiementCreateInput = {
-    type?: $Enums.TypeModePaiement
+    type?: $Enums.TypeModePaiement | null
     soldeActuel?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29216,7 +29349,7 @@ export namespace Prisma {
 
   export type ModePaiementUncheckedCreateInput = {
     id?: number
-    type?: $Enums.TypeModePaiement
+    type?: $Enums.TypeModePaiement | null
     soldeActuel?: number | null
     caisseId: number
     createdAt?: Date | string
@@ -29226,7 +29359,7 @@ export namespace Prisma {
   }
 
   export type ModePaiementUpdateInput = {
-    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    type?: NullableEnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement | null
     soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29237,7 +29370,7 @@ export namespace Prisma {
 
   export type ModePaiementUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    type?: NullableEnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement | null
     soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     caisseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29248,7 +29381,7 @@ export namespace Prisma {
 
   export type ModePaiementCreateManyInput = {
     id?: number
-    type?: $Enums.TypeModePaiement
+    type?: $Enums.TypeModePaiement | null
     soldeActuel?: number | null
     caisseId: number
     createdAt?: Date | string
@@ -29256,7 +29389,7 @@ export namespace Prisma {
   }
 
   export type ModePaiementUpdateManyMutationInput = {
-    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    type?: NullableEnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement | null
     soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29264,7 +29397,7 @@ export namespace Prisma {
 
   export type ModePaiementUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    type?: NullableEnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement | null
     soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     caisseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30261,6 +30394,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type AdresseListRelationFilter = {
     every?: AdresseWhereInput
     some?: AdresseWhereInput
@@ -30328,12 +30472,17 @@ export namespace Prisma {
 
   export type EntrepriseCountOrderByAggregateInput = {
     id?: SortOrder
-    nom?: SortOrder
+    raison_sociale?: SortOrder
+    forme_juridique?: SortOrder
+    rccm?: SortOrder
+    num_impot?: SortOrder
+    identification_nationale?: SortOrder
     email?: SortOrder
-    encronyme?: SortOrder
-    codePostale?: SortOrder
-    site?: SortOrder
-    description?: SortOrder
+    secteur_d_activite?: SortOrder
+    contenu?: SortOrder
+    slogan?: SortOrder
+    vision?: SortOrder
+    date_de_creation?: SortOrder
     logo?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -30345,12 +30494,17 @@ export namespace Prisma {
 
   export type EntrepriseMaxOrderByAggregateInput = {
     id?: SortOrder
-    nom?: SortOrder
+    raison_sociale?: SortOrder
+    forme_juridique?: SortOrder
+    rccm?: SortOrder
+    num_impot?: SortOrder
+    identification_nationale?: SortOrder
     email?: SortOrder
-    encronyme?: SortOrder
-    codePostale?: SortOrder
-    site?: SortOrder
-    description?: SortOrder
+    secteur_d_activite?: SortOrder
+    contenu?: SortOrder
+    slogan?: SortOrder
+    vision?: SortOrder
+    date_de_creation?: SortOrder
     logo?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -30358,12 +30512,17 @@ export namespace Prisma {
 
   export type EntrepriseMinOrderByAggregateInput = {
     id?: SortOrder
-    nom?: SortOrder
+    raison_sociale?: SortOrder
+    forme_juridique?: SortOrder
+    rccm?: SortOrder
+    num_impot?: SortOrder
+    identification_nationale?: SortOrder
     email?: SortOrder
-    encronyme?: SortOrder
-    codePostale?: SortOrder
-    site?: SortOrder
-    description?: SortOrder
+    secteur_d_activite?: SortOrder
+    contenu?: SortOrder
+    slogan?: SortOrder
+    vision?: SortOrder
+    date_de_creation?: SortOrder
     logo?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -30389,6 +30548,20 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumSexeNullableFilter<$PrismaModel = never> = {
@@ -30850,11 +31023,11 @@ export namespace Prisma {
     agentId?: SortOrder
   }
 
-  export type EnumTypeModePaiementFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeModePaiement | EnumTypeModePaiementFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeModePaiementFilter<$PrismaModel> | $Enums.TypeModePaiement
+  export type EnumTypeModePaiementNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeModePaiement | EnumTypeModePaiementFieldRefInput<$PrismaModel> | null
+    in?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumTypeModePaiementNullableFilter<$PrismaModel> | $Enums.TypeModePaiement | null
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -30912,14 +31085,14 @@ export namespace Prisma {
     caisseId?: SortOrder
   }
 
-  export type EnumTypeModePaiementWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeModePaiement | EnumTypeModePaiementFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeModePaiementWithAggregatesFilter<$PrismaModel> | $Enums.TypeModePaiement
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeModePaiementFilter<$PrismaModel>
-    _max?: NestedEnumTypeModePaiementFilter<$PrismaModel>
+  export type EnumTypeModePaiementNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeModePaiement | EnumTypeModePaiementFieldRefInput<$PrismaModel> | null
+    in?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumTypeModePaiementNullableWithAggregatesFilter<$PrismaModel> | $Enums.TypeModePaiement | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumTypeModePaiementNullableFilter<$PrismaModel>
+    _max?: NestedEnumTypeModePaiementNullableFilter<$PrismaModel>
   }
 
   export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -31108,17 +31281,6 @@ export namespace Prisma {
     not?: NestedEnumStatutVenteFilter<$PrismaModel> | $Enums.StatutVente
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type PanierScalarRelationFilter = {
     is?: PanierWhereInput
     isNot?: PanierWhereInput
@@ -31204,20 +31366,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutVenteFilter<$PrismaModel>
     _max?: NestedEnumStatutVenteFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumstatutPanierFilter<$PrismaModel = never> = {
@@ -31932,6 +32080,10 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type AdresseUpdateManyWithoutEntrepriseNestedInput = {
@@ -33310,8 +33462,8 @@ export namespace Prisma {
     connect?: DetailPanierWhereUniqueInput | DetailPanierWhereUniqueInput[]
   }
 
-  export type EnumTypeModePaiementFieldUpdateOperationsInput = {
-    set?: $Enums.TypeModePaiement
+  export type NullableEnumTypeModePaiementFieldUpdateOperationsInput = {
+    set?: $Enums.TypeModePaiement | null
   }
 
   export type NullableFloatFieldUpdateOperationsInput = {
@@ -33696,10 +33848,6 @@ export namespace Prisma {
 
   export type EnumStatutVenteFieldUpdateOperationsInput = {
     set?: $Enums.StatutVente
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type PanierUpdateOneRequiredWithoutVentesNestedInput = {
@@ -34480,6 +34628,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -34506,6 +34665,20 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumSexeNullableFilter<$PrismaModel = never> = {
@@ -34599,21 +34772,21 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedEnumTypeModePaiementFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeModePaiement | EnumTypeModePaiementFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeModePaiementFilter<$PrismaModel> | $Enums.TypeModePaiement
+  export type NestedEnumTypeModePaiementNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeModePaiement | EnumTypeModePaiementFieldRefInput<$PrismaModel> | null
+    in?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumTypeModePaiementNullableFilter<$PrismaModel> | $Enums.TypeModePaiement | null
   }
 
-  export type NestedEnumTypeModePaiementWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TypeModePaiement | EnumTypeModePaiementFieldRefInput<$PrismaModel>
-    in?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel>
-    not?: NestedEnumTypeModePaiementWithAggregatesFilter<$PrismaModel> | $Enums.TypeModePaiement
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTypeModePaiementFilter<$PrismaModel>
-    _max?: NestedEnumTypeModePaiementFilter<$PrismaModel>
+  export type NestedEnumTypeModePaiementNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeModePaiement | EnumTypeModePaiementFieldRefInput<$PrismaModel> | null
+    in?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.TypeModePaiement[] | ListEnumTypeModePaiementFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumTypeModePaiementNullableWithAggregatesFilter<$PrismaModel> | $Enums.TypeModePaiement | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumTypeModePaiementNullableFilter<$PrismaModel>
+    _max?: NestedEnumTypeModePaiementNullableFilter<$PrismaModel>
   }
 
   export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -34656,17 +34829,6 @@ export namespace Prisma {
     not?: NestedEnumStatutVenteFilter<$PrismaModel> | $Enums.StatutVente
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedEnumStatutVenteWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.StatutVente | EnumStatutVenteFieldRefInput<$PrismaModel>
     in?: $Enums.StatutVente[] | ListEnumStatutVenteFieldRefInput<$PrismaModel>
@@ -34675,20 +34837,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutVenteFilter<$PrismaModel>
     _max?: NestedEnumStatutVenteFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumstatutPanierFilter<$PrismaModel = never> = {
@@ -36706,12 +36854,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseCreateWithoutAdresseInput = {
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36724,12 +36877,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedCreateWithoutAdresseInput = {
     id?: number
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36885,12 +37043,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseUpdateWithoutAdresseInput = {
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36903,12 +37066,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedUpdateWithoutAdresseInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37000,12 +37168,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseCreateWithoutContactInput = {
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -37018,12 +37191,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedCreateWithoutContactInput = {
     id?: number
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -37173,12 +37351,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseUpdateWithoutContactInput = {
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37191,12 +37374,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedUpdateWithoutContactInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38176,7 +38364,7 @@ export namespace Prisma {
   }
 
   export type ModePaiementCreateWithoutPaiementInput = {
-    type?: $Enums.TypeModePaiement
+    type?: $Enums.TypeModePaiement | null
     soldeActuel?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38186,7 +38374,7 @@ export namespace Prisma {
 
   export type ModePaiementUncheckedCreateWithoutPaiementInput = {
     id?: number
-    type?: $Enums.TypeModePaiement
+    type?: $Enums.TypeModePaiement | null
     soldeActuel?: number | null
     caisseId: number
     createdAt?: Date | string
@@ -38407,7 +38595,7 @@ export namespace Prisma {
   }
 
   export type ModePaiementUpdateWithoutPaiementInput = {
-    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    type?: NullableEnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement | null
     soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38417,7 +38605,7 @@ export namespace Prisma {
 
   export type ModePaiementUncheckedUpdateWithoutPaiementInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    type?: NullableEnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement | null
     soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     caisseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38812,7 +39000,7 @@ export namespace Prisma {
   }
 
   export type ModePaiementCreateWithoutCaisseInput = {
-    type?: $Enums.TypeModePaiement
+    type?: $Enums.TypeModePaiement | null
     soldeActuel?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38822,7 +39010,7 @@ export namespace Prisma {
 
   export type ModePaiementUncheckedCreateWithoutCaisseInput = {
     id?: number
-    type?: $Enums.TypeModePaiement
+    type?: $Enums.TypeModePaiement | null
     soldeActuel?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -38991,7 +39179,7 @@ export namespace Prisma {
     OR?: ModePaiementScalarWhereInput[]
     NOT?: ModePaiementScalarWhereInput | ModePaiementScalarWhereInput[]
     id?: IntFilter<"ModePaiement"> | number
-    type?: EnumTypeModePaiementFilter<"ModePaiement"> | $Enums.TypeModePaiement
+    type?: EnumTypeModePaiementNullableFilter<"ModePaiement"> | $Enums.TypeModePaiement | null
     soldeActuel?: FloatNullableFilter<"ModePaiement"> | number | null
     caisseId?: IntFilter<"ModePaiement"> | number
     createdAt?: DateTimeFilter<"ModePaiement"> | Date | string
@@ -39113,12 +39301,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseCreateWithoutVenteInput = {
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39131,12 +39324,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedCreateWithoutVenteInput = {
     id?: number
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39367,12 +39565,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseUpdateWithoutVenteInput = {
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39385,12 +39588,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedUpdateWithoutVenteInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39872,7 +40080,7 @@ export namespace Prisma {
   }
 
   export type ModePaiementCreateWithoutDetailPanierInput = {
-    type?: $Enums.TypeModePaiement
+    type?: $Enums.TypeModePaiement | null
     soldeActuel?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39882,7 +40090,7 @@ export namespace Prisma {
 
   export type ModePaiementUncheckedCreateWithoutDetailPanierInput = {
     id?: number
-    type?: $Enums.TypeModePaiement
+    type?: $Enums.TypeModePaiement | null
     soldeActuel?: number | null
     caisseId: number
     createdAt?: Date | string
@@ -39997,7 +40205,7 @@ export namespace Prisma {
   }
 
   export type ModePaiementUpdateWithoutDetailPanierInput = {
-    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    type?: NullableEnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement | null
     soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40007,7 +40215,7 @@ export namespace Prisma {
 
   export type ModePaiementUncheckedUpdateWithoutDetailPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    type?: NullableEnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement | null
     soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     caisseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40124,12 +40332,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseCreateWithoutAchatInput = {
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -40142,12 +40355,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedCreateWithoutAchatInput = {
     id?: number
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -40324,12 +40542,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseUpdateWithoutAchatInput = {
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40342,12 +40565,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedUpdateWithoutAchatInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40602,12 +40830,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseCreateWithoutCommandeInput = {
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -40620,12 +40853,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedCreateWithoutCommandeInput = {
     id?: number
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -40831,12 +41069,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseUpdateWithoutCommandeInput = {
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40849,12 +41092,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedUpdateWithoutCommandeInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41003,12 +41251,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseCreateWithoutDepenseInput = {
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -41021,12 +41274,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedCreateWithoutDepenseInput = {
     id?: number
-    nom: string
+    raison_sociale?: string | null
+    forme_juridique?: string | null
+    rccm?: string | null
+    num_impot?: string | null
+    identification_nationale?: string | null
     email: string
-    encronyme: string
-    codePostale: string
-    site?: string | null
-    description?: string | null
+    secteur_d_activite?: string | null
+    contenu?: string | null
+    slogan?: string | null
+    vision?: string | null
+    date_de_creation?: Date | string | null
     logo?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -41154,12 +41412,17 @@ export namespace Prisma {
   }
 
   export type EntrepriseUpdateWithoutDepenseInput = {
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41172,12 +41435,17 @@ export namespace Prisma {
 
   export type EntrepriseUncheckedUpdateWithoutDepenseInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
+    raison_sociale?: NullableStringFieldUpdateOperationsInput | string | null
+    forme_juridique?: NullableStringFieldUpdateOperationsInput | string | null
+    rccm?: NullableStringFieldUpdateOperationsInput | string | null
+    num_impot?: NullableStringFieldUpdateOperationsInput | string | null
+    identification_nationale?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
-    encronyme?: StringFieldUpdateOperationsInput | string
-    codePostale?: StringFieldUpdateOperationsInput | string
-    site?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    secteur_d_activite?: NullableStringFieldUpdateOperationsInput | string | null
+    contenu?: NullableStringFieldUpdateOperationsInput | string | null
+    slogan?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    date_de_creation?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43126,7 +43394,7 @@ export namespace Prisma {
 
   export type ModePaiementCreateManyCaisseInput = {
     id?: number
-    type?: $Enums.TypeModePaiement
+    type?: $Enums.TypeModePaiement | null
     soldeActuel?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -43205,7 +43473,7 @@ export namespace Prisma {
   }
 
   export type ModePaiementUpdateWithoutCaisseInput = {
-    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    type?: NullableEnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement | null
     soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43215,7 +43483,7 @@ export namespace Prisma {
 
   export type ModePaiementUncheckedUpdateWithoutCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    type?: NullableEnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement | null
     soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43225,7 +43493,7 @@ export namespace Prisma {
 
   export type ModePaiementUncheckedUpdateManyWithoutCaisseInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: EnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement
+    type?: NullableEnumTypeModePaiementFieldUpdateOperationsInput | $Enums.TypeModePaiement | null
     soldeActuel?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

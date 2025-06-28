@@ -1,9 +1,14 @@
 import { Produit } from "@/app/generated/prisma";
 
-import { DetailPanierForm } from "@/prisma/defs-front"
+import { Acheteur, Agent, Client, DetailPanierForm, Fournisseur, PaiementData } from "@/prisma/defs-front"
 
 const api = 'http://localhost:3000/api/';
-export async function createVente(panierId: number, detailsPanier: DetailPanierForm[], client: any) {
+export async function createVente(
+    panierId: number, 
+    detailsPanier: DetailPanierForm[], 
+    client: Acheteur, 
+    paiement: PaiementData
+) {
     try {
         const produits = detailsPanier.map(detail => ({ ...detail, panierId }));
         const newProduits = produits.map(({ id, devise, designation, produit, teneur, ...rest }) => rest);
@@ -15,7 +20,8 @@ export async function createVente(panierId: number, detailsPanier: DetailPanierF
             },
             body: JSON.stringify({
                 details: newProduits,
-                client: client
+                client: client,
+                paiement: paiement
             })
         });
         const data = await res.json();

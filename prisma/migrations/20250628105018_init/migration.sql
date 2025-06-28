@@ -8,7 +8,7 @@ CREATE TYPE "Sexe" AS ENUM ('HOMME', 'FEMME');
 CREATE TYPE "Poste" AS ENUM ('DIRECTEUR', 'SECRETAIRE', 'CAISSIER', 'GERANT');
 
 -- CreateEnum
-CREATE TYPE "ModePaiment" AS ENUM ('CACHE', 'BANQUE', 'MOBILE');
+CREATE TYPE "TypeModePaiement" AS ENUM ('CASH', 'BANQUE', 'CREDIT', 'MOITIER_CREDIT', 'MOITIER_CASH');
 
 -- CreateEnum
 CREATE TYPE "StatutVente" AS ENUM ('EN_ATTENTE', 'CONFIRME', 'REMBOURSE', 'ANNULE');
@@ -26,13 +26,10 @@ CREATE TYPE "StatutAchat" AS ENUM ('EN_COURS', 'TERMINE', 'ANNULE');
 CREATE TYPE "StatutCommande" AS ENUM ('EN_ATTENTE_PAIEMENT', 'EN_COURS', 'LIVREE', 'ANNULEE');
 
 -- CreateEnum
-CREATE TYPE "TypeMouvementCaisse" AS ENUM ('ENTREE', 'SORTIE');
-
--- CreateEnum
 CREATE TYPE "StatutCaisse" AS ENUM ('OUVERTE', 'FERMEE');
 
 -- CreateEnum
-CREATE TYPE "CategorieMouvement" AS ENUM ('ACHAT', 'VENTE', 'COMMANDE', 'FOURNITUR', 'SALAIRE', 'LOYER', 'EMPRUNT', 'TAXE', 'AUTRES');
+CREATE TYPE "MotifsDepense" AS ENUM ('ACHAT_FOURNITURES', 'PAIEMENT_SALAIRE', 'PAIEMENT_LOYER', 'PAIEMENT_EMPRUNT', 'PAIEMENT_TAXE', 'AUTRES');
 
 -- CreateTable
 CREATE TABLE "Teneur" (
@@ -62,12 +59,17 @@ CREATE TABLE "Devise" (
 -- CreateTable
 CREATE TABLE "Entreprise" (
     "id" SERIAL NOT NULL,
-    "nom" TEXT NOT NULL,
+    "raison_sociale" TEXT,
+    "forme_juridique" TEXT,
+    "rccm" TEXT,
+    "num_impot" TEXT,
+    "identification_nationale" TEXT,
     "email" TEXT NOT NULL,
-    "encronyme" TEXT NOT NULL,
-    "codePostale" TEXT NOT NULL,
-    "site" TEXT,
-    "description" TEXT,
+    "secteur_d_activite" TEXT,
+    "contenu" TEXT,
+    "slogan" TEXT,
+    "vision" TEXT,
+    "date_de_creation" TIMESTAMP(3),
     "logo" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -168,16 +170,28 @@ CREATE TABLE "Produit" (
 );
 
 -- CreateTable
+CREATE TABLE "ModePaiement" (
+    "id" SERIAL NOT NULL,
+    "type" "TypeModePaiement" DEFAULT 'CASH',
+    "soldeActuel" DOUBLE PRECISION DEFAULT 0,
+    "caisseId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ModePaiement_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Paiement" (
     "id" SERIAL NOT NULL,
-    "totalHT" DOUBLE PRECISION,
-    "totalTTC" DOUBLE PRECISION,
-    "modePaiement" "ModePaiment" NOT NULL,
+    "montant" DOUBLE PRECISION,
+    "modePaiementId" INTEGER NOT NULL,
     "deviseId" INTEGER NOT NULL,
     "caisseId" INTEGER NOT NULL,
     "venteId" INTEGER,
     "achatId" INTEGER,
     "commandeId" INTEGER,
+    "depenseId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -188,11 +202,10 @@ CREATE TABLE "Paiement" (
 CREATE TABLE "Caisse" (
     "id" SERIAL NOT NULL,
     "nom" VARCHAR(100) NOT NULL,
-    "description" TEXT,
-    "soldeActuel" DOUBLE PRECISION DEFAULT 0,
     "deviseId" INTEGER NOT NULL,
     "agentId" INTEGER NOT NULL,
     "statut" "StatutCaisse" NOT NULL DEFAULT 'OUVERTE',
+    "description" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -203,10 +216,15 @@ CREATE TABLE "Caisse" (
 CREATE TABLE "Vente" (
     "id" SERIAL NOT NULL,
     "statut" "StatutVente" NOT NULL DEFAULT 'CONFIRME',
-    "typeAcheteur" "TypeClient" NOT NULL,
+    "nom" TEXT,
+    "tel" TEXT,
+    "dateLivraison" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "adresseLivraison" VARCHAR(255),
+    "notes" TEXT,
     "clientId" INTEGER,
     "agentId" INTEGER,
     "fournisseurId" INTEGER,
+    "entrepriseId" INTEGER NOT NULL DEFAULT 1,
     "panierId" INTEGER NOT NULL,
     "enregistrerPar" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -232,12 +250,12 @@ CREATE TABLE "DetailPanier" (
     "id" SERIAL NOT NULL,
     "produitId" INTEGER NOT NULL,
     "qtte" INTEGER NOT NULL,
-    "modePaiement" "ModePaiment" NOT NULL,
     "prixUnitaire" DOUBLE PRECISION NOT NULL,
     "prixTotalHT" DOUBLE PRECISION NOT NULL,
     "prixTotalTTC" DOUBLE PRECISION NOT NULL,
     "panierId" INTEGER NOT NULL,
-    "deviseId" INTEGER NOT NULL,
+    "deviseId" INTEGER,
+    "modePaiementId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -251,6 +269,7 @@ CREATE TABLE "Achat" (
     "panierId" INTEGER NOT NULL,
     "fournisseurId" INTEGER,
     "agentId" INTEGER NOT NULL,
+    "entrepriseId" INTEGER NOT NULL DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -271,6 +290,7 @@ CREATE TABLE "Commande" (
     "fournisseurId" INTEGER,
     "agentId" INTEGER,
     "enregistrerPar" TEXT,
+    "entrepriseId" INTEGER NOT NULL DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -278,33 +298,18 @@ CREATE TABLE "Commande" (
 );
 
 -- CreateTable
-CREATE TABLE "ClotureCaisse" (
-    "id" SERIAL NOT NULL,
-    "dateCloture" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "agentId" INTEGER NOT NULL,
-    "entrepriseId" INTEGER,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "notes" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "ClotureCaisse_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "MouvementCaisse" (
+CREATE TABLE "Depense" (
     "id" SERIAL NOT NULL,
     "caisseId" INTEGER NOT NULL,
     "referenceExterne" VARCHAR(100),
-    "type_mouvement" "TypeMouvementCaisse" NOT NULL DEFAULT 'SORTIE',
-    "categorie" "CategorieMouvement" NOT NULL DEFAULT 'VENTE',
-    "moyen_paiement" "ModePaiment" NOT NULL,
-    "montant" DOUBLE PRECISION NOT NULL,
+    "motif" "MotifsDepense" NOT NULL,
     "description" TEXT,
     "agentId" INTEGER NOT NULL,
+    "entrepriseId" INTEGER NOT NULL DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "MouvementCaisse_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Depense_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -317,16 +322,7 @@ CREATE UNIQUE INDEX "Devise_nom_key" ON "Devise"("nom");
 CREATE UNIQUE INDEX "Devise_code_key" ON "Devise"("code");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Entreprise_nom_key" ON "Entreprise"("nom");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Entreprise_email_key" ON "Entreprise"("email");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Entreprise_encronyme_key" ON "Entreprise"("encronyme");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Entreprise_codePostale_key" ON "Entreprise"("codePostale");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Agent_email_key" ON "Agent"("email");
@@ -345,12 +341,6 @@ CREATE UNIQUE INDEX "Fournisseur_email_key" ON "Fournisseur"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Caisse_nom_key" ON "Caisse"("nom");
-
--- CreateIndex
-CREATE UNIQUE INDEX "ClotureCaisse_dateCloture_key" ON "ClotureCaisse"("dateCloture");
-
--- CreateIndex
-CREATE UNIQUE INDEX "MouvementCaisse_referenceExterne_key" ON "MouvementCaisse"("referenceExterne");
 
 -- AddForeignKey
 ALTER TABLE "Teneur" ADD CONSTRAINT "Teneur_agentId_fkey" FOREIGN KEY ("agentId") REFERENCES "Agent"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -395,6 +385,12 @@ ALTER TABLE "Produit" ADD CONSTRAINT "Produit_deviseId_fkey" FOREIGN KEY ("devis
 ALTER TABLE "Produit" ADD CONSTRAINT "Produit_teneurId_fkey" FOREIGN KEY ("teneurId") REFERENCES "Teneur"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "ModePaiement" ADD CONSTRAINT "ModePaiement_caisseId_fkey" FOREIGN KEY ("caisseId") REFERENCES "Caisse"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Paiement" ADD CONSTRAINT "Paiement_modePaiementId_fkey" FOREIGN KEY ("modePaiementId") REFERENCES "ModePaiement"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Paiement" ADD CONSTRAINT "Paiement_venteId_fkey" FOREIGN KEY ("venteId") REFERENCES "Vente"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -402,6 +398,9 @@ ALTER TABLE "Paiement" ADD CONSTRAINT "Paiement_achatId_fkey" FOREIGN KEY ("acha
 
 -- AddForeignKey
 ALTER TABLE "Paiement" ADD CONSTRAINT "Paiement_commandeId_fkey" FOREIGN KEY ("commandeId") REFERENCES "Commande"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Paiement" ADD CONSTRAINT "Paiement_depenseId_fkey" FOREIGN KEY ("depenseId") REFERENCES "Depense"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Paiement" ADD CONSTRAINT "Paiement_caisseId_fkey" FOREIGN KEY ("caisseId") REFERENCES "Caisse"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -425,6 +424,9 @@ ALTER TABLE "Vente" ADD CONSTRAINT "Vente_agentId_fkey" FOREIGN KEY ("agentId") 
 ALTER TABLE "Vente" ADD CONSTRAINT "Vente_fournisseurId_fkey" FOREIGN KEY ("fournisseurId") REFERENCES "Fournisseur"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Vente" ADD CONSTRAINT "Vente_entrepriseId_fkey" FOREIGN KEY ("entrepriseId") REFERENCES "Entreprise"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Vente" ADD CONSTRAINT "Vente_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "Client"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -434,13 +436,19 @@ ALTER TABLE "Panier" ADD CONSTRAINT "Panier_agentId_fkey" FOREIGN KEY ("agentId"
 ALTER TABLE "Panier" ADD CONSTRAINT "Panier_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "Client"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "DetailPanier" ADD CONSTRAINT "DetailPanier_deviseId_fkey" FOREIGN KEY ("deviseId") REFERENCES "Devise"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "DetailPanier" ADD CONSTRAINT "DetailPanier_modePaiementId_fkey" FOREIGN KEY ("modePaiementId") REFERENCES "ModePaiement"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "DetailPanier" ADD CONSTRAINT "DetailPanier_deviseId_fkey" FOREIGN KEY ("deviseId") REFERENCES "Devise"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "DetailPanier" ADD CONSTRAINT "DetailPanier_produitId_fkey" FOREIGN KEY ("produitId") REFERENCES "Produit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "DetailPanier" ADD CONSTRAINT "DetailPanier_panierId_fkey" FOREIGN KEY ("panierId") REFERENCES "Panier"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Achat" ADD CONSTRAINT "Achat_entrepriseId_fkey" FOREIGN KEY ("entrepriseId") REFERENCES "Entreprise"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Achat" ADD CONSTRAINT "Achat_panierId_fkey" FOREIGN KEY ("panierId") REFERENCES "Panier"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -458,19 +466,19 @@ ALTER TABLE "Commande" ADD CONSTRAINT "Commande_panierId_fkey" FOREIGN KEY ("pan
 ALTER TABLE "Commande" ADD CONSTRAINT "Commande_fournisseurId_fkey" FOREIGN KEY ("fournisseurId") REFERENCES "Fournisseur"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Commande" ADD CONSTRAINT "Commande_entrepriseId_fkey" FOREIGN KEY ("entrepriseId") REFERENCES "Entreprise"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Commande" ADD CONSTRAINT "Commande_agentId_fkey" FOREIGN KEY ("agentId") REFERENCES "Agent"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Commande" ADD CONSTRAINT "Commande_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "Client"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ClotureCaisse" ADD CONSTRAINT "ClotureCaisse_agentId_fkey" FOREIGN KEY ("agentId") REFERENCES "Agent"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Depense" ADD CONSTRAINT "Depense_entrepriseId_fkey" FOREIGN KEY ("entrepriseId") REFERENCES "Entreprise"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ClotureCaisse" ADD CONSTRAINT "ClotureCaisse_entrepriseId_fkey" FOREIGN KEY ("entrepriseId") REFERENCES "Entreprise"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Depense" ADD CONSTRAINT "Depense_caisseId_fkey" FOREIGN KEY ("caisseId") REFERENCES "Caisse"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "MouvementCaisse" ADD CONSTRAINT "MouvementCaisse_caisseId_fkey" FOREIGN KEY ("caisseId") REFERENCES "Caisse"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "MouvementCaisse" ADD CONSTRAINT "MouvementCaisse_agentId_fkey" FOREIGN KEY ("agentId") REFERENCES "Agent"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Depense" ADD CONSTRAINT "Depense_agentId_fkey" FOREIGN KEY ("agentId") REFERENCES "Agent"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

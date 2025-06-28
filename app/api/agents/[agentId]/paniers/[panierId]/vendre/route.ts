@@ -17,83 +17,34 @@ export async function POST(request: NextRequest, { params }: PanierRouteParams) 
         detail.prixTotalTTC = detail.prixTotalHT * 0.16;
     }
 
-    const detailsPanier = await prisma.detailPanier.createManyAndReturn({
-        data: form.details
-    });
-
-    if (!detailsPanier) return new Response(JSON.stringify({error: "Les details du Panier ne sont pas valide."}), { status: 201 });
-    
     try {
-        let ProduitsDisponible = await GetProduit(detailsPanier);
-        let devisesProduit = [];
-        for (let i = 0; i < detailsPanier.length; i++) {
-            const Detail = detailsPanier[i];
-            if (Detail.qtte > ProduitsDisponible[i].qtteDisponible) return new Response(`Produit ${ProduitsDisponible[i].designation} N'est Pas Disponible en Stock`, { status: 404 });
-            devisesProduit.push({
-                id: ProduitsDisponible[i].id,
-                deviseId: ProduitsDisponible[i].deviseId,
-                tauxDEchange: ProduitsDisponible[i].devise.tauxDEchange
-            });
+        let ProduitsDisponible = await GetProduit(form.details);
+        for (let i = 0; i < form.details.length; i++) {
+            const Detail = form.details[i];
+            if (Detail.qtte > ProduitsDisponible[i].qtteDisponible) {
+                return new Response(JSON.stringify({error: `Produit ${ProduitsDisponible[i].designation} N'est Pas Disponible en Stock`}), { status: 201 });
+            }
         }
 
-        // let nouveauClient: any | null = null;
-        // if (form.typeAcheteur === 'NOUVEAU') {
-        //     try {
-        //         nouveauClient = await prisma.client.create({
-        //             data: {
-        //                 nom: form.client.nom,
-        //                 nom_complet: form.client.nom,
-        //                 email: form.client.email
-        //             }
-        //         });
-
-        //         if (nouveauClient) {
-        //             await prisma.contact.create({
-        //                 data: {
-        //                     tel: form.client.tel,
-        //                     clientId: nouveauClient.id
-        //                 }
-        //             });
-
-        //             await prisma.adresse.create({
-        //                 data: {
-        //                     adresse: form.client.adresse,
-        //                     clientId: nouveauClient.id
-        //                 }
-        //             });
-        //         }
-                
-        //     } catch (error) {
-        //         return new Response("Formulaire Client Invalide", { status : 404 });
-        //     }
-        // }
-
+        const detailsPanier = await prisma.detailPanier.createMany({
+            data: form.details
+        });
         const vente = await Vente(agent, panier.id, form.client);
-        const paiementData = {
-            panierId: panier.id,
-            deviseProduit: devisesProduit,
-            deviseId: form.deviseId,
-            modePaiementId: form.modePaiementId
-        };
-
-        // const paiement = await Paiement(detailsPanier, paiementData, null, vente?.id, null);
-        // const destockage = await VariationStockage (detailsPanier, null, true, null);
-        // const caisseData = {
-        //     deviseId: form.deviseId,
-        //     modePaiementId: form.modePaiementId,
-        //     montant: paiement
-        // }
-
-        // const encaissement = await VariationCaisse(caisseData, null, true, null);
+        const paiement = await Paiement(form.paiement, null, vente?.id, null);
+        const destockage = await VariationStockage (ProduitsDisponible, form.details, null, true, null);
+        const encaissement = await VariationCaisse(form.paiement, null, true, null);
 
         const resetPanier = await prisma.panier.update({
             where: {id: panier.id},
             data: { statut: 'VALIDE' }
         }); 
         
-        return new Response(JSON.stringify(vente), { status: 201 });
+        return new Response(JSON.stringify({ 
+            message: "Vente enregistré !",
+            data: vente?.id
+        }), { status: 201 });
     } catch (error) {
-        return new Response("Invalid Form", { status : 201 });        
+        return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status : 201 });        
     }    
 } 
 

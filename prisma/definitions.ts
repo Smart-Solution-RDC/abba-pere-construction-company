@@ -121,12 +121,12 @@ export interface ProduitsDisponible {
     }
 }
 
-export type MoyenPaiment = 'cache' | 'banque' | 'mobile' | 'cheque' | 'autres'
+export type MoyenPaiment = 'cash' | 'banque' | 'mobile' | 'cheque' | 'autres'
 
 // Changer fournisseur a fourniture
 export type CategorieMouvement = 'ACHAT' | 'VENTE' | 'COMMANDE' | 'FOURNITUR' | 'SALAIRE' | 'LOYER' | 'TAXE' | 'AUTRES'
 
-export type ModePaiement = 'CACHE' | 'BANQUE'
+export type ModePaiement = 'CASH' | 'BANQUE' | 'CREDIT' | 'MOITIE_CASH' | 'MOITIER_CREDIT'
  
 export interface AchatRouteParams {
     caisseId: string
