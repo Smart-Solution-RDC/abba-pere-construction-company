@@ -12,25 +12,25 @@ export async function getPanierId () {
             }
         });
 
-        let data =  await res.json();
-        return data;
+        let data = await res.json();
+        return data.data;
     } catch (error) {
         console.log(error);        
     }    
 }
 
-export async function createPanier (produit: Produit) {
+export async function createPanier () {
     try {
         const res = await fetch (`${api}agents/1/paniers/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(produit)
+            body: JSON.stringify('')
         });
 
         let data = await res.json();
-        return data;
+        return data.data;
     } catch (error) {
         console.log(error);        
     }    

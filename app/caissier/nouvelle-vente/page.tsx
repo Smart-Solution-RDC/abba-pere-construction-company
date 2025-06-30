@@ -126,6 +126,7 @@ export default function NouvelleVentePage() {
         designation: null,
         teneur: null,
         modePaiementId: null,
+        fournisseurId: null
       },
       ]);
     }
@@ -290,6 +291,7 @@ export default function NouvelleVentePage() {
     setAgentSelected(undefined);
     setFournisseurSelected(undefined);
     setDetailsPanier([]);
+    setPaiement({deviseId: 0, modePaiementId: 0, montant: 0});
     // setNotes("");
     setIsProcessing(false);
   };

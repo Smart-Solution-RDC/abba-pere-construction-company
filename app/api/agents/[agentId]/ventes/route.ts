@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
                 }
             }
         },
-        createdAt: true
+        updatedAt: true
     }
     
     const data = await Pagination(request, 'vente', condition, selection, null);

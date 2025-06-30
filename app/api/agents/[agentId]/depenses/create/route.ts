@@ -69,7 +69,7 @@ export async function POST(request: Request, { params }: { params: { agentId: st
 
         return new Response(JSON.stringify(depense), { status: 201 });
     } catch (error) {
-        return new Response("Invalid Form", { status: 500 });
+        return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });
     }
 }
 

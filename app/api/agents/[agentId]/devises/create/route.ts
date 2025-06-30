@@ -16,7 +16,7 @@ export async function POST(request: Request, { params }: AgentRouteParams ) {
         })
         return new Response("Devise created!", { status: 200 });
     } catch (error) {
-        return new Response("Invalid Form", { status: 404 });
+        return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });
     }
         
 }

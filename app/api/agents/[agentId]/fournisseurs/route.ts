@@ -13,7 +13,8 @@ export async function GET(request: NextRequest) {
         const fournisseurs = await prisma.fournisseur.findMany({
             select: {
                 id: true,
-                nom: true
+                nom: true,
+                typeProduit: true
             }
         });
 

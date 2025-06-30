@@ -15,6 +15,7 @@ export async function GET(request: NextRequest) {
                     valeur: true
                 }
             },
+            typeProduit: true,
             // qtteDisponible: true,
             deviseId: true,
             devise: {

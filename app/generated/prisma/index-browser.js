@@ -212,7 +212,8 @@ exports.Prisma.FournisseurScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
   email: 'email',
-  codePostale: 'codePostale',
+  typeProduit: 'typeProduit',
+  autresType: 'autresType',
   agentId: 'agentId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -221,6 +222,8 @@ exports.Prisma.FournisseurScalarFieldEnum = {
 exports.Prisma.ProduitScalarFieldEnum = {
   id: 'id',
   designation: 'designation',
+  typeProduit: 'typeProduit',
+  autresType: 'autresType',
   prixUnitaire: 'prixUnitaire',
   qtteDisponible: 'qtteDisponible',
   description: 'description',
@@ -302,6 +305,7 @@ exports.Prisma.DetailPanierScalarFieldEnum = {
   panierId: 'panierId',
   deviseId: 'deviseId',
   modePaiementId: 'modePaiementId',
+  fournisseurId: 'fournisseurId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -378,6 +382,14 @@ exports.Poste = exports.$Enums.Poste = {
   GERANT: 'GERANT'
 };
 
+exports.TypeProduit = exports.$Enums.TypeProduit = {
+  CIMENT: 'CIMENT',
+  CARREAU: 'CARREAU',
+  FER_A_BETON: 'FER_A_BETON',
+  JEPSEN: 'JEPSEN',
+  AUTRES: 'AUTRES'
+};
+
 exports.TypeModePaiement = exports.$Enums.TypeModePaiement = {
   CASH: 'CASH',
   BANQUE: 'BANQUE',
@@ -392,7 +404,6 @@ exports.StatutCaisse = exports.$Enums.StatutCaisse = {
 };
 
 exports.StatutVente = exports.$Enums.StatutVente = {
-  EN_ATTENTE: 'EN_ATTENTE',
   CONFIRME: 'CONFIRME',
   REMBOURSE: 'REMBOURSE',
   ANNULE: 'ANNULE'

@@ -26,6 +26,11 @@ const navigationItems = [
     icon: CreditCard,
   },
   {
+    title: "Nouvel Achat",
+    url: "/caissier/nouvel-achat",
+    icon: ShoppingCart,
+  },
+  {
     title: "Nouvelle Vente",
     url: "/caissier/nouvelle-vente",
     icon: ShoppingCart,

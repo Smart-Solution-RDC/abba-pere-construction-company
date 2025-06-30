@@ -29,6 +29,6 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
 
         return new NextResponse(JSON.stringify(modePaiement), { status: 201 });
     } catch (error) {
-        return new Response("Invalid Form", { status: 400 });
+        return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });;
     }
 }

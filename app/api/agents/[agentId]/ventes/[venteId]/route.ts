@@ -18,19 +18,29 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
             nom: true,
             tel: true,
             statut: true,
-            enregistrerPar: true,
-            // paiements: {
-            //     select: {
-            //         totalHT: true,
-            //         totalTTC: true,
-            //         modePaiement: true,
-            //         devise: {
-            //             select: {
-            //                 symbole: true
-            //             }
-            //         }
-            //     }
-            // },
+            adresseLivraison: true,
+            dateLivraison: true,
+            notes: true,
+            panier: {
+                select: {
+                    detailPaniers: {
+                        select: {
+                            produit: {
+                                select: {
+                                    designation: true,
+                                    teneur: {
+                                        select: {
+                                            valeur: true
+                                        }
+                                    }
+                                }
+                            },
+                            qtte: true,
+                            prixTotalHT: true,
+                        }
+                    }
+                }
+            },
             client: {
                 select: {
                     id: true,
@@ -77,6 +87,23 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
                     }
                 }
             },
+            paiements: {
+                select: {
+                    montant: true,
+                    modePaiement: {
+                        select: {
+                            type: true
+                        }
+                    },
+                    devise: {
+                        select: {
+                            code: true
+                        }
+                    }
+                }
+            },
+            enregistrerPar: true,
+            updatedAt: true
         }
     });
 

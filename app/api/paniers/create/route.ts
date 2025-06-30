@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     
         return new Response("Panier Created!", { status: 201 });
     } catch (error) {
-        return new Response("Invalid Form", { status: 201 });
+        return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });
     }
 }
 

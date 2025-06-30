@@ -74,6 +74,7 @@ export interface DepenseRouteParams {
 
 export interface PanierRouteParams { 
     params: {
+        clientId: string,
         agentId: string
         panierId: string
     }

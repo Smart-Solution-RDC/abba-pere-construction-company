@@ -20,7 +20,7 @@ export async function PUT (req: Request, { params }: AchatParams) {
         return new Response("Achat Updated!", { status: 201 });
 
     } catch (error) {
-        return new Response("Invalid Form", { status: 201 });    
+        return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });    
     }
     
 

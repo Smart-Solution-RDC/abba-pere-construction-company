@@ -24,7 +24,7 @@ export async function POST (request: Request, { params }: AgentRouteParams) {
 
         return new Response("Caisse Created!", { status: 201 });    
     } catch (error) {
-        return new Response("Invalid Form!", { status: 201 });    
+        return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });    
     }    
 }
 

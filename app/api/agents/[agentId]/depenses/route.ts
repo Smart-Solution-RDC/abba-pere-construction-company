@@ -29,6 +29,6 @@ export async function GET (request: NextRequest) {
     });
         return new Response(JSON.stringify(depenses), { status: 201 });
     } catch (error) {
-        return new Response("Invalid Form", { status: 201 });
+        return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });
     }    
 }

@@ -68,6 +68,6 @@ export async function POST(req: NextRequest, { params }: PanierParams) {
 
     }
     
-    return new Response("Invalid Form!", { status: 201 });
+    return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });
 } 
 

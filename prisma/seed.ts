@@ -162,7 +162,6 @@ async function main() {
     create: {
       nom: 'bralima',
       email: 'bralima@gmail.com',
-      codePostale: 'sd90K12',
       agentId: agent.id
     }
   });    

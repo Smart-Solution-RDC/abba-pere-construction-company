@@ -26,18 +26,16 @@ export async function POST(request: NextRequest, { params }: PanierRouteParams) 
             }
         }
 
-        const detailsPanier = await prisma.detailPanier.createMany({
+        await prisma.detailPanier.createMany({
             data: form.details
         });
         const vente = await Vente(agent, panier.id, form.client);
-        const paiement = await Paiement(form.paiement, null, vente?.id, null);
-        const destockage = await VariationStockage (ProduitsDisponible, form.details, null, true, null);
-        const encaissement = await VariationCaisse(form.paiement, null, true, null);
+        await Paiement(form.paiement, null, vente.id);
+        await VariationStockage (ProduitsDisponible, form.details, null, true, null);
+        await VariationCaisse(form.paiement, 'INCREMENT');
 
-        const resetPanier = await prisma.panier.update({
-            where: {id: panier.id},
-            data: { statut: 'VALIDE' }
-        }); 
+        // Reset Panier
+        await prisma.panier.update({ where: {id: panier.id}, data: { statut: 'VALIDE' } }); 
         
         return new Response(JSON.stringify({ 
             message: "Vente enregistré !",

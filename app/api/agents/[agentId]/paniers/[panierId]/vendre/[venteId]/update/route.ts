@@ -70,6 +70,6 @@ export async function PUT(request: NextRequest, { params }: VenteRouteParams ) {
         }    
         return new Response(JSON.stringify({ vente, panier }), { status: 201 });
     } catch (error) {
-        return new Response("Invalid form", { status: 201 });        
+        return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });        
     }
 }

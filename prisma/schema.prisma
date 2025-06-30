@@ -151,35 +151,47 @@ model Contact {
   updatedAt     DateTime     @updatedAt
 }
 
+enum TypeProduit {
+  CIMENT
+  CARREAU
+  FER_A_BETON
+  JEPSEN
+  AUTRES
+}
+
 model Fournisseur {
-  id          Int        @id @default(autoincrement())
-  nom         String     @unique
-  email       String     @unique
-  codePostale String?
-  agentId     Int
-  agent       Agent      @relation(fields: [agentId], references: [id])
-  ventes      Vente[]
-  achats      Achat[]
-  adresses    Adresse[]
-  contacts    Contact[]
-  commandes   Commande[]
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id           Int            @id @default(autoincrement())
+  nom          String         @unique
+  email        String         @unique
+  typeProduit  TypeProduit?
+  autresType   String?
+  agentId      Int
+  agent        Agent          @relation(fields: [agentId], references: [id])
+  ventes       Vente[]
+  // achats       Achat[]
+  adresses     Adresse[]
+  contacts     Contact[]
+  commandes    Commande[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  DetailPanier DetailPanier[]
 }
 
 model Produit {
   id             Int            @id @default(autoincrement())
   designation    String
+  typeProduit    TypeProduit?
+  autresType     String?
   prixUnitaire   Float
   qtteDisponible Int            @default(0)
   description    String?
   deviseId       Int
-  teneurId       Int
+  teneurId       Int?
   agentId        Int
   detailsPaniers DetailPanier[]
   agent          Agent          @relation(fields: [agentId], references: [id])
   devise         Devise         @relation(fields: [deviseId], references: [id])
-  teneur         Teneur         @relation(fields: [teneurId], references: [id])
+  teneur         Teneur?        @relation(fields: [teneurId], references: [id])
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 }
@@ -303,6 +315,8 @@ model DetailPanier {
   panierId       Int
   deviseId       Int?
   modePaiementId Int?
+  fournisseurId  Int?
+  fournisseur    Fournisseur?  @relation(fields: [fournisseurId], references: [id])
   modePaiement   ModePaiement? @relation(fields: [modePaiementId], references: [id])
   devise         Devise?       @relation(fields: [deviseId], references: [id])
   produit        Produit       @relation(fields: [produitId], references: [id])
@@ -321,12 +335,12 @@ model Achat {
   id            Int          @id @default(autoincrement())
   statut        StatutAchat  @default(EN_COURS)
   panierId      Int
-  fournisseurId Int?
+  // fournisseurId Int?
   agentId       Int
   entrepriseId  Int          @default(1)
   entreprise    Entreprise   @relation(fields: [entrepriseId], references: [id])
   panier        Panier       @relation(fields: [panierId], references: [id])
-  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
+  // fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
   agent         Agent        @relation(fields: [agentId], references: [id])
   paiements     Paiement[]
   createdAt     DateTime     @default(now())

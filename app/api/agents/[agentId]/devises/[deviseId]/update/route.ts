@@ -28,6 +28,6 @@ export async function PUT (request: Request, { params }: DeviseRouteParams) {
 
         return new Response("Devise Updated!", { status: 201 });   
     } catch (error) {
-        return new Response("Invalid Form!", { status: 201 });   
+        return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });   
     }
 }  

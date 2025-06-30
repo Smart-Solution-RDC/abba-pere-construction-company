@@ -4,10 +4,9 @@ export interface ProduitForm {
     id: number,
     designation: string,
     prixUnitaire: number,
-    teneur: {
-        valeur: number
-    },
-    // qtteDisponible: true,
+    teneur: { valeur: number },
+    typeProduit: string
+    prixUnitaireAchat: number,
     deviseId: number,
     devise: {
         id: number,
@@ -26,9 +25,12 @@ export interface DetailPanierForm {
     devise: { code: string },
     designation: null
     teneur: { valeur: number } | null,
-    prixTotalTTC: number | null,
+    prixTotalTTC: number,
     deviseId: number | null,
     modePaiementId: number | null,
+    typeProduit: string,
+    fournisseurId: number | null,
+    panierId: number | null,
 }
 
 export interface Devise {
@@ -75,7 +77,8 @@ export interface Agent {
 
 export interface Fournisseur {
     id: number,
-    nom: string
+    nom: string,
+    typeProduit: string
 }
 
 export interface Response {

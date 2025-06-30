@@ -1,82 +1,54 @@
 import { Panier } from "@/app/generated/prisma";
 import { prisma } from "@/lib/prisma";
 import { AgentRouteParams } from "@/prisma/definitions";
+import { checkTable } from "@/prisma/utils";
 
 export async function POST(request: Request, { params }: AgentRouteParams) {
     const data = await request.json();
-    const { agentId } = await params;
+    const { agentId, clientId } = await params;
+    let agent: any | null = null;
+    let client: any | null = null;
+    if (agentId) {
+        agent = await checkTable('agent', agentId);
+    }
 
-    const agent = await prisma.agent.findUnique({
-        where: { id: parseInt(agentId) }
-    });
+    if (clientId) {
+        client = await checkTable('client', clientId);
+    }
 
-    if (!agent) return new Response("Agent Not found", { status: 201 }); 
+    if (!agent && !client) return new Response(JSON.stringify({error: "Informations de l'utilisateurs non valide."}), { status: 201 }); 
 
     try {
-        
-        const findPanier = await prisma.panier.findFirst({
-            where: { agent: { id: parseInt(agentId) }, statut: 'EN_COURS' },
-            select: { id: true }
+
+        // Recupere les details du panier si il existe
+        // sinon cree le.
+        // const getData = async ({table, id}: {table: string, id: number}) => {
+        //     const verify = await prisma.panier.findFirst({
+        //         where: { 
+        //             agentId: table === 'agent' ? id : null, 
+        //             clientId: table === 'client' ? id : null, 
+        //             statut: 'EN_COURS' 
+        //         }
+        //     });
+
+        //     if (verify) {
+        //         const getDetailPanier = await prisma.detailPanier.findMany({
+        //             where: { panierId: verify.id }
+        //         });
+        //         return getDetailPanier;
+        //     }
+        // }
+
+        // const t = await getData(agent ? {table: 'agent', id: agent.id} : {table: 'client', id: client.id});
+
+        const panier = await prisma.panier.create({ 
+            data: { agentId: parseInt(agentId), clientId: parseInt(clientId) } 
         });
 
-        if (findPanier) {
-            console.log(data);
-            data.prixTotalHT = data.qtte * data.prixUnitaire;
-            data.prixTotalTTC = data.prixTotalHT * 0.16;
-            data.panierId = findPanier.id;
-            
-            const detailPanier = await prisma.detailPanier.create({
-                data: data
-            });
-
-            const getAllDetail = await prisma.detailPanier.findMany({
-                where: { agentd: parseInt(agentId), statut: 'EN_COURS' },
-                select: {
-                    id: true,
-                    produit: {
-                        select: {
-                            designation: true
-                        }
-                    },
-                    qtte: true,
-                    prixUnitaire: true,
-                    prixTotalHT: true,
-                    devise: {
-                        select: {
-                            id: true,
-                            code: true
-                        }
-                    }
-                }
-            });
-
-            return new Response(JSON.stringify(data), { status: 201 });
-        }
-        
-        // const panier = await prisma.panier.create({
-        //     data: { agentId: parseInt(agentId)}
-        // });
-
-        // const detailPanier = await prisma.detailPanier.create({
-        //     data: data
-        // });
-
-        // return new Response(JSON.stringify([]), { status: 201 });
-            // } else {
-                // await prisma.panier.update({
-                //     where: {
-                //         agentId: parseInt(agentId),
-                //         statut: 'EN_COURS'
-                //     },
-                //     data: { statut: 'EN_COURS' }
-                // });
-                // return new Response("Statut updated!", { status: 201 });
-            // }
-        
-        // }
+        return new Response(JSON.stringify({ data: panier.id }), { status: 201 });
         
     } catch (error) {
-        return new Response(JSON.stringify({error: "Invalid Form"}), { status: 201 });
+        return new Response(JSON.stringify({error: "Erreur! Réessayer plus tard !"}), { status: 201 });
     }
 }
 
