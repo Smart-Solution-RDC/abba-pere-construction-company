@@ -510,17 +510,6 @@ export async function GetMontantPanier(DetailPanier: DetailPanier[], data: any) 
                 }
             }
         }
-
-        // await prisma.detailPanier.update({
-        //     where: { id: detail.id, panierId: data.panierId },
-        //     data: {
-        //         deviseId: data.deviseId,
-        //         prixUnitaire: detail.prixUnitaire,
-        //         prixTotalHT: detail.prixTotalHT,
-        //         prixTotalTTC: detail.prixTotalHT * 0.16,
-        //         modePaiementId: data.modePaiementId
-        //     }
-        // });
         
         montant += detail.prixTotalHT;
     }

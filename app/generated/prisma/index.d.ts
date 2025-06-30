@@ -2933,7 +2933,6 @@ export namespace Prisma {
 
   export type FournisseurCountOutputType = {
     ventes: number
-    achats: number
     adresses: number
     contacts: number
     commandes: number
@@ -2942,7 +2941,6 @@ export namespace Prisma {
 
   export type FournisseurCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ventes?: boolean | FournisseurCountOutputTypeCountVentesArgs
-    achats?: boolean | FournisseurCountOutputTypeCountAchatsArgs
     adresses?: boolean | FournisseurCountOutputTypeCountAdressesArgs
     contacts?: boolean | FournisseurCountOutputTypeCountContactsArgs
     commandes?: boolean | FournisseurCountOutputTypeCountCommandesArgs
@@ -2965,13 +2963,6 @@ export namespace Prisma {
    */
   export type FournisseurCountOutputTypeCountVentesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VenteWhereInput
-  }
-
-  /**
-   * FournisseurCountOutputType without action
-   */
-  export type FournisseurCountOutputTypeCountAchatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AchatWhereInput
   }
 
   /**
@@ -12585,7 +12576,6 @@ export namespace Prisma {
     updatedAt?: boolean
     agent?: boolean | AgentDefaultArgs<ExtArgs>
     ventes?: boolean | Fournisseur$ventesArgs<ExtArgs>
-    achats?: boolean | Fournisseur$achatsArgs<ExtArgs>
     adresses?: boolean | Fournisseur$adressesArgs<ExtArgs>
     contacts?: boolean | Fournisseur$contactsArgs<ExtArgs>
     commandes?: boolean | Fournisseur$commandesArgs<ExtArgs>
@@ -12632,7 +12622,6 @@ export namespace Prisma {
   export type FournisseurInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     agent?: boolean | AgentDefaultArgs<ExtArgs>
     ventes?: boolean | Fournisseur$ventesArgs<ExtArgs>
-    achats?: boolean | Fournisseur$achatsArgs<ExtArgs>
     adresses?: boolean | Fournisseur$adressesArgs<ExtArgs>
     contacts?: boolean | Fournisseur$contactsArgs<ExtArgs>
     commandes?: boolean | Fournisseur$commandesArgs<ExtArgs>
@@ -12651,7 +12640,6 @@ export namespace Prisma {
     objects: {
       agent: Prisma.$AgentPayload<ExtArgs>
       ventes: Prisma.$VentePayload<ExtArgs>[]
-      achats: Prisma.$AchatPayload<ExtArgs>[]
       adresses: Prisma.$AdressePayload<ExtArgs>[]
       contacts: Prisma.$ContactPayload<ExtArgs>[]
       commandes: Prisma.$CommandePayload<ExtArgs>[]
@@ -13062,7 +13050,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     agent<T extends AgentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AgentDefaultArgs<ExtArgs>>): Prisma__AgentClient<$Result.GetResult<Prisma.$AgentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     ventes<T extends Fournisseur$ventesArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$ventesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    achats<T extends Fournisseur$achatsArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$achatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     adresses<T extends Fournisseur$adressesArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$adressesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdressePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contacts<T extends Fournisseur$contactsArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$contactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     commandes<T extends Fournisseur$commandesArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$commandesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -13521,30 +13508,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: VenteScalarFieldEnum | VenteScalarFieldEnum[]
-  }
-
-  /**
-   * Fournisseur.achats
-   */
-  export type Fournisseur$achatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Achat
-     */
-    select?: AchatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Achat
-     */
-    omit?: AchatOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AchatInclude<ExtArgs> | null
-    where?: AchatWhereInput
-    orderBy?: AchatOrderByWithRelationInput | AchatOrderByWithRelationInput[]
-    cursor?: AchatWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AchatScalarFieldEnum | AchatScalarFieldEnum[]
   }
 
   /**
@@ -22636,7 +22599,6 @@ export namespace Prisma {
   export type AchatAvgAggregateOutputType = {
     id: number | null
     panierId: number | null
-    fournisseurId: number | null
     agentId: number | null
     entrepriseId: number | null
   }
@@ -22644,7 +22606,6 @@ export namespace Prisma {
   export type AchatSumAggregateOutputType = {
     id: number | null
     panierId: number | null
-    fournisseurId: number | null
     agentId: number | null
     entrepriseId: number | null
   }
@@ -22653,7 +22614,6 @@ export namespace Prisma {
     id: number | null
     statut: $Enums.StatutAchat | null
     panierId: number | null
-    fournisseurId: number | null
     agentId: number | null
     entrepriseId: number | null
     createdAt: Date | null
@@ -22664,7 +22624,6 @@ export namespace Prisma {
     id: number | null
     statut: $Enums.StatutAchat | null
     panierId: number | null
-    fournisseurId: number | null
     agentId: number | null
     entrepriseId: number | null
     createdAt: Date | null
@@ -22675,7 +22634,6 @@ export namespace Prisma {
     id: number
     statut: number
     panierId: number
-    fournisseurId: number
     agentId: number
     entrepriseId: number
     createdAt: number
@@ -22687,7 +22645,6 @@ export namespace Prisma {
   export type AchatAvgAggregateInputType = {
     id?: true
     panierId?: true
-    fournisseurId?: true
     agentId?: true
     entrepriseId?: true
   }
@@ -22695,7 +22652,6 @@ export namespace Prisma {
   export type AchatSumAggregateInputType = {
     id?: true
     panierId?: true
-    fournisseurId?: true
     agentId?: true
     entrepriseId?: true
   }
@@ -22704,7 +22660,6 @@ export namespace Prisma {
     id?: true
     statut?: true
     panierId?: true
-    fournisseurId?: true
     agentId?: true
     entrepriseId?: true
     createdAt?: true
@@ -22715,7 +22670,6 @@ export namespace Prisma {
     id?: true
     statut?: true
     panierId?: true
-    fournisseurId?: true
     agentId?: true
     entrepriseId?: true
     createdAt?: true
@@ -22726,7 +22680,6 @@ export namespace Prisma {
     id?: true
     statut?: true
     panierId?: true
-    fournisseurId?: true
     agentId?: true
     entrepriseId?: true
     createdAt?: true
@@ -22824,7 +22777,6 @@ export namespace Prisma {
     id: number
     statut: $Enums.StatutAchat
     panierId: number
-    fournisseurId: number | null
     agentId: number
     entrepriseId: number
     createdAt: Date
@@ -22854,14 +22806,12 @@ export namespace Prisma {
     id?: boolean
     statut?: boolean
     panierId?: boolean
-    fournisseurId?: boolean
     agentId?: boolean
     entrepriseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    fournisseur?: boolean | Achat$fournisseurArgs<ExtArgs>
     agent?: boolean | AgentDefaultArgs<ExtArgs>
     paiements?: boolean | Achat$paiementsArgs<ExtArgs>
     _count?: boolean | AchatCountOutputTypeDefaultArgs<ExtArgs>
@@ -22871,14 +22821,12 @@ export namespace Prisma {
     id?: boolean
     statut?: boolean
     panierId?: boolean
-    fournisseurId?: boolean
     agentId?: boolean
     entrepriseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    fournisseur?: boolean | Achat$fournisseurArgs<ExtArgs>
     agent?: boolean | AgentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["achat"]>
 
@@ -22886,14 +22834,12 @@ export namespace Prisma {
     id?: boolean
     statut?: boolean
     panierId?: boolean
-    fournisseurId?: boolean
     agentId?: boolean
     entrepriseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    fournisseur?: boolean | Achat$fournisseurArgs<ExtArgs>
     agent?: boolean | AgentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["achat"]>
 
@@ -22901,18 +22847,16 @@ export namespace Prisma {
     id?: boolean
     statut?: boolean
     panierId?: boolean
-    fournisseurId?: boolean
     agentId?: boolean
     entrepriseId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AchatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "panierId" | "fournisseurId" | "agentId" | "entrepriseId" | "createdAt" | "updatedAt", ExtArgs["result"]["achat"]>
+  export type AchatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "panierId" | "agentId" | "entrepriseId" | "createdAt" | "updatedAt", ExtArgs["result"]["achat"]>
   export type AchatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    fournisseur?: boolean | Achat$fournisseurArgs<ExtArgs>
     agent?: boolean | AgentDefaultArgs<ExtArgs>
     paiements?: boolean | Achat$paiementsArgs<ExtArgs>
     _count?: boolean | AchatCountOutputTypeDefaultArgs<ExtArgs>
@@ -22920,13 +22864,11 @@ export namespace Prisma {
   export type AchatIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    fournisseur?: boolean | Achat$fournisseurArgs<ExtArgs>
     agent?: boolean | AgentDefaultArgs<ExtArgs>
   }
   export type AchatIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    fournisseur?: boolean | Achat$fournisseurArgs<ExtArgs>
     agent?: boolean | AgentDefaultArgs<ExtArgs>
   }
 
@@ -22935,7 +22877,6 @@ export namespace Prisma {
     objects: {
       entreprise: Prisma.$EntreprisePayload<ExtArgs>
       panier: Prisma.$PanierPayload<ExtArgs>
-      fournisseur: Prisma.$FournisseurPayload<ExtArgs> | null
       agent: Prisma.$AgentPayload<ExtArgs>
       paiements: Prisma.$PaiementPayload<ExtArgs>[]
     }
@@ -22943,7 +22884,6 @@ export namespace Prisma {
       id: number
       statut: $Enums.StatutAchat
       panierId: number
-      fournisseurId: number | null
       agentId: number
       entrepriseId: number
       createdAt: Date
@@ -23344,7 +23284,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     entreprise<T extends EntrepriseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EntrepriseDefaultArgs<ExtArgs>>): Prisma__EntrepriseClient<$Result.GetResult<Prisma.$EntreprisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     panier<T extends PanierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PanierDefaultArgs<ExtArgs>>): Prisma__PanierClient<$Result.GetResult<Prisma.$PanierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    fournisseur<T extends Achat$fournisseurArgs<ExtArgs> = {}>(args?: Subset<T, Achat$fournisseurArgs<ExtArgs>>): Prisma__FournisseurClient<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     agent<T extends AgentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AgentDefaultArgs<ExtArgs>>): Prisma__AgentClient<$Result.GetResult<Prisma.$AgentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     paiements<T extends Achat$paiementsArgs<ExtArgs> = {}>(args?: Subset<T, Achat$paiementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -23379,7 +23318,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Achat", 'Int'>
     readonly statut: FieldRef<"Achat", 'StatutAchat'>
     readonly panierId: FieldRef<"Achat", 'Int'>
-    readonly fournisseurId: FieldRef<"Achat", 'Int'>
     readonly agentId: FieldRef<"Achat", 'Int'>
     readonly entrepriseId: FieldRef<"Achat", 'Int'>
     readonly createdAt: FieldRef<"Achat", 'DateTime'>
@@ -23777,25 +23715,6 @@ export namespace Prisma {
      * Limit how many Achats to delete.
      */
     limit?: number
-  }
-
-  /**
-   * Achat.fournisseur
-   */
-  export type Achat$fournisseurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Fournisseur
-     */
-    select?: FournisseurSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Fournisseur
-     */
-    omit?: FournisseurOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FournisseurInclude<ExtArgs> | null
-    where?: FournisseurWhereInput
   }
 
   /**
@@ -26657,7 +26576,6 @@ export namespace Prisma {
     id: 'id',
     statut: 'statut',
     panierId: 'panierId',
-    fournisseurId: 'fournisseurId',
     agentId: 'agentId',
     entrepriseId: 'entrepriseId',
     createdAt: 'createdAt',
@@ -27618,7 +27536,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Fournisseur"> | Date | string
     agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
     ventes?: VenteListRelationFilter
-    achats?: AchatListRelationFilter
     adresses?: AdresseListRelationFilter
     contacts?: ContactListRelationFilter
     commandes?: CommandeListRelationFilter
@@ -27636,7 +27553,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     agent?: AgentOrderByWithRelationInput
     ventes?: VenteOrderByRelationAggregateInput
-    achats?: AchatOrderByRelationAggregateInput
     adresses?: AdresseOrderByRelationAggregateInput
     contacts?: ContactOrderByRelationAggregateInput
     commandes?: CommandeOrderByRelationAggregateInput
@@ -27657,7 +27573,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Fournisseur"> | Date | string
     agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
     ventes?: VenteListRelationFilter
-    achats?: AchatListRelationFilter
     adresses?: AdresseListRelationFilter
     contacts?: ContactListRelationFilter
     commandes?: CommandeListRelationFilter
@@ -28362,14 +28277,12 @@ export namespace Prisma {
     id?: IntFilter<"Achat"> | number
     statut?: EnumStatutAchatFilter<"Achat"> | $Enums.StatutAchat
     panierId?: IntFilter<"Achat"> | number
-    fournisseurId?: IntNullableFilter<"Achat"> | number | null
     agentId?: IntFilter<"Achat"> | number
     entrepriseId?: IntFilter<"Achat"> | number
     createdAt?: DateTimeFilter<"Achat"> | Date | string
     updatedAt?: DateTimeFilter<"Achat"> | Date | string
     entreprise?: XOR<EntrepriseScalarRelationFilter, EntrepriseWhereInput>
     panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
-    fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
     agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
     paiements?: PaiementListRelationFilter
   }
@@ -28378,14 +28291,12 @@ export namespace Prisma {
     id?: SortOrder
     statut?: SortOrder
     panierId?: SortOrder
-    fournisseurId?: SortOrderInput | SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     entreprise?: EntrepriseOrderByWithRelationInput
     panier?: PanierOrderByWithRelationInput
-    fournisseur?: FournisseurOrderByWithRelationInput
     agent?: AgentOrderByWithRelationInput
     paiements?: PaiementOrderByRelationAggregateInput
   }
@@ -28397,14 +28308,12 @@ export namespace Prisma {
     NOT?: AchatWhereInput | AchatWhereInput[]
     statut?: EnumStatutAchatFilter<"Achat"> | $Enums.StatutAchat
     panierId?: IntFilter<"Achat"> | number
-    fournisseurId?: IntNullableFilter<"Achat"> | number | null
     agentId?: IntFilter<"Achat"> | number
     entrepriseId?: IntFilter<"Achat"> | number
     createdAt?: DateTimeFilter<"Achat"> | Date | string
     updatedAt?: DateTimeFilter<"Achat"> | Date | string
     entreprise?: XOR<EntrepriseScalarRelationFilter, EntrepriseWhereInput>
     panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
-    fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
     agent?: XOR<AgentScalarRelationFilter, AgentWhereInput>
     paiements?: PaiementListRelationFilter
   }, "id">
@@ -28413,7 +28322,6 @@ export namespace Prisma {
     id?: SortOrder
     statut?: SortOrder
     panierId?: SortOrder
-    fournisseurId?: SortOrderInput | SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
     createdAt?: SortOrder
@@ -28432,7 +28340,6 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Achat"> | number
     statut?: EnumStatutAchatWithAggregatesFilter<"Achat"> | $Enums.StatutAchat
     panierId?: IntWithAggregatesFilter<"Achat"> | number
-    fournisseurId?: IntNullableWithAggregatesFilter<"Achat"> | number | null
     agentId?: IntWithAggregatesFilter<"Achat"> | number
     entrepriseId?: IntWithAggregatesFilter<"Achat"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Achat"> | Date | string
@@ -29353,7 +29260,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     agent: AgentCreateNestedOneWithoutFournisseurInput
     ventes?: VenteCreateNestedManyWithoutFournisseurInput
-    achats?: AchatCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseCreateNestedManyWithoutFournisseurInput
     contacts?: ContactCreateNestedManyWithoutFournisseurInput
     commandes?: CommandeCreateNestedManyWithoutFournisseurInput
@@ -29370,7 +29276,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
-    achats?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
     commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
@@ -29386,7 +29291,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agent?: AgentUpdateOneRequiredWithoutFournisseurNestedInput
     ventes?: VenteUpdateManyWithoutFournisseurNestedInput
-    achats?: AchatUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUpdateManyWithoutFournisseurNestedInput
     commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
@@ -29403,7 +29307,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
-    achats?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
     commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
@@ -30082,7 +29985,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     entreprise?: EntrepriseCreateNestedOneWithoutAchatInput
     panier: PanierCreateNestedOneWithoutAchatsInput
-    fournisseur?: FournisseurCreateNestedOneWithoutAchatsInput
     agent: AgentCreateNestedOneWithoutAchatsInput
     paiements?: PaiementCreateNestedManyWithoutAchatInput
   }
@@ -30091,7 +29993,6 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     panierId: number
-    fournisseurId?: number | null
     agentId: number
     entrepriseId?: number
     createdAt?: Date | string
@@ -30105,7 +30006,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entreprise?: EntrepriseUpdateOneRequiredWithoutAchatNestedInput
     panier?: PanierUpdateOneRequiredWithoutAchatsNestedInput
-    fournisseur?: FournisseurUpdateOneWithoutAchatsNestedInput
     agent?: AgentUpdateOneRequiredWithoutAchatsNestedInput
     paiements?: PaiementUpdateManyWithoutAchatNestedInput
   }
@@ -30114,7 +30014,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30126,7 +30025,6 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     panierId: number
-    fournisseurId?: number | null
     agentId: number
     entrepriseId?: number
     createdAt?: Date | string
@@ -30143,7 +30041,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31765,7 +31662,6 @@ export namespace Prisma {
     id?: SortOrder
     statut?: SortOrder
     panierId?: SortOrder
-    fournisseurId?: SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
     createdAt?: SortOrder
@@ -31775,7 +31671,6 @@ export namespace Prisma {
   export type AchatAvgOrderByAggregateInput = {
     id?: SortOrder
     panierId?: SortOrder
-    fournisseurId?: SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
   }
@@ -31784,7 +31679,6 @@ export namespace Prisma {
     id?: SortOrder
     statut?: SortOrder
     panierId?: SortOrder
-    fournisseurId?: SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
     createdAt?: SortOrder
@@ -31795,7 +31689,6 @@ export namespace Prisma {
     id?: SortOrder
     statut?: SortOrder
     panierId?: SortOrder
-    fournisseurId?: SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
     createdAt?: SortOrder
@@ -31805,7 +31698,6 @@ export namespace Prisma {
   export type AchatSumOrderByAggregateInput = {
     id?: SortOrder
     panierId?: SortOrder
-    fournisseurId?: SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
   }
@@ -33377,13 +33269,6 @@ export namespace Prisma {
     connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
   }
 
-  export type AchatCreateNestedManyWithoutFournisseurInput = {
-    create?: XOR<AchatCreateWithoutFournisseurInput, AchatUncheckedCreateWithoutFournisseurInput> | AchatCreateWithoutFournisseurInput[] | AchatUncheckedCreateWithoutFournisseurInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutFournisseurInput | AchatCreateOrConnectWithoutFournisseurInput[]
-    createMany?: AchatCreateManyFournisseurInputEnvelope
-    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-  }
-
   export type AdresseCreateNestedManyWithoutFournisseurInput = {
     create?: XOR<AdresseCreateWithoutFournisseurInput, AdresseUncheckedCreateWithoutFournisseurInput> | AdresseCreateWithoutFournisseurInput[] | AdresseUncheckedCreateWithoutFournisseurInput[]
     connectOrCreate?: AdresseCreateOrConnectWithoutFournisseurInput | AdresseCreateOrConnectWithoutFournisseurInput[]
@@ -33417,13 +33302,6 @@ export namespace Prisma {
     connectOrCreate?: VenteCreateOrConnectWithoutFournisseurInput | VenteCreateOrConnectWithoutFournisseurInput[]
     createMany?: VenteCreateManyFournisseurInputEnvelope
     connect?: VenteWhereUniqueInput | VenteWhereUniqueInput[]
-  }
-
-  export type AchatUncheckedCreateNestedManyWithoutFournisseurInput = {
-    create?: XOR<AchatCreateWithoutFournisseurInput, AchatUncheckedCreateWithoutFournisseurInput> | AchatCreateWithoutFournisseurInput[] | AchatUncheckedCreateWithoutFournisseurInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutFournisseurInput | AchatCreateOrConnectWithoutFournisseurInput[]
-    createMany?: AchatCreateManyFournisseurInputEnvelope
-    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
   }
 
   export type AdresseUncheckedCreateNestedManyWithoutFournisseurInput = {
@@ -33478,20 +33356,6 @@ export namespace Prisma {
     update?: VenteUpdateWithWhereUniqueWithoutFournisseurInput | VenteUpdateWithWhereUniqueWithoutFournisseurInput[]
     updateMany?: VenteUpdateManyWithWhereWithoutFournisseurInput | VenteUpdateManyWithWhereWithoutFournisseurInput[]
     deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
-  }
-
-  export type AchatUpdateManyWithoutFournisseurNestedInput = {
-    create?: XOR<AchatCreateWithoutFournisseurInput, AchatUncheckedCreateWithoutFournisseurInput> | AchatCreateWithoutFournisseurInput[] | AchatUncheckedCreateWithoutFournisseurInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutFournisseurInput | AchatCreateOrConnectWithoutFournisseurInput[]
-    upsert?: AchatUpsertWithWhereUniqueWithoutFournisseurInput | AchatUpsertWithWhereUniqueWithoutFournisseurInput[]
-    createMany?: AchatCreateManyFournisseurInputEnvelope
-    set?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    disconnect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    delete?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    update?: AchatUpdateWithWhereUniqueWithoutFournisseurInput | AchatUpdateWithWhereUniqueWithoutFournisseurInput[]
-    updateMany?: AchatUpdateManyWithWhereWithoutFournisseurInput | AchatUpdateManyWithWhereWithoutFournisseurInput[]
-    deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
   }
 
   export type AdresseUpdateManyWithoutFournisseurNestedInput = {
@@ -33562,20 +33426,6 @@ export namespace Prisma {
     update?: VenteUpdateWithWhereUniqueWithoutFournisseurInput | VenteUpdateWithWhereUniqueWithoutFournisseurInput[]
     updateMany?: VenteUpdateManyWithWhereWithoutFournisseurInput | VenteUpdateManyWithWhereWithoutFournisseurInput[]
     deleteMany?: VenteScalarWhereInput | VenteScalarWhereInput[]
-  }
-
-  export type AchatUncheckedUpdateManyWithoutFournisseurNestedInput = {
-    create?: XOR<AchatCreateWithoutFournisseurInput, AchatUncheckedCreateWithoutFournisseurInput> | AchatCreateWithoutFournisseurInput[] | AchatUncheckedCreateWithoutFournisseurInput[]
-    connectOrCreate?: AchatCreateOrConnectWithoutFournisseurInput | AchatCreateOrConnectWithoutFournisseurInput[]
-    upsert?: AchatUpsertWithWhereUniqueWithoutFournisseurInput | AchatUpsertWithWhereUniqueWithoutFournisseurInput[]
-    createMany?: AchatCreateManyFournisseurInputEnvelope
-    set?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    disconnect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    delete?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    connect?: AchatWhereUniqueInput | AchatWhereUniqueInput[]
-    update?: AchatUpdateWithWhereUniqueWithoutFournisseurInput | AchatUpdateWithWhereUniqueWithoutFournisseurInput[]
-    updateMany?: AchatUpdateManyWithWhereWithoutFournisseurInput | AchatUpdateManyWithWhereWithoutFournisseurInput[]
-    deleteMany?: AchatScalarWhereInput | AchatScalarWhereInput[]
   }
 
   export type AdresseUncheckedUpdateManyWithoutFournisseurNestedInput = {
@@ -34510,12 +34360,6 @@ export namespace Prisma {
     connect?: PanierWhereUniqueInput
   }
 
-  export type FournisseurCreateNestedOneWithoutAchatsInput = {
-    create?: XOR<FournisseurCreateWithoutAchatsInput, FournisseurUncheckedCreateWithoutAchatsInput>
-    connectOrCreate?: FournisseurCreateOrConnectWithoutAchatsInput
-    connect?: FournisseurWhereUniqueInput
-  }
-
   export type AgentCreateNestedOneWithoutAchatsInput = {
     create?: XOR<AgentCreateWithoutAchatsInput, AgentUncheckedCreateWithoutAchatsInput>
     connectOrCreate?: AgentCreateOrConnectWithoutAchatsInput
@@ -34554,16 +34398,6 @@ export namespace Prisma {
     upsert?: PanierUpsertWithoutAchatsInput
     connect?: PanierWhereUniqueInput
     update?: XOR<XOR<PanierUpdateToOneWithWhereWithoutAchatsInput, PanierUpdateWithoutAchatsInput>, PanierUncheckedUpdateWithoutAchatsInput>
-  }
-
-  export type FournisseurUpdateOneWithoutAchatsNestedInput = {
-    create?: XOR<FournisseurCreateWithoutAchatsInput, FournisseurUncheckedCreateWithoutAchatsInput>
-    connectOrCreate?: FournisseurCreateOrConnectWithoutAchatsInput
-    upsert?: FournisseurUpsertWithoutAchatsInput
-    disconnect?: FournisseurWhereInput | boolean
-    delete?: FournisseurWhereInput | boolean
-    connect?: FournisseurWhereUniqueInput
-    update?: XOR<XOR<FournisseurUpdateToOneWithWhereWithoutAchatsInput, FournisseurUpdateWithoutAchatsInput>, FournisseurUncheckedUpdateWithoutAchatsInput>
   }
 
   export type AgentUpdateOneRequiredWithoutAchatsNestedInput = {
@@ -35906,7 +35740,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     panier: PanierCreateNestedOneWithoutAchatsInput
-    fournisseur?: FournisseurCreateNestedOneWithoutAchatsInput
     agent: AgentCreateNestedOneWithoutAchatsInput
     paiements?: PaiementCreateNestedManyWithoutAchatInput
   }
@@ -35915,7 +35748,6 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     panierId: number
-    fournisseurId?: number | null
     agentId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36133,7 +35965,6 @@ export namespace Prisma {
     id?: IntFilter<"Achat"> | number
     statut?: EnumStatutAchatFilter<"Achat"> | $Enums.StatutAchat
     panierId?: IntFilter<"Achat"> | number
-    fournisseurId?: IntNullableFilter<"Achat"> | number | null
     agentId?: IntFilter<"Achat"> | number
     entrepriseId?: IntFilter<"Achat"> | number
     createdAt?: DateTimeFilter<"Achat"> | Date | string
@@ -36362,7 +36193,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     entreprise?: EntrepriseCreateNestedOneWithoutAchatInput
     panier: PanierCreateNestedOneWithoutAchatsInput
-    fournisseur?: FournisseurCreateNestedOneWithoutAchatsInput
     paiements?: PaiementCreateNestedManyWithoutAchatInput
   }
 
@@ -36370,7 +36200,6 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     panierId: number
-    fournisseurId?: number | null
     entrepriseId?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36525,7 +36354,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ventes?: VenteCreateNestedManyWithoutFournisseurInput
-    achats?: AchatCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseCreateNestedManyWithoutFournisseurInput
     contacts?: ContactCreateNestedManyWithoutFournisseurInput
     commandes?: CommandeCreateNestedManyWithoutFournisseurInput
@@ -36541,7 +36369,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
-    achats?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
     commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
@@ -37259,7 +37086,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     agent: AgentCreateNestedOneWithoutFournisseurInput
     ventes?: VenteCreateNestedManyWithoutFournisseurInput
-    achats?: AchatCreateNestedManyWithoutFournisseurInput
     contacts?: ContactCreateNestedManyWithoutFournisseurInput
     commandes?: CommandeCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutFournisseurInput
@@ -37275,7 +37101,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
-    achats?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
     contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
     commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutFournisseurInput
@@ -37458,7 +37283,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agent?: AgentUpdateOneRequiredWithoutFournisseurNestedInput
     ventes?: VenteUpdateManyWithoutFournisseurNestedInput
-    achats?: AchatUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUpdateManyWithoutFournisseurNestedInput
     commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutFournisseurNestedInput
@@ -37474,7 +37298,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
-    achats?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
     commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutFournisseurNestedInput
@@ -37671,7 +37494,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     agent: AgentCreateNestedOneWithoutFournisseurInput
     ventes?: VenteCreateNestedManyWithoutFournisseurInput
-    achats?: AchatCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseCreateNestedManyWithoutFournisseurInput
     commandes?: CommandeCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutFournisseurInput
@@ -37687,7 +37509,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
-    achats?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutFournisseurInput
@@ -37876,7 +37697,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agent?: AgentUpdateOneRequiredWithoutFournisseurNestedInput
     ventes?: VenteUpdateManyWithoutFournisseurNestedInput
-    achats?: AchatUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
     commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutFournisseurNestedInput
@@ -37892,7 +37712,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
-    achats?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutFournisseurNestedInput
@@ -37994,37 +37813,6 @@ export namespace Prisma {
 
   export type VenteCreateManyFournisseurInputEnvelope = {
     data: VenteCreateManyFournisseurInput | VenteCreateManyFournisseurInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type AchatCreateWithoutFournisseurInput = {
-    statut?: $Enums.StatutAchat
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    entreprise?: EntrepriseCreateNestedOneWithoutAchatInput
-    panier: PanierCreateNestedOneWithoutAchatsInput
-    agent: AgentCreateNestedOneWithoutAchatsInput
-    paiements?: PaiementCreateNestedManyWithoutAchatInput
-  }
-
-  export type AchatUncheckedCreateWithoutFournisseurInput = {
-    id?: number
-    statut?: $Enums.StatutAchat
-    panierId: number
-    agentId: number
-    entrepriseId?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    paiements?: PaiementUncheckedCreateNestedManyWithoutAchatInput
-  }
-
-  export type AchatCreateOrConnectWithoutFournisseurInput = {
-    where: AchatWhereUniqueInput
-    create: XOR<AchatCreateWithoutFournisseurInput, AchatUncheckedCreateWithoutFournisseurInput>
-  }
-
-  export type AchatCreateManyFournisseurInputEnvelope = {
-    data: AchatCreateManyFournisseurInput | AchatCreateManyFournisseurInput[]
     skipDuplicates?: boolean
   }
 
@@ -38248,22 +38036,6 @@ export namespace Prisma {
   export type VenteUpdateManyWithWhereWithoutFournisseurInput = {
     where: VenteScalarWhereInput
     data: XOR<VenteUpdateManyMutationInput, VenteUncheckedUpdateManyWithoutFournisseurInput>
-  }
-
-  export type AchatUpsertWithWhereUniqueWithoutFournisseurInput = {
-    where: AchatWhereUniqueInput
-    update: XOR<AchatUpdateWithoutFournisseurInput, AchatUncheckedUpdateWithoutFournisseurInput>
-    create: XOR<AchatCreateWithoutFournisseurInput, AchatUncheckedCreateWithoutFournisseurInput>
-  }
-
-  export type AchatUpdateWithWhereUniqueWithoutFournisseurInput = {
-    where: AchatWhereUniqueInput
-    data: XOR<AchatUpdateWithoutFournisseurInput, AchatUncheckedUpdateWithoutFournisseurInput>
-  }
-
-  export type AchatUpdateManyWithWhereWithoutFournisseurInput = {
-    where: AchatScalarWhereInput
-    data: XOR<AchatUpdateManyMutationInput, AchatUncheckedUpdateManyWithoutFournisseurInput>
   }
 
   export type AdresseUpsertWithWhereUniqueWithoutFournisseurInput = {
@@ -38853,7 +38625,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     entreprise?: EntrepriseCreateNestedOneWithoutAchatInput
     panier: PanierCreateNestedOneWithoutAchatsInput
-    fournisseur?: FournisseurCreateNestedOneWithoutAchatsInput
     agent: AgentCreateNestedOneWithoutAchatsInput
   }
 
@@ -38861,7 +38632,6 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     panierId: number
-    fournisseurId?: number | null
     agentId: number
     entrepriseId?: number
     createdAt?: Date | string
@@ -39096,7 +38866,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entreprise?: EntrepriseUpdateOneRequiredWithoutAchatNestedInput
     panier?: PanierUpdateOneRequiredWithoutAchatsNestedInput
-    fournisseur?: FournisseurUpdateOneWithoutAchatsNestedInput
     agent?: AgentUpdateOneRequiredWithoutAchatsNestedInput
   }
 
@@ -39104,7 +38873,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39696,7 +39464,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     agent: AgentCreateNestedOneWithoutFournisseurInput
-    achats?: AchatCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseCreateNestedManyWithoutFournisseurInput
     contacts?: ContactCreateNestedManyWithoutFournisseurInput
     commandes?: CommandeCreateNestedManyWithoutFournisseurInput
@@ -39712,7 +39479,6 @@ export namespace Prisma {
     agentId: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    achats?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
     commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
@@ -39958,7 +39724,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agent?: AgentUpdateOneRequiredWithoutFournisseurNestedInput
-    achats?: AchatUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUpdateManyWithoutFournisseurNestedInput
     commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
@@ -39974,7 +39739,6 @@ export namespace Prisma {
     agentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    achats?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
     commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
@@ -40227,7 +39991,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     entreprise?: EntrepriseCreateNestedOneWithoutAchatInput
-    fournisseur?: FournisseurCreateNestedOneWithoutAchatsInput
     agent: AgentCreateNestedOneWithoutAchatsInput
     paiements?: PaiementCreateNestedManyWithoutAchatInput
   }
@@ -40235,7 +39998,6 @@ export namespace Prisma {
   export type AchatUncheckedCreateWithoutPanierInput = {
     id?: number
     statut?: $Enums.StatutAchat
-    fournisseurId?: number | null
     agentId: number
     entrepriseId?: number
     createdAt?: Date | string
@@ -40518,7 +40280,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     agent: AgentCreateNestedOneWithoutFournisseurInput
     ventes?: VenteCreateNestedManyWithoutFournisseurInput
-    achats?: AchatCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseCreateNestedManyWithoutFournisseurInput
     contacts?: ContactCreateNestedManyWithoutFournisseurInput
     commandes?: CommandeCreateNestedManyWithoutFournisseurInput
@@ -40534,7 +40295,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
-    achats?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
     commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
@@ -40683,7 +40443,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agent?: AgentUpdateOneRequiredWithoutFournisseurNestedInput
     ventes?: VenteUpdateManyWithoutFournisseurNestedInput
-    achats?: AchatUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUpdateManyWithoutFournisseurNestedInput
     commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
@@ -40699,7 +40458,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
-    achats?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
     commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
@@ -40925,42 +40683,6 @@ export namespace Prisma {
     create: XOR<PanierCreateWithoutAchatsInput, PanierUncheckedCreateWithoutAchatsInput>
   }
 
-  export type FournisseurCreateWithoutAchatsInput = {
-    nom: string
-    email: string
-    typeProduit?: $Enums.TypeProduit | null
-    autresType?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    agent: AgentCreateNestedOneWithoutFournisseurInput
-    ventes?: VenteCreateNestedManyWithoutFournisseurInput
-    adresses?: AdresseCreateNestedManyWithoutFournisseurInput
-    contacts?: ContactCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeCreateNestedManyWithoutFournisseurInput
-    DetailPanier?: DetailPanierCreateNestedManyWithoutFournisseurInput
-  }
-
-  export type FournisseurUncheckedCreateWithoutAchatsInput = {
-    id?: number
-    nom: string
-    email: string
-    typeProduit?: $Enums.TypeProduit | null
-    autresType?: string | null
-    agentId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
-    adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
-    contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
-    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutFournisseurInput
-  }
-
-  export type FournisseurCreateOrConnectWithoutAchatsInput = {
-    where: FournisseurWhereUniqueInput
-    create: XOR<FournisseurCreateWithoutAchatsInput, FournisseurUncheckedCreateWithoutAchatsInput>
-  }
-
   export type AgentCreateWithoutAchatsInput = {
     email: string
     nom: string
@@ -41140,48 +40862,6 @@ export namespace Prisma {
     commandes?: CommandeUncheckedUpdateManyWithoutPanierNestedInput
   }
 
-  export type FournisseurUpsertWithoutAchatsInput = {
-    update: XOR<FournisseurUpdateWithoutAchatsInput, FournisseurUncheckedUpdateWithoutAchatsInput>
-    create: XOR<FournisseurCreateWithoutAchatsInput, FournisseurUncheckedCreateWithoutAchatsInput>
-    where?: FournisseurWhereInput
-  }
-
-  export type FournisseurUpdateToOneWithWhereWithoutAchatsInput = {
-    where?: FournisseurWhereInput
-    data: XOR<FournisseurUpdateWithoutAchatsInput, FournisseurUncheckedUpdateWithoutAchatsInput>
-  }
-
-  export type FournisseurUpdateWithoutAchatsInput = {
-    nom?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    typeProduit?: NullableEnumTypeProduitFieldUpdateOperationsInput | $Enums.TypeProduit | null
-    autresType?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    agent?: AgentUpdateOneRequiredWithoutFournisseurNestedInput
-    ventes?: VenteUpdateManyWithoutFournisseurNestedInput
-    adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
-    contacts?: ContactUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
-    DetailPanier?: DetailPanierUpdateManyWithoutFournisseurNestedInput
-  }
-
-  export type FournisseurUncheckedUpdateWithoutAchatsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    typeProduit?: NullableEnumTypeProduitFieldUpdateOperationsInput | $Enums.TypeProduit | null
-    autresType?: NullableStringFieldUpdateOperationsInput | string | null
-    agentId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
-    adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
-    contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
-    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutFournisseurNestedInput
-  }
-
   export type AgentUpsertWithoutAchatsInput = {
     update: XOR<AgentUpdateWithoutAchatsInput, AgentUncheckedUpdateWithoutAchatsInput>
     create: XOR<AgentCreateWithoutAchatsInput, AgentUncheckedCreateWithoutAchatsInput>
@@ -41330,7 +41010,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     agent: AgentCreateNestedOneWithoutFournisseurInput
     ventes?: VenteCreateNestedManyWithoutFournisseurInput
-    achats?: AchatCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseCreateNestedManyWithoutFournisseurInput
     contacts?: ContactCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutFournisseurInput
@@ -41346,7 +41025,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
-    achats?: AchatUncheckedCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutFournisseurInput
@@ -41567,7 +41245,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     agent?: AgentUpdateOneRequiredWithoutFournisseurNestedInput
     ventes?: VenteUpdateManyWithoutFournisseurNestedInput
-    achats?: AchatUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutFournisseurNestedInput
@@ -41583,7 +41260,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
-    achats?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutFournisseurNestedInput
@@ -42393,7 +42069,6 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     panierId: number
-    fournisseurId?: number | null
     agentId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -42551,7 +42226,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     panier?: PanierUpdateOneRequiredWithoutAchatsNestedInput
-    fournisseur?: FournisseurUpdateOneWithoutAchatsNestedInput
     agent?: AgentUpdateOneRequiredWithoutAchatsNestedInput
     paiements?: PaiementUpdateManyWithoutAchatNestedInput
   }
@@ -42560,7 +42234,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42571,7 +42244,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42721,7 +42393,6 @@ export namespace Prisma {
     id?: number
     statut?: $Enums.StatutAchat
     panierId: number
-    fournisseurId?: number | null
     entrepriseId?: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -42968,7 +42639,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entreprise?: EntrepriseUpdateOneRequiredWithoutAchatNestedInput
     panier?: PanierUpdateOneRequiredWithoutAchatsNestedInput
-    fournisseur?: FournisseurUpdateOneWithoutAchatsNestedInput
     paiements?: PaiementUpdateManyWithoutAchatNestedInput
   }
 
@@ -42976,7 +42646,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42987,7 +42656,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
     panierId?: IntFieldUpdateOperationsInput | number
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43126,7 +42794,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ventes?: VenteUpdateManyWithoutFournisseurNestedInput
-    achats?: AchatUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUpdateManyWithoutFournisseurNestedInput
     commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
@@ -43142,7 +42809,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
-    achats?: AchatUncheckedUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
     commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
@@ -43529,16 +43195,6 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type AchatCreateManyFournisseurInput = {
-    id?: number
-    statut?: $Enums.StatutAchat
-    panierId: number
-    agentId: number
-    entrepriseId?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type AdresseCreateManyFournisseurInput = {
     id?: number
     ville?: string | null
@@ -43641,37 +43297,6 @@ export namespace Prisma {
     entrepriseId?: IntFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
     enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AchatUpdateWithoutFournisseurInput = {
-    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    entreprise?: EntrepriseUpdateOneRequiredWithoutAchatNestedInput
-    panier?: PanierUpdateOneRequiredWithoutAchatsNestedInput
-    agent?: AgentUpdateOneRequiredWithoutAchatsNestedInput
-    paiements?: PaiementUpdateManyWithoutAchatNestedInput
-  }
-
-  export type AchatUncheckedUpdateWithoutFournisseurInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
-    panierId?: IntFieldUpdateOperationsInput | number
-    agentId?: IntFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    paiements?: PaiementUncheckedUpdateManyWithoutAchatNestedInput
-  }
-
-  export type AchatUncheckedUpdateManyWithoutFournisseurInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
-    panierId?: IntFieldUpdateOperationsInput | number
-    agentId?: IntFieldUpdateOperationsInput | number
-    entrepriseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44196,7 +43821,6 @@ export namespace Prisma {
   export type AchatCreateManyPanierInput = {
     id?: number
     statut?: $Enums.StatutAchat
-    fournisseurId?: number | null
     agentId: number
     entrepriseId?: number
     createdAt?: Date | string
@@ -44283,7 +43907,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     entreprise?: EntrepriseUpdateOneRequiredWithoutAchatNestedInput
-    fournisseur?: FournisseurUpdateOneWithoutAchatsNestedInput
     agent?: AgentUpdateOneRequiredWithoutAchatsNestedInput
     paiements?: PaiementUpdateManyWithoutAchatNestedInput
   }
@@ -44291,7 +43914,6 @@ export namespace Prisma {
   export type AchatUncheckedUpdateWithoutPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44302,7 +43924,6 @@ export namespace Prisma {
   export type AchatUncheckedUpdateManyWithoutPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
     statut?: EnumStatutAchatFieldUpdateOperationsInput | $Enums.StatutAchat
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: IntFieldUpdateOperationsInput | number
     entrepriseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

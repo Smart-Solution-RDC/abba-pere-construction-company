@@ -314,7 +314,6 @@ exports.Prisma.AchatScalarFieldEnum = {
   id: 'id',
   statut: 'statut',
   panierId: 'panierId',
-  fournisseurId: 'fournisseurId',
   agentId: 'agentId',
   entrepriseId: 'entrepriseId',
   createdAt: 'createdAt',

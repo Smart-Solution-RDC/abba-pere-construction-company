@@ -30,7 +30,7 @@ export async function POST(request: NextRequest, { params }: PanierRouteParams) 
             data: form.details
         });
         const vente = await Vente(agent, panier.id, form.client);
-        await Paiement(form.paiement, null, vente.id);
+        await Paiement(form.paiement, null, vente.id, null);
         await VariationStockage (ProduitsDisponible, form.details, null, true, null);
         await VariationCaisse(form.paiement, 'INCREMENT');
 

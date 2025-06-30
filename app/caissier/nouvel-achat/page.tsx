@@ -266,7 +266,7 @@ export default function NouvelleAchatPage() {
         <>
           Visualisez les details avant l'impression.
           <br />
-          <a href={`/caissier/achats/${response.data}/print`} className="text-green-700 underline ml-1">
+          <a href={`/caissier/historique/achats/${response.data}`} className="text-green-700 underline ml-1">
             Imprimer le bordereau.
           </a>
         </>

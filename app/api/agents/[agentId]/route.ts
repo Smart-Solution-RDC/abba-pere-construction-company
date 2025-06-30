@@ -31,7 +31,7 @@ export async function GET(req: Request, { params }: AgentRouteParams) {
                     statut: true,
                     paiements: {
                         select: {
-                            totalHT: true,
+                            montant: true,
                             modePaiement: true,
                             devise: {
                                 select: {
@@ -48,7 +48,7 @@ export async function GET(req: Request, { params }: AgentRouteParams) {
                     statut: true,
                     paiements: {
                         select: {
-                            totalHT: true,
+                            montant: true,
                             modePaiement: true,
                             devise: {
                                 select: {
@@ -63,7 +63,7 @@ export async function GET(req: Request, { params }: AgentRouteParams) {
         }
     });
 
-    if (!agent) return new Response("Agent Not Found", { status: 404 });
+    if (!agent) return new Response(JSON.stringify({error: "Agent Not Found"}), { status: 404 });
 
     return new Response(JSON.stringify(agent), { status: 201 });
 }

@@ -171,7 +171,8 @@ async function main() {
     update: {},
     create: {
       email: 'client@gmail.com',
-      nom: 'client'
+      nom: 'client',
+      nom_complet: 'default client'
     }
   });
 

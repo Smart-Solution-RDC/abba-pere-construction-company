@@ -11,7 +11,7 @@ export async function createVente(
 ) {
     try {
         const produits = detailsPanier.map(detail => ({ ...detail, panierId }));
-        const newProduits = produits.map(({ id, devise, designation, produit, teneur, ...rest }) => rest);
+        const newProduits = produits.map(({ id, devise, designation, modePaiementId, fournisseurId, typeProduit, produit, teneur, ...rest }) => rest);
                 
         const res = await fetch(`${api}agents/1/paniers/${panierId}/vendre`, {
             method: 'POST',
@@ -25,9 +25,28 @@ export async function createVente(
             })
         });
         const data = await res.json();
+        console.log(newProduits);
         return data;
     } catch (error) {
         console.log(error);
+    }
+}
+
+
+export async function findUniqueVente (id: string | null) {
+    const venteId = parseInt(id as string, 10);
+    try {
+        const res = await fetch(`${api}agents/1/ventes/${venteId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        let datas = await res.json();
+        console.log(datas);
+        return datas;
+    } catch (error) {
+        console.log(error);        
     }
 }
 

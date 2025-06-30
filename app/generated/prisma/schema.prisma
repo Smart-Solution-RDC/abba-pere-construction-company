@@ -168,7 +168,7 @@ model Fournisseur {
   agentId      Int
   agent        Agent          @relation(fields: [agentId], references: [id])
   ventes       Vente[]
-  achats       Achat[]
+  // achats       Achat[]
   adresses     Adresse[]
   contacts     Contact[]
   commandes    Commande[]
@@ -332,19 +332,19 @@ enum StatutAchat {
 }
 
 model Achat {
-  id            Int          @id @default(autoincrement())
-  statut        StatutAchat  @default(EN_COURS)
-  panierId      Int
-  fournisseurId Int?
-  agentId       Int
-  entrepriseId  Int          @default(1)
-  entreprise    Entreprise   @relation(fields: [entrepriseId], references: [id])
-  panier        Panier       @relation(fields: [panierId], references: [id])
-  fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
-  agent         Agent        @relation(fields: [agentId], references: [id])
-  paiements     Paiement[]
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  id           Int         @id @default(autoincrement())
+  statut       StatutAchat @default(EN_COURS)
+  panierId     Int
+  // fournisseurId Int?
+  agentId      Int
+  entrepriseId Int         @default(1)
+  entreprise   Entreprise  @relation(fields: [entrepriseId], references: [id])
+  panier       Panier      @relation(fields: [panierId], references: [id])
+  // fournisseur   Fournisseur? @relation(fields: [fournisseurId], references: [id])
+  agent        Agent       @relation(fields: [agentId], references: [id])
+  paiements    Paiement[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 enum StatutCommande {

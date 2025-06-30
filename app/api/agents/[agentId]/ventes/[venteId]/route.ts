@@ -35,7 +35,13 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
                                     }
                                 }
                             },
+                            devise: {
+                                select: {
+                                    symbole: true
+                                }
+                            },
                             qtte: true,
+                            prixUnitaire: true,
                             prixTotalHT: true,
                         }
                     }
@@ -97,17 +103,18 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
                     },
                     devise: {
                         select: {
-                            code: true
+                            symbole: true
                         }
                     }
                 }
             },
             enregistrerPar: true,
+            createdAt: true,
             updatedAt: true
         }
     });
 
-    if (!vente) return new Response("vente not found", { status: 404 });        
+    if (!vente) return new Response(JSON.stringify({error: "vente not found"}), { status: 404 });        
 
     return new Response(JSON.stringify(vente), { status: 201 });
 }

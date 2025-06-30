@@ -25,7 +25,7 @@ import {
 } from "@/utils/pdfGenerator";
 import { getProduits } from "@/actions/produits";
 import { Acheteur, Agent, Client, DetailPanierForm, Devise, Fournisseur, ModePaiement, PaiementData, ProduitForm, Response } from "@/prisma/defs-front";
-import { getPanierId } from "@/actions/panier";
+import { createPanier, getPanierId } from "@/actions/panier";
 import { createVente } from "@/actions/vente";
 import { getDevises } from "@/actions/devises";
 import { getModePaiements } from "@/actions/mode-paiement";
@@ -71,13 +71,9 @@ export default function NouvelleVentePage() {
     setProduits(await getProduits());
   }; 
 
-  const get_panier_id = async () => {
-    const data = await getPanierId();
-    if (data.detailsPanier) setDetailsPanier(data.detailsPanier);
-    detailsPanier.map(item => item.produitId === data.detailsPanier.id);
-
-    setPanierId(data.panierId);
-  }
+  const get_panier_id = async () => {  
+      setPanierId(await getPanierId());
+    } 
 
   const get_devises = async () => {
     setDevises(await getDevises());
@@ -88,13 +84,19 @@ export default function NouvelleVentePage() {
   }
 
   useEffect(() => {
-    get_produits();
     get_panier_id();
+    get_produits();
     get_devises();
     get_mode_paiements();
   }, []);
 
-  const ajouterAuPanier = () => {
+  const ajouterAuPanier = async () => {
+    console.log(panierId);
+    if (panierId == undefined) {
+        setProduitSelectionne("");
+        setPanierId(await createPanier());
+    }
+
     const produit = produits.find((p) => String(p.id) === produitSelectionne);
     if (!produit) return;
     
@@ -122,11 +124,12 @@ export default function NouvelleVentePage() {
         prixUnitaire: produit.prixUnitaire,
         prixTotalHT: produit.prixUnitaire * quantite,
         deviseId: produit.deviseId,
-        prixTotalTTC: null,
+        prixTotalTTC: 0,
         designation: null,
         teneur: null,
         modePaiementId: null,
-        fournisseurId: null
+        fournisseurId: null,
+        panierId: panierId ?? 0
       },
       ]);
     }
@@ -191,6 +194,7 @@ export default function NouvelleVentePage() {
   }
 
   const traiterVente = async () => {
+    
     if (clientSelected || fournisseurSelected || agentSelected) {
       client.nom = "";
       client.tel = "";
@@ -206,29 +210,27 @@ export default function NouvelleVentePage() {
       return;
     }
 
-    setIsProcessing(true);
-
     // Générer un numéro de commande unique
-    const numeroCommande = `VTE-${Date.now()}`;
+    // const numeroCommande = `VTE-${Date.now()}`;
 
     // Créer les données de vente
-    const venteData = {
-      id: numeroCommande,
-      date: new Date().toISOString().split("T")[0],
-      client: client.nom,
-      tel: client.tel,
-      email: "",
-      adresseLivraison: client.adresseLivraison,
-      produits: detailsPanier.map((p) => ({
-        // nom: , //
-        quantite: p.qtte,
-        prixUnitaire: p.prixUnitaire,
-        total: p.prixTotalHT,
-      })),
-      total: totalVente,
-      statut: "payee",
-      notes: notes,
-    };
+    // const venteData = {
+    //   id: numeroCommande,
+    //   date: new Date().toISOString().split("T")[0],
+    //   client: client.nom,
+    //   tel: client.tel,
+    //   email: "",
+    //   adresseLivraison: client.adresseLivraison,
+    //   produits: detailsPanier.map((p) => ({
+    //     // nom: , //
+    //     quantite: p.qtte,
+    //     prixUnitaire: p.prixUnitaire,
+    //     total: p.prixTotalHT,
+    //   })),
+    //   total: totalVente,
+    //   statut: "payee",
+    //   notes: notes,
+    // };
 
     paiement.montant = prixTotalConverti;
 
@@ -236,26 +238,19 @@ export default function NouvelleVentePage() {
     if (agentSelected) client.agentSelectedId = agentSelected.id
     if (fournisseurSelected) client.fournisseurSelectedId = fournisseurSelected.id    
 
+    setIsProcessing(true);
+
     if (panierId) {
-      setResponse(await createVente(
+      response = await createVente(
         panierId, 
         detailsPanier, 
         client, 
         paiement
-      ));
+      );
     }
 
     // Simulation du traitement
     await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    if (response && response.error) {
-      toast({
-        title: "Erreur",
-        description:
-          response.error,
-        variant: "destructive",
-      });
-    } 
 
     // Générer le reçu et la facture
     // const formattedData = formatCommandeForPDF(venteData);
@@ -269,31 +264,42 @@ export default function NouvelleVentePage() {
         <>
           Visualisez la vente avant l'impression.
           <br />
-          <a href={`/caissier/ventes/${response.data}/print`} className="text-green-700 underline ml-1">
+          <a href={`/caissier/historique/ventes/${response.data}`} className="text-green-700 underline ml-1">
             Voir le document.
           </a>
         </>
         ),
       });
+
+      // Reset du formulaire
+      setClient({
+        nom: "",
+        tel: "",
+        dateLivraison: "",
+        adresseLivraison: "",
+        clientSelectedId: null,
+        agentSelectedId: null,
+        fournisseurSelectedId: null
+      });
+      setClientSelected(undefined);
+      setAgentSelected(undefined);
+      setFournisseurSelected(undefined);
+      setPanierId(undefined);
+      setDetailsPanier([]);
+      setPaiement({deviseId: 0, modePaiementId: 0, montant: 0});
+      setIsProcessing(false);
     }
 
-    // Reset du formulaire
-    setClient({
-      nom: "",
-      tel: "",
-      dateLivraison: "",
-      adresseLivraison: "",
-      clientSelectedId: null,
-      agentSelectedId: null,
-      fournisseurSelectedId: null
-    });
-    setClientSelected(undefined);
-    setAgentSelected(undefined);
-    setFournisseurSelected(undefined);
-    setDetailsPanier([]);
-    setPaiement({deviseId: 0, modePaiementId: 0, montant: 0});
-    // setNotes("");
-    setIsProcessing(false);
+    if (response && response.error) {
+      toast({
+        title: "Erreur",
+        description:
+          response.error,
+        variant: "destructive",
+      });
+      setIsProcessing(false);
+    } 
+
   };
 
   const getClient = (client: Client | undefined) => {
