@@ -10,7 +10,7 @@ import { ProtectedRoute } from "@/components/ProtectedRoute"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "CimentPro - Gestion Commerciale",
+  title: "Abba Rère Construction Company - Gestion Commerciale",
   description: "Solution de gestion commerciale pour professionnels du BTP"
 }
 

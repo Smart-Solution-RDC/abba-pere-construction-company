@@ -1,21 +1,21 @@
 import { prisma } from "@/lib/prisma";
-import { VenteRouteParams } from "@/prisma/definitions";
+import { AchatRouteParams } from "@/prisma/definitions";
 
 
-export async function GET(req: Request, { params }: VenteRouteParams) {
-    const { venteId, agentId } = await params;
+export async function GET(req: Request, { params }: AchatRouteParams) {
+    const { achatId, agentId } = await params;
 
-    // const agent = await prisma.vente.findUnique({
-    //     where: { id: parseInt(agentId) }
-    // });
+    // the client does not send the agentId
+    const agent = await prisma.achat.findUnique({
+        where: { id: parseInt(agentId) }
+    });
 
-    // if (!agent) return new Response(JSON.stringify({error: "Agent Not Found"}), { status: 404 });
+    if (!agent) return new Response(JSON.stringify({error: "Agent Not Found"}), { status: 404 });
 
-    const vente = await prisma.vente.findUnique({
-        where: { id: parseInt(venteId) },
+    const achat = await prisma.achat.findUnique({
+        where: { id: parseInt(achatId) },
         select: {
             id: true,
-            nom: true,
             panier: {
                 select: {
                     detailPaniers: {
@@ -35,6 +35,11 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
                                     symbole: true
                                 }
                             },
+                            fournisseur: {
+                                select: {
+                                    nom: true
+                                }
+                            },
                             qtte: true,
                             prixUnitaire: true,
                             prixTotalHT: true,
@@ -42,33 +47,33 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
                     }
                 }
             },
-            client: {
-                select: {
-                    id: true,
-                    nom_complet: true,
-                    adresses: {
-                        select: {
-                            ville: true,
-                            adresse: true
-                        }
-                    },
-                    contacts: {
-                        select: {
-                            tel: true
-                        }
-                    }
-                }
-            },
-            fournisseur: {
-                select: {
-                    nom: true,
-                    contacts: {
-                        select: {
-                            tel: true
-                        }
-                    }
-                }
-            },
+            // client: {
+            //     select: {
+            //         id: true,
+            //         nom_complet: true,
+            //         adresses: {
+            //             select: {
+            //                 ville: true,
+            //                 adresse: true
+            //             }
+            //         },
+            //         contacts: {
+            //             select: {
+            //                 tel: true
+            //             }
+            //         }
+            //     }
+            // },
+            // fournisseur: {
+            //     select: {
+            //         nom: true,
+            //         contacts: {
+            //             select: {
+            //                 tel: true
+            //             }
+            //         }
+            //     }
+            // },
             agent: {
                 select: {
                     id: true,
@@ -112,7 +117,7 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
                     }
                 }
             },
-            enregistrerPar: true,
+            // enregistrerPar: true,
             updatedAt: true
         }
     });
@@ -127,19 +132,19 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
             heure: d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })
         };
     }
-    const venteResponse = vente
+    const achatResponse = achat
         ? {
-            ...vente,
+            ...achat,
             updatedAt: (() => {
-                const f = formatDate(vente.updatedAt);
+                const f = formatDate(achat.updatedAt);
                 return f ? `${f.jour}/${f.mois}/${f.annee} à ${f.heure}` : null;
             })(),
         }
         : null;
 
-    if (!vente) return new Response(JSON.stringify({error: "vente not found"}), { status: 404 });        
+    if (!achat) return new Response(JSON.stringify({error: "achat not found"}), { status: 404 });        
 
-    return new Response(JSON.stringify(venteResponse), { status: 201 });
+    return new Response(JSON.stringify(achatResponse), { status: 201 });
 }
 
 

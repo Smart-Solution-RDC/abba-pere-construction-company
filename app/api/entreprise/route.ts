@@ -1,17 +1,13 @@
 import { prisma } from "@/lib/prisma";
 
-export async function GET(req: Request) {
+export async function GET(request: Request) {
     const default_data = 1;
 
     const data = await prisma.entreprise.findUnique({
-        where: {
-            id: default_data
-        }
+        where: { id: default_data }
     });
 
-    return new Response(JSON.stringify(data), {
-        status: 201
-    });
+    return new Response(JSON.stringify(data), {status: 201});
 }
 
 export async function POST(req: Request) {

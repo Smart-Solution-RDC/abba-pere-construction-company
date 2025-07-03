@@ -17,7 +17,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, Pencil, Printer, Trash } from "lucide-react";
+import { Pencil, Printer } from "lucide-react";
+import { FormLogistique } from "@/components/Form-Logistique";
+import { AlerteSuppression } from "@/components/delete-alert";
+import { useRouter } from "next/navigation";
 
 
 export default function Historique() {
@@ -31,6 +34,15 @@ export default function Historique() {
         if (id) setDatas(await findUniqueAchat(id));
     }
 
+    const router = useRouter();
+    const callUpdateVente = () => {
+        router.push(`/caissier/nouvel-achat?id=${id}`);
+    }
+
+    const callPrintPage = () => {
+        router.push(`${id}/print?type=achat`);
+    }
+
     useEffect(() => {
         get_datas();
     }, [id]); 
@@ -40,9 +52,9 @@ export default function Historique() {
             <div className="space-y-6">
                 {/* Header */}
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight">Description</h1>
+                    <h1 className="text-3xl font-bold tracking-tight">Achat</h1>
                     <p className="text-muted-foreground">
-                        Historique des achats et ventes.
+                        Déscription de l'approvisionnement.
                     </p>
                 </div>
             </div>
@@ -83,9 +95,12 @@ export default function Historique() {
                                             {datas?.paiements.map((paiement, index) => <TableCell className="text-right" key={index}>{paiement.devise.symbole}{paiement.montant}</TableCell>)}
                                     </TableRow>
                                 </TableFooter>
-                                </Table>
+                            </Table>
                         </CardContent>
                     </Card>
+
+                    <FormLogistique/>
+                    
                 </div>
                 <div className="space-y-6">
                     <Card>
@@ -95,9 +110,6 @@ export default function Historique() {
                         <CardContent className="space-y-4">
                             <div className="flex justify-between">
                                 <span className="text-sm">Statut</span> <span className="text-sm">{datas?.statut}</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span className="text-sm">Montant</span>{datas?.paiements.map((paiement, index) => <span className="text-sm" key={index}>{paiement.devise.symbole}{paiement.montant}</span>)}
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-sm">Mode de Paiement</span>{datas?.paiements.map((paiement, index) => <span className="text-sm" key={index}>{paiement.modePaiement.type}</span>)}
@@ -111,18 +123,24 @@ export default function Historique() {
                             <div className="flex justify-between">
                                 <span className="text-sm">Enregistrer par</span><span className="capitalize text-sm">{datas?.agent.nom_complet}</span>
                             </div>
-                            <div>
-                                <Button size="sm" className="bg-green-600 mr-1">
+                            
+                            <div className="flex">
+                                <Button 
+                                    size="icon" 
+                                    variant="outline"
+                                    className="mr-2 text-green-500 bg-transparent hover:bg-transparent active:bg-transparent"
+                                    onClick={ callUpdateVente }
+                                >
                                     <Pencil />
                                 </Button>
-                                <Button size="sm" className="bg-green-600 mr-1">
-                                    <Download />
-                                </Button>
-                                <Button size="sm" className="bg-green-600 mr-1">
+                                <AlerteSuppression venteId={id} />
+                                <Button 
+                                    variant="outline"
+                                    size="icon"
+                                    className="text-green-500 bg-transparent hover:bg-transparent active:bg-transparent"                                    
+                                    onClick={ callPrintPage }
+                                >
                                     <Printer/>
-                                </Button>
-                                <Button size="sm" className="bg-red-500">
-                                    <Trash />
                                 </Button>
                             </div>
                         </CardContent>

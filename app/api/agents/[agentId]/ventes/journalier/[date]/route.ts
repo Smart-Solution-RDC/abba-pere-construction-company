@@ -31,7 +31,7 @@ export async function GET (request: Request, { params }: ClotureVenteRoute) {
 
     const ventesJournalier = await prisma.vente.findMany({
         where: {
-            updatedAt: {
+            createdAt: {
                 gte: startDayUTC,
                 lte: endDayUTC
             }
@@ -39,6 +39,24 @@ export async function GET (request: Request, { params }: ClotureVenteRoute) {
         select: {
             id: true,
             statut: true,
+            nom: true,
+            // entreprise: {
+            //     select: {
+            //         raison_sociale: true,
+            //         forme_juridique: true,
+            //         rccm: true,
+            //         num_impot: true,
+            //         identification_nationale: true,
+            //         email: true,
+            //         slogan: true,
+            //         Contact: {
+            //             select: { tel: true }
+            //         },
+            //         Adresse: {
+            //             select: {adresse: true }
+            //         }
+            //     }
+            // },
             client: {
                 select: {
                     nom_complet: true,
@@ -52,6 +70,13 @@ export async function GET (request: Request, { params }: ClotureVenteRoute) {
             fournisseur: {
                 select: {
                     nom: true
+                }
+            },
+            paiements: {
+                select: {
+                    montant: true,
+                    devise: { select: { symbole: true } },
+                    modePaiement: { select: { type: true } }
                 }
             }
         }

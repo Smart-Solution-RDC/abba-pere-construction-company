@@ -12,7 +12,13 @@ export async function GET(req: Request, { params }: AgentRouteParams) {
 
     try {
         const datasRaw = await prisma.paiement.findMany({
-            where: {},
+            where: {
+                OR: [
+                    { venteId: { not: null }},
+                    { achatId: { not: null }},
+                    { commandeId: { not: null }}
+                ]
+            },
             select: {
                 montant: true,
                 devise: {

@@ -42,3 +42,20 @@ export async function findUniqueAchat(id: string | null) {
         console.log(error);        
     }    
 }   
+
+export async function printAchat (id: string | null) {
+    const achatId = parseInt(id as string, 10);
+    try {
+        const res = await fetch(`${api}agents/1/achats/${achatId}/print`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        let datas = await res.json();
+        console.log(datas);
+        return datas;
+    } catch (error) {
+        console.log(error);
+    }
+} 

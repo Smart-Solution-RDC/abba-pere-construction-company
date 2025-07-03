@@ -209,29 +209,7 @@ export default function NouvelleVentePage() {
       });
       return;
     }
-
-    // Générer un numéro de commande unique
-    // const numeroCommande = `VTE-${Date.now()}`;
-
-    // Créer les données de vente
-    // const venteData = {
-    //   id: numeroCommande,
-    //   date: new Date().toISOString().split("T")[0],
-    //   client: client.nom,
-    //   tel: client.tel,
-    //   email: "",
-    //   adresseLivraison: client.adresseLivraison,
-    //   produits: detailsPanier.map((p) => ({
-    //     // nom: , //
-    //     quantite: p.qtte,
-    //     prixUnitaire: p.prixUnitaire,
-    //     total: p.prixTotalHT,
-    //   })),
-    //   total: totalVente,
-    //   statut: "payee",
-    //   notes: notes,
-    // };
-
+    
     paiement.montant = prixTotalConverti;
 
     if (clientSelected) client.clientSelectedId = clientSelected.id
@@ -286,6 +264,7 @@ export default function NouvelleVentePage() {
       setFournisseurSelected(undefined);
       setPanierId(undefined);
       setDetailsPanier([]);
+      setNotes("");
       setPaiement({deviseId: 0, modePaiementId: 0, montant: 0});
       setIsProcessing(false);
     }
@@ -483,7 +462,7 @@ export default function NouvelleVentePage() {
             </Card>
 
             {/* Notes */}
-            {/* <Card>
+            <Card>
               <CardHeader>
                 <CardTitle>Notes (optionnel)</CardTitle>
               </CardHeader>
@@ -492,9 +471,10 @@ export default function NouvelleVentePage() {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Notes sur la vente..."
+                  className="resize-none"
                 />
               </CardContent>
-            </Card> */}
+            </Card>
           </div>
 
           <div className="space-y-6">  
@@ -528,7 +508,7 @@ export default function NouvelleVentePage() {
                     placeholder="+243 XXX XXX XXX"
                   />
                 </div>
-                {/* <div>
+                <div>
                   <Label htmlFor="tel">Date de livraison *</Label>
                   <Input
                     id="date"
@@ -538,7 +518,7 @@ export default function NouvelleVentePage() {
                       setClient({ ...client, dateLivraison: e.target.value })
                     }
                   />
-                </div> */}
+                </div>
                 <div>
                   <Label htmlFor="AdresseLivraison">Adresse de livraison *</Label>
                   <Textarea

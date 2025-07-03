@@ -22,7 +22,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
         where: { id: parseInt(agentId) },
     });
 
-    if (!agentId) return new Response("Agent ID is required", { status: 400 });
+    if (!agent) return new Response(JSON.stringify({error: "Agent Is Not Found"}), { status: 404 });
     
     const date = searchDate && new Date(searchDate);
     let startDayUTC: Date | undefined = undefined;
@@ -70,8 +70,25 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
         // take: limit
     });
 
+    function formatDate(date: Date | string) {
+        const d = date instanceof Date ? date : new Date(date);
+        return {
+            jour: d.getDate(),
+            mois: d.getMonth() + 1,
+            annee: d.getFullYear(),
+            heure: d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })
+        };
+    }
+
+    const rapportResponse = ventes
+        ? ventes.map((vente) => ({
+            ...vente,
+            createdAt: `${formatDate(vente.createdAt).jour}/${formatDate(vente.createdAt).mois}/${formatDate(vente.createdAt).annee}`,
+        }))
+        : null;
+
     return new Response(JSON.stringify({
-        data: ventes,
+        data: rapportResponse,
         meta: {
             currentPage: page,
             limit: limit,
@@ -80,7 +97,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
             hasNextPage: page < totalPages,
             hasPrevPage: page > 1,
         }
-    }), { status: 200 });
+    }), { status: 201 });
 }
 
 

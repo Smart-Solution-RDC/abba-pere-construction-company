@@ -36,8 +36,14 @@ const navigationItems = [
     icon: ShoppingCart,
   },
   {
-    title: "Commandes en Attente",
-    url: "/caissier/commandes-attente",
+    title: "Produits",
+    url: "/caissier/produits",
+    icon: Clock,
+  },
+  
+  {
+    title: "Produits",
+    url: "/caissier/produits",
     icon: Clock,
   },
   {

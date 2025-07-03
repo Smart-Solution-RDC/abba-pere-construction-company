@@ -5,11 +5,12 @@ import { VenteRouteParams } from "@/prisma/definitions";
 export async function GET(req: Request, { params }: VenteRouteParams) {
     const { venteId, agentId } = await params;
 
-    const agent = await prisma.vente.findUnique({
-        where: { id: parseInt(agentId) }
-    });
+    //verify id and role of every request...
+    // const agent = await prisma.vente.findUnique({
+    //     where: { id: parseInt(agentId) }
+    // });
 
-    if (!agent) return new Response("Agent Not Found", { status: 404 });
+    // if (agent) return new Response(JSON.stringify({error: "Agent Not Found"}), { status: 201 });
 
     const vente = await prisma.vente.findUnique({
         where: { id: parseInt(venteId) },
@@ -50,9 +51,7 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
             client: {
                 select: {
                     id: true,
-                    picture: true,
                     nom_complet: true,
-                    sexe: true,
                     adresses: {
                         select: {
                             ville: true,
@@ -78,14 +77,8 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
             },
             agent: {
                 select: {
+                    id: true,
                     nom_complet: true,
-                    role: true,
-                    adresses: {
-                        select: {
-                            ville: true,
-                            adresse: true
-                        }
-                    },
                     contacts: {
                         select: {
                             tel: true
@@ -114,9 +107,37 @@ export async function GET(req: Request, { params }: VenteRouteParams) {
         }
     });
 
+    function formatDate(date: Date | string | null) {
+        if (!date) return null;
+        const d = date instanceof Date ? date : new Date(date);
+        return {
+            jour: d.getDate(),
+            mois: d.getMonth() + 1,
+            annee: d.getFullYear(),
+            heure: d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })
+        };
+    }
+    const venteResponse = vente
+        ? {
+            ...vente,
+            dateLivraison: (() => {
+                const f = formatDate(vente.dateLivraison);
+                return f ? `${f.jour}/${f.mois}/${f.annee}` : null;
+            })(),
+            createdAt: (() => {
+                const f = formatDate(vente.createdAt);
+                return f ? `${f.jour}/${f.mois}/${f.annee} à ${f.heure}` : null;
+            })(),
+            updatedAt: (() => {
+                const f = formatDate(vente.createdAt);
+                return f ? `${f.jour}/${f.mois}/${f.annee} à ${f.heure}` : null;
+            })(),
+        }
+        : null;
+
     if (!vente) return new Response(JSON.stringify({error: "vente not found"}), { status: 404 });        
 
-    return new Response(JSON.stringify(vente), { status: 201 });
+    return new Response(JSON.stringify(venteResponse), { status: 201 });
 }
 
 

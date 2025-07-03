@@ -50,3 +50,74 @@ export async function findUniqueVente (id: string | null) {
     }
 }
 
+export async function deleteVente (id: string | null) {
+    // const venteId = if id {
+    //     parseInt(id as string, 10);
+    // }
+    try {
+        const res = await fetch(`${api}agents/1/ventes/${id}/remove`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        let datas = await res.json();
+        console.log(datas);
+        return datas;
+    } catch (error) {
+        console.log(error);        
+    }
+}
+
+export async function printVente (id: string | null) {
+    const venteId = parseInt(id as string, 10);
+    try {
+        const res = await fetch(`${api}agents/1/ventes/${venteId}/print`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        let datas = await res.json();
+        console.log(datas);
+        return datas;
+    } catch (error) {
+        console.log(error);        
+    }
+}
+
+
+export async function RapportJournalier(date: string | null) {
+    try {
+        const res = await fetch(`${api}agents/1/ventes/journalier?date=${date ?? ''}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        let datas = await res.json();
+        // console.log(datas);
+        return datas;
+    } catch (error) {
+        console.log(error);        
+    }
+}
+
+
+export async function VentesJournalier (date: string) {
+    try {
+        const res = await fetch(`${api}agents/1/ventes/journalier/${date}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        let datas = await res.json();
+        console.log(datas);
+        return datas;
+    } catch (error) {
+        console.log(error);        
+    }
+}
+
+

@@ -72,7 +72,7 @@ export default function Historique() {
         </div>
 
           {/* Historique des ventes et achats */}
-          {datas && <Card>
+          {/* {datas && <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium"></CardTitle>
             </CardHeader>
@@ -120,7 +120,7 @@ export default function Historique() {
                 </TableBody>
               </Table>
             </CardContent>
-          </Card>}
+          </Card>} */}
           
       </div>
     </CaissierLayout>

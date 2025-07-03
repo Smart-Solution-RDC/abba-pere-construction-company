@@ -117,6 +117,8 @@ export interface HistoriqueFormatData {
 export interface AchatUnique {
     id: number,
     statut: string,
+    adresseLivraison: string,
+    dateLivraison: string,
     createdAt: string,
     updatedAt: string,
     panier: {
@@ -164,10 +166,133 @@ export interface VenteUnique {
         modePaiement: { type: string }
     }[],
     enregistrerPar: string | null,
-    client: {} | null,
-    fournisseur: {} | null,
-    agent: {} | null,
+    client: {
+        id: number,
+        nom_complet: string,
+        contacts: { tel: string }[]
+    } | null,
+    fournisseur: {
+        id: number,
+        nom: string,
+        contacts: { tel: string }[]
+    } | null,
+    agent: {
+        id: number,
+        nom_complet: string,
+        contacts: { tel: string }[]
+    } | null,
     createdAt: string | null,
     updatedAt: string | null
+}
+
+export interface VentePrint {
+    id: number,
+    entreprise: Entreprise,
+    nom: string | null,
+    enregistrerPar: string | null,
+    client: {
+        id: number,
+        nom_complet: string,
+        contacts: { tel: string }[]
+    } | null,
+    fournisseur: {
+        id: number,
+        nom: string,
+        contacts: { tel: string }[]
+    } | null,
+    agent: {
+        id: number,
+        nom_complet: string,
+        contacts: { tel: string }[]
+    } | null,
+    panier: {
+        detailPaniers: {
+            produit: {
+                designation: string
+            },
+            devise: { symbole: string },
+            qtte: number,
+            prixUnitaire: number,
+            prixTotalHT: number,
+        }[]
+    },
+    paiements: {
+        montant: number,
+        devise: { symbole: string },
+        modePaiement: { type: string }
+    }[],
+    updatedAt: string | null
+}
+
+export interface Entreprise {
+    raison_jurifique: string,
+    email: string,
+    identification_nationale: string,
+    num_impot: string,
+    raison_sociale: string,
+    rccm: string,
+    slogan: string,
+    Contact: { tel: string }[],
+    Adresse: { adresse: string }[]
+}
+
+export interface Agent {
+    id: number,
+    nom_complet: string,
+    contacts: { tel: string }[]
+}
+
+export interface Panier {
+    detailPaniers: {
+        produit: {
+            designation: string
+        },
+        devise: { symbole: string },
+        qtte: number,
+        fournisseur: { nom: string } | null,
+        prixUnitaire: number,
+        prixTotalHT: number,
+    }[]
+}
+
+export interface Paiement {
+    montant: number,
+    devise: { symbole: string },
+    modePaiement: { type: string }
+}
+export interface AchatPrint {
+    id: number,
+    enregistrerPar: string,
+    entreprise: Entreprise,
+    agent: Agent,
+    panier: Panier,
+    paiements: Paiement[]
+}
+
+export interface Meta {
+    currentPage: number,
+    hasNextPage: boolean,
+    hasPrevPage: boolean,
+    limit: number,
+    totalItems: number,
+    totalPages: number
+}
+
+export interface Rapports {
+    data: {
+        createdAt: string,
+    }[],
+    meta: Meta
+}
+
+export interface RapportDocument {
+    id: number,
+    statut: string,
+    nom: string | null,
+    client: Client,
+    agent: Agent,
+    fournisseur: Fournisseur,
+    // entreprise: Entreprise,
+    paiements: Paiement[]
 }
 
