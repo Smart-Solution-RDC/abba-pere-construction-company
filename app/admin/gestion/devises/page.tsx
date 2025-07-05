@@ -179,7 +179,7 @@ export default function DevisesPage() {
                 </div>
 
                 <div>
-                  <Label htmlFor="nom">Nom Complet *</Label>
+                  <Label htmlFor="nom">Nom</Label>
                   <Input
                     id="nom"
                     value={formData.nom}

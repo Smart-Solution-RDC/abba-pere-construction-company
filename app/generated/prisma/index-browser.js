@@ -320,20 +320,25 @@ exports.Prisma.AchatScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AcheteurTiersScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  postnom: 'postnom',
+  tel: 'tel'
+};
+
 exports.Prisma.CommandeScalarFieldEnum = {
   id: 'id',
   panierId: 'panierId',
-  nom: 'nom',
-  tel: 'tel',
   statut: 'statut',
   dateLivraison: 'dateLivraison',
   adresseLivraison: 'adresseLivraison',
   notes: 'notes',
   clientId: 'clientId',
-  fournisseurId: 'fournisseurId',
   agentId: 'agentId',
-  enregistrerPar: 'enregistrerPar',
+  estReserve: 'estReserve',
   entrepriseId: 'entrepriseId',
+  acheteurTiersId: 'acheteurTiersId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -422,7 +427,7 @@ exports.StatutAchat = exports.$Enums.StatutAchat = {
 
 exports.StatutCommande = exports.$Enums.StatutCommande = {
   EN_ATTENTE_PAIEMENT: 'EN_ATTENTE_PAIEMENT',
-  EN_COURS: 'EN_COURS',
+  PAIEE: 'PAIEE',
   LIVREE: 'LIVREE',
   ANNULEE: 'ANNULEE'
 };
@@ -453,6 +458,7 @@ exports.Prisma.ModelName = {
   Panier: 'Panier',
   DetailPanier: 'DetailPanier',
   Achat: 'Achat',
+  AcheteurTiers: 'AcheteurTiers',
   Commande: 'Commande',
   Depense: 'Depense'
 };

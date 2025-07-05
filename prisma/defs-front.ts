@@ -32,6 +32,8 @@ export interface DetailPanierForm {
     typeProduit: string,
     fournisseurId: number | null,
     panierId: number | null,
+    autresType: null,
+    qtteDisponible: null
 }
 
 export interface Devise {
@@ -412,3 +414,15 @@ export interface Caisse {
     devise: { code: string, symbole: string },
     montant: number
 }
+
+export interface AcheteurTiersForm {
+    nom: string,
+    postnom: string,
+    tel: string,
+    email: string
+}
+
+export interface LivraisonForm {
+    dateLivraison: string,
+    adresseLivraison: string
+  }

@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { AchatRouteParams, ProduitsDisponible, tableType, Type, TypeAcheteur, TypeMouvement } from "./definitions";
 import { NextRequest } from "next/server";
 import { Agent, Client, DetailPanier, ModePaiement, Produit } from "@/app/generated/prisma";
-import { Acheteur, PaiementData } from "./defs-front";
+import { Acheteur, LivraisonForm, PaiementData } from "./defs-front";
 
 
 
@@ -571,8 +571,23 @@ export async function Vente(agent: Agent, panierId: number, acheteur: Acheteur) 
     return vente;
 }
 
+export async function Commande(
+    clientId: number, panierId: number, data: LivraisonForm, 
+    notes: string | null, estReserve: boolean, acheteurTiersId: number | null) {
+    const commande = await prisma.commande.create({
+        data: {
+            panierId: panierId,
+            dateLivraison: data.dateLivraison != '' ? new Date (data.dateLivraison) : null,
+            adresseLivraison: data.adresseLivraison != '' ? data.adresseLivraison : null,
+            notes: notes,
+            clientId: clientId,
+            estReserve: estReserve ? estReserve : false,
+            acheteurTiersId: acheteurTiersId
+        }
+    });
 
-
+    return commande;
+}
 
 
 

@@ -168,10 +168,8 @@ model Fournisseur {
   agentId      Int
   agent        Agent          @relation(fields: [agentId], references: [id])
   ventes       Vente[]
-  // achats       Achat[]
   adresses     Adresse[]
   contacts     Contact[]
-  commandes    Commande[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
   DetailPanier DetailPanier[]
@@ -349,29 +347,35 @@ model Achat {
 
 enum StatutCommande {
   EN_ATTENTE_PAIEMENT
-  EN_COURS
+  PAIEE
   LIVREE
   ANNULEE
+}
+
+model AcheteurTiers {
+  id       Int        @id @default(autoincrement())
+  nom      String
+  postnom  String
+  tel      String
+  Commande Commande[]
 }
 
 model Commande {
   id               Int            @id @default(autoincrement())
   panierId         Int
-  nom              String?
-  tel              String?
   statut           StatutCommande @default(EN_ATTENTE_PAIEMENT)
   dateLivraison    DateTime?      @default(now())
   adresseLivraison String?        @db.VarChar(255)
   notes            String?        @db.Text
   clientId         Int?
-  fournisseurId    Int?
   agentId          Int?
-  enregistrerPar   String?
+  estReserve       Boolean?
   entrepriseId     Int            @default(1)
   Paiement         Paiement[]
+  acheteurTiersId  Int?
   panier           Panier         @relation(fields: [panierId], references: [id])
-  fournisseur      Fournisseur?   @relation(fields: [fournisseurId], references: [id])
   entreprise       Entreprise     @relation(fields: [entrepriseId], references: [id])
+  acheteurTiers    AcheteurTiers? @relation(fields: [acheteurTiersId], references: [id])
   agent            Agent?         @relation(fields: [agentId], references: [id])
   client           Client?        @relation(fields: [clientId], references: [id])
   createdAt        DateTime       @default(now())

@@ -94,6 +94,11 @@ export type DetailPanier = $Result.DefaultSelection<Prisma.$DetailPanierPayload>
  */
 export type Achat = $Result.DefaultSelection<Prisma.$AchatPayload>
 /**
+ * Model AcheteurTiers
+ * 
+ */
+export type AcheteurTiers = $Result.DefaultSelection<Prisma.$AcheteurTiersPayload>
+/**
  * Model Commande
  * 
  */
@@ -185,7 +190,7 @@ export type StatutAchat = (typeof StatutAchat)[keyof typeof StatutAchat]
 
 export const StatutCommande: {
   EN_ATTENTE_PAIEMENT: 'EN_ATTENTE_PAIEMENT',
-  EN_COURS: 'EN_COURS',
+  PAIEE: 'PAIEE',
   LIVREE: 'LIVREE',
   ANNULEE: 'ANNULEE'
 };
@@ -542,6 +547,16 @@ export class PrismaClient<
     * ```
     */
   get achat(): Prisma.AchatDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.acheteurTiers`: Exposes CRUD operations for the **AcheteurTiers** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AcheteurTiers
+    * const acheteurTiers = await prisma.acheteurTiers.findMany()
+    * ```
+    */
+  get acheteurTiers(): Prisma.AcheteurTiersDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.commande`: Exposes CRUD operations for the **Commande** model.
@@ -1018,6 +1033,7 @@ export namespace Prisma {
     Panier: 'Panier',
     DetailPanier: 'DetailPanier',
     Achat: 'Achat',
+    AcheteurTiers: 'AcheteurTiers',
     Commande: 'Commande',
     Depense: 'Depense'
   };
@@ -1038,7 +1054,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "teneur" | "devise" | "entreprise" | "agent" | "client" | "adresse" | "contact" | "fournisseur" | "produit" | "modePaiement" | "paiement" | "caisse" | "vente" | "panier" | "detailPanier" | "achat" | "commande" | "depense"
+      modelProps: "teneur" | "devise" | "entreprise" | "agent" | "client" | "adresse" | "contact" | "fournisseur" | "produit" | "modePaiement" | "paiement" | "caisse" | "vente" | "panier" | "detailPanier" | "achat" | "acheteurTiers" | "commande" | "depense"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2226,6 +2242,80 @@ export namespace Prisma {
           }
         }
       }
+      AcheteurTiers: {
+        payload: Prisma.$AcheteurTiersPayload<ExtArgs>
+        fields: Prisma.AcheteurTiersFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AcheteurTiersFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AcheteurTiersPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AcheteurTiersFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AcheteurTiersPayload>
+          }
+          findFirst: {
+            args: Prisma.AcheteurTiersFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AcheteurTiersPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AcheteurTiersFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AcheteurTiersPayload>
+          }
+          findMany: {
+            args: Prisma.AcheteurTiersFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AcheteurTiersPayload>[]
+          }
+          create: {
+            args: Prisma.AcheteurTiersCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AcheteurTiersPayload>
+          }
+          createMany: {
+            args: Prisma.AcheteurTiersCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AcheteurTiersCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AcheteurTiersPayload>[]
+          }
+          delete: {
+            args: Prisma.AcheteurTiersDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AcheteurTiersPayload>
+          }
+          update: {
+            args: Prisma.AcheteurTiersUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AcheteurTiersPayload>
+          }
+          deleteMany: {
+            args: Prisma.AcheteurTiersDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AcheteurTiersUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AcheteurTiersUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AcheteurTiersPayload>[]
+          }
+          upsert: {
+            args: Prisma.AcheteurTiersUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AcheteurTiersPayload>
+          }
+          aggregate: {
+            args: Prisma.AcheteurTiersAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAcheteurTiers>
+          }
+          groupBy: {
+            args: Prisma.AcheteurTiersGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AcheteurTiersGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AcheteurTiersCountArgs<ExtArgs>
+            result: $Utils.Optional<AcheteurTiersCountAggregateOutputType> | number
+          }
+        }
+      }
       Commande: {
         payload: Prisma.$CommandePayload<ExtArgs>
         fields: Prisma.CommandeFieldRefs
@@ -2474,6 +2564,7 @@ export namespace Prisma {
     panier?: PanierOmit
     detailPanier?: DetailPanierOmit
     achat?: AchatOmit
+    acheteurTiers?: AcheteurTiersOmit
     commande?: CommandeOmit
     depense?: DepenseOmit
   }
@@ -2935,7 +3026,6 @@ export namespace Prisma {
     ventes: number
     adresses: number
     contacts: number
-    commandes: number
     DetailPanier: number
   }
 
@@ -2943,7 +3033,6 @@ export namespace Prisma {
     ventes?: boolean | FournisseurCountOutputTypeCountVentesArgs
     adresses?: boolean | FournisseurCountOutputTypeCountAdressesArgs
     contacts?: boolean | FournisseurCountOutputTypeCountContactsArgs
-    commandes?: boolean | FournisseurCountOutputTypeCountCommandesArgs
     DetailPanier?: boolean | FournisseurCountOutputTypeCountDetailPanierArgs
   }
 
@@ -2977,13 +3066,6 @@ export namespace Prisma {
    */
   export type FournisseurCountOutputTypeCountContactsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ContactWhereInput
-  }
-
-  /**
-   * FournisseurCountOutputType without action
-   */
-  export type FournisseurCountOutputTypeCountCommandesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CommandeWhereInput
   }
 
   /**
@@ -3231,6 +3313,37 @@ export namespace Prisma {
    */
   export type AchatCountOutputTypeCountPaiementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PaiementWhereInput
+  }
+
+
+  /**
+   * Count Type AcheteurTiersCountOutputType
+   */
+
+  export type AcheteurTiersCountOutputType = {
+    Commande: number
+  }
+
+  export type AcheteurTiersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Commande?: boolean | AcheteurTiersCountOutputTypeCountCommandeArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AcheteurTiersCountOutputType without action
+   */
+  export type AcheteurTiersCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiersCountOutputType
+     */
+    select?: AcheteurTiersCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AcheteurTiersCountOutputType without action
+   */
+  export type AcheteurTiersCountOutputTypeCountCommandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommandeWhereInput
   }
 
 
@@ -12578,7 +12691,6 @@ export namespace Prisma {
     ventes?: boolean | Fournisseur$ventesArgs<ExtArgs>
     adresses?: boolean | Fournisseur$adressesArgs<ExtArgs>
     contacts?: boolean | Fournisseur$contactsArgs<ExtArgs>
-    commandes?: boolean | Fournisseur$commandesArgs<ExtArgs>
     DetailPanier?: boolean | Fournisseur$DetailPanierArgs<ExtArgs>
     _count?: boolean | FournisseurCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["fournisseur"]>
@@ -12624,7 +12736,6 @@ export namespace Prisma {
     ventes?: boolean | Fournisseur$ventesArgs<ExtArgs>
     adresses?: boolean | Fournisseur$adressesArgs<ExtArgs>
     contacts?: boolean | Fournisseur$contactsArgs<ExtArgs>
-    commandes?: boolean | Fournisseur$commandesArgs<ExtArgs>
     DetailPanier?: boolean | Fournisseur$DetailPanierArgs<ExtArgs>
     _count?: boolean | FournisseurCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -12642,7 +12753,6 @@ export namespace Prisma {
       ventes: Prisma.$VentePayload<ExtArgs>[]
       adresses: Prisma.$AdressePayload<ExtArgs>[]
       contacts: Prisma.$ContactPayload<ExtArgs>[]
-      commandes: Prisma.$CommandePayload<ExtArgs>[]
       DetailPanier: Prisma.$DetailPanierPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -13052,7 +13162,6 @@ export namespace Prisma {
     ventes<T extends Fournisseur$ventesArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$ventesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     adresses<T extends Fournisseur$adressesArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$adressesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdressePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contacts<T extends Fournisseur$contactsArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$contactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    commandes<T extends Fournisseur$commandesArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$commandesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     DetailPanier<T extends Fournisseur$DetailPanierArgs<ExtArgs> = {}>(args?: Subset<T, Fournisseur$DetailPanierArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DetailPanierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -13556,30 +13665,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ContactScalarFieldEnum | ContactScalarFieldEnum[]
-  }
-
-  /**
-   * Fournisseur.commandes
-   */
-  export type Fournisseur$commandesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Commande
-     */
-    select?: CommandeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Commande
-     */
-    omit?: CommandeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommandeInclude<ExtArgs> | null
-    where?: CommandeWhereInput
-    orderBy?: CommandeOrderByWithRelationInput | CommandeOrderByWithRelationInput[]
-    cursor?: CommandeWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CommandeScalarFieldEnum | CommandeScalarFieldEnum[]
   }
 
   /**
@@ -23761,6 +23846,1097 @@ export namespace Prisma {
 
 
   /**
+   * Model AcheteurTiers
+   */
+
+  export type AggregateAcheteurTiers = {
+    _count: AcheteurTiersCountAggregateOutputType | null
+    _avg: AcheteurTiersAvgAggregateOutputType | null
+    _sum: AcheteurTiersSumAggregateOutputType | null
+    _min: AcheteurTiersMinAggregateOutputType | null
+    _max: AcheteurTiersMaxAggregateOutputType | null
+  }
+
+  export type AcheteurTiersAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AcheteurTiersSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AcheteurTiersMinAggregateOutputType = {
+    id: number | null
+    nom: string | null
+    postnom: string | null
+    tel: string | null
+  }
+
+  export type AcheteurTiersMaxAggregateOutputType = {
+    id: number | null
+    nom: string | null
+    postnom: string | null
+    tel: string | null
+  }
+
+  export type AcheteurTiersCountAggregateOutputType = {
+    id: number
+    nom: number
+    postnom: number
+    tel: number
+    _all: number
+  }
+
+
+  export type AcheteurTiersAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type AcheteurTiersSumAggregateInputType = {
+    id?: true
+  }
+
+  export type AcheteurTiersMinAggregateInputType = {
+    id?: true
+    nom?: true
+    postnom?: true
+    tel?: true
+  }
+
+  export type AcheteurTiersMaxAggregateInputType = {
+    id?: true
+    nom?: true
+    postnom?: true
+    tel?: true
+  }
+
+  export type AcheteurTiersCountAggregateInputType = {
+    id?: true
+    nom?: true
+    postnom?: true
+    tel?: true
+    _all?: true
+  }
+
+  export type AcheteurTiersAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AcheteurTiers to aggregate.
+     */
+    where?: AcheteurTiersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AcheteurTiers to fetch.
+     */
+    orderBy?: AcheteurTiersOrderByWithRelationInput | AcheteurTiersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AcheteurTiersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AcheteurTiers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AcheteurTiers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AcheteurTiers
+    **/
+    _count?: true | AcheteurTiersCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AcheteurTiersAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AcheteurTiersSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AcheteurTiersMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AcheteurTiersMaxAggregateInputType
+  }
+
+  export type GetAcheteurTiersAggregateType<T extends AcheteurTiersAggregateArgs> = {
+        [P in keyof T & keyof AggregateAcheteurTiers]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAcheteurTiers[P]>
+      : GetScalarType<T[P], AggregateAcheteurTiers[P]>
+  }
+
+
+
+
+  export type AcheteurTiersGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AcheteurTiersWhereInput
+    orderBy?: AcheteurTiersOrderByWithAggregationInput | AcheteurTiersOrderByWithAggregationInput[]
+    by: AcheteurTiersScalarFieldEnum[] | AcheteurTiersScalarFieldEnum
+    having?: AcheteurTiersScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AcheteurTiersCountAggregateInputType | true
+    _avg?: AcheteurTiersAvgAggregateInputType
+    _sum?: AcheteurTiersSumAggregateInputType
+    _min?: AcheteurTiersMinAggregateInputType
+    _max?: AcheteurTiersMaxAggregateInputType
+  }
+
+  export type AcheteurTiersGroupByOutputType = {
+    id: number
+    nom: string
+    postnom: string
+    tel: string
+    _count: AcheteurTiersCountAggregateOutputType | null
+    _avg: AcheteurTiersAvgAggregateOutputType | null
+    _sum: AcheteurTiersSumAggregateOutputType | null
+    _min: AcheteurTiersMinAggregateOutputType | null
+    _max: AcheteurTiersMaxAggregateOutputType | null
+  }
+
+  type GetAcheteurTiersGroupByPayload<T extends AcheteurTiersGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AcheteurTiersGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AcheteurTiersGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AcheteurTiersGroupByOutputType[P]>
+            : GetScalarType<T[P], AcheteurTiersGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AcheteurTiersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    postnom?: boolean
+    tel?: boolean
+    Commande?: boolean | AcheteurTiers$CommandeArgs<ExtArgs>
+    _count?: boolean | AcheteurTiersCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["acheteurTiers"]>
+
+  export type AcheteurTiersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    postnom?: boolean
+    tel?: boolean
+  }, ExtArgs["result"]["acheteurTiers"]>
+
+  export type AcheteurTiersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    postnom?: boolean
+    tel?: boolean
+  }, ExtArgs["result"]["acheteurTiers"]>
+
+  export type AcheteurTiersSelectScalar = {
+    id?: boolean
+    nom?: boolean
+    postnom?: boolean
+    tel?: boolean
+  }
+
+  export type AcheteurTiersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "postnom" | "tel", ExtArgs["result"]["acheteurTiers"]>
+  export type AcheteurTiersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Commande?: boolean | AcheteurTiers$CommandeArgs<ExtArgs>
+    _count?: boolean | AcheteurTiersCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AcheteurTiersIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AcheteurTiersIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $AcheteurTiersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AcheteurTiers"
+    objects: {
+      Commande: Prisma.$CommandePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      nom: string
+      postnom: string
+      tel: string
+    }, ExtArgs["result"]["acheteurTiers"]>
+    composites: {}
+  }
+
+  type AcheteurTiersGetPayload<S extends boolean | null | undefined | AcheteurTiersDefaultArgs> = $Result.GetResult<Prisma.$AcheteurTiersPayload, S>
+
+  type AcheteurTiersCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AcheteurTiersFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AcheteurTiersCountAggregateInputType | true
+    }
+
+  export interface AcheteurTiersDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AcheteurTiers'], meta: { name: 'AcheteurTiers' } }
+    /**
+     * Find zero or one AcheteurTiers that matches the filter.
+     * @param {AcheteurTiersFindUniqueArgs} args - Arguments to find a AcheteurTiers
+     * @example
+     * // Get one AcheteurTiers
+     * const acheteurTiers = await prisma.acheteurTiers.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AcheteurTiersFindUniqueArgs>(args: SelectSubset<T, AcheteurTiersFindUniqueArgs<ExtArgs>>): Prisma__AcheteurTiersClient<$Result.GetResult<Prisma.$AcheteurTiersPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AcheteurTiers that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AcheteurTiersFindUniqueOrThrowArgs} args - Arguments to find a AcheteurTiers
+     * @example
+     * // Get one AcheteurTiers
+     * const acheteurTiers = await prisma.acheteurTiers.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AcheteurTiersFindUniqueOrThrowArgs>(args: SelectSubset<T, AcheteurTiersFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AcheteurTiersClient<$Result.GetResult<Prisma.$AcheteurTiersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AcheteurTiers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AcheteurTiersFindFirstArgs} args - Arguments to find a AcheteurTiers
+     * @example
+     * // Get one AcheteurTiers
+     * const acheteurTiers = await prisma.acheteurTiers.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AcheteurTiersFindFirstArgs>(args?: SelectSubset<T, AcheteurTiersFindFirstArgs<ExtArgs>>): Prisma__AcheteurTiersClient<$Result.GetResult<Prisma.$AcheteurTiersPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AcheteurTiers that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AcheteurTiersFindFirstOrThrowArgs} args - Arguments to find a AcheteurTiers
+     * @example
+     * // Get one AcheteurTiers
+     * const acheteurTiers = await prisma.acheteurTiers.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AcheteurTiersFindFirstOrThrowArgs>(args?: SelectSubset<T, AcheteurTiersFindFirstOrThrowArgs<ExtArgs>>): Prisma__AcheteurTiersClient<$Result.GetResult<Prisma.$AcheteurTiersPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AcheteurTiers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AcheteurTiersFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AcheteurTiers
+     * const acheteurTiers = await prisma.acheteurTiers.findMany()
+     * 
+     * // Get first 10 AcheteurTiers
+     * const acheteurTiers = await prisma.acheteurTiers.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const acheteurTiersWithIdOnly = await prisma.acheteurTiers.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AcheteurTiersFindManyArgs>(args?: SelectSubset<T, AcheteurTiersFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AcheteurTiersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AcheteurTiers.
+     * @param {AcheteurTiersCreateArgs} args - Arguments to create a AcheteurTiers.
+     * @example
+     * // Create one AcheteurTiers
+     * const AcheteurTiers = await prisma.acheteurTiers.create({
+     *   data: {
+     *     // ... data to create a AcheteurTiers
+     *   }
+     * })
+     * 
+     */
+    create<T extends AcheteurTiersCreateArgs>(args: SelectSubset<T, AcheteurTiersCreateArgs<ExtArgs>>): Prisma__AcheteurTiersClient<$Result.GetResult<Prisma.$AcheteurTiersPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AcheteurTiers.
+     * @param {AcheteurTiersCreateManyArgs} args - Arguments to create many AcheteurTiers.
+     * @example
+     * // Create many AcheteurTiers
+     * const acheteurTiers = await prisma.acheteurTiers.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AcheteurTiersCreateManyArgs>(args?: SelectSubset<T, AcheteurTiersCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AcheteurTiers and returns the data saved in the database.
+     * @param {AcheteurTiersCreateManyAndReturnArgs} args - Arguments to create many AcheteurTiers.
+     * @example
+     * // Create many AcheteurTiers
+     * const acheteurTiers = await prisma.acheteurTiers.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AcheteurTiers and only return the `id`
+     * const acheteurTiersWithIdOnly = await prisma.acheteurTiers.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AcheteurTiersCreateManyAndReturnArgs>(args?: SelectSubset<T, AcheteurTiersCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AcheteurTiersPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AcheteurTiers.
+     * @param {AcheteurTiersDeleteArgs} args - Arguments to delete one AcheteurTiers.
+     * @example
+     * // Delete one AcheteurTiers
+     * const AcheteurTiers = await prisma.acheteurTiers.delete({
+     *   where: {
+     *     // ... filter to delete one AcheteurTiers
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AcheteurTiersDeleteArgs>(args: SelectSubset<T, AcheteurTiersDeleteArgs<ExtArgs>>): Prisma__AcheteurTiersClient<$Result.GetResult<Prisma.$AcheteurTiersPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AcheteurTiers.
+     * @param {AcheteurTiersUpdateArgs} args - Arguments to update one AcheteurTiers.
+     * @example
+     * // Update one AcheteurTiers
+     * const acheteurTiers = await prisma.acheteurTiers.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AcheteurTiersUpdateArgs>(args: SelectSubset<T, AcheteurTiersUpdateArgs<ExtArgs>>): Prisma__AcheteurTiersClient<$Result.GetResult<Prisma.$AcheteurTiersPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AcheteurTiers.
+     * @param {AcheteurTiersDeleteManyArgs} args - Arguments to filter AcheteurTiers to delete.
+     * @example
+     * // Delete a few AcheteurTiers
+     * const { count } = await prisma.acheteurTiers.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AcheteurTiersDeleteManyArgs>(args?: SelectSubset<T, AcheteurTiersDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AcheteurTiers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AcheteurTiersUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AcheteurTiers
+     * const acheteurTiers = await prisma.acheteurTiers.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AcheteurTiersUpdateManyArgs>(args: SelectSubset<T, AcheteurTiersUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AcheteurTiers and returns the data updated in the database.
+     * @param {AcheteurTiersUpdateManyAndReturnArgs} args - Arguments to update many AcheteurTiers.
+     * @example
+     * // Update many AcheteurTiers
+     * const acheteurTiers = await prisma.acheteurTiers.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AcheteurTiers and only return the `id`
+     * const acheteurTiersWithIdOnly = await prisma.acheteurTiers.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AcheteurTiersUpdateManyAndReturnArgs>(args: SelectSubset<T, AcheteurTiersUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AcheteurTiersPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AcheteurTiers.
+     * @param {AcheteurTiersUpsertArgs} args - Arguments to update or create a AcheteurTiers.
+     * @example
+     * // Update or create a AcheteurTiers
+     * const acheteurTiers = await prisma.acheteurTiers.upsert({
+     *   create: {
+     *     // ... data to create a AcheteurTiers
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AcheteurTiers we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AcheteurTiersUpsertArgs>(args: SelectSubset<T, AcheteurTiersUpsertArgs<ExtArgs>>): Prisma__AcheteurTiersClient<$Result.GetResult<Prisma.$AcheteurTiersPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AcheteurTiers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AcheteurTiersCountArgs} args - Arguments to filter AcheteurTiers to count.
+     * @example
+     * // Count the number of AcheteurTiers
+     * const count = await prisma.acheteurTiers.count({
+     *   where: {
+     *     // ... the filter for the AcheteurTiers we want to count
+     *   }
+     * })
+    **/
+    count<T extends AcheteurTiersCountArgs>(
+      args?: Subset<T, AcheteurTiersCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AcheteurTiersCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AcheteurTiers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AcheteurTiersAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AcheteurTiersAggregateArgs>(args: Subset<T, AcheteurTiersAggregateArgs>): Prisma.PrismaPromise<GetAcheteurTiersAggregateType<T>>
+
+    /**
+     * Group by AcheteurTiers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AcheteurTiersGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AcheteurTiersGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AcheteurTiersGroupByArgs['orderBy'] }
+        : { orderBy?: AcheteurTiersGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AcheteurTiersGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAcheteurTiersGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AcheteurTiers model
+   */
+  readonly fields: AcheteurTiersFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AcheteurTiers.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AcheteurTiersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Commande<T extends AcheteurTiers$CommandeArgs<ExtArgs> = {}>(args?: Subset<T, AcheteurTiers$CommandeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommandePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AcheteurTiers model
+   */
+  interface AcheteurTiersFieldRefs {
+    readonly id: FieldRef<"AcheteurTiers", 'Int'>
+    readonly nom: FieldRef<"AcheteurTiers", 'String'>
+    readonly postnom: FieldRef<"AcheteurTiers", 'String'>
+    readonly tel: FieldRef<"AcheteurTiers", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AcheteurTiers findUnique
+   */
+  export type AcheteurTiersFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiers
+     */
+    select?: AcheteurTiersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AcheteurTiers
+     */
+    omit?: AcheteurTiersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AcheteurTiersInclude<ExtArgs> | null
+    /**
+     * Filter, which AcheteurTiers to fetch.
+     */
+    where: AcheteurTiersWhereUniqueInput
+  }
+
+  /**
+   * AcheteurTiers findUniqueOrThrow
+   */
+  export type AcheteurTiersFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiers
+     */
+    select?: AcheteurTiersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AcheteurTiers
+     */
+    omit?: AcheteurTiersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AcheteurTiersInclude<ExtArgs> | null
+    /**
+     * Filter, which AcheteurTiers to fetch.
+     */
+    where: AcheteurTiersWhereUniqueInput
+  }
+
+  /**
+   * AcheteurTiers findFirst
+   */
+  export type AcheteurTiersFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiers
+     */
+    select?: AcheteurTiersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AcheteurTiers
+     */
+    omit?: AcheteurTiersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AcheteurTiersInclude<ExtArgs> | null
+    /**
+     * Filter, which AcheteurTiers to fetch.
+     */
+    where?: AcheteurTiersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AcheteurTiers to fetch.
+     */
+    orderBy?: AcheteurTiersOrderByWithRelationInput | AcheteurTiersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AcheteurTiers.
+     */
+    cursor?: AcheteurTiersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AcheteurTiers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AcheteurTiers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AcheteurTiers.
+     */
+    distinct?: AcheteurTiersScalarFieldEnum | AcheteurTiersScalarFieldEnum[]
+  }
+
+  /**
+   * AcheteurTiers findFirstOrThrow
+   */
+  export type AcheteurTiersFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiers
+     */
+    select?: AcheteurTiersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AcheteurTiers
+     */
+    omit?: AcheteurTiersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AcheteurTiersInclude<ExtArgs> | null
+    /**
+     * Filter, which AcheteurTiers to fetch.
+     */
+    where?: AcheteurTiersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AcheteurTiers to fetch.
+     */
+    orderBy?: AcheteurTiersOrderByWithRelationInput | AcheteurTiersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AcheteurTiers.
+     */
+    cursor?: AcheteurTiersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AcheteurTiers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AcheteurTiers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AcheteurTiers.
+     */
+    distinct?: AcheteurTiersScalarFieldEnum | AcheteurTiersScalarFieldEnum[]
+  }
+
+  /**
+   * AcheteurTiers findMany
+   */
+  export type AcheteurTiersFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiers
+     */
+    select?: AcheteurTiersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AcheteurTiers
+     */
+    omit?: AcheteurTiersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AcheteurTiersInclude<ExtArgs> | null
+    /**
+     * Filter, which AcheteurTiers to fetch.
+     */
+    where?: AcheteurTiersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AcheteurTiers to fetch.
+     */
+    orderBy?: AcheteurTiersOrderByWithRelationInput | AcheteurTiersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AcheteurTiers.
+     */
+    cursor?: AcheteurTiersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AcheteurTiers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AcheteurTiers.
+     */
+    skip?: number
+    distinct?: AcheteurTiersScalarFieldEnum | AcheteurTiersScalarFieldEnum[]
+  }
+
+  /**
+   * AcheteurTiers create
+   */
+  export type AcheteurTiersCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiers
+     */
+    select?: AcheteurTiersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AcheteurTiers
+     */
+    omit?: AcheteurTiersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AcheteurTiersInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AcheteurTiers.
+     */
+    data: XOR<AcheteurTiersCreateInput, AcheteurTiersUncheckedCreateInput>
+  }
+
+  /**
+   * AcheteurTiers createMany
+   */
+  export type AcheteurTiersCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AcheteurTiers.
+     */
+    data: AcheteurTiersCreateManyInput | AcheteurTiersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AcheteurTiers createManyAndReturn
+   */
+  export type AcheteurTiersCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiers
+     */
+    select?: AcheteurTiersSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AcheteurTiers
+     */
+    omit?: AcheteurTiersOmit<ExtArgs> | null
+    /**
+     * The data used to create many AcheteurTiers.
+     */
+    data: AcheteurTiersCreateManyInput | AcheteurTiersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AcheteurTiers update
+   */
+  export type AcheteurTiersUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiers
+     */
+    select?: AcheteurTiersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AcheteurTiers
+     */
+    omit?: AcheteurTiersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AcheteurTiersInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AcheteurTiers.
+     */
+    data: XOR<AcheteurTiersUpdateInput, AcheteurTiersUncheckedUpdateInput>
+    /**
+     * Choose, which AcheteurTiers to update.
+     */
+    where: AcheteurTiersWhereUniqueInput
+  }
+
+  /**
+   * AcheteurTiers updateMany
+   */
+  export type AcheteurTiersUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AcheteurTiers.
+     */
+    data: XOR<AcheteurTiersUpdateManyMutationInput, AcheteurTiersUncheckedUpdateManyInput>
+    /**
+     * Filter which AcheteurTiers to update
+     */
+    where?: AcheteurTiersWhereInput
+    /**
+     * Limit how many AcheteurTiers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AcheteurTiers updateManyAndReturn
+   */
+  export type AcheteurTiersUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiers
+     */
+    select?: AcheteurTiersSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AcheteurTiers
+     */
+    omit?: AcheteurTiersOmit<ExtArgs> | null
+    /**
+     * The data used to update AcheteurTiers.
+     */
+    data: XOR<AcheteurTiersUpdateManyMutationInput, AcheteurTiersUncheckedUpdateManyInput>
+    /**
+     * Filter which AcheteurTiers to update
+     */
+    where?: AcheteurTiersWhereInput
+    /**
+     * Limit how many AcheteurTiers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AcheteurTiers upsert
+   */
+  export type AcheteurTiersUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiers
+     */
+    select?: AcheteurTiersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AcheteurTiers
+     */
+    omit?: AcheteurTiersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AcheteurTiersInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AcheteurTiers to update in case it exists.
+     */
+    where: AcheteurTiersWhereUniqueInput
+    /**
+     * In case the AcheteurTiers found by the `where` argument doesn't exist, create a new AcheteurTiers with this data.
+     */
+    create: XOR<AcheteurTiersCreateInput, AcheteurTiersUncheckedCreateInput>
+    /**
+     * In case the AcheteurTiers was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AcheteurTiersUpdateInput, AcheteurTiersUncheckedUpdateInput>
+  }
+
+  /**
+   * AcheteurTiers delete
+   */
+  export type AcheteurTiersDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiers
+     */
+    select?: AcheteurTiersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AcheteurTiers
+     */
+    omit?: AcheteurTiersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AcheteurTiersInclude<ExtArgs> | null
+    /**
+     * Filter which AcheteurTiers to delete.
+     */
+    where: AcheteurTiersWhereUniqueInput
+  }
+
+  /**
+   * AcheteurTiers deleteMany
+   */
+  export type AcheteurTiersDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AcheteurTiers to delete
+     */
+    where?: AcheteurTiersWhereInput
+    /**
+     * Limit how many AcheteurTiers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AcheteurTiers.Commande
+   */
+  export type AcheteurTiers$CommandeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commande
+     */
+    select?: CommandeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commande
+     */
+    omit?: CommandeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommandeInclude<ExtArgs> | null
+    where?: CommandeWhereInput
+    orderBy?: CommandeOrderByWithRelationInput | CommandeOrderByWithRelationInput[]
+    cursor?: CommandeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommandeScalarFieldEnum | CommandeScalarFieldEnum[]
+  }
+
+  /**
+   * AcheteurTiers without action
+   */
+  export type AcheteurTiersDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AcheteurTiers
+     */
+    select?: AcheteurTiersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AcheteurTiers
+     */
+    omit?: AcheteurTiersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AcheteurTiersInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Commande
    */
 
@@ -23776,34 +24952,32 @@ export namespace Prisma {
     id: number | null
     panierId: number | null
     clientId: number | null
-    fournisseurId: number | null
     agentId: number | null
     entrepriseId: number | null
+    acheteurTiersId: number | null
   }
 
   export type CommandeSumAggregateOutputType = {
     id: number | null
     panierId: number | null
     clientId: number | null
-    fournisseurId: number | null
     agentId: number | null
     entrepriseId: number | null
+    acheteurTiersId: number | null
   }
 
   export type CommandeMinAggregateOutputType = {
     id: number | null
     panierId: number | null
-    nom: string | null
-    tel: string | null
     statut: $Enums.StatutCommande | null
     dateLivraison: Date | null
     adresseLivraison: string | null
     notes: string | null
     clientId: number | null
-    fournisseurId: number | null
     agentId: number | null
-    enregistrerPar: string | null
+    estReserve: boolean | null
     entrepriseId: number | null
+    acheteurTiersId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -23811,17 +24985,15 @@ export namespace Prisma {
   export type CommandeMaxAggregateOutputType = {
     id: number | null
     panierId: number | null
-    nom: string | null
-    tel: string | null
     statut: $Enums.StatutCommande | null
     dateLivraison: Date | null
     adresseLivraison: string | null
     notes: string | null
     clientId: number | null
-    fournisseurId: number | null
     agentId: number | null
-    enregistrerPar: string | null
+    estReserve: boolean | null
     entrepriseId: number | null
+    acheteurTiersId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -23829,17 +25001,15 @@ export namespace Prisma {
   export type CommandeCountAggregateOutputType = {
     id: number
     panierId: number
-    nom: number
-    tel: number
     statut: number
     dateLivraison: number
     adresseLivraison: number
     notes: number
     clientId: number
-    fournisseurId: number
     agentId: number
-    enregistrerPar: number
+    estReserve: number
     entrepriseId: number
+    acheteurTiersId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -23850,34 +25020,32 @@ export namespace Prisma {
     id?: true
     panierId?: true
     clientId?: true
-    fournisseurId?: true
     agentId?: true
     entrepriseId?: true
+    acheteurTiersId?: true
   }
 
   export type CommandeSumAggregateInputType = {
     id?: true
     panierId?: true
     clientId?: true
-    fournisseurId?: true
     agentId?: true
     entrepriseId?: true
+    acheteurTiersId?: true
   }
 
   export type CommandeMinAggregateInputType = {
     id?: true
     panierId?: true
-    nom?: true
-    tel?: true
     statut?: true
     dateLivraison?: true
     adresseLivraison?: true
     notes?: true
     clientId?: true
-    fournisseurId?: true
     agentId?: true
-    enregistrerPar?: true
+    estReserve?: true
     entrepriseId?: true
+    acheteurTiersId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -23885,17 +25053,15 @@ export namespace Prisma {
   export type CommandeMaxAggregateInputType = {
     id?: true
     panierId?: true
-    nom?: true
-    tel?: true
     statut?: true
     dateLivraison?: true
     adresseLivraison?: true
     notes?: true
     clientId?: true
-    fournisseurId?: true
     agentId?: true
-    enregistrerPar?: true
+    estReserve?: true
     entrepriseId?: true
+    acheteurTiersId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -23903,17 +25069,15 @@ export namespace Prisma {
   export type CommandeCountAggregateInputType = {
     id?: true
     panierId?: true
-    nom?: true
-    tel?: true
     statut?: true
     dateLivraison?: true
     adresseLivraison?: true
     notes?: true
     clientId?: true
-    fournisseurId?: true
     agentId?: true
-    enregistrerPar?: true
+    estReserve?: true
     entrepriseId?: true
+    acheteurTiersId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -24008,17 +25172,15 @@ export namespace Prisma {
   export type CommandeGroupByOutputType = {
     id: number
     panierId: number
-    nom: string | null
-    tel: string | null
     statut: $Enums.StatutCommande
     dateLivraison: Date | null
     adresseLivraison: string | null
     notes: string | null
     clientId: number | null
-    fournisseurId: number | null
     agentId: number | null
-    enregistrerPar: string | null
+    estReserve: boolean | null
     entrepriseId: number
+    acheteurTiersId: number | null
     createdAt: Date
     updatedAt: Date
     _count: CommandeCountAggregateOutputType | null
@@ -24045,23 +25207,21 @@ export namespace Prisma {
   export type CommandeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     panierId?: boolean
-    nom?: boolean
-    tel?: boolean
     statut?: boolean
     dateLivraison?: boolean
     adresseLivraison?: boolean
     notes?: boolean
     clientId?: boolean
-    fournisseurId?: boolean
     agentId?: boolean
-    enregistrerPar?: boolean
+    estReserve?: boolean
     entrepriseId?: boolean
+    acheteurTiersId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     Paiement?: boolean | Commande$PaiementArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    fournisseur?: boolean | Commande$fournisseurArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
+    acheteurTiers?: boolean | Commande$acheteurTiersArgs<ExtArgs>
     agent?: boolean | Commande$agentArgs<ExtArgs>
     client?: boolean | Commande$clientArgs<ExtArgs>
     _count?: boolean | CommandeCountOutputTypeDefaultArgs<ExtArgs>
@@ -24070,22 +25230,20 @@ export namespace Prisma {
   export type CommandeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     panierId?: boolean
-    nom?: boolean
-    tel?: boolean
     statut?: boolean
     dateLivraison?: boolean
     adresseLivraison?: boolean
     notes?: boolean
     clientId?: boolean
-    fournisseurId?: boolean
     agentId?: boolean
-    enregistrerPar?: boolean
+    estReserve?: boolean
     entrepriseId?: boolean
+    acheteurTiersId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    fournisseur?: boolean | Commande$fournisseurArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
+    acheteurTiers?: boolean | Commande$acheteurTiersArgs<ExtArgs>
     agent?: boolean | Commande$agentArgs<ExtArgs>
     client?: boolean | Commande$clientArgs<ExtArgs>
   }, ExtArgs["result"]["commande"]>
@@ -24093,22 +25251,20 @@ export namespace Prisma {
   export type CommandeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     panierId?: boolean
-    nom?: boolean
-    tel?: boolean
     statut?: boolean
     dateLivraison?: boolean
     adresseLivraison?: boolean
     notes?: boolean
     clientId?: boolean
-    fournisseurId?: boolean
     agentId?: boolean
-    enregistrerPar?: boolean
+    estReserve?: boolean
     entrepriseId?: boolean
+    acheteurTiersId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    fournisseur?: boolean | Commande$fournisseurArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
+    acheteurTiers?: boolean | Commande$acheteurTiersArgs<ExtArgs>
     agent?: boolean | Commande$agentArgs<ExtArgs>
     client?: boolean | Commande$clientArgs<ExtArgs>
   }, ExtArgs["result"]["commande"]>
@@ -24116,42 +25272,40 @@ export namespace Prisma {
   export type CommandeSelectScalar = {
     id?: boolean
     panierId?: boolean
-    nom?: boolean
-    tel?: boolean
     statut?: boolean
     dateLivraison?: boolean
     adresseLivraison?: boolean
     notes?: boolean
     clientId?: boolean
-    fournisseurId?: boolean
     agentId?: boolean
-    enregistrerPar?: boolean
+    estReserve?: boolean
     entrepriseId?: boolean
+    acheteurTiersId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CommandeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "panierId" | "nom" | "tel" | "statut" | "dateLivraison" | "adresseLivraison" | "notes" | "clientId" | "fournisseurId" | "agentId" | "enregistrerPar" | "entrepriseId" | "createdAt" | "updatedAt", ExtArgs["result"]["commande"]>
+  export type CommandeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "panierId" | "statut" | "dateLivraison" | "adresseLivraison" | "notes" | "clientId" | "agentId" | "estReserve" | "entrepriseId" | "acheteurTiersId" | "createdAt" | "updatedAt", ExtArgs["result"]["commande"]>
   export type CommandeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Paiement?: boolean | Commande$PaiementArgs<ExtArgs>
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    fournisseur?: boolean | Commande$fournisseurArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
+    acheteurTiers?: boolean | Commande$acheteurTiersArgs<ExtArgs>
     agent?: boolean | Commande$agentArgs<ExtArgs>
     client?: boolean | Commande$clientArgs<ExtArgs>
     _count?: boolean | CommandeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CommandeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    fournisseur?: boolean | Commande$fournisseurArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
+    acheteurTiers?: boolean | Commande$acheteurTiersArgs<ExtArgs>
     agent?: boolean | Commande$agentArgs<ExtArgs>
     client?: boolean | Commande$clientArgs<ExtArgs>
   }
   export type CommandeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     panier?: boolean | PanierDefaultArgs<ExtArgs>
-    fournisseur?: boolean | Commande$fournisseurArgs<ExtArgs>
     entreprise?: boolean | EntrepriseDefaultArgs<ExtArgs>
+    acheteurTiers?: boolean | Commande$acheteurTiersArgs<ExtArgs>
     agent?: boolean | Commande$agentArgs<ExtArgs>
     client?: boolean | Commande$clientArgs<ExtArgs>
   }
@@ -24161,25 +25315,23 @@ export namespace Prisma {
     objects: {
       Paiement: Prisma.$PaiementPayload<ExtArgs>[]
       panier: Prisma.$PanierPayload<ExtArgs>
-      fournisseur: Prisma.$FournisseurPayload<ExtArgs> | null
       entreprise: Prisma.$EntreprisePayload<ExtArgs>
+      acheteurTiers: Prisma.$AcheteurTiersPayload<ExtArgs> | null
       agent: Prisma.$AgentPayload<ExtArgs> | null
       client: Prisma.$ClientPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       panierId: number
-      nom: string | null
-      tel: string | null
       statut: $Enums.StatutCommande
       dateLivraison: Date | null
       adresseLivraison: string | null
       notes: string | null
       clientId: number | null
-      fournisseurId: number | null
       agentId: number | null
-      enregistrerPar: string | null
+      estReserve: boolean | null
       entrepriseId: number
+      acheteurTiersId: number | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["commande"]>
@@ -24578,8 +25730,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Paiement<T extends Commande$PaiementArgs<ExtArgs> = {}>(args?: Subset<T, Commande$PaiementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaiementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     panier<T extends PanierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PanierDefaultArgs<ExtArgs>>): Prisma__PanierClient<$Result.GetResult<Prisma.$PanierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    fournisseur<T extends Commande$fournisseurArgs<ExtArgs> = {}>(args?: Subset<T, Commande$fournisseurArgs<ExtArgs>>): Prisma__FournisseurClient<$Result.GetResult<Prisma.$FournisseurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     entreprise<T extends EntrepriseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EntrepriseDefaultArgs<ExtArgs>>): Prisma__EntrepriseClient<$Result.GetResult<Prisma.$EntreprisePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    acheteurTiers<T extends Commande$acheteurTiersArgs<ExtArgs> = {}>(args?: Subset<T, Commande$acheteurTiersArgs<ExtArgs>>): Prisma__AcheteurTiersClient<$Result.GetResult<Prisma.$AcheteurTiersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     agent<T extends Commande$agentArgs<ExtArgs> = {}>(args?: Subset<T, Commande$agentArgs<ExtArgs>>): Prisma__AgentClient<$Result.GetResult<Prisma.$AgentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     client<T extends Commande$clientArgs<ExtArgs> = {}>(args?: Subset<T, Commande$clientArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
@@ -24613,17 +25765,15 @@ export namespace Prisma {
   interface CommandeFieldRefs {
     readonly id: FieldRef<"Commande", 'Int'>
     readonly panierId: FieldRef<"Commande", 'Int'>
-    readonly nom: FieldRef<"Commande", 'String'>
-    readonly tel: FieldRef<"Commande", 'String'>
     readonly statut: FieldRef<"Commande", 'StatutCommande'>
     readonly dateLivraison: FieldRef<"Commande", 'DateTime'>
     readonly adresseLivraison: FieldRef<"Commande", 'String'>
     readonly notes: FieldRef<"Commande", 'String'>
     readonly clientId: FieldRef<"Commande", 'Int'>
-    readonly fournisseurId: FieldRef<"Commande", 'Int'>
     readonly agentId: FieldRef<"Commande", 'Int'>
-    readonly enregistrerPar: FieldRef<"Commande", 'String'>
+    readonly estReserve: FieldRef<"Commande", 'Boolean'>
     readonly entrepriseId: FieldRef<"Commande", 'Int'>
+    readonly acheteurTiersId: FieldRef<"Commande", 'Int'>
     readonly createdAt: FieldRef<"Commande", 'DateTime'>
     readonly updatedAt: FieldRef<"Commande", 'DateTime'>
   }
@@ -25046,22 +26196,22 @@ export namespace Prisma {
   }
 
   /**
-   * Commande.fournisseur
+   * Commande.acheteurTiers
    */
-  export type Commande$fournisseurArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Commande$acheteurTiersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Fournisseur
+     * Select specific fields to fetch from the AcheteurTiers
      */
-    select?: FournisseurSelect<ExtArgs> | null
+    select?: AcheteurTiersSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Fournisseur
+     * Omit specific fields from the AcheteurTiers
      */
-    omit?: FournisseurOmit<ExtArgs> | null
+    omit?: AcheteurTiersOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: FournisseurInclude<ExtArgs> | null
-    where?: FournisseurWhereInput
+    include?: AcheteurTiersInclude<ExtArgs> | null
+    where?: AcheteurTiersWhereInput
   }
 
   /**
@@ -26585,20 +27735,28 @@ export namespace Prisma {
   export type AchatScalarFieldEnum = (typeof AchatScalarFieldEnum)[keyof typeof AchatScalarFieldEnum]
 
 
+  export const AcheteurTiersScalarFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    postnom: 'postnom',
+    tel: 'tel'
+  };
+
+  export type AcheteurTiersScalarFieldEnum = (typeof AcheteurTiersScalarFieldEnum)[keyof typeof AcheteurTiersScalarFieldEnum]
+
+
   export const CommandeScalarFieldEnum: {
     id: 'id',
     panierId: 'panierId',
-    nom: 'nom',
-    tel: 'tel',
     statut: 'statut',
     dateLivraison: 'dateLivraison',
     adresseLivraison: 'adresseLivraison',
     notes: 'notes',
     clientId: 'clientId',
-    fournisseurId: 'fournisseurId',
     agentId: 'agentId',
-    enregistrerPar: 'enregistrerPar',
+    estReserve: 'estReserve',
     entrepriseId: 'entrepriseId',
+    acheteurTiersId: 'acheteurTiersId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -27538,7 +28696,6 @@ export namespace Prisma {
     ventes?: VenteListRelationFilter
     adresses?: AdresseListRelationFilter
     contacts?: ContactListRelationFilter
-    commandes?: CommandeListRelationFilter
     DetailPanier?: DetailPanierListRelationFilter
   }
 
@@ -27555,7 +28712,6 @@ export namespace Prisma {
     ventes?: VenteOrderByRelationAggregateInput
     adresses?: AdresseOrderByRelationAggregateInput
     contacts?: ContactOrderByRelationAggregateInput
-    commandes?: CommandeOrderByRelationAggregateInput
     DetailPanier?: DetailPanierOrderByRelationAggregateInput
   }
 
@@ -27575,7 +28731,6 @@ export namespace Prisma {
     ventes?: VenteListRelationFilter
     adresses?: AdresseListRelationFilter
     contacts?: ContactListRelationFilter
-    commandes?: CommandeListRelationFilter
     DetailPanier?: DetailPanierListRelationFilter
   }, "id" | "nom" | "email">
 
@@ -28346,29 +29501,79 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Achat"> | Date | string
   }
 
+  export type AcheteurTiersWhereInput = {
+    AND?: AcheteurTiersWhereInput | AcheteurTiersWhereInput[]
+    OR?: AcheteurTiersWhereInput[]
+    NOT?: AcheteurTiersWhereInput | AcheteurTiersWhereInput[]
+    id?: IntFilter<"AcheteurTiers"> | number
+    nom?: StringFilter<"AcheteurTiers"> | string
+    postnom?: StringFilter<"AcheteurTiers"> | string
+    tel?: StringFilter<"AcheteurTiers"> | string
+    Commande?: CommandeListRelationFilter
+  }
+
+  export type AcheteurTiersOrderByWithRelationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    postnom?: SortOrder
+    tel?: SortOrder
+    Commande?: CommandeOrderByRelationAggregateInput
+  }
+
+  export type AcheteurTiersWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: AcheteurTiersWhereInput | AcheteurTiersWhereInput[]
+    OR?: AcheteurTiersWhereInput[]
+    NOT?: AcheteurTiersWhereInput | AcheteurTiersWhereInput[]
+    nom?: StringFilter<"AcheteurTiers"> | string
+    postnom?: StringFilter<"AcheteurTiers"> | string
+    tel?: StringFilter<"AcheteurTiers"> | string
+    Commande?: CommandeListRelationFilter
+  }, "id">
+
+  export type AcheteurTiersOrderByWithAggregationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    postnom?: SortOrder
+    tel?: SortOrder
+    _count?: AcheteurTiersCountOrderByAggregateInput
+    _avg?: AcheteurTiersAvgOrderByAggregateInput
+    _max?: AcheteurTiersMaxOrderByAggregateInput
+    _min?: AcheteurTiersMinOrderByAggregateInput
+    _sum?: AcheteurTiersSumOrderByAggregateInput
+  }
+
+  export type AcheteurTiersScalarWhereWithAggregatesInput = {
+    AND?: AcheteurTiersScalarWhereWithAggregatesInput | AcheteurTiersScalarWhereWithAggregatesInput[]
+    OR?: AcheteurTiersScalarWhereWithAggregatesInput[]
+    NOT?: AcheteurTiersScalarWhereWithAggregatesInput | AcheteurTiersScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"AcheteurTiers"> | number
+    nom?: StringWithAggregatesFilter<"AcheteurTiers"> | string
+    postnom?: StringWithAggregatesFilter<"AcheteurTiers"> | string
+    tel?: StringWithAggregatesFilter<"AcheteurTiers"> | string
+  }
+
   export type CommandeWhereInput = {
     AND?: CommandeWhereInput | CommandeWhereInput[]
     OR?: CommandeWhereInput[]
     NOT?: CommandeWhereInput | CommandeWhereInput[]
     id?: IntFilter<"Commande"> | number
     panierId?: IntFilter<"Commande"> | number
-    nom?: StringNullableFilter<"Commande"> | string | null
-    tel?: StringNullableFilter<"Commande"> | string | null
     statut?: EnumStatutCommandeFilter<"Commande"> | $Enums.StatutCommande
     dateLivraison?: DateTimeNullableFilter<"Commande"> | Date | string | null
     adresseLivraison?: StringNullableFilter<"Commande"> | string | null
     notes?: StringNullableFilter<"Commande"> | string | null
     clientId?: IntNullableFilter<"Commande"> | number | null
-    fournisseurId?: IntNullableFilter<"Commande"> | number | null
     agentId?: IntNullableFilter<"Commande"> | number | null
-    enregistrerPar?: StringNullableFilter<"Commande"> | string | null
+    estReserve?: BoolNullableFilter<"Commande"> | boolean | null
     entrepriseId?: IntFilter<"Commande"> | number
+    acheteurTiersId?: IntNullableFilter<"Commande"> | number | null
     createdAt?: DateTimeFilter<"Commande"> | Date | string
     updatedAt?: DateTimeFilter<"Commande"> | Date | string
     Paiement?: PaiementListRelationFilter
     panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
-    fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
     entreprise?: XOR<EntrepriseScalarRelationFilter, EntrepriseWhereInput>
+    acheteurTiers?: XOR<AcheteurTiersNullableScalarRelationFilter, AcheteurTiersWhereInput> | null
     agent?: XOR<AgentNullableScalarRelationFilter, AgentWhereInput> | null
     client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
   }
@@ -28376,23 +29581,21 @@ export namespace Prisma {
   export type CommandeOrderByWithRelationInput = {
     id?: SortOrder
     panierId?: SortOrder
-    nom?: SortOrderInput | SortOrder
-    tel?: SortOrderInput | SortOrder
     statut?: SortOrder
     dateLivraison?: SortOrderInput | SortOrder
     adresseLivraison?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     clientId?: SortOrderInput | SortOrder
-    fournisseurId?: SortOrderInput | SortOrder
     agentId?: SortOrderInput | SortOrder
-    enregistrerPar?: SortOrderInput | SortOrder
+    estReserve?: SortOrderInput | SortOrder
     entrepriseId?: SortOrder
+    acheteurTiersId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     Paiement?: PaiementOrderByRelationAggregateInput
     panier?: PanierOrderByWithRelationInput
-    fournisseur?: FournisseurOrderByWithRelationInput
     entreprise?: EntrepriseOrderByWithRelationInput
+    acheteurTiers?: AcheteurTiersOrderByWithRelationInput
     agent?: AgentOrderByWithRelationInput
     client?: ClientOrderByWithRelationInput
   }
@@ -28403,23 +29606,21 @@ export namespace Prisma {
     OR?: CommandeWhereInput[]
     NOT?: CommandeWhereInput | CommandeWhereInput[]
     panierId?: IntFilter<"Commande"> | number
-    nom?: StringNullableFilter<"Commande"> | string | null
-    tel?: StringNullableFilter<"Commande"> | string | null
     statut?: EnumStatutCommandeFilter<"Commande"> | $Enums.StatutCommande
     dateLivraison?: DateTimeNullableFilter<"Commande"> | Date | string | null
     adresseLivraison?: StringNullableFilter<"Commande"> | string | null
     notes?: StringNullableFilter<"Commande"> | string | null
     clientId?: IntNullableFilter<"Commande"> | number | null
-    fournisseurId?: IntNullableFilter<"Commande"> | number | null
     agentId?: IntNullableFilter<"Commande"> | number | null
-    enregistrerPar?: StringNullableFilter<"Commande"> | string | null
+    estReserve?: BoolNullableFilter<"Commande"> | boolean | null
     entrepriseId?: IntFilter<"Commande"> | number
+    acheteurTiersId?: IntNullableFilter<"Commande"> | number | null
     createdAt?: DateTimeFilter<"Commande"> | Date | string
     updatedAt?: DateTimeFilter<"Commande"> | Date | string
     Paiement?: PaiementListRelationFilter
     panier?: XOR<PanierScalarRelationFilter, PanierWhereInput>
-    fournisseur?: XOR<FournisseurNullableScalarRelationFilter, FournisseurWhereInput> | null
     entreprise?: XOR<EntrepriseScalarRelationFilter, EntrepriseWhereInput>
+    acheteurTiers?: XOR<AcheteurTiersNullableScalarRelationFilter, AcheteurTiersWhereInput> | null
     agent?: XOR<AgentNullableScalarRelationFilter, AgentWhereInput> | null
     client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
   }, "id">
@@ -28427,17 +29628,15 @@ export namespace Prisma {
   export type CommandeOrderByWithAggregationInput = {
     id?: SortOrder
     panierId?: SortOrder
-    nom?: SortOrderInput | SortOrder
-    tel?: SortOrderInput | SortOrder
     statut?: SortOrder
     dateLivraison?: SortOrderInput | SortOrder
     adresseLivraison?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     clientId?: SortOrderInput | SortOrder
-    fournisseurId?: SortOrderInput | SortOrder
     agentId?: SortOrderInput | SortOrder
-    enregistrerPar?: SortOrderInput | SortOrder
+    estReserve?: SortOrderInput | SortOrder
     entrepriseId?: SortOrder
+    acheteurTiersId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CommandeCountOrderByAggregateInput
@@ -28453,17 +29652,15 @@ export namespace Prisma {
     NOT?: CommandeScalarWhereWithAggregatesInput | CommandeScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Commande"> | number
     panierId?: IntWithAggregatesFilter<"Commande"> | number
-    nom?: StringNullableWithAggregatesFilter<"Commande"> | string | null
-    tel?: StringNullableWithAggregatesFilter<"Commande"> | string | null
     statut?: EnumStatutCommandeWithAggregatesFilter<"Commande"> | $Enums.StatutCommande
     dateLivraison?: DateTimeNullableWithAggregatesFilter<"Commande"> | Date | string | null
     adresseLivraison?: StringNullableWithAggregatesFilter<"Commande"> | string | null
     notes?: StringNullableWithAggregatesFilter<"Commande"> | string | null
     clientId?: IntNullableWithAggregatesFilter<"Commande"> | number | null
-    fournisseurId?: IntNullableWithAggregatesFilter<"Commande"> | number | null
     agentId?: IntNullableWithAggregatesFilter<"Commande"> | number | null
-    enregistrerPar?: StringNullableWithAggregatesFilter<"Commande"> | string | null
+    estReserve?: BoolNullableWithAggregatesFilter<"Commande"> | boolean | null
     entrepriseId?: IntWithAggregatesFilter<"Commande"> | number
+    acheteurTiersId?: IntNullableWithAggregatesFilter<"Commande"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Commande"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Commande"> | Date | string
   }
@@ -29262,7 +30459,6 @@ export namespace Prisma {
     ventes?: VenteCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseCreateNestedManyWithoutFournisseurInput
     contacts?: ContactCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutFournisseurInput
   }
 
@@ -29278,7 +30474,6 @@ export namespace Prisma {
     ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
@@ -29293,7 +30488,6 @@ export namespace Prisma {
     ventes?: VenteUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutFournisseurNestedInput
   }
 
@@ -29309,7 +30503,6 @@ export namespace Prisma {
     ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
@@ -30047,20 +31240,68 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AcheteurTiersCreateInput = {
+    nom: string
+    postnom: string
+    tel: string
+    Commande?: CommandeCreateNestedManyWithoutAcheteurTiersInput
+  }
+
+  export type AcheteurTiersUncheckedCreateInput = {
+    id?: number
+    nom: string
+    postnom: string
+    tel: string
+    Commande?: CommandeUncheckedCreateNestedManyWithoutAcheteurTiersInput
+  }
+
+  export type AcheteurTiersUpdateInput = {
+    nom?: StringFieldUpdateOperationsInput | string
+    postnom?: StringFieldUpdateOperationsInput | string
+    tel?: StringFieldUpdateOperationsInput | string
+    Commande?: CommandeUpdateManyWithoutAcheteurTiersNestedInput
+  }
+
+  export type AcheteurTiersUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    postnom?: StringFieldUpdateOperationsInput | string
+    tel?: StringFieldUpdateOperationsInput | string
+    Commande?: CommandeUncheckedUpdateManyWithoutAcheteurTiersNestedInput
+  }
+
+  export type AcheteurTiersCreateManyInput = {
+    id?: number
+    nom: string
+    postnom: string
+    tel: string
+  }
+
+  export type AcheteurTiersUpdateManyMutationInput = {
+    nom?: StringFieldUpdateOperationsInput | string
+    postnom?: StringFieldUpdateOperationsInput | string
+    tel?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AcheteurTiersUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    postnom?: StringFieldUpdateOperationsInput | string
+    tel?: StringFieldUpdateOperationsInput | string
+  }
+
   export type CommandeCreateInput = {
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Paiement?: PaiementCreateNestedManyWithoutCommandeInput
     panier: PanierCreateNestedOneWithoutCommandesInput
-    fournisseur?: FournisseurCreateNestedOneWithoutCommandesInput
     entreprise?: EntrepriseCreateNestedOneWithoutCommandeInput
+    acheteurTiers?: AcheteurTiersCreateNestedOneWithoutCommandeInput
     agent?: AgentCreateNestedOneWithoutCommandeInput
     client?: ClientCreateNestedOneWithoutCommandesInput
   }
@@ -30068,36 +31309,32 @@ export namespace Prisma {
   export type CommandeUncheckedCreateInput = {
     id?: number
     panierId: number
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
     clientId?: number | null
-    fournisseurId?: number | null
     agentId?: number | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     entrepriseId?: number
+    acheteurTiersId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Paiement?: PaiementUncheckedCreateNestedManyWithoutCommandeInput
   }
 
   export type CommandeUpdateInput = {
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Paiement?: PaiementUpdateManyWithoutCommandeNestedInput
     panier?: PanierUpdateOneRequiredWithoutCommandesNestedInput
-    fournisseur?: FournisseurUpdateOneWithoutCommandesNestedInput
     entreprise?: EntrepriseUpdateOneRequiredWithoutCommandeNestedInput
+    acheteurTiers?: AcheteurTiersUpdateOneWithoutCommandeNestedInput
     agent?: AgentUpdateOneWithoutCommandeNestedInput
     client?: ClientUpdateOneWithoutCommandesNestedInput
   }
@@ -30105,17 +31342,15 @@ export namespace Prisma {
   export type CommandeUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
+    acheteurTiersId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Paiement?: PaiementUncheckedUpdateManyWithoutCommandeNestedInput
@@ -30124,29 +31359,25 @@ export namespace Prisma {
   export type CommandeCreateManyInput = {
     id?: number
     panierId: number
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
     clientId?: number | null
-    fournisseurId?: number | null
     agentId?: number | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     entrepriseId?: number
+    acheteurTiersId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type CommandeUpdateManyMutationInput = {
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30154,17 +31385,15 @@ export namespace Prisma {
   export type CommandeUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
+    acheteurTiersId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31712,6 +32941,35 @@ export namespace Prisma {
     _max?: NestedEnumStatutAchatFilter<$PrismaModel>
   }
 
+  export type AcheteurTiersCountOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    postnom?: SortOrder
+    tel?: SortOrder
+  }
+
+  export type AcheteurTiersAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type AcheteurTiersMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    postnom?: SortOrder
+    tel?: SortOrder
+  }
+
+  export type AcheteurTiersMinOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    postnom?: SortOrder
+    tel?: SortOrder
+  }
+
+  export type AcheteurTiersSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type EnumStatutCommandeFilter<$PrismaModel = never> = {
     equals?: $Enums.StatutCommande | EnumStatutCommandeFieldRefInput<$PrismaModel>
     in?: $Enums.StatutCommande[] | ListEnumStatutCommandeFieldRefInput<$PrismaModel>
@@ -31719,20 +32977,28 @@ export namespace Prisma {
     not?: NestedEnumStatutCommandeFilter<$PrismaModel> | $Enums.StatutCommande
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type AcheteurTiersNullableScalarRelationFilter = {
+    is?: AcheteurTiersWhereInput | null
+    isNot?: AcheteurTiersWhereInput | null
+  }
+
   export type CommandeCountOrderByAggregateInput = {
     id?: SortOrder
     panierId?: SortOrder
-    nom?: SortOrder
-    tel?: SortOrder
     statut?: SortOrder
     dateLivraison?: SortOrder
     adresseLivraison?: SortOrder
     notes?: SortOrder
     clientId?: SortOrder
-    fournisseurId?: SortOrder
     agentId?: SortOrder
-    enregistrerPar?: SortOrder
+    estReserve?: SortOrder
     entrepriseId?: SortOrder
+    acheteurTiersId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -31741,25 +33007,23 @@ export namespace Prisma {
     id?: SortOrder
     panierId?: SortOrder
     clientId?: SortOrder
-    fournisseurId?: SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
+    acheteurTiersId?: SortOrder
   }
 
   export type CommandeMaxOrderByAggregateInput = {
     id?: SortOrder
     panierId?: SortOrder
-    nom?: SortOrder
-    tel?: SortOrder
     statut?: SortOrder
     dateLivraison?: SortOrder
     adresseLivraison?: SortOrder
     notes?: SortOrder
     clientId?: SortOrder
-    fournisseurId?: SortOrder
     agentId?: SortOrder
-    enregistrerPar?: SortOrder
+    estReserve?: SortOrder
     entrepriseId?: SortOrder
+    acheteurTiersId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -31767,17 +33031,15 @@ export namespace Prisma {
   export type CommandeMinOrderByAggregateInput = {
     id?: SortOrder
     panierId?: SortOrder
-    nom?: SortOrder
-    tel?: SortOrder
     statut?: SortOrder
     dateLivraison?: SortOrder
     adresseLivraison?: SortOrder
     notes?: SortOrder
     clientId?: SortOrder
-    fournisseurId?: SortOrder
     agentId?: SortOrder
-    enregistrerPar?: SortOrder
+    estReserve?: SortOrder
     entrepriseId?: SortOrder
+    acheteurTiersId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -31786,9 +33048,9 @@ export namespace Prisma {
     id?: SortOrder
     panierId?: SortOrder
     clientId?: SortOrder
-    fournisseurId?: SortOrder
     agentId?: SortOrder
     entrepriseId?: SortOrder
+    acheteurTiersId?: SortOrder
   }
 
   export type EnumStatutCommandeWithAggregatesFilter<$PrismaModel = never> = {
@@ -31799,6 +33061,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutCommandeFilter<$PrismaModel>
     _max?: NestedEnumStatutCommandeFilter<$PrismaModel>
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type EnumMotifsDepenseFilter<$PrismaModel = never> = {
@@ -33283,13 +34553,6 @@ export namespace Prisma {
     connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
   }
 
-  export type CommandeCreateNestedManyWithoutFournisseurInput = {
-    create?: XOR<CommandeCreateWithoutFournisseurInput, CommandeUncheckedCreateWithoutFournisseurInput> | CommandeCreateWithoutFournisseurInput[] | CommandeUncheckedCreateWithoutFournisseurInput[]
-    connectOrCreate?: CommandeCreateOrConnectWithoutFournisseurInput | CommandeCreateOrConnectWithoutFournisseurInput[]
-    createMany?: CommandeCreateManyFournisseurInputEnvelope
-    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
-  }
-
   export type DetailPanierCreateNestedManyWithoutFournisseurInput = {
     create?: XOR<DetailPanierCreateWithoutFournisseurInput, DetailPanierUncheckedCreateWithoutFournisseurInput> | DetailPanierCreateWithoutFournisseurInput[] | DetailPanierUncheckedCreateWithoutFournisseurInput[]
     connectOrCreate?: DetailPanierCreateOrConnectWithoutFournisseurInput | DetailPanierCreateOrConnectWithoutFournisseurInput[]
@@ -33316,13 +34579,6 @@ export namespace Prisma {
     connectOrCreate?: ContactCreateOrConnectWithoutFournisseurInput | ContactCreateOrConnectWithoutFournisseurInput[]
     createMany?: ContactCreateManyFournisseurInputEnvelope
     connect?: ContactWhereUniqueInput | ContactWhereUniqueInput[]
-  }
-
-  export type CommandeUncheckedCreateNestedManyWithoutFournisseurInput = {
-    create?: XOR<CommandeCreateWithoutFournisseurInput, CommandeUncheckedCreateWithoutFournisseurInput> | CommandeCreateWithoutFournisseurInput[] | CommandeUncheckedCreateWithoutFournisseurInput[]
-    connectOrCreate?: CommandeCreateOrConnectWithoutFournisseurInput | CommandeCreateOrConnectWithoutFournisseurInput[]
-    createMany?: CommandeCreateManyFournisseurInputEnvelope
-    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
   }
 
   export type DetailPanierUncheckedCreateNestedManyWithoutFournisseurInput = {
@@ -33386,20 +34642,6 @@ export namespace Prisma {
     deleteMany?: ContactScalarWhereInput | ContactScalarWhereInput[]
   }
 
-  export type CommandeUpdateManyWithoutFournisseurNestedInput = {
-    create?: XOR<CommandeCreateWithoutFournisseurInput, CommandeUncheckedCreateWithoutFournisseurInput> | CommandeCreateWithoutFournisseurInput[] | CommandeUncheckedCreateWithoutFournisseurInput[]
-    connectOrCreate?: CommandeCreateOrConnectWithoutFournisseurInput | CommandeCreateOrConnectWithoutFournisseurInput[]
-    upsert?: CommandeUpsertWithWhereUniqueWithoutFournisseurInput | CommandeUpsertWithWhereUniqueWithoutFournisseurInput[]
-    createMany?: CommandeCreateManyFournisseurInputEnvelope
-    set?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
-    disconnect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
-    delete?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
-    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
-    update?: CommandeUpdateWithWhereUniqueWithoutFournisseurInput | CommandeUpdateWithWhereUniqueWithoutFournisseurInput[]
-    updateMany?: CommandeUpdateManyWithWhereWithoutFournisseurInput | CommandeUpdateManyWithWhereWithoutFournisseurInput[]
-    deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
-  }
-
   export type DetailPanierUpdateManyWithoutFournisseurNestedInput = {
     create?: XOR<DetailPanierCreateWithoutFournisseurInput, DetailPanierUncheckedCreateWithoutFournisseurInput> | DetailPanierCreateWithoutFournisseurInput[] | DetailPanierUncheckedCreateWithoutFournisseurInput[]
     connectOrCreate?: DetailPanierCreateOrConnectWithoutFournisseurInput | DetailPanierCreateOrConnectWithoutFournisseurInput[]
@@ -33454,20 +34696,6 @@ export namespace Prisma {
     update?: ContactUpdateWithWhereUniqueWithoutFournisseurInput | ContactUpdateWithWhereUniqueWithoutFournisseurInput[]
     updateMany?: ContactUpdateManyWithWhereWithoutFournisseurInput | ContactUpdateManyWithWhereWithoutFournisseurInput[]
     deleteMany?: ContactScalarWhereInput | ContactScalarWhereInput[]
-  }
-
-  export type CommandeUncheckedUpdateManyWithoutFournisseurNestedInput = {
-    create?: XOR<CommandeCreateWithoutFournisseurInput, CommandeUncheckedCreateWithoutFournisseurInput> | CommandeCreateWithoutFournisseurInput[] | CommandeUncheckedCreateWithoutFournisseurInput[]
-    connectOrCreate?: CommandeCreateOrConnectWithoutFournisseurInput | CommandeCreateOrConnectWithoutFournisseurInput[]
-    upsert?: CommandeUpsertWithWhereUniqueWithoutFournisseurInput | CommandeUpsertWithWhereUniqueWithoutFournisseurInput[]
-    createMany?: CommandeCreateManyFournisseurInputEnvelope
-    set?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
-    disconnect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
-    delete?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
-    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
-    update?: CommandeUpdateWithWhereUniqueWithoutFournisseurInput | CommandeUpdateWithWhereUniqueWithoutFournisseurInput[]
-    updateMany?: CommandeUpdateManyWithWhereWithoutFournisseurInput | CommandeUpdateManyWithWhereWithoutFournisseurInput[]
-    deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
   }
 
   export type DetailPanierUncheckedUpdateManyWithoutFournisseurNestedInput = {
@@ -34436,6 +35664,48 @@ export namespace Prisma {
     deleteMany?: PaiementScalarWhereInput | PaiementScalarWhereInput[]
   }
 
+  export type CommandeCreateNestedManyWithoutAcheteurTiersInput = {
+    create?: XOR<CommandeCreateWithoutAcheteurTiersInput, CommandeUncheckedCreateWithoutAcheteurTiersInput> | CommandeCreateWithoutAcheteurTiersInput[] | CommandeUncheckedCreateWithoutAcheteurTiersInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutAcheteurTiersInput | CommandeCreateOrConnectWithoutAcheteurTiersInput[]
+    createMany?: CommandeCreateManyAcheteurTiersInputEnvelope
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+  }
+
+  export type CommandeUncheckedCreateNestedManyWithoutAcheteurTiersInput = {
+    create?: XOR<CommandeCreateWithoutAcheteurTiersInput, CommandeUncheckedCreateWithoutAcheteurTiersInput> | CommandeCreateWithoutAcheteurTiersInput[] | CommandeUncheckedCreateWithoutAcheteurTiersInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutAcheteurTiersInput | CommandeCreateOrConnectWithoutAcheteurTiersInput[]
+    createMany?: CommandeCreateManyAcheteurTiersInputEnvelope
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+  }
+
+  export type CommandeUpdateManyWithoutAcheteurTiersNestedInput = {
+    create?: XOR<CommandeCreateWithoutAcheteurTiersInput, CommandeUncheckedCreateWithoutAcheteurTiersInput> | CommandeCreateWithoutAcheteurTiersInput[] | CommandeUncheckedCreateWithoutAcheteurTiersInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutAcheteurTiersInput | CommandeCreateOrConnectWithoutAcheteurTiersInput[]
+    upsert?: CommandeUpsertWithWhereUniqueWithoutAcheteurTiersInput | CommandeUpsertWithWhereUniqueWithoutAcheteurTiersInput[]
+    createMany?: CommandeCreateManyAcheteurTiersInputEnvelope
+    set?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    disconnect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    delete?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    update?: CommandeUpdateWithWhereUniqueWithoutAcheteurTiersInput | CommandeUpdateWithWhereUniqueWithoutAcheteurTiersInput[]
+    updateMany?: CommandeUpdateManyWithWhereWithoutAcheteurTiersInput | CommandeUpdateManyWithWhereWithoutAcheteurTiersInput[]
+    deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
+  }
+
+  export type CommandeUncheckedUpdateManyWithoutAcheteurTiersNestedInput = {
+    create?: XOR<CommandeCreateWithoutAcheteurTiersInput, CommandeUncheckedCreateWithoutAcheteurTiersInput> | CommandeCreateWithoutAcheteurTiersInput[] | CommandeUncheckedCreateWithoutAcheteurTiersInput[]
+    connectOrCreate?: CommandeCreateOrConnectWithoutAcheteurTiersInput | CommandeCreateOrConnectWithoutAcheteurTiersInput[]
+    upsert?: CommandeUpsertWithWhereUniqueWithoutAcheteurTiersInput | CommandeUpsertWithWhereUniqueWithoutAcheteurTiersInput[]
+    createMany?: CommandeCreateManyAcheteurTiersInputEnvelope
+    set?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    disconnect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    delete?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    connect?: CommandeWhereUniqueInput | CommandeWhereUniqueInput[]
+    update?: CommandeUpdateWithWhereUniqueWithoutAcheteurTiersInput | CommandeUpdateWithWhereUniqueWithoutAcheteurTiersInput[]
+    updateMany?: CommandeUpdateManyWithWhereWithoutAcheteurTiersInput | CommandeUpdateManyWithWhereWithoutAcheteurTiersInput[]
+    deleteMany?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
+  }
+
   export type PaiementCreateNestedManyWithoutCommandeInput = {
     create?: XOR<PaiementCreateWithoutCommandeInput, PaiementUncheckedCreateWithoutCommandeInput> | PaiementCreateWithoutCommandeInput[] | PaiementUncheckedCreateWithoutCommandeInput[]
     connectOrCreate?: PaiementCreateOrConnectWithoutCommandeInput | PaiementCreateOrConnectWithoutCommandeInput[]
@@ -34449,16 +35719,16 @@ export namespace Prisma {
     connect?: PanierWhereUniqueInput
   }
 
-  export type FournisseurCreateNestedOneWithoutCommandesInput = {
-    create?: XOR<FournisseurCreateWithoutCommandesInput, FournisseurUncheckedCreateWithoutCommandesInput>
-    connectOrCreate?: FournisseurCreateOrConnectWithoutCommandesInput
-    connect?: FournisseurWhereUniqueInput
-  }
-
   export type EntrepriseCreateNestedOneWithoutCommandeInput = {
     create?: XOR<EntrepriseCreateWithoutCommandeInput, EntrepriseUncheckedCreateWithoutCommandeInput>
     connectOrCreate?: EntrepriseCreateOrConnectWithoutCommandeInput
     connect?: EntrepriseWhereUniqueInput
+  }
+
+  export type AcheteurTiersCreateNestedOneWithoutCommandeInput = {
+    create?: XOR<AcheteurTiersCreateWithoutCommandeInput, AcheteurTiersUncheckedCreateWithoutCommandeInput>
+    connectOrCreate?: AcheteurTiersCreateOrConnectWithoutCommandeInput
+    connect?: AcheteurTiersWhereUniqueInput
   }
 
   export type AgentCreateNestedOneWithoutCommandeInput = {
@@ -34484,6 +35754,10 @@ export namespace Prisma {
     set?: $Enums.StatutCommande
   }
 
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
   export type PaiementUpdateManyWithoutCommandeNestedInput = {
     create?: XOR<PaiementCreateWithoutCommandeInput, PaiementUncheckedCreateWithoutCommandeInput> | PaiementCreateWithoutCommandeInput[] | PaiementUncheckedCreateWithoutCommandeInput[]
     connectOrCreate?: PaiementCreateOrConnectWithoutCommandeInput | PaiementCreateOrConnectWithoutCommandeInput[]
@@ -34506,22 +35780,22 @@ export namespace Prisma {
     update?: XOR<XOR<PanierUpdateToOneWithWhereWithoutCommandesInput, PanierUpdateWithoutCommandesInput>, PanierUncheckedUpdateWithoutCommandesInput>
   }
 
-  export type FournisseurUpdateOneWithoutCommandesNestedInput = {
-    create?: XOR<FournisseurCreateWithoutCommandesInput, FournisseurUncheckedCreateWithoutCommandesInput>
-    connectOrCreate?: FournisseurCreateOrConnectWithoutCommandesInput
-    upsert?: FournisseurUpsertWithoutCommandesInput
-    disconnect?: FournisseurWhereInput | boolean
-    delete?: FournisseurWhereInput | boolean
-    connect?: FournisseurWhereUniqueInput
-    update?: XOR<XOR<FournisseurUpdateToOneWithWhereWithoutCommandesInput, FournisseurUpdateWithoutCommandesInput>, FournisseurUncheckedUpdateWithoutCommandesInput>
-  }
-
   export type EntrepriseUpdateOneRequiredWithoutCommandeNestedInput = {
     create?: XOR<EntrepriseCreateWithoutCommandeInput, EntrepriseUncheckedCreateWithoutCommandeInput>
     connectOrCreate?: EntrepriseCreateOrConnectWithoutCommandeInput
     upsert?: EntrepriseUpsertWithoutCommandeInput
     connect?: EntrepriseWhereUniqueInput
     update?: XOR<XOR<EntrepriseUpdateToOneWithWhereWithoutCommandeInput, EntrepriseUpdateWithoutCommandeInput>, EntrepriseUncheckedUpdateWithoutCommandeInput>
+  }
+
+  export type AcheteurTiersUpdateOneWithoutCommandeNestedInput = {
+    create?: XOR<AcheteurTiersCreateWithoutCommandeInput, AcheteurTiersUncheckedCreateWithoutCommandeInput>
+    connectOrCreate?: AcheteurTiersCreateOrConnectWithoutCommandeInput
+    upsert?: AcheteurTiersUpsertWithoutCommandeInput
+    disconnect?: AcheteurTiersWhereInput | boolean
+    delete?: AcheteurTiersWhereInput | boolean
+    connect?: AcheteurTiersWhereUniqueInput
+    update?: XOR<XOR<AcheteurTiersUpdateToOneWithWhereWithoutCommandeInput, AcheteurTiersUpdateWithoutCommandeInput>, AcheteurTiersUncheckedUpdateWithoutCommandeInput>
   }
 
   export type AgentUpdateOneWithoutCommandeNestedInput = {
@@ -35039,6 +36313,11 @@ export namespace Prisma {
     not?: NestedEnumStatutCommandeFilter<$PrismaModel> | $Enums.StatutCommande
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type NestedEnumStatutCommandeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.StatutCommande | EnumStatutCommandeFieldRefInput<$PrismaModel>
     in?: $Enums.StatutCommande[] | ListEnumStatutCommandeFieldRefInput<$PrismaModel>
@@ -35047,6 +36326,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatutCommandeFilter<$PrismaModel>
     _max?: NestedEnumStatutCommandeFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumMotifsDepenseFilter<$PrismaModel = never> = {
@@ -35765,18 +37052,16 @@ export namespace Prisma {
   }
 
   export type CommandeCreateWithoutEntrepriseInput = {
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Paiement?: PaiementCreateNestedManyWithoutCommandeInput
     panier: PanierCreateNestedOneWithoutCommandesInput
-    fournisseur?: FournisseurCreateNestedOneWithoutCommandesInput
+    acheteurTiers?: AcheteurTiersCreateNestedOneWithoutCommandeInput
     agent?: AgentCreateNestedOneWithoutCommandeInput
     client?: ClientCreateNestedOneWithoutCommandesInput
   }
@@ -35784,16 +37069,14 @@ export namespace Prisma {
   export type CommandeUncheckedCreateWithoutEntrepriseInput = {
     id?: number
     panierId: number
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
     clientId?: number | null
-    fournisseurId?: number | null
     agentId?: number | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
+    acheteurTiersId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Paiement?: PaiementUncheckedCreateNestedManyWithoutCommandeInput
@@ -35993,17 +37276,15 @@ export namespace Prisma {
     NOT?: CommandeScalarWhereInput | CommandeScalarWhereInput[]
     id?: IntFilter<"Commande"> | number
     panierId?: IntFilter<"Commande"> | number
-    nom?: StringNullableFilter<"Commande"> | string | null
-    tel?: StringNullableFilter<"Commande"> | string | null
     statut?: EnumStatutCommandeFilter<"Commande"> | $Enums.StatutCommande
     dateLivraison?: DateTimeNullableFilter<"Commande"> | Date | string | null
     adresseLivraison?: StringNullableFilter<"Commande"> | string | null
     notes?: StringNullableFilter<"Commande"> | string | null
     clientId?: IntNullableFilter<"Commande"> | number | null
-    fournisseurId?: IntNullableFilter<"Commande"> | number | null
     agentId?: IntNullableFilter<"Commande"> | number | null
-    enregistrerPar?: StringNullableFilter<"Commande"> | string | null
+    estReserve?: BoolNullableFilter<"Commande"> | boolean | null
     entrepriseId?: IntFilter<"Commande"> | number
+    acheteurTiersId?: IntNullableFilter<"Commande"> | number | null
     createdAt?: DateTimeFilter<"Commande"> | Date | string
     updatedAt?: DateTimeFilter<"Commande"> | Date | string
   }
@@ -36356,7 +37637,6 @@ export namespace Prisma {
     ventes?: VenteCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseCreateNestedManyWithoutFournisseurInput
     contacts?: ContactCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutFournisseurInput
   }
 
@@ -36371,7 +37651,6 @@ export namespace Prisma {
     ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
@@ -36386,35 +37665,31 @@ export namespace Prisma {
   }
 
   export type CommandeCreateWithoutAgentInput = {
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Paiement?: PaiementCreateNestedManyWithoutCommandeInput
     panier: PanierCreateNestedOneWithoutCommandesInput
-    fournisseur?: FournisseurCreateNestedOneWithoutCommandesInput
     entreprise?: EntrepriseCreateNestedOneWithoutCommandeInput
+    acheteurTiers?: AcheteurTiersCreateNestedOneWithoutCommandeInput
     client?: ClientCreateNestedOneWithoutCommandesInput
   }
 
   export type CommandeUncheckedCreateWithoutAgentInput = {
     id?: number
     panierId: number
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
     clientId?: number | null
-    fournisseurId?: number | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     entrepriseId?: number
+    acheteurTiersId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Paiement?: PaiementUncheckedCreateNestedManyWithoutCommandeInput
@@ -36849,35 +38124,31 @@ export namespace Prisma {
   }
 
   export type CommandeCreateWithoutClientInput = {
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Paiement?: PaiementCreateNestedManyWithoutCommandeInput
     panier: PanierCreateNestedOneWithoutCommandesInput
-    fournisseur?: FournisseurCreateNestedOneWithoutCommandesInput
     entreprise?: EntrepriseCreateNestedOneWithoutCommandeInput
+    acheteurTiers?: AcheteurTiersCreateNestedOneWithoutCommandeInput
     agent?: AgentCreateNestedOneWithoutCommandeInput
   }
 
   export type CommandeUncheckedCreateWithoutClientInput = {
     id?: number
     panierId: number
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
-    fournisseurId?: number | null
     agentId?: number | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     entrepriseId?: number
+    acheteurTiersId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Paiement?: PaiementUncheckedCreateNestedManyWithoutCommandeInput
@@ -37087,7 +38358,6 @@ export namespace Prisma {
     agent: AgentCreateNestedOneWithoutFournisseurInput
     ventes?: VenteCreateNestedManyWithoutFournisseurInput
     contacts?: ContactCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutFournisseurInput
   }
 
@@ -37102,7 +38372,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
     contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
@@ -37284,7 +38553,6 @@ export namespace Prisma {
     agent?: AgentUpdateOneRequiredWithoutFournisseurNestedInput
     ventes?: VenteUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutFournisseurNestedInput
   }
 
@@ -37299,7 +38567,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
@@ -37495,7 +38762,6 @@ export namespace Prisma {
     agent: AgentCreateNestedOneWithoutFournisseurInput
     ventes?: VenteCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutFournisseurInput
   }
 
@@ -37510,7 +38776,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
@@ -37698,7 +38963,6 @@ export namespace Prisma {
     agent?: AgentUpdateOneRequiredWithoutFournisseurNestedInput
     ventes?: VenteUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutFournisseurNestedInput
   }
 
@@ -37713,7 +38977,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
@@ -37880,51 +39143,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CommandeCreateWithoutFournisseurInput = {
-    nom?: string | null
-    tel?: string | null
-    statut?: $Enums.StatutCommande
-    dateLivraison?: Date | string | null
-    adresseLivraison?: string | null
-    notes?: string | null
-    enregistrerPar?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Paiement?: PaiementCreateNestedManyWithoutCommandeInput
-    panier: PanierCreateNestedOneWithoutCommandesInput
-    entreprise?: EntrepriseCreateNestedOneWithoutCommandeInput
-    agent?: AgentCreateNestedOneWithoutCommandeInput
-    client?: ClientCreateNestedOneWithoutCommandesInput
-  }
-
-  export type CommandeUncheckedCreateWithoutFournisseurInput = {
-    id?: number
-    panierId: number
-    nom?: string | null
-    tel?: string | null
-    statut?: $Enums.StatutCommande
-    dateLivraison?: Date | string | null
-    adresseLivraison?: string | null
-    notes?: string | null
-    clientId?: number | null
-    agentId?: number | null
-    enregistrerPar?: string | null
-    entrepriseId?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Paiement?: PaiementUncheckedCreateNestedManyWithoutCommandeInput
-  }
-
-  export type CommandeCreateOrConnectWithoutFournisseurInput = {
-    where: CommandeWhereUniqueInput
-    create: XOR<CommandeCreateWithoutFournisseurInput, CommandeUncheckedCreateWithoutFournisseurInput>
-  }
-
-  export type CommandeCreateManyFournisseurInputEnvelope = {
-    data: CommandeCreateManyFournisseurInput | CommandeCreateManyFournisseurInput[]
-    skipDuplicates?: boolean
-  }
-
   export type DetailPanierCreateWithoutFournisseurInput = {
     qtte: number
     prixUnitaire: number
@@ -38068,22 +39286,6 @@ export namespace Prisma {
   export type ContactUpdateManyWithWhereWithoutFournisseurInput = {
     where: ContactScalarWhereInput
     data: XOR<ContactUpdateManyMutationInput, ContactUncheckedUpdateManyWithoutFournisseurInput>
-  }
-
-  export type CommandeUpsertWithWhereUniqueWithoutFournisseurInput = {
-    where: CommandeWhereUniqueInput
-    update: XOR<CommandeUpdateWithoutFournisseurInput, CommandeUncheckedUpdateWithoutFournisseurInput>
-    create: XOR<CommandeCreateWithoutFournisseurInput, CommandeUncheckedCreateWithoutFournisseurInput>
-  }
-
-  export type CommandeUpdateWithWhereUniqueWithoutFournisseurInput = {
-    where: CommandeWhereUniqueInput
-    data: XOR<CommandeUpdateWithoutFournisseurInput, CommandeUncheckedUpdateWithoutFournisseurInput>
-  }
-
-  export type CommandeUpdateManyWithWhereWithoutFournisseurInput = {
-    where: CommandeScalarWhereInput
-    data: XOR<CommandeUpdateManyMutationInput, CommandeUncheckedUpdateManyWithoutFournisseurInput>
   }
 
   export type DetailPanierUpsertWithWhereUniqueWithoutFournisseurInput = {
@@ -38644,18 +39846,16 @@ export namespace Prisma {
   }
 
   export type CommandeCreateWithoutPaiementInput = {
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     panier: PanierCreateNestedOneWithoutCommandesInput
-    fournisseur?: FournisseurCreateNestedOneWithoutCommandesInput
     entreprise?: EntrepriseCreateNestedOneWithoutCommandeInput
+    acheteurTiers?: AcheteurTiersCreateNestedOneWithoutCommandeInput
     agent?: AgentCreateNestedOneWithoutCommandeInput
     client?: ClientCreateNestedOneWithoutCommandesInput
   }
@@ -38663,17 +39863,15 @@ export namespace Prisma {
   export type CommandeUncheckedCreateWithoutPaiementInput = {
     id?: number
     panierId: number
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
     clientId?: number | null
-    fournisseurId?: number | null
     agentId?: number | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     entrepriseId?: number
+    acheteurTiersId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -38891,18 +40089,16 @@ export namespace Prisma {
   }
 
   export type CommandeUpdateWithoutPaiementInput = {
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     panier?: PanierUpdateOneRequiredWithoutCommandesNestedInput
-    fournisseur?: FournisseurUpdateOneWithoutCommandesNestedInput
     entreprise?: EntrepriseUpdateOneRequiredWithoutCommandeNestedInput
+    acheteurTiers?: AcheteurTiersUpdateOneWithoutCommandeNestedInput
     agent?: AgentUpdateOneWithoutCommandeNestedInput
     client?: ClientUpdateOneWithoutCommandesNestedInput
   }
@@ -38910,17 +40106,15 @@ export namespace Prisma {
   export type CommandeUncheckedUpdateWithoutPaiementInput = {
     id?: IntFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
+    acheteurTiersId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39466,7 +40660,6 @@ export namespace Prisma {
     agent: AgentCreateNestedOneWithoutFournisseurInput
     adresses?: AdresseCreateNestedManyWithoutFournisseurInput
     contacts?: ContactCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierCreateNestedManyWithoutFournisseurInput
   }
 
@@ -39481,7 +40674,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
     DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
@@ -39726,7 +40918,6 @@ export namespace Prisma {
     agent?: AgentUpdateOneRequiredWithoutFournisseurNestedInput
     adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutFournisseurNestedInput
   }
 
@@ -39741,7 +40932,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
@@ -40061,35 +41251,31 @@ export namespace Prisma {
   }
 
   export type CommandeCreateWithoutPanierInput = {
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Paiement?: PaiementCreateNestedManyWithoutCommandeInput
-    fournisseur?: FournisseurCreateNestedOneWithoutCommandesInput
     entreprise?: EntrepriseCreateNestedOneWithoutCommandeInput
+    acheteurTiers?: AcheteurTiersCreateNestedOneWithoutCommandeInput
     agent?: AgentCreateNestedOneWithoutCommandeInput
     client?: ClientCreateNestedOneWithoutCommandesInput
   }
 
   export type CommandeUncheckedCreateWithoutPanierInput = {
     id?: number
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
     clientId?: number | null
-    fournisseurId?: number | null
     agentId?: number | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     entrepriseId?: number
+    acheteurTiersId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Paiement?: PaiementUncheckedCreateNestedManyWithoutCommandeInput
@@ -40282,7 +41468,6 @@ export namespace Prisma {
     ventes?: VenteCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseCreateNestedManyWithoutFournisseurInput
     contacts?: ContactCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurUncheckedCreateWithoutDetailPanierInput = {
@@ -40297,7 +41482,6 @@ export namespace Prisma {
     ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
     adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
     contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
-    commandes?: CommandeUncheckedCreateNestedManyWithoutFournisseurInput
   }
 
   export type FournisseurCreateOrConnectWithoutDetailPanierInput = {
@@ -40445,7 +41629,6 @@ export namespace Prisma {
     ventes?: VenteUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
   }
 
   export type FournisseurUncheckedUpdateWithoutDetailPanierInput = {
@@ -40460,7 +41643,6 @@ export namespace Prisma {
     ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
   export type ModePaiementUpsertWithoutDetailPanierInput = {
@@ -40938,6 +42120,63 @@ export namespace Prisma {
     data: XOR<PaiementUpdateManyMutationInput, PaiementUncheckedUpdateManyWithoutAchatInput>
   }
 
+  export type CommandeCreateWithoutAcheteurTiersInput = {
+    statut?: $Enums.StatutCommande
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
+    estReserve?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Paiement?: PaiementCreateNestedManyWithoutCommandeInput
+    panier: PanierCreateNestedOneWithoutCommandesInput
+    entreprise?: EntrepriseCreateNestedOneWithoutCommandeInput
+    agent?: AgentCreateNestedOneWithoutCommandeInput
+    client?: ClientCreateNestedOneWithoutCommandesInput
+  }
+
+  export type CommandeUncheckedCreateWithoutAcheteurTiersInput = {
+    id?: number
+    panierId: number
+    statut?: $Enums.StatutCommande
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
+    clientId?: number | null
+    agentId?: number | null
+    estReserve?: boolean | null
+    entrepriseId?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Paiement?: PaiementUncheckedCreateNestedManyWithoutCommandeInput
+  }
+
+  export type CommandeCreateOrConnectWithoutAcheteurTiersInput = {
+    where: CommandeWhereUniqueInput
+    create: XOR<CommandeCreateWithoutAcheteurTiersInput, CommandeUncheckedCreateWithoutAcheteurTiersInput>
+  }
+
+  export type CommandeCreateManyAcheteurTiersInputEnvelope = {
+    data: CommandeCreateManyAcheteurTiersInput | CommandeCreateManyAcheteurTiersInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommandeUpsertWithWhereUniqueWithoutAcheteurTiersInput = {
+    where: CommandeWhereUniqueInput
+    update: XOR<CommandeUpdateWithoutAcheteurTiersInput, CommandeUncheckedUpdateWithoutAcheteurTiersInput>
+    create: XOR<CommandeCreateWithoutAcheteurTiersInput, CommandeUncheckedCreateWithoutAcheteurTiersInput>
+  }
+
+  export type CommandeUpdateWithWhereUniqueWithoutAcheteurTiersInput = {
+    where: CommandeWhereUniqueInput
+    data: XOR<CommandeUpdateWithoutAcheteurTiersInput, CommandeUncheckedUpdateWithoutAcheteurTiersInput>
+  }
+
+  export type CommandeUpdateManyWithWhereWithoutAcheteurTiersInput = {
+    where: CommandeScalarWhereInput
+    data: XOR<CommandeUpdateManyMutationInput, CommandeUncheckedUpdateManyWithoutAcheteurTiersInput>
+  }
+
   export type PaiementCreateWithoutCommandeInput = {
     montant?: number | null
     createdAt?: Date | string
@@ -41001,40 +42240,6 @@ export namespace Prisma {
     create: XOR<PanierCreateWithoutCommandesInput, PanierUncheckedCreateWithoutCommandesInput>
   }
 
-  export type FournisseurCreateWithoutCommandesInput = {
-    nom: string
-    email: string
-    typeProduit?: $Enums.TypeProduit | null
-    autresType?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    agent: AgentCreateNestedOneWithoutFournisseurInput
-    ventes?: VenteCreateNestedManyWithoutFournisseurInput
-    adresses?: AdresseCreateNestedManyWithoutFournisseurInput
-    contacts?: ContactCreateNestedManyWithoutFournisseurInput
-    DetailPanier?: DetailPanierCreateNestedManyWithoutFournisseurInput
-  }
-
-  export type FournisseurUncheckedCreateWithoutCommandesInput = {
-    id?: number
-    nom: string
-    email: string
-    typeProduit?: $Enums.TypeProduit | null
-    autresType?: string | null
-    agentId: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ventes?: VenteUncheckedCreateNestedManyWithoutFournisseurInput
-    adresses?: AdresseUncheckedCreateNestedManyWithoutFournisseurInput
-    contacts?: ContactUncheckedCreateNestedManyWithoutFournisseurInput
-    DetailPanier?: DetailPanierUncheckedCreateNestedManyWithoutFournisseurInput
-  }
-
-  export type FournisseurCreateOrConnectWithoutCommandesInput = {
-    where: FournisseurWhereUniqueInput
-    create: XOR<FournisseurCreateWithoutCommandesInput, FournisseurUncheckedCreateWithoutCommandesInput>
-  }
-
   export type EntrepriseCreateWithoutCommandeInput = {
     raison_sociale?: string | null
     forme_juridique?: string | null
@@ -41083,6 +42288,24 @@ export namespace Prisma {
   export type EntrepriseCreateOrConnectWithoutCommandeInput = {
     where: EntrepriseWhereUniqueInput
     create: XOR<EntrepriseCreateWithoutCommandeInput, EntrepriseUncheckedCreateWithoutCommandeInput>
+  }
+
+  export type AcheteurTiersCreateWithoutCommandeInput = {
+    nom: string
+    postnom: string
+    tel: string
+  }
+
+  export type AcheteurTiersUncheckedCreateWithoutCommandeInput = {
+    id?: number
+    nom: string
+    postnom: string
+    tel: string
+  }
+
+  export type AcheteurTiersCreateOrConnectWithoutCommandeInput = {
+    where: AcheteurTiersWhereUniqueInput
+    create: XOR<AcheteurTiersCreateWithoutCommandeInput, AcheteurTiersUncheckedCreateWithoutCommandeInput>
   }
 
   export type AgentCreateWithoutCommandeInput = {
@@ -41225,46 +42448,6 @@ export namespace Prisma {
     ventes?: VenteUncheckedUpdateManyWithoutPanierNestedInput
   }
 
-  export type FournisseurUpsertWithoutCommandesInput = {
-    update: XOR<FournisseurUpdateWithoutCommandesInput, FournisseurUncheckedUpdateWithoutCommandesInput>
-    create: XOR<FournisseurCreateWithoutCommandesInput, FournisseurUncheckedCreateWithoutCommandesInput>
-    where?: FournisseurWhereInput
-  }
-
-  export type FournisseurUpdateToOneWithWhereWithoutCommandesInput = {
-    where?: FournisseurWhereInput
-    data: XOR<FournisseurUpdateWithoutCommandesInput, FournisseurUncheckedUpdateWithoutCommandesInput>
-  }
-
-  export type FournisseurUpdateWithoutCommandesInput = {
-    nom?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    typeProduit?: NullableEnumTypeProduitFieldUpdateOperationsInput | $Enums.TypeProduit | null
-    autresType?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    agent?: AgentUpdateOneRequiredWithoutFournisseurNestedInput
-    ventes?: VenteUpdateManyWithoutFournisseurNestedInput
-    adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
-    contacts?: ContactUpdateManyWithoutFournisseurNestedInput
-    DetailPanier?: DetailPanierUpdateManyWithoutFournisseurNestedInput
-  }
-
-  export type FournisseurUncheckedUpdateWithoutCommandesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nom?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    typeProduit?: NullableEnumTypeProduitFieldUpdateOperationsInput | $Enums.TypeProduit | null
-    autresType?: NullableStringFieldUpdateOperationsInput | string | null
-    agentId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
-    adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
-    contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
-    DetailPanier?: DetailPanierUncheckedUpdateManyWithoutFournisseurNestedInput
-  }
-
   export type EntrepriseUpsertWithoutCommandeInput = {
     update: XOR<EntrepriseUpdateWithoutCommandeInput, EntrepriseUncheckedUpdateWithoutCommandeInput>
     create: XOR<EntrepriseCreateWithoutCommandeInput, EntrepriseUncheckedCreateWithoutCommandeInput>
@@ -41319,6 +42502,30 @@ export namespace Prisma {
     Vente?: VenteUncheckedUpdateManyWithoutEntrepriseNestedInput
     Achat?: AchatUncheckedUpdateManyWithoutEntrepriseNestedInput
     Depense?: DepenseUncheckedUpdateManyWithoutEntrepriseNestedInput
+  }
+
+  export type AcheteurTiersUpsertWithoutCommandeInput = {
+    update: XOR<AcheteurTiersUpdateWithoutCommandeInput, AcheteurTiersUncheckedUpdateWithoutCommandeInput>
+    create: XOR<AcheteurTiersCreateWithoutCommandeInput, AcheteurTiersUncheckedCreateWithoutCommandeInput>
+    where?: AcheteurTiersWhereInput
+  }
+
+  export type AcheteurTiersUpdateToOneWithWhereWithoutCommandeInput = {
+    where?: AcheteurTiersWhereInput
+    data: XOR<AcheteurTiersUpdateWithoutCommandeInput, AcheteurTiersUncheckedUpdateWithoutCommandeInput>
+  }
+
+  export type AcheteurTiersUpdateWithoutCommandeInput = {
+    nom?: StringFieldUpdateOperationsInput | string
+    postnom?: StringFieldUpdateOperationsInput | string
+    tel?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AcheteurTiersUncheckedUpdateWithoutCommandeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nom?: StringFieldUpdateOperationsInput | string
+    postnom?: StringFieldUpdateOperationsInput | string
+    tel?: StringFieldUpdateOperationsInput | string
   }
 
   export type AgentUpsertWithoutCommandeInput = {
@@ -42077,16 +43284,14 @@ export namespace Prisma {
   export type CommandeCreateManyEntrepriseInput = {
     id?: number
     panierId: number
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
     clientId?: number | null
-    fournisseurId?: number | null
     agentId?: number | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
+    acheteurTiersId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -42250,18 +43455,16 @@ export namespace Prisma {
   }
 
   export type CommandeUpdateWithoutEntrepriseInput = {
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Paiement?: PaiementUpdateManyWithoutCommandeNestedInput
     panier?: PanierUpdateOneRequiredWithoutCommandesNestedInput
-    fournisseur?: FournisseurUpdateOneWithoutCommandesNestedInput
+    acheteurTiers?: AcheteurTiersUpdateOneWithoutCommandeNestedInput
     agent?: AgentUpdateOneWithoutCommandeNestedInput
     client?: ClientUpdateOneWithoutCommandesNestedInput
   }
@@ -42269,16 +43472,14 @@ export namespace Prisma {
   export type CommandeUncheckedUpdateWithoutEntrepriseInput = {
     id?: IntFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    acheteurTiersId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Paiement?: PaiementUncheckedUpdateManyWithoutCommandeNestedInput
@@ -42287,16 +43488,14 @@ export namespace Prisma {
   export type CommandeUncheckedUpdateManyWithoutEntrepriseInput = {
     id?: IntFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    acheteurTiersId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42446,16 +43645,14 @@ export namespace Prisma {
   export type CommandeCreateManyAgentInput = {
     id?: number
     panierId: number
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
     clientId?: number | null
-    fournisseurId?: number | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     entrepriseId?: number
+    acheteurTiersId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -42796,7 +43993,6 @@ export namespace Prisma {
     ventes?: VenteUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUpdateManyWithoutFournisseurNestedInput
   }
 
@@ -42811,7 +44007,6 @@ export namespace Prisma {
     ventes?: VenteUncheckedUpdateManyWithoutFournisseurNestedInput
     adresses?: AdresseUncheckedUpdateManyWithoutFournisseurNestedInput
     contacts?: ContactUncheckedUpdateManyWithoutFournisseurNestedInput
-    commandes?: CommandeUncheckedUpdateManyWithoutFournisseurNestedInput
     DetailPanier?: DetailPanierUncheckedUpdateManyWithoutFournisseurNestedInput
   }
 
@@ -42826,35 +44021,31 @@ export namespace Prisma {
   }
 
   export type CommandeUpdateWithoutAgentInput = {
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Paiement?: PaiementUpdateManyWithoutCommandeNestedInput
     panier?: PanierUpdateOneRequiredWithoutCommandesNestedInput
-    fournisseur?: FournisseurUpdateOneWithoutCommandesNestedInput
     entreprise?: EntrepriseUpdateOneRequiredWithoutCommandeNestedInput
+    acheteurTiers?: AcheteurTiersUpdateOneWithoutCommandeNestedInput
     client?: ClientUpdateOneWithoutCommandesNestedInput
   }
 
   export type CommandeUncheckedUpdateWithoutAgentInput = {
     id?: IntFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
+    acheteurTiersId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Paiement?: PaiementUncheckedUpdateManyWithoutCommandeNestedInput
@@ -42863,16 +44054,14 @@ export namespace Prisma {
   export type CommandeUncheckedUpdateManyWithoutAgentInput = {
     id?: IntFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
+    acheteurTiersId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42962,16 +44151,14 @@ export namespace Prisma {
   export type CommandeCreateManyClientInput = {
     id?: number
     panierId: number
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
-    fournisseurId?: number | null
     agentId?: number | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     entrepriseId?: number
+    acheteurTiersId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -43127,35 +44314,31 @@ export namespace Prisma {
   }
 
   export type CommandeUpdateWithoutClientInput = {
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Paiement?: PaiementUpdateManyWithoutCommandeNestedInput
     panier?: PanierUpdateOneRequiredWithoutCommandesNestedInput
-    fournisseur?: FournisseurUpdateOneWithoutCommandesNestedInput
     entreprise?: EntrepriseUpdateOneRequiredWithoutCommandeNestedInput
+    acheteurTiers?: AcheteurTiersUpdateOneWithoutCommandeNestedInput
     agent?: AgentUpdateOneWithoutCommandeNestedInput
   }
 
   export type CommandeUncheckedUpdateWithoutClientInput = {
     id?: IntFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
+    acheteurTiersId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Paiement?: PaiementUncheckedUpdateManyWithoutCommandeNestedInput
@@ -43164,16 +44347,14 @@ export namespace Prisma {
   export type CommandeUncheckedUpdateManyWithoutClientInput = {
     id?: IntFieldUpdateOperationsInput | number
     panierId?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
+    acheteurTiersId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -43214,23 +44395,6 @@ export namespace Prisma {
     agentId?: number | null
     clientId?: number | null
     entrepriseId?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type CommandeCreateManyFournisseurInput = {
-    id?: number
-    panierId: number
-    nom?: string | null
-    tel?: string | null
-    statut?: $Enums.StatutCommande
-    dateLivraison?: Date | string | null
-    adresseLivraison?: string | null
-    notes?: string | null
-    clientId?: number | null
-    agentId?: number | null
-    enregistrerPar?: string | null
-    entrepriseId?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -43364,58 +44528,6 @@ export namespace Prisma {
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
     entrepriseId?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CommandeUpdateWithoutFournisseurInput = {
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
-    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
-    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Paiement?: PaiementUpdateManyWithoutCommandeNestedInput
-    panier?: PanierUpdateOneRequiredWithoutCommandesNestedInput
-    entreprise?: EntrepriseUpdateOneRequiredWithoutCommandeNestedInput
-    agent?: AgentUpdateOneWithoutCommandeNestedInput
-    client?: ClientUpdateOneWithoutCommandesNestedInput
-  }
-
-  export type CommandeUncheckedUpdateWithoutFournisseurInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    panierId?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
-    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
-    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    agentId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
-    entrepriseId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Paiement?: PaiementUncheckedUpdateManyWithoutCommandeNestedInput
-  }
-
-  export type CommandeUncheckedUpdateManyWithoutFournisseurInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    panierId?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
-    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
-    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    agentId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
-    entrepriseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -43846,17 +44958,15 @@ export namespace Prisma {
 
   export type CommandeCreateManyPanierInput = {
     id?: number
-    nom?: string | null
-    tel?: string | null
     statut?: $Enums.StatutCommande
     dateLivraison?: Date | string | null
     adresseLivraison?: string | null
     notes?: string | null
     clientId?: number | null
-    fournisseurId?: number | null
     agentId?: number | null
-    enregistrerPar?: string | null
+    estReserve?: boolean | null
     entrepriseId?: number
+    acheteurTiersId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -43983,35 +45093,31 @@ export namespace Prisma {
   }
 
   export type CommandeUpdateWithoutPanierInput = {
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Paiement?: PaiementUpdateManyWithoutCommandeNestedInput
-    fournisseur?: FournisseurUpdateOneWithoutCommandesNestedInput
     entreprise?: EntrepriseUpdateOneRequiredWithoutCommandeNestedInput
+    acheteurTiers?: AcheteurTiersUpdateOneWithoutCommandeNestedInput
     agent?: AgentUpdateOneWithoutCommandeNestedInput
     client?: ClientUpdateOneWithoutCommandesNestedInput
   }
 
   export type CommandeUncheckedUpdateWithoutPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
+    acheteurTiersId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Paiement?: PaiementUncheckedUpdateManyWithoutCommandeNestedInput
@@ -44019,17 +45125,15 @@ export namespace Prisma {
 
   export type CommandeUncheckedUpdateManyWithoutPanierInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nom?: NullableStringFieldUpdateOperationsInput | string | null
-    tel?: NullableStringFieldUpdateOperationsInput | string | null
     statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
     dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: NullableIntFieldUpdateOperationsInput | number | null
-    fournisseurId?: NullableIntFieldUpdateOperationsInput | number | null
     agentId?: NullableIntFieldUpdateOperationsInput | number | null
-    enregistrerPar?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
     entrepriseId?: IntFieldUpdateOperationsInput | number
+    acheteurTiersId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44081,6 +45185,67 @@ export namespace Prisma {
     venteId?: NullableIntFieldUpdateOperationsInput | number | null
     commandeId?: NullableIntFieldUpdateOperationsInput | number | null
     depenseId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommandeCreateManyAcheteurTiersInput = {
+    id?: number
+    panierId: number
+    statut?: $Enums.StatutCommande
+    dateLivraison?: Date | string | null
+    adresseLivraison?: string | null
+    notes?: string | null
+    clientId?: number | null
+    agentId?: number | null
+    estReserve?: boolean | null
+    entrepriseId?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommandeUpdateWithoutAcheteurTiersInput = {
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Paiement?: PaiementUpdateManyWithoutCommandeNestedInput
+    panier?: PanierUpdateOneRequiredWithoutCommandesNestedInput
+    entreprise?: EntrepriseUpdateOneRequiredWithoutCommandeNestedInput
+    agent?: AgentUpdateOneWithoutCommandeNestedInput
+    client?: ClientUpdateOneWithoutCommandesNestedInput
+  }
+
+  export type CommandeUncheckedUpdateWithoutAcheteurTiersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    panierId?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    entrepriseId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Paiement?: PaiementUncheckedUpdateManyWithoutCommandeNestedInput
+  }
+
+  export type CommandeUncheckedUpdateManyWithoutAcheteurTiersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    panierId?: IntFieldUpdateOperationsInput | number
+    statut?: EnumStatutCommandeFieldUpdateOperationsInput | $Enums.StatutCommande
+    dateLivraison?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    adresseLivraison?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: NullableIntFieldUpdateOperationsInput | number | null
+    agentId?: NullableIntFieldUpdateOperationsInput | number | null
+    estReserve?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    entrepriseId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
