@@ -28,6 +28,9 @@ export async function GET(request: NextRequest) {
     const selection = {
         id: true,
         nom: true, 
+        email: true,
+        typeProduit: true,
+        autresType: true,
         adresses: {
             select: {
                 adresse: true

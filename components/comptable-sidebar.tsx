@@ -61,7 +61,7 @@ export function ComptableSidebar() {
                   <Calculator className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">CimentPro</span>
+                  <span className="font-semibold">APCC</span>
                   <span className="text-xs">Comptabilité</span>
                 </div>
               </Link>

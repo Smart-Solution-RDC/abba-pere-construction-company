@@ -103,7 +103,7 @@ model Agent {
 
 model Client {
   id          Int        @id @default(autoincrement())
-  email       String     @unique
+  email       String     @unique 
   nom         String
   postnom     String?
   nom_complet String?
@@ -168,7 +168,6 @@ model Fournisseur {
   agentId      Int
   agent        Agent          @relation(fields: [agentId], references: [id])
   ventes       Vente[]
-  // achats       Achat[]
   adresses     Adresse[]
   contacts     Contact[]
   commandes    Commande[]

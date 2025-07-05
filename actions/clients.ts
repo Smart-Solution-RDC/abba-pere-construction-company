@@ -1,3 +1,4 @@
+import { ClientForm } from "@/prisma/defs-front";
 
 
 const api = 'http://localhost:3000/api/'
@@ -18,38 +19,52 @@ export async function getClientsWithoutPagination () {
     }    
 }
 
-export const getAllClients = async () => {
+export const getClients = async (search: string | null) => {
   try {
-    const res = await fetch(`${API}/api/agents/1/clients`, {
+    const res = await fetch(`${api}agents/1/clients?search=${search ?? ''}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     });
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch cleint. Status: ${res.status}`);
-    }
-
-    return await res.json();
+    const data = await res.json();
+    return data;
   } catch (error) {
     console.error("getAllClients error:", error);
     return [];
   }
 };
 
+export const createClient = async (form: ClientForm) => {
+    try {
+        const res = await fetch(`${api}agents/1/clients/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(form)
+        });
+
+        const response = await res.json();
+        console.log(response);
+        return response;
+    } catch (error) {
+        console.error("Erreur création agent:", error);
+        throw new Error('Erreur lors de la création de l’agent');
+    }
+};
+
+
+// From this line
 export const getSingleClient = async (id: number) => {
   try {
-    const res = await fetch(`${API}/api/agents/1/clients/${id}`, {
+    const res = await fetch(`${api}agents/1/clients/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     });
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch agent with ID ${id}. Status: ${res.status}`);
-    }
 
     const agent = await res.json();
     console.log("Single Client:", agent);
@@ -58,35 +73,6 @@ export const getSingleClient = async (id: number) => {
     console.error("getSingleClient error:", error);
     return null;
   }
-};
-
-export const createClient = async (agentData: {
-    email: string;
-    nom: string;
-    postnom?: string;
-    sexe?: "HOMME" | "FEMME";
-    picture?: string;
-}) => {
-    try {
-        const res = await fetch(`${API}/api/agents/1/clients/create`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(agentData)
-        });
-
-        if (!res.ok) {
-            const error = await res.json();
-            throw new Error(error?.error || "Failed to create agent");
-        }
-
-        const response = await res.json();
-        return response;
-    } catch (error) {
-        console.error("Erreur création agent:", error);
-        throw new Error('Erreur lors de la création de l’agent');
-    }
 };
 
 export const updateClient = async (

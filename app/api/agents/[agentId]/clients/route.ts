@@ -25,17 +25,11 @@ export async function GET (request: NextRequest) {
 
     const selection = {
         id: true,
-        nom: true,
-        postnom: true,
         picture: true,
         nom_complet: true,
         email: true,
-        adresses: {
-            select: {
-                ville: true,
-                adresse: true
-            }
-        }
+        contacts: { select: { tel: true }},
+        adresses: { select: { adresse: true } }
     }
 
     const clients = await Pagination(request, 'client', condition, selection, null);

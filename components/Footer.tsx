@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-semibold mb-4">CimentPro</h3>
+            <h3 className="text-lg font-semibold mb-4">APCC</h3>
             <p className="text-gray-400">
               Solution de gestion commerciale pour professionnels du BTP
             </p>
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {currentYear} CimentPro. Tous droits réservés.</p>
+          <p>&copy; {currentYear} APCC. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

@@ -8,13 +8,19 @@ export async function POST(request: Request, { params }: AgentRouteParams ) {
     const { agentId } = await params;
 
     try {
-        const devise = await prisma.devise.create({
+
+        await prisma.devise.create({
             data: {
                 ...data,
                 agentId: parseInt(agentId)
             }
-        })
-        return new Response("Devise created!", { status: 200 });
+        });
+
+        const all = await prisma.devise.findMany();
+        return new Response(JSON.stringify({
+            message: "La devise a été creé!",
+            data: all
+        }), { status: 201 });
     } catch (error) {
         return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });
     }

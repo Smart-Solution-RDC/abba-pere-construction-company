@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/contexts/AuthContext"
 import { ProtectedRoute } from "@/components/ProtectedRoute"
+import SessionWrapper from "@/components/sessionWrapper"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -22,12 +23,14 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <AuthProvider>
-            <ProtectedRoute>{children}</ProtectedRoute>
-            <Toaster />
-          </AuthProvider>
-        </ThemeProvider>
+        <SessionWrapper>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+            <AuthProvider>
+              <ProtectedRoute>{children}</ProtectedRoute>
+              <Toaster />
+            </AuthProvider>
+          </ThemeProvider>
+        </SessionWrapper>
       </body>
     </html>
   )

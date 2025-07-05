@@ -12,7 +12,7 @@ export default function AdminNotFound() {
         {/* Logo/Header */}
         <div className="text-center mb-8">
           <Link href="/admin/dashboard">
-            <h1 className="text-3xl font-bold text-white mb-2">CimentPro Admin</h1>
+            <h1 className="text-3xl font-bold text-white mb-2">APCC Admin</h1>
           </Link>
           <p className="text-gray-200">Page d'administration non trouvée</p>
         </div>

@@ -1,3 +1,5 @@
+'use client'
+
 import { ArrowRight, Package, BarChart3, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,8 +11,22 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { verification } from "@/actions/manuel-adapter";
 
 export default function HomePage() {
+  const {data: session} = useSession();
+
+  // const [datas, setDatas] = useState();
+  const verify = async () => {
+    await verification();
+  }
+
+  useEffect(() => {
+    verify();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
@@ -18,30 +34,19 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <h1 className="text-xl font-bold text-[#155E75]">CimentPro</h1>
+              <h1 className="text-xl font-bold text-[#155E75]">APCC</h1>
             </div>
             <div className="flex items-center space-x-4">
-              <Link href="/login">
-                <Button
-                  variant="ghost"
-                  className="text-[#155E75] hover:text-[#164E63]"
-                >
-                  Connexion
-                </Button>
-              </Link>
-              <Link href="/register">
-                <Button
-                  variant="outline"
-                  className="text-[#155E75] border-[#155E75] hover:bg-[#155E75] hover:text-white"
-                >
-                  Inscription
-                </Button>
-              </Link>
-              <Link href="/admin/login">
-                <Button className="bg-[#155E75] hover:bg-[#164E63]">
-                  Admin
-                </Button>
-              </Link>
+              {!session?.user && <Button 
+                variant="outline" 
+                className="text-[#155E75] border-[#155E75] hover:bg-[#155E75] hover:text-white"
+                onClick={() => signIn('google')}
+              >Se connecter</Button>}
+              {session?.user && <Button 
+                variant="outline" 
+                className=" text-[#155E75] border-[#155E75] hover:bg-[#155E75] hover:text-white"
+                onClick={() => signOut()}
+              >Se déconnecter</Button>}
             </div>
           </div>
         </div>
@@ -54,14 +59,7 @@ export default function HomePage() {
           <div className="text-center md:text-left md:w-1/2">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
               Gérez vos commandes de ciment en toute simplicité
-            </h1>
-            
-            <ul>
-              <li><a href="/auth/login" className="bg-red">Login</a></li>
-              <li><a href="/auth/logout">Logout</a></li>
-              <li><a href="/auth/profile">Profile</a></li>
-            </ul>
-            
+            </h1>            
 
             <p className="text-base sm:text-lg md:text-xl mb-8 text-gray-200 max-w-xl mx-auto md:mx-0">
               Solution complète pour la gestion de vos commandes de ciment 32.5

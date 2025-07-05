@@ -85,7 +85,14 @@ export interface Fournisseur {
 export interface Response {
     error: String | undefined, 
     message: String | undefined, 
-    data: object | number | undefined
+    data: any | undefined
+}
+
+export interface ResponseValidation {
+    success: boolean,
+    message: string,
+    error: string | null,
+    datas: any
 }
 
 export interface HistoriqueFormatData {
@@ -296,3 +303,112 @@ export interface RapportDocument {
     paiements: Paiement[]
 }
 
+export interface Produit {
+    id: number,
+    designation: string,
+    typeProduit: string,
+    autresType: string,
+    teneur: { valeur: number },
+    devise: { code: string },
+    prixUnitaire: number,
+    qtteDisponible: number
+}
+
+// export interface TypeProduits [
+//     {
+//         label: 'ciment',
+//         value: 'CIMENT'
+//     },
+//     {
+//         label: 'carreaux',
+//         value: 'CARREAUX'
+//     },
+//     {
+//         label: 'fer à béton',
+//         value: 'FER_A_BETON'
+//     },
+//     {
+//         label: 'jepsen',
+//         value: 'JEPSEN'
+//     },
+//     {
+//         label: 'autres',
+//         value: 'AUTRES'
+//     },
+// ]
+
+export interface Data {
+    id: number,
+    email: string,
+    picture: string,
+    nom_complet: string,
+    contacts: { tel: string }[],
+    adresses: { adresse: string }[],
+}
+export interface ClientDatas {
+    data: Data[],
+    meta: Meta
+}
+
+export interface ClientForm {
+    email: string,
+    nom: string,
+    postnom: string,
+    tel: string,
+    adresse: string
+}
+
+export let types = [
+    {
+      label: 'ciment',
+      value: 'CIMENT'
+    },
+    {
+      label: 'carreau',
+      value: 'CARREAU'
+    },
+    {
+      label: 'fer à béton',
+      value: 'FER_A_BETON'
+    },
+    {
+      label: 'jepsen',
+      value: 'JEPSEN'
+    },
+    {
+      label: 'autres',
+      value: 'AUTRES'
+    }
+  ];
+
+
+  export interface FournisseurForm {
+    nom: string,
+    email: string,
+    typeProduit: string,
+    tel: string,
+    adresse: string
+  }
+
+  export interface FournisseurData {
+    id: number,
+    nom: string,
+    email: string,
+    typeProduit: string,
+    autresTypes: string,
+    adresses: { adresse: string }[],
+    contacts: { tel: string }[]
+  }
+
+  export interface FournisseurDatas {
+    data: FournisseurData[],
+    meta: Meta
+}
+
+export interface Caisse {
+    id: number,
+    nom: string,
+    statut: string,
+    devise: { code: string, symbole: string },
+    montant: number
+}

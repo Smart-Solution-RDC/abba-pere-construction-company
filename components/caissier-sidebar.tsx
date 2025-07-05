@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { CreditCard, ShoppingCart, Clock, FileText, LogOut, Receipt } from "lucide-react"
+import { CreditCard, ShoppingCart, FileText, LogOut, ShoppingBag, User, UserCog, Wallet } from "lucide-react"
 
 import {
   Sidebar,
@@ -33,29 +33,28 @@ const navigationItems = [
   {
     title: "Nouvelle Vente",
     url: "/caissier/nouvelle-vente",
-    icon: ShoppingCart,
+    icon: ShoppingBag,
   },
   {
-    title: "Produits",
-    url: "/caissier/produits",
-    icon: Clock,
+    title: "Clients",
+    url: "/caissier/clients",
+    icon: UserCog,
   },
-  
   {
-    title: "Produits",
-    url: "/caissier/produits",
-    icon: Clock,
+    title: "Fournisseurs",
+    url: "/caissier/fournisseurs",
+    icon: User,
+  },
+  {
+    title: "Caisses",
+    url: "/caissier/caisses",
+    icon: Wallet,
   },
   {
     title: "Historique",
     url: "/caissier/historique",
     icon: FileText,
-  },
-  {
-    title: "Reçus",
-    url: "/caissier/recus",
-    icon: Receipt,
-  },
+  }
 ]
 
 export function CaissierSidebar() {
@@ -72,7 +71,7 @@ export function CaissierSidebar() {
                   <CreditCard className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">CimentPro</span>
+                  <span className="font-semibold">APCC</span>
                   <span className="text-xs">Caisse</span>
                 </div>
               </Link>

@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { DeviseRouteParams } from "@/prisma/definitions";
 
 
-export async function PUT(request: Request, { params }: DeviseRouteParams) {
+export async function GET(request: Request, { params }: DeviseRouteParams) {
     const { deviseId } = await params;
     const data: Devise = await request.json();
 
@@ -11,15 +11,15 @@ export async function PUT(request: Request, { params }: DeviseRouteParams) {
         where: { id: parseInt(deviseId)}
     });
 
-    if (!devise) return new Response("Devise Not Found!", { status: 404 });
+    if (!devise) return new Response(JSON.stringify({error: "Devise Not Found!"}), { status: 404 });
 
     try {
         await prisma.devise.update({
             where: { id: parseInt(deviseId) },
             data: data
         });
-        return new Response("Devise Updated!", { status: 404 });
+        return new Response(JSON.stringify({message: "Devise Updated!"}), { status: 404 });
     } catch (error) {
-        return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });!", { status: 404 });   
+        return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });
     }
 } 

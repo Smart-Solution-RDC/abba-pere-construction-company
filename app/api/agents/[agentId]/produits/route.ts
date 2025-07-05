@@ -5,7 +5,7 @@ import { NextRequest } from "next/server";
 export async function GET(request: NextRequest) {
 
     const produits = await prisma.produit.findMany({
-        where: {},
+        // where: {},
         select: {
             id: true,
             designation: true,
@@ -16,7 +16,8 @@ export async function GET(request: NextRequest) {
                 }
             },
             typeProduit: true,
-            // qtteDisponible: true,
+            autresType: true,
+            qtteDisponible: true,
             deviseId: true,
             devise: {
                 select: {

@@ -11,23 +11,21 @@ export async function PUT (request: Request, { params }: DeviseRouteParams) {
         where: { id: parseInt(agentId)}
     });
 
-    if (!agent) return new Response("Agent Not Found!", { status: 404 });
-
-    const devise = await prisma.devise.findUnique({
-        where: { id: parseInt(deviseId)}
-    });
-
-    if (!devise) return new Response("Devise Not Found!", { status: 404 });
+    if (!agent) return new Response(JSON.stringify({error: "Agent Not Found!"}), { status: 404 });
 
     try {
-
         await prisma.devise.update({
-            where: { id: devise.id },
+            where: { id: parseInt(deviseId) },
             data: data
         });
 
-        return new Response("Devise Updated!", { status: 201 });   
+        const all = await prisma.devise.findMany();
+        return new Response(JSON.stringify({
+            message: "La devise a été mis à jour!",
+            data: all
+        }), { status: 201 });   
     } catch (error) {
         return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });   
     }
 }  
+

@@ -108,7 +108,7 @@ export default function NotFound() {
 
         {/* Footer */}
         <div className="text-center mt-8 text-gray-200 text-sm">
-          <p>&copy; {new Date().getFullYear()} CimentPro. Tous droits réservés.</p>
+          <p>&copy; {new Date().getFullYear()} APCC. Tous droits réservés.</p>
         </div>
       </div>
     </div>

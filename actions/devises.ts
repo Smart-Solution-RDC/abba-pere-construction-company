@@ -7,14 +7,16 @@ export async function getDevises () {
         const res = await fetch (`${api}agents/1/devises`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+              'Content-Type': 'application/json'
             }
         });
 
-        let data =  await res.json();
-        return data;
+        let datas = await res.json();
+        console.log(datas);
+        return datas;
     } catch (error) {
-        console.log(error);        
+        console.log(error);   
+        return []     ;
     }    
 }
 
@@ -69,7 +71,7 @@ export const createDevise = async (agentData: {
     tauxDEchange: number;
 }) => {
     try {
-        const res = await fetch(`${API}/api/agents/1/devises/create`, {
+        const res = await fetch(`${api}agents/1/devises/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -77,13 +79,8 @@ export const createDevise = async (agentData: {
             body: JSON.stringify(agentData)
         });
 
-        if (!res.ok) {
-            const error = await res.json();
-            throw new Error(error?.error || "Failed to create agent");
-        }
-
-        const response = await res.json();
-        return response;
+        const data = await res.json();
+        return data;
     } catch (error) {
         console.error("Erreur création agent:", error);
         throw new Error('Erreur lors de la création de l’agent');
@@ -92,7 +89,7 @@ export const createDevise = async (agentData: {
 
 export const updateDevise = async (
   id: number,
-  agentData: {
+  devise: {
     nom: string;
     code: string;
     symbole: string;
@@ -100,17 +97,13 @@ export const updateDevise = async (
   }
 ) => {
   try {
-    const nom_complet = agentData.nom + (agentData.postnom ? ` ${agentData.postnom}` : "");
 
-    const res = await fetch(`${API}/api/agents/1/devices/${id}`, {
+    const res = await fetch(`${api}agents/1/devises/${id}/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        ...agentData,
-        nom_complet
-      })
+      body: JSON.stringify(devise)
     });
 
     if (!res.ok) {
@@ -122,28 +115,24 @@ export const updateDevise = async (
     return response;
   } catch (error) {
     console.error("Erreur mise à jour agent:", error);
-    throw new Error(`Erreur lors de la mise à jour de l’agent avec l'ID ${id}`);
   }
 };
 
 
 export const deleteDevise = async (id: number) => {
   try {
-    const res = await fetch(`${API}/api/agents/1/devices/${id}`, {
+    const res = await fetch(`${api}agents/1/devises/${id}/remove`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       }
     });
 
-    if (!res.ok) {
-      const error = await res.json();
-      throw new Error(error?.message || `Échec de suppression de l'agent avec l'ID ${id}`);
-    }
-
-    return { success: true, message: `Devise avec l'ID ${id} supprimé avec succès.` };
+    const datas = await res.json();
+    return datas;
   } catch (error) {
     console.error("Erreur suppression agent:", error);
-    throw new Error(`Erreur lors de la suppression de l’agent avec l'ID ${id}`);
   }
 };
+
+

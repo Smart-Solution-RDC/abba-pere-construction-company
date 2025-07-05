@@ -7,14 +7,38 @@ export async function POST(request: Request, { params }: AgentRouteParams) {
     const { agentId } = await params;
 
     try {
-        const produit = await prisma.produit.create({
-            data: {
-                ...data,
-                agentId: parseInt(agentId)
-            }
+        await prisma.produit.create({
+            data: { ...data, agentId: parseInt(agentId) }
         });
 
-        return new Response(JSON.stringify(produit), { status: 201 });
+        const all = await prisma.produit.findMany({
+            select: {
+                id: true,
+                designation: true,
+                prixUnitaire: true,
+                teneur: {
+                    select: {
+                        valeur: true
+                    }
+                },
+                typeProduit: true,
+                autresType: true,
+                qtteDisponible: true,
+                deviseId: true,
+                devise: {
+                    select: {
+                        id: true,
+                        code: true,
+                        tauxDEchange: true
+                    }
+                }
+            }
+        })
+
+        return new Response(JSON.stringify({
+            message: "Le produit a été enregistré!",
+            data: all
+        }), { status: 201 });
         
     } catch (error) {
         return new Response(JSON.stringify({error: "Formulaire Invalide"}), { status: 201 });

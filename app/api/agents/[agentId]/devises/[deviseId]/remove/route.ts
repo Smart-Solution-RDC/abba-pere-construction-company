@@ -5,16 +5,20 @@ import { DeviseRouteParams } from "@/prisma/definitions";
 export async function DELETE(req: Request, { params }: DeviseRouteParams) {
     const { deviseId } = await params;
 
-    const devise = await prisma.devise.findUnique({
-        where: { id: parseInt(deviseId)}
-    });
 
-    if (!devise) return new Response("Devise Not Found!", { status: 404 });
+    try {
+        await prisma.devise.delete({
+            where: { id: parseInt(deviseId)}
+        });
+        
+        const all = await prisma.devise.findMany();
+        return new Response(JSON.stringify({
+            message: "La devise a été supprimé!",
+            data: all
+        }), { status: 201 });
 
-    await prisma.devise.delete({
-        where: { id: parseInt(deviseId)}
-    });
-
-    return new Response("Devise Deleted!", { status: 404 });
+    } catch (error) {
+        return new Response(JSON.stringify({error: "Erreur de suppression!"}));
+    }
 
 } 

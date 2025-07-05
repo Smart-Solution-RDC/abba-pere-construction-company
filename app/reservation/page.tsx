@@ -83,7 +83,7 @@ export default function ReservationPage() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link href="/">
-                <h1 className="text-xl font-bold text-[#155E75]">CimentPro</h1>
+                <h1 className="text-xl font-bold text-[#155E75]">APCC</h1>
               </Link>
             </div>
             <div className="flex items-center space-x-4">
