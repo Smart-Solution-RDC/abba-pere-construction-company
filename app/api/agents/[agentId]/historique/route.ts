@@ -54,9 +54,6 @@ export async function GET(req: Request, { params }: AgentRouteParams) {
             }
         });
 
-        // Format the date for achat.updatedAt and vente.updatedAt in ISO format (YYYY-MM-DD)
-        
-
         // Format the date for achat.updatedAt
         const datas = datasRaw.map(item => ({
             ...item,

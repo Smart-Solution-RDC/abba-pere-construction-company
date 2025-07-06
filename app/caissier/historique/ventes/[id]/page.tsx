@@ -102,7 +102,6 @@ export default function Historique() {
                     </Card>
 
                     <FormLogistique />
-
                 </div>
                 <div className="space-y-6">
                     <Card>

@@ -426,3 +426,73 @@ export interface LivraisonForm {
     dateLivraison: string,
     adresseLivraison: string
   }
+
+export interface Commande {
+    id: number,
+    statut: string,
+    estReserve: boolean,
+    dateDeLivraison: string,
+    prix: { prixTotal: number, symbole: string }
+}
+
+export interface AchatClientFormat {
+    id: number,
+    statut: string,
+    updatedAt: string,
+    paiements: {
+        montant: number, 
+        devise: { symbole: string },
+        modePaiement: { type: string }
+    }[]
+}
+
+export interface CommandeUnique {
+    id: number,
+    adresseLivraison: string | null,
+    dateLivraison: string | null,
+    notes: string,
+    statut: string,
+    createdAt: string,
+    updatedAt: string,
+    panier: {
+        detailPaniers: {
+            prixTotalHT: number,
+            prixUnitaire: number,
+            qtte: number,
+            produit: { designation: string },
+            devise: { symbole: string }
+        }[]
+    },
+    prix: { prixTotal: number, devise: string },
+    acheteurTiers: {
+        nom: string,
+        postnom: string,
+        tel: string
+    }
+}
+
+export interface AchatUniqueClient {
+    id: number,
+    statut: string,
+    dateLivraison: string,
+    adresseLivraison: string,
+    notes: string,
+    createdAt: string,
+    updatedAt: string,
+    enregistrerPar: string,
+    panier: {
+        detailPaniers: {
+            produit: { designation: string },
+            devise: { symbole: string },
+            qtte: number,
+            prixUnitaire: number,
+            prixTotalHT: number,
+            prixTotal: number,
+        }[],
+    },
+    paiements: {
+        montant: number,
+        modePaiement: { type: string },
+        devise: { symbole: true }
+    }[]
+}

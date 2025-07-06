@@ -61,14 +61,7 @@ export default function Historique() {
             />
           </div>
           
-          <div>
-            {/* <Input 
-              type="date" 
-              placeholder="Recherche"
-              value={date}
-              onChange={e => setDate(e.target.value)}
-            /> */}
-          </div>
+          <div></div>
         </div>
 
           {/* Historique des ventes et achats */}

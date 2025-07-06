@@ -206,8 +206,7 @@ export default function NouvelleVentePage() {
       return;
     }
     
-    paiement.montant = prixTotalConverti;
-      
+    paiement.montant = prixTotalConverti;      
 
     setIsProcessing(true);
 

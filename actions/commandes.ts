@@ -3,16 +3,15 @@ import { AcheteurTiersForm, DetailPanierForm, LivraisonForm } from "@/prisma/def
 
 const api = 'http://localhost:3000/api/'
 
-export const getAllCommandes = async () => {
+export const getCommandes = async () => {
     try {
-        const res = await fetch(`${api}commandes`, {
+        const res = await fetch(`${api}clients/1/commandes`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         });
         const response = await res.json();
-        console.log("Get All Commandes", response);
         return response;
     } catch (error) {
         console.log(error);
